@@ -1,0 +1,236 @@
+ \documentclass[11pt]{article}
+ \usepackage[applemac]{inputenc}
+
+\usepackage{amsmath,amssymb,amsthm,amsfonts,amstext,amsbsy,amscd}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{a4wide}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{picins}
+%\usepackage{tikz}
+\setlength{\parskip}{0.3cm}
+%\setlength{\textwidth}{13.7cm}
+\setlength{\textwidth}{14cm}
+\setlength{\textheight}{19.3cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Albert's definitions
+\def\vp{\varphi}
+\def\<{\langle}
+\def\>{\rangle}
+\def\t{\tilde}
+\def\i{\infty}
+\def\e{\eps}
+\def\sm{\setminus}
+\def\nl{\newline}
+\def\o{\overline}
+\def\wt{\widetilde}
+\def\wh{\widehat}
+\def\cK{\cal K}
+\def\co{\cal O}
+\def\Chi{\raise .3ex
+\hbox{\large $\chi$}} \def\vp{\varphi}
+\newcommand{\norme}[1]{ {\left\lVert  #1\right\rVert}}
+\newcommand{\dd}{\text{d}}
+\newcommand{\ve}{\varepsilon}
+\def\({\Bigl (}
+\def\){\Bigr )}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bea}{$$ \begin{array}{lll}}
+\newcommand{\eea}{\end{array} $$}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\iref}[1]{(\ref{#1})}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%This is Markus' definition
+\newcommand{\MR}{{($\spadesuit$)}}
+\frenchspacing \sloppy
+\numberwithin{equation}{section}
+%\swapnumbers
+\newtheorem{satz}{Satz}[section]
+\newtheorem{theo}[satz]{Theorem}
+\newtheorem{prop}[satz]{Proposition}
+\newtheorem{theorem}[satz]{Theorem}
+\newtheorem{proposition}[satz]{Proposition}
+\newtheorem{corollary}[satz]{Corollary}
+\newtheorem{lemma}[satz]{Lemma}
+\newtheorem{assumption}[satz]{Assumption}
+\newtheorem{korollar}[satz]{Korollar}
+\newtheorem{definition}[satz]{Definition}
+\newtheorem{bemerkung}[satz]{Bemerkung}
+\newtheorem{remark}[satz]{Remark}
+\newtheorem{remarks}[satz]{Remarks}
+\newtheorem{beispiel}[satz]{Beispiel}
+\newtheorem{example}[satz]{Example}
+\DeclareMathOperator{\E}{{\mathbb E}}
+\DeclareMathOperator{\F}{{\mathbb F}}
+\DeclareMathOperator{\G}{{\mathbb G}}
+\DeclareMathOperator{\D}{{\mathbb D}}
+\DeclareMathOperator{\R}{{\mathbb R}}
+\DeclareMathOperator{\C}{{\mathbb C}}
+\DeclareMathOperator{\Z}{{\mathbb Z}}
+\DeclareMathOperator{\N}{{\mathbb N}}
+\DeclareMathOperator{\K}{{\mathbb K}}
+\DeclareMathOperator{\T}{{\mathbb T}}
+\DeclareMathOperator{\PP}{{\mathbb P}}
+\DeclareMathOperator{\QQ}{{\mathbb Q}}
+\DeclareMathOperator{\Q}{{\mathbb Q}}
+\DeclareMathOperator{\spann}{span}
+\DeclareMathOperator{\supp}{supp} \DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rg}{rg} \DeclareMathOperator{\Eig}{Eig}
+\DeclareMathOperator{\sgn}{sgn} \DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\kerr}{ker} \DeclareMathOperator{\dimm}{dim}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\esssup}{esssup}
+\DeclareMathOperator{\diag}{diag} \DeclareMathOperator{\KL}{KL}
+\DeclareMathOperator{\grad}{grad} \DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\Var}{Var} \DeclareMathOperator{\Cov}{Cov}
+\renewcommand{\d}{\ensuremath {\,\text{d}}}
+\providecommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\cdot}{{\scriptstyle \bullet} }
+\providecommand{\abs}[1]{\lvert #1 \rvert}
+\providecommand{\norm}[1]{\lVert #1 \rVert}
+\providecommand{\bnorm}[1]{{\Bigl\lVert #1 \Bigr\rVert}}
+\providecommand{\babs}[1]{{\Bigl\lvert #1 \Bigr\rvert}}
+\providecommand{\scapro}[2]{\langle #1,#2 \rangle}
+\providecommand{\floor}[1]{\lfloor #1 \rfloor}
+\providecommand{\dfloor}[1]{{\lfloor #1 \rfloor_\Delta}}
+\providecommand{\ceil}[1]{\lceil #1 \rceil}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\cit}[1]{\citeasnoun{#1}}
+\begin{document}
+\title{\'Ecole Polytechnique -- Année 2010-2011\\ MAP\-433 Statistique  %{\bf Corrigé}
+}
+\date{}
+\maketitle
+
+
+
+{\small On {\bf tiendra compte} de la qualité de la rédaction. 
+Les Sections 1 et 2 sont indépendantes. 
+%Les questions précédées de la mention {\it (Facultatif.)} sont hors barême.
+%La Section 2.4 est indépendante des Sections 2.2. et 2.3. 
+
+%Pour $d\geq 1$, $\mu \in \R^d$ et $\Sigma$ une matrice $d \times d$ symétrique semi-définie positive, ${\mathcal N}(\mu,\Sigma)$ désigne la loi du vecteur gaussien de moyenne $\mu$ et de matrice de variance-covariance $\Sigma$. 
+
+%Pour $x \in \R$, on note $\Phi(x) = \int_{-\infty}^x e^{-t^2/2}\tfrac{dt}{\sqrt{2\pi}}$ la fonction de répartition de la loi gaussienne centrée réduite. 
+
+La densité d'une variable aléatoire exponentielle $\xi$ de paramètre $\lambda >0$ est donnée par $x\leadsto \lambda \exp\big(-\lambda x\big){\bf 1}_{\{x \geq 0\}}$.
+%fonction de répartition $F(x)= \big(1-\exp(-\lambda x)\big)1_{\{x \geq 0\}}$. 
+%Pour $k \in \mathbb{N}$,
+On a alors
+$$\E\big[\xi^k\big] = \lambda^{-k}\; (k+1)!\;\;\;\text{pour}\;\;\;k\in\mathbb{N}.$$
+
+\section{Observations inhomogènes}
+On observe $n$ variables aléatoires $(X_1,\ldots, X_{n})$ indépendantes et identiquement distribuées de loi $\PP$. Après une certaine action, on observe $m=m_n$ variables aléatoires $(Y_1,\ldots, Y_{m})$ indépendantes des $X_i$, qui mesurent une action. Les $Y_i$ sont indépendantes, identiquement distribuées, de loi $\mathbb{Q}$.
+% de même loi $\PP_\lambda$, où $\lambda >0$. On suppose que les lois $\PP_\lambda$ sont dominées, c'est-à-dire qu'il existe une mesure $\mu(dx)$ sigma-finie sur $\R$, de sorte que
+%$$\PP_\lambda(dx) = f(\lambda, x)\mu(dx),\;\;\lambda >0.$$
+%qui mesurent la caractéristique d'une population donnée. Les $X_i$ sont indépendantes, identiquement distribuées, de loi exponentielle de paramètre $\lambda >0$. 
+
+% mais cette fois-ci de loi 
+%$$\mathbb{Q}_\lambda(dx) = g(\lambda, x)\mu(dx),\;\;\lambda >0.$$
+%exponentielle de paramètre $\lambda^2 >0$.
+On suppose 
+$$\lim_{n \rightarrow \infty}\frac{n}{m_n} = \gamma \in (0, \infty),$$ 
+et on veut tester 
+$$H_0\,:\;\PP=\mathbb{Q}\;\;\text{(absence d'effet de l'action) contre}\;\; H_1\,:\,\PP \neq \mathbb{Q}.$$
+\subsection{Comparaison des moyennes}
+On suppose que les quantités
+%$$m_2(\PP) = \E[X_1^2]<\infty\;\;\text{ et}\;\;m_2(\mathbb{Q})=\E[Y_1^2]<\infty.$$
+%On suppose connus
+$$v(\PP) = \text{Var}[X_1]\;\;\text{et}\;\;v(\mathbb{Q})=\text{Var}[Y_1]$$
+sont bien définies et connues.
+On pose $\overline{X}_{n} = n^{-1}\sum_{i = 1}^{n}X_i$ et $\overline{Y}_{m_n} ={m_n}^{-1}\sum_{i = 1}^{m_n}Y_i$. 
+\begin{itemize}
+\item[1.] On se place sous l'hypothèse nulle $H_0$. Quelle est la loi limite lorsque $n \rightarrow \infty$ de 
+$$\sqrt{n}\big(\overline{X}_{n}-\overline{Y}_{m_n}\big)\;\;?$$
+\item[2.] En déduire un test asymptotiquement de niveau $\alpha \in (0,1)$ de $H_0$ contre $H_1$ que l'on explicitera.
+\item[3.] Le test est-il consistant ?
+\item[4.] On suppose que $\PP$ est la loi exponentielle de paramètre $\lambda$ et que $\mathbb{Q}$ est la loi exponentielle de paramètre $\lambda^2$, pour $\lambda >0$. Reprendre les questions 1, 2 et 3 dans ce contexte.
+\end{itemize}
+\subsection{Approche par maximum de vraisemblance}
+On considère l'expérience ${\mathcal E}^n$ engendrée par $Z^n = (X_1,\ldots, X_{n}, Y_1,\ldots, Y_{m_n})$, où les $X_i$ suivent la loi exponentielle de paramètre $\lambda$ et les $Y_i$ la loi exponentielle de paramètre $\lambda^2$. On note $\PP_\lambda^{n}$ la loi de $Z^n$ sur $\R_+^{n+m_n}$.
+\begin{itemize}
+%\item[4.] Décrire ${\mathcal E}^n$.
+\item[5.] Montrer que ${\mathcal E}^n$ est dominée par la mesure de Lebesgue sur $\R_+^{n+m_n}$ et expliciter sa fonction de vraisemblance.
+$$\lambda \leadsto f(\lambda ; X_1,\ldots, X_n, Y_1,\ldots, Y_{m_n}).$$
+\item[6.] Montrer que l'estimateur du maximum de vraisemblance $\widehat \lambda_n^{\tt{mv}}$ est bien défini et le calculer.
+% est bien défini\footnote{On ne demande pas de calculer l'estimateur du maximum de vraisemblance.}. 
+\item[7.] Calculer l'information de Fisher
+$$\mathbb{I}_n(\lambda) = \E_\lambda^n\big[\big(\partial_\lambda \log  f(\lambda ; X_1,\ldots, X_n, Y_1,\ldots, Y_{m_n})\big)^2\big],$$
+où $\E_\lambda^n$ désigne l'espérance pour la loi de $Z^n = (X_1,\ldots, X_{n}, Y_1,\ldots, Y_{m_n})$ lorsque le paramètre est $\lambda$.
+%Soit $\mu >0$. On supposeque $n_1= n $ et $n_2=\lfloor \mu n \rfloor$. En admettant que $\sqrt{n}()$
+%En admettant que  $\widehat \lambda_n^{\tt{mv}}$ est asymptotiquement normal de variance limite l'inverse de l'information de Fisher, dans le sens où
+%$$\widehat \lambda_n^{\tt{mv}}\stackrel{\text{loi}}{\approx} {\mathcal N}\big(\lambda,\mathbb{I}_n^{-1}(\lambda)\big),$$ 
+%où $\mathbb{I}_n(\lambda)$ désigne l'information de Fisher du modèle au point $\lambda$,
+\item[8.] Montrer que
+$$\sqrt{n}\big(\widehat \lambda_n^{\tt{mv}}-\lambda\big) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,\tfrac{\lambda^2}{1+4\gamma}\big).$$ 
+\item[9.] En déduire un test asymptotiquement de niveau $\alpha \in (0,1)$ et consistant (on prendra soin de démontrer que le test ainsi construit est bien consistant).
+\item[10.] Le test basé sur  $\widehat \lambda_n^{\tt{mv}}$ est-il plus puissant que le test construit dans la Question 4 ?
+\end{itemize}
+
+\section{Estimation d'une fonctionnelle linéaire en régression} 
+
+On observe le vecteur aléatoire $(Y_1,\ldots, Y_n)$ donné par
+$$Y_i = f(x_{i,n})+\xi_i,\;\;i=0,\ldots, n$$
+où la fonction $f : [0,1] \rightarrow \R$ inconnue est $\gamma$-hölderienne\footnote{On rappelle que $f:[0,1] \rightarrow \R$ est $\gamma$-hölderienne avec $0 < \alpha \leq 1$ si $\sup_{x \neq y}\frac{|f(y)-f(x)|}{|y-x|^\gamma}<\infty$.} pour une certaine valeur $0 < \gamma \leq 1$, les bruits $\xi_i$ sont des variables aléatoires indépendantes, de lois inconnues, satisfaisant
+$$\E\big[\xi_i\big]=0,\;\;\E\big[\xi_i^2\big]=\sigma^2,\;\;\E\big[\xi_i^4\big]<\infty,$$
+pour une variance commune $\sigma^2$, et les points $x_{i,n}$ du {\it design} sont observés et satisfont
+$$0 \leq x_{0,n} < x_{1,n} < \ldots < x_{n,n} \leq 1.$$
+Le but est d'estimer la fonctionnelle linéaire $\vartheta = \vartheta(f) = \int_0^1 f(x)dx$.
+\subsection{Estimation par approximation de Riemann} \label{riemann}
+On suppose que $\max_{1 \leq i \leq n}(x_{i,n}-x_{i-1,n}) = {\mathcal O}(n^{-\beta})$ pour un certain $\beta >0$ et on considère l'estimateur
+$$\widehat \vartheta_n^{\,{\tt R}} = \sum_{i = 1}^n Y_i (x_{i,n}-x_{i-1,n}).$$
+\begin{itemize}
+\item[1.] Montrer que l'on a la décomposition
+$$\widehat \vartheta_n^{\,{\tt R}} = \sum_{i = 1}^n f(x_{i_n})(x_{i,n}-x_{i-1,n}) + R_n,$$
+où $R_n$ est un reste qui vérifie $\E\big[R_n^2\big] = {\mathcal O}(n^{-\beta})$.
+\item[2.] En déduire
+$$\E\big[\big(\widehat \vartheta_n^{\,{\tt R}}- \vartheta\big)^2\big] = {\mathcal O}\big(n^{-\text{min}\{\beta, 2\gamma\}}\big).$$
+\item[3.] Quelle vitesse de convergence maximale peut atteindre cet estimateur ?
+\end{itemize}
+
+\subsection{Vitesse de convergence par approximation de Riemann} \label{vitesse riemann}
+On suppose désormais $\gamma >1/2$ et qu'il existe une fonction $G:[0,1]\rightarrow [0,1]$, avec $G(0)=0$ et $G(1)=1$, strictement croissance et régulière\footnote{c'est-à-dire autant de fois dérivable qu'on le souhaite.}, et telle que
+$$G(x_{i,n})=\frac{i}{n}\;\;\text{pour}\;\;i=1,\ldots, n.$$ 
+\begin{itemize}
+\item[4.] Montrer que ces hypothèses sont compatibles avec celles de la Section \ref{riemann}
+\end{itemize}
+On donne le \underline{théorème central-limite version Lindeberg} : {\it Si $\eta_1,\ldots, \eta_n$ sont des variables aléatoires indépendantes, centrées, si $v_n = \sum_{i = 1}^n \E\big[\eta_i^2\big]$ et s'il existe $c>0$ tel que
+$$\frac{1}{v_n}\sum_{i = 1}^n \E\Big[\eta_i^2{\bf 1}_{\big\{|\eta_i| \geq c \sqrt{v_n}\big\}}\Big] \rightarrow 0\;\;\text{quand}\;\;n \rightarrow \infty,$$
+alors
+$$\frac{1}{\sqrt{v_n}}\sum_{i =1}^n \eta_i \stackrel{d}{\longrightarrow} {\mathcal N}(0,1).$$}
+\begin{itemize}
+\item[5.] Montrer que dans la décomposition de la Section \ref{riemann}, on a plus précisément la convergence
+$$\sqrt{n}R_n \stackrel{d}{\longrightarrow} {\mathcal N}\Big(0,\sigma^2 \int_0^1 \tfrac{d}{dx}(G^{-1})(x)^2dx\Big).$$
+\item[6.] En déduire que $\widehat \vartheta_n^{\,{\tt R}}$ est asymptotiquement normal, pour une variance $v_{{\tt R}}$  que l'on précisera. 
+\item[7.] Montrer que $v_{{\tt R}} \geq \sigma^2$.
+\item[8.] Si $\sigma^2$ est connue, construire un intervalle de confiance asymptotiquement de niveau $\alpha \in (0,1)$ pour $\vartheta$.
+\end{itemize}
+\subsection{Estimation par lissage pondéré}
+On se place dans les conditions de la Section \ref{vitesse riemann} et on considère désormais l'estimateur
+$$\widehat \vartheta_n^{\,{\tt L}} = n^{-1}\sum_{i = 1}^n Y_i\, w(i/n),$$
+où $w:[0,1] \rightarrow \R$ est une certaine fonction continue donnée.
+\begin{itemize}
+\item[9.] Montrer que pour un certain choix de $w$, on a 
+$$\sqrt{n}\big(\widehat \vartheta_n^{\,{\tt L}} -\vartheta\big) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,v_{{\tt L}}\big),$$
+pour une variance $v_{{\tt L}}$ que l'on explicitera.
+\item[10.] Proposer une condition simple sur $G$ pour que $\widehat \vartheta_n^{\,{\tt L}}$ soit préférable à $\widehat \vartheta_n^{\,{\tt R}}$.
+\end{itemize}
+
+
+
+\end{document}
+
+
+
+
+
+
+
+\end{document}

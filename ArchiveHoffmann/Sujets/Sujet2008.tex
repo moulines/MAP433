@@ -1,0 +1,350 @@
+ \documentclass[11pt]{article}
+ \usepackage[applemac]{inputenc}
+
+\usepackage{amsmath,amssymb,amsthm,amsfonts,amstext,amsbsy,amscd}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{a4wide}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{picins}
+%\usepackage{tikz}
+\setlength{\parskip}{0.3cm}
+%\setlength{\textwidth}{13.7cm}
+\setlength{\textwidth}{14cm}
+\setlength{\textheight}{19.3cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Albert's definitions
+\def\vp{\varphi}
+\def\<{\langle}
+\def\>{\rangle}
+\def\t{\tilde}
+\def\i{\infty}
+\def\e{\eps}
+\def\sm{\setminus}
+\def\nl{\newline}
+\def\o{\overline}
+\def\wt{\widetilde}
+\def\wh{\widehat}
+\def\cK{\cal K}
+\def\co{\cal O}
+\def\Chi{\raise .3ex
+\hbox{\large $\chi$}} \def\vp{\varphi}
+\newcommand{\norme}[1]{ {\left\lVert  #1\right\rVert}}
+\newcommand{\dd}{\text{d}}
+\newcommand{\ve}{\varepsilon}
+\def\({\Bigl (}
+\def\){\Bigr )}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bea}{$$ \begin{array}{lll}}
+\newcommand{\eea}{\end{array} $$}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\iref}[1]{(\ref{#1})}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%This is Markus' definition
+\newcommand{\MR}{{($\spadesuit$)}}
+\frenchspacing \sloppy
+\numberwithin{equation}{section}
+%\swapnumbers
+\newtheorem{satz}{Satz}[section]
+\newtheorem{theo}[satz]{Theorem}
+\newtheorem{prop}[satz]{Proposition}
+\newtheorem{theorem}[satz]{Theorem}
+\newtheorem{proposition}[satz]{Proposition}
+\newtheorem{corollary}[satz]{Corollary}
+\newtheorem{lemma}[satz]{Lemma}
+\newtheorem{assumption}[satz]{Assumption}
+\newtheorem{korollar}[satz]{Korollar}
+\newtheorem{definition}[satz]{Definition}
+\newtheorem{bemerkung}[satz]{Bemerkung}
+\newtheorem{remark}[satz]{Remark}
+\newtheorem{remarks}[satz]{Remarks}
+\newtheorem{beispiel}[satz]{Beispiel}
+\newtheorem{example}[satz]{Example}
+\DeclareMathOperator{\E}{{\mathbb E}}
+\DeclareMathOperator{\F}{{\mathbb F}}
+\DeclareMathOperator{\G}{{\mathbb G}}
+\DeclareMathOperator{\D}{{\mathbb D}}
+\DeclareMathOperator{\R}{{\mathbb R}}
+\DeclareMathOperator{\C}{{\mathbb C}}
+\DeclareMathOperator{\Z}{{\mathbb Z}}
+\DeclareMathOperator{\N}{{\mathbb N}}
+\DeclareMathOperator{\K}{{\mathbb K}}
+\DeclareMathOperator{\T}{{\mathbb T}}
+\DeclareMathOperator{\PP}{{\mathbb P}}
+\DeclareMathOperator{\QQ}{{\mathbb Q}}
+\DeclareMathOperator{\Q}{{\mathbb Q}}
+\DeclareMathOperator{\spann}{span}
+\DeclareMathOperator{\supp}{supp} \DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rg}{rg} \DeclareMathOperator{\Eig}{Eig}
+\DeclareMathOperator{\sgn}{sgn} \DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\kerr}{ker} \DeclareMathOperator{\dimm}{dim}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\esssup}{esssup}
+\DeclareMathOperator{\diag}{diag} \DeclareMathOperator{\KL}{KL}
+\DeclareMathOperator{\grad}{grad} \DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\Var}{Var} \DeclareMathOperator{\Cov}{Cov}
+\renewcommand{\d}{\ensuremath {\,\text{d}}}
+\providecommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\cdot}{{\scriptstyle \bullet} }
+\providecommand{\abs}[1]{\lvert #1 \rvert}
+\providecommand{\norm}[1]{\lVert #1 \rVert}
+\providecommand{\bnorm}[1]{{\Bigl\lVert #1 \Bigr\rVert}}
+\providecommand{\babs}[1]{{\Bigl\lvert #1 \Bigr\rvert}}
+\providecommand{\scapro}[2]{\langle #1,#2 \rangle}
+\providecommand{\floor}[1]{\lfloor #1 \rfloor}
+\providecommand{\dfloor}[1]{{\lfloor #1 \rfloor_\Delta}}
+\providecommand{\ceil}[1]{\lceil #1 \rceil}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\cit}[1]{\citeasnoun{#1}}
+\begin{document}
+%\dateposted{demain}
+%\thanks{}
+%\title{Transition de l'information statistique à travers les échelles spatiales en  statistique des processus}
+\title{\'Ecole Polytechnique -- Année 2008-2009  \\MAP\-433 Statistique}
+\date{}
+\maketitle
+
+
+
+{\small On tiendra compte de la qualité de la rédaction. Les Sections 1 et 2 sont indépendantes. La Section 2.4 est indépendante des Sections 2.2. et 2.3. 
+
+Pour $\alpha \in (0,1)$, on note $q_{1-\alpha,n}^{\chi^2}$ le quantile d'ordre $1-\alpha$ de la loi du $\chi^2$ à $n$ degrés de libertés, c'est-à-dire le nombre $q_{1-\alpha,n}^{\chi^2} >0$ vérifiant
+$$\PP\big[Y > q_{1-\alpha,n}^{\chi^2}\big] = \alpha$$
+si $Y$ suit la loi du $\chi^2$ à $n$ degrés de libertés.}
+\section{Test du signe}
+On considère le modèle statistique engendré par l'observation du vecteur aléatoire $Z^{n}=\big(X^{n},Y^{n}\big)$ de $\R^{2n}$ défini par
+$$X^{n} = \big(X_1,\ldots, X_n\big),$$
+où les variables aléatoires $X_i$ sont indépendantes, de même loi ayant une fonction de répartition $F$ continue, et
+$$Y^{n} = \big(Y_1,\ldots, Y_n\big),$$ 
+où les variables aléatoires $Y_i$ sont indépendantes, de même loi ayant une fonction de répartition $G$ continue. On suppose que les vecteurs $X^{n}$ et 
+$Y^{n}$ sont indépendants. On considère le test d'hypothèse 
+$$H_0\;:\;F=G\;\;\;\text{contre}\;\;\;H_1\;:\;F\neq G.$$ 
+\begin{enumerate}
+\item Montrer que 
+$$\PP\big[X_i=Y_i\big]=0$$
+et en déduire que si $F=G$,
+$$\PP\big[X_i > Y_i\big] = \frac{1}{2}.$$
+
+%\noindent \underline{Corrigé} :  $F$ et $G$ sont continues, donc les mesures de probabilité associées $\PP_F(dx)$ et $\PP_G(dx)$ sont diffuses : $\PP_F\big[\{x\}\big] = \PP_{G}\big[\{x\}\big]=0$ pour $x\in \R$. Par indépendance et par Fubini
+%$$\PP\big[X_i=Y_i\big] = \int_{\R \times \R}1_{\{x=y\}}F(dx)F(dy)=0.$$
+%On a 
+%$$1=\PP\big[X_i>Y_i\big]+\PP\big[X_i <Y_i\big]+\PP\big[X_i=Y_i\big].$$
+%Si $F=G$, les deux premiers termes du membre de droite sont égaux. Le dernier terme est nul, d'où le résultat.
+\item On pose
+$$N\big(Z^{n}\big) = \sum_{i = 1}^n 1_{\big\{X_i>Y_i\big\}}.$$
+Quelle est la loi de $N$ sous $H_0$ ?
+
+%\noindent \underline{Corrigé} : Les variables $1_{\big\{X_i>Y_i\big\}}$ sont i.i.d. et, sous l'hypothèse $H_0$, c'est-à-dire si $F=G$, et suivent une loi de Bernoulli de paramètre $1/2$. Donc, sous $H_0$, $N(Z^n)$ suit une loi binomiale de paramètres $(n,1/2)$.
+\item En déduire que le test simple défini par la zone de rejet
+$${\mathcal R}(c)=\left\{\left|N(Z^{n})-\frac{n}{2}\right| \geq c\right\}$$
+permet de construire un test de niveau $\alpha \in (0,1)$ de $H_0$ contre $H_1$ pour un choix $c=c(\alpha) >0$ que l'on précisera. Parmi tous les choix possibles de $c(\alpha)$, lequel préférer ?
+
+%\noindent \underline{Corrigé}. Soit $Y$ une variable aléatoire de loi binomiale de paramètre $(n,1/2)$. Le choix
+%$$c(\alpha) = \inf\{c\geq 0,\;\PP\big[|Y-\tfrac{n}{2}]\geq c\}\leq \alpha$$
+%garantit que sous l'hypothèse, la probabilité de rejeter l'hypothèse est inférieure à $\alpha$. C'est aussi le choix de $c(\alpha)$ minimale, qui fournit donc la zone de rejet maximale parmi la classe des tests simples de zone de rejet de la forme ${\mathcal R}(c)$, et qui fournit donc la puissance maximale parmi cette classe de tests.
+\item Donner un équivalent de $c(\alpha) = c_n(\alpha)$ lorsque $n\rightarrow \infty$.
+
+%\underline{Corrigé} : Sous l'hypothèse, les variables aléatoires $1_{\{X_i > Y_i\}}$ sont i.i.d., de moyenne $1/2$ et de variance $1/4$. D'après le TCL
+%$$\frac{1}{\sqrt{n}}\sum_{i=1}^n \frac{1_{\{X_i > Y_i\}}-\tfrac{1}{2}}{\tfrac{1}{2}} =\frac{2}{\sqrt{n}}\Big(N(Z^n)-\frac{n}{2}\Big)\stackrel{d}{\longrightarrow} {\mathcal N}(0,1).$$
+%Il vient
+%$$\PP\big[\big|N(Z^n)-\tfrac{n}{2}\big|\geq c\big] \approx \PP\Big[|\xi| \geq \frac{2c}{\sqrt{n}}\Big] = 2\left(1-\Phi\Big(\frac{2c}{\sqrt{n}}\Big)\right)$$
+%où $\xi$ suit la loi gaussienne standard et $\Phi(x) = \int_{-\infty}^x e^{-t^2/2}\tfrac{dt}{\sqrt{2\pi}}$. Puisque $\Phi$ est monotone, on en déduit
+%$$c_n(\alpha) \sim \frac{\sqrt{n}}{2}\Phi^{-1}(1-\alpha/2).$$
+\item Montrer que néanmoins le test n'est pas consistant.
+
+%\noindent \underline{Corrigé} : Soient $F$ et $G$ deux distributions de l'alternative, c'est-à-dire telles que $F \neq G$, mais satisfaisant de plus
+%$$\PP_{(F,G)}\big[X_i > Y_i\big] = \frac{1}{2}.$$
+%On vérifie immédiatement que 
+%$$\lim_{n \rightarrow \infty}\PP_{(F,G)}\big[{\mathcal R}(c_n(\alpha))\big] = \alpha < 1,$$
+%ce qui contredit la consistance. (Un contre exemple : prendre $G$ telle que $\int_{0}^1G(dx)=\tfrac{1}{2}$ qui n'est pas la loi uniforme sur $[0,1]$ et prendre pour $F$ la loi uniforme sur $[0,1]$.)
+\end{enumerate}
+
+\section{Modèle de durée de vie avec censure}
+Soit $n\geq 1$ un entier. Soit $N_n$ une variable aléatoire à  valeurs dans $\mathbb{N}$. Sur l'événement $\{N_n\geq 1\}$, on observe 
+$$X_1,\ldots, X_{N_n}$$
+où les variables aléatoires $X_i$ sont indépendantes, de même loi exponentielle de paramètre $\lambda >0$, c'est-à-dire de densité
+$$x \leadsto \lambda \exp\big(-\lambda x\big)1_{\{x \geq 0\}}.$$
+On suppose de plus que les $X_i$ sont indépendantes de $N_n$.
+\subsection{Nombre déterministe d'observations} \label{deter}
+On suppose dans un premier temps que $N_n=n$ presque-sûrement.
+\begin{enumerate}
+\item Ecrire le modèle statistique engendré par l'observation de $(X_1,\ldots, X_n)$.
+
+%\noindent \underline{Corrigé} : l'expérience statistique s'écrit (par exemple)
+%$$\big(\R_+^n, {\mathcal B}(\R_+^n), \{\PP_\lambda^n,\lambda \in \Lambda = (0,+\infty)\}\big),$$
+%où 
+%$$\PP_\lambda^n(dx_1,\ldots, dx_n) = \lambda^n \exp\big(-\lambda \sum_{i = 1}^n x_i\big)dx_1\ldots dx_n.$$
+\item Calculer l'estimateur du maximum de vraisemblance $\widehat \lambda^{{\tt mv}}_n$ de $\lambda$.
+
+%\noindent \underline{Corrigé} : un calcul standard donne $\widehat \lambda^{{\tt mv}}_n=\frac{n}{\sum_{i = 1}^n X_i}$. 
+\item Montrer que $\widehat \lambda^{{\tt mv}}_n$ est asymptotiquement normal et calculer sa variance limite.
+
+%\noindent \underline{Corrigé} : le modèle est régulier. On calcule sont information de Fisher, pour la densité
+%$$f(\lambda,x) = \lambda e^{-\lambda x},\;\;x \in \R_+$$
+%On a $\partial_\lambda \log f(\lambda,x)=\lambda^{-1}-x$ et $\partial^2_\lambda \log f(\lambda,x)=-\lambda^{-2}$, d'où $\mathbb{I}(\lambda) = \lambda^{-2}$. On en déduit (Poly., Chapitre 6)
+%$$\sqrt{n}\big(\widehat \lambda^{{\tt mv}}_n-\lambda\big) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,\tfrac{1}{\mathbb{I}(\lambda)}\big) =  {\mathcal N}\big(0,\lambda^2\big).$$
+
+\item Dans quel sens sa variance limite est-elle minimale ?
+
+%\noindent \underline{Corrigé} : Le modèle est régulier. On invoque la théorie asymptotique du Poly., Chapitre 6.
+\item Montrer que\footnote{Indication : on pourra introduire la transformée de Laplace de $2\lambda X_i$ définie par $\xi \leadsto \E\big[e^{-\xi 2\lambda X_i}\big]$.}
+$$\left[0, \frac{1}{2n} \widehat \lambda^{{\tt mv}}_n  q_{1-\alpha,2n}^{\chi^2}\right], $$
+$$\left[\frac{1}{2n} \widehat \lambda^{{\tt mv}}_n  q_{\alpha,2n}^{\chi^2}, +\infty\right)$$
+et
+$$\left[\frac{1}{2n} \widehat \lambda^{{\tt mv}}_n  q_{\alpha/2,2n}^{\chi^2},\frac{1}{2n} \widehat \lambda^{{\tt mv}}_n  q_{1-\alpha/2,2n}^{\chi^2}\right]$$
+sont trois intervalles de confiance de $\lambda$ de niveau $1-\alpha$. Proposer des situations de modélisation où le choix de l'un des ces intervalles s'impose plutôt qu'un autre.
+
+%\noindent \underline{Corrigé} : La transformée de Laplace de $2\lambda X_i$ est donnée par
+%$$\xi \leadsto \E\big[e^{-\xi2\lambda X_i}\big] = (1+2\xi)^{-1},$$
+%et, par indépendance, des $X_i$, la transformée de Laplace de $2\lambda \sum_{i = 1}^n X_i$ est $\xi \leadsto (1+2\xi)^{-n}$. C'est aussi la transformée de Laplace de la loi du $\chi^2$ à $2n$ degrés de liberté. Donc
+%$$2n \frac{\lambda}{\widehat \lambda^{{\tt mv}}_n} \stackrel{d}{=} \chi^2(2n)$$
+%sous $\PP_\lambda$. On en déduit les trois intervalles de confiance par des manipulations élémentaires.
+\item Soient $0 < \lambda_0 <\lambda_1$. Construire un test d'hypothèse de
+$$H_0\,:\,\lambda = \lambda_0\;\;\;\text{contre}\;\;\;H_1\,:\,\lambda = \lambda_1$$ 
+de niveau $\alpha$ et uniformément plus puissant. Expliciter le choix du seuil définissant la région critique. Montrer que l'erreur de seconde espèce de ce test tend vers $0$ lorsque $n \rightarrow \infty$.
+
+%\noindent \underline{Corrigé} : on est dans un cadre où le test de Neyman-Pearson s'écrit comme un test simple. Sa zone de rejet est
+%$${\mathcal R}\big(c(\alpha)\big) = \Big\{ \Big(\frac{\lambda_1}{\lambda_0}\Big)^n \exp\big(-(\lambda_1-\lambda_0)\sum_{i = 1}^n X_i\big) \geq c(\alpha)\Big\},$$
+%où $c(\alpha)$ est déterminé par la condition
+%$$\PP_{\lambda_0}\Big[ \Big(\frac{\lambda_1}{\lambda_0}\Big)^n \exp\big(-(\lambda_1-\lambda_0)\sum_{i = 1}^n X_i\big) \geq c_\alpha\Big]=\alpha,$$
+%ce qui se réécrit encore comme
+%$$\PP_{\lambda_0}\Big[2\lambda_0\sum_{i = 1}^n X_i \leq 2\lambda_0\frac{\log \tfrac{\lambda_1}{\lambda_0}-\log c(\alpha)}{\lambda_1-\lambda_0}\Big] = \alpha.$$
+%Comme $2\lambda_0\sum_{i = 1}^n X_i$ suit la loi du $\chi^2$ à $2n$ degrés de liberté sous $\PP_{\lambda_0}$, on en déduit
+%$$c(\alpha) = \Big(\frac{\lambda_0}{\lambda_1}\Big)^n\exp\big(-\frac{\lambda_1-\lambda_0}{2\lambda_0}q_{\alpha,2n}^{\chi^2}\big).$$
+%Pour montrer que le test est consistant, on peut utiliser la loi des grands nombres. Sous l'alternative $\PP_{\lambda_1}$, puisque $\E_{\lambda_1}\big[X_i\big]=1/\lambda_1$, on a 
+%$$\sum_{i = 1}^nX_i \sim \frac{n}{\lambda_1},$$
+%donc la statistique de test  de Neyman-Pearson est équivalente à 
+%$$\Big(\frac{\lambda_1}{\lambda_0}\Big)^n \exp\big(-(\lambda_1-\lambda_0)\sum_{i = 1}^n X_i\big) \sim \exp\big(n(x-\log x-1)\big)$$
+%avec $x=\lambda_0/\lambda_1 \in (0,1)$. On a $x-\log x-1 > 0$ pour tout $x \in (0,1)$. Donc la statistique de test diverge sous l'alternative. On en déduit la consistance du test.
+\end{enumerate}
+\subsection{Nombre aléatoire ancillaire d'observations}
+On suppose que la loi de $N_n$ est {\bf indépendante de} $\lambda$, que $\E\big[N_n\big]=n$ et 
+$$\frac{N_n}{n} \stackrel{\text{p.s.}}{\longrightarrow}1.$$
+\begin{enumerate}
+\item[7.] Ecrire la vraisemblance du modèle statistique engendré par l'observation 
+$$(N_n,X_1,\ldots, X_{N_n})$$
+et l'information de Fisher du modèle.
+
+%\noindent \underline{Corrigé} : l'expérience statistique se réalise sur 
+%l'espace $\mathbb{N}\times \R_+^{\mathbb{N}}.$
+%Conditionnellement à $N_n=k$, on se retrouve dans l'expérience précédente avec $k$ au lieu de $n$. La loi de l'observation $(N_n,X_1,\ldots, X_{N_n})$ s'écrit
+%$$\E_\lambda\big[\varphi(N_n,X_1,\ldots, X_{N_n})\big] = \sum_{k \geq 0} \E_\lambda^k[\varphi(k,X_1,\ldots, X_k)\big]q_k, $$
+%où $q_k = \PP\big[N_n=k\big]$ et
+%$\PP_\lambda^k(dx_1\ldots dx_k) = \lambda^k e^{-\lambda \sum_{i = 1}^k x_i}dx_1\ldots dx_k$. La vraisemblance s'écrit
+%$${\mathcal L}(\lambda, N_n,X_1,\ldots, X_{N_n}) = q_{N_n} \lambda^{N_n} \exp\big(-\lambda\sum_{i = 1}^{N_n} X_i\big).$$
+%On a alors $\partial_\lambda^2 \log {\mathcal L}(\lambda, N_n,X_1,\ldots, X_{N_n}) = -N_n\lambda^{-2}$. Par indépendance l'information de Fisher au point $\lambda$ vaut :
+%$$-\E_\lambda\big[\partial_\lambda^2 \log {\mathcal L}(\lambda, N_n,X_1,\ldots, X_{N_n})\big]=\E\big[N_n\big]\lambda^{-2}=n\lambda^{-2}.$$
+\item[8.] Calculer l'estimateur du maximum de vraisemblance $\widehat \lambda^{{\tt mv}}_{N_n}$ de $\lambda$ correspondant.
+
+%\noindent \underline{Corrigé}. Puisque $q_k$ ne dépend pas de $\lambda$, le calcul du maximum de vraisemblance reste inchangé par rapport à la Section précédente. On obtient
+%$$\widehat \lambda^{{\tt mv}}_{N_n} = \frac{N_n}{\sum_{i = 1}^{N_n} X_i}.$$
+\item[9.] Calculer la loi limite de $\widehat \lambda^{{\tt mv}}_{N_n}$ lorsque $n\rightarrow \infty$.
+
+%\noindent \underline{Corrigé} : on peut anticiper, compte tenu de la question  7, que tout se passe comme dans la Section 2.2. où $N_n=n$ presque-sûrement. Puisque $N_n\rightarrow +\infty$ presque-sûrement et est indépendant des $X_i$, on a par le TCL
+%$$\sqrt{N_n}\left(\frac{1}{N_n}\sum_{i = 1}^{N_n}X_i-\frac{1}{\lambda}\right) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,\tfrac{1}{\lambda^2}\big).$$
+%Par la méthode ``delta" avec $g(x)=1/x$, on a aussi
+%$$\sqrt{N_n}\big(\widehat \lambda^{{\tt mv}}_{N_n}-\lambda\big) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0, \tfrac{1}{\lambda^2}g'(1/\lambda)^2\big)={\mathcal N}\big(0,\lambda^2\big).$$
+%En écrivant
+%$$\widehat \lambda^{{\tt mv}}_{N_n}\sqrt{n}\big(\widehat \lambda^{{\tt mv}}_{N_n}-\lambda\big) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,\tfrac{1}{\lambda^2}\big) = {\mathcal N}\big(0,\lambda^2\big).$$
+%Comme, $\sqrt{n/N_n}\stackrel{\text{p.s.}}{\longrightarrow}1$, on en déduit, par le lemme de Slutsky,
+%$$\sqrt{n}\big(\widehat \lambda^{{\tt mv}}_{N_n}-\lambda\big)=\sqrt{n/N_n} \sqrt{N_n}\big(\widehat \lambda^{{\tt mv}}_{N_n}-\lambda\big) \stackrel{d}{\longrightarrow} {\mathcal N}(0,\lambda^2).$$ 
+\end{enumerate}
+\subsection{Nombre aléatoire poissonnien d'observations}
+On suppose désormais que $N_n$ suit une loi de Poisson de paramètre $n\lambda$.
+\begin{enumerate}
+\item[10.] Calculer l'estimateur du maximum de vraisemblance de $\lambda$ basé sur l'observation de $N_n$ uniquement, et calculer sa loi limite lorsque $n\rightarrow \infty$.
+
+%\noindent \underline{Corrigé} : l'expérience consistant à observer $N_n$ uniquement se réalise sur $\mathbb{N}$, et une vraisembance s'écrit
+%$${\mathcal L}(\lambda, N_n) = e^{-n\lambda} \frac{(n\lambda)^{N_n}}{N_n!}.$$
+%On a $\partial_\lambda \log {\mathcal L}(\lambda, N_n) = -n+\frac{N_n}{\lambda}$ qui s'annule en $\frac{N_n}{n}$. On vérifie que c'est bien un maximum.
+
+%On réalise $N_n$ comme la somme de $n$ variables aléatoires, indépendantes, de loi de Poisson de paramètre $\lambda$. On est dans la cadre du modèle de la densité. Toutes les conditions de régularité sont vérifiées, et 
+%$$\partial_\lambda^2 \log {\mathcal L}(\lambda, N_n)  = -\frac{N_n}{\lambda^2}.$$
+%Comme $-\E\big[\partial_\lambda^2 \log {\mathcal L}(N_n)\big] = \frac{n}{\lambda}$, on en déduit que
+%$$\sqrt{n}\Big(\tfrac{N_n}{n}-\lambda\Big) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0, \lambda\big).$$
+%On peut aussi directement calculer la loi limite de $\tfrac{N_n}{n}$ via le TCL.
+\item[11.] Ecrire la vraisemblance du modèle statistique engendré par l'observation 
+$$\big(N_n,X_1,\ldots, X_{N_n}\big).$$
+
+%\noindent \underline{Corrigé} : l'expérience statistique se réalise sur 
+%$\mathbb{N}\times \R_+^{\mathbb{N}}.$ Comme dans la Section 2.2., conditionnellement à $N_n=k$, on se retrouve dans l'expérience précédente avec $k$ au lieu de $n$. La loi de l'observation $(N_n,X_1,\ldots, X_{N_n})$ s'écrit
+%$$\E_\lambda\big[\varphi(N_n,X_1,\ldots, X_{N_n})\big] = \sum_{k \geq 0} \E_\lambda^k[\varphi(k,X_1,\ldots, X_k)\big]e^{-\lambda n} \frac{(n\lambda)^k}{k!} $$
+%où $\PP_\lambda^k(dx_1\ldots dx_k) = \lambda^k e^{-\lambda \sum_{i = 1}^k x_i}dx_1\ldots dx_k$. La vraisemblance s'écrit
+%$${\mathcal L}(\lambda, N_n,X_1,\ldots, X_{N_n}) = e^{-\lambda n}\frac{(\lambda n)^{N_n}}{N_n!} \lambda^{N_n} \exp\big(-\lambda\sum_{i = 1}^{N_n} X_i\big).$$
+
+\item[12.] Calculer l'estimateur du maximum de vraisemblance $\widetilde \lambda^{{\tt mv}}_{N_n}$ de $\lambda$. 
+
+%\noindent \underline{Corrigé} : à la différence de la Section 2.2. la loi de $N_n$ dépend de $\lambda$ et apporte de l'information sur $\lambda$.  On a 
+%$$\partial_\lambda \log {\mathcal L}(\lambda, N_n,X_1,\ldots, X_{N_n}) = \frac{2N_n}{\lambda}- \Big(\sum_{i = 1}^{N_n}X_i+n\Big),$$
+%d'où 
+%$$\widetilde \lambda^{{\tt mv}}_{N_n} = \frac{2N_n}{\sum_{i = 1}^{N_n}X_i+n}.$$
+\item[13.] Montrer que $\widetilde \lambda^{{\tt mv}}_{N_n} \stackrel{\PP}{\longrightarrow} \lambda$ puis calculer la loi limite de $\widetilde \lambda^{{\tt mv}}_{N_n}$ lorsque $n \rightarrow \infty$.
+%\noindent \underline{Corrigé} : On a d'une part, d'après la question 9,
+%$$\sqrt{n}\Big(\frac{1}{N_n}\sum_{i = 1}^{N_n}X_i - \frac{1}{\lambda}\Big) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,\tfrac{1}{\lambda^2}\big).$$
+%D'autre part, d'après la question 10,
+%$$\sqrt{n} \big(\tfrac{N_n}{n}-\lambda\big) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0, \lambda\big), $$
+%et, via la méthode ``delta" avec $g(x)=1/x$,
+%$$\sqrt{n} \Big(\tfrac{n}{N_n}-\tfrac{1}{\lambda}\Big) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0, \lambda^{-3}\big).$$
+%Il vient
+%\begin{align*}
+%\sqrt{n}\Big(\frac{1}{\widetilde \lambda^{{\tt mv}}_{N_n}}-\frac{1}{\lambda}\Big) & =\sqrt{n}\Big(\frac{1}{2N_n}\sum_{i = 1}^{N_n}(X_i-\tfrac{1}{\lambda})+ \frac{1}{2}\big(\tfrac{n}{N_n}-\tfrac{1}{\lambda}\big)\Big)\\
+%& \stackrel{d}{\longrightarrow} \frac{1}{2\lambda}\xi + \frac{1}{2\lambda^{3/2}}\zeta
+%\end{align*}
+%où $\xi$ et $\zeta$ sont deux variables aléatoires gaussiennes centrées, réduites et indépendantes. (On peut par exemple passer par le calcul des fonctions caractéristiques et utiliser l'indépendance entre $N_n$ et les $X_i$.) Donc
+%$$\sqrt{n}\Big(\frac{1}{\widetilde \lambda^{{\tt mv}}_{N_n}}-\frac{1}{\lambda}\Big) \stackrel{d}{\longrightarrow} {\mathcal N}\Big(0,\tfrac{1}{4\lambda^2}(1+\tfrac{1}{\lambda})\Big).$$
+%En appliquant une nouvelle fois la méthode ``delta" avec $g(x)=1/x$, on en déduit
+%$$\sqrt{n}\big(\widetilde \lambda^{{\tt mv}}_{N_n}-\lambda\big) \stackrel{d}{\longrightarrow} {\mathcal N}\Big(0,\tfrac{\lambda^2}{4}\big(1+\tfrac{1}{\lambda}\big)\Big).$$
+%est asymptotiquement normal et calculer sa variance limite.
+\item[14.] Comparer la gain d'information vis-à-vis des situations précédentes. 
+%ou vis-à-vis de la situation où l'on observe $N_n$ uniquement.
+
+%\noindent \underline{Corrigé} : comparons pour simplifier les situations où $\lambda \sim 0$ et $\lambda \sim \infty$.
+%Dans le cas où $\lambda \sim 0$, la variance asymptotique de $\widetilde \lambda^{{\tt mv}}_{N_n}$ est équivalente à 
+%$\lambda/4 \leq \lambda$ qui est la variance de l'estimateur de la question 10. Dans le cas où $\lambda \sim \infty$, la variance asymptotique de $\widetilde \lambda^{{\tt mv}}_{N_n}$ est équivalente à $\lambda^2/4 \leq \lambda^2$ qui est la variance asymptotique de l'estimateur de la question 9. Dans tous les régimes, l'estimateur ainsi obtenu améliore (sans surprise) les estimateurs précédents.
+\end{enumerate}
+\subsection{Observations avec censure}
+On se replace dans le contexte de la Section \ref{deter} et on suppose que, pour un entier $1 \leq k  \leq n$ donné, on n'observe que les $k$ plus petites valeurs des $X_i$. Si $(X_{1:n}$, $X_{2:n}$, \ldots, $X_{n:n})$ désigne la statistique d'ordre des $X_i$, c'est-à-dire le réarrangement croissant vérifiant :
+$$X_{1:n} \leq X_{2:n} \leq \cdots \leq X_{n:n},$$
+on observe {\bf seulement} les valeurs de
+$$X_{1:n} \leq X_{2:n} \leq \cdots \leq X_{k:n}.$$
+\begin{enumerate}
+\item[15.] Montrer que la densité\footnote{On pourra utiliser le résultat suivant : si les $X_i$ sont des variables aléatoires indépendantes de même loi, de densité $f$ par rapport à la mesure de Lebesgue sur $\R_+$, alors la densité conjointe de $(X_{1:n},\ldots, X_{n:n})$  s'écrit $(x_1,\ldots, x_n)\leadsto n! \prod_{i = 1}^nf(x_i)1_{0 \leq x_1 \leq x_2 \leq \ldots \leq x_n}$.} de $(X_{1:n},\ldots, X_{k:n})$ s'écrit
+$$(x_1,\ldots, x_k) \leadsto \frac{\lambda^d n!}{(n-k)!} \exp\big(-\lambda S_{n,k}(x_1,\ldots, x_k)\big)1_{\big\{x_1 \leq x_2 \leq \cdots \leq x_k\big\}},$$
+où 
+$$S_{n,k}(x_1,\ldots, x_k) = \sum_{i=1}^k x_i + (n-k) x_k.$$ 
+
+%\noindent \underline{Corrigé} : On part de la densité de la loi de $(X_{1:n},\ldots, X_{n:n})$ qui vaut
+%$$g(x_1,\ldots, x_n) = n!\lambda^n \exp\big(-\sum_{i = 1}^n x_i\big)1_{\big\{0 \leq x_1 \leq x_1 \leq \cdots \leq x_n\big\}}$$
+%et on fait $n-k$ intégrations successives pour obtenir la formule annoncée.
+\item[16.] En déduire l'estimateur du maximum de vraisemblance $\bar \lambda^{\,{\tt mv}}_k$ de $\lambda$ pour l'observation de $(X_{1:n},\ldots, X_{k:n})$.
+
+%\noindent \underline{Corrigé} : La log-vraisemblance vaut :
+%$$\log {\mathcal L}(\lambda, X_{1:n},\ldots, X_{k:n}) = \log \frac{n!}{(n-k)!}+k\log \lambda-\lambda S_{n,k}(X_{1:n},\ldots, X_{k:n}),$$
+%d'où, par un calcul standard
+%$$\widehat \lambda^{\,{\tt mv}}_k = \frac{k}{S_{n,k}(X_{1:n},\ldots, X_{k:n})}.$$
+
+\item[17.] A l'aide du changement de variable $u_i = (n-i+1)(x_i-x_{i-1})$, $i=1,\ldots, k$,  où l'on a posé $x_0=0$, expliciter la loi de $\bar \lambda^{\,{\tt mv}}_k$. Comparer avec la situation de la Section \ref{deter}.
+
+%\noindent \underline{Corrigé} : Le changement de variable linéaire
+%$$u_i = (n-i+1)(x_i-x_{i-1}),\;\;i=1,\ldots, k,\;\;x_0=0$$ 
+%a pour jacobien $(n-k)!/n!$. La loi conjointe des variables aléatoires $U_i=(n-i+1)(X_{i:n}-X_{i-1:n})$, pour $i=1,\ldots, k$, a pour densité (en convenant $X_{0:n}=0$) sur $\R_+^k$
+%$$(u_1,\ldots, u_k) \leadsto \prod_{i=1}^k \lambda e^{-\lambda u_i}.$$
+%Donc
+%$$2\lambda  S_{n,k}(X_{1:n},\ldots, X_{k:n}) = 2\lambda \sum_{i = 1}^k U_i$$
+%suit la loi du $\chi^2$ à $2k$ degrés de liberté, et la construction d'intervalles de confiance se fait comme dans la Section 2.1. en substituant $n$ par $k$. Il est remarquable que dans le cas où l'on observe les $k$ premières valeurs ordonnées de variables exponentielles indépendantes de paramètre $\lambda$ à partir d'un $n$-échantillon, on a la même information statistique que si l'on avait observé $k$ variables aléatoires exponentielles indépendantes, de même paramètre $\lambda$.
+
+
+\end{enumerate}
+
+
+
+%\begin{}
+
+\end{document}

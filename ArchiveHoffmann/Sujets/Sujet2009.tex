@@ -1,0 +1,266 @@
+ \documentclass[11pt]{article}
+ \usepackage[applemac]{inputenc}
+
+\usepackage{amsmath,amssymb,amsthm,amsfonts,amstext,amsbsy,amscd}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{a4wide}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{picins}
+%\usepackage{tikz}
+\setlength{\parskip}{0.3cm}
+%\setlength{\textwidth}{13.7cm}
+\setlength{\textwidth}{14cm}
+\setlength{\textheight}{19.3cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Albert's definitions
+\def\vp{\varphi}
+\def\<{\langle}
+\def\>{\rangle}
+\def\t{\tilde}
+\def\i{\infty}
+\def\e{\eps}
+\def\sm{\setminus}
+\def\nl{\newline}
+\def\o{\overline}
+\def\wt{\widetilde}
+\def\wh{\widehat}
+\def\cK{\cal K}
+\def\co{\cal O}
+\def\Chi{\raise .3ex
+\hbox{\large $\chi$}} \def\vp{\varphi}
+\newcommand{\norme}[1]{ {\left\lVert  #1\right\rVert}}
+\newcommand{\dd}{\text{d}}
+\newcommand{\ve}{\varepsilon}
+\def\({\Bigl (}
+\def\){\Bigr )}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bea}{$$ \begin{array}{lll}}
+\newcommand{\eea}{\end{array} $$}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\iref}[1]{(\ref{#1})}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%This is Markus' definition
+\newcommand{\MR}{{($\spadesuit$)}}
+\frenchspacing \sloppy
+\numberwithin{equation}{section}
+%\swapnumbers
+\newtheorem{satz}{Satz}[section]
+\newtheorem{theo}[satz]{Theorem}
+\newtheorem{prop}[satz]{Proposition}
+\newtheorem{theorem}[satz]{Theorem}
+\newtheorem{proposition}[satz]{Proposition}
+\newtheorem{corollary}[satz]{Corollary}
+\newtheorem{lemma}[satz]{Lemma}
+\newtheorem{assumption}[satz]{Assumption}
+\newtheorem{korollar}[satz]{Korollar}
+\newtheorem{definition}[satz]{Definition}
+\newtheorem{bemerkung}[satz]{Bemerkung}
+\newtheorem{remark}[satz]{Remark}
+\newtheorem{remarks}[satz]{Remarks}
+\newtheorem{beispiel}[satz]{Beispiel}
+\newtheorem{example}[satz]{Example}
+\DeclareMathOperator{\E}{{\mathbb E}}
+\DeclareMathOperator{\F}{{\mathbb F}}
+\DeclareMathOperator{\G}{{\mathbb G}}
+\DeclareMathOperator{\D}{{\mathbb D}}
+\DeclareMathOperator{\R}{{\mathbb R}}
+\DeclareMathOperator{\C}{{\mathbb C}}
+\DeclareMathOperator{\Z}{{\mathbb Z}}
+\DeclareMathOperator{\N}{{\mathbb N}}
+\DeclareMathOperator{\K}{{\mathbb K}}
+\DeclareMathOperator{\T}{{\mathbb T}}
+\DeclareMathOperator{\PP}{{\mathbb P}}
+\DeclareMathOperator{\QQ}{{\mathbb Q}}
+\DeclareMathOperator{\Q}{{\mathbb Q}}
+\DeclareMathOperator{\spann}{span}
+\DeclareMathOperator{\supp}{supp} \DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rg}{rg} \DeclareMathOperator{\Eig}{Eig}
+\DeclareMathOperator{\sgn}{sgn} \DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\kerr}{ker} \DeclareMathOperator{\dimm}{dim}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\esssup}{esssup}
+\DeclareMathOperator{\diag}{diag} \DeclareMathOperator{\KL}{KL}
+\DeclareMathOperator{\grad}{grad} \DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\Var}{Var} \DeclareMathOperator{\Cov}{Cov}
+\renewcommand{\d}{\ensuremath {\,\text{d}}}
+\providecommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\cdot}{{\scriptstyle \bullet} }
+\providecommand{\abs}[1]{\lvert #1 \rvert}
+\providecommand{\norm}[1]{\lVert #1 \rVert}
+\providecommand{\bnorm}[1]{{\Bigl\lVert #1 \Bigr\rVert}}
+\providecommand{\babs}[1]{{\Bigl\lvert #1 \Bigr\rvert}}
+\providecommand{\scapro}[2]{\langle #1,#2 \rangle}
+\providecommand{\floor}[1]{\lfloor #1 \rfloor}
+\providecommand{\dfloor}[1]{{\lfloor #1 \rfloor_\Delta}}
+\providecommand{\ceil}[1]{\lceil #1 \rceil}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\cit}[1]{\citeasnoun{#1}}
+\begin{document}
+%\dateposted{demain}
+%\thanks{}
+%\title{Transition de l'information statistique à travers les échelles spatiales en  statistique des processus}
+\title{\'Ecole Polytechnique -- Année 2009-2010\\ MAP\-433 Statistique  %{\bf Corrigé}
+}
+\date{}
+\maketitle
+
+
+
+{\small On {\bf tiendra compte} de la qualité de la rédaction. 
+Les Sections 1 et 2 sont indépendantes. Les questions précédées de la mention {\it (Facultatif.)} sont hors barême.
+%La Section 2.4 est indépendante des Sections 2.2. et 2.3. 
+
+Pour $d\geq 1$, $\mu \in \R^d$ et $\Sigma$ une matrice $d \times d$ symétrique semi-définie positive, ${\mathcal N}(\mu,\Sigma)$ désigne la loi du vecteur gaussien de moyenne $\mu$ et de matrice de variance-covariance $\Sigma$. 
+
+Pour $x \in \R$, on note $\Phi(x) = \int_{-\infty}^x e^{-t^2/2}\tfrac{dt}{\sqrt{2\pi}}$ la fonction de répartition de la loi gaussienne centrée réduite. 
+
+La densité d'une variable aléatoire exponentielle $\xi$ de paramètre $\lambda >0$ est donnée par $x\leadsto \lambda \exp\big(-\lambda x\big)1_{\{x \geq 0\}}$.
+%fonction de répartition $F(x)= \big(1-\exp(-\lambda x)\big)1_{\{x \geq 0\}}$. 
+%Pour $k \in \mathbb{N}$,
+On a alors
+$$\E\big[\xi^k\big] = \lambda^{-k}\; (k+1)!\;\;\;\text{pour}\;\;\;k\in\mathbb{N}.$$
+
+%Pour $\alpha \in (0,1)$, on note $q_{1-\alpha,n}^{\chi^2}$ le quantile d'ordre $1-\alpha$ de la loi du $\chi^2$ à $n$ degrés de libertés, c'est-à-dire le nombre $q_{1-\alpha,n}^{\chi^2} >0$ vérifiant
+%$$\PP\big[Y > q_{1-\alpha,n}^{\chi^2}\big] = \alpha$$
+%si $Y$ suit la loi du $\chi^2$ à $n$ degrés de libertés.}
+}
+%\section{Régression non-linéaire}
+\section{Marqueur d'une infection}
+%Dans des conditions de laboratoire, 
+$Q$ agents infectieux agressent simultanément un organisme, lequel est muni de $N$ agents de défense. La réponse immunitaire est modélisée de la façon suivante : chaque agent de défense choisit au hasard un agent infectieux (et un seul) parmi les $Q$ agresseurs, indépendamment des autres défenseurs. Un agent de défense a une probabilité $\vartheta \in (0,1)$ d'annihiler l'agent infectieux choisi pour cible. 
+
+%Pour que l'organisme soit infecté, il suffit qu'un seul agent infectieux ait échappé à la riposte du système de défense de l'organisme. 
+\begin{enumerate}
+\item[1.] Montrer que la probabilité qu'un agent infectieux donné contamine l'organisme est 
+$$p_{Q,N}(\vartheta) = \Big(1-\frac{\vartheta}{N}\Big)^Q.$$
+\end{enumerate}
+On répète en laboratoire $n$ scénarios indépendants d'aggression de l'organisme. Dans chaque expérience, on {\bf marque} un agent infectieux donné. Pour l'expérience $i$, on note $X_i=1$ si l'agent infectieux a contaminé l'organisme et $0$ sinon.
+\begin{enumerate}
+\item[2.] Ecrire la vraisemblance de l'expérience statistique associée à l'observation de $(X_1,\ldots, X_n)$, où $\vartheta$ est les paramètre inconnu et $Q$ et $N$ sont connus.
+\item[3.] Montrer que le modèle est régulier et que son information de Fisher vaut 
+$$\mathbb{I}(\vartheta) = \frac{\big(\partial_\vartheta p_{Q,N}(\vartheta)\big)^2}{p_{Q,N}(\vartheta)\big(1-p_{Q,N}(\vartheta)\big)}.$$
+\item[4.] Montrer que l'estimateur du maximum de vraisemblance de $\vartheta$ est bien défini, qu'il est asymptotiquement normal et calculer sa variance limite.
+\end{enumerate}
+On suppose désormais les paramètres $N$ et $Q$ inconnus, et on se place dans l'asymptotique $N\rightarrow \infty$, $Q=Q_N\sim \kappa N$ pour un $\kappa >0$  (donc inconnu). 
+\begin{enumerate}
+\item[5.] En passant à la limite en $N$ dans le modèle précédent, montrer que l'expérience basée sur l'observation de $(X_1,\ldots, X_n)$ permet d'estimer le paramètre $\widetilde \vartheta = \kappa \vartheta$ et calculer l'estimateur du maximum de vraisemblance de $\widetilde \vartheta$. 
+\item[6.] Soit  $\widetilde \vartheta_0 \in (0,+\infty)$ donné. Construire le test de Wald de 
+$$H_0\,:\widetilde \vartheta = \widetilde \vartheta_0\;\;\text{contre}\;\; H_1\,:\widetilde \vartheta \neq \widetilde \vartheta_0.$$ 
+\item[7.] Le test ainsi construit est-il consistant ?
+\end{enumerate}
+\section{Le test de Moran}
+\subsection{Préliminaires}
+Soit $n\geq 1$ et $(U_1,\ldots, U_n)$ des variables aléatoires indépendantes, identiquement distribuées, de loi uniforme sur $[0,1]$. On note 
+$\big(U_{(1)}, U_{(2)},\ldots, U_{(n)}\big)$ la statistique d'ordre de $(U_1,\ldots, U_n)$, c'est-à-dire le réarrangement croissant des $U_i$ vérifiant
+$$U_{(1)} \leq U_{(2)} \leq \dots \leq U_{(n)}.$$
+\begin{enumerate}
+\item[1.] {\it (Facultatif.)} Montrer l'égalité en loi
+$$\big(U_{(1)}, U_{(2)},\ldots, U_{(n)}\big) \stackrel{d}{=} \Big(\frac{\zeta_1}{\zeta_{n+1}},\frac{\zeta_2}{\zeta_{n+1}},\ldots,\frac{\zeta_n}{\zeta_{n+1}}\Big),$$
+où $\zeta_n = \sum_{j = 1}^n \xi_j$, 
+et les $\xi_j$ sont indépendantes, identiquement distribuées, de loi exponentielle de paramètre $1$.
+\item[2.] En déduire
+% l'égalité en loi
+%\begin{align*}
+%& \;\big(U_{(1)}, U_{(2)}-U_{(1)},\ldots, U_{(n)}-U_{(n-1)}, 1-U_{(n)}\big) \\
+%\stackrel{d}{=} &\; \Big(\frac{\xi_1}{\zeta_{n+1}},\frac{\xi_2}{\zeta_{n+1}},\ldots,\frac{\xi_n}{\zeta_{n+1}}\Big).
+%\end{align*}
+$$\;\big(U_{(1)}, U_{(2)}-U_{(1)},\ldots, U_{(n)}-U_{(n-1)}, 1-U_{(n)}\big) 
+\stackrel{d}{=} \Big(\frac{\xi_1}{\zeta_{n+1}},\frac{\xi_2}{\zeta_{n+1}},\ldots,\frac{\xi_n}{\zeta_{n+1}}\Big).
+$$
+\end{enumerate}
+\subsection{Construction du test}
+Soit $n \geq 1$ et $(X_1,\ldots, X_n)$ un $n$-échantillon de fonction de répartition $F$ continue. 
+On teste l'hypothèse nulle $H_0\,:\,F = F_0$ contre l'alternative $H_1\,:\,F \neq F_0$. On pose
+$$M_n = \sum_{k = 0}^n \big(F_0(X_{(k+1)})-F_0(X_{(k)})\big)^2,$$
+avec $F_0(X_{(0)})=0$ et $F_0(X_{(n+1)})=1$ et $(X_{(1)}, \ldots, X_{(n)})$ est la statistique d'ordre de $(X_1,\ldots, X_n)$.
+% et avec la convention $F_0(X_{(0)})=0$ et $F_0(X_{(n+1)})=1$.
+
+\begin{enumerate}
+\item[3.] Montrer, sous $H_0$, l'égalité en loi
+$$\big(F_0(X_1),F_0(X_2),\ldots, F_0(X_n)\big) \stackrel{d}{=} \big(U_1,\ldots, U_n\big)$$
+où les $U_j$ sont indépendantes et identiquement distribuées, de loi uniforme sur $[0,1]$. 
+\item[4.] En déduire, sous $H_0$, 
+%l'égalité en loi
+$$M_n \stackrel{d}{=} \frac{\sum_{j = 1}^{n+1}\xi_j^2}{\big(\sum_{j = 1}^{n+1}\xi_j\big)^2}$$
+où les $\xi_j$ sont indépendantes et identiquement distribuées, de loi exponentielle de paramètre $1$.
+\item[5.] Montrer 
+%la convergence en loi
+$$\frac{1}{\sqrt{n}}\sum_{j = 1}^n\big(\xi_j -1, \xi_j^2 - 2\big)^T \stackrel{d}{\longrightarrow} {\mathcal N}(0,\Sigma)$$
+%\;\;\text{lorsque}\;\;n\rightarrow \infty$$
+pour une matrice de variance-covariance $\Sigma$ que l'on déterminera. 
+\item[6.] En déduire que, sous $H_0$,
+% la convergence en loi
+$$T_n = \sqrt{n}\big(\tfrac{n}{2}M_{n} -1\big) \stackrel{d}{\longrightarrow} {\mathcal N}(0,1).$$
+%\;\;\text{lorsque}\;\;n\rightarrow \infty.$$
+%en loi lorsque $n \rightarrow \infty$.
+\item[7.] Montrer que, pour tout $\alpha \in (0,1)$, le test de Moran défini par la zone de rejet
+$${\mathcal R}_{n,\alpha} = \big\{\big|T_n\big| \geq \Phi^{-1}(1-\tfrac{\alpha}{2})\big\}$$
+est asymptotiquement de niveau $\alpha$ pour tester $H_0$ contre $H_1$.
+\end{enumerate}
+
+\subsection{Consistance du test de Moran} \label{consistance}
+On suppose dans cette section que $F \neq F_0$. Le but est de montrer qu'alors
+$$\lim_{n \rightarrow \infty}\PP_{F}^n\Big[|T_n| \geq \Phi^{-1}(1-\tfrac{\alpha}{2})\Big]=1,\;\;\eqno(\star)$$
+où $\PP_F^n$ désigne la loi du vecteur d'observation $(X_1,\ldots, X_n)$ lorsque les $X_i$ ont pour fonction de répartition $F$.
+\begin{enumerate}
+\item[8.] Interpréter $(\star)$ et rappeler pourquoi cela entraine la consistance du test.
+\item[9.] Montrer que, sans perdre de généralité, on peut supposer que l'une des deux fonctions $F$ ou $F_0$ est la fonction de répartition de la loi uniforme sur $[0,1]$.
+\end{enumerate}
+On supposera dans la suite que $F$ est la fonction de répartition de la loi uniforme sur $[0,1]$ et que $F_0$
+%$= x$ si $x \in [0,1]$, $F_0(x)=0$ si $x \leq 0$ et $F_0(x)=1$ si $x \geq 1$.
+vérifie
+$$F_0(x) = \int_{-\infty}^x f(t)dt,\;\;x \in \R$$
+pour une fonction $t \leadsto f(t)$ continue et telle que $f(t)=0$ si $t \notin [0,1]$.
+\begin{enumerate}
+\item[10.] Montrer que 
+$$nM_n = V_n+R_n,$$
+où $R_n \stackrel{\PP_F^n}{\longrightarrow} 0$ en $\PP_F^n$-probabilité et $V_n$ vérifie l'égalité en loi sous $\PP_{F}^n$
+$$V_n \stackrel{d}{=} n \sum_{k = 1}^{n+1}\Big(f\big(\zeta_k/\zeta_{n+1}\big)\frac{\xi_k}{\zeta_{n+1}}\Big)^2,$$
+où $\zeta_n = \sum_{j = 1}^n \xi_j$ et où les $\xi_j$ sont des variables aléatoires indépendantes et identiquement distribuées, de loi exponentielle de paramètre $1$.
+% et où l'on a posé $\zeta_n = \sum_{j = 1}^n \xi_j$.
+\item[11.] ({\it Facultatif.}) Montrer que ce dernier terme est équivalent à
+% en $\PP_F^n$-probabilité à 
+$$n \sum_{k = 1}^{n}\Big(f\big(k/n\big)\frac{\xi_k^2}{n}\Big)^2.$$
+\item[12.] En déduire 
+$nM_n \stackrel{\PP_F^n}{\longrightarrow} 2\int_0^1 f(t)^2dt$
+%\;\;\text{lorsque}\;\;n \rightarrow \infty$$
+et que la limite est toujours supérieure à $2$.
+\item[13.] En déduire 
+%que si $f$ n'est pas la fonction identiquement égale à $1$ sur $[0,1]$, on a
+$\sqrt{n}\big(\tfrac{n}{2}M_n -1\big)\stackrel{\PP_F^n}{\longrightarrow} +\infty$
+%\;\;\text{lorsque}\;\;n\rightarrow \infty$$
+et conclure.
+%\item Conclure.
+\end{enumerate}
+\subsection{Indistinguabilité d'hypothèses voisines}
+Dans les mêmes conditions qu'à la Section \ref{consistance}, on considère une fonction de répartition de la forme
+$$F_0(x) = x+\rho(x)n^{-1/2},\;\;x \in [0,1],$$
+avec $F(x)=0$ si $x \leq 0$ et $F(x)=1$ si $x\geq 1$, où $x \leadsto \rho(x)$ est continûment différentiable et vérifie $\rho(x)=0$ si $x\notin [0,1]$. On écrit
+$$n^{3/2}M_n = W_n+Y_n+Z_n,$$
+avec 
+%$U_n  =n^{3/2}\sum_{k = 0}^n\big(X_{(k+1)}-X_{(k)}\big)^2$, $V_n = n^{1/2}\sum_{k = 0}^n \big(\rho(X_{(k+1)})-\rho(X_{(k)})\big)^2$, et
+%$W_n = 2n\sum_{k=0}^n\big(X_{(k+1)}-X_{(k)}\big)\big(\rho(X_{k+1})-\rho(X_{(k)})$. 
+%$$V_n =2n\sum_{k=0}^n\big(X_{(k+1)}-X_{(k)}\big)\big(\rho(X_{k+1})-\rho(X_{(k)}),\;\;W_n=n^{1/2}\sum_{k = 0}^n \big(\rho(X_{(k+1)})-\rho(X_{(k)})\big)^2.$$
+\begin{align*}
+W_n & =n^{3/2}\sum_{k = 0}^n\big(X_{(k+1)}-X_{(k)}\big)^2,\\
+Y_n & =2n\sum_{k=0}^n\big(X_{(k+1)}-X_{(k)}\big)\big(\rho(X_{k+1})-\rho(X_{(k)}),\\ 
+Z_n & = n^{1/2}\sum_{k = 0}^n \big(\rho(X_{(k+1)})-\rho(X_{(k)})\big)^2.
+\end{align*}
+\begin{enumerate}
+\item[14.] Montrer que $Y_n \stackrel{\PP_F^n}{\longrightarrow} 0$ et $Z_n \stackrel{\PP_F^n}{\longrightarrow} 0$.
+% en $\PP_F^n$-probabilité lorsque $n\rightarrow \infty$.
+%\item Montrer que  $W_n \longrightarrow 0$ en $\PP_F^n$-probabilité lorsque $n\rightarrow \infty$.
+\item[15.] En déduire 
+$T_n \stackrel{d}{\longrightarrow} {\mathcal N}(0,1)
+%\;\;\text{lorsque}\;\;n\rightarrow \infty$$
+$ en loi sous $\PP_F^n$ et conclure.
+\end{enumerate}
+\end{document}

@@ -1,0 +1,105 @@
+% Template for the submittion to:
+%   Probability Surveys              [ps]
+%   Statistics Surveys                [ss]
+%   Electronic Journal of Statistics  [ejs]
+%
+% Author: In this template, the places where you need to add information
+%         (or delete line) are indicated by {???}.  Mostly the information
+%         required is obvious, but some explanations are given in lines starting
+% Author:
+% All other lines should be ignored.  After editing, there should be
+% no instances of ??? after this line.
+
+% use option [preprint] to remove info line at bottom:
+% journal options: ps,ss,ejs
+%\documentclass[dvips,aos]{imsart2}
+\documentclass{article}
+%\usepackage{amsthm,amsmath,natbib}
+%\RequirePackage[dvips]{hyperref}
+
+% use this package if hyperref and natbib is used:
+%\RequirePackage{hypernat}
+
+% will be filled by editor:
+%\arxiv{}
+%\setlength{\topmargin}{0cm} \setlength{\textheight}{20cm}
+%\setlength{\oddsidemargin}{0cm} \setlength{\textwidth}{19cm}
+
+\RequirePackage[OT1]{fontenc}
+
+\RequirePackage{amsthm,amsmath}
+%\RequirePackage[colorlinks]{hyperref}
+%\RequirePackage{hypernat}
+
+% put your definitions there:
+
+\begin{document}
+
+\centerline{\Huge \ \ \ \ \ \ \ \ Donn\'ees de diab\`ete}
+
+\begin{large}
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c||c|}
+\hline
+Patient&age&sex&bmi&map&tc&ldl&hdl&tch&ltg&glu&Response\\\hline
+1&59&2&32.1&101&157&93.2&38&4&4.9&87&151\\
+2&48&1&21.6&87&183&103.2&70&3&3.9&69&75\\
+3&72&2&30.5&93&156&93.6&41&4&4.7&85&141\\
+4&24&1&25.3&84&198&131.4&40&5&4.9&89&206\\
+5&50&1&23.0&101&192&125.4&52&4&4.3&80&135\\
+6&23&1&22.6&89&139&64.8&61&2&4.2&68&97\\
+\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots\\
+441&36&1&30.0&95&201&125.2&42&5&5.1&82&220\\
+442&36&1&19.6&71&250&132.2&97&3&4.6&92&57\\\hline
+\end{tabular}
+%\end{table}
+\end{center}
+
+{\Large $n$=442, $k$=10
+
+\medskip
+
+bmi = Body Mass Index
+
+\medskip
+
+map = Blood Pressure
+
+\medskip
+
+tc, ldl, tch, ltg, glu = Blood Serum Measurements
+
+\medskip
+
+\noindent
+
+\underline{Response} $Y$ = a quantitative measure of disease\\
+progression 1 year after baseline}
+
+\end{large}
+
+%\begin{center}
+%\begin{tabular}{|c||c|c|c|c|}
+%\hline
+%&Estimate&Std. Error&t value&Pr($>|t|$)\\\hline
+%(Intercept) &$152.133$&$2.576$&$59.061$&$< 2e-16***$\\
+%age&$-10.012$&$59.749$&$ -0.168$&$0.867000$\\\hline
+%sex &$-239.819$&$61.222$&$-3.917$&$0.000104***$\\
+%bmi&$519.840$&$66.534$&$7.813$&$4.30e-14***$\\\hline
+%map&$324.390$&$65.422$&$4.958$&$1.02e-06***$\\
+%tc&$-792.184$&$416.684$&$-1.901$&$0.057947$\\\hline
+%ldl&$476.746$&$339.035$&$1.406$&$0.160389$\\
+%hdl&$101.045$&$212.533 $&$0.475$&$0.634721$\\\hline
+%tch&$177.064$&$161.476$&$ 1.097$&$0.273456$\\
+%ltg&$751.279$&$ 171.902$&$4.370$&$ 1.56e-05***$\\\hline
+%glu&$67.625$&$ 65.984$&$1.025$&$0.305998$\\\hline
+%\end{tabular}
+%%\end{table}
+%\end{center}
+%
+%
+%Residual standard error: $54.15$ on $431$ degrees of freedom
+%Multiple R-squared: $0.5177$, Adjusted R-squared: $0.5066$
+%F-statistic: $46.27$ on $10$ and $431$ DF,  p-value: $< 2.2e-16$.
+
+\end{document}

@@ -1,0 +1,459 @@
+ \documentclass[12pt]{article}
+ \usepackage[applemac]{inputenc}
+
+\usepackage{amsmath,amssymb,amsthm,amsfonts,amstext,amsbsy,amscd}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage{a4wide}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{picins}
+%\usepackage{tikz}
+\setlength{\parskip}{0.3cm}
+%\setlength{\textwidth}{13.7cm}
+\setlength{\textwidth}{14cm}
+\setlength{\textheight}{19.3cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Albert's definitions
+\def\vp{\varphi}
+\def\<{\langle}
+\def\>{\rangle}
+\def\t{\tilde}
+\def\i{\infty}
+\def\e{\eps}
+\def\sm{\setminus}
+\def\nl{\newline}
+\def\o{\overline}
+\def\wt{\widetilde}
+\def\wh{\widehat}
+\def\cK{\cal K}
+\def\co{\cal O}
+\def\Chi{\raise .3ex
+\hbox{\large $\chi$}} \def\vp{\varphi}
+\newcommand{\norme}[1]{ {\left\lVert  #1\right\rVert}}
+\newcommand{\dd}{\text{d}}
+\newcommand{\ve}{\varepsilon}
+\def\({\Bigl (}
+\def\){\Bigr )}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bea}{$$ \begin{array}{lll}}
+\newcommand{\eea}{\end{array} $$}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\iref}[1]{(\ref{#1})}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%This is Markus' definition
+\newcommand{\MR}{{($\spadesuit$)}}
+\frenchspacing \sloppy
+\numberwithin{equation}{section}
+%\swapnumbers
+\newtheorem{satz}{Satz}[section]
+\newtheorem{theo}[satz]{Theorem}
+\newtheorem{prop}[satz]{Proposition}
+\newtheorem{theorem}[satz]{Theorem}
+\newtheorem{proposition}[satz]{Proposition}
+\newtheorem{corollary}[satz]{Corollary}
+\newtheorem{lemma}[satz]{Lemma}
+\newtheorem{assumption}[satz]{Assumption}
+\newtheorem{korollar}[satz]{Korollar}
+\newtheorem{definition}[satz]{Definition}
+\newtheorem{bemerkung}[satz]{Bemerkung}
+\newtheorem{remark}[satz]{Remark}
+\newtheorem{remarks}[satz]{Remarks}
+\newtheorem{beispiel}[satz]{Beispiel}
+\newtheorem{example}[satz]{Example}
+\DeclareMathOperator{\E}{{\mathbb E}}
+\DeclareMathOperator{\F}{{\mathbb F}}
+\DeclareMathOperator{\G}{{\mathbb G}}
+\DeclareMathOperator{\D}{{\mathbb D}}
+\DeclareMathOperator{\R}{{\mathbb R}}
+\DeclareMathOperator{\C}{{\mathbb C}}
+\DeclareMathOperator{\Z}{{\mathbb Z}}
+\DeclareMathOperator{\N}{{\mathbb N}}
+\DeclareMathOperator{\K}{{\mathbb K}}
+\DeclareMathOperator{\T}{{\mathbb T}}
+\DeclareMathOperator{\PP}{{\mathbb P}}
+\DeclareMathOperator{\QQ}{{\mathbb Q}}
+\DeclareMathOperator{\Q}{{\mathbb Q}}
+\DeclareMathOperator{\spann}{span}
+\DeclareMathOperator{\supp}{supp} \DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rg}{rg} \DeclareMathOperator{\Eig}{Eig}
+\DeclareMathOperator{\sgn}{sgn} \DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\kerr}{ker} \DeclareMathOperator{\dimm}{dim}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\esssup}{esssup}
+\DeclareMathOperator{\diag}{diag} \DeclareMathOperator{\KL}{KL}
+\DeclareMathOperator{\grad}{grad} \DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\Var}{Var} \DeclareMathOperator{\Cov}{Cov}
+\renewcommand{\d}{\ensuremath {\,\text{d}}}
+\providecommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\cdot}{{\scriptstyle \bullet} }
+\providecommand{\abs}[1]{\lvert #1 \rvert}
+\providecommand{\norm}[1]{\lVert #1 \rVert}
+\providecommand{\bnorm}[1]{{\Bigl\lVert #1 \Bigr\rVert}}
+\providecommand{\babs}[1]{{\Bigl\lvert #1 \Bigr\rvert}}
+\providecommand{\scapro}[2]{\langle #1,#2 \rangle}
+\providecommand{\floor}[1]{\lfloor #1 \rfloor}
+\providecommand{\dfloor}[1]{{\lfloor #1 \rfloor_\Delta}}
+\providecommand{\ceil}[1]{\lceil #1 \rceil}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\cit}[1]{\citeasnoun{#1}}
+%\newcommand{\CORRECTION}[1]{{\it \textsc{Correction succinte~:} \\ #1}}
+\newcommand{\CORRECTION}[1]{}
+
+
+
+\begin{document}
+\title{\'Ecole Polytechnique -- Année 2011-2012\\ MAP\-433 Statistique}
+\date{}
+\maketitle
+
+
+
+{\small {\bf Attention !} On tiendra grand compte de la qualité de la rédaction et de la présentation. 
+Les Sections 1 et 2 sont indépendantes. 
+%Les questions précédées de la mention {\it (Facultatif.)} sont en bonus.
+%La Section 2.4 est indépendante des Sections 2.2. et 2.3. 
+
+%Pour $d\geq 1$, $\mu \in \R^d$ et $\Sigma$ une matrice $d \times d$ symétrique semi-définie positive, ${\mathcal N}(\mu,\Sigma)$ désigne la loi du vecteur gaussien de moyenne $\mu$ et de matrice de variance-covariance $\Sigma$. 
+
+%Pour $x \in \R$, on note $\Phi(x) = \int_{-\infty}^x e^{-t^2/2}\tfrac{dt}{\sqrt{2\pi}}$ la fonction de répartition de la loi gaussienne centrée réduite. 
+
+%La densité d'une variable aléatoire exponentielle $\xi$ de paramètre $\lambda >0$ est donnée par $x\leadsto \lambda \exp\big(-\lambda x\big){\bf 1}_{\{x \geq 0\}}$.
+%fonction de répartition $F(x)= \big(1-\exp(-\lambda x)\big)1_{\{x \geq 0\}}$. 
+%Pour $k \in \mathbb{N}$,
+%On a alors
+%$$\E\big[\xi^k\big] = \lambda^{-k}\; (k+1)!\;\;\;\text{pour}\;\;\;k\in\mathbb{N}.$$
+\section{Biais de sélection}
+Soit $x \leadsto f(x)$ une densité de probabilité par rapport à une mesure dominante $\mu(dx)$ sur $\R$. %On souhaite retrouver de l'information sur $f$ à partir d'un $n$-échantillon $(X_1,\ldots, X_n)$ de densité $f$. 
+
+Pour des raisons expérimentales, on ne peut pas observer un $n$-échantilllon $(X_1,\ldots, X_n)$ de densité $f$. On subit un biais de sélection :
+une observation $X_i=x$ est incluse dans l'échantilllon avec une probabilité proportionnelle à une fonction dite de sélection $x\leadsto w(x) \geq 0$ connue.  
+
+Mathématiquement, cela signifie que l'on observe un $n$-échantillon $(Y_1, \ldots, Y_n)$, où les $Y_i$ ont pour densité 
+$$x \leadsto \frac{f(x)w(x)}{c_w(f)}\;\;\text{par rapport à}\;\;\mu(dx),$$
+avec $c_w(f) = \int_{\R}w(x)f(x)\mu(dx)$. 
+%On suppose $w(x)>0$ pour tout $x\in \R$ et que $$
+%\newpage
+\subsection{Estimateur de Cox}
+\begin{itemize}
+\item[1.] On suppose $\PP(w(Y_i)=0)=0$.
+% et que l'application $x \leadsto w(x)^{-1}$, définie $\mu$-presque partout, est intégrable par rapport à $\mu$. 
+Montrer que 
+$$\widehat c_n = n^{-1}\sum_{i = 1}^n w(Y_i)^{-1}$$ est bien défini et converge en probabilité lorsque $n \rightarrow \infty$
+vers une limite que l'on identifiera. 
+
+\CORRECTION{
+On a $w(Y_i)>0$ $\mu$-p.s. Les variables aléatoires $w(Y_i)^{-1}$ sont bien définies, IID et intégrables. La loi faible des grands nombres assure la convergence de $n^{-1}\sum_{i = 1}^nw(Y_i)^{-1}$ en probabilité vers
+$$\E\big[w(Y)^{-1}\big] = c_w(f)^{-1}\int_{\R}w(x)^{-1}w(x)f(x)\mu(dx) = c_w(f)^{-1}$$
+puisque $f$ est une densité de probabilité par rapport à $\mu$.
+}
+\item[2.] Montrer que pour $x \in \R$, l'estimateur 
+$$\widetilde F_n(x) = \frac{n^{-1}\sum_{i = 1}^n w(Y_i)^{-1}{\bf 1}_{\{Y_i \leq x\}}}{\widehat c_n}$$
+converge en probabilité lorsque $n\rightarrow \infty$ vers $F(x) = \int_{(-\infty,x]} f(y)\mu(dy)$.
+
+\CORRECTION{
+De même, $n^{-1}\sum_{i = 1}^n w(Y_i)^{-1}{\bf 1}_{\{Y_i \leq x\}}$ converge en probabilité vers 
+$$\E\big[w(Y)^{-1}{\bf 1}_{\{Y\leq x\}}\big] = c_w(f)^{-1}\int_{(-\infty, x]}w(y)^{-1}w(y)f(y)\mu(dy)=c_w(f)^{-1}F(x).$$
+On obtient le résultat en divisant par $\widehat c_n$ et en utilisant la question précédente.}
+\item[3.] On suppose $\E[w(Y_i)^{-2}]<\infty$. On désigne par 
+$$G(x) = \PP(Y_i \leq x),\;\;x \in \R,$$
+la fonction de répartition commune des $Y_i$. Montrer que 
+$$\sqrt{n}\big(\widetilde F_n(x)- F(x)\big) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,v(G)\big)$$
+en loi lorsque $n \rightarrow \infty$, où $v(G)$ est une variance que l'on ne demande pas de calculer.
+
+\CORRECTION{
+Les vecteurs aléatoires $\big(w(Y_i)^{-1}{\bf 1}_{\{Y_i \leq x\}}, w(Y_i)^{-1}\big)$ sont IID, de moyenne $\big(c_w(f)^{-1}F(x),\;c_w(f)^{-1}\big)$ et de matrice de variance-covariance
+$$\Sigma= 
+\left(
+\begin{array}{ll}
+\mathbb{V}\mathrm{ar}\big[w(Y)^{-1}{\bf 1}_{\{Y\leq x\}}\big] & \mathbb{C}\mathrm{ov}\big[w(Y)^{-1},w(Y)^{-1}{\bf 1}_{Y\leq x}\big] \\
+ \mathbb{C}\mathrm{ov}\big[w(Y)^{-1},w(Y)^{-1}{\bf 1}_{\{Y\leq x\}}\big] & \mathbb{V}\mathrm{ar}\big[w(Y)^{-1}\big] 
+\end{array}
+\right).$$
+On a
+\begin{align*}
+\mathbb{V}\mathrm{ar}\big[w(Y)^{-1}{\bf 1}_{\{Y\leq x\}}\big] & = \int_{-\infty}^x w(y)^{-2}dG(y)- \big(\int_{-\infty}^xw(y)^{-1}dG(y)\big)^2, \\
+\mathbb{C}\mathrm{ov}\big[w(Y)^{-1},w(Y)^{-1}{\bf 1}_{\{Y\leq x\}}\big] & = \int_{-\infty}^xw(y)^{-2}dG(y)-\int_{\R}w(y)^{-1}dG(y)\int_{-\infty}^xw(y)^{-1}dG(y), \\
+\mathbb{V}\mathrm{ar}\big[w(Y)^{-1}\big] & = \int_{\R}w(y)^{-2}dG(y)-\big(\int_{\R} w(y)^{-1}dG(y)\big)^2
+\end{align*}
+Donc $\Sigma = \Sigma_G$ est une matrice dont les coefficients sont des fonctionnelles régulières de $G$.
+On applique le TCL vectoriel:
+$$\sqrt{n}\Big(n^{-1}\sum_{i = 1}^n\big(w(Y_i)^{-1}{\bf 1}_{\{Y_i \leq x\}}, w(Y_i)^{-1}\big)^T - \big(c_w(f)^{-1}F(x),\;c_w(f)^{-1}\big)^T\Big) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,\Sigma_G\big).$$
+L'application $g(x,y)=x/y$ est régulière, de gradient $\nabla g(x,y) = (y^{-1}, -xy^{-2})$. En appliquant la méthode Delta et en notant que
+\begin{align*}
+\big(c_w(f)^{-1}F(x),\;c_w(f)^{-1}\big) & = \Big(\int_{-\infty}^x w(y)^{-1}dG(y), \int_{\R}w(y)^{-1}dG(y)\Big) \\
+& = \big(U(G), V(G)\big)
+\end{align*}
+avec $U(G)$ et $V(G)$ deux fonctionnelle régulières de $G$,
+on obtient
+\begin{align*}
+& \sqrt{n}\Big(n^{-1}\sum_{i = 1}^ng\big(w(Y_i)^{-1}{\bf 1}_{\{Y_i \leq x\}}, w(Y_i)^{-1}\big) - g\big(c_w(f)^{-1}F(x),\;c_w(f)^{-1}\big)\Big) \\
+\stackrel{d}{\longrightarrow} &\; {\mathcal N}\big(0,\nabla g\big(U(G), V(G)\big)\Sigma_G\nabla g\big(U(G), V(G))^T\big) \\
+=&\, {\mathcal N}\big(0, v(G)\big) 
+\end{align*}
+On conclut en notant que $n^{-1}\sum_{i = 1}^ng\big(w(Y_i)^{-1}{\bf 1}_{\{Y_i \leq x\}}, w(Y_i)^{-1}\big) =\widetilde F_n(x)$ et $g\big(c_w(f)^{-1}F(x),\;c_w(f)^{-1}\big)=F(x)$.
+} 
+\item[4.] Construire un estimateur $\widehat v_n$ tel que 
+$$\widehat v_n \stackrel{\PP}{\rightarrow} v(G)\;\;\text{lorsque}\;\;n \rightarrow \infty.$$
+
+\CORRECTION{
+La fonctionelle $G \leadsto v(G)$ est régulière. En notant $\widehat G_n(x) = \frac{1}{n}\sum_{i = 1}^n {\bf 1}_{\{Y_i \leq x\}}$, l'estimateur par plug-in  $\widehat v_n = v(\widehat G_n)$ est consistant. 
+}
+\item[5.] En déduire un intervalle de confiance asymptotiquement de niveau $\alpha \in (0,1)$ pour $F(x_0)$ en un point donné $x_0\in \R$. 
+
+\CORRECTION{
+On aplique les résultats standard du cours. Un intervalle de confiance de niveau $\alpha \in (0,1)$ est donné par
+$$\big[\widetilde F_n(x_0) \pm \frac{\widehat v_n^{1/2}}{\sqrt{n}} \Phi^{-1}(1-\alpha/2)\big],$$
+où $\Phi(x) = \int_{-\infty}^x e^{-u-2/2}\frac{du}{\sqrt{2\pi}}$ est la fonction de répartition de la loi normale standard.
+}
+\end{itemize}
+\subsection{Le cadre paramétrique}
+Soit $(X_1,\ldots, X_n)$ des variables aléatoires réelles indépendantes et identiquement distribuées, de densité 
+$$x \leadsto f(x-\vartheta),\;\;\vartheta \in \Theta = \R,$$
+par rapport à la mesure de Lebesgue $\mu(dx)=dx$ sur $\R$. On suppose que $f$ vérifie toutes les conditions de régularité et d'intégrabilité voulues.
+\begin{itemize}
+\item[6.] Montrer que l'information de Fisher $\mathbb{I}(\vartheta)$ de l'expérience engendrée par $(X_1,\ldots, X_n)$ ne dépend pas du paramètre $\vartheta$.
+
+\CORRECTION{On a
+\begin{align*}
+\mathbb{I}(\vartheta) & = \E_\vartheta[(\partial_\vartheta \log f(X_i-\vartheta))^2] \\
+&=  \E_\vartheta[(\partial_x \log f(X_i-\vartheta))^2] \\ 
+&= \int_{\R}\big(\partial_x \log f(x-\vartheta)\big)^2f(x-\vartheta)dx\\
+&= \int_{\R}\big(\partial_x \log f(x)\big)^2f(x)dx.
+\end{align*}
+}
+\end{itemize}
+On suppose que $f$ et la densité gaussienne standard, et que les $X_i$ sont sujets à un biais de sélection, de fonction de sélection $w(x)=x^2$. On note $(Y_1,\ldots, Y_n)$ l'échantillon biaisé effectivement observé.
+\begin{itemize}
+\item[7.] Calculer l'information de Fisher $\mathbb{I}_w(\vartheta)$ de l'expérience engendrée par $(Y_1,\ldots, Y_n)$.
+
+\CORRECTION{
+Notons tout d'abord que
+$$\int_{\R}x^2f(x-\vartheta)dx=\int_{\R}(x+\vartheta)^2f(x)dx=\vartheta^2+1$$
+en utilisant que si $f(x)=(2\pi)^{-1/2}\exp(-\tfrac{1}{2}x^2)$ est la densité gaussienne standard, on a $\int_{\R}xf(x)dx=0$ et $\int_{\R}x^2f(x)dx=1$.
+Soit $g(\vartheta, x)$ la densité des $Y_i$. Alors
+\begin{align*}
+\log g(\vartheta, Y_i) & = \log \frac{f(Y_i-\vartheta)w(Y_i)}{\int_{\R}f(x-\vartheta)w(x)dx} \\
+& = \log \frac{f(Y_i-\vartheta)Y_i^2}{\vartheta^2+1} \\
+& = -\log (\vartheta^2+1) +\log f(Y_i-\vartheta) + \log Y_i^2.
+\end{align*}
+Il vient
+$$\partial_\vartheta \log g(\vartheta, Y_i)  = - \frac{2\vartheta}{\vartheta^2+1} + \partial_\vartheta \log f(Y_i-\vartheta)$$
+puis
+\begin{align*}
+\partial^2_\vartheta \log g(\vartheta, Y_i) & = - \frac{2(\vartheta^2+1)-2\vartheta (2\vartheta)}{(\vartheta^2+1)^2} + \partial_\vartheta^2 \log f(Y_i-\vartheta) \\
+& = - \frac{2(1-\vartheta^2)}{(\vartheta^2+1)^2} - 1.
+\end{align*}
+En effet, puisque $f(x-\vartheta) = (2\pi)^{-1/2}\exp\big(-\tfrac{1}{2}(x-\vartheta^2)\big)$, alors $\log f(x-\vartheta) = \log (2\pi)^{-1/2}- \tfrac{1}{2}(x-\vartheta)^2$, puis
+$\partial_\vartheta \log f(x-\vartheta) = x-\vartheta$ et finalement $\partial_\vartheta^2 \log f(x-\vartheta) = -1$. On obtient $\mathbb{I}_w(\vartheta)$ en intégrant $-\partial^2_\vartheta \log g(\vartheta, Y_i)$ qui est déterministe, d'où
+$$\mathbb{I}_w(\vartheta) = \frac{2(1-\vartheta^2)}{(\vartheta^2+1)^2} +1.$$
+}
+\item[8.] Faire une étude succinte de la fonction $\vartheta \leadsto \mathbb{I}_w(\vartheta)-\mathbb{I}(\vartheta)$. 
+
+Le biais de sélection donnant lieu à l'observation de $(Y_1,\ldots, Y_n)$ améliore-t-il la qualité d'estimation fournie par un $n$-échantillon $(X_1,\ldots, X_n)$ sans biais de sélection ? La dégrade-t-il ? 
+
+\CORRECTION{
+Le calcul précédent de $\partial_\vartheta^2 \log f(x-\vartheta)$ fournit immédiatement $\mathbb{I}(\vartheta)=1$. D'où
+$$\varphi(\vartheta):=\mathbb{I}_w(\vartheta)-\mathbb{I}(\vartheta) = \frac{2(1-\vartheta^2)}{(\vartheta^2+1)^2}.$$
+La fonction $\varphi$ est paire. On a $\varphi(0)=2$ et $\varphi(\infty)=0^-$. On a aussi $\varphi(1)=0$. Plus précisément, 
+\begin{align*}
+\partial \varphi(\vartheta) & = 2\frac{-2\vartheta (\vartheta^2+1)^2 - (1-\vartheta^2)\big(2(2\vartheta)(\vartheta^2+1)\big)}{(\vartheta^2+1)^4} \\ 
+& = \frac{4\vartheta\big(-\vartheta^2-1-2(1-\vartheta^2)\big)}{(\vartheta^2+1)^3} \\
+& = \frac{4\vartheta\big(\vartheta^2-3\big)}{(\vartheta^2+1)^3}.
+\end{align*}
+Donc $\varphi$ atteint son minimum (sur $\R_+$) en $\vartheta = \sqrt{3}$ et $\varphi(\sqrt{3}) = -\frac{1}{4}$. En conclusion, $\varphi$ décroit de $0$ à $1$ en étant positive. Elle est négative au delà de $-1$, décroit jusqu'en $\sqrt{3}$  où elle atteint son minimum, puis  croit
+tout en restant négative de $\sqrt{3}$ jusqu'en l'infini. Le biais de sélection améliore la qualité d'estimation pour 
+$|\vartheta | \leq 1$ puisque l'information de Fisher $\mathbb{I}_w(\vartheta)$ domine $\mathbb{I}(\vartheta)$, et la dégrade au-delà.
+}
+\end{itemize}
+
+%Pour mesurer plus précisément l'influence du biais de sélection $w$, on suppose désormais une structure paramétrique : 
+%$$f(x) = f_0(\vartheta, x),\;\;\vartheta \in \Theta \subset \R$$
+%où $x \leadsto f_0(\vartheta, x)$ est connue au paramètre $\vartheta$ près et satisfait toutes les propriétés de régularité voulues.
+%\begin{itemize}
+%\item[6.] On note $\mathbb{I}_w(\vartheta)$ l'information de Fisher associée à l'échantillon biaisé $(Y_1,\ldots, Y_n)$ de densité $f_0(\vartheta, x)w(x)/c_w\big(f_0(\vartheta,\cdot)\big)$. 
+%
+%Calculer $\mathbb{I}_w(\vartheta)$ en fonction de l'information de Fisher associée à un échantillon $(X_1,\ldots, X_n)$ sans biais de sélection, c'est-à-dire de densité  $f_0(\vartheta,x)$.
+%
+%\CORRECTION{
+%La vraisemblance associée à l'expérience engendrée par $(Y_1,\ldots, Y_n)$ s'écrit
+%$${\mathcal L}_n(\vartheta, Y_1,\ldots, Y_n) = \prod_{i = 1}^n g(\vartheta, Y_i),$$
+%où 
+%$$g(\vartheta, Y_i) = \frac{w(Y_i)f(\vartheta, Y_i)}{c_w\big(f_0(\vartheta, \cdot)\big)}.$$
+%Il vient $\log g(\vartheta, Y_i) = -\log c_w\big(f_0(\vartheta, \cdot)\big)+\log f_0(\vartheta, Y_i)+\log w(Y_i).$
+%}
+% \item[7.] On suppose que $f_0(\vartheta, x) = \exp(-\vartheta) \frac{\vartheta^x}{x!}$ est la densité de la loi de Poisson de paramètre $\vartheta \in \Theta = (0,\infty)$ par rapport à la mesure de comptage sur $\N$. Pour $\rho >0$, on pose
+%$$g_\rho(x) = \exp\big(\tfrac{1}{6}x^2-\tfrac{\rho}{2}x^2\big)$$
+%et on définit le biais  de sélection
+%$$w_\rho(x) = \big(\tfrac{d^k}{dx^k}g_\rho\big)(0).$$
+% Calculer $\mathbb{I}_{w_\rho}(\vartheta)$ pour tout $\vartheta \in \Theta$.
+%\item[8.] Le biais de sélection améliore-t-il la qualité d'estimation fournie par un $n$-échantillon sans biais de sélection ? La dégrade-t-il ?
+%%\item[8.] 
+%\end{itemize}
+\subsection{Détection d'un biais de sélection}
+On suspecte un appareil de mesure de fournir un biais de sélection systématique, de biais $w(x)=\exp(\rho\, x)$, pour une certaine valeur $0 < \rho < 1$. 
+
+On calibre l'appareil avec $n$ mesures $(Y_1,\ldots, Y_n)$, sachant que s'il n'y a pas de biais de sélection, les observations sont distribuées selon une loi exponentielle de paramètre $1$. 
+\begin{itemize}
+\item[9.] Ecrire l'expérience statistique correspondante et traduire la problématique sous forme d'un test d'hypothèse.
+
+\CORRECTION{
+L'espace d'état est $\big(\R^n, \text{boréliens de }(\R^n)\big)$, muni de $\{\PP_0^n, \PP_1^n\}$, où
+$$\PP_0^n(dy_1\ldots dy_n) = \exp\big(-\sum_{i = 1}^ny_i\big){\bf 1}_{\{\min_{1 \leq i \leq n} x_i \geq 0\}}dy_1\ldots dy_n$$
+dans le cas où l'on observe un $n$-échantillon de loi exponentielle de paramètre $1$, et 
+$$\PP_1^n(dy_1\ldots dy_n) = \prod_{i = 1}^n \frac{e^{-y_i}{\bf 1}_{\{y_i \geq 0\}}w(y_i)}{\int_{\R}w(y_i)e^{-y_i}{\bf 1}_{\{y_i \geq 0\}}}dy_1\ldots dy_n.$$
+Dans ce cas, on a
+$$\int_{\R_+}w(y_i)e^{-y_i}dy_i = \int_{\R_+}e^{-(1-\rho)y_i}dy_i=\frac{1}{1-\rho},$$
+d'où
+$$\PP_1^n(dy_1\ldots dy_n) = (1-\rho)^n \exp\big(-(1-\rho)\sum_{i = 1}^ny_i\big){\bf 1}_{\{\min_{1 \leq i \leq n}y_i \geq 0\}}$$
+c'est-à-dire $\PP_1^n$ est la loi d'un $n$-échantillon de loi exponentielle de paramètre $1-\rho$. Si $\PP^n$ désigne la loi de $(Y_1,\ldots, Y_n)$,  on teste $H_0: \PP^n = \PP_0^n$ contre $H_1:\PP^n=\PP_1^n$.
+}
+\item[10.] Montrer que lorsqu'il n'y a pas de biais de sélection, $2\sum_{i = 1}^n Y_i$ suit la loi du $\chi^2$ à $2n$ degrés de libertés\footnote{On pourra par exemple calculer la transformée de Laplace de $2\sum_{i = 1}^n Y_i$}. 
+
+\CORRECTION{
+La transformée de Laplace de $2\lambda Y_i$ est donnée par
+$$\xi \leadsto \E\big[e^{-\xi2 Y_i}\big] = (1+2\xi)^{-1},$$
+et, par indépendance, des $Y_i$, la transformée de Laplace de $2\sum_{i = 1}^n Y_i$ est 
+$$\xi \leadsto (1+2\xi)^{-n}.$$
+C'est aussi la transformée de Laplace de la loi du $\chi^2$ à $2n$ degrés de liberté.
+}
+\item[11.] Ecrire le test de Neyman-Pearson de niveau $\alpha \in (0,1)$ associé en explicitant sa zone de rejet à l'aide du quantile d'ordre $1-\alpha$ de la loi du $\chi^2$ à $2n$ degrés de liberté.
+
+\CORRECTION{
+On est dans un cadre où le test de Neyman-Pearson s'écrit comme un test simple. Sa zone de rejet est
+$${\mathcal R}\big(c(\alpha)\big) = \Big\{(1-\rho)^n \exp\big(\rho\sum_{i = 1}^n Y_i\big) \geq c(\alpha)\Big\},$$
+où $c(\alpha)$ est déterminé par la condition
+$$\PP_{0}^n\Big((1-\rho)^n \exp\big(\rho\sum_{i = 1}^n Y_i\big) \geq c(\alpha)\Big)=\alpha,$$
+ce qui se réécrit encore comme
+$$\PP_{0}^n\Big(2\sum_{i = 1}^n Y_i \geq \frac{2}{\rho}\log \frac{c(\alpha)}{(1-\rho)^n}\Big) = \alpha.$$
+Comme $2\sum_{i = 1}^n Y_i$ suit la loi du $\chi^2$ à $2n$ degrés de liberté sous $\PP_{0}^n$, on en déduit
+$$c(\alpha) = (1-\rho)^n\exp\big(\frac{\rho}{2}q^{\chi^2}_{1-\alpha,2n}\big),$$
+où $q^{\chi^2}_{1-\alpha,2n}$ désigne le quantile d'ordre $1-\alpha$ de la loi du $\chi^2$ à $2n$ degrés de libertés.
+}
+\item[12.] Montrer que le test de Neyman-Pearson de niveau $\alpha$ est consistant\footnote{On pourra calculer un équivalent 
+%du quantile d'ordre $1-\alpha$ de la loi du $\chi^2$ à $2n$ degrés de libertés à l'aide de la loi des grands nombres.)
+de $q_{1-\alpha, 2n}^{\chi^2}$ à l'aide de la loi des grands nombres,  où $q_{1-\alpha, 2n}^{\chi^2}$ désigne le quantile d'ordre $1-\alpha$ de la loi du $\chi^2$ à $2n$ degrés de liberté.}.
+\CORRECTION{
+%Pour montrer que le test est consistant, on peut utiliser la loi des grands nombres. Sous l'alternative $\PP_{1}^n$, puisque $\E_{1}^n\big[Y_i\big]=1/(1-\rho)$, on a
+%M$$\sum_{i = 1}^nY_i \sim \frac{n}{1-\rho},$$
+%donc la statistique de test  de Neyman-Pearson est équivalente à
+%$$\Big((1-\rho)^n\exp\big(\rho \sum_{i = 1}^n Y_i\big) \sim \exp\Big(n\big(\log(1-\rho)+\frac{\rho}{1-\rho}\big)\Big) = \exp\big(n(x-\log x -1)\big)$$
+%avec $x=1/(1-\rho)$.
+%avec $x=\lambda_0/\lambda_1 \in (0,1)$. On a $x-\log x-1 > 0$ pour tout $x \in (0,1)$. Donc la statistique de test diverge sous l'alternative. On en déduit la consistance du test.
+Sous $\PP_0^n$, on a $2\sum_{i = 1}^n Y_i \stackrel{d}{=} \sum_{i = 1}^{2n}\xi_i^2$, où les $\xi_i$ sont i.i.d. gaussiennes standard. Donc
+\begin{align*}
+\PP_0^n\big(2\sum_{i = 1}^nY_i\geq q_{1-\alpha,2n}^{\chi^2}\big) & = \PP_0^n\big(\sum_{i = 1}^{2n}\xi_i^2\geq q_{1-\alpha,2n}^{\chi^2}\big)  \\
+& =  \PP_0^n\big(\sqrt{2n}\frac{(2n)^{-1}\sum_{i = 1}^{2n}(\xi_i^2-1)}{\sqrt{2}}\geq \sqrt{2n}\frac{(2n)^{-1}q_{1-\alpha,2n}^{\chi^2}-1}{\sqrt{2}}\big) \\
+& \sim 1-\Phi\Big(\sqrt{2n}\frac{(2n)^{-1}q_{1-\alpha,2n}^{\chi^2}-1}{\sqrt{2}}\Big) = \alpha,
+\end{align*}
+où $\Phi$ est la fonction de répartition de la loi normale standard, d'où
+$$q_{1-\alpha, 2n}^{\chi^2} \sim 2n\big(1+\tfrac{1}{\sqrt{n}}\Phi^{-1}(1-\alpha)\big).$$
+Le même raisonnement qu'à la question 10 montre que sous $\PP_1^n$, la variable $2(1-\rho)\sum_{i = 1}^n Y_i$ suit la loi du $\chi^2$ à $2n$ degrés de liberté. Calculons la puissance du test. On a
+\begin{align*}
+\PP_1^n\big(2\sum_{i = 1}^n Y_i \geq q_{1-\alpha, 2n}^{\chi^2}\big) & = \PP_1^n \Big(\frac{1}{1-\rho} 2(1-\rho)\sum_{i = 1}^n Y_i \geq q_{1-\alpha, 2n}^{\chi^2}\Big) \\
+& =  \PP_1^n \Big(\frac{1}{1-\rho} \sum_{i = 1}^{2n}\xi_i^2\geq 2n\big(1+{\mathcal O}(n^{-1/2})\big)\Big) \\
+& =  \PP_1^n \Big(\frac{1}{1-\rho} (2n)^{-1}\sum_{i = 1}^{2n}\xi_i^2\geq 1+{\mathcal O}(n^{-1/2})\Big). 
+\end{align*}
+Le terme de gauche tend vers $1/(1-\rho)>1$ par la loi des grands nombres. On a donc 
+$$\PP_1^n\big(2\sum_{i = 1}^n Y_i \geq q_{1-\alpha, 2n}^{\chi^2}\big) \rightarrow 1,\;\;\;n \rightarrow \infty,$$
+et le test est consistant.}
+\item[13.] On suppose que $\rho = \rho(n)\rightarrow 0$ lorsque $n \rightarrow \infty$. A quelle condition sur $\rho(n)$ le test de Neyman-Pearson de niveau $\alpha$ est-il encore consistant\footnote{On pourra calculer un équivalent de $q_{1-\alpha,2n}^{\chi^2}-2n$ à l'aide du théorème central-limite.}
+\CORRECTION{
+En utilisant le développement asymptotique de la question précédente, on montre que la convergence précédente à lieu tant que 
+$$\frac{1}{1-\rho(n)} = 1 +u_n,\;\;\text{avec}\;\;u_n\rightarrow 0$$
+à condition d'avoir
+$u_n\sqrt{n} \rightarrow \infty$, comme le montre le terme d'ordre 2 dans le développement asymptotique de $q_{1-\alpha, 2n}^{\chi^2}$. Donc pour $\rho(n)\rightarrow 0$ mais tel que $\sqrt{n}\rho(n)\rightarrow \infty$, le test reste consistant.
+}
+\end{itemize}
+\newpage
+\section{Tests multiples}
+Soit ${\mathcal E}^n = \big(\mathfrak{Z}^n,{\mathcal Z}^n, \{\PP_\vartheta^n, \vartheta \in \Theta\}\big)$ une suite d'expériences statistiques. Soit $m \in \mathbb{N}\setminus\{0\}$ et, pour $i=1,\ldots, m$, soient  $\Theta_{i,0} \subset \Theta$ des sous-ensembles de $\Theta$.
+% et $\alpha_i \in [0,1]$ des nombres donnés.
+
+Pour $i=1,\ldots, m$, on suppose que l'on dispose d'un test simple de zone de rejet ${\mathcal R}_{i,n}$ de niveau $\alpha_i \in [0,1]$ 
+%et d'erreur de seconde espèce majorée en tout point de l'alternative par $\beta_{i,n} \in [0,1]$, 
+pour tester
+$$H_{0,i}\,:\,\vartheta \in \Theta_{0,i},\;\;\text{contre}\;\;H_{1,i}\,:\,\vartheta \in \Theta \setminus \Theta_{0,i}.$$
+On note $\beta_{i,n} \in [0,1]$ un majorant de l'erreur de seconde espèce.
+On veut tester
+$$H_0\,:\,\vartheta \in \Theta_0 =  \bigcap_{i=1}^m \Theta_{0,i}\;\;\text{contre}\;\;H_1\,:\,\vartheta \in \Theta_1 \subset \Big(\bigcup_{i = 1}^m \Theta_{0,i}\Big)^c.%\;\;\Theta_0 \cap \Theta_1 = \emptyset,$$
+$$
+%où $\Theta_0$ s'écrit
+%$$\Theta_0 = \bigcap_{i=1}^m \Theta_{0,i}.$$
+\begin{enumerate}
+\item On considère le test simple de $H_0$ contre $H_1$ de zone de rejet $\bigcup_{i=1}^m {\mathcal R}_{i,n}$. Montrer que son erreur de première espèce est inférieure ou égale à 
+$$\alpha = \sum_{i = 1}^m \alpha_i.$$
+
+\CORRECTION{
+On a
+$$\PP_\vartheta\big(\bigcup_{i=1}^m {\mathcal R}_{i,n}\big) \leq \sum_{i = 1}^m \PP_\vartheta\big({\mathcal R}_{i,n}\big).$$
+Si $\vartheta \in \Theta_0$, alors, pour tout $i=1,\ldots, m$, on a $\vartheta \in \Theta_{0,i}$ et donc, puisque ${\mathcal R}_{i,n}$ fournit la zone de rejet d'un test de niveau $\alpha_i$ de $H_0$: $\vartheta \in \Theta_{0,1}$, on a
+$$\PP_\vartheta\big({\mathcal R}_{i,n}\big) \leq \alpha_i,$$
+d'où le résultat en sommant sur $i$.
+}
+\item Montrer que l'erreur de seconde espèce de ce test est inférieure ou égale à
+$$\beta_n  = \min_{i =1,\ldots, m} \beta_{i,n}.$$
+
+\CORRECTION{
+On a
+$$\PP\Big(\big(\bigcup_{i=1}^m {\mathcal R}_{i,n}\big)^c\Big) = \PP\big(\bigcap_{i = 1}^m {\mathcal R}_{i,n}^c\big) \leq \min_{1 \leq i \leq m} \PP_\vartheta({\mathcal R}_{i,n}^c).$$
+Si $\vartheta \in \Theta_1 \in \bigcap_{i = 1}^m \Theta_{0,i}^c$, alors $\vartheta \in \Theta_{i,0}^c$ pour tout $i$ et donc $\PP_\vartheta({\mathcal R}_{i,n}^c) \leq \beta_{i,n}$ pour tout $i=1,\ldots, m$. D'où le résultat.
+}
+
+\item On suppose que, pour un $i_0 \in \{1,\ldots, m\}$, le test  de $H_{0,i_0}$ contre $H_{1,i_0}$ défini par la zone de rejet ${\mathcal R}_{i_0,n}$ est consistant lorsque $n \rightarrow \infty$. 
+
+Le test de $H_0$ contre $H_1$ de zone de rejet  $\bigcup_{i=1}^m {\mathcal R}_{i,n}$ est-il consistant ?
+
+\CORRECTION{
+On a $\beta_n \leq \beta_{i_0,n}$ d'après la question précédente. Donc si $\beta_{i_0,n} \rightarrow 0$, on a aussi $\beta_n \rightarrow 0$ d'où la consistance du test.
+}
+\item On observe 
+$$Y_i = \vartheta_i + n^{-1/2}\xi_i,\;\;i=1,\ldots, d$$
+où $d \geq 1$, $n\geq 1$, et les $\xi_i$ sont des variables aléatoires indépendantes, de même loi gaussienne standard. Le paramètre est 
+$$\vartheta = (\vartheta_1,\ldots, \vartheta_d) \in \Theta = \R^d.$$
+Pour $1 \leq i \leq d$, on définit
+$$H_{0,i} : \vartheta_i=0\;\;\text{contre}\;\;H_{1,i}:|\vartheta_i| \geq 1.$$
+Montrer que la situation précédente s'applique.
+
+\CORRECTION{
+On définit $\Theta_{0,i} = \{\vartheta_i=0\}$ et $\Theta_{1,i}=\{|\vartheta_i|\geq 1\}$. Le test de zone de rejet ${\mathcal R}_{i,n} = \{|Y_i|\geq n^{-1/2}\Phi(1-\alpha_i/2)\}$ est de niveau $\alpha_i$ pour tester $H_{0,i}$ contre $H_{1,i}$. Son erreur de seconde espèce est majorée (par exemple) par
+$$\PP_{(1,0,\ldots, 0)}\big({\mathcal R}_{i,n}^c\big) = \PP_{(1,0,\ldots, 0)}\big(|1+n^{-1/2}\xi| \leq n^{-1/2}\Phi(1-\alpha/2)\big) \rightarrow 0$$
+lorsque $n \rightarrow \infty.$
+On a donc pour un $i_0$ (en fait pour tous) une erreur de seconde espèce qui tend vers $0$. On est donc dans les conditions d'applications des résultats précédents.
+}
+\item Quel défaut méthodologique peut-on reprocher à cette approche ?
+
+\CORRECTION{
+Cette méthode est très conservative. Pour un paramètre de dimension $d$, elle dégrade l'erreur de première espèce en $d\alpha$, forçant  un choix initial de $\alpha$ très petit, composante par composante, pour produire un nveau global acceptable. Elle n'est pas applicable lorsque $d$ est grand. On préfère alors minimiser dans ce cas le taux de fausses découvertes (FDR), qui est la moyenne du nombre de faux rejets divisé par le nombre de rejets.
+
+Par ailleurs, le calcul de l'erreur de seconde espèce est très grossier. Dans notre exemple, les ${\mathcal R}_{i,n}^c$ sont des événements indépendants, donc l'erreur de seconde espèce est
+$\PP\big(\bigcap_{i = 1}^m {\mathcal R}_{i,n}^c\big) = \prod_{i = 1}^d \beta_{i,n}$ qui peut être beaucoup plus petite que $\min_{1 \leq i \leq d}\beta_{i,n}$.
+%procédure à rendre petite la probab pour un seuil $\alpha$ sur une composante. Lorsque $d$ est grand, elle force le choix de $\alpha$ a être très petit, ce qui augmente la probabilité d'acceptation
+}
+\end{enumerate}
+%A chaque test de  $H_{0,i}$ contre $H_{1,i}$ défini par la zone de rejet ${\mathcal R}_{i,n}$, on lui associe sa $p$-valeur $p_i$. Pour $i=1,\ldots, m$, on construit un nouveau test de $H_{0,i}$ contre $H_{1,i}$ défini par la zone de rejet ${\widetilde R}_{i} = \{p_i <\alpha_i\}$. 
+%\begin{itemize}
+%\item[4] Montrer que la probabilité de rejeter à tort une hypothèse nulle parmi les $m$-hypothèses est inférieure ou égale à $\alpha$. 
+%\end{itemize}
+%On souhaite désormais tester
+%$$H_0^\star\,:\vartheta \in \Theta_0^\star = \bigcup_{i = 1}^m \Theta_{0,i}\;\;\text{contre}\;\;H_1^\star\,:\vartheta \in \Theta\setminus \Theta_0^\star.$$
+%\begin{itemize}
+%\item[4.] Pour tout $i \in \{1,\ldots, m\}$, on suppose $\beta_{i,n} \leq \alpha_i$. Montrer qu'en utilisant la même procédure que précédemment, on obtient un test de niveau $\alpha$.
+%\item[5.] Quel est la faiblesse %\footnote{On prendra bien soin de justifier sa réponse.} 
+%de cette procédure ? 
+%\end{itemize}
+
+
+
+
+
+
+
+
+\end{document}
