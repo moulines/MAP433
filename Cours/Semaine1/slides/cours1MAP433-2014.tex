@@ -1,0 +1,851 @@
+
+\documentclass{beamer}
+\usetheme[right,hideothersubsections]{Berkeley}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amstext}
+\usepackage{amsfonts}
+
+%\usepackage[latin1]{inputenc}
+\usepackage[french]{babel}
+\usepackage[applemac]{inputenc}
+
+
+\newenvironment{disarray}{\everymath{\displaystyle\everymath{}}\array} {\endarray}
+\newtheorem{theo}{Theorem}
+\newtheorem{prop}[theo]{Proposition}
+\newtheorem{conj}[theo]{Conjecture}
+\newtheorem{cor}{Corollary}[theo]
+\newtheorem{lm}{Lemma}
+\newtheorem{nota}{Notation}
+\newtheorem{rk}{Remark}
+\newtheorem{exa}{Example}
+\newtheorem{df}{Definition}
+\newtheorem{terminologie}{Terminologie}
+\newenvironment{dem}{\textbf{Proof}}{\flushright$\blacksquare$\\}
+
+\DeclareMathOperator{\E}{{\mathbb E}}
+\DeclareMathOperator{\F}{{\mathbb F}}
+\DeclareMathOperator{\G}{{\mathbb G}}
+\DeclareMathOperator{\D}{{\mathbb D}}
+\DeclareMathOperator{\R}{{\mathbb R}}
+\DeclareMathOperator{\C}{{\mathbb C}}
+\DeclareMathOperator{\Z}{{\mathbb Z}}
+\DeclareMathOperator{\N}{{\mathbb N}}
+\DeclareMathOperator{\K}{{\mathbb K}}
+\DeclareMathOperator{\T}{{\mathbb T}}
+\DeclareMathOperator{\PP}{{\mathbb P}}
+\DeclareMathOperator{\QQ}{{\mathbb Q}}
+\DeclareMathOperator{\Q}{{\mathbb Q}}
+\DeclareMathOperator{\IF}{{\mathbb I}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Pour le modèle linéaire
+
+\DeclareMathOperator{\bX}{\boldsymbol{X}}
+\DeclareMathOperator{\bY}{\boldsymbol{Y}}
+\DeclareMathOperator{\bx}{\boldsymbol{x}}
+\DeclareMathOperator{\vp}{\boldsymbol{p}}
+\DeclareMathOperator{\vq}{\boldsymbol{q}}
+\DeclareMathOperator{\estMC}{\widehat \vartheta_n^{\,\,{\tt mc}}}
+\DeclareMathOperator{\estMCNL}{\widehat \vartheta_n^{\,\,{\tt mcnl}}}
+\DeclareMathOperator{\estMV}{\widehat \vartheta_n^{\,\,{\tt mv}}}
+\DeclareMathOperator{\design}{\mathbb{M}}
+\DeclareMathOperator{\est}{\widehat \vartheta_{\mathnormal{n}}}
+\DeclareMathOperator{\var}{\mathrm{Var}}
+\DeclareMathOperator{\estMVc}{\widehat \vartheta_{n,0}^{\,{\tt mv}}}
+\DeclareMathOperator{\Xbar}{\overline{\mathnormal{X}}_\mathnormal{n}}
+
+
+
+
+\title{MAP 433 : Introduction aux méthodes statistiques}
+%\author{M. Hoffmann}
+%\institute{Université Paris-Est and ETG}
+\begin{document}
+\date{31 janvier 2014}
+\maketitle
+
+
+
+\begin{frame}
+\frametitle{Aujourd'hui}
+\tableofcontents
+
+%\begin{itemize}
+%\item Intendance (équipe enseignante, agendas, modalités de contrôle).
+%\item Présentation (succinte) du cours.
+%\item Première partie : {\color{red}\'Echantillonnage et modélisation statistique} (1/2).
+%\end{itemize}
+\end{frame}
+
+\section{Agenda}
+
+\begin{frame}
+\frametitle{Organisation : équipe enseignante}
+
+%{\large {\color{gray} Equipe enseignante}} \vspace{0.5cm}
+
+{\color{red} Cours \vspace{2mm}}
+
+%Alexandre Tsybakov, ENSAE (cours 1 \`a 5)\\
+%{\small \hspace{3mm} alexandre.tsybakov@ensae.fr}\\
+Marc Hoffmann, Universit\'e Paris-Dauphine \\
+%\begin{center}
+{\small \hspace{3mm} hoffmann@ceremade.dauphine.fr}
+%\end{center}
+\vspace{4mm}
+
+{\color{red} PC}
+\begin{itemize}
+\item Stéphane Gaiffas, \'Ecole Polytechnique.
+\item Christophe Giraud, Université Paris-Sud et \'Ecole Polytechnique. 
+\item Guillaume Lecu\'e,  \'Ecole Polytechnique.
+\item Mathieu Rosenbaum, Université Pierre-et-Marie Curie.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Organisation : agenda} {\color{red} Cours et PC
+\vspace{2mm}}
+
+Les vendredis 31 janvier, 7 février, 14 février, 21 février, 7 mars, 21 mars, 28
+mars, 4 avril, 11 avril. \vspace{0.7cm}
+
+{\color{red} Evaluation}
+\begin{itemize}
+\item {\color{red} Contrôle classant} : noté sur $20$.
+%\item {\color{red} Participation aux PC} : noté sur 2.
+\item {\color{red} Projet en binôme} : (présentés le 7 février) noté sur 4.
+\end{itemize}
+%\hline
+Fournit une note tronquée à 20 et convertie en note littérale.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Organisation : materiel}
+%{\color{gray} Materiel}
+\begin{itemize}
+\item {\color{red}Transparents} du cours téléchargeables à l'adresse
+\begin{center}
+{\small http://www.crest.fr/pagesperso.php?user=3131}
+\end{center}
+\item {\color{red} Poly} ({\small document autonome contenant l'intégralité du cours et plus, téléchargeable à la même adresse}).
+\item Les documents et {\color{red} exercices} de PC.
+\end{itemize}
+\end{frame}
+
+\section{Présentation (succinte) du cours}
+
+\begin{frame}
+\frametitle{Présentation (succinte) du cours}
+\begin{itemize}
+\item Echantillonnage et modélisation statistique. Expérience statistique {\color{red} (2 cours)}.
+\item Méthodes d'estimation classique  {\color{red} (2 cours)}.
+\item Information statistique, théorie asymptotique pour l'estimation  {\color{red} (2 cours)}.
+\item Décision statistique et tests  {\color{red} (2 cours)}.
+\item {\color{red} 1 cours} d'ouverture ou de compléments {\small (en fonction de l'auditoire)}.
+\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%%\frametitle{La Statistique dans le monde du travail}
+%\centerline{Classement Forbes "10 Best Jobs for 2010"}
+%\begin{enumerate}
+%\item {\color{red} Actuary}
+%\item Software engineer
+%\item Computer systems analyst
+%\item Biologist
+%\item Historian
+%\item {\color{red} Mathematician}
+%\item Paralegal assistant
+%\item {\color{red} Statistician}
+%\end{enumerate}
+%\end{frame}
+
+\section{Echantillonnage et modélisation statistique (1/2)}
+\begin{frame}
+\frametitle{Plan}
+\begin{itemize}
+\item {\color{red} Problématique statistique} : de quoi s'agit-il ?
+\item {\color{red} Echantillonnage}.
+\item Estimation d'une distribution inconnue à partir d'un $n$-échantillon, {\color{red} méthodes empiriques}.
+\end{itemize}
+\end{frame}
+
+\subsection{Les données aujourd'hui}
+
+\begin{frame}
+\frametitle{Les donn\'ees aujourd'hui : (1) les chiffres du travail}
+\centerline{\bf  Les chiffres du travail}  \centerline{Taux
+d'activit\'e par tranche d'\^age hommes vs. femmes}
+\begin{center}
+\includegraphics[width=8cm]{insee0.jpg}
+\end{center}
+\begin{center}
+{\tt http://www.insee.fr/}
+\end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Les donn\'ees aujourd'hui: (2) }
+\centerline{\bf Le monde de la finance}
+\begin{center}
+\includegraphics[width=10cm]{dowjones.jpg}
+\end{center}
+\begin{center}
+{\tt http://fr.finance.yahoo.com/}
+\end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Les donn\'ees aujourd'hui: (3)  }
+\centerline{\bf Biopuces et analyse d'ADN}
+\begin{figure}
+  \includegraphics[width=5.5cm]{puceADN}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Les donn\'ees aujourd'hui: (4)}
+    \centerline{\bf  E-marketing - Livres}
+\begin{center}
+\vspace{-8cm}
+\includegraphics[width=10cm]{Kawai_Livre.pdf}
+\end{center}
+\end{frame}
+
+\subsection{Les données hier...}
+
+\begin{frame}
+\frametitle{Retour en arrière : les données hier...}
+\begin{itemize}
+\item \og Statistik\fg\; (dérivé du latin Statisticum). Allemagne, 1740 (Achenwall). {\color{red}Ensemble de mesures} et recueil de données nécessaires au fonctionnement et à l'organisation de l'état : recensements et estimations de la population, des richesses, de l'impôt, des armées.
+\item Les progrès de la statistique : représenta\-tion graphique et {\color{red}organisation des données en tableaux} (statistique descriptive, dominée par l'école allemande au $18^e$ siècle). Activité importante aussi en Grande Bretagne\footnote{William Playfair (1759--1823), 1786, "The Commercial and Political Atlas" contenant le premier diagramme en barres connu.} et dans une France centralisée.\footnote{Vauban, 1686,  "Méthode générale et facile pour faire le dénombrement des peuples".}
+%En 1800, Bonaparte institue les préfets et un "bureau de la statistique de la République".}\\
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Statistique et probabilités}
+\begin{itemize}
+\item  $17^e$ siècle : {\color{red}Invention des probabilités}. Incorporation d'un raisonnement probabiliste -- et donc un modèle du hasard -- dans le traitement d'observations.
+\item Basculement de la statistique vers une {\color{red}discipline scientifique} à part entière. Préfigure l'actuariat moderne\footnote{les frêres Hyugens, premier calcul de l'espérance de vie humaine en 1669, Graunt (1620--1674), William Petty (1623--1687), Laplace.}.
+\item L'exemple historique incontournable : {\color{red}John Arbuthnott} (1667--1735) et le déficit des naissances et morts selon le sexe.
+-- la première reflexion \og moderne \fg\; de statistique.
+% et qui préfugurent l'actuariat. 
+%Les noms souvent cités sont  Nous exposons brièvement la figure de 
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{John Arbuthnott et \og{}la divine providence\fg{}}
+\begin{itemize}
+\item 1712, Arbuthnott (médecin de la Reine Anne) examine le nombre de baptêmes de filles et de garçons à Londres, entre 1629 et 1710.
+%, voir le Tableau \ref{}, extrait\footnote{{\tt http://www.taieb.net/auteurs/Arbuthnot/Arbuthnot.html}.} de Arbuthnott \ref{ARBU}, pp. 189--190. 
+\item Sur 82 années retenues, le nombre de naissances masculines est toujours supérieur au nombre de naissance féminines.
+\item Arbuthnott calcule la probabilité que les naissances masculines (avec équi-probabilité filles/garçons) soient plus nombreuses que les naissances féminines, 82 fois de suite ($=(1/2)^{82}$), {\it \og which will be found easily by the Table of Logarithms to be 1/4 8360 0000 0000 0000 0000 0000 \fg}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{An Argument for Divine Providence}
+% {\it An Argument for Divine Providence, taken frome the constant Regularity observed in the Births of both Sexes} 
+\begin{itemize}
+\item {\it An Argument for Divine Providence, taken frome the constant Regularity observed in the Births of both Sexes}
+%l'excédent de naissnces masculines de la manière suivante
+\item {\small  {\it \og [...] This Event is wisely prevented by the Oeconomy of Nature; and to the judge of the wisdom of the Contrivance, we must observe that the external Accidents to which Males are subject (who must seek their food with danger) do make a great havock of them, and that this loss exceeds far that of the other Sex, occasioned by Disease incident to it, as Experience convinces us. To repair that Loss, provident Nature, by the Disposal of its wife Creator, brings more Males than Females ; and this in almost a constant proportion\fg\;.}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Problématique statistique}
+\begin{itemize}
+\item {\color{red} Point de départ} : des observations (des nombres réels)
+$${\tt x_1},\ldots, {\tt x_n}.$$
+\item {\color{red} Modélisation statistique} :
+\begin{itemize}
+\item
+les observations sont des réalisations
+$$X_1(\omega),\ldots, X_n(\omega)\;\;\text{de v.a.r.}\;\;X_1,\ldots, X_n.$$
+%de variables aléatoires
+%$X_1,\ldots, X_n$.
+\item
+La {\color{red}loi} $\PP^{(X_1,\ldots, X_n)}$ de $(X_1,\ldots, X_n)$ {\color{red} est inconnue}, mais appartient à une famille donnée
+$$\boxed{\big\{\PP_\vartheta^n,\vartheta \in \Theta\big\}.}$$
+\end{itemize}
+\item {\color{red} Problématique}: à partir de \og l'observation \fg{} $X_1,\ldots, X_n$, peut-on {\color{red}retrouver} $\PP_\vartheta^n$ ? et donc $\vartheta$ ?
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Problématique statistique (suite)}
+\begin{itemize}
+\item $\vartheta$ est le {\color{red} paramètre} et $\Theta$ {\color{red} l'ensemble} des paramètres.
+%\item Deux grandes classes de problèmes
+%\begin{itemize}
+\item {\color{red}Estimation}
+: à partir de $X_1,\ldots, X_n$, construire $\varphi_n(X_1,\ldots,X_n)$ qui \og approche au mieux \fg{} $\vartheta$.
+\item {\color{red} Test} : à partir de  $X_1,\ldots, X_n$, établir une {\color{red}décision} $\varphi_n(X_1,\ldots,X_n) \in \{\text{ensemble de décisions}\}$ concernant $\vartheta$ pouvant être vraie ou fausse.
+%\end{itemize}
+%\item Si $\Theta$ est un sous-ensemble de $\R^d$, statistique {\color{red}paramétrique}. Si $\Theta$ sous-ensemble d'un espace fonctionnel, statistique {\color{red}non-paramétrique}.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Exemple le plus simple}
+\begin{itemize}
+\item On lance une pièce de monnaie 18 fois et on observe ($P=0$, $F=1$)
+$$0,0,0,1,1,0,1,0,0,1,1,0,1,0,0,1,1,0.$$
+\item Modèle statistique : on observe $n=18$ variables aléatoires $X_i$ indépendantes, de Bernoulli de paramètre {\color{red}inconnu} $\vartheta \in \Theta = [0,1]$.
+\begin{itemize}
+\item {\color{red} Estimation}. Estimateur $\bar X_{18} = \frac{1}{18}\sum_{i = 1}^{18}X_i \stackrel{\text{ici}}{=} 8/18=0.44$. Quelle précision ?
+\item {\color{red} Test}. Décision à prendre : \og la pièce est-elle équilibrée \fg{} ?. Par exemple : on compare $\bar X_{18}$ à 0.5.
+Si $|\bar X_{18}-0.5|$ \og petit\fg{}, on accepte l'hypothèse \og la pièce est équilibrée\fg{}. Sinon, on rejette. Quel seuil choisir, et avec quelles conséquences (ex. probabilité de se tromper).
+\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Echantillonnage}
+\begin{itemize}
+\item
+\underline{L'expérience statistique la plus centrale} : on observe la réalisation de $X_1,\ldots, X_n$, v.a.r. où les $X_i$ sont {\color{red} indépendantes}, {\color{red} identiquement distribuées}, de même loi commune $\PP^X$.
+\item Que dire de la loi $\PP^X$ commune des $X_i$ ?
+\item Structure stochastique {\color{red} très simple} (variable aléatoires indépendantes, de même loi). Mais : espace des paramètres {\color{red} immense} (toutes les lois de probabilités).
+\end{itemize}
+\end{frame}
+\begin{frame}
+
+\subsection{Loi d'une variable aléatoire}
+
+\frametitle{Rappel : loi d'une variable aléatoire réelle}
+\begin{definition}
+$$X:\big(\Omega, {\mathcal A}, \PP\big) \longrightarrow \big(\R, {\mathcal B}\big)$$
+{\color{red} Loi de $X$}: mesure de probabilité sur $(\R, {\mathcal B})$, notée $\PP^X$, définie  par
+$$\PP^X\big[A\big] = \PP\big[X^{-1}(A)\big],\;\;A\in {\mathcal B}.$$
+\end{definition}
+\underline{Formule d'intégration}
+$$\boxed{\E\big[\varphi(X)\big]= \int_{\Omega}\varphi\big(X(\omega)\big)\PP(d\omega) = \int_{\R} \varphi(x)\PP^X(dx)}
+$$
+$\varphi$ fonction test.
+\end{frame}
+\begin{frame}
+\frametitle{Loi d'une variable aléatoire (suite)}
+{\color{red} Exemple 1 :} $X$ suit la loi de Bernoulli de paramètre $1/3$.
+\begin{itemize}
+\item \underline{La loi de $X$} est décrite par
+$$\PP\big[X=1\big]=\tfrac{1}{3} = 1- \PP\big[X=0\big].$$
+\item \underline{Ecriture de} $\PP^X(dx)$ :
+$$\boxed{\PP^X(dx) = \tfrac{1}{3}\delta_1(dx)+\tfrac{2}{3}\delta_0(dx).}$$
+\item {\small \underline{Formule de calcul}
+\begin{align*}
+\E\big[\varphi(X)\big] & = \int_{\R} \varphi(x) \PP^X(dx)
+%= \int_{\R} \varphi(x)  \big(\tfrac{1}{3}\delta_1(dx)+\tfrac{2}{3}\delta_0(dx)\big)
+\\
+&= \tfrac{1}{3}\int_{\R}\varphi(x)\delta_1(dx)+\tfrac{2}{3}\int_{\R}\varphi(x)\delta_0(dx) \\
+&= \tfrac{1}{3}\,\varphi(1)+\tfrac{2}{3}\,\varphi(0).
+\end{align*}}
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Loi d'une variable aléatoire (suite)}
+{\color{red} Exemple 2 :} $X \sim$ loi de Poisson de paramètre $2$.
+\begin{itemize}
+\item \underline{La loi de $X$} est décrite par
+$$\PP\big[X=k\big]=e^{-2}\frac{2^k}{k!},\;\;k=0,1,\ldots$$
+\item \underline{Ecriture de} $\PP^X(dx)$ :
+$$\boxed{\PP^X(dx) = e^{-2}\sum_{k \in \N}\tfrac{2^k}{k!}\delta_k(dx).}$$
+\item {\small \underline{Formule de calcul}
+$$\E\big[\varphi(X)\big] = \int_{\R}\varphi(x)\PP^X(dx) = e^{-2}\sum_{k\in \N}\varphi(k)\tfrac{2^k}{k!}.$$}
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Loi d'une variable aléatoire (suite)}
+{\color{red} Exemple 3 :} $X \sim {\mathcal N}(0,1)$ (loi normale standard).
+\begin{itemize}
+\item \underline{La loi de $X$} est décrite par
+$$\PP\big[X \in [a,b]\big]= \int_{[a,b]}e^{-x^2/2}\tfrac{dx}{\sqrt{2\pi}}$$
+\item \underline{Ecriture de} $\PP^X(dx)$ :
+$$\boxed{\PP^X(dx) = \tfrac{1}{\sqrt{2\pi}}e^{-x^2/2} {\color{red}dx}}$$
+{\color{red}$dx$: mesure de Lebesgue}.
+\item {\small \underline{Formule de calcul}
+$$\E\big[\varphi(X)\big] = \int_{\R}\varphi(x)\PP^X(dx) = \int_{\R}\varphi(x)e^{-x^2/2}\tfrac{dx}{\sqrt{2\pi}}.$$}
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Loi d'une variable aléatoire (suite)}
+{\color{red} Exemple 4 :} $X = Z \wedge 1$, où la loi de $Z$ a une densité $f$ par rapport à la mesure de Lebesgue sur $\R$\vspace{4mm}.
+
+\underline{{\color{red} Loi de $X$}}
+\begin{itemize}
+\item Sur l'événement $\big\{Z < 1\big\}$, on observe $X = Z$.
+\item Sur l'événement $\big\{Z \geq 1\big\}$, on observe $X = 1$.
+\end{itemize}
+
+\underline{{\color{red}Ecriture de} $\PP^X(dx)$} :
+$$
+\PP^X(dx) = f(x)1_{\big\{x < 1\big\}}dx + \PP\big[Z \geq 1\big]\delta_1(dx),
+$$
+\end{frame}
+\begin{frame}
+c'est-à-dire
+$$\boxed{\PP^X(dx) = f(x)1_{\big\{x < 1\big\}}dx + \Big( \int_{[1,+\infty)}f(u)du\Big)\delta_1(dx)}$$
+\underline{Formule de calcul}
+\begin{align*}
+\E\big[\varphi(X)\big] &= \int_{\R}\varphi(x)\PP^X(dx)\\
+& = \int_{(-\infty,1)}\varphi(x)f(x)dx+\Big(\int_{[1,+\infty)}f(u)du\Big)\varphi(1).
+\end{align*}
+\end{frame}
+\subsection{Fonction de répartition empirique}
+\begin{frame}
+\frametitle{Identification de la loi : fonction de répartition}
+\begin{itemize}
+\item La loi d'une variable aléatoire $X$ est un \og objet compliqué \fg{} :
+\begin{itemize}
+\item elle peut être discrète (somme de masses de Dirac)
+\item elle peut être (absolument) continue (densité par rapport à la mesure de Lebesgue)
+\item elle peut-être une combinaison des deux, ou encore autre chose....
+\end{itemize}
+\item On peut {\color{red} caractériser la loi} de $X$ par un objet plus simple à manipuler : une fonction croissante bornée : la {\color{red} fonction de répartition}.
+\item Plus facile à étudier dans un {\color{red} contexte de statistique}.
+\item (Il y aura bien sûr des limites à cette approche...)
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Fonction de répartition}
+\begin{definition}
+$X$ variable aléatoire réelle. Fonction de répartition de $X$ :
+$$F(x) := \PP\big[X \leq x\big],\;x\in \R.$$
+\end{definition}
+\begin{itemize}
+\item
+$F$ est croissante, cont. à droite, $F(-\infty)=0$, $F(+\infty)=1$
+\item $F$ {\color{red} caractérise} la loi $\PP^X$ :
+$$\boxed{\PP^X\big[(a,b]\big] = \PP\big[a < X \leq b\big] = F(b)-F(a)}$$
+\item Désormais, la {\color{red} loi (distribution)} de $X$ désignera indifféremment $F$ ou $\PP^X$.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Problématique statistique}
+\begin{itemize}
+\item On \og observe \fg{}
+$$X_1,\ldots, X_n \sim_{i.i.d.} F,$$
+$F$ fonction de répartition {\color{red} quelconque, inconnue}.
+\item Terminologie :
+$(X_1,\ldots, X_n)$ est un {\color{red} $n$-échantillon} de la loi
+$F$.
+\item Comment {\color{red} retrouver} $F$ à partir des observations $X_1,\ldots, X_n$ ?
+\item {\color{red} Démarche} : on construit une fonction (aléatoire)
+$x \leadsto \widehat F_n(x) = F_n(x; X_1,\ldots, X_n)$
+ne dépendant pas de $F$ (inconnu) telle que
+$$\widehat F_n(x)-F(x)$$
+petit lorsque $n$ grand... Comment ? Petit dans quel sens ?
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Fonction de répartition empirique}
+\begin{definition}
+Fonction de répartition empirique associée au $n$-échantillon $(X_1,\ldots, X_n)$ :
+$$\widehat F_n(x) = \frac{1}{n}\sum_{i = 1}^n 1_{\{X_i \leq x\}},\;x \in \R.$$
+\end{definition}
+\begin{itemize}
+\item C'est une fréquence empirique
+% (nombres d'observations avant $x$ renormalisé par le nombre total d'observations).
+\item Terminologie : $\widehat F_n$ est un {\color{red} estimateur} : fonction des observations qui ne dépend {\color{red} pas} de la quantité inconnue.
+\item Pour tout $x_0\in \R$
+$$\boxed{\widehat F_n(x_0) \stackrel{\PP}{\longrightarrow} F(x_0),\;\;n\rightarrow \infty}$$
+(loi faible des grands nombres appliquée aux $1_{\{X_i \leq x_0\}}$).
+%\item (Aussi  : convergence p.s. et dans $L^2$ par la loi forte.)
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\begin{figure}[htbp]
+  \centering
+  %\color{black}
+  %\pagecolor{white}
+  \includegraphics[height=6cm, width=8cm]{Fig1.pdf}
+ \caption{{\small $\widehat F_n$ (noir), $F$ (rouge), $n=20$. $F \sim {\mathcal N}(0,1)$.}}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[htbp]
+  \centering
+  %\color{black}
+  %\pagecolor{white}
+  \includegraphics[height=6cm, width=8cm]{Fig2.pdf}
+   \caption{{\small $\widehat F_n$ (noir), $F$ (rouge), $n=100$. $F \sim {\mathcal N}(0,1)$.}}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[htbp]
+  \centering
+  %\color{black}
+  %\pagecolor{white}
+  \includegraphics[height=6cm, width=8cm]{Fig3.pdf}
+  \caption{{\small $\widehat F_n$ (noir), $F$ (rouge), $n=1000$. $F \sim {\mathcal N}(0,1)$.}}
+\end{figure}
+\end{frame}
+
+
+\subsection{précision d'estimation}
+
+\begin{frame}
+\frametitle{Convergence en probabilité}
+\begin{itemize}
+\item Mode de convergence \og naturel \fg{} en statistique
+\item {\color{red} Rappel} : $X_n \stackrel{\PP}{\longrightarrow} X$ si
+$$\forall \varepsilon >0,\;\PP\big[|X_n-X|\geq \varepsilon\big] \rightarrow 0,\;\;\; \rightarrow \infty.$$
+\item {\color{red} Interprétation} : pour tout niveau de risque $\alpha >0$ (petit) et tout niveau de précision $\varepsilon >0$, il existe un rang
+$N = N(\alpha, \varepsilon)$ tel que
+$$n>N\;\;\text{implique}\;\;|X_n-X| \leq \varepsilon\;\;\text{avec proba.}\;\geq 1-\alpha.$$
+\item En pratique, on souhaite simultanément $N$, $\alpha$ et $\varepsilon$ petits. Quantités {\color{red} antagonistes} (à suivre...).
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Vers la précision d'estimation}
+\begin{itemize}
+\item On a $\forall x_0 \in \R,\,\widehat F_n(x_0)\stackrel{\PP}{\rightarrow} F(x_0)$. Avec {\color{red}quelle précision ?}
+%Si on se donne un nombre d'observation $n$ et un niveau de risque $\alpha$, quelle précision $\varepsilon$ garantir ?
+Problèmes de même types :
+\begin{itemize}
+\item $n$ {\color{red}information} et $\alpha$ {\color{red}risque} donnés $\rightarrow$ quelle  {\color{red} précision} $\varepsilon$ ?
+\item risque $\alpha$ et précision $\varepsilon$ donnés $\rightarrow$ quel nombre minimal de données $n$ nécessaires ?
+\item quel risque prend-on si l'on suppose une précision $\varepsilon$ avec $n$ données ?
+\end{itemize}
+
+\item Plusieurs approches :
+\begin{itemize}
+\item non-asymptotique naïve
+\item non-asymptotique
+\item {\color{red} approche asymptotique (via des théorèmes limites)}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Approche naïve : contrôle de la variance}
+Soit {\color{red}$\alpha >0$ donné} (petit). On veut {\color{red} trouver $\varepsilon$}, le plus petit possible, de sorte que
+$$\PP\big[|\widehat F_n(x_0)-F(x_0)|\geq \varepsilon\big] \leq \alpha.$$
+On a {\color{red}(Tchebychev)}
+\begin{align*}
+\PP\big[|\widehat F_n(x_0)-F(x_0)|\geq \varepsilon\big] & \leq \frac{1}{\varepsilon^2}\text{Var}\big[\widehat F_n(x_0)\big]\\
+& = \frac{{\color{red}F(x_0)}\big(1-{\color{red}F(x_0)}\big)}{n\varepsilon^2} \\
+& \leq \frac{1}{4n\varepsilon^2}\\
+& \;{\color{red} \leq \alpha}
+%%\;\;\;\text{(ce qu'on veut)}.
+\end{align*}
+Conduit à
+$$\boxed{\varepsilon = \frac{1}{2\sqrt{n\alpha}}}$$
+\end{frame}
+\begin{frame}
+\frametitle{Intervalle de confiance}
+\underline{Conclusion} : pour tout $\alpha >0$,
+$$\PP\Big[|\widehat F_n(x_0)-F(x_0)|\geq \frac{1}{2\sqrt{n\alpha}}\Big] \leq \alpha.$$
+\begin{terminologie}
+L'intervalle
+$$\boxed{{\mathcal I}_{n,\alpha} = \left[\widehat F_n(x_0)\pm  \frac{1}{2\sqrt{n\alpha}}\right]}
+$$
+est un intervalle de confiance pour $F(x_0)$ au niveau de confiance $1-\alpha$.
+\end{terminologie}
+\end{frame}
+\begin{frame}
+\frametitle{Précision catastrophique !}
+\begin{itemize}
+\item Si $\alpha = 5\%$ et $n=100$, précision $\varepsilon = 0.22$, soit une barre d'erreur de taille $0.44$, alors que $0 \leq F(x_0) \leq 1$.
+\item \underline{Autres exemples} : $\varepsilon_{\alpha=1/1000,n=100} = 1.58$, $\varepsilon_{\alpha = 1/100, n=100}=0.5$. {\color{red} aucune précision d'estimation !\vspace{0.5cm}}
+\item D'où vient le défaut de cette précision ?
+\begin{itemize}
+\item Mauvais choix de l'estimateur ? ($\rightarrow$ on verra que {\color{red} non}).
+\item Mauvaise estimation de l'erreur ?
+%($\rightarrow$ {\color{red}problème de nature probabiliste : l'inégalité de Tchebychev est trop grossière}).
+\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Inégalité de Hoeffding}
+\begin{prop}
+$Y_1,\ldots, Y_n$ i.i.d. de loi de Bernoulli de paramètre $p$. Alors
+$$\PP\big[\big|\tfrac{1}{n}\sum_{i = 1}^nY_i-p\big|\geq t\big] \leq 2\exp(-2nt^2).$$
+\end{prop}
+Application : on fait $Y_i=1_{\{x_I \leq x_0\}}$ et $p = F(x_0)$. On en déduit
+$$\PP\big[\big|\widehat F_n(x_0)-F(x_0)\big|\geq \varepsilon \big] \leq 2\exp(-2n\varepsilon^2).$$
+On résout en $\varepsilon$:
+$$2\exp(-2n\varepsilon^2) = \alpha,$$
+soit
+$$\boxed{\varepsilon = \sqrt{\frac{1}{2n}\log \frac{2}{\alpha}}}.$$
+\end{frame}
+\begin{frame}
+\frametitle{Comparaison Tchebychev vs. Hoeffding}
+Nouvel intervalle de confiance
+$$\boxed{{\mathcal I}_{n,\alpha}^{{\tt hoeffding}} = \left[\widehat F_n(x_0)\pm \sqrt{\frac{1}{2n}\log \frac{2}{\alpha}}\right]},$$
+à comparer avec
+$${\mathcal I}_{n,\alpha}^{{\tt tchebychev}} = \left[\widehat F_n(x_0)\pm  \frac{1}{2\sqrt{n\alpha}}\right].$$
+\begin{itemize}
+\item Même ordre de grandeur en $n$.
+\item Gain {\color{red} significatif} dans la limite $\alpha \rightarrow 0$. La \og prise de risque\fg{} devient marginale par rapport au nombre d'observations.
+\item {\color{red} Optimalité d'une telle approche ?}
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{L'approche asymptotique}
+\begin{itemize}
+\item Vers une notion d'optimalité : on se place dans la limite $n \rightarrow \infty$ (l'information \og explose \fg{}). On évalue
+$$\PP\big[\big|\widehat F_n(x_0)-F(x_0)\big| \geq \varepsilon \big], n \rightarrow \infty$$
+pour une normalisation $\varepsilon = \varepsilon_n$ appropriée.
+\item Outil : {\color{red} Théorème central-limite.}
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Rappel : théorème central-limite}
+\begin{itemize}
+\item TCL :\og vitesse \fg{} dans la loi des grands nombres.
+\item Si $Y_1,\ldots, Y_n$ i.i.d., $\mu=\E\big[Y_i\big]$, $0< \sigma^2=\text{Var}[Y_i]<+\infty$, alors
+$$\sqrt{n}\Big(\frac{1}{n}\sum_{i = 1}^n Y_i-\mu\Big) \stackrel{d}{\longrightarrow} {\mathcal N}(0,\sigma^2).$$
+\item Le mode de convergence est {\color{red} la convergence en loi}. Ne peut pas avoir lieu en probabilité.
+\item $X_n \stackrel{d}{\rightarrow} X$ signifie que
+$$\PP\big[X_n \leq x\big] \rightarrow \PP\big[X \leq x\big]$$
+en tout point $x$ où la fonction de répartition de $X$ est continue
+(les lois de $X_n$ se \og rapprochent \fg{} de la loi de $X$).
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Interprétation et application}
+\begin{itemize}
+\item Interprétation du TCL :
+$$\frac{1}{n}\sum_{i = 1}^n Y_i = \mu + \frac{\sigma}{\sqrt{n}}\, \xi^{(n)},\;\;\xi^{(n)} \stackrel{d}{\approx} {\mathcal N}(0,1).$$
+\item \underline{Application} : $Y_i = 1_{\{X_i \leq x_0\}}$, $\mu = F(x_0)$, $\sigma({\color{red}F}) = F(x_0)^{1/2}(1-F(x_0)\big)^{1/2}$.
+
+On a
+\begin{align*}
+\PP\big[\big|\widehat F_n(x_0)-F(x_0)\big|\geq \varepsilon_n\big] & = \PP\Big[\Big|\xi^{(n)}\Big| \geq \frac{\sqrt{n}\,\varepsilon_n}{\sigma({\color{red}F})}\Big] \\
+& = \PP\Big[\Big|\xi^{(n)}\Big|\geq \frac{\varepsilon_0}{\sigma({\color{red} F})}\Big]
+\end{align*}
+pour la calibration $\varepsilon_n = \varepsilon_0/\sqrt{n}$ ($\varepsilon_0$ reste à choisir).
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{TCL et intervalle de confiance (suite)}
+Il vient
+\begin{align*}
+ \PP\Big[\Big|\xi^{(n)}\Big|\geq \frac{\varepsilon_0}{\sigma({\color{red} F})}\Big]
+& \rightarrow \int_{|x|\geq \varepsilon_0/\sigma({\color{red}F})}e^{-x^2/2}\frac{dx}{\sqrt{2\pi}} \\
+& = 2\Big(1-\Phi\big(\varepsilon_0/\sigma({\color{red}F})\big)\Big) \\
+&\leq \alpha,
+\end{align*}
+avec $\Phi(x) = \int_{-\infty}^xe^{-t^2/2}dt$, ce qui donne
+$$\boxed{\varepsilon_0 = \sigma({\color{red}F})\Phi^{-1}\big(1-\alpha/2\big).}$$
+\end{frame}
+\begin{frame}
+\frametitle{TCL et intervalle de confiance : (suite)}
+\begin{itemize}
+\item On a montré
+$$\PP\big[\big|\widehat F_n(x_0)-F(x_0)\big|\geq \frac{\sigma({\color{red}F})}{\sqrt{n}}\Phi^{-1}\big(1-\alpha/2\big)\big] \rightarrow \alpha.$$
+\item {\color{red}\underline{Attention !}} ceci ne fournit {\color{red}pas} un intervalle de confiance : $\sigma({\color{red}F})={\color{red}F}(x_0)^{1/2}\big(1-{\color{red}F}(x_0)\big)^{1/2}$ est inconnu !
+\item \underline{Solution} : remplacer $\sigma({\color{red}F})$ par  $\widehat F_n(x_0)^{1/2}\big(1-\widehat F_n(x_0)\big)^{1/2}$ observable.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{TCL et intervalle de confiance : conclusion}
+\begin{prop}
+Pour tout $\alpha \in (0,1)$,
+$${\mathcal I}_{n,\alpha}^{{\tt asymp}} = \left[\widehat F_n(x_0)\pm\frac{\widehat F_n(x_0)^{1/2}\big(1-\widehat F_n(x_0)\big)^{1/2}}{\sqrt{n}}\Phi^{-1}(1-\alpha/2)\right]$$
+est un intervalle de confiance asymptotique pour $F(x_0)$ au niveau de confiance $1-\alpha$ :
+$$\PP\big[F(x_0)\in{\mathcal I}_{n,\alpha}^{{\tt asymp}} \big] \rightarrow 1-\alpha.$$
+\end{prop}
+Le passage $\sigma({\color{red}F}) \longrightarrow \widehat F_n(x_0)^{1/2}\big(1-\widehat F_n(x_0)\big)^{1/2}$ est licite via le lemme de Slutsky.
+\end{frame}
+%\begin{frame}
+%\frametitle{Lemme de Slutsky}
+%\begin{itemize}
+%\item Le vecteur $(X_n,Y_n) \stackrel{d}{\rightarrow} (X,Y)$ si
+%$$\E\big[\varphi(X_n,Y_n)\big]\rightarrow \E\big[\varphi(X,Y)\big],$$
+%pour $\varphi$ {\color{red} continue bornée}.
+%\item {\color{red} Attention !} Si $X_n \stackrel{d}{\rightarrow} X$ et $Y_n \stackrel{d}{\rightarrow} Y$, on {\color{red} n'a pas en général} $(X_n,Y_n) \stackrel{d}{\rightarrow} (X,Y)$.
+%\item {\color{red} Mais} (lemme de Slutsky) si $X_n \stackrel{d}{\rightarrow} X$ et $Y_n \stackrel{\PP}{\rightarrow} c$ (constante), alors $(X_n,Y_n) \stackrel{d}{\rightarrow} (X,Y)$.
+%\item Par suite, sous les hypothèses du lemme, {\color{red}pour toute fonction continue} $g$, on a $g(X_n,Y_n) \stackrel{d}{\rightarrow} g(X,Y)$.
+%\end{itemize}
+%\end{frame}
+%\begin{frame}
+%\frametitle{Observation finale}
+%Comparaison des longueurs des 3 intervalles de confiance :
+%\begin{itemize}
+%\item \underline{Tchebychev (non-asymptotique)}
+%$\frac{2}{\sqrt{n}} \frac{1}{2} \frac{1}{\sqrt{\alpha}}$
+%\item \underline{{\color{red}Hoeffding (non-asymptotique)}}
+%$\frac{2}{\sqrt{n}} \sqrt{\frac{\alpha}{2}\log \frac{2}{\alpha}}$
+%\item \underline{TCL (asymptotique)}
+%$\frac{2}{\sqrt{n}} \widehat F_n(x_0)^{1/2}\big(1-\widehat F_n(x_0)\big)^{1/2} \Phi^{-1}(1-\alpha/2).$
+%\item La longueur la plus petite est ({\color{red}sans surprise !}) celle fournie par le TCL. Mais
+%% la longueur de l'intervalle de confiance fournie par l'inégalité de
+%Hoeffding {\color{red} comparable} au TCL en $n$ et $\alpha$ (dans la limite $\alpha\rightarrow 0$).
+%\end{itemize}
+%\end{frame}
+%\subsection{Estimation uniforme}
+%\begin{frame}
+%\frametitle{Estimation uniforme}
+%\begin{itemize}
+%\item On \og sait \fg{} estimer $F(x_0)$, pour un $x_0$ donné. Qu'en est-il de l'estimation {\color{red} globale} de $F$ :
+%$$\big(F(x), x \in \R\big) ?$$
+%\item 3 résultats pour passer de l'estimation en un point à {\color{red}l'estimation globale} :
+%\begin{itemize}
+%\item Glivenko-Cantelli (convergence uniforme)
+%\item Kolomogorov-Smirnov (vitesse de convergence, asymptotique)
+%\item Inégalité de DKV (vitesse de convergence, non-asymptotique)
+%\end{itemize}
+%\end{itemize}
+%\end{frame}
+%\begin{frame}
+%\frametitle{Glivenko-Cantelli, Kolmogorov-Smirnov}
+%$X_1,\ldots, X_n$ i.i.d. de loi $F$, $\widehat F_n$ leur fonction de répartition empirique.
+%\begin{prop}
+%\begin{itemize}
+%\item (Glivenko-Cantelli) $$\sup_{x \in \R}\big|\widehat F_n(x)-F(x)\big| \stackrel{\mathrm{p.s.}}{\rightarrow}0.$$
+%\item (Kolmogorv-Smirnov) Si $F$ est continue,
+%$$\sqrt{n}\sup_{x \in \R}\big|\widehat F_n(x)-F(x)\big| \stackrel{d}{\rightarrow} \mathbb{B},$$
+%$\mathbb{B}$ loi connue {\color{red} indépendante} de $F$.
+%\end{itemize}
+%\end{prop}
+%\end{frame}
+%\begin{frame}
+%\frametitle{Inégalité de DKW}
+%$X_1,\ldots, X_n$ i.i.d. de loi $F$ {\color{red} continue}, $\widehat F_n$ leur fonction de répartition empirique.
+%\begin{prop}[Inégalité de Dvoretsky-Kiefer-Wolfowitz] Pour tout $\varepsilon >0$.
+%$$\PP\big[\sup_{x \in \R}\big|\widehat F_n(x)-F(x)\big|\geq \varepsilon\big] \leq 2 \exp\big(-2n\varepsilon^2\big).$$
+%\end{prop}
+%\begin{itemize}
+%\item Résultat difficile (théorie des processus empiriques).
+%\item Permet de construire des {\color{red} régions} de confiance avec des résultats similaires au cadre ponctuel :
+%$$\PP\Big[\forall x \in \R, F(x)\in \big[\widehat F_n(x)\pm\sqrt{\tfrac{1}{2n}\log \tfrac{2}{\alpha}}\big]\Big]\geq 1-\alpha.$$
+%\end{itemize}
+%\end{frame}
+%\subsection{Estimation de fonctionnelles}
+%\begin{frame}
+%\frametitle{Estimation de fonctionnelles}
+%\begin{itemize}
+%\item {\color{red} Objectif :} estimation d'une fonctionnelle $T(F) \in \R$. \\
+%\item Exemples
+%\begin{itemize}
+%\item \underline{Déjà vu} : valeur en un point  $T(F) = F(x_0)$
+%\item \underline{Fonctionnelle régulière} :
+%$$T(F) = h\left(\int_{\R}g(x)dF(x)\right),$$
+%où $g,h: \R \rightarrow \R$ sont {\color{red} régulières}
+%\item {\color{red}Autres cas...}
+%\end{itemize}
+%\item \underline{Principe} : si $F \leadsto T(F)$ est \og régulière \fg{}, un estimateur \og naturel \fg{} est $T(\widehat F_n)$
+%({\color{red}estimateur par plug-in}).
+%\end{itemize}
+%\end{frame}
+%\begin{frame}
+%\frametitle{Exemples}
+%\begin{itemize}
+%\item \underline{Moyenne} : $m(F) = \int_{\R}xdF(x)$.
+%\item \underline{Variance} :
+%\begin{align*}
+%\sigma^2(F) & = \int_{\R}\big(x-m(F)\big)^2dF(x)\\
+%& = \int_{\R}x^2 dF(x)-\big(\int_{\R}xdF(x)\big)^2
+%\end{align*}
+%\item \underline{Asymétrie (skewness)} :
+%$$\alpha(F)=\frac{\int_{\R}\big(x-m(F)\big)^3dF(x)}{\sigma^2(F)^{3/2}}=\cdots.$$
+%\item \underline{Aplatissement (kurtosis)} :
+%$$\kappa(F) = \frac{\int_{\R}\big(x-m(F)\big)^4dF(x)}{\sigma^2(F)^2}=\cdots.$$
+%\end{itemize}
+%\end{frame}
+%\begin{frame}
+%\frametitle{Estimation de fonctionnelles régulières}
+%\begin{itemize}
+%%\item \underline{Principe} : si $F \leadsto T(F)$ est \og régulière \fg{}, alors $T(\widehat F_n)$ est un \og bon \fg{} estimateur de $T(F)$ (estimateur par plug-in).
+%\item Cas où $T(F) = h\big(\int_{\R}g(x)dF(x)\big)$
+%%\item $\int_{\R} \varphi(x)dF(x) = \int_{\R}\varphi(x) \PP^X(dx)$, où $X \sim F$.
+%\item \underline{Formule de calcul} :
+%$$\boxed{\int_{\R}\varphi(x)d\widehat F_n(x) = \frac{1}{n}\sum_{i = 1}^n\varphi(X_i).}$$
+%Traduction : {\color{red}une variable aléatoire de loi $\widehat F_n$ prend les valeurs $X_i$ avec probabilité $1/n$.}
+%\item Estimateur par {\color{red} substitution} ou plug-in de $T(F)$ :
+%$$\boxed{T(\widehat F_n) = h\Big(\tfrac{1}{n}\sum_{i = 1}^ng(X_i)\Big)}$$
+%\end{itemize}
+%\end{frame}
+%\begin{frame}
+%\frametitle{Performance de l'estimateur par substitution}
+%\begin{itemize}
+%\item {\color{red}Convergence} si $g,h:\R\rightarrow \R$ continues, alors $T(\widehat F_n)\stackrel{\mathrm{p.s.}}{\rightarrow} T(F)$ (loi forte des grands nombres).
+%\item {\color{red} Vitesse de convergence, Etape 1.}
+%TCL :
+%$$\sqrt{n}\big(\tfrac{1}{n}\sum_{i=1}^ng(X_i)-\int_{\R}g(x)dF(x)\big) \stackrel{d}{\rightarrow} {\mathcal N}\big(0,\mathrm{Var}\big[g(X)\big]\big),$$
+%où
+%\begin{align*}
+%\text{Var}\big[g(X)\big] &= \E\big[g(X)^2\big]-\big(\E[g(X)]\big)^2 \\
+%&= \int_{\R}g(x)^2dF(x)-\big(\int_{\R}g(x)dF(x)\big)^2.
+%\end{align*}
+%\end{itemize}
+%\end{frame}
+%\begin{frame}
+%\frametitle{Vitesse de convergence (suite)}
+%\begin{itemize}
+%\item{\color{red} Etape 2.} On a $\sqrt{n}(Z_n -c_1)\stackrel{d}{\rightarrow} {\mathcal N}(0,c_2)$.
+%Comment transférer ce résultat à $h(Z_n)\rightarrow h(c_1)$ ?
+%\item {\color{red} Méthode \og delta\fg{}} : si $h$ continûment différentiable
+%$$\sqrt{n}\big(h(Z_n)-h(c_1)\big) = \sqrt{n}(Z_n-c_1)h'(\eta_n),\;\;\eta_n \in \big[Z_n,c_1\big].$$
+%On a  $\sqrt{n}(Z_n-c_1)\stackrel{d}{\rightarrow} {\mathcal N}(0,c_2)$ et $h'(\eta_n)\stackrel{\PP}{\rightarrow}h'(c_1)$.
+%%car $Z_n\stackrel{\PP}{\rightarrow} c_1$.
+
+%{\color{red}Lemme de Slutsky} :
+%$$ \sqrt{n}(Z_n-c_1)h'(\eta_n) \stackrel{d}{\rightarrow} {\mathcal N}(0,c_2) h'(c_1).$$
+%% \stackrel{d}{=} {\mathcal N}\big(0,h'(c_1)^2c_2\big).$$
+%Finalement
+%$$\boxed{\sqrt{n}\big(h(Z_n)-h(c_1)\big) \stackrel{d}{\rightarrow} {\mathcal N}\big(0,c_2h'(c_1)^2\big)}$$
+%\end{itemize}
+%\end{frame}
+%\begin{frame}
+%\frametitle{Conclusion}
+%\begin{prop}
+%Si $\E[g(X)^2]<+\infty$ et $h$ continûment différentiable, alors
+%$$\sqrt{n}\big(T(\widehat F_n)-T(F)\big)\stackrel{d}{\rightarrow} {\mathcal N}\big(0,v({\color{red}F})\big),
+%$$
+%où $v({\color{red}F}) = h'\big(\E\big[g(X)\big]\big)^2\mathrm{Var}\big[g(X)\big]$.
+%\end{prop}
+%Pour construire un {\color{red} intervalle de confiance}, il faut encore remplacer $v({\color{red}F})$ par $v(\widehat F_n)$. Alors
+%$v(\widehat F_n)\stackrel{\PP}{\rightarrow} v(F)$ et, via le lemme de Slutsky,
+%$$
+%\sqrt{n}\frac{T(\widehat F_n)-T(F)}{v(\widehat F_n)^{1/2}}\stackrel{d}{\rightarrow} {\mathcal N}\big(0,1\big).
+%$$
+%On peut maintenant en déduire une intervalle de confiance asymptotique comme précédemment.
+%\end{frame}
+%%\begin{frame}
+%%\frametitle{Exemple en dimension 1}
+%%\end{frame}
+%%\begin{frame}
+%%\frametitle{Le cas de la dimension $d>1$}
+%%\end{frame}
+%%\begin{frame}
+%%\frametitle{Limites de l'approche empirique}
+%%L'estimation de $T(F)$ par $T(\widehat F_n)$ n'est pas toujours {\color{red}possible} ou {\color{red}souhaitable} :
+%%\begin{itemize}
+%%\item La fonctionnelle $F \leadsto T(F)$ n'est pas \og régulière\fg{},
+%%\item On dispose d'information {\color{red} a priori} supplémentaire : $F$ appartient à une sous-classe {\color{red} particulière} de distributions, et il y a des choix plus judicieux que l'estimateur par plug-in,
+%%\item La paramétrisation $F \leadsto T(F)$ ne donne {\color{red}pas} lieu à une {\color{red}forme analytique simple}.
+%%%et ne s'étudie pas à force d'arguments standard basés sur la loi des grands nombres et le TCL
+%%$\rightarrow$ autres approches.
+%%\end{itemize}
+%%\end{frame}
+%%\begin{frame}
+%%\frametitle{Exemple 1 : fonctionnelle irrégulière}
+%%\end{frame}
+%%\begin{frame}
+%%\frametitle{Exemple 2 : information supplémentaire}
+%%\end{frame}
+%%\begin{frame}
+%%\frametitle{Exemple 3 : paramétrisation non-standard}
+%%\end{frame}
+%%\begin{frame}
+%%\frametitle{Conclusion}
+%%\end{frame}
+%%%\item {\color{red} hypothèse supplémentaire} : $F$ admet une densité {\color{red}continue} $x \leadsto f(x)$ par rapport à la mesure de Lebesgue. Estimation de
+%%%$$T(F) = f(x_0)\;?$$
+%%%On a $F'(x) = f(x)$, mais {\color{red} on ne peut pas réaliser} $\widehat F_n'(x_0)$ : $x \leadsto \widehat F_n(x)$ est constante par morceaux !
+%%%\item  {\color{red} hypothèse supplémentaire} : $F$ est de la forme $F_\vartheta(x) = G(x-\vartheta)$, $\vartheta \in \R$, où
+%%%$$G(x) = x1_{x \in [0,1)}+1_{\{x >1\}}\;\;(\text{loi uniforme sur $[0,1]$}).$$
+%%%Alors
+%%%\end{itemize}
+%%%\item kjh
+%%%\end{itemize}
+%%%\end{frame}
+\end{document}

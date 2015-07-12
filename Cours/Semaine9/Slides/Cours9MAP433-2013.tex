@@ -1,0 +1,1649 @@
+
+\documentclass{beamer}
+\usetheme[right,hideothersubsections]{Berkeley}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amstext}
+\usepackage{amsfonts}
+
+%\usepackage[latin1]{inputenc}
+\usepackage[french]{babel}
+\usepackage[applemac]{inputenc}
+
+
+\newenvironment{disarray}{\everymath{\displaystyle\everymath{}}\array} {\endarray}
+\newtheorem{theo}{Théorème}
+\newtheorem{prop}[theo]{Proposition}
+\newtheorem{conj}[theo]{Conjecture}
+\newtheorem{cor}{Corollary}[theo]
+\newtheorem{lm}{Lemma}
+\newtheorem{lemme}{Lemme}
+\newtheorem{nota}{Notation}
+\newtheorem{rk}{Remark}
+\newtheorem{remarque}{Remarque}
+\newtheorem{exa}{Example}
+\newtheorem{df}{Définition}
+\newtheorem{hypothese}{Hypothèse}
+\newtheorem{terminologie}{Terminologie}
+\newenvironment{dem}{\textbf{Proof}}{\flushright$\blacksquare$\\}
+
+\DeclareMathOperator{\E}{{\mathbb E}}
+\DeclareMathOperator{\F}{{\mathbb F}}
+\DeclareMathOperator{\G}{{\mathbb G}}
+\DeclareMathOperator{\D}{{\mathbb D}}
+\DeclareMathOperator{\R}{{\mathbb R}}
+\DeclareMathOperator{\C}{{\mathbb C}}
+\DeclareMathOperator{\Z}{{\mathbb Z}}
+\DeclareMathOperator{\N}{{\mathbb N}}
+\DeclareMathOperator{\K}{{\mathbb K}}
+\DeclareMathOperator{\T}{{\mathbb T}}
+\DeclareMathOperator{\PP}{{\mathbb P}}
+\DeclareMathOperator{\QQ}{{\mathbb Q}}
+\DeclareMathOperator{\Q}{{\mathbb Q}}
+\DeclareMathOperator{\IF}{{\mathbb I}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Pour le modèle linéaire
+
+\DeclareMathOperator{\bX}{\boldsymbol{X}}
+\DeclareMathOperator{\bY}{\boldsymbol{Y}}
+\DeclareMathOperator{\bx}{\boldsymbol{x}}
+\DeclareMathOperator{\vp}{\boldsymbol{p}}
+\DeclareMathOperator{\vq}{\boldsymbol{q}}
+\DeclareMathOperator{\estMC}{\widehat \vartheta_n^{\,\,{\tt mc}}}
+\DeclareMathOperator{\estMCNL}{\widehat \vartheta_n^{\,\,{\tt mcnl}}}
+\DeclareMathOperator{\estMV}{\widehat \vartheta_n^{\,\,{\tt mv}}}
+\DeclareMathOperator{\design}{\mathbb{M}}
+\DeclareMathOperator{\est}{\widehat \vartheta_{\mathnormal{n}}}
+\DeclareMathOperator{\var}{\mathrm{Var}}
+\DeclareMathOperator{\estMVc}{\widehat \vartheta_{n,0}^{\,{\tt mv}}}
+\DeclareMathOperator{\Xbar}{\overline{\mathnormal{X}}_\mathnormal{n}}
+
+
+
+
+\title{MAP 433 : Introduction aux méthodes statistiques. Cours 9}
+\author{M. Hoffmann}
+%\institute{Université Paris-Dauphine}
+\begin{document}
+\date{11 avril 2014}
+\maketitle
+
+
+
+\begin{frame} 
+\frametitle{Aujourd'hui } 
+\tableofcontents
+\end{frame}
+
+
+%%\section{Hypothèse simple/composite contre alternative simple/composite}
+%\section{Construction d'un test : hypothèses générales}
+
+%
+%%\frametitle
+
+%\begin{frame}
+%\frametitle{Situation}
+%\begin{itemize}
+%\item \underline{Situation} : on part d'une expérience statistique $\big(\mathfrak{Z}, {\mathcal Z},\{\PP_\vartheta, \vartheta \in \Theta\}\big)$ engendrée par l'observation $Z$.
+%\item On souhaite tester :
+%$$H_0:\;\vartheta \in \Theta_0 \subset \Theta\;\;\;\text{{\color{red}contre}}\;\;\;H_1:\vartheta \in \Theta_1$$
+%avec ${\color{red}\Theta_0 \cap \Theta_1 = \emptyset}$.
+%\item Si $\Theta_0 = \{\vartheta_0\}$ et $\Theta_1 = \{\vartheta_1\}$, on a Neyman-Pearson. {\color{red} Et sinon ?} 
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Principe de construction}
+%\begin{itemize}
+%\item \og Trouver \fg{} une {\color{red}statistique libre sous l'hypothèse} : toute quantité $\phi(Z)$ {\color{red}observable} dont on connait la loi sous l'hypothèse, c'est-à-dire la loi de $\phi(Z)$ sous $\PP_\vartheta$ avec $\vartheta \in \Theta_0$.
+%\item On \og regarde \fg{} si le comportement de $\phi(Z)$ est {\color{red}typique} d'un comportement sous l'hypothèse. 
+%\item Si oui, on {\color{red}accepte} $H_0$, si non on {\color{red}rejette} $H_0$.
+%\item On quantifie \og oui/non \fg{} par le niveau $\alpha$ du test. 
+%\end{itemize}
+%\end{frame}
+
+%\subsection{Retour sur un exemple}
+%\begin{frame}
+%\frametitle{Exemple : test sur la variance}
+%\begin{itemize}
+%\item On observe $Z=(Y_1,\ldots, Y_n)$,
+%$$Y_1,\ldots, Y_n \sim_{\text{i.i.d.}}{\mathcal N}(\mu,\sigma^2)$$ 
+%avec $\vartheta =(\mu,\sigma^2) \in \Theta = \R \times (0,+\infty)$. 
+%\item {\color{red}Premier cas} : on teste
+%$$ {\color{red} H_0:\sigma^2 = \sigma_0^2\;\;\;\text{ contre}\;\;\; H_1:\sigma^2 > \sigma_0^2.}$$
+%\item Sous l'hypothèse (c'est-à-dire sous $\PP_\vartheta$ avec $\vartheta = (\mu,\sigma_0)$ et $\mu \in \R$ quelconque), on a
+%$$\boxed{(n-1)\frac{s_n^2}{\sigma_0^2} \sim \chi^2(n-1)}$$
+%avec $s_n^2:=\frac{1}{n-1}\sum_{i = 1}^n (Y_i-\overline{Y}_n)^2$.
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Test sur la variance (cont.)}
+%\begin{itemize}
+%\item Donc, {\color{red}sous l'hypothèse}, le comportement \og typique\fg{} de 
+%$$\phi(Z) = (n-1)\frac{s_n^2}{\sigma_0^2} $$
+%est celui d'une variable aléatoire de loi du $\chi^2$ à $n-1$ degrés de liberté.
+%\item Soit $q_{1-\alpha,n-1}^{\chi^2}>0$ tel que si $U \sim {\chi^2}(n-1)$, alors
+%$$\PP\big[U > q_{1-\alpha,n-1}^{\chi^2}\big] = \alpha.$$
+%\item {\color{red}Sous l'hypothèse} $\phi(Z)\stackrel{d}{=} U$ et donc la probabilité pour que $\phi(Z)$ dépasse $q_{1-\alpha,n-1}^{\chi^2}$ est inférieure (égale) à $\alpha$ (comportement atypique si $\alpha$ petit).
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Test sur la variance (cont.)}
+%\begin{itemize}
+%\item {\color{red}Règle de décision :} On accepte l'hypothèse si 
+%$$\phi(Z) \leq  q_{1-\alpha,n-1}^{\chi^2}.$$ 
+%On la rejette sinon.
+%\item Par construction, on a un {\color{red}test de niveau $\alpha$}.
+%\item On ne {\color{red}sait rien dire sur l'erreur de seconde espèce}, mis à part qu'elle est minimale parmi les tests de zone de rejet de la forme de $\{\phi(Z) > c\}$, $c>0$...
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Test sur la variance (fin)}
+%\begin{itemize}
+%\item {\color{red}Deuxième cas :} On teste
+%$$H_0: {\color{red} \sigma^2 \leq \sigma_0^2}\;\;\;\text{ contre}\;\;\; H_1:\sigma^2 > \sigma_0^2.$$
+%\item {\color{red}Pas de statistique libre évidente...} Mais, pour $\sigma^2 \leq \sigma_0^2$, on a
+%\begin{align*}
+%\PP_{\sigma}\big[(n-1)\tfrac{s_n^2}{\sigma_0^2} > q_{1-\alpha,n-1}^{\chi^2}\big] 
+%= & \PP_{\sigma}\big[(n-1)\tfrac{s_n^2}{\sigma^2} > {\color{red}\tfrac{\sigma_0^2}{\sigma^2} } q_{1-\alpha,n-1}^{\chi^2}\big] \\
+%\leq &  \PP_{\sigma}\big[(n-1)\tfrac{s_n^2}{\sigma^2} > q_{1-\alpha,n-1}^{\chi^2}\big] \\
+%= & \alpha.  
+%\end{align*} 
+%\item La même statistique de test convient pour contrôler l'erreur de première espèce que pour l'hypohèse nulle simple. On choisit {\color{red} ici} la {\color{red}même} règle de décision.
+%\end{itemize}
+%\end{frame}
+
+%\subsection{Principe de construction}
+
+%\begin{frame}
+%\frametitle{Conclusion provisoire}
+%\begin{itemize}
+%\item Pour contruire un test de l'hypothèse $H_0:\vartheta \in \Theta_0$ contre $H_1:\vartheta \in \Theta_1$, on cherche {\color{red}une statistique libre} sous l'hypothèse et on rejette pour un seuil qui dépend de la loi de la statistique sous $H_0$, de sorte de fournir une zone de rejet {\color{red} maximale}.
+%%étudie séparément l'erreur de seconde espèce
+% \item Le plus souvent, la statistique est obtenue via un estimateur. Sauf exception (comme la cas gaussien) une telle statistique est difficile à trouver en général. 
+% \item {\color{red}Simplification} cadre asymptotique (où la gaussianité réapparaît le plus souvent...).
+%\end{itemize}
+
+%\end{frame}
+
+%\section{Tests asymptotiques}
+
+%\begin{frame}
+%\frametitle{Le test de Wald : hypothèse nulle simple}
+%\begin{itemize}
+%\item \underline{Situation} la suite d'expériences $\big(\mathfrak{Z}^n, {\mathcal Z}^n,\{\PP_\vartheta^n,\vartheta \in \Theta\}\big)$ est engendrée par l'observation $Z^n$, $\vartheta \in \Theta \subset \R$
+%\item {\color{red}Objectif} : Tester
+%$$H_0:\vartheta = \vartheta_0\;\;\;\text{contre}\;\;\;\vartheta\neq \vartheta_0.$$
+%\item {\color{red}Hyopthèse} : on dispose d'un estimateur $\est$ {\color{red}asymptotiquement normal}
+%$$\boxed{\sqrt{n}(\est-\vartheta)\stackrel{d}{\rightarrow}{\mathcal N}\big(0,v(\vartheta)\big)}$$
+%en loi sous $\PP_{\vartheta}^n$, $\forall \vartheta \in \Theta$, où $\vartheta \leadsto v(\vartheta) >0$ est continue.
+%\item Sous l'hypothèse (ici sous $\PP_{\vartheta_0}^n$) on a {\color{red}la convergence}
+%$$\sqrt{n}\frac{\est-\vartheta_0}{\sqrt{v(\est)}}\stackrel{d}{\longrightarrow} {\mathcal N}(0,1)$$
+%{\color{red}en loi sous $\PP_{\vartheta_0}^n$}.
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Test de Wald (cont.)}
+%\begin{itemize}
+%\item \underline{Remarque} $\sqrt{v(\est)} \leftrightarrow \sqrt{v(\vartheta_0)}$ ou d'autres choix encore...
+%\item On a aussi
+%$$T_n = n\frac{(\est-\vartheta_0)^2}{v(\est)} \stackrel{d}{\longrightarrow} \chi^2(1)$$
+%sous $\PP_{\vartheta_0}^n$.
+%\item Soit $q_{1-\alpha,1}^{\chi^2} >0$ tel que si $U \sim \chi^2(1)$, on a $\PP\big[U > q_{1-\alpha,1}^{\chi^2}\big]=\alpha$. On {\color{red}choisit la zone de rejet}
+%$${\mathcal R}_{n,\alpha} = \big\{T_n\geq q_{1-\alpha,1}^{\chi^2}\big\}.$$
+%\item Le test de zone de rejet ${\mathcal R}_{n,\alpha}$ s'appelle {\color{red}Test de Wald de l'hypothèse simple $\vartheta=\vartheta_0$ contre l'alternative $\vartheta \neq \vartheta_0$ basé sur $\est$.} 
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Propriétés du tes de Wald}
+%\begin{prop}
+%Le test Wald de l'hypothèse simple $\vartheta=\vartheta_0$ contre l'alternative $\vartheta \neq \vartheta_0$ basé sur $\est$ est
+%\begin{itemize}
+%\item {\color{red}asymptotiquement} de niveau $\alpha$ :
+%$$\PP_{\vartheta_0}^n\big[T_n \in {\mathcal R}_{n,\alpha}\big]\rightarrow \alpha.$$
+%\item {\color{red}convergent ou (consistant)}. Pour tout point $\vartheta \neq \vartheta_0$
+%$$\PP_\vartheta^n\big[T_n \notin {\mathcal R}_{n,\alpha}\big] \rightarrow 0.$$
+%\end{itemize}
+%\end{prop}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Preuve}
+%\begin{itemize}
+%\item Test asymptotiquement de niveau $\alpha$ {\color{red}par construction}.
+%\item \underline{Contrôle de l'erreur de seconde espèce :}
+%Soit $\vartheta \neq \vartheta_0$. On a
+%\begin{align*}
+%T_n & = \Big(\sqrt{n}\frac{\est-\vartheta}{\sqrt{v(\est)}}+\sqrt{n}\frac{\vartheta-\vartheta_0}{\sqrt{v(\est)}}\Big)^2 \\
+%& =: T_{n,1}+T_{n,2}.
+%\end{align*}
+%On a $T_{n,1} \stackrel{d}{\longrightarrow} {\mathcal N}(0,1)$ sous $\PP_{\vartheta}^n$ et
+%$$T_{n,2} \stackrel{\PP_{\vartheta}^n}{\longrightarrow} \pm \infty\;\;{\color{red}\text{car}\;\;\vartheta \neq \vartheta_0}$$
+%Donc $T_{n}\stackrel{\PP_{\vartheta}^n}{\longrightarrow}+\infty$, d'où le résultat.
+%\item {\color{red}Remarque} : si $\vartheta \neq \vartheta_0$ mais $|\vartheta - \vartheta_0| \lesssim 1/\sqrt{n}$, le raisonnement ne s'applique pas. Résultat {\color{red}non uniforme en le paramètre}.
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Test de Wald : hypothèse nulle composite}
+%\begin{itemize}
+%\item {\color{red} Même contexte:} $\Theta \subset \R^d$ et {\color{red}on dispose} d'un estimateur $\est$ asymptotiquement normal :
+%$$\sqrt{n}\big(\est-\vartheta\big)\stackrel{d}{\longrightarrow} {\mathcal N}\big(0, V(\vartheta)\big)$$
+%où $V(\vartheta)$ est {\color{red}définie positive} et continue en $\vartheta$.
+%\item {\color{red}But} Tester $H_0: \vartheta \in \Theta_0$ contre $H_1:\vartheta \notin \Theta_0$, où
+%$$\boxed{\Theta_0 = \big\{\vartheta \in \Theta,\;\;g(\vartheta) = 0\big\}}$$
+%et
+%$$g:\R^d \rightarrow \R^m$$
+%($m \leq d$) est régulière.
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Test de Wald cont.}
+%\begin{itemize}
+%\item {\color{red}Hypothèse : } la différentielle (de matrice $J_g(\vartheta)$) de $g$ est de rang maximal $m$ en tout point de (l'intérieur) de $\Theta_0$.
+%\end{itemize}
+%\begin{prop}
+%En tout point $\vartheta$ de l'intérieur de $\Theta_0$ (i.e. {\color{red}sous l'hypothèse}), on a, en loi sous $\PP_\vartheta^n$ :
+%\begin{itemize}
+%\item $$\sqrt{n}g(\est) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0, J_g(\vartheta)V(\vartheta)J_g(\vartheta)^T\big),$$
+%\item $${\color{red}T_n=ng(\est)^T\Sigma_g(\est)^{-1}g(\est)} \stackrel{d}{\longrightarrow} \chi^2(m)$$
+%%en loi sous $\PP_\vartheta^n$, 
+%où $\Sigma_g(\vartheta) =J_g(\vartheta) V(\vartheta) J_g(\vartheta)^T$. 
+%\end{itemize}
+%\end{prop}
+%\begin{itemize}
+%\item Preuve : méthode \og delta \fg{} multidimensionnelle. 
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Test de Wald (fin)}
+%\begin{prop}
+%Sous les hypothèses précédentes, le test de zone de rejet
+%$${\mathcal R}_\alpha  = \big\{T_n \geq q_{1-\alpha, m}^{\chi^2}\big\}$$
+%avec $\PP\big[U > q_{1-\alpha, m}^{\chi^2}\big]=\alpha$ si $U \sim \chi^2(m)$ est 
+%\begin{itemize}
+%\item {\color{red}Asymptotiquement de niveau $\alpha$} en tout point $\vartheta$ de (l'intérieur) de $\Theta_0$ :
+%$$\PP_\vartheta^n\big[T_n \in {\mathcal R}_{n,\alpha}\big]\rightarrow \alpha.$$
+%\item {\color{red}Convergent} : pour tout $\vartheta \notin \Theta_0$ on a
+%$$\PP_\vartheta^n\big[T_n \notin {\mathcal R}_{n,\alpha}\big]\rightarrow 0.$$
+%\end{itemize}
+%\end{prop}
+%\begin{itemize}
+%\item C'est la \og même preuve\fg{} qu'en dimension 1.
+%\end{itemize}
+%\end{frame}
+
+%
+%\section{Tests d'adéquation}
+
+%\begin{frame}
+%\frametitle{Tests d'adéquation}
+%\begin{itemize}
+%\item \underline{Situation} On observe (pour simplifier) un $n$-échantillon de loi $F$ inconnu
+%$$X_1,\ldots, X_n\sim_{\text{i.i.d.}}F$$
+%\item {\color{red}Objectif} Tester
+%$$H_0:F=F_0\;\;\text{contre}\;\;F\neq F_0$$
+%où 
+%$F_0$ distribution donnée. Par exemple : $F_0$ {\color{red}gaussienne centrée réduite}.
+%\item Il est {\color{red}très facile de construire un test asymptotiquement de niveau $\alpha$.} 
+%Il suffit de trouver une statistique $\phi(X_1,\ldots, X_n)$ de loi connue sous l'hypothèse. 
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Test d'adéquation : situation}
+%\begin{itemize}
+%\item {\color{red}Exemples : sous l'hypothèse} 
+%$$\phi_1(X_1\ldots, X_n) = \sqrt{n}\overline{X}_n \sim {\mathcal N}(0,1)$$
+%$$\phi_2(X_1,\ldots, X_n) = \sqrt{n}\frac{\overline{X}_n}{s_n} \sim \text{Student}(n-1)$$
+%$$\phi_3(X_1,\ldots, X_n) = (n-1)s_n^2 \sim \chi^2(n-1).$$
+%\item Le problème est que ces tests {\color{red}ont une faible puissance} : ils ne sont pas consistants.
+%\item Pas exemple, si $F\neq$ gaussienne mais $\int_{\R}xdF(x)=0$, $\int_{\R}x^2dF(x)=1$, alors
+%$$\PP_{F}\big[\phi_1(X_1,\ldots,X_n) \leq x \big] \rightarrow \int_{-\infty}^x e^{-u^2/2}\frac{du}{\sqrt{2\pi}},\;\;x \in \R.$$
+%(résultats analogues pour $\phi_2$ et $\phi_3$).
+%\item La statistique de test $\phi_i$ {\color{red}ne caractérise pas} la loi $F_0$. 
+%\end{itemize}
+%\end{frame}
+
+%
+%\subsection{Tests de Kolmogorov-Smirnov}
+
+%\begin{frame}
+%\frametitle{Test de Kolmogorov-Smirnov}
+%\begin{itemize}
+%\item \underline{Rappel} Si la fonction de répartition $F$ est continue,
+%$$\sqrt{n}\sup_{x\in \R}\big|\widehat F_n(x)-F(x)\big| \stackrel{d}{\longrightarrow} \mathbb{B}$$
+%où la loi de $\mathbb{B}$ ne dépend pas de $F$.
+%\end{itemize}
+%\begin{prop}[Test de Kolmogorov-Smirnov]
+%Soit $q_{1-\alpha}^{\mathbb{B}}$ tel que $\PP\big[\mathbb{B}>q_{1-\alpha}^{\mathbb{B}}\big]=\alpha$. Le test défini par la zone de rejet 
+%$${\mathcal R}_{n,\alpha} = \big\{\sqrt{n}\sup_{x\in \R}\big|\widehat F_n(x)-F_0(x)\big| \geq q_{1-\alpha}^{\mathbb{B}}\big|\big\}$$
+%est {\color{red}asymptotiquement de niveau $\alpha$ :} 
+%$\PP_{F_0}\big[\widehat F_n \in {\mathcal R}_{n,\alpha}\big]\rightarrow 0$
+%et {\color{red}consistant} :
+%$$\forall F \neq F_0: \PP_{F}\big[\widehat F_n \notin {\mathcal R}_{n,\alpha}\big] \rightarrow 0.$$
+%\end{prop}
+%\end{frame}
+
+%\subsection{Tests du $\chi^2$}
+
+%\begin{frame}
+%\frametitle{Test du Chi-deux}
+%\begin{itemize}
+%\item $X$ variables {\color{red}qualitative} : $X \in \{1,\ldots, d\}$.
+%$$\PP\big[X=\ell\big]=p_\ell,\;\ell=1,\ldots d.$$
+%\item La loi de $X$ est caratérisée par ${\boldsymbol p} = (p_1,\ldots, p_d)^T$. 
+%\item \underline{Notation} 
+%$${\mathcal M}_d  = \big\{{\boldsymbol p}=(p_1,\ldots, p_d)^T,\;\;0 \leq p_\ell,\sum_{\ell=1}^dp_\ell=1\big\}.$$
+%\item {\color{red}Objectif} ${\boldsymbol q}\in {\mathcal M}_d$ donnée. A partir d'un $n$-échantillon 
+%$$X_1,\ldots, X_n \sim_{\text{i.i.d.}}{\boldsymbol p},$$
+%tester
+%$H_0:{\boldsymbol p}={\boldsymbol q}$ {\color{red}contre} $H_1:{\boldsymbol p}\neq{\boldsymbol q}.$
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Construction \og naturelle\fg{} d'un test}
+%\begin{itemize}
+%\item {\color{red}Comparaison des fréquences empiriques}
+%$$\widehat p_{n,\ell}=\frac{1}{n}\sum_{i=1}^n 1_{X_i=\ell}\;\;\;\text{{\color{red}proche de}}\;\;q_\ell,\;\;\ell=1,\ldots, d\; {\color{red}?}$$
+%\item Loi des grands nombres :
+%$$\big(\widehat p_{n,1},\ldots, \widehat p_{n,d}\big) \stackrel{\PP_{{\boldsymbol p}}}{\longrightarrow} (p_1,\ldots, p_d)={\boldsymbol p}.$$
+%\item {\color{red}Théorème central-limite ?}
+%$${\boldsymbol{U}_n}(\boldsymbol{p})=\sqrt{n}\Big(\frac{\widehat p_{n,1}-p_1}{\sqrt{p_1}},\ldots, \frac{\widehat p_{n,d}-p_d}{\sqrt{p_d}}\Big) \stackrel{d}{\longrightarrow} ?$$
+%\item Composante par composante oui. {\color{red}Convergence globale plus délicate}.
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Statistique du Chi-deux}
+%\begin{prop}
+%Si les composantes de $\boldsymbol{p}$ sont toute non-nulles
+%\begin{itemize}
+%\item On a la {\color{red}convergence en loi} sous $\PP_{\boldsymbol{p}}$
+%$${\boldsymbol{U}_n}(\boldsymbol{p})\stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$$
+%avec $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ et $\sqrt{\boldsymbol{p}} = (\sqrt{p_1},\ldots, \sqrt{p_d})^T$.
+%\item {\color{red}De plus}
+%$$\|{\boldsymbol{U}_n}(\boldsymbol{p})\|^2 = n\sum_{\ell=1}^d \frac{(\widehat p_{n,\ell}-p_\ell)^2}{p_\ell} \stackrel{d}{\longrightarrow} \chi^2({\color{red}d-1}).$$
+%\end{itemize}
+%\end{prop}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Preuve de la normalité asymptotique}
+%\begin{itemize}
+%\item Pour $i=1,\ldots, n$ et $1 \leq \ell \leq d$, on pose
+%$$Y_\ell^i=\frac{1}{\sqrt{p_\ell}}\big(1_{\{X_i=\ell\}}-p_\ell\big).$$
+%\item Les vecteurs ${\boldsymbol Y}_i=(Y_1^i,\ldots, Y_d^i)$ sont {\color{red}indépendants et identiquement distribués} et
+%$${\boldsymbol U}_n(\boldsymbol{p}) = \frac{1}{\sqrt{n}}\sum_{i = 1}^n {\boldsymbol Y}_i,$$
+%$\E\big[Y_\ell^i\big]=0$, $\E\big[(Y_\ell^i)^2\big]=1-p_\ell$, $\E\big[Y_\ell^iY_{\ell'}^i \big]=-(p_\ell p_{\ell'})^{1/2}$.
+%\item {\color{red}On applique le TCL vectoriel}.
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Convergence de la norme au carré}
+%\begin{itemize}
+%\item On a donc ${\boldsymbol U}_n(\boldsymbol{p}) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$.
+%\item On a aussi
+%\begin{align*}
+%\|{\boldsymbol U}_n(\boldsymbol{p}) \|^2 & \stackrel{d}{\longrightarrow} \| {\mathcal N}\big(0,V(\boldsymbol{p})\big)\|^2 \\
+%& \sim \chi^2\big(\mathrm{Rang}\big(V(\boldsymbol{p})\big)\big)
+%\end{align*}
+%par {\color{red}Cochran} :  $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ est la projection orthogonale sur $\mathrm{vect}\{\sqrt{\boldsymbol{p}}\}^\perp$ qui est de dimension $d-1$.
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Test d'adéquation du $\chi^2$}
+%\begin{itemize}
+%\item \og distance\fg{} du $\chi^2$:
+%$$\chi^2(\boldsymbol{p},\boldsymbol{q})=\sum_{\ell=1}^d \frac{(p_\ell-q_\ell)^2}{q_\ell}.$$
+%\item Avec ces notations
+%$\|{\boldsymbol U}_n(\boldsymbol{p})\|^2=n\chi^2(\widehat {\boldsymbol p}_n,\boldsymbol{p}).$
+%\end{itemize}
+%\begin{prop}
+%Pour $\boldsymbol{q} \in {\mathcal M}_d$ le test simple défini par la zone de rejet
+%$${\mathcal R}_{n,\alpha} = \big\{n\chi^2(\widehat {\boldsymbol p}_n,\boldsymbol{q}) \geq q_{1-\alpha,d-1}^{\chi^2} \big\}$$
+%où 
+%%$q_{1-\alpha,d-1}^{chi^2}>0$ est défini par 
+%$\PP\big[U > q_{1-\alpha,d-1}^{\chi^2}\big]=\alpha$ si $U \sim \chi^2(d-1)$ est 
+%{\color{red}asymptotiquement de niveau $\alpha$ et consistant} pour tester 
+%$$H_0:\boldsymbol{p}=\boldsymbol{q}\;\;\;\text{contre}\;\;\; 
+%H_1:\boldsymbol{p}\neq\boldsymbol{q}.$$
+%\end{prop}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Exemple de mise en oeuvre : expérience de Mendel}
+%\begin{itemize}
+%\item Soit $d=4$ et 
+%$$\boldsymbol{q}=\Big(\frac{9}{16},\frac{3}{16},\frac{3}{16},\frac{1}{16}\Big).$$
+%\item {\color{red}Répartition observée} : $n=556$
+%$$\widehat {\boldsymbol p}_{556} = \frac{1}{556}(315,101,108,32).$$
+%\item {\color{red}Calcul de la statistique du $\chi^2$}
+%$$556 \times \chi^2(\widehat {\boldsymbol p}_{556}, \boldsymbol{q})=0,47.$$
+%\item On a $q_{95\%, 3}=0,7815$.
+%\item {\color{red}Conclusion :} Puisque $0,47 < 0,7815$, on accepte l'hypothèse $\boldsymbol{p}=\boldsymbol{q}$ au niveau $\alpha = 5\%$.
+%\end{itemize}
+%\end{frame}
+\section{Tests asymptotiques}
+
+\begin{frame}
+\frametitle{Le test de Wald : hypothèse nulle simple}
+\begin{itemize}
+\item \underline{Situation} la suite d'expériences $\big(\mathfrak{Z}^n, {\mathcal Z}^n,\{\PP_\vartheta^n,\vartheta \in \Theta\}\big)$ est engendrée par l'observation $Z^n$, $\vartheta \in \Theta \subset \R$
+\item {\color{red}Objectif} : Tester
+$$H_0:\vartheta = \vartheta_0\;\;\;\text{contre}\;\;\;\vartheta\neq \vartheta_0.$$
+\item {\color{red}Hyopthèse} : on dispose d'un estimateur $\est$ {\color{red}asymptotiquement normal}
+$$\boxed{\sqrt{n}(\est-\vartheta)\stackrel{d}{\rightarrow}{\mathcal N}\big(0,v(\vartheta)\big)}$$
+en loi sous $\PP_{\vartheta}^n$, $\forall \vartheta \in \Theta$, où $\vartheta \leadsto v(\vartheta) >0$ est continue.
+\item Sous l'hypothèse (ici sous $\PP_{\vartheta_0}^n$) on a {\color{red}la convergence}
+$$\sqrt{n}\frac{\est-\vartheta_0}{\sqrt{v(\est)}}\stackrel{d}{\longrightarrow} {\mathcal N}(0,1)$$
+{\color{red}en loi sous $\PP_{\vartheta_0}^n$}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test de Wald (cont.)}
+\begin{itemize}
+\item \underline{Remarque} $\sqrt{v(\est)} \leftrightarrow \sqrt{v(\vartheta_0)}$ ou d'autres choix encore...
+\item On a aussi
+$$T_n = n\frac{(\est-\vartheta_0)^2}{v(\est)} \stackrel{d}{\longrightarrow} \chi^2(1)$$
+sous $\PP_{\vartheta_0}^n$.
+\item Soit $q_{1-\alpha,1}^{\chi^2} >0$ tel que si $U \sim \chi^2(1)$, on a $\PP\big[U > q_{1-\alpha,1}^{\chi^2}\big]=\alpha$. On {\color{red}choisit la zone de rejet}
+$${\mathcal R}_{n,\alpha} = \big\{T_n\geq q_{1-\alpha,1}^{\chi^2}\big\}.$$
+\item Le test de zone de rejet ${\mathcal R}_{n,\alpha}$ s'appelle {\color{red}Test de Wald de l'hypothèse simple $\vartheta=\vartheta_0$ contre l'alternative $\vartheta \neq \vartheta_0$ basé sur $\est$.} 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Propriétés du test de Wald}
+\begin{prop}
+Le test Wald de l'hypothèse simple $\vartheta=\vartheta_0$ contre l'alternative $\vartheta \neq \vartheta_0$ basé sur $\est$ est
+\begin{itemize}
+\item {\color{red}asymptotiquement} de niveau $\alpha$ :
+$$\PP_{\vartheta_0}^n\big[T_n \in {\mathcal R}_{n,\alpha}\big]\rightarrow \alpha.$$
+\item {\color{red}convergent ou (consistant)}. Pour tout point $\vartheta \neq \vartheta_0$
+$$\PP_\vartheta^n\big[T_n \notin {\mathcal R}_{n,\alpha}\big] \rightarrow 0.$$
+\end{itemize}
+\end{prop}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preuve}
+\begin{itemize}
+\item Test asymptotiquement de niveau $\alpha$ {\color{red}par construction}.
+\item \underline{Contrôle de l'erreur de seconde espèce :}
+Soit $\vartheta \neq \vartheta_0$. On a
+\begin{align*}
+T_n & = \Big(\sqrt{n}\frac{\est-\vartheta}{\sqrt{v(\est)}}+\sqrt{n}\frac{\vartheta-\vartheta_0}{\sqrt{v(\est)}}\Big)^2 \\
+& =: T_{n,1}+T_{n,2}.
+\end{align*}
+On a $T_{n,1} \stackrel{d}{\longrightarrow} {\mathcal N}(0,1)$ sous $\PP_{\vartheta}^n$ et
+$$T_{n,2} \stackrel{\PP_{\vartheta}^n}{\longrightarrow} \pm \infty\;\;{\color{red}\text{car}\;\;\vartheta \neq \vartheta_0}$$
+Donc $T_{n}\stackrel{\PP_{\vartheta}^n}{\longrightarrow}+\infty$, d'où le résultat.
+\item {\color{red}Remarque} : si $\vartheta \neq \vartheta_0$ mais $|\vartheta - \vartheta_0| \lesssim 1/\sqrt{n}$, le raisonnement ne s'applique pas. Résultat {\color{red}non uniforme en le paramètre}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test de Wald : hypothèse nulle composite}
+\begin{itemize}
+\item {\color{red} Même contexte:} $\Theta \subset \R^d$ et {\color{red}on dispose} d'un estimateur $\est$ asymptotiquement normal :
+$$\sqrt{n}\big(\est-\vartheta\big)\stackrel{d}{\longrightarrow} {\mathcal N}\big(0, V(\vartheta)\big)$$
+où $V(\vartheta)$ est {\color{red}définie positive} et continue en $\vartheta$.
+\item {\color{red}But} Tester $H_0: \vartheta \in \Theta_0$ contre $H_1:\vartheta \notin \Theta_0$, où
+$$\boxed{\Theta_0 = \big\{\vartheta \in \Theta,\;\;g(\vartheta) = 0\big\}}$$
+et
+$$g:\R^d \rightarrow \R^m$$
+($m \leq d$) est régulière.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test de Wald cont.}
+\begin{itemize}
+\item {\color{red}Hypothèse : } la différentielle (de matrice $J_g(\vartheta)$) de $g$ est de rang maximal $m$ en tout point de (l'intérieur) de $\Theta_0$.
+\end{itemize}
+\begin{prop}
+En tout point $\vartheta$ de l'intérieur de $\Theta_0$ (i.e. {\color{red}sous l'hypothèse}), on a, en loi sous $\PP_\vartheta^n$ :
+\begin{itemize}
+\item $$\sqrt{n}g(\est) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0, J_g(\vartheta)V(\vartheta)J_g(\vartheta)^T\big),$$
+\item $${\color{red}T_n=ng(\est)^T\Sigma_g(\est)^{-1}g(\est)} \stackrel{d}{\longrightarrow} \chi^2(m)$$
+%en loi sous $\PP_\vartheta^n$, 
+où $\Sigma_g(\vartheta) =J_g(\vartheta) V(\vartheta) J_g(\vartheta)^T$. 
+\end{itemize}
+\end{prop}
+\begin{itemize}
+\item Preuve : méthode \og delta \fg{} multidimensionnelle. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test de Wald (fin)}
+\begin{prop}
+Sous les hypothèses précédentes, le test de zone de rejet
+$${\mathcal R}_\alpha  = \big\{T_n \geq q_{1-\alpha, m}^{\chi^2}\big\}$$
+avec $\PP\big[U > q_{1-\alpha, m}^{\chi^2}\big]=\alpha$ si $U \sim \chi^2(m)$ est 
+\begin{itemize}
+\item {\color{red}Asymptotiquement de niveau $\alpha$} en tout point $\vartheta$ de (l'intérieur) de $\Theta_0$ :
+$$\PP_\vartheta^n\big[T_n \in {\mathcal R}_{n,\alpha}\big]\rightarrow \alpha.$$
+\item {\color{red}Convergent} : pour tout $\vartheta \notin \Theta_0$ on a
+$$\PP_\vartheta^n\big[T_n \notin {\mathcal R}_{n,\alpha}\big]\rightarrow 0.$$
+\end{itemize}
+\end{prop}
+\begin{itemize}
+\item C'est la \og même preuve\fg{} qu'en dimension 1.
+\end{itemize}
+\end{frame}
+
+
+\section{Tests d'adéquation}
+
+\begin{frame}
+\frametitle{Tests d'adéquation}
+\begin{itemize}
+\item \underline{Situation} On observe (pour simplifier) un $n$-échantillon de loi $F$ inconnu
+$$X_1,\ldots, X_n\sim_{\text{i.i.d.}}F$$
+\item {\color{red}Objectif} Tester
+$$H_0:F=F_0\;\;\text{contre}\;\;F\neq F_0$$
+où 
+$F_0$ distribution donnée. Par exemple : $F_0$ {\color{red}gaussienne centrée réduite}.
+\item Il est {\color{red}très facile de construire un test asymptotiquement de niveau $\alpha$.} 
+Il suffit de trouver une statistique $\phi(X_1,\ldots, X_n)$ de loi connue sous l'hypothèse. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test d'adéquation : situation}
+\begin{itemize}
+\item {\color{red}Exemples : sous l'hypothèse} 
+$$\phi_1(X_1\ldots, X_n) = \sqrt{n}\overline{X}_n \sim {\mathcal N}(0,1)$$
+$$\phi_2(X_1,\ldots, X_n) = \sqrt{n}\frac{\overline{X}_n}{s_n} \sim \text{Student}(n-1)$$
+$$\phi_3(X_1,\ldots, X_n) = (n-1)s_n^2 \sim \chi^2(n-1).$$
+\item Le problème est que ces tests {\color{red}ont une faible puissance} : ils ne sont pas consistants.
+\item Pas exemple, si $F\neq$ gaussienne mais $\int_{\R}xdF(x)=0$, $\int_{\R}x^2dF(x)=1$, alors
+$$\PP_{F}\big[\phi_1(X_1,\ldots,X_n) \leq x \big] \rightarrow \int_{-\infty}^x e^{-u^2/2}\frac{du}{\sqrt{2\pi}},\;\;x \in \R.$$
+(résultats analogues pour $\phi_2$ et $\phi_3$).
+\item La statistique de test $\phi_i$ {\color{red}ne caractérise pas} la loi $F_0$. 
+\end{itemize}
+\end{frame}
+
+
+\subsection{Tests de Kolmogorov-Smirnov}
+
+\begin{frame}
+\frametitle{Test de Kolmogorov-Smirnov}
+\begin{itemize}
+\item \underline{Rappel} Si la fonction de répartition $F$ est continue,
+$$\sqrt{n}\sup_{x\in \R}\big|\widehat F_n(x)-F(x)\big| \stackrel{d}{\longrightarrow} \mathbb{B}$$
+où la loi de $\mathbb{B}$ ne dépend pas de $F$.
+\end{itemize}
+\begin{prop}[Test de Kolmogorov-Smirnov]
+Soit $q_{1-\alpha}^{\mathbb{B}}$ tel que $\PP\big[\mathbb{B}>q_{1-\alpha}^{\mathbb{B}}\big]=\alpha$. Le test défini par la zone de rejet 
+$${\mathcal R}_{n,\alpha} = \big\{\sqrt{n}\sup_{x\in \R}\big|\widehat F_n(x)-F_0(x)\big| \geq q_{1-\alpha}^{\mathbb{B}}\big|\big\}$$
+est {\color{red}asymptotiquement de niveau $\alpha$ :} 
+$\PP_{F_0}\big[\widehat F_n \in {\mathcal R}_{n,\alpha}\big]\rightarrow \alpha$
+et {\color{red}consistant} :
+$$\forall F \neq F_0: \PP_{F}\big[\widehat F_n \notin {\mathcal R}_{n,\alpha}\big] \rightarrow 0.$$
+\end{prop}
+\end{frame}
+
+\subsection{Tests du $\chi^2$}
+
+\begin{frame}
+\frametitle{Test du Chi-deux}
+\begin{itemize}
+\item $X$ variables {\color{red}qualitative} : $X \in \{1,\ldots, d\}$.
+$$\PP\big[X=\ell\big]=p_\ell,\;\ell=1,\ldots d.$$
+\item La loi de $X$ est caratérisée par ${\boldsymbol p} = (p_1,\ldots, p_d)^T$. 
+\item \underline{Notation} 
+$${\mathcal M}_d  = \big\{{\boldsymbol p}=(p_1,\ldots, p_d)^T,\;\;0 \leq p_\ell,\sum_{\ell=1}^dp_\ell=1\big\}.$$
+\item {\color{red}Objectif} ${\boldsymbol q}\in {\mathcal M}_d$ donnée. A partir d'un $n$-échantillon 
+$$X_1,\ldots, X_n \sim_{\text{i.i.d.}}{\boldsymbol p},$$
+tester
+$H_0:{\boldsymbol p}={\boldsymbol q}$ {\color{red}contre} $H_1:{\boldsymbol p}\neq{\boldsymbol q}.$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Construction \og naturelle\fg{} d'un test}
+\begin{itemize}
+\item {\color{red}Comparaison des fréquences empiriques}
+$$\widehat p_{n,\ell}=\frac{1}{n}\sum_{i=1}^n 1_{X_i=\ell}\;\;\;\text{{\color{red}proche de}}\;\;q_\ell,\;\;\ell=1,\ldots, d\; {\color{red}?}$$
+\item Loi des grands nombres :
+$$\big(\widehat p_{n,1},\ldots, \widehat p_{n,d}\big) \stackrel{\PP_{{\boldsymbol p}}}{\longrightarrow} (p_1,\ldots, p_d)={\boldsymbol p}.$$
+\item {\color{red}Théorème central-limite ?}
+$${\boldsymbol{U}_n}(\boldsymbol{p})=\sqrt{n}\Big(\frac{\widehat p_{n,1}-p_1}{\sqrt{p_1}},\ldots, \frac{\widehat p_{n,d}-p_d}{\sqrt{p_d}}\Big) \stackrel{d}{\longrightarrow} ?$$
+\item Composante par composante oui. {\color{red}Convergence globale plus délicate}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Statistique du Chi-deux}
+\begin{prop}
+Si les composantes de $\boldsymbol{p}$ sont toute non-nulles
+\begin{itemize}
+\item On a la {\color{red}convergence en loi} sous $\PP_{\boldsymbol{p}}$
+$${\boldsymbol{U}_n}(\boldsymbol{p})\stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$$
+avec $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ et $\sqrt{\boldsymbol{p}} = (\sqrt{p_1},\ldots, \sqrt{p_d})^T$.
+\item {\color{red}De plus}
+$$\|{\boldsymbol{U}_n}(\boldsymbol{p})\|^2 = n\sum_{\ell=1}^d \frac{(\widehat p_{n,\ell}-p_\ell)^2}{p_\ell} \stackrel{d}{\longrightarrow} \chi^2({\color{red}d-1}).$$
+\end{itemize}
+\end{prop}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preuve de la normalité asymptotique}
+\begin{itemize}
+\item Pour $i=1,\ldots, n$ et $1 \leq \ell \leq d$, on pose
+$$Y_\ell^i=\frac{1}{\sqrt{p_\ell}}\big(1_{\{X_i=\ell\}}-p_\ell\big).$$
+\item Les vecteurs ${\boldsymbol Y}_i=(Y_1^i,\ldots, Y_d^i)$ sont {\color{red}indépendants et identiquement distribués} et
+$${\boldsymbol U}_n(\boldsymbol{p}) = \frac{1}{\sqrt{n}}\sum_{i = 1}^n {\boldsymbol Y}_i,$$
+$\E\big[Y_\ell^i\big]=0$, $\E\big[(Y_\ell^i)^2\big]=1-p_\ell$, $\E\big[Y_\ell^iY_{\ell'}^i \big]=-(p_\ell p_{\ell'})^{1/2}$.
+\item {\color{red}On applique le TCL vectoriel}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Convergence de la norme au carré}
+\begin{itemize}
+\item On a donc ${\boldsymbol U}_n(\boldsymbol{p}) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$.
+\item On a aussi
+\begin{align*}
+\|{\boldsymbol U}_n(\boldsymbol{p}) \|^2 & \stackrel{d}{\longrightarrow} \| {\mathcal N}\big(0,V(\boldsymbol{p})\big)\|^2 \\
+& \sim \chi^2\big(\mathrm{Rang}\big(V(\boldsymbol{p})\big)\big)
+\end{align*}
+par {\color{red}Cochran} :  $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ est la projection orthogonale sur $\mathrm{vect}\{\sqrt{\boldsymbol{p}}\}^\perp$ qui est de dimension $d-1$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test d'adéquation du $\chi^2$}
+\begin{itemize}
+\item \og distance\fg{} du $\chi^2$:
+$$\chi^2(\boldsymbol{p},\boldsymbol{q})=\sum_{\ell=1}^d \frac{(p_\ell-q_\ell)^2}{q_\ell}.$$
+\item Avec ces notations
+$\|{\boldsymbol U}_n(\boldsymbol{p})\|^2=n\chi^2(\widehat {\boldsymbol p}_n,\boldsymbol{p}).$
+\end{itemize}
+\begin{prop}
+Pour $\boldsymbol{q} \in {\mathcal M}_d$ le test simple défini par la zone de rejet
+$${\mathcal R}_{n,\alpha} = \big\{n\chi^2(\widehat {\boldsymbol p}_n,\boldsymbol{q}) \geq q_{1-\alpha,d-1}^{\chi^2} \big\}$$
+où 
+%$q_{1-\alpha,d-1}^{chi^2}>0$ est défini par 
+$\PP\big[U > q_{1-\alpha,d-1}^{\chi^2}\big]=\alpha$ si $U \sim \chi^2(d-1)$ est 
+{\color{red}asymptotiquement de niveau $\alpha$ et consistant} pour tester 
+$$H_0:\boldsymbol{p}=\boldsymbol{q}\;\;\;\text{contre}\;\;\; 
+H_1:\boldsymbol{p}\neq\boldsymbol{q}.$$
+\end{prop}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemple de mise en oeuvre : expérience de Mendel}
+\begin{itemize}
+\item Soit $d=4$ et 
+$$\boldsymbol{q}=\Big(\frac{9}{16},\frac{3}{16},\frac{3}{16},\frac{1}{16}\Big).$$
+\item {\color{red}Répartition observée} : $n=556$
+$$\widehat {\boldsymbol p}_{556} = \frac{1}{556}(315,101,108,32).$$
+\item {\color{red}Calcul de la statistique du $\chi^2$}
+$$556 \times \chi^2(\widehat {\boldsymbol p}_{556}, \boldsymbol{q})=0,47.$$
+\item On a $q_{95\%, 3}=0,7815$.
+\item {\color{red}Conclusion :} Puisque $0,47 < 0,7815$, on accepte l'hypothèse $\boldsymbol{p}=\boldsymbol{q}$ au niveau $\alpha = 5\%$.
+\end{itemize}
+\end{frame}
+
+
+\section{Compléments : $p$-valeur et liens entre tests et régions de confiance}
+
+\begin{frame}
+\frametitle{$p$-valeurs}
+\begin{itemize}
+\item {\color{red}Exemple} : on observe
+$$X_1,\ldots, X_n\sim_{\text{i.i.d.}}{\mathcal N}(\mu,\sigma^2),\;\;\;\sigma^2\;\;\text{connu}.$$
+\item {\color{red}Objectif}: tester $H_0:\mu=0$ contre $H_1:\mu\neq 0$.
+\item Au niveau $\alpha=5\%$, on rejette si
+$$\big| \overline{X}_n \big| > \frac{\phi^{-1}(1-\alpha/2)}{\sqrt{n}}$$ 
+\item {\color{red}Application numérique} : $n=100$, $\overline{X}_{100}=0.307$. On a $\frac{\phi^{-1}(1-0.05/2)}{\sqrt{100}} \approx 0.196$. {\color{red}on rejette l'hypothèse...}.
+%\item  
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{$p$-valeur (cont.)}
+\begin{itemize}
+\item {\color{red}Et pour un autre choix de $\alpha$ ?}. Pour $\alpha=0.01$, on a $\frac{\phi^{-1}(1-0.01/2)}{\sqrt{100}} \approx 0.256$. On rejette toujours... Pour $\alpha=0.001$, on a $\frac{\phi^{-1}(1-0.001/2)}{\sqrt{100}} \approx 0.329$. {\color{red}On accepte $H_0$ !}
+\item Que penser de cette petite expérience ?
+\begin{itemize}
+\item En pratique, on a une observation une bonne fois pour toute (ici $0.307$) et on \og choisit \fg{} $\alpha$... {\color{red}comment ?}
+\item On ne veut pas $\alpha$ trop grand (trop de risque), mais en prenant $\alpha$ de plus en plus petit... on va {\color{red} fatalement} finir par accepter $H_0$ ! 
+\end{itemize}
+\item Défaut de méthodologie inhérent au principe de Neyman (contrôle de l'erreur de première espèce).
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{p-valeur}
+\begin{itemize}
+\item Quantité {\color{red}significative} : non par le niveau $\alpha$, mais le {\color{red}seuil de basculement de décision} : c'est la $p$-valeur ($p$-value) du test. 
+\end{itemize}
+\begin{df}
+Soit ${\mathcal R}_\alpha$ une famille de zones de rejet d'un test de niveau $\alpha$ pour une hypothèse $H_0$ contre une alternative $H_1$. Soit $Z$ l'observation associée à l'expérience. On a $Z \in \mathfrak{Z}$ et ${\mathcal R}_0 = \mathfrak{Z}$.
+On appelle {\color{red}$p$-valeur du test} la quantité
+$$p-\text{valeur}(Z) = \inf\{\alpha, Z \in {\mathcal R}_\alpha\}.$$
+\end{df}
+\end{frame}
+
+\begin{frame}
+\frametitle{Interprétation de la $p$-valeur}
+\begin{itemize}
+\item Une grande valeur de la $p$-valeur s'interprète en faveur de {\color{red}ne pas vouloir rejeter l'hypothèse}.
+\item \og Ne pas vouloir rejeter l'hypothèse \fg{} peut signifier deux choses :
+\begin{itemize}
+\item L'hypothèse est vraie
+\item L'hypothèse est fausse {\color{red} mais} le test n'est pas {\color{red}puissant} (erreur de seconde espèce {\color{red}grande}).
+\end{itemize}
+\item {\color{red}Souvent :} la $p$-valeur est la probabilité (sous $H_0$) que la statistique de test d'une expérience \og copie \fg{} soit $\geq$ à la statistique de test observée.
+\item {\color{red}Exemple du test du $\chi^2$ et de l'expérience de Mendel} %
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Expérience de Mendel et $p$-valeur}
+\begin{itemize}
+\item Sous l'hypothèse $H_0$
+$$556 \cdot \chi^2(\widehat {\boldsymbol{p}}_{556},\boldsymbol{q}) \sim \chi^2(3).$$
+\item Les données fournissent $556 \cdot \chi^2(\widehat {\boldsymbol{p}}_{556},\boldsymbol{q})=0.47$ et $q_{1-0.05,3}^{\chi^2}=0.7815$.  {\color{red}On accepte l'hypothèse}. 
+\item {\color{red}Calcul de la $p$-valeur} : pour $Z \sim \chi^2(3)$
+$$p-\text{valeur} = \PP_{\boldsymbol{q}}\big[Z>0.47\big]=0.93.$$
+La \og pratique \fg{} invite à ne pas rejeter $H_0$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{R\'egression lin\'eaire multiple (=Modèle linéaire)}
+\begin{itemize}
+\item La fonction de r\'egression est $r(\vartheta,\bx_i) = \vartheta^T\bx_i$.
+On observe
+$$(\bx_1,Y_1),\ldots, (\bx_n,Y_n)$$
+avec
+$$\boxed{Y_i = \vartheta^T\bx_i+\xi_i,\;\;i=1,\ldots, n}$$
+où $\vartheta \in \Theta = \R^k,\;\;\bx_i \in \R^k$.
+\item {\color{red}Matriciellement}
+$$\boxed{\boldsymbol{Y} = \mathbb{M}\vartheta + \boldsymbol{\xi}}$$
+avec $\boldsymbol{Y} = (Y_1,\ldots, Y_n)^T$, $\boldsymbol{\xi} =
+(\xi_1,\ldots, \xi_n)^T$ et $\mathbb{M}$ la matrice $(n\times k)$
+dont les {\color{red} lignes} sont les $\bx_i$.
+\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Réduction \og design\fg{} aléatoire $\longrightarrow$ déterministe}
+%\begin{itemize}
+%\item Les modèles de régression à \og design\fg{} déterministe ou aléatoire se traitent  {\color{red} essentiellement de la même manière} :
+%\end{itemize}
+%\begin{hypothese}[Ancillarité des covariables]
+%On suppose que la loi $\PP^{\bX}$ des $\bX_i$ ne dépend pas du paramètre inconnu ${\color{red}\vartheta}$.
+%\end{hypothese}
+%\begin{itemize}
+%\item Sous l'hypothèse d'ancillarité, le caractère aléatoire des $\bX_i$ -- observés -- ne joue aucun rôle : on peut faire l'étude mathématique du modèle {\color{red}conditionnellement aux $\bX_i$}.
+%\item {\color{red} Désormais} : on se place  dans le modèle de régression à \og design \fg{} {\color{red}déterministe}.
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{\og design\fg{} aléatoire vs. déterministe}
+%\begin{remarque}
+%{\it A posteriori} pourquoi considérer le modèle de régression à \og design \fg{} aléatoire et ne pas se placer d'emblée en signal + bruit ?
+%\begin{itemize}
+%\item {\color{red}Le design aléatoire} fournit une interprétation en terme de fonction de régression obtenue via l'espérance conditionnelle.
+%\item {\color{red}Essentiel} pour le traitement des {\color{red}modèles à réponse binaire} (ou multiple), voir plus loin.
+%\end{itemize}
+%\end{remarque}
+%\end{frame}
+
+
+
+
+
+%\begin{frame}
+%\frametitle{Estimation de $\sigma^2$}
+%\begin{itemize}
+%\item {\color{red}Estimation de $\sigma$} (ou $\sigma^2$) à partir des observations
+%$$\boxed{Y_i = \vartheta_0\,+\vartheta_1\,x_i+{\color{red}\sigma}\, \varepsilon_i,\;\;i=1,\ldots,n}$$
+%{\color{red}avec}
+%$$\boxed{\E_\vartheta\big[\varepsilon_i\big]=0,\;\E_\vartheta\big[\varepsilon_i^2\big]=1}$$
+%\item \underline{Estimateur naturel} de $\sigma^2$ :
+%$$\widehat \sigma_n^2 = \frac{1}{n}\sum_{i = 1}^n\big(Y_i-r(\estMC, x_i)\big)^2$$
+%\item Somme de variables aléatoires {\color{red}non indépendantes}.
+%\item Difficile de progresser {\color{red}sans hypothèse supplémentaire}. Si les $\varepsilon_i$ sont i.i.d. ${\mathcal N}(0,1)$, alors {\color{red}on sait} \og résoudre \fg{} le problème... plus loin.
+%\end{itemize}
+%\end{frame}
+
+
+
+
+
+%\subsection{EMV et EMC}
+
+\begin{frame}
+\frametitle{EMC en régression linéaire multiple}
+\begin{itemize}
+\item Estimateur des {\color{red}moindres carrés} en régression
+linéaire multiple : tout estimateur $\estMC$ satisfaisant
+$$\sum_{i = 1}^n
+\big(Y_i-(\estMC)^T\bx_i\big)^2 = \min_{\vartheta \in \R^k}\sum_{i =
+1}^n \big(Y_i-{\vartheta}^T\bx_i\big)^2.$$
+\item En notations matricielles :
+\begin{eqnarray*} \|\boldsymbol{Y}-\design\estMC\|^2 &=& \min_{\vartheta \in
+\R^k}\|\boldsymbol{Y}-\design\vartheta\|^2\\
+&=& \min_{v \in V}\|\boldsymbol{Y}-v\|^2
+\end{eqnarray*}
+o\`u $V=\text{Im}(\design) = \{v\in \R^n: v=\design\vartheta, \
+\vartheta\in \R^k\}$.
+ Projection orthogonale sur $V$.
+ \end{itemize}
+ \end{frame}
+
+% \subsection{G\'eometrie de l'EMC}
+
+ \begin{frame}
+\frametitle{G\'eom\'etrie de l'EMC}
+ \begin{itemize}
+ \item L'EMC vérifie
+$$\boxed{\design {\estMC} = P_V \boldsymbol{Y}}$$
+o\`u $P_V$ est le projecteur orthogonal sur $V$.
+\item Mais $\design^T  P_V= \design^T  P_V^T = ( P_V\design)^T =
+\design^T$. On en d\'eduit {\color{red}les \'equations normales des
+moindres carr\'es}:
+$$\boxed{\design^T\design {\estMC} =
+\design^T\boldsymbol{Y}.}$$
+%\item \underline{Remarques.}
+%  \begin{itemize}
+%  \item L'EMC est un $Z$-estimateur.
+%  \item Pas d'{\color{red}unicit\'e} de $\estMC$ si la matrice
+%  $\design^T\design$ n'est pas inversible.
+%  \end{itemize}
+%\end{itemize}
+%\end{frame}
+\end{itemize}
+%\begin{frame} \frametitle{G\'eometrie de l'EMC}
+\begin{prop}
+Si $\design^T\design$ (matrice $k \times k$) inversible, alors
+$\estMC$ {\color{red}est unique} et
+$$\boxed{\estMC = \big(\design^T\design\big)^{-1}\design^T \boldsymbol{Y}}$$
+\end{prop}
+%\begin{itemize}
+%\item Contient le cas précédent de la droite de régression simple.
+%\item Résultat g\'eometrique, {\color{red}non stochastique}.
+%\item $\design^T\design\ge0$; \ \ $\design^T\design$
+%inversible $\Longleftrightarrow$ $\design^T\design>0$;
+%$$\design^T\design>0 \ \Longleftrightarrow \ {\rm rang}(\design)=k
+%\ \Longleftrightarrow \ {\rm dim}(V)=k.$$
+%$$\design^T\design>0 \quad \Longrightarrow \quad {\color{red} n \geq k}.$$
+%\end{itemize}
+\end{frame}
+
+
+%\begin{frame} \frametitle{G\'eometrie de l'EMC}
+%Soit $\design^T\design>0$. Alors, la matrice $n\times n$
+%$$
+%A = \design\big(\design^T\design\big)^{-1}\design^T
+%$$
+%est dite {\bf matrice chapeau} (\texttt{hat matrix}).
+%%
+%\begin{prop}
+%Si $\design^T\design>0$, alors $A$ est le projecteur sur
+%$V$:\\\vspace{2mm} \centerline{$A=P_V$} et ${\rm rang}(A)=k$.
+%\end{prop}
+%\underline{Preuve} :
+%\begin{itemize}
+%\item  $A=A^T$, $A=A^2$, donc $A$ est un
+%projecteur.
+%\item ${\rm Im}(A) = V$, donc $A=P_V$; \
+%${\rm rang}(P_V)={\rm dim}(V)=k$.
+%\end{itemize}
+%{\color{red}\og Chapeau \fg{}}, car $A$ g\'en\`ere la pr\'evison de
+%$\design\vartheta$ not\'ee $\widehat{\boldsymbol{Y}}$ :
+%$$\widehat{\boldsymbol{Y}}= \design\estMC= A\boldsymbol{Y}.$$
+%\end{frame}
+
+%\subsection{Propriétés statistiques de l'EMC : cas gaussien}
+
+
+\begin{frame}
+    \frametitle{Exemple de donn\'ees de r\'egression}
+\begin{center}
+\vspace{-2.5cm}
+\includegraphics[height=2\textheight]{cours4_data1.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{R\'esultats de traitement statistique initial}
+\begin{tabular}{|c||c|c|c|c|}
+\hline &Estimate&Std. Error&t value&Pr($>|t|$)\\\hline
+(Intercept) &$152.133$&$2.576$&$59.061$&$< 2e-16***$\\
+age&$-10.012$&$59.749$&$ -0.168$&$0.867000$\\\hline
+sex &$-239.819$&$61.222$&$-3.917$&$0.000104***$\\
+bmi&$519.840$&$66.534$&$7.813$&$4.30e-14***$\\\hline
+map&$324.390$&$65.422$&$4.958$&$1.02e-06***$\\
+tc&$-792.184$&$416.684$&$-1.901$&$0.057947$\\\hline
+ldl&$476.746$&$339.035$&$1.406$&$0.160389$\\
+hdl&$101.045$&$212.533 $&$0.475$&$0.634721$\\\hline
+tch&$177.064$&$161.476$&$ 1.097$&$0.273456$\\
+ltg&$751.279$&$ 171.902$&$4.370$&$ 1.56e-05***$\\\hline
+glu&$67.625$&$ 65.984$&$1.025$&$0.305998$\\\hline
+\end{tabular}
+\end{frame}
+
+
+
+%\begin{frame}
+%\frametitle{Exemple de donn\'ees de r\'egression}
+%\begin{center}
+%\begin{footnotesize}
+%\begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c||c|}
+%\hline
+%Patient&age&sex&bmi&map&tc&ldl&hdl&tch&ltg&glu&Response\\\hline
+%1&59&2&32.1&101&157&93.2&38&4&4.9&87&151\\
+%2&48&1&21.6&87&183&103.2&70&3&3.9&69&75\\
+%3&72&2&30.5&93&156&93.6&41&4&4.7&85&141\\
+%4&24&1&25.3&84&198&131.4&40&5&4.9&89&206\\
+%5&50&1&23.0&101&192&125.4&52&4&4.3&80&135\\
+%6&23&1&22.6&89&139&64.8&61&2&4.2&68&97\\
+%\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots\\
+%441&36&1&30.0&95&201&125.2&42&5&5.1&82&220\\
+%442&36&1&19.6&71&250&132.2&97&3&4.6&92&57\\\hline
+%\end{tabular}
+%%\end{table}
+%\end{footnotesize}
+%\end{center}
+%\end{frame}
+%%\begin{frame}
+%%\frametitle{Limites des moindres carrés et du cadre gaussien}
+%%\begin{itemize}
+%%\item {\color{red}EMC} : limité à une fonction de régression {\color{red}linéaire}.
+%%\item {\color{red} hypothèse de gaussianité} : cadre asymptotique implicite.
+%%\item Besoin d'outils pour les modèles {\color{red} à réponse $Y$ discrète}.
+%%\item Hors cadre gaussien, le choix du critère quadratique est discutable {\color{red} régression robuste... attendre}.
+%%\end{itemize}
+%%\end{frame}
+
+%\section{Régression lin\'eaire : rappels}
+
+%\subsection{Régression à \og design \fg{} déterministe}
+
+%\begin{frame}
+%\frametitle{Modèle de régression}
+%\begin{df}
+%Modèle de régression (à \og design\fg{} déterministe) = donnée de l'observation
+%$$(\bx_1,Y_1),\ldots, (\bx_n,Y_n)$$
+%avec $Y_i \in \R, \bx_i\in \R^k$, et
+%$$Y_i = r({\color{red}\vartheta},\bx_i)+\xi_i,\;\;\E\big[\xi_i\big]=0,\;\;{\color{red} \vartheta \in \Theta \subset \R^d}.$$
+%\begin{itemize}
+%%\item $\bx \leadsto r({\color{red}\vartheta},\bx)$ fonction de {\color{red} régression}, connue au paramètre
+%%$\vartheta$ près.
+%\item $\bx_i$ déterministes, donnés (ou choisis) : plan d'expérience, points du \og design\fg{}.
+%\item Hypothèse : les $\xi_i$ sont i.i.d. (pour simplifier). {\color{red} Attention : } les $Y_i$ ne sont {\color{red}pas} identiquement distribuées.
+%\item Ecriture de la vraisemblance du modèle...
+%\end{itemize}
+%\end{df}
+%\end{frame}
+
+%
+%\begin{frame}
+%\frametitle{Modèle linéaire}
+%\begin{itemize}
+%\item On observe
+%$$(\bx_1,Y_1),\ldots, (\bx_n,Y_n)$$
+%avec
+%$$\boxed{Y_i = \vartheta^T\bx_i+\xi_i,\;\;i=1,\ldots, n}$$
+%où $\vartheta \in \Theta = \R^k,\;\;\bx_i \in \R^k$.
+%\item {\color{red}Matriciellement}
+%$$\boxed{\boldsymbol{Y} = \mathbb{M}\vartheta + \boldsymbol{\xi}}$$
+%avec $\boldsymbol{Y} = (Y_1,\ldots, Y_n)^T$, $\boldsymbol{\xi} = (\xi_1,\ldots, \xi_n)^T$ et $\mathbb{M}$ la matrice $(n\times k)$ dont les {\color{red} lignes} sont les $\bx_i$.
+%\end{itemize}
+%\end{frame}
+
+%%%\subsection{EMV et EMC}
+
+%\begin{frame}
+%\frametitle{Estimateur des moindres carrés}
+%\begin{df}
+%{\color{red}Estimateur des moindres carrés} (EMC) : tout estimateur
+%$\estMC$ satisfaisant $\estMC \in \arg \min_{\vartheta \in
+%\R^k}\sum_{i = 1}^n \big(Y_i-\vartheta^T\bx_i\big)^2$.
+%\end{df}
+
+%\begin{itemize}
+%\item
+%EMC = cas particulier de $M$-estimateur et de $Z$-estimateur
+%\end{itemize}
+
+%\begin{prop}
+%Si $\design^T\design$ (matrice $k \times k$) inversible (cond. néc. : ${\color{red} n \geq k}$), alors $\estMC$ {\color{red}est unique} et
+%$$\boxed{\estMC = \big(\design^T\design\big)^{-1}\design^T \boldsymbol{Y}}$$
+%\end{prop}
+%\end{frame}
+
+
+
+
+%\subsection{Modèle linéaire gaussien}
+
+%\begin{frame}
+%\frametitle{Synthèse : régression gaussienne} {\bf Régression gaussienne} : on
+%suppose $\boldsymbol{\xi} \sim {\mathcal
+%N}(0,\sigma^2\mathrm{Id}_n)$. Alors on a plusieurs prori\'et\'es
+%remarquables:
+%\begin{itemize}
+%\item Estimateur des moindres carrés $\estMC$ et
+%estimateur du maximum de vraisemblance
+%{\color{red}coïncident}.\\\vspace{1mm} {\it Preuve} : \'ecriture de
+%la fonction de vraisemblance.
+%\item  On sait expliciter la loi {\color{red} exacte} (non-asymptotique!)
+%de~$\estMC$.\\\vspace{1mm} {\it Ingrédient} : {\color{red}loi des
+%vecteurs gaussiens sont caractérisés par leur moyenne et matrice de
+%variance-covariance}.
+%\end{itemize}
+%\end{frame}
+
+%\subsection{Propriétés statistiques de l'EMC : cas gaussien}
+
+%\begin{frame}
+%\frametitle{Cadre gaussien : loi des estimateurs}
+%\begin{itemize}
+%\item \underline{Hyp. 1} : $\boldsymbol{\xi} \sim {\mathcal N}(0,\sigma^2\mathrm{Id}_n)$.
+%\item \underline{Hyp. 2} : $\design^T \design>0$.
+%\end{itemize}
+%\begin{prop}
+%\begin{itemize}
+%\item[(i)] $\estMC \sim {\mathcal N}\big(\vartheta, \sigma^2 \big(\design^T\design\big)^{-1}\big)$
+%\item[(ii)] $\|\boldsymbol{Y}-\design \estMC\|^2 \sim \sigma^2\chi^2(n-k)$ {\color{red} loi du Chi 2 à $n-k$ degrés de liberté}
+%\item[(iii)] $\estMC$ et $\boldsymbol{Y}-\design \estMC$ sont indépendants.
+%\end{itemize}
+%\end{prop}
+%\begin{itemize}
+%\item \underline{Preuve} : {\color{red}Thm. de Cochran} (Poly, page 18). Si
+%$\boldsymbol{\xi}\sim {\mathcal N}(0,\mathrm{Id}_n)$ et $A_j$
+%matrices $n \times n$ projecteurs t.q. $A_jA_i=0$ pour $i\neq j$,
+%alors : $A_j\,\boldsymbol{\xi} \sim {\mathcal N}\big(0,A_j\big)$,
+%{\color{red}indépendants}, $\|A_j\boldsymbol{\xi}\|^2\sim
+%\chi^2(\mathrm{Rang}(A_j))$.
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Preuve de la proposition}
+%\begin{itemize}
+%\item (i)
+%$\estMC = \vartheta + \big(\design^T\design\big)^{-1}\design^T
+%\boldsymbol{\xi}$.
+
+%On vérifie: $\ \ \E[\estMC]=\vartheta$,
+%\begin{align*}
+%&\E\big[ \big(\design^T\design\big)^{-1}\design^T \boldsymbol{\xi} \big(\big(\design^T\design\big)^{-1}\design^T \boldsymbol{\xi}\big)^T\big] \\
+%=\; &\sigma^2\big(\design^T\design\big)^{-1}.
+%\end{align*}
+%\item (ii)
+%\begin{align*}
+%\boldsymbol{Y}-\design \estMC & = \design\big(\vartheta - \estMC\big)+\boldsymbol{\xi} \\
+%& = -\design\big(\design^T\design\big)^{-1}\design^T\boldsymbol{\xi}+\boldsymbol{\xi} \\
+%& =
+%\sigma(\text{Id}_n-A)\boldsymbol{\xi}',\;\boldsymbol{\xi}'\sim{\mathcal
+%N}(0,\mathrm{Id}_n).
+%\end{align*}
+%\item (iii) le vecteur $(\estMC,\boldsymbol{Y}-\design \estMC)$ est gaussien. On calcule explicitement sa matrice de variance-covariance.
+%\end{itemize}
+%\end{frame}
+
+%
+
+%\begin{frame}
+%\frametitle{Propriétés de l'EMC}
+%%\begin{itemize}
+%%\item \underline{Hyp. 1} : $\design^T \design>0$.
+%%\item  \underline{Hyp. 2} : {\color{red}$\E\big[\boldsymbol{\xi}\big]=0$, $\E\big[\boldsymbol{\xi}\boldsymbol{\xi}^T\big] = \sigma^2 \mathrm{Id}_n$}.
+%%\end{itemize}
+%%\begin{prop}
+%%%Sous les hypothèses précédentes
+%%\begin{itemize}
+%%\item $\E_\vartheta\big[\estMC\big]=\vartheta$ et
+%%$$\E_\vartheta\big[\big(\estMC-\vartheta\big)\big(\estMC-\vartheta\big)^T\big]=\sigma^2 \big(\design^T\design\big)^{-1}$$
+%%\item Si l'on pose
+%\begin{itemize}
+%\item Estimateur de la variance $\sigma^2$:
+%$$\boxed{\widehat \sigma_n^2 = \frac{\|\boldsymbol{Y}-\design \estMC\|^2}{n-{\color{red}k}} = \frac{1}{n-{\color{red}k}}\sum_{i = 1}^n\big(Y_i-(\estMC)^T\bx_i\big)^2}$$
+%C'est un estimateur sans biais: $\E_\vartheta\big[\widehat
+%\sigma_n^2\big]=\sigma^2.$
+%\item Lois des coordonn\'ees de $\estMC$:
+%$$
+%(\estMC)_j -\vartheta_j \sim {\mathcal N}\big(0, \sigma^2 b_j)
+%$$
+%o\`u $b_j$ est le $j$\`eme \'el\'ement diagonal de $\big(\design^T
+%\design\big)^{-1}$. $$ \frac{(\estMC)_j -\vartheta_j}{\widehat
+%\sigma_n \sqrt{b_j}} \sim t_{n-k}$$ {\color{red}loi de Student \`a
+%$n-k$ degr\'es de libert\'e}.
+%\end{itemize}
+%%\end{prop}
+%\end{frame}
+
+%
+
+%\begin{frame}
+%\frametitle{Cadre gaussien : loi des estimateurs}
+%\begin{itemize}
+%\item \underline{Hyp. 1} : $\boldsymbol{\xi} \sim {\mathcal N}(0,\sigma^2\mathrm{Id}_n)$.
+%\item \underline{Hyp. 2} : $\design^T \design>0$.
+%\end{itemize}
+%\begin{prop}
+%\begin{itemize}
+%\item[(i)] $\estMC \sim {\mathcal N}\big(\vartheta, \sigma^2 \big(\design^T\design\big)^{-1}\big)$
+%\item[(ii)] $\|\boldsymbol{Y}-\design \estMC\|^2 \sim
+%\sigma^2\chi^2(n-k)$ {\color{red} loi du Chi 2 à $n-k$ degrés de liberté}
+%\item[(iii)] $\estMC$ et $\boldsymbol{Y}-\design \estMC$ sont indépendants.
+%\end{itemize}
+%\end{prop}
+%\end{frame}
+
+
+
+%\begin{frame}
+%\frametitle{Propriétés de l'EMC: cadre gaussien}
+
+%Estimateur de la variance $\sigma^2$:
+%$$\boxed{\widehat \sigma_n^2 = \frac{\|\boldsymbol{Y}-\design \estMC\|^2}{n-{\color{red}k}} = \frac{1}{n-{\color{red}k}}\sum_{i = 1}^n\big(Y_i-(\estMC)^T\bx_i\big)^2}$$
+%D'apr\`es la derni\`ere Proposition :
+%\begin{itemize}
+%\item $\widehat
+%\sigma_n^2/\sigma^2 \sim \chi^2(n-k)$ {\color{red} loi du Chi 2 à
+%$n-k$ degrés de liberté}
+%\item C'est un estimateur {\color{red}sans biais}: $$\E_\vartheta\big[\widehat
+%\sigma_n^2\big]=\sigma^2.$$
+%\item $\widehat
+%\sigma_n^2$ est {\color{red}ind\'ependant} de $\estMC$.
+%\end{itemize}
+%\end{frame}
+
+\begin{frame}
+\frametitle{Propriétés de l'EMC: cadre gaussien}
+\begin{itemize}
+\item Lois des coordonn\'ees de $\estMC$:
+$$
+(\estMC)_j -\vartheta_j \sim {\mathcal N}\big(0, \sigma^2 b_j)
+$$
+o\`u $b_j$ est le $j$\`eme \'el\'ement diagonal de $\big(\design^T
+\design\big)^{-1}$. $$ \frac{(\estMC)_j -\vartheta_j}{\widehat
+\sigma_n \sqrt{b_j}} \sim t_{n-k}$$ {\color{red}loi de Student \`a
+$n-k$ degr\'es de libert\'e}.
+$$ t_q = \frac{\xi}{\sqrt{\eta/q}}$$
+o\`u $q\ge 1$ un entier, $\xi\sim {\mathcal N}\big(0,1)$, $\eta\sim
+\chi^2(q)$ et\\ $\xi$ {\color{red}ind\'ependant} de $\eta$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Exemple de donn\'ees de r\'egression}
+\begin{center}
+\vspace{-1cm}
+%\begin{figure}
+\includegraphics[height=16cm,width=11cm]{cours4_data1.pdf}
+\end{center}
+%\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{R\'esultats de traitement statistique initial}
+\begin{tabular}{|c||c|c|c|c|}
+\hline &Estimate&Std. Error&t value&Pr($>|t|$)\\\hline
+(Intercept) &$152.133$&$2.576$&$59.061$&$< 2e-16***$\\
+age&$-10.012$&$59.749$&$ -0.168$&$0.867000$\\\hline
+sex &$-239.819$&$61.222$&$-3.917$&$0.000104***$\\
+bmi&$519.840$&$66.534$&$7.813$&$4.30e-14***$\\\hline
+map&$324.390$&$65.422$&$4.958$&$1.02e-06***$\\
+tc&$-792.184$&$416.684$&$-1.901$&$0.057947$\\\hline
+ldl&$476.746$&$339.035$&$1.406$&$0.160389$\\
+hdl&$101.045$&$212.533 $&$0.475$&$0.634721$\\\hline
+tch&$177.064$&$161.476$&$ 1.097$&$0.273456$\\
+ltg&$751.279$&$ 171.902$&$4.370$&$ 1.56e-05***$\\\hline
+glu&$67.625$&$ 65.984$&$1.025$&$0.305998$\\\hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions statistiques}
+\begin{itemize}
+\item {\bf S\'election de variables.} Lesquelles parmi les 10
+variables:\\\vspace{3mm}
+\centerline{\texttt{age,sex,bmi,map,tc,ldl,hdl,tch,ltg,glu}}\vspace{3mm}
+sont significatives? Formalisation math\'ematique: trouver (estimer)
+l'ensemble $N= \{j: \vartheta_{j}\ne 0\}$.
+\item {\bf Pr\'evison.} Un nouveau patient arrive avec son vecteur
+des 10 variables ${\bf x}_0\in \R^{10}$. Donner la pr\'evison de la
+r\'eponse $Y$ =\'etat du patient dans 1 an.
+\end{itemize}
+\end{frame}
+
+\section{S\'election de variables}
+
+\begin{frame}
+\frametitle{RSS (Residual Sum of Squares)} Mod\`ele de
+r\'egression\vspace{2mm} \centerline{$ Y_i= r(\vartheta, {\bf
+x}_i)+\xi_i, \quad i=1,\dots,n.$}
+\begin{itemize}
+\item {\bf Résidu:} si $\est$ est un estimateur de
+$\vartheta$,
+$$\widehat \xi_i = Y_i - r(\est, {\bf x}_i)
+\;\;\text{{\color{red}résidu} au point}\;i.$$
+\item {\bf RSS:} {\color{red} Residual Sum of Squares}, somme
+r\'esiduelle des carr\'es. Caract\'erise la qualit\'e
+d'approximation.
+$${\rm RSS}(={\rm RSS}_{\est})=\|\widehat \xi\|^2
+= \sum_{i = 1}^n\big(Y_i - r(\est,{\bf x}_i)\big)^2.$$
+\item En r\'egression {\color{red}lin\'eaire}:
+$\boxed{{\rm RSS}= \|{\bf Y}-\design\est\|^2.}$
+\end{itemize}
+\end{frame}
+
+\subsection{Backward Stepwise Regression}
+
+\begin{frame}
+\frametitle{S\'election de variables : Backward Stepwise Regression}
+\begin{itemize}
+\item On se donne un crit\`ere d'\'elimination de variables
+{\color{red}(plusieurs choix de crit\`ere possibles...)}.
+\item On \'elimine une
+variable, la moins significative du point de vue du crit\`ere
+choisi.
+\item On calcule l'EMC $\widehat\vartheta_{n,k-1}^{\rm mc}$ dans le nouveau mod\`ele, avec seulement
+les $k-1$ param\'etres restants, ainsi que le RSS:\vspace{1mm}
+\centerline{${\rm RSS}_{k-1}=\|{\bf
+Y}-\design\widehat\vartheta_{n,k-1}^{\rm mc}\|^2$.}\vspace{1mm}
+\item On continue \`a \'eliminer des variables, une par une,
+jusqu'\`a la {\color{red}stabilisation de RSS}: ${\rm
+RSS}_{m}\approx {\rm RSS}_{m-1}$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Donn\'ees de diab\`ete : Backward Regression}
+
+\begin{itemize}
+\item {\bf S\'election "na\"{\i}ve"} : \
+\{\texttt{sex,bmi,map,ltg}\}
+\item {\bf S\'election par Backward Regression}:\\
+ {\color{red}Crit\`ere
+d'\'elimination: plus grande valeur de} Pr($>|t|$).
+\end{itemize}
+%\vspace{2mm}
+
+
+{\small
+\begin{tabular}{|c||c|c|c|c|}
+\hline &Estimate&Std. Error&t value&Pr($>|t|$)\\\hline
+(Intercept) &$152.133$&$2.576$&$59.061$&$< 2e-16***$\\
+{\color{red}age}&$-10.012$&$59.749$&$
+-0.168$&${\color{red}0.867000}$\\\hline
+sex &$-239.819$&$61.222$&$-3.917$&$0.000104***$\\
+bmi&$519.840$&$66.534$&$7.813$&$4.30e-14***$\\\hline
+map&$324.390$&$65.422$&$4.958$&$1.02e-06***$\\
+tc&$-792.184$&$416.684$&$-1.901$&$0.057947$\\\hline
+ldl&$476.746$&$339.035$&$1.406$&$0.160389$\\
+hdl&$101.045$&$212.533 $&$0.475$&$0.634721$\\\hline
+tch&$177.064$&$161.476$&$ 1.097$&$0.273456$\\
+ltg&$751.279$&$ 171.902$&$4.370$&$ 1.56e-05***$\\\hline
+glu&$67.625$&$ 65.984$&$1.025$&$0.305998$\\\hline
+\end{tabular}
+}
+\end{frame}
+
+\begin{frame}
+\frametitle{Donn\'ees de diab\`ete : Backward Regression}
+
+\centerline{\bf Backward Regression: It\'eration 2.}
+
+%\vspace{3mm}
+
+\begin{center}
+
+{\color{red}Crit\`ere d'\'elimination: plus grande valeur de}
+Pr($>|t|$).
+
+\vspace{4mm}
+
+{\small
+\begin{tabular}{|c||c|c|c|c|}
+\hline &Estimate&Std. Error&t value&Pr($>|t|$)\\\hline (Intercept)
+&$152.133$&$2.573$&$59.128$&$< 2e-16$
+\\\hline
+sex &$-240.835$&$60.853$&$-3.958$&$0.000104$\\
+bmi&$519.905$&$64.156$&$5.024$&$8.85e-05$\\\hline
+map&$322.306$&$65.422$&$4.958$&$7.43e-07$\\
+tc&$-790.896$&$416.144$&$-1.901$&$0.058$\\\hline
+ldl&$474.377$&$338.358$&$1.402$&$0.162$\\
+{\color{red} hdl}&$99.718$&$212.146 $&$0.470$&${\color{red}
+0.639}$\\\hline
+tch&$177.458$&$161.277$&$ 1.100$&$0.272$\\
+ltg&$749.506$&$ 171.383$&$4.373$&$ 1.54e-05$\\\hline glu&$67.170$&$
+65.336$&$1.013$&$0.312$\\\hline
+\end{tabular}
+}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Donn\'ees de diab\`ete : Backward Regression}
+
+\centerline{\bf Backward Regression: It\'eration 5 (derni\`ere).}
+
+%\vspace{3mm}
+
+\begin{center}
+
+Variables s\'electionn\'ees:\\\vspace{2mm}
+\{\texttt{sex,bmi,map,{\color{red}tc,ldl},ltg}\}
+
+
+\vspace{4mm}
+
+{\small
+\begin{tabular}{|c||c|c|c|c|}
+\hline &Estimate&Std. Error&t value&Pr($>|t|$)\\\hline (Intercept)
+&$152.133$&$2.572$&$59.159$&$< 2e-16$
+\\\hline
+sex &$-226.511$&$59.857$&$-3.784$&$0.000176$\\
+bmi&$529.873$&$65.620$&$8.075$&$6.69e-15$\\\hline
+map&$327.220$&$62.693$&$5.219$&$2.79e-07$\\
+tc&$-757.938$&$160.435$&$-4.724$&$3.12e-06$\\\hline
+ldl&$538.586$&$146.738$&$3.670$&$0.000272$\\
+ltg&$804.192$&$80.173$&$10.031$&$< 2e-16$\\\hline
+\end{tabular}
+}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{S\'election de variables : Backward Regression}
+
+Discussion de \texttt{Backward Regression}:
+
+\begin{itemize}
+\item M\'ethode de s\'election purement empirique, pas de justification
+th\'eorique.
+\item Application d'autres crit\`eres d'\'elimination en
+\texttt{Backward Regression} peut amener aux r\'esultats diff\'erents.\\
+\underline{Exemple.} {\color{red}Crit\`ere $C_p$} de Mallows--Akaike
+: on \'elimine la variable $j$ qui r\'ealise
+$$
+\min_j \Big({\rm RSS}_{m, (-j)} + 2\widehat\sigma^2_n m\Big).
+$$
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Lien tests et régions de confiance}
+\begin{itemize}
+\item ${\mathcal E}=\big(\mathfrak{Z}, {\mathcal Z}, \{\PP_\vartheta,\vartheta \in \Theta\}\big)$,  expérience statistique engendrée par l'observation $Z$ avec $\Theta \subset \R^d$,.
+\end{itemize}
+\begin{df}
+Une région de confiance de niveau $1-\alpha$ pour $\vartheta \in \Theta$ est un {\color{red}sous-ensemble ${\mathcal C}_\alpha(Z)$ de $\R^d$} tel que
+$$\forall \vartheta \in \Theta,\;\;\PP_\vartheta\big[\vartheta \in {\mathcal C}_\alpha(Z)\big] \geq 1-\alpha.$$
+\end{df}
+\end{frame}
+
+\begin{frame}
+\frametitle{Dualité tests -- régions de confiance}
+\begin{prop}
+\begin{itemize}
+\item Si, pour tout $\vartheta_0 \in \Theta$, il existe un test de zone de rejet ${\mathcal R}_\alpha(\vartheta_0)$ pour tester $H_0:\vartheta = \vartheta_0$ contre $\vartheta \neq \vartheta$, alors
+$${\mathcal C}_\alpha(Z):=\big\{\vartheta \in \Theta,\,Z\in {\mathcal R}_\alpha^c\big\}$$ 
+est {\color{red}une région de confiance pour $\vartheta$ de niveau $1-\alpha$.}
+\item Si ${\mathcal C}_\alpha(Z)$ est une région de confiance de niveau $1-\alpha$ pour $\vartheta \in \Theta$, alors le test défini par la région critique
+$${\mathcal R}_\alpha:=\big\{\vartheta_0 \in {\mathcal C}_\alpha^c\big\}$$
+{\color{red}est de niveau $\alpha$} pour tester $H_0:\vartheta = \vartheta_0$ contre $H_1:\vartheta \neq \vartheta_0$.
+\end{itemize}
+\end{prop}
+\end{frame}
+
+
+%\subsection{Retour sur les tests gaussiens}
+%\section{Retour sur les tests gaussiens}
+%
+%
+%%\subsection{Tests sur la moyenne}
+%\begin{frame}
+%\frametitle{Retour sur les tests gaussiens}
+%\begin{itemize}
+%\item Test d'appartenance à un {\color{red}sous-espace linéaire}.
+%\item Sélection de variables signifiatives dans un modèle gaussien.
+%\item $F$-tests (test de Fisher).
+%\end{itemize}
+%\end{frame}
+%
+%
+%%\subsection{Test d'appartenance à un sous-espace linéaire}
+%
+%\begin{frame}
+%\frametitle{Test d'appartenance à un sous-espace linéaire}
+%\begin{itemize}
+%\item {\color{red}Modèle linéaire gaussien} $\vartheta \in \R^d$ et
+%$$\bY = \design \vartheta + \boldsymbol{\xi},\;\;\boldsymbol{\xi} \sim {\mathcal N}(0,\sigma^2 \text{Id}_n),$$
+%avec $\det\design^T\design >0$.
+%\item $a \in \R$, $j \in \{1,\ldots, d\}$ donné. {\color{red}Test de $H_0: \vartheta_j=a$ contre $H_1:\vartheta_j \neq a$}, $\vartheta = (\vartheta_1,\ldots, \vartheta_d)^T$.
+%\item {\color{red}On a} 
+%$$\frac{\big(\estMC\big)_j-\vartheta_j}{s_n \sqrt{(\design^T\design)_{jj}^{-1}}} \stackrel{d}{=} \text{Student}(n-d).$$
+%\item {\color{red}Test  de niveau $\alpha$} défini par la zone de rejet
+%$${\mathcal R}_{\alpha} = \Big\{\Big|\frac{\big(\estMC\big)_j-a}{s_n \sqrt{(\design^T\design)_{jj}^{-1}}}\Big| > q_{1-\alpha/2, n-d}^{\mathfrak{T}}\Big\}.$$
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Sélection de variables}
+%\begin{itemize}
+%\item On écrit le modèle linéaire (gaussien) avec $d \geq 2$:
+%$$Y_i = \vartheta^T\bx_i+\xi_i = \sum_{i = 1}^d \vartheta_i x_i + \xi_i,\;\;i=1,\ldots, n$$
+%\item $1 \leq k <d$ fixé. {\color{red}Test d'influence des $k$ premières variables seulement}. On teste
+%$$\boxed{H_0:\vartheta_{k+\ell}=0,\;\;\ell = 1,\ldots, d-k}$$
+%contre 
+%$$\boxed{H_1: \text{il existe} \;1 \leq \ell \leq d-k,\;\text{t.q.}\;\vartheta_{k+\ell} \neq 0}$$
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Formulation du problème : F-tests.}
+%\begin{itemize}
+%\item Poly. pp. 186--188.
+%\item $\mathbb{G}$ matrice d'une application linéaire de $\R^d \rightarrow \R^m$ de la forme
+%$$
+%\mathbb{G} = 
+%\left(
+%\begin{array}{llllll}
+%0 & \ldots & 0 & \;\;1 & \ldots & 0 \\
+%\vdots & \ddots &\vdots &\;\; \vdots & \ddots & \vdots \\
+%0 & \ldots & 0 &\;\; 0 & \ldots & 1
+%\end{array}
+%\right),
+%$$
+%bloc de $0$ : $m$ lignes et $d-m$ colonnes.
+%% alors que le second bloc est la matrice identité à $m$ lignes et $m$ colonnes. 
+%et $\boldsymbol{b} = (a_1,\ldots, a_m)^T$ donné. 
+%\item {\color{red}On teste}
+%$$\boxed{H_0:\mathbb{G}\vartheta = \boldsymbol{b}}$$
+%{\color{red}contre}
+%$$\boxed{H_1:\mathbb{G}\vartheta \neq \boldsymbol{b}}$$
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{F-tests (fin)}
+%\begin{itemize}
+%\item Sous l'hypothèse (sous $\PP_\vartheta$ tel que $\mathbb{G}\vartheta=\boldsymbol{b}$) on a (Cochran)
+%$$\mathbb{G}\estMC \sim {\mathcal N}\big(\boldsymbol{b},\sigma^2 \mathbb{G}( \design^T \design )^{-1}\mathbb{G}^T\big)$$ 
+%\item En posant ${\bf U} = \sigma^2 \mathbb{G}(\design^T\design)^{-1}\mathbb{G}^T$, on {\color{red}montre}
+%$$(\mathbb{G}\estMC-{\bf b})^T{\bf U}^{-1}(\mathbb{G}\estMC-{\bf b}) \sim \chi^2(m)\;\;{\color{red}\text{sous}\; H_0}.$$
+%\item Si $\sigma^2$ inconnu, on l'estime par $\widehat \sigma_n^2 = \frac{\|{\bf Y}-\design \,\estMC\|^2}{n-d}$. Alors la loi de
+%$$\frac{(\mathbb{G}\estMC-{\bf b})^T\widehat {\bf U}^{-1}(\mathbb{G}\estMC-{\bf b})}{m}$$
+%ne {\color{red}dépend pas de $\vartheta$ ni de $\sigma^2$} sous $H_0$ et suit la loi de Fisher-Snedecor à $(m,n-d)$ degrés de liberté.
+%\end{itemize}
+%\end{frame}
+%
+
+\section{Test du $\chi^2$ d'indépendance}
+
+\begin{frame}
+\frametitle{Tests du $\chi^2$}
+\begin{itemize}
+\item Adéquation à une loi discrète (finie).
+\item Test du $\chi^2$ avec {\color{red}paramètres estimés}.
+\item Test d'indépendance.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Lois discrète finies}
+\begin{itemize}
+\item $X$ variables {\color{red}qualitative} : $X \in \{1,\ldots, d\}$.
+$$\PP\big[X=\ell\big]=p_\ell,\;\ell=1,\ldots d.$$
+\item La loi de $X$ est caractérisée par ${\boldsymbol p} = (p_1,\ldots, p_d)^T$. 
+\item \underline{Notation} 
+$${\mathcal M}_d  = \big\{{\boldsymbol p}=(p_1,\ldots, p_d)^T,\;\;0 \leq p_\ell \leq 1,\sum_{\ell=1}^dp_\ell=1\big\}.$$
+\item {\color{red}Objectif} ${\boldsymbol q}\in {\mathcal M}_d$ donnée. A partir d'un $n$-échantillon 
+$$X_1,\ldots, X_n \sim_{\text{i.i.d.}}{\boldsymbol p},$$
+tester
+$H_0:{\boldsymbol p}={\boldsymbol q}$ {\color{red}contre} $H_1:{\boldsymbol p}\neq{\boldsymbol q}.$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Rappel : Test d'adéquation du $\chi^2$}
+\begin{itemize}
+\item \og distance\fg{} du $\chi^2$:
+$$\chi^2(\boldsymbol{p},\boldsymbol{q})=\sum_{\ell=1}^d \frac{(p_\ell-q_\ell)^2}{q_\ell}.$$
+%\item Avec ces notations
+%$\|{\boldsymbol U}_n(\boldsymbol{p})\|^2=n\chi^2(\widehat {\boldsymbol p}_n,\boldsymbol{p}).$
+\end{itemize}
+\begin{prop}
+Pour $\boldsymbol{q} \in {\mathcal M}_d$ le test simple défini par la zone de rejet
+$${\mathcal R}_{n,\alpha} = \big\{n\chi^2(\widehat {\boldsymbol p}_n,\boldsymbol{q}) \geq q_{1-\alpha,d-1}^{\chi^2} \big\}$$
+où 
+$q_{1-\alpha,d-1}^{\chi^2}>0$ est défini par 
+$\PP\big[U > q_{1-\alpha,d-1}^{\chi^2}\big]=\alpha$ si $U \sim \chi^2(d-1)$ est 
+{\color{red}asymptotiquement de niveau $\alpha$ et consistant} pour tester 
+$$H_0:\boldsymbol{p}=\boldsymbol{q}\;\;\;\text{contre}\;\;\; 
+H_1:\boldsymbol{p}\neq\boldsymbol{q}.$$
+\end{prop}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Test du $\chi^2$ avec paramètres estimés}
+\begin{itemize}
+\item On observe $X_1,\ldots, X_n \sim_{\text{i.i;d.}}{\boldsymbol p}\in {\mathcal M}_d$.
+\item On teste
+$$H_0:{\boldsymbol p} \in \big({\mathcal M}_d\big)_0\;\;\text{contre}\;\;{\boldsymbol p} \in {\mathcal M}_d \setminus \big({\mathcal M}_d\big)_0,$$
+où la famille
+$$\big({\mathcal M}_d\big)_0=\big\{{\boldsymbol p} = {\boldsymbol p}(\gamma),\;\gamma \in \Gamma\big\}$$
+est {\color{red} régulière} et $\Gamma \subset \R^d$ est \og régulier\fg{} et de dimension $m <  d-1$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{EMV et paramètres estimés}
+\begin{prop}
+On a les estimateurs du maximum de vraisemblance suivants :
+\begin{itemize}
+\item Pour la famille ${\mathcal M}_d$: les {\color{red}fréquences empiriques}
+$$\widehat {\boldsymbol p}_n^{\,{\tt mv}} = \big(\widehat p_{n,1},\ldots, \widehat p_{n,d}\big)^T$$
+\item Pour la famille {\color{red}restreinte} $\big({\mathcal M}_d\big)_0$ :
+$${\boldsymbol p}(\widehat \gamma_n^{{\tt \, mv}}) = \arg \max_{\gamma \in \Gamma} \sum_{\ell=1}^d\widehat p_{n,\ell} \log p_\ell(\gamma).$$
+\item {\color{red}Sous des hypothèses de régularité} on a la convergence
+$$n\chi^2\big(\widehat {\boldsymbol p}_n^{\,{\tt mv}}, {\boldsymbol p}(\widehat \gamma_n^{{\tt \, mv}})\big) \stackrel{d}{\longrightarrow} \chi^2({\color{red}d-m-1}).$$
+\end{itemize}
+\end{prop}
+\end{frame}
+
+%\section{En guise de conclusion}
+
+\begin{frame}
+\frametitle{Application au test d'indépendance du $\chi^2$}
+\begin{itemize}
+\item On observe
+$$(X_1,Y_1),\ldots, (X_n,Y_n)\sim_{\text{i.i.d.}} {\boldsymbol p} \in {\mathcal M}_{d_1,d_2}$$
+où
+$${\mathcal M}_{d_1,d_2} = \big\{{\boldsymbol p}=\text{proba. sur}\;\{1,\ldots d_1\}\times \{1,\ldots, d_2\}\big\}.$$
+\item {\color{red}Objectif} : tester l'indépendance entre $X$ et $Y$, c'est-à-dire ${\boldsymbol p}=(p_{\ell,\ell'})$ de la forme
+$$\boxed{p_{\ell,\ell'} = p_{\ell,\bullet}p_{\bullet,\ell'}}$$
+où 
+$$p_{\ell,\bullet}=\sum_{\ell'=1}^{d_2}p_{\ell,\ell'},\;\;p_{\bullet,\ell'}=\sum_{\ell=1}^{d_1} p_{\ell,\ell'}.$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{EMV sur l'hypothèse nulle}
+\begin{itemize}
+\item On note 
+$$\big({\mathcal M}_{d_1,d_2}\big)_0 = \big\{{\boldsymbol p} = (p_{\ell,\ell'}),\;p_{\ell,\ell'}=p_{\ell,\bullet}p_{\bullet\ell'}\big\}.$$
+\end{itemize}
+\begin{prop}
+\begin{itemize}
+\item $\big({\mathcal M}_{d_1,d_2}\big)_0$ est en correspondance avec $\big\{\vp=\vp(\gamma), \,\gamma \in \Gamma\big\}$ $\Gamma \subset \R^m$ de {\color{red}dimension} $m=d_1+d_2-2$.
+\item L'estimateur du maximum de vraisemblance restreint à $\big({\mathcal M}_{d_1,d_2}\big)_0$ vaut
+$$\big(\widehat p_{n,0}^{{\tt \,mv}}\big)_{\ell,\ell'} = \frac{1}{n}\sum_{i = 1}^n 1_{X_i=\ell} \times \frac{1}{n} \sum_{i = 1}^n 1_{Y_i=\ell'}$$
+i.e. {\color{red}le produit des fréquences empiriques}.
+\end{itemize}
+\end{prop}
+\end{frame}
+
+\begin{frame}
+\frametitle{Conclusion : test du $\chi^2$ d'indépendance}
+\begin{itemize}
+\item {\color{red}Objectif} : Tester 
+$$H_0:{\boldsymbol p} \in \big({\mathcal M}_{d_1,d_2}\big)_0\;\;\text{contre}\;\;H_1:{\boldsymbol p} \in {\mathcal M}_{d_1,d_2} \setminus \big({\mathcal M}_{d_1,d_2}\big)_0.$$
+\item {\color{red}Sous l'hypothèse}, on a la convergence
+$$n\chi^2\big(\widehat {\boldsymbol p}_{n}^{{\tt \, mv}},\widehat {\boldsymbol p}_{n,0}^{{\tt \, mv}} \big) \stackrel{d}{\longrightarrow} \chi^2\big((d_1-1)(d_2-1)\big).$$
+\item En particulier, {\color{red}la statistique de test s'écrit}
+$$\boxed{n\chi^2\big(\widehat {\boldsymbol p}_{n}^{{\tt \, mv}},\widehat {\boldsymbol p}_{n,0}^{{\tt \, mv}} \big) =n \sum_{\ell,\ell'}\frac{\big((\widehat {\boldsymbol p}_n)_{\ell,\ell'}-\widehat p_{n,(\ell,\bullet)} \widehat p_{n,(\bullet,\ell')}\big)^2}{\widehat p_{n,(\ell,\bullet)}\widehat p_{n,(\bullet,\ell')}}}$$
+\end{itemize}
+\end{frame}
+
+
+
+
+
+%\begin{frame}
+%\frametitle{Poly. Errata Ch. 8}
+%{\small
+%\begin{itemize}
+%\item p. 191. Remarque 8.3 Lire $v(\vartheta) = \mathbb{I}(\vartheta)^{-1}$.
+%\item p.199. Dans la définition de ${\mathcal M}_d$ lire ${\boldsymbol p} = (p_1,\ldots, p_d)$ et non $(p_1,\ldots, p_\ell)$.
+%\item p. 201. Ligne 2, lire $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ (le symbole $T$ manque).
+%\end{itemize}
+%}
+%\end{frame}
+
+\end{document}
+
+
+
+
+
+
+
+
+
