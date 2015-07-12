@@ -1,0 +1,170 @@
+\documentclass[a4paper,11pt,fleqn]{article}
+
+\usepackage[francais]{babel}
+%\usepackage[latin1]{inputenc}
+%\usepackage[applemac]{inputenc}
+\usepackage{a4wide,amsmath,amssymb,bbm,fancyhdr}
+
+\RequirePackage[OT1]{fontenc}
+
+\usepackage[latin1]{inputenc}
+% THE variable
+\newcommand{\thisyear}{Ann\'ee 2014-2015}
+
+% Definitions (pas trop!)
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\rset}{\ensuremath{\mathbb{R}}}
+\renewcommand{\P}{\ensuremath{\operatorname{P}}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\V}{\ensuremath{\mathbb{V}}}
+\newcommand{\gaus}{\ensuremath{\mathcal{N}}}
+\newcommand{\1}{\ensuremath{\mathbbm{1}}}
+\newcommand{\dlim}{\ensuremath{\stackrel{\mathcal{L}}{\longrightarrow}}}
+\newcommand{\plim}{\ensuremath{\stackrel{\mathrm{P}}{\longrightarrow}}}
+\newcommand{\PP}{\ensuremath{\mathbb{P}}}
+\newcommand{\p}{\ensuremath{\mathbb{P}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\pa}[1]{\left(#1\right)}
+\newcommand{\cro}[1]{\left[#1\right]}
+\newcommand{\ac}[1]{\left\{#1\right\}}
+
+
+% Style
+%\pagestyle{fancyplain}
+%\renewcommand{\sectionmark}[1]{\markright{#1}}
+%\renewcommand{\subsectionmark}[1]{}
+%\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\footnotesize {\sf
+%MAP433 Statistique, \thisyear / \rightmark}}}
+%\rhead[\fancyplain{}{\footnotesize {\sf MAP433 Statistique,
+%\thisyear / \rightmark}}]{\fancyplain{}{\thepage}}
+%\cfoot[\fancyplain{}{}]{\fancyplain{}{}}
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\pagestyle{fancyplain}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\renewcommand{\subsectionmark}[1]{}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\footnotesize {\sf
+MAP433 Statistique, \thisyear /PC4}}}
+\rhead[\fancyplain{}{\footnotesize {\sf MAP433 Statistique,
+\thisyear / \rightmark}}]{\fancyplain{}{\thepage}}
+\cfoot[\fancyplain{}{}]{\fancyplain{}{}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\parindent=0mm
+
+% Titre
+\title{{\bf MAP433 Statistique}\\
+{\bf PC4: m\'ethodes d'estimation}}
+
+\date{19 septembre 2014}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{1. Param\`etre vectoriel - vitesses de convergence diff\'erentes}
+Soient $X_1, \ldots,X_n$ des variables al\'eatoires i.i.d. de loi
+exponentielle translat\'ee dont le densit\'e est de la forme:
+$$f(x,\theta,\alpha)=\frac{1}{\theta}\text{exp}\left[-
+\frac{(x-\alpha)}{\theta}\right]I(x\geq\alpha),$$ o\`u
+$\theta>0$ et $\alpha\in \R$ sont deux param\`etres inconnus.
+\begin{enumerate}
+\item Donner les estimateurs du maximum de vraisemblance $\hat{\alpha}_n$ et
+$\hat{\theta}_n$ de $\alpha$ et $\theta$.
+\item Quelle est la loi de $X_{i}-\alpha$? Calculer la loi (exacte) de $n(\hat{\alpha}_n-\alpha)$.
+\item D\'eterminer la loi limite de $\sqrt{n}(\hat{\theta}_n-\theta)$.
+%\item  Chercher la loi
+%du $n$-uplet
+%$$\big(nX_{(1)},(n-1)(X_{(2)}-X_{(1)}),\ldots,2(X_{(n-1)}-X_{(n-2)}),X_{(n)}-X_{(n-1)}\big).$$
+%En d\'eduire que $\hat{\alpha}_n$ et $\hat{\theta}_n$ sont
+%ind\'ependants pour tout $n$.
+\end{enumerate}
+%
+
+\subsection*{2. Information de Fisher: entra\^{\i}nement!}
+
+Dans les mod\`eles suivants, calculer  l'information de Fisher associ\'ee aux $n$ observations (si elle est bien d\'efinie), l'estimateur du maximum de vraisemblance et sa loi asymptotique :
+
+\begin{enumerate}
+\item $X_1,\ldots,X_{n}\stackrel{i.i.d}{\sim} \mathcal{B}(\theta)$.
+\item $X_1,\ldots,X_{n}\stackrel{i.i.d}{\sim} \mathcal{N}(m,v)$.
+\item $X_1,\ldots,X_{n}\stackrel{i.i.d}{\sim}\mathcal{U}[0,\theta]$.
+\end{enumerate}
+
+
+\subsection*{3. Estimateur bay\'esien}
+
+Le but de cet exercice est d'introduire une classe de m\'ethodes d'estimation dites bay\'esiennes.
+Ces m\'ethodes sont souvent utilis\'ees dans la pratique quand on dispose d'une information suppl\'ementaire
+sur le param\`etre \`a estimer $\theta$ de type que certaines valeurs de  $\theta$ sont {\it a priori} ``plus probables"
+que les autres. Cette information est r\'esum\'ee en termes d'une densit\'e de probabilit\'e $\pi(\theta)$ dite {\it densit\'e a priori} sur l'ensemble des
+param\`etres $\Theta$ suppos\'ee connue au statisticien.
+
+
+On dispose des observations $X_{1},\ldots,X_{n},$ o\`u les $X_i$ sont i.i.d. de densit\'e $f(x, \theta^*)$ par rapport \`a la mesure de 
+Lebesgue sur $\R$ appartenant \`a une famille param\'etrique connue $\{f(x, \theta), \theta\in\Theta\}$ de densit\'es sur $\R$, o\`u $\Theta\subseteq \R$ est une ensemble donn\'e. 
+
+Soit  $\hat\theta = \hat\theta(X_{1},\ldots,X_{n})$ un estimateur de $\theta$ et soit $$R_{n}(\theta,\hat\theta)=E_\theta [(\hat\theta-\theta)^2]$$ son risque quadratique. 
+Soit $\pi(\cdot)$ une densit\'e de probabilit\'e par rapport \`a la mesure de 
+Lebesgue sur $\R$ (densit\'e a priori de $\theta$) telle que $\int_{\Theta}\pi(\theta)d\theta =1$ et $\int_{\Theta}\theta^2\pi(\theta)d\theta<\infty$.
+
+{\it Le risque bay\'esien} de $\hat\theta$ est d\'efini par :
+$$R^{\pi}_n(\hat \theta)=\int_{\Theta}R_{n}(\theta,\hat\theta)\pi(\theta) d\theta.$$
+{\it L'estimateur bay\'esien} de $\theta$ not\'e $\hat\theta^\pi$ est un estimateur qui fournit le minimum du risque bay\'esien :
+$$
+R^{\pi}_n(\hat\theta^\pi) = \min_{\hat\theta} R^{\pi}_n(\hat \theta),
+$$
+o\`u $\min_{\hat\theta}$ d\'esigne le minimum sur tous les estimateurs.
+\begin{enumerate}
+\item On note $p$ la densit\'e de probabilit\'e sur $\R^{n+1}$ d\'efinie par $$p(\theta,x_{1},\ldots,x_{n})=\prod_{i=1}^n f(x_i,\theta)\pi(\theta).$$ Montrez que %, pour tout estimateur $\hat\theta$,
+$R^{\pi}_n(\hat\theta)=\E \big[(\hat\theta(\tilde X_{1},\ldots,\tilde X_{n})-\tilde\theta)^2\big]$, o\`u le vecteur al\'eatoire $(\tilde\theta,\tilde X_{1},\ldots,\tilde X_{n})$ est distribu\'e selon la densit\'e $p$.
+\item En d\'eduire que le risque bay\'esien $R^{\pi}_n(\hat\theta)$ est minimal en
+$$\hat\theta^\pi(x_{1},\ldots,x_{n})=\E\cro{\tilde \theta\,\vert\, \tilde X_{1}=x_{1},\ldots,\tilde X_{n}=x_{n}}=\int \theta\,\pi(\theta|x_{1},\ldots,x_{n})d\theta$$
+$$\textrm{o\`u}\quad \pi(\theta|x_{1},\ldots,x_{n})={p(\theta,x_{1},\ldots,x_{n})\over \int p(\alpha,x_{1},\ldots,x_{n})d\alpha}\,\quad (\textrm{avec la convention }0/0=0),$$
+est la densit\'e de la loi dite {\it loi a posteriori} de $\theta$. L'estimateur $\hat\theta^{\pi}(X_{1},\ldots,X_{n})$ est  l'estimateur bay\'esien de $\theta$.
+\item On suppose maintenant que $f(x,\theta)$ est la densit\'e de la loi ${\cal N}(\theta, \sigma^2)$ et la loi a priori est ${\cal N}(0, \sigma_0^2)$, o\`u les variances $\sigma^2$ et  $\sigma_0^2$ sont connues. Expliciter l'estimateur bay\'esien de $\theta$. Quelle est sa forme limite dans les cas $n \to \infty$, $\sigma_0^2\to 0$ et $\sigma_0^2\to \infty$?
+\end{enumerate}
+
+
+
+\subsection*{4. La statistique d'ordre}
+
+Soient $X_1, \ldots,X_n$ des variables al\'eatoires i.i.d. de
+fonction de r\'epartition $F$. On suppose que $F$ admet une
+densit\'e $f$ par rapport \`a la mesure de Lebesgue. On note $X_{(1)}\leq X_{(2)}\leq\ldots\leq X_{(n)}$ les variables al\'eatoires $X_1, \ldots,X_n$ r\'eordonn\'ees par ordre croissant.
+\begin{enumerate}
+\item D\'eterminer la fonction de r\'epartition $F_{k}(x)$ puis la densit\'e $f_k(x) $ de $X_{(k)}$.
+\item
+Donner l'expression de la loi de la statistique d'ordre
+$(X_{(1)},\ldots,X_{(n)})$ en fonction de $f$.
+%Calculer la fonction de r\'epartition, not\'ee $G_k(x)$, de
+%$X_{(k)}$.
+\item Sans utiliser les r\'esultats des questions pr\'ec\'edentes,
+calculer les fonctions de r\'epartition de $X_{(1)}$, $X_{(n)}$,
+du couple $(X_{(1)}, X_{(n)})$ et la loi de la statistique $W=
+X_{(n)}- X_{(1)}$ (on appelle $W$ {\it \'etendue}). Les
+variables $X_{(1)}$ et $X_{(n)}$ sont elles ind\'ependantes?
+\item Nous supposons dans la suite que les $X_{1},\ldots,X_{n}$ suivent une loi exponentielle.
+On note $Y_{(j)}=(n-j+1)(X_{(j)}-X_{(j-1)})$ pour $j=1,\ldots,n$. Quelle est la loi de $(Y_{1},\ldots,Y_{n})$?
+\item Montrer que $X_{(1)}$ est ind\'ependant de $\bar X_{n}-X_{(1)}$.
+\end{enumerate}
+
+\subsection*{5. Borne de Cram\'er-Rao}
+On consid\`ere un vecteur al\'eatoire $(X_{1},\ldots,X_{n})\in\R^n$ de loi appartenant \`a une famille $\ac{\p_{\theta},\ \theta\in\Theta}$ de lois sur $\R^n$, avec $\Theta$ intervalle ouvert de $\R$. On suppose que $d\p_{\theta}(x)=p(\theta,x)\,d\mu(x)$ avec $\mu$ mesure $\sigma$-finie sur $\R^n$ et on note $l_{X}(\theta)=\log(p(\theta,X))$. On suppose que la famille de lois $\ac{\p_{\theta},\ \theta\in\Theta}$ est r\'eguli\`ere;   l'information de Fisher $I_{n}(\theta)$ est donc bien d\'efinie et on pourra intervertir int\'egrales et d\'erivations \`a notre de guise. 
+
+Pour un estimateur $\hat \theta$ donn\'e, on note $R_{\theta}(\hat\theta):=\E_{\theta}\cro{(\hat\theta-\theta)^2}$ son risque quadratique et $b(\theta):=\E_{\theta}[\hat\theta]-\theta$ son biais (qu'on suppose d\'erivable).
+\begin{enumerate}
+\item Montrez que $R_{\theta}(\hat\theta)=b(\theta)^2+\textrm{Var}_{\theta}(\hat\theta)$.
+\item Montrez que $\E_{\theta}\cro{l'_{X}(\theta)}=0$.
+\item Montrez que $b'(\theta)=\E_{\theta}\cro{\hat\theta l'_{X}(\theta)}-1$.
+\item D\'eduire des deux questions pr\'ec\'edentes l'\'egalit\'e
+  $1+b'(\theta)=\E_{\theta}\cro{\big(\hat\theta-\E_{\theta}(\hat\theta)\big)l'_{X}(\theta)}$.
+\item En d\'eduire la borne de Cramer-Rao:
+$$\boxed{R_{\theta}(\hat\theta)\geq {(1+b'(\theta))^2\over I_{n}(\theta)}+b(\theta)^2.}$$
+\item Quel est le risque quadratique minimal d'un estimateur sans biais?
+\end{enumerate}
+
+
+
+
+\end{document}

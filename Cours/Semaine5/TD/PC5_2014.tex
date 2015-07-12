@@ -1,0 +1,53 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{fancybox}
+\pagestyle{plain}
+
+\begin{document}
+
+\title{{\bf MAP433 Statistique}\\
+{\bf PC5: Introduction aux tests}}
+
+\date{19 septembre 2014}
+\maketitle
+
+\subsection*{1 Test pour une certification bio}
+
+Pour avoir la certification ``bio'', un fabriquant de produits ``bio'' doit garantir pour chaque lot un pourcentage d'OGM inf\'{e}rieur \`{a} 1\%. Il pr\'{e}l\`{e}ve donc $n=25$ produits par lot et teste si le pourcentage d'OGM est inf\'{e}rieur \`{a} 1\%. On note $X_{i}$ le logarithme naturel du nombre de pourcents d'OGM du paquet num\'{e}ro $i.$
+
+Mod\`{e}le : On suppose que les $X_{i}$ sont ind\'{e}pendants et suivent une loi gaussienne $\mathcal{N}(\theta,\ 1)$ . 
+\begin{enumerate}
+\item Pour $\theta_{1}>\theta_{0}$, montrez que le test de Neyman-Pearson de niveau $\alpha$ de $\mathrm{H}_{0}$ : $\theta=\theta_{0}$ contre $\mathrm{H}_{1}:\theta=\theta_{1}$ est de la forme $\overline{X}_{n}>t_{n,\alpha}.$
+\item Pour le fabriquant, le pourcentage d'OGM est inf\'{e}rieur \`{a} 1\% sauf preuve du contraire. Il veut tester l'hypoth\`{e}se $\mathrm{H}_{0}:\theta\leq 0$ contre $\mathrm{H}_{1}$ : $\theta>0$ et il souhaite que pour $\theta\leq 0$ le test se trompe avec une probabilit\'{e} inf\'{e}rieure \`{a} 5\%. Calculez un seuil $t_{25,5}$ tel que
+$$
+\sup_{\theta\leq 0}\mathrm{P}_{\theta}(\overline{X}_{25}>t_{25,5})=5\%.
+$$
+On pourra utiliser que $\mathrm{P}(Z>1.645)\approx 5\%$, pour $Z\sim \mathcal{N}(0,1)$ .
+\item Une association `` anti-OGM'' veut s'assurer qu'il n'y a effectivement pas plus de 1\% d'OGM dans les produits lab\'{e}lis\'{e}s ``bio'' En particulier, elle s'inqui\`{e}te de savoir si le test parvient \`{a} \'{e}liminer les produits pour lesquels le pourcentage d'OGM d\'{e}passe de 50\% le maximum autoris\'{e}. Quelle est la probabilit\'{e} que le test ne rejette pas $\mathrm{H}_{0}$ lorsque le pourcentage d'OGM est de 1.5\%?
+\item Scandalis\'{e}e par le r\'{e}sultat pr\'{e}c\'{e}dent, l'association milite pour que le test du fabriquant prouve effectivement que le pourcentage d'OGM est inf\'{e}rieur \`{a} 1\%. Pour elle, le pour- centage d'OGM est sup\'{e}rieur \`{a} 1\% sauf preuve du contraire, donc $\mathrm{H}_{0}$ est $\theta>0$ et $\mathrm{H}_{1}$ est $\theta\leq 0$. Proposez un test de $\mathrm{H}_{0}$ contre $\mathrm{H}_{1}$ tel que la probabilit\'{e} que le test rejette \`{a} tort $\mathrm{H}_{0}$ soit inf\'{e}rieure \`{a} 5\%.
+\end{enumerate}
+
+
+\subsection*{2 Test de Neyman-Pearson}
+
+Chercher la r\'{e}gion de rejet du test de Neyman-Pearson dans les cas suivants.
+\begin{enumerate}
+\item  Loi exponentielle $\mathcal{E}(\theta)$ . Test de $\theta=\theta_{0}$ contre $\theta=\theta_{1}$ avec $\theta_{1}>\theta_{0}.$
+\item Loi de Bernoulli $B(p)$ . Test de $p=p_{0}$ contre $p=p_{1}$ pour $p_{1}>p_{0}$. Quel probl\`{e}me rencontre-t-on dans ce cas?
+\end{enumerate}
+
+\subsection*{3 Test de support}
+
+Soient $X_{1}, \ldots, X_{n}$ de loi $\mathcal{U}[0,\ \theta]$ et $M=\displaystyle \max(X_{i}), 1\leq i\leq n$. On cherche \`{a} tester $H_{0}$ : $\theta=1$ contre $H_{1}$ : $\theta>1.$
+\begin{enumerate}
+\item Pourquoi ne peut-on pas utiliser ici le test de Neyman-Pearson?
+\item  On propose le test suivant: on rejette $H_{0}$ lorsque $M>c$ ( $c>0$ constante donn\'{e}e). Calculer la fonction de puissance.
+\item  Quelle valeur prendre pour $c$ pour obtenir un niveau de 5\%?
+\item Si $n=20$ et la valeur observ\'{e}e de $M$ est 0.96, que vaut la $p$-value? quelle conclusion tirer sur $H_{0}$ ? M\^{e}me question pour $M^{obs}=1.04.$
+\end{enumerate}
+\end{document}

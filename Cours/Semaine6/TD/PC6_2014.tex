@@ -1,0 +1,94 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{fancybox}
+\pagestyle{plain}
+
+\begin{document}
+
+\title{{\bf MAP433 Statistique}\\
+{\bf PC6: Tests asymptotiques. Test de rangs}}
+
+\date{}
+\maketitle
+ 
+
+
+
+\subsection*{1 Cancer et tabac}
+
+Voici les chiffres (fictifs) du suivi d'une population de 100 personnes (50 fumeurs, 50 non- fumeurs) pendant 20 ans.
+\begin{center}
+\begin{tabular}{l|l}
+\multicolumn{1}{l|}{}&	\multicolumn{1}{|l}{fumeur non-fumeur}	\\
+\hline
+\multicolumn{1}{l|}{$\begin{array}{l}\mbox{cancer diagnostiqu\'{e}}	\\	\mbox{pas de cancer}	\end{array}$}&	\multicolumn{1}{|l}{ $\begin{array}{l}\mbox{ $11\ 5$}	\\	\mbox{ $39\ 45$}	\end{array}$}
+\end{tabular}
+\end{center}
+On s'interroge : la diff\'{e}rence du nombre de cancers entre fumeurs et non-fumeurs est-elle statistiquement significative? On note $X_{i}$ la variable qui vaut 1 si le fumeur $i$ a \'{e}t\'{e} atteint d'un cancer et $0$ sinon. De m\^{e}me, on note $Y_{i}$ la variable qui vaut 1 si le non-fumeur $i$ a \'{e}t\'{e} atteint d'un cancer et $0$ sinon. On suppose que les $X_{i}$ sont i.i.d. de loi be Bernoulli $B(\theta_{f})$ , les $Y_{i}$ sont i.i.d. de loi $B(\theta_{nf})$ et les $X_{i}$ sont ind\'{e}pendants des $Y_{i}.$
+\begin{enumerate}
+\item Si $\theta_{f}\neq\theta_{nf}$, quelle est la limite de $\sqrt{n}|\overline{X}_{n}-\overline{Y}_{n}|$?
+\item On suppose que $\theta_{f}=\theta_{nf}=\theta$ et on note $\hat{\theta}=(\overline{X}_{n}+\overline{Y}_{n})/2$. Montrez que
+$$
+\sqrt{\frac{n}{2\hat{\theta}(1-\hat{\theta})}}(X_{n}^{-}-\overline{Y}_{n})\rightarrow \mathcal{N}(0,1)loi.
+$$
+\item Proposez un test de niveau asymptotique 5\% de $\mathrm{H}_{0}$ : ``le taux de cancer n'est pas diff\'{e}rent'' $(\theta_{f}=\theta_{nf})$ contre $\mathrm{H}_{1}$: ``le taux de cancer est diff\'{e}rent'' $(\theta_{f}\neq\theta_{nf})$ .
+\item Supposons maintenant qu'une \'{e}tude suppl\'{e}mentaire permet d'avoir le suivi de 300 per- sonnes et que les proportions sont les m\^{e}mes:
+\begin{center}
+\begin{tabular}{l|l}
+\multicolumn{1}{l|}{}&	\multicolumn{1}{|l}{fumeur non-fumeur}	\\
+\hline
+\multicolumn{1}{l|}{$\begin{array}{l}\mbox{cancer diagnostiqu\'{e}}	\\	\mbox{pas de cancer}	\end{array}$}&	\multicolumn{1}{|l}{ $\begin{array}{l}\mbox{ $33\ 15$}	\\	\mbox{ $117\ 135$}	\end{array}$}
+\end{tabular}
+
+\end{center}
+Quelle est la conclusion du test avec ces donn\'{e}es?
+
+\item Revenons aux chiffres de la premi\`{e}re \'{e}tude: proposez un test de niveau asymptotique 5\% de $\mathrm{H}_{0}$ : ``fumer n'a pas d'impact sur le taux de cancer'' $(\theta_{f}=\theta_{nf})$ contre $\mathrm{H}_{1}$ : ``fumer augmente le taux de cancer'' $(\theta_{f}>\theta_{nf})$ ? Quelle est sa conclusion? Quelle est la $\mathrm{p}$-value associ\'{e}e aux observations?
+\end{enumerate}
+
+\subsection*{2 Test de Wilcoxon}
+
+Une firme pharmaceutique a mis au point une nouvelle mol\'{e}cule pour faire chuter le taux de sucre dans le sang. Pour tester l'efficacit\'{e} de cette mol\'{e}cule, elle le compare \`{a} un placebo. Elle r\'{e}unit $n+m$ patients. A un premier groupe de $m$ individus, elle administre un placebo (sans leur dire!). Au second groupe elle donne sa nouvelle mol\'{e}cule. Apr\`{e}s un d\'{e}lai appropri\'{e}, on mesure les taux de glyc\'{e}mie $\{X_{i}\ :\ i=1,\ \ldots,\ n\}$ et $\{Y_{i}\ :\ i=1,\ \ldots,\ m\}$ chez les deux groupes.
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{1}{|l|}{placebo: X}&	\multicolumn{1}{|l|}{m\'{e}dicament: $\mathrm{y}$}	\\
+\hline
+\multicolumn{1}{|l|}{ $\begin{array}{l}\mbox{ $1.0$}	\\	\mbox{ $1.41$}	\\	\mbox{ $0.61$}	\\	\mbox{ $0.22$}	\\	\mbox{ $5.9$}	\\	\mbox{ $0.84$}	\\	\mbox{ $0.49$}	\end{array}$}&	\multicolumn{1}{|l|}{ $\begin{array}{l}\mbox{ $1.4$}	\\	\mbox{ $0.94$}	\\	\mbox{ $3.\ 1$}	\\	\mbox{ $0.54$}	\\	\mbox{ $1.2$}	\\	\mbox{ $0.043$}	\\	\mbox{ $3.0$}	\\	\mbox{ $0.40$}	\\	\mbox{ $0.075$}	\\	\mbox{ $1.\ 1$}	\end{array}$}	\\
+\hline
+\end{tabular}
+
+\end{center}
+On suppose que les $X_{1}, \ldots, X_{n} ($resp. $Y_{1},\ \ldots,\ Y_{m})$ sont i.i.d. de loi de fonction de r\'{e}partition $F_{X}$ (resp. $F_{Y}$). On supposera que les fonctions $F_{X}$ et $F_{Y}$ sont continues. On veut tester si les lois des $X$ et des $Y$ sont les m\^{e}mes ou si les $Y_{i}$ sont stochastiquement plus petits que les $X_{i},$ c'est \`{a} dire $F_{X}<F_{Y}$. On va donc tester $H_{0}:F_{X}=F_{Y}$ contre $H_{1}:F_{X}<F_{Y}.$
+
+On pose $Z_{i}=X_{i}$ pour $i=1, \ldots, n$ et $Z_{n+i}=Y_{i}$ pour $i=1, \ldots, m$. On note $R(i)$ le rang de $Z_{i}$ dans la suite $(Z_{1},\ \ldots,\ Z_{n+m})$ , \`{a} savoir, $R(i)=1$ si $Z_{i}$ est la plus petite valeur, $R(i)=2$ si $Z_{i}$ est la seconde plus petite valeur, etc. La statistique de Wilcoxon est d\'{e}finie par
+$$
+W_{n,m}=\sum_{i=1}^{n}R(i)\ .
+$$
+L'id\'{e}e est que sous $H_{1}$ la statistique $W_{n,m}$ sera plus grande que sous $H_{0}.$
+\begin{enumerate}
+ \item Soit $N=n+m$. Montrez que la {\it statistique de rang} $R=\triangle(R(1),\ \ldots,\ R(N))$ suit sous $H_{0}$ la loi uniforme sur l'ensemble $S_{N}$ de toutes les permutations de $\{$1, $\ldots, N\}$. En d\'{e}duire que sous $H_{0}$ la statistique de Wilcoxon est {\it libre}, i.e., la loi de $W_{n,m}$ ne d\'{e}pend pas de $F_{X}$. Quelle est la loi de $R(i)$ sous $H_{0}$ ?
+\item Montrez que sous $H_{0}$ on a $\mathrm{E}(W_{n,m})=n(n+m+1)/2.$
+
+\item Montrez que sous $H_{0}$ on a Var $(W_{n,m})=n\mathrm{Var}(R(1))+n(n-1)\mathrm{Cov}(R(1),\ R(2))$ et
+$$
+0= \mathrm{Var}(\displaystyle \sum_{i=1}^{n+m}R(i))=(n+m) \mathrm{Var}(R(1))+(n+m)(n+m-1)\mathrm{Cov}(R(1),\ R(2)) \, .
+$$
+En d\'{e}duire que Var $(W_{n,m})=nm(n+m+1)/12$ sous $H_{0}.$
+
+\item En admettant que $T_{n,m}=(W_{n,m}-\mathrm{E}(W_{n,m}))/\sqrt{\mathrm{Var}(W_{n,m})}$ converge en loi sous $H_{0}$ vers une loi normale $\mathrm{N}(0,\ 1)$ lorsque $ n\rightarrow\infty$, testez au niveau asymptotique 5\% si la nouvelle mol\'{e}cule est plus efficace que le placebo.
+\end{enumerate}
+
+\subsection*{3 Peut-on retarder sa mort?}
+
+On pr\'{e}tend couramment que les mourants peuvent retarder leur d\'{e}c\`{e}sjusqu'\`{a} certains \'{e}v\'{e}nements importants. Pour tester cette th\'{e}orie, Philips et King (1988, article paru dans {\it The Lancet},
+prestigieux journal m\'{e}dical) ont collect\'{e} des donn\'{e}es de d\'{e}c\`{e}s aux environs d'une f\^{e}te religieusejuive. 
+Sur 1919 d\'{e}c\`{e}s, 922 (resp. 997) ont eu lieu la semaine pr\'{e}c\'{e}dente (resp. suivante).
+Comment utiliser de telles donn\'{e}es pour tester cette th\'{e}orie gr\^{a}ce \`{a} un test asymptotique?
+
+\end{document}

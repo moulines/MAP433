@@ -1,0 +1,178 @@
+%\documentclass[a4paper,11pt,fleqn]{article}
+
+\documentclass[10pt]{article}
+\setlength{\topmargin}{0cm} \setlength{\textheight}{23cm}
+\setlength{\oddsidemargin}{-0.5cm} \setlength{\textwidth}{20cm}
+
+\usepackage[francais]{babel}
+%\usepackage[latin1]{inputenc}
+\usepackage[applemac]{inputenc}
+\usepackage{a4wide,amsmath,amssymb,bbm,fancyhdr, graphicx}
+
+% THE variable
+\newcommand{\thisyear}{Année 2014-2015}
+
+% Definitions (pas trop!)
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\rset}{\ensuremath{\mathbb{R}}}
+\renewcommand{\P}{\ensuremath{\operatorname{P}}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\V}{\ensuremath{\mathbb{V}}}
+\newcommand{\gaus}{\ensuremath{\mathcal{N}}}
+\newcommand{\1}{\ensuremath{\mathbbm{1}}}
+\newcommand{\dlim}{\ensuremath{\stackrel{\mathcal{L}}{\longrightarrow}}}
+\newcommand{\plim}{\ensuremath{\stackrel{\mathrm{P}}{\longrightarrow}}}
+\newcommand{\PP}{\ensuremath{\mathbb{P}}}
+\newcommand{\eps}{\varepsilon}
+
+% Style
+\pagestyle{fancyplain}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\renewcommand{\subsectionmark}[1]{}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\footnotesize {\sf MAP433 Statistique, \thisyear, PC1}}}
+\rhead[\fancyplain{}{\footnotesize {\sf MAP433 Statistique, \thisyear\  / \rightmark}}]{\fancyplain{}{\thepage}}
+\cfoot[\fancyplain{}{}]{\fancyplain{}{}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\parindent=0mm
+
+
+
+% Titre
+\title{\includegraphics[width=3.5cm]{../images/logo_x.jpg}\hfill {\bf MAP433 Statistique}\hfill \quad\quad\quad\quad \ }
+\author{\bf PC1: Rappels de probabilit\'es}
+
+
+\date{29 ao\^ut 2014}
+
+\begin{document}
+
+
+\maketitle
+
+\vspace{-0.1cm}
+
+
+
+
+
+
+\section{Théorème central limite} % 
+Soit $\left( X_{n}\right)_{n}$ une suite de variables aléatoires
+i.i.d. centrées de variance $\sigma^2>0$. Soit
+\begin{equation*}
+  Z_{n}=\frac{1}{\sigma\sqrt{n}}\sum_{j=1}^{n} X_{j}\,.
+\end{equation*}%
+Par le théorème central limite, cette variable converge en loi vers la
+loi normale centrée réduite, c'est-à-dire, pour tout $t \in \R$, on a   $
+\lim_{n\rightarrow +\infty} \E[e^{itZ_{n}}]=e^{-\frac{t^{2}}{2}}$. L'objet de
+cet exercice est de montrer que la suite $Z_{n}$ ne peut pas converger en probabilité.
+\begin{enumerate}
+\item Calculer la fonction caractéristique de $Z_{2n}-Z_{n}$ et montrer que
+  cette différence converge en loi.
+\item En \'etudiant $\PP(|Z_{2n}-Z_{n}|\geq\eps)$, montrer que $Z_{n}$ ne converge pas en
+  probabilité.
+\end{enumerate}
+
+\section{Lemme de Slutsky} \label{slutski1}
+\begin{enumerate}
+\item Donner un exemple de suites $(X_{n})$ et $(Y_{n})$ telles que $X_{n}\stackrel{\textrm{loi}}{\to}X$ et $Y_{n}\stackrel{\textrm{loi}}{\to}Y$, mais $X_{n}+Y_{n}$ ne converge pas en loi vers $X+Y$.
+\item Soient $(X_n)$, $(Y_n)$ deux suites
+de variables aléatoires r\'eelles,
+$X$ et $Y$ des variables aléatoires r\'eelles, telles que
+\begin{enumerate}
+\item[(i)]  $X_{n}\stackrel{\textrm{loi}}{\to}X$ et $Y_{n}\stackrel{\mathbb{P}}{\to}Y$,
+\item[(ii)] $Y$ est indépendante de $(X_n)$ et $X$.
+\end{enumerate}
+Montrer que le couple $(X_n,Y_n)$ converge en loi vers $(X,Y)$.
+\item En d\'eduire que si $(X_n)$ et $(Y_n)$ sont deux suites de variables aléatoires réelles telles que $(X_n)$
+converge en loi vers une limite $X$ et $(Y_n)$ converge en
+probabilité vers une constante $c$, alors $(X_n+Y_n)$ converge en
+loi vers $X+c$ et $(X_n\, Y_n)$ converge en loi vers $c \, X$.
+\end{enumerate}
+
+
+\section{Estimateur de la variance}
+Soient $X_{1},\ldots,X_{n}$ des variables al\'eatoires i.i.d.,
+$X_i\sim f(\cdot-\theta)$, o\`u $f$ est une densit\'e de
+probabilit\'e sur $\mathbb{R}$ sym\'etrique dont on note $\mu_k =
+\int_{\R}x^kf(x)\, dx$ les moments d'ordre $k=2$ et $k=4$. On note
+$\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$.
+ Montrer que l'estimateur $\frac{1}{n}\sum_{i=1}^n (X_i -\bar{X}_n)^2$
+ de la variance des $X_{i}$ v\'erifie un th\'eor\`eme central limite.
+ 
+ \medskip
+
+
+  {\it Indication}~: on montrera d'abord que l'on peut se ramener au cas
+  o\`u $\theta=0$, puis on exprimera l'estimateur comme une transformation de $S_n
+  = \frac{1}{n}\sum_{i=1}^n X_i^2$ et de $\bar{X}_n$.
+
+
+
+
+\section{Taux de d\'efaillance}
+Une cha\^{\i}ne de production  doit
+garantir une qualit\'e minimale de ses produits. En particulier,
+elle doit garantir que la proportion $\theta$ des produits
+d\'efaillants reste inf\'erieure \`a un taux fix\'e par le client.
+Un
+\'echantillon de  $n$ produits  est pr\'elev\'e et
+analys\'e. %On
+%suppose que le nombre $n$ de composants pr\'elev\'es est faible
+%devant le nombre de composants produits.
+On note $\hat \theta_{n}$ la proportion de produits d\'efectueux
+dans l'\'echantillon.
+\begin{enumerate}
+\item Proposer un mod\`ele statistique pour ce probl\`eme. Quelle est la loi de $n\hat\theta_{n}$?
+\item Quelle information donne la loi des grands nombres et le th\'eor\`eme central limite sur le comportement asymptotique de $\hat\theta_{n}$?
+\item On donne $\PP(N>1.64)=5\%$ pour $N\sim\mathcal{N}(0,1)$.
+En d\'eduire $\eps_{n}$ (d\'ependant de $n$ et $\theta$) tel que
+$\PP(\theta \geq \hat\theta_{n}+\eps_{n})\stackrel{n\to \infty}{\to} 5\%$.
+\item La valeur $\eps_{n}$ pr\'ec\'edente d\'epend de $\theta$. A l'aide du lemme de Slutsky, donner $\eps'_{n}$ ne d\'ependant que de $n$ et $\hat\theta_{n}$ tel que $\PP(\theta \geq \hat\theta_{n}+\eps'_{n})\stackrel{n\to \infty}{\to} 5\%$.
+\end{enumerate}
+
+%\subsection*{7. Cas des d\'efaillances rares}
+%La cha\^{\i}ne produit des composants \'electroniques utilis\'es dans le secteur
+%a\'eronautique. Le taux de d\'efaillance doit donc \^etre tr\`es
+%bas. En particulier, comme la taille de l'\'echantillon ne peut \^etre tr\`es grosse (question de co\^ut), il est attendu que $\theta$ soit du m\^eme ordre de grandeur que $1/n$. 
+% On supposera donc par la suite que la proportion de composants
+%d\'efectueux est $\theta_{n}=\lambda/n$ pour un certain $\lambda>0$
+%et on cherche \`a estimer $\lambda$ par
+%$\hat\lambda_{n}=n\hat\theta_{n}$. La valeur $\lambda$ est
+%suppos\'ee ind\'ependante de $n$ (le cas int\'eressant est quand
+%$\lambda$ est petit).
+%\begin{enumerate}
+%\item Quelle est la limite de
+%$\PP(\hat\lambda_{n}=k)$ lorsque $n\rightarrow+\infty$? En
+%déduire que $\hat\lambda_n$ converge en loi vers une variable de
+%Poisson de param\`etre $\lambda$.
+%\item On suppose qu'il y a une proportion $\theta_{n}=3/n$ de
+%composants d\'efectueux.  Sachant que $\PP(Z=0)\approx 5\%$ pour $Z$
+%de loi de Poisson de param\`etre 3, montrer que $\PP(\theta_{n}>\hat
+%\theta_{n}+2/n)\approx 5\%$ pour $n$ grand.
+%\end{enumerate}
+
+%\subsection*{3. Convergence dans $L^p$}
+%Soit $(X_n)$ une suite de variables
+%aléatoires réelles bor\-nées par une même constante. Montrer que si
+%$(X_n)$ converge en probabilité, alors $X_n$ converge dans $L^p$ pour tout $p \ge 1$.
+
+%\subsection*{4. Loi conditionnelle}
+%\label{loicond1}
+%Soit $X$ une variable aléatoire qui suit une loi Gamma $\left( 2,\lambda
+%\right) $ de densité
+%\begin{equation*}
+%  f\left( x\right) =\lambda ^{2}xe^{-\lambda x}\1_{[0,+\infty)}(x)
+%\end{equation*}%
+%et soit $Y$ une variable aléatoire dont la loi conditionnelle à $X=x$ est
+%uniforme sur $\left[ 0,x\right] .$
+%
+%\begin{enumerate}
+%\item Donner la loi jointe de $\left( X,Y\right)$.
+%\item Donner la loi marginale de $Y$ et montrer que $Y$ est indépendant de
+%  $X-Y$.
+%\end{enumerate}
+
+
+
+\end{document}

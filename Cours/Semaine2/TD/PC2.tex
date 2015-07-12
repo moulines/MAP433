@@ -1,0 +1,197 @@
+\documentclass[a4paper,11pt,fleqn]{article}
+
+\usepackage[francais]{babel}
+%\usepackage[latin1]{inputenc}
+%\usepackage[applemac]{inputenc}
+\usepackage{a4wide,amsmath,amssymb,bbm,fancyhdr}
+
+\RequirePackage[OT1]{fontenc}
+
+\usepackage[latin1]{inputenc}
+% THE variable
+\newcommand{\thisyear}{Ann\'ee 2014-2015}
+
+% Definitions (pas trop!)
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\rset}{\ensuremath{\mathbb{R}}}
+\renewcommand{\P}{\ensuremath{\operatorname{P}}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\V}{\ensuremath{\mathbb{V}}}
+\newcommand{\gaus}{\ensuremath{\mathcal{N}}}
+\newcommand{\1}{\ensuremath{\mathbbm{1}}}
+\newcommand{\dlim}{\ensuremath{\stackrel{\mathcal{L}}{\longrightarrow}}}
+\newcommand{\plim}{\ensuremath{\stackrel{\mathrm{P}}{\longrightarrow}}}
+\newcommand{\PP}{\ensuremath{\mathbb{P}}}
+\newcommand{\p}{\ensuremath{\mathbb{P}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\pa}[1]{\left(#1\right)}
+
+
+% Style
+\pagestyle{fancyplain}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\renewcommand{\subsectionmark}[1]{}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\footnotesize {\sf MAP433 Statistique, \thisyear, PC2}}}
+\rhead[\fancyplain{}{\footnotesize {\sf MAP433 Statistique, \thisyear\  / \rightmark}}]{\fancyplain{}{\thepage}}
+\cfoot[\fancyplain{}{}]{\fancyplain{}{}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\parindent=0mm
+
+
+
+% Titre
+\title{{\bf MAP433 Statistique}\\
+{\bf PC2: Mod\'elisation statistique}}
+
+\date{5 septembre 2014}
+
+\begin{document}
+
+\maketitle
+
+\section{Stabilisation de la variance}
+ On dispose d'un
+\'echantillon $X_{1},\ldots,X_{n}$ i.i.d. de loi de Bernoulli de
+param\`etre $0<\theta<1$.
+\begin{enumerate}
+\item On note $\bar X_{n}$ la moyenne empirique des $X_{i}$. Que
+disent la loi des grands nombres et le TCL?
+\item Cherchez une fonction $g$ telle que $\sqrt{n}(g(\bar X_{n})-g(\theta))$
+converge en loi vers $Z$ de loi $\mathcal{N}(0,1)$.
+\item On note $z_{\alpha}$ le quantile d'ordre $1-\alpha/2$ de la loi normale
+standard. En d\'eduire un intervalle $\hat I_{n, \alpha}$ fonction
+de $z_{\alpha}, n, \bar X_{n}$ tel que $\lim_{n\to
+\infty}\p(\theta\in \hat I_{n,\alpha})=1-\alpha$.
+\end{enumerate}
+
+
+
+\section{Mod\`ele exponentiel}
+Une grande partie des mod\`eles utilis\'es en pratique sont des
+mod\`eles exponentiels (mod\`ele gaussien, log-normal, exponentiel,
+gamma, Bernouilli, Poisson, etc). Nous allons \'etudier quelques
+propri\'et\'es de ces mod\`eles. On appelle mod\`ele exponentiel une
+famille de lois $\{\PP_{\theta},\ \theta\in\Theta\}$ ayant une
+densit\'e par rapport \`a une mesure $\mu$ $\sigma$-finie sur $\R$
+ou $\N$ de la forme
+$$p_{\theta}(x)=c(\theta)\exp\pa{m(\theta)f(x)+h(x)}.$$
+On supposera que $\Theta$ est un intervalle ouvert de $\R$, $m(\theta)=\theta$
+et $c(\cdot)\in C^2$, $c(\theta)>0$ pour tout $\theta\in \Theta$. On
+notera $X$ une variable al\'eatoire de loi $\PP_{\theta}$ et on
+admettra que
+$${d^i\over d \theta^i}\int\exp(\theta f(x)+h(x))\, \mu(dx)=\int f(x)^i\exp(\theta f(x)+h(x))\, \mu(dx)<+\infty,\quad \textrm{pour }i=1,2.$$
+ \begin{enumerate}
+\item Montrez que
+$\varphi(\theta):=\E_{\theta}\pa{f(X)}=-{d\over
+d\theta}\log(c(\theta))$.
+\item Montrez que ${\rm Var_{\theta}}(f(X))=\varphi'(\theta)=-{d^2\over d\theta^2}\log( c\pa{\theta}).$
+\item On dispose d'un $n$-\'echantillon $X_{1},\ldots,X_{n}$ de loi $\p_{\theta}$. On note
+$\hat \theta_{n}$ l'estimateur obtenu en r\'esolvant $\varphi(\hat
+\theta_{n})={1\over n}\sum_{i=1}^n f(X_{i})$.
+En supposant ${\rm Var_{\theta}}(f(X))>0$, montrez que
+$$\sqrt{n}\pa{\hat\theta_{n}-\theta}\stackrel{\textrm{loi}}{\to}\mathcal N\pa{0,{1\over {\rm Var}_{\theta}\pa{f(X)}}}.$$
+\end{enumerate}
+
+
+\section{Mod\`ele probit} 
+\label{probit}
+Nous disposons d'une information relative au comportement de remboursement ou
+de non-remboursement d'emprunteurs :
+\begin{equation*}
+Y_{i}=\left\{
+    \begin{array}{cc}
+      1 & \text{si l'emprunteur }i\text{ rembourse}, \\
+      0 & \text{si l'emprunteur }i\text{ est d\'efaillant}.%
+    \end{array}%
+  \right.
+\end{equation*}%
+Afin de mod\'eliser ce ph\'enom\`ene, on suppose l'existence d'une variable al\'eatoire
+$Y_{i}^{\ast }$ normale, d'esp\'erance $m$ et de variance $\sigma ^{2}$, que l'on
+appellera {\og}capacit\'e de remboursement de l'individu $i${\fg}, telle que :
+\begin{equation*}
+  Y_{i}=\left\{
+    \begin{array}{cc}
+      1 & \text{si }Y_{i}^{\ast }>0, \\
+      0 & \text{si }Y_{i}^{\ast }\leq 0.%
+    \end{array}%
+  \right.
+\end{equation*}
+On note $\Phi$ la fonction de r\'epartition de la loi normale $\mathcal{N}%
+\left( 0,1\right) $.
+\begin{enumerate}
+\item Exprimer la loi de $Y_{i}$ en fonction de $\Phi$.
+\item Les param\`etres $m$ et $\sigma^{2}$ sont-ils identifiables~?
+\end{enumerate}
+
+
+
+\section{Mod\`ele d'autor\'egression}
+
+On consid\`ere l'observation $Z=(X_1,\dots,X_n)$, o\`u les $X_i$
+sont issus du processus d'autor\'egression:
+$$
+X_i=\theta X_{i-1} + \xi_i, \quad i=1,\dots,n, \quad\quad X_0=0,
+$$
+avec les $\xi_i$ i.i.d. de loi normale ${\mathcal N}(0,\sigma^2)$ et
+$\theta\in \R$. \'Ecrire le mod\`ele statistique engendr\'e
+par l'observation $Z$.
+
+
+\section{Dur\'ee de vie}
+Un syst\`eme fonctionne en utilisant deux machines de types
+diff\'erents. Les dur\'ees de vie $X_1$ et $X_2$ des deux machines
+suivent des lois exponentielles de param\`etres $\lambda_1$ et
+$\lambda_2$. Les variables al\'eatoires $X_1$ et $X_2$ sont
+suppos\'ees ind\'ependantes.
+\begin{enumerate}
+\item Montrer que une variable al\'eatoire $X$ suit la loi exponentielle $\mathcal{E}(\lambda)$ si et seulement si 
+$$\forall x>0:  \  \P(X > x)=\text{exp}(-\lambda x).$$
+\item Calculer la probabilit\'e pour que le syst\`eme ne tombe pas en panne
+avant la date $t$. En d\'eduire la loi de la dur\'ee de vie $Z$ du
+syst\`eme. Calculer la probabilit\'e pour que la panne du syst\`eme
+soit due \`a une d\'efaillance de la machine $1$.
+\item Soit $I = 1$ si la
+panne du syst\`eme est due \`a une d\'efaillance de la machine $1$,
+$I = 0$ sinon. Calculer $\P(Z > t; I = \delta)$, pour tout $t\geq 0$
+et $\delta\in\{0,1\}$. En d\'eduire que $Z$ et $I$ sont
+ind\'ependantes.
+\item On dispose de $n$ syst\`emes identiques et fonctionnant
+ind\'ependamment les uns des autres dont on observe les dur\'ees de
+vie
+$Z_1,\ldots,Z_n$.\\
+(a) \'Ecrire le mod\`ele statistique correspondant. Les param\`etres 
+$\lambda_1$ et $\lambda_2$ sont-ils identifiables?\\
+(b) Supposons maintenant que l'on observe \`a la fois les dur\'ees de vie des syst\`emes $Z_1,\ldots,Z_n$ et
+les causes de la d\'efaillance correspondantes $I_1,\dots,I_n$, $I_i\in\{0,1\}$.  \'Ecrire le mod\`ele statistique dans ce cas. Les param\`etres 
+$\lambda_1$ et $\lambda_2$ sont-ils identifiables?
+
+%\item On
+%consid\`ere maintenant un seul syst\`eme utilisant une machine de type
+%$1$ et une machine de type $2$, mais on suppose que l'on dispose
+%d'un stock de $n_1$ machines de type $1$, de dur\'ees de vie
+%$X_1^1,\ldots,X_1^{n_1}$ et d'un stock de $n_2$ machines de type
+%$2$, de dur\'ees de vie $X_2^1,\ldots,X_2^{n_2}$. Quand une machine
+%tombe en panne, on la remplace par une machine du m\^eme type, tant
+%que le stock de machines de ce type n'est pas \'epuis\'e. Quand cela
+%arrive, on dit que le syst\`eme lui-m\^eme est en panne. On note
+%toujours $Z$ la dur\'ee de vie du syst\`eme. Le cas $n_1$ = $n_2$ =
+%$1$ correspond donc aux trois premi\`eres questions.\\
+%(a) Montrer que la densit\'e de la somme $U$ de $k$ variables
+%ind\'ependantes qui suivent une loi exponentielle de m\^eme
+%param\`etre $\lambda$ s'\'ecrit, pour $x\geq 0$ : $$f_U(x) =
+%\frac{\lambda^k}{(k-1)!} x^{k-1}\text{exp}(-\lambda x).$$ \noindent
+%(b) \'Ecrire $Z$ en fonction des $X_i^j$ et en d\'eduire $\P(Z\geq t)$
+%en fonction $n_1$, $n_2$, $\lambda_1$, $\lambda_2$ et $t$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+\end{document}
