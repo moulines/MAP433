@@ -1,0 +1,273 @@
+\documentclass[a4paper,11pt,fleqn]{article}
+
+\usepackage[francais]{babel}
+%\usepackage[latin1]{inputenc}
+%\usepackage[applemac]{inputenc}
+\usepackage{a4wide,amsmath,amssymb,bbm,fancyhdr,hyperref, graphicx}
+
+\RequirePackage[OT1]{fontenc}
+
+\usepackage[latin1]{inputenc}
+% THE variable
+\newcommand{\thisyear}{Ann\'ee 2014-2015}
+
+% Definitions (pas trop!)
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\rset}{\ensuremath{\mathbb{R}}}
+\renewcommand{\P}{\ensuremath{\operatorname{P}}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\V}{\ensuremath{\mathbb{V}}}
+\newcommand{\gaus}{\ensuremath{\mathcal{N}}}
+\newcommand{\1}{\ensuremath{\mathbbm{1}}}
+\newcommand{\dlim}{\ensuremath{\stackrel{\mathcal{L}}{\longrightarrow}}}
+\newcommand{\plim}{\ensuremath{\stackrel{\mathrm{P}}{\longrightarrow}}}
+\newcommand{\PP}{\ensuremath{\mathbb{P}}}
+\newcommand{\p}{\ensuremath{\mathbb{P}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\pa}[1]{\left(#1\right)}
+\newcommand{\ac}[1]{\left\{#1\right\}}
+
+
+% Style
+\pagestyle{fancyplain}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\renewcommand{\subsectionmark}[1]{}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\footnotesize {\sf
+MAP433 Statistique, \thisyear / PC7-8}}}
+\rhead[\fancyplain{}{\footnotesize {\sf MAP433 Statistique,
+\thisyear / \rightmark}}]{\fancyplain{}{\thepage}}
+\cfoot[\fancyplain{}{}]{\fancyplain{}{}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\parindent=0mm
+
+% Titre
+%\title{{\bf MAP433 Statistique}}
+\title{\includegraphics[width=3.5cm]{../images/logo_x.jpg}\hfill {\bf MAP433 Statistique}\hfill \quad\quad\quad\quad\quad\quad \ }
+\author{{\bf PC 7 et 8: Test du $\chi^2$ et r\'egression lin\'eaire}}
+\date{10 et 17 octobre 2014}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Test d'ad\'equation du $\chi^2$}
+Une vaste enqu\^ete au sein d'un central t\'el\'ephonique a permis de d\'eterminer que le nombre d'appels re\c{c}us durant une seconde suit une loi de Poisson de param\`etre~4. 
+
+
+Pour un second central t\'el\'ephonique, on effectue une enqu\^ete de moindre envergure afin de v\'erifier si le nombre d'appels re\c{c}us par seconde  suit la m\^eme loi.
+ On comptabilise lors de 200 secondes, le nombre d'appels par seconde, ce qui produit les r\'esultats suivants :
+\begin{center}\begin{small}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Nombre d'appels par seconde&0&1&2&3&4&5&6&7&8&9&10&11\\
+\hline
+Effectifs observ\'es&6&15&40&42&37&30&10&9&5&3&2&1\\
+\hline
+\end{tabular}\end{small}
+\end{center}
+On note $N_{i}$ le nombre d'appels re\c{c}us entre les secondes $i$ et $i+1$ et on suppose les $N_{i}$ ind\'ependantes. Enfin on note $N'_{i}=\min(N_{i},8)$.
+\begin{enumerate}
+\item On note $Q_{0}$ la loi de $\min(N,8)$ o\`u $N$ suit une loi de Poisson de param\`etre 4. Tester l'ad\'equation  des $N'_{i}$  \`a cette loi $Q_{0}$.
+\item On suppose maintenant que les $N_{i}$ sont ind\'ependants et suivent une loi de Poisson de param\`etre $\lambda$. Proposez un test de niveau asymptotique  5\% de $\lambda=4$ contre $\lambda\neq 4$.
+\item Comment expliquer la diff\'erence de r\'esultats entre ces deux tests?
+\end{enumerate}
+\bigskip
+
+\noindent{\bf Table de la loi de Poisson:}
+
+\bigskip
+
+\hspace{-1.5cm}\begin{small}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+$k$&0&1&2&3&4&5&6&7&8&9&10&11&12&13\\ \hline
+$\p_{3.7}[X=k]$&.025&.091&.169&.209&.193&.143&.088&.047&.021&
+.009&.003&.001&$3.10^{-4}$&$10^{-4}$\\ \hline
+$\p_{4}[X=k]$&.018&.073&.146&.195&.195&.156&.104&.059&.03&.013&.005&.002&$6.10^{-4}$&$2.10^{-4}$\\
+\hline
+\end{tabular}\end{small}
+
+
+\section{Mod\`ele de r\'egression multiple}
+On consid\`ere le mod\`ele de regression multiple
+$$y=\theta_{0}e+X\theta+\xi,\quad\textrm{o\`u}\ \ \E[\xi]=0,~\E[\xi\xi^T]=\sigma^2I_n,\ e=(1,1,\ldots,1)^T$$
+avec $X$ une matrice $n\times k$ de rang $k$ et  $y$, $\xi$ des vecteurs de $\mathbb{R}^n$. Les param\`etres
+$\theta_{0}\in\R$ et $\theta\in\R^k$ sont inconnus. On note $\hat \theta_{0}$ et $\hat \theta$ les estimateurs des moindres carr\'es de $\theta_{0}$ et $\theta$.
+\begin{enumerate}
+\item On note $\hat y = \hat \theta_{0} e+X\hat \theta$. 
+Montrer que $\bar{\hat{y}}=\bar{y}$, o\`u $\bar y$ (resp. $\bar{\hat{y}}$) est la moyenne des $y_{i}$ (resp. des $\hat y_{i}$). En d\'eduire que  $\bar y = \hat\theta_{0}+\bar X\hat \theta$ o\`u
+$\bar X={1\over n}e^TX=\left[\ldots,\bar X_{:\,j},\ldots\right].$
+\item Montrer l'\'equation d'analyse de la variance:
+$$\|y-\bar ye\|^2=\|y-\hat y\|^2+\|\hat y-\bar ye\|^2.$$
+En d\'eduire que 
+le {\it coefficient de d\'etermination}
+$$R^2=\frac{\sum_{i=1}^n(\hat{y}_i-\bar{y})^2}{\sum_{i=1}^n(y_i-\bar{y})^2}$$
+est toujours inf\'erieur \`a 1.
+\item Supposons que $Z=[e,X]$ est de rang $k+1$.
+Calculez en fonction de $Z$ la matrice de covariance de $(\hat \theta_{0},\hat\theta)$. Comment acc\`ede-t-on \`a Var$(\hat\theta_{j})$, pour $j=0,\ldots,p$?
+\item Proposer un estimateur sans biais de $\sigma^2$ puis de  la matrice de covariance de $(\hat \theta_{0},\hat \theta)$.
+\item On suppose dor\'enavant que $\theta_{0}=0$ et donc
+$$y=X\theta+\xi,\quad\E[\xi]=0,~\E[\xi\xi^T]=\sigma^2I_n.$$
+L'estimateur des moindres carr\'es $\tilde \theta$ dans ce mod\`ele est-il \'egal \`a $\hat \theta$?
+\item A-t-on la relation $\bar{\hat{y}}=\bar{y}$? Que dire du $R^2$ dans ce mod\`ele?
+\end{enumerate}
+
+
+
+
+
+
+
+\section{Analyse de donn\'ees atmosph\'eriques}
+Nous allons analyser des relev\'es atmosph\'eriques effectu\'es par l'association``Air Breizh". 
+Ces relev\'es se pr\'esentent sous la forme d'un tableau dont chaque ligne donne les mesures de l'ozone du jour (O3), de la temp\'erature \`a 12h (T12) et 15h (T15), d'un indice de n\'ebulosit\'e \`a 12h (Ne12), des relev\'es de vents \`a 12h (N12, S12, E12, W12),
+d'un indice du vent moyen (Vx) et de la concentration en ozone de la veille (03v). 
+Notre objectif sera de trouver parmi  les facteurs pr\'ec\'edents ceux qui sont influents sur la quantit\'e d'ozone (O3) pr\'esente dans la basse atmosph\`ere.  \medskip
+
+Les analyses seront r\'ealis\'ees avec  {\tt R} : c'est un logiciel gratuit et tr\`es largement utilis\'e par les statisticiens car la plupart des m\'ethodes statistiques (anciennes et nouvelles) ont \'et\'e impl\'ement\'ees dans ce langage. Il est 
+t\'el\'echargeable sur: \url{http://cran.r-project.org/}.
+ Pour apprendre \`a s'en servir:  \url{http://cran.r-project.org/doc/manuals/R-intro.pdf}. Vous pouvez aussi consulter l'ouvrage 
+ \emph{R\'egression avec R} de Cornillon \& Matzner-Lober. La syntaxe est proche de scilab et matlab. \medskip
+ 
+ Pour commencer, t\'el\'echargez les donn\'ees sur la page \url{http://www.cmap.polytechnique.fr/~giraud/MAP433/ozone.Rdata}. Lancez {\tt R}, puis chargez les donn\'ees dans {\tt R} avec la commande {\tt load("ozone.Rdata")}. Nous effectuerons une r\'egression lin\'eaire \`a l'aide de la fonction {\tt lm}. Par exemple
+ \begin{verbatim}
+ reg = lm(O3~T12+Vx, data=ozone)
+ \end{verbatim}
+ r\'ealise la r\'egression de O3 par rapport aux variables T12 et Vx. 
+ Tapez {\tt ?lm} pour avoir une description de cette fonction.
+ Si {\tt reg} est le r\'esultat d'une r\'egression de $Y\in\R^n$ contre $X\in\R^{n\times k}$, l'instruction {\tt summary(reg)} retourne un tableau de valeurs dont la premi\`ere  colonne donne l'estimateur 
+ $$\widehat \theta\in\mathop{\textrm{argmin}}_{\theta\in\R^k}\|Y-X \theta\|^2$$  
+ et l'avant derni\`ere colonne donne les $t$-values
+$$\hat t_{j}={\widehat\theta_{j}\over \sqrt{\hat \sigma^2[(X^TX)^{-1}]_{jj}}}\quad\textrm{o\`u}\quad \widehat \sigma^2={1\over n-k}\|Y-X\widehat\theta\|^2.$$
+ La derni\`ere colonne donne les $p$-values $\hat p_{j}= \mathcal{T}_{n-k}(\hat t_{j})$ o\`u $\mathcal{T}_{n-k}(t)=\p(|T_{n-k}|>|t|)$  avec $T_{n-k}$ une variable de Student \`a $n-k$ degr\'es de libert\'e.
+
+
+
+\subsection*{A) Inspection des r\'esidus}
+\begin{enumerate}
+\item Calculer avec la fonction {\tt lm} la r\'egression de O3 par rapport aux autres variables. Identifier $Y$ et $X$ dans ce cas.  Que vaut $n$? Que vaut $k$?
+\item On note $\hat\xi=Y-\hat Y$ o\`u $\hat Y=X\widehat \theta$. Tracer l'histogramme des $\{\hat \xi_{i}:i=1,\ldots,n\}$ \`a l'aide de la fonction ${\tt hist}$. 
+\item L'histogramme sugg\`ere que les r\'esidus pourraient suivre une loi Gaussienne. On va inspecter cette hypoth\`ese en regardant les quantiles de la loi empirique. On note $x_{q}(Q)=\min\{x : {Q}(]-\infty,x])\geq q\}$ le quantile d'ordre $q$ d'une loi $Q$. Tracer le QQplot 
+\begin{verbatim}
+qqnorm(lm(O3~.,data=ozone)$residuals)
+\end{verbatim}
+ Que repr\'esente ce graphique?
+ \item Pour savoir si la variance d\'epend du signal tracer les points $\big\{(\hat Y_{i},|\hat\xi_{i}|):i=1,\ldots,n\big\}$ \`a l'aide de la fonction {\tt plot}. Effectuer la r\'egression des $|\hat\xi_{i}|$ en fonction des $\hat Y_{i}$.
+\end{enumerate}
+
+
+\subsection*{B) Choix des variables}
+\begin{enumerate}
+\item Quelles variables $j$ ont une $p$-value $\hat p_{j}$ inf\'erieure \`a 5\%?
+\item Calculer la r\'egression de O3 par rapport \`a Ne12+O3v et inspecter les r\'esidus comme pr\'ec\'edemment.
+\item Calculer la r\'egression de O3 par rapport \`a Ne12+O3v+T15+Vx. Que constatez-vous au niveau des  $p$-values $\hat p_{j}$?
+\end{enumerate}
+
+
+
+\subsection*{C) R\'egressions partielles}
+Dor\'enavant on ne travaille qu'avec les variables Ne12, O3v, T15 et Vx. On veut inspecter les questions suivantes:
+\begin{itemize}
+\item le mod\`ele lin\'eaire par rapport \`a la variable $j$ est-il raisonnable?
+\item quelle est l'influence de la variable $j$?
+\end{itemize}
+\begin{enumerate}
+\item Montrer que si le mod\`ele $Y=\sum_{k}\theta_{k}X_{k}+\xi$ est vrai, alors:
+
+lm($Y\sim -X_{j}$)\$residuals = $\theta_{j}\times$ lm($X_{j} \sim -X_{j}$)\$residuals + lm($\xi \sim -X_{j}$)\$residuals 
+
+o\`u lm($Z\sim -X_{j}$) repr\'esente la r\'egression de $Z$ par rapport \`a toutes les variables $X_{1},\ldots,X_{k}$ sauf $X_{j}$.
+\item Si les $\xi_{1},\ldots,\xi_{n}$ sont i.i.d.\ de loi $\mathcal{N}(0,\sigma^2)$,
+quelle est la loi du vecteur lm($\xi \sim -X_{j}$)\$residuals?
+\item Calculer la r\'egression de lm($Y\sim -X_{j}$)\$residuals par lm($X_{j} \sim -X_{j}$)\$residuals pour $j=$Ne12. Le mod\`ele lin\'eaire semble-t-il raisonnable pour cette variable?
+\item M\^eme question avec la variable $j=$T15.
+ \end{enumerate}
+
+
+
+
+\section{Test dans un mod\`ele ANOVA}
+
+
+On dispose de l'observation de variables al\'eatoires
+$$
+Y_{ij}= m_i + \xi_{ij}, \quad i=1,\dots, k, \quad j=1,\dots, l,
+$$
+o\`u $(m_1,\dots,m_k)\in \R^k$ et les $\xi_{ij}$ sont des variables
+al\'eatoires i.i.d. de loi ${\cal N}(0,\sigma^2)$. On consid\`ere le
+probl\`eme de test d'\'egalit\'e des moyennes
+$$ {\bf H}_0: m_1=m_2=\dots=m_k \quad\text{contre}\quad
+{\bf H}_1: \text{ $\exists i\not=i'$ tels que $m_i\not=m_{i'}$}.$$
+\begin{enumerate}
+\item Montrer qu'il s'agit d'un mod\`ele de r\'egression lin\'eaire
+avec la matrice ${\bf X}$ que l'on pr\'ecisera, ainsi que la
+matrice $B={\bf X}^T{\bf X}$ correspondante.
+\item Montrer que l'hypoth\`ese nulle s'\'ecrit
+$${\bf H}_0:\, m\in \Theta_0= \{m: Gm =0\}$$ avec la
+matrice $G$ que l'on pr\'ecisera.
+\item En d\'eduire la forme du test de Fisher dans ce contexte.
+\end{enumerate}
+
+
+
+
+\section{Th\'eor\`eme de Gauss-Markov}
+On consid\`ere le mod\`ele de r\'egression
+$$\underset{(n,1)}{Y}=\underset{(n,k)}{X}\underset{(k,1)}{\theta}
++\underset{(n,1)}{\xi}.$$ On suppose que $X$ est une matrice
+d\'eterministe, $\E[\xi]=0$, $\E[\xi\xi^T]=\sigma^2I_n$,
+Rang$(X)=k$. On note $\hat{\theta}$ l'estimateur des MC de $\theta$.
+\begin{enumerate}
+\item Montrer que $\hat{\theta}$ est sans biais et expliciter
+sa matrice de covariance.
+\item Soit $\tilde\theta$ un estimateur de $\theta$ linéaire en $Y$,
+i.e., $\tilde\theta = LY$ pour une matrice $L\in\R^{k\times n}$ d\'eterministe. Donner une condition nécessaire et suffisante sur $L$ pour
+que $\tilde\theta$ soit sans biais. On supposera maintenant cette
+hypothèse vérifiée.
+\item Calculer la matrice de covariance de $\tilde\theta$.
+En posant $\Delta=L-(X^TX)^{-1}X^T$ montrer que $\Delta X=0$ et cov$(\tilde \theta)=\ $cov$(\hat\theta)+\sigma^2\Delta\Delta^T$.
+En d\'eduire que
+$$
+\E[(\tilde\theta - \theta)(\tilde\theta - \theta)^T]\ge \E[(\hat{\theta} -
+\theta)(\hat{\theta} - \theta)^T] \quad\textrm{(in\'egalit\'e au sens matriciel).}
+$$
+\item En passant au risques quadratiques
+$\E\big[\|\tilde\theta - \theta\|^2\big]$ et $\E\big[\|\hat{\theta} -
+\theta\|^2\big]$, en d\'eduire que l'estimateur des MC est optimal
+dans la classe de tous les estimateurs lin\'eaires sans biais.
+
+\end{enumerate}
+
+
+\section{R\'egression Ridge}
+On consid\`ere le mod\`ele de r\'egression
+$$\underset{(n,1)}{Y}=\underset{(n,k)}{X}\underset{(k,1)}{\theta}+
+\underset{(n,1)}{\xi}.$$ On suppose que $X$ est une matrice
+d\'eterministe, $\E[\xi]=0$, $\E[\xi\xi^T]=\sigma^2I_n$.
+\begin{enumerate}
+\item On suppose que $k> n$. Que dire de l'estimation par moindres carr\'es?
+\item On appelle estimateur \texttt{Ridge regression} de
+param\`etre de r\'egularisation $\lambda>0$ l'estimateur
+$$
+\hat \theta_{\lambda}= \arg \min_{\theta\in\R^k}\left\{
+\|Y-X\theta\|^2+\lambda \|\theta\|^2\right\}.
+$$
+Exprimez $\hat \theta_{\lambda}$ en fonction de $X$, $Y$ et
+$\lambda$. Cet estimateur est-il d\'efini pour $k>n$?
+\item Calculez la moyenne et la matrice de covariance de
+l'estimateur Ridge. Est-il sans biais?
+\item On suppose maintenant que $k=1$, ce qui correspond
+au mod\`ele de r\'egression simple.
+ Montrer qu'il existe une valeur de $\lambda$ telle que, pour certaines valeurs de $\theta$,  le risque $\E\big[(\hat\theta_\lambda - \theta)^2\big]$ de l'estimateur Ridge de param\`etre $\lambda$ est inf\'erieur au risque  $\E\big[(\hat\theta_0 - \theta)^2\big]$ de l'estimateur des MC.
+\end{enumerate}
+
+
+
+
+
+
+
+
+\end{document}

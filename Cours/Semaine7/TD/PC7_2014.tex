@@ -1,0 +1,75 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{fancybox}
+\pagestyle{plain}
+
+\begin{document}
+
+\title{{\bf MAP433 Statistique}\\
+{\bf PC7:  Test du $\chi^{2}$. R\'{e}gression lin\'{e}aire}}
+\date{}
+\maketitle
+
+\subsection*{1 Test d'ad\'{e}quation du $\chi^{2}$}
+
+Une vaste enqu\^{e}te au sein d'un central t\'{e}l\'{e}phonique a permis de d\'{e}terminer que le nombre d'appels re\c{c}us durant une seconde suit une loi de Poisson de param\`{e}tre 4.
+
+Pour un second central t\'{e}l\'{e}phonique, on effectue une enqu\^{e}te de moindre envergure afin de v\'{e}rifier si le nombre d'appels re\c{c}us par seconde suit la m\^{e}me loi. On comptabilise lors de 200 secondes, le nombre d'appels par seconde, ce qui produit les r\'{e}sultats suivants:
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|l|}{Nombre d'appels par seconde}&	\multicolumn{1}{|l|}{$0$}&	\multicolumn{1}{|l|}{ $1$}&	\multicolumn{1}{|l|}{ $2$}&	\multicolumn{1}{|l|}{ $3$}&	\multicolumn{1}{|l|}{ $4$}&	\multicolumn{1}{|l|}{ $5$}&	\multicolumn{1}{|l|}{ $6$}&	\multicolumn{1}{|l|}{ $7$}&	\multicolumn{1}{|l|}{ $8$}&	\multicolumn{1}{|l|}{ $9$}&	\multicolumn{1}{|l|}{ $10$}&	\multicolumn{1}{|l|}{ $11$}	\\
+\hline
+\multicolumn{1}{|l|}{Effectifs observ\'{e}s}&	\multicolumn{1}{|l|}{$6$}&	\multicolumn{1}{|l|}{ $15$}&	\multicolumn{1}{|l|}{ $40$}&	\multicolumn{1}{|l|}{ $42$}&	\multicolumn{1}{|l|}{ $37$}&	\multicolumn{1}{|l|}{ $30$}&	\multicolumn{1}{|l|}{ $10$}&	\multicolumn{1}{|l|}{ $9$}&	\multicolumn{1}{|l|}{ $5$}&	\multicolumn{1}{|l|}{ $3$}&	\multicolumn{1}{|l|}{ $2$}&	\multicolumn{1}{|l|}{ $1$}	\\
+\hline
+\end{tabular}
+
+\end{center}
+On note $N_{i}$ le nombre d'appels re\c{c}us entre les secondes $i$ et $i+1$ et on suppose les $N_{i}$ ind\'{e}pendantes. Enfin on note $N_{i}'=\displaystyle \min(N_{i},\ 8)$ .
+\begin{enumerate}
+\item On note $Q$ la loi de $\displaystyle \min(N,\ 8)$ o\`{u} $N$ suit une loi de Poisson de param\`{e}tre 4. Tester l'ad\'{e}quation des $N_{i}'$ \`{a} cette loi $Q.$
+\item On suppose maintenant que les $N_{i}$ sont ind\'{e}pendants et suivent une loi de Poisson de param\`{e}tre $\lambda$. Proposez un test de niveau asymptotique 5\% de $\lambda=4$ contre $\lambda\neq 4.$
+\end{enumerate}
+Table de la loi de Poisson:
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|l|}{$k$}&	\multicolumn{1}{|l|}{ $0$}&	\multicolumn{1}{|l|}{ $1$}&	\multicolumn{1}{|l|}{ $2$}&	\multicolumn{1}{|l|}{ $3$}&	\multicolumn{1}{|l|}{ $4$}&	\multicolumn{1}{|l|}{ $5$}&	\multicolumn{1}{|l|}{ $6$}&	\multicolumn{1}{|l|}{ $7$}&	\multicolumn{1}{|l|}{ $8$}&	\multicolumn{1}{|l|}{ $9$}&	\multicolumn{1}{|l|}{ $10$}&	\multicolumn{1}{|l|}{ $11$}&	\multicolumn{1}{|l|}{ $12$}&	\multicolumn{1}{|l|}{ $13$}	\\
+\hline
+\multicolumn{1}{|l|}{ $\mathbb{P}_{4}[X=k]$}&	\multicolumn{1}{|l|}{ $.018$}&	\multicolumn{1}{|l|}{ $073$}&	\multicolumn{1}{|l|}{ $.146$}&	\multicolumn{1}{|l|}{ $.195$}&	\multicolumn{1}{|l|}{ $.195$}&	\multicolumn{1}{|l|}{ $.156$}&	\multicolumn{1}{|l|}{ $.104$}&	\multicolumn{1}{|l|}{ $059$}&	\multicolumn{1}{|l|}{ $03$}&	\multicolumn{1}{|l|}{ $.013$}&	\multicolumn{1}{|l|}{ $005$}&	\multicolumn{1}{|l|}{ $.002$}&	\multicolumn{1}{|l|}{ $6.10^{-4}$}&	\multicolumn{1}{|l|}{ $2.10^{-4}$}	\\
+\hline
+\end{tabular}
+
+\end{center}
+\subsection*{2 Mod\`{e}le de r\'{e}gression multiple}
+
+On consid\`{e}re le mod\`{e}le de r\'{e}gression multiple
+\begin{center}
+$ y=\theta_{0}e+X\theta+\xi$, o\`{u} $\mathrm{E}[\xi]=0, \mathrm{E}[\xi\xi^{T}]=\sigma^{2}I_{n}, e=(1,1,\ \ldots,\ 1)^{T}$
+\end{center}
+avec $X$ une matrice $n\times k$ de rang $k$ et $y, \xi$ des vecteurs de $\mathbb{R}^{n}$. Les param\`{e}tres $\theta_{0}\in \mathbb{R}$ et $\theta\in \mathbb{R}^{k}$ sont inconnus. On note $\hat{\theta}_{0}$ et $\hat{\theta}$ les estimateurs des moindres carr\'{e}s de $\theta_{0}$ et $\theta.$
+\begin{enumerate}
+\item On note $\hat{y}=\hat{\theta}_{0}e+X\hat{\theta}$. Montrer que $\overline{\hat{y}}=\overline{y}$, o\`{u} $\overline{y}$ (resp. $\overline{\hat{y}}$) est la moyenne des $y_{i}$ (resp. des $\hat{y}_{i}$) . En d\'{e}duire que $\overline{y}=\hat{\theta}_{0}+X^{-}\hat{\theta}$ o\`{u} $\displaystyle \overline{X}=\frac{1}{n}e^{T}X=(X_{1}^{-},\ \ldots,\ X_{k}^{-})$ .
+\item  Montrer l'\'{e}quation d'analyse de la variance:
+$$
+\Vert y-\overline{y}e\Vert^{2}=\Vert y-\hat{y}\Vert^{2}+\Vert\hat{y}-\overline{y}e\Vert^{2}
+$$
+En d\'{e}duire que le {\it coefficient de determination}
+$$
+R^{2}=\frac{\sum_{i=1}^{n}(\hat{y}_{i}-\overline{y})^{2}}{\sum_{i=1}^{n}(y_{i}-\overline{y})^{2}}
+$$
+est toujours inf\'{e}rieur \`{a} 1.
+\item Supposons que $Z=[e,\ X]$ est de rang $k+1$. Calculez en fonction de $Z$ la matrice de covariance de $(\hat{\theta}_{0},\hat{\theta})$ . Comment acc\`{e}de-t-on \`{a} $\mathrm{Var}(\hat{\theta}_{j})$ , pour $j=0, \ldots,p$ ?
+\item  On suppose dor\'{e}navant que $\theta_{0}=0$ et donc
+$$
+y=X\theta+\xi,\ \mathrm{E}[\xi]=0,\ \mathrm{E}[\xi\xi^{T}]=\sigma^{2}I_{n}.
+$$
+L'estimateur des moindres carr\'{e}s $\tilde{\theta}$ dans ce mod\`{e}le est-il \'{e}gal \`{a} $\hat{\theta}$ ?
+\item A-t-on la relation $\overline{\hat{y}}=\overline{y}$? Que dire du $R^{2}$ dans ce mod\`{e}le?
+\end{enumerate}
+\end{document}
