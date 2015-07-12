@@ -1,0 +1,254 @@
+
+\section{Transform{\'e}e de Fourier sur $L^1(\rset)$}
+
+Nous abordons dans cette partie la d{\'e}finition et les propri{\'e}t{\'e}s de la transform{\'e}e de Fourier des fonctions. L'essentiel
+concerne les r{\`e}gles de calcul qu'il faut savoir manipuler couramment.
+
+\begin{definition}[Transform{\'e}e de Fourier]
+Soit $f \in L_1(\rset)$. On pose, pour tout $\xi\in\rset$,
+\begin{align}
+\label{eq:TFL1}
+&[\TFA{f}](\xi)= \hat{f}(\xi) = \int_{\rset} \rme^{- \rmi 2 \pi \xi x} f(x) \rmd x \\
+&[\TFAC{f}](\xi) = \int_{\rset} \rme^{ \rmi 2 \pi \xi x} f(x) \rmd x
+\end{align}
+On appelle $\TFA{f}$ (not{\'e} aussi $\TF f$) la \emph{Transform{\'e}e de Fourier} de $f$ et $\TFAC{f}$  (not{\'e} aussi $\TFC f$) la
+transform{\'e}e de Fourier conjugu{\'e}e de $f$.
+\end{definition}
+Cette int{\'e}grale a un sens pour $f \in L_1(\rset)$, parce que $x\mapsto \rme^{- \rmi 2 \pi \xi x} f(x)$ est alors aussi dans
+$L_1(\rset)$ pour tout $\xi\in\rset$.
+\begin{example}
+Soit $f = \1_{[a,b]}(x)$, la fonction indicatrice de l'intervalle $[a,b]$. Un calcul imm{\'e}diat montre que
+$$
+\hat{f}(\xi) =
+\begin{cases}
+b-a & \quad \xi = 0, \\
+\frac{\sin \pi (b-a) \xi}{\pi \xi} \rme^{- \rmi \pi (a+b) \xi} & \quad \xi\neq0\eqsp.
+\end{cases}
+$$
+On remarque que, pour cette exemple, $\hat{f}$ n'est pas dans $L_1(\rset)$. En revanche c'est une fonction continue born{\'e}e
+qui tend vers zero aux deux extr{\'e}mit{\'e}s de la droite r{\'e}elle.
+\end{example}
+En fait les propri{\'e}t{\'e}s d{\'e}crites pour $\hat{f}$ dans cet exemple sont des propri{\'e}t{\'e}s g{\'e}n{\'e}rales des
+fonctions de $\TF(L^1(\rset))$ comme le montre le r{\'e}sultat suivant.
+
+\begin{theorem}[Rieman-Lebesgue]
+\label{thm:rieman-lebesgue}
+Etant donn{\'e} $f \in L_1(\rset)$ on a
+\begin{enumerate}
+\item $\TF f$ est une fonction continue et born{\'e}e sur $\rset$,
+\item $\TF$ est un op{\'e}rateur lin{\'e}aire et continu de $(L_1(\rset),\|\cdot\|_1)$ dans $(C_\infty,\|\cdot\|)$ (l'espace des
+  fonctions continues munie de la norme sup) et $\| \hat{f} \| \leq \| f \|_1$,
+\item $\lim_{|\xi| \to \pm \infty} |\hat{f}(\xi) |= 0 $.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}
+\item La continuit{\'e} de $\hat{f}$ d{\'e}coule directement de la continuit{\'e} de l'int{\'e}grale \eqref{eq:TFL1} par rapport au param{\`e}tre
+  $\xi$ par convergence domin{\'e}e. En effet, la fonction $\xi \mapsto \rme^{- \rmi 2 \pi \xi x} f(x)$ est continue sur $\rset$
+  et major{\'e}e en module par $|f(x)|$ (qui ne d{\'e}pende pas de $\xi$), qui est dans $L_1(\rset)$.
+\item La lin{\'e}arit{\'e} de $\TF$ d{\'e}coule directement de celle de l'int{\'e}grale. Pour tout $\xi \in \rset$, on a $|\hat{f}(\xi)| \leq
+  \int |f(x)| \rmd x = \| f \|_1$. On en d{\'e}duit que $\hat{f}$ est born{\'e}e par $\| f\|_1$ et que $\TF$ est continue.
+\item Supposons tout d'abord que $f$ est continue {\`a} support compact (il existe $M>0$ tel que $f(x)=0$ si $|x|>M$). Par
+  changement de variable $x=t-1/(2\xi)$ dans~(\ref{eq:TFL1}), on a, pour tout $\xi\neq0$,
+$$
+\hat{f}(\xi) = \int_{\rset} \rme^{- \rmi 2 \pi \xi t - \rmi \pi} f(t+1/(2\xi)) dt =
+- \int_{\rset} \rme^{- \rmi 2 \pi \xi t} f(t+1/(2\xi)) dt.
+$$
+D'o{\`u} l'expression, en sommant cette {\'e}quation avec~(\ref{eq:TFL1}),  pour tout $\xi\neq0$,
+$$
+2 \hat{f}(\xi) = \int_{\rset} \rme^{- \rmi 2 \pi \xi x} (f(x)-f(x+1/(2\xi))) \,\rmd x
+$$
+Il s'en suit, par convergence domin{\'e}e (en observant que $|f(x)-f(x+1/(2\xi))|$ est major{\'e} ind{\'e}pendamment de $x$ et $\xi$ et
+est nul pour $x\notin[-M-1,M+1]$ pour tout $|\xi|\geq1$),
+$$
+\lim_{|\xi| \to \pm \infty} |\hat{f}(\xi)| \leq \frac12 \lim_{|\xi| \to \pm \infty}
+\int_{\rset} |f(x)-f(x+1/(2\xi))| \,\rmd x = 0.
+$$
+Soit maintenant $f \in L_1(\rset)$. Il existe une suite $\{g_n\}$ de fonctions continues dans $L_1(\rset)$ telles que $\|f - g_n \|_1 \to 0$. Comme,
+$\|\hat{f} - g_n\|_\infty \leq \| f - g_n \|_1$ et $\lim_{\xi \to \pm \infty} g_n(\xi) = 0$,
+on en d{\'e}duit ais{\'e}ment que $\lim_{\xi  \to \pm \infty} \hat{f}(\xi)= 0$.
+\end{enumerate}
+\end{proof}
+
+La propri{\'e}t{\'e} {\`a} la fois la plus imm{\'e}diate et la plus  fondamentale de la transform{\'e}e de Fourier est son effet sur les
+translations.
+\begin{proposition}[Transform{\'e}e de Fourier et translation]
+\label{prop:FourierTranslation}
+Soit $f\in L_1(\rset)$. Alors, pour tout $t\in\rset$, les fonctions $x\mapsto f(x-t)$ et
+$x\mapsto \rme^{\rmi 2 \pi t}f(x)$ sont dans $L_1(\rset)$ et v{\'e}rifient
+\begin{enumerate}
+\item $[\TFA{x\mapsto f(x-t)}](\xi)=\rme^{- \rmi 2 \pi t}\hat{f}(\xi)$ pour tout $\xi\in\rset$;
+\item $[\TFA{x\mapsto  \rme^{\rmi 2 \pi t}f(x)}](\xi)=\hat{f}(\xi-t)$ pour tout $\xi\in\rset$.
+\end{enumerate}
+\end{proposition}
+
+
+Une des propri{\'e}t{\'e}s remarquables de la transform{\'e}e de Fourier est d'{\'e}changer la \emph{d{\'e}rivation} et la multiplication par un mon{\^o}me
+\begin{proposition}[Transform{\'e}e de Fourier et D{\'e}rivation]
+\label{prop:FourierDerivation}
+Soit $n$ un entier naturel.
+\begin{enumerate}
+\item Si $x\mapsto x^k f(x)$ est dans $L_1(\rset)$  pour tout $k=0,1, \dots, n$, alors $\hat{f}$ est $n$ fois contin\^ument
+  d{\'e}rivable et on a
+$$
+\hat{f}^{(n)} = \TFA{x\mapsto(-2 \rmi \pi x)^n f(x)}
+$$
+\item Si $f$ est $n$ fois continûment d{\'e}rivables avec $f^{(k)} \in L_1(\rset)$ pour tout $k=0,1, \dots, n$, alors
+$$
+[\TF(f^{(n)})](\xi) = (2 \rmi \pi \xi)^n \hat{f}(\xi) \quad\text{pour tout $\xi\in\rset$}\eqsp.
+$$
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Dans les deux cas, il suffit de d{\'e}montrer le r{\'e}sultat pour $n=1$ puis d'appliquer une r{\'e}currence {\'e}vidente.
+\begin{enumerate}
+\item La fonction $h:\xi \mapsto \rme^{- \rmi 2 \pi \xi x} f(x)$ est contin\^ument d{\'e}rivable
+et $h'(\xi)= -2 \rmi \pi x \rme^{- \rmi 2 \pi \xi x} f(x)$. De plus $|h'(\xi)| \leq 2 \pi |xf(x)|$.
+Le r{\'e}sultat d{\'e}coule du th{\'e}or{\`e}me de d{\'e}rivation sous le signe somme.
+\item Comme $f' \in L_1(\rset)$, on peut calculer $\TFA{f'}$ par la formule
+$$
+[\TFA{f'}](\xi) = \lim_{a \to \infty} \int_{-a}^a \rme^{- \rmi 2 \pi \xi x} f'(x) \rmd x, \quad\xi\in\rset\eqsp.
+$$
+De plus, par int{\'e}gration par parties, pour tout $\xi\in\rset$ et tout  $a>0$,
+$$
+\int_{-a}^{+a} \rme^{- \rmi 2 \pi \xi x} f'(x) \rmd x = [ \rme^{- \rmi 2 \pi \xi x} f(x) ]_{-a}^a + \int_{-a}^a (2 \rmi \pi \xi) \rme^{- \rmi 2 \pi \xi x} f(x) \rmd x \eqsp.
+$$
+Comme $f' \in L_1(\rset)$ et $f(a) = f(0) + \int_0^a f'(t) \rmd x$, $\lim_{a \to \infty} \int_0^a f'(t) \rmd x$ existe et donc
+$\lim_{a \to \infty} f(a) $ existe. Cette limite est n{\'e}cessairement nulle car $f \in L_1(\rset)$. De la m{\^e}me façon,
+$\lim_{a \to \infty} f(-a) = 0$. D'o{\`u} le r{\'e}sultat.
+\end{enumerate}
+\end{proof}
+
+La proposition suivante sera tr{\`e}s utile pour {\'e}tablir des formules d'inversion de la transform{\'e}e de Fourier.
+\begin{proposition}
+\label{prop:echangeTF}
+Soit $f$ et $g$ deux fonctions de $L_1(\rset)$. Alors $f \hat{g}$ et $\hat{f}g$ sont dans $L_1(\rset)$ et on a
+\begin{equation}
+\label{eq:echange}
+\int f(x) \hat{g}(x) \rmd x = \int \hat{f}(x) g(x) \rmd x \eqsp.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Comme $\hat{g} \in L_\infty(\rset)$, les fonctions $f \hat{g}$ et
+$\hat{f} g$ appartiennent {\`a} $L_1(\rset)$. Comme la fonction $(t,x)
+\mapsto \rme^{- \rmi 2 \pi t x} f(t) g(x) \in L_1(\rset^2)$, il
+r{\'e}sulte du th{\'e}or{\`e}me de Fubini que
+\begin{multline*}
+\int f(t) \hat{g}(t) dt = \int f(t) \left( \int \rme^{- \rmi 2 \pi t x} g(x) \rmd x \right) dt =
+\\ \int g(x) \left( \int \rme^{- \rmi 2 \pi t x} f(t) dt \right) \rmd x = \int g(x) \hat{f}(x) \rmd x\eqsp.
+\end{multline*}
+\end{proof}
+
+
+\section{D{\'e}croissance et d{\'e}rivation}
+%Nous avons observ{\'e} dans la partie pr{\'e}c{\'e}dente la n{\'e}cessit{\'e} de restreindre l'espace $L_1(\rset)$
+%pour pour d{\'e}finir la transform{\'e}e de Fourier inverse.
+Nous avons observ{\'e} dans la partie pr{\'e}c{\'e}dente d{\'e}s le premier exemple de calcul de transform{\'e}e de Fourier
+que $L_1(\rset)$  n'est pas stable sous l'effet de $\TF$.
+Nous allons introduire un sous-espace de $L_1(\rset)$ stable par transformation de Fourier,
+d{\'e}rivation et multiplication par un polyn{\^o}me. Cet espace introduit par Laurent Schwartz et que l'on notera $\mcs$, est {\`a} la
+base de beaucoup de constructions analytiques autour de la transform{\'e}e de Fourier.
+
+\begin{definition}[Fonction {\`a} d{\'e}croissance rapide]\index{Fonction|{\`a}
+    d{\'e}croissance rapide}
+Une fonction $f : \rset \to \cset$ est dite {\`a} \emph{d{\'e}croissance rapide} si, pour tout $p \in \nset$,
+on a
+$$
+\lim_{|x| \to \infty} |x|^p |f (x)| = 0 \eqsp.
+$$
+\end{definition}
+C'est le cas par exemple de $f (x) = \rme^{-|x|}$.
+Mais on notera que contrairement {\`a} son nom, cette d{\'e}finition n'implique aucune monotonie pour
+$f$ m{\^e}me dans un voisinage de l'infini (prendre par exemple $f (x) = \rme^{-|x|} \sin x$).
+Une propri{\'e}t{\'e} utile sur l'int{\'e}grabilit{\'e} des fonctions {\`a} d{\'e}croissance rapide est la suivante.
+\begin{lemma}
+\label{lem:decroissancerapide}
+ Si $f$ est une fonction de $L_{1\mathrm{loc}}(\rset)$ {\`a} d{\'e}croissance rapide alors pour tout
+ $p \in \nset$, $x \mapsto x^p f (x)$ appartient {\`a} $L_1(\rset)$.
+\end{lemma}
+\begin{proof}
+L'indice ``loc'' signifie que la restriction de $f$ {\`a} tout compact est dans $L_1(\rset)$.
+ $f$ {\'e}tant {\`a} d{\'e}croissance rapide, il existe $M > 0$ tel que pour tout $|x| \geq  M$,
+on ait $|x|^{p+2} |f(x)| \leq  1$. D'o{\`u}
+\begin{align*}
+\int |x^p f(x)| \rmd x &\leq \int_{|x| \leq M}  |x|^p |f(x)| \rmd x+ \int_{|x| > M} |x|^{-2} |x^{p+2}  f(x)| \rmd x \\
+&\leq  M^p \int_{|x| \leq M} |f(x)|\, \rmd x +  \int_{|x| > M}   x^{-2} \rmd x < \infty\eqsp.
+\end{align*}
+\end{proof}
+On en d{\'e}duit une propri{\'e}t{\'e} remarquable de la transform{\'e}e de Fourier des fonctions {\`a} d{\'e}croissance rapide.
+\begin{proposition}
+\label{prop:1913}
+Soit $f$ une fonction de $L_1(\rset)$ {\`a} d{\'e}croissance rapide. Alors $\hat{f}$ est ind{\'e}finiment d{\'e}rivable.
+\end{proposition}
+\begin{proof}
+D'apr{\`e}s la proposition \ref{prop:FourierDerivation}, $\hat{f}$ est dans $C_\infty(\rset)$ d{\'e}s que, pour tout $p \in  \nset$,
+$x^p f (x)$ est dans $L_1(\rset)$; ce qui est assur{\'e} par  le lemme \ref{lem:decroissancerapide}.
+\end{proof}
+Inversement si $f$ est dans $C_\infty(\rset)$ quelles propri{\'e}t{\'e}s poss{\`e}de $\hat{f}$ ? Le r{\'e}sultat suivant am{\`e}ne un {\'e}l{\'e}ment de r{\'e}ponse.
+
+\begin{proposition}
+\label{prop:1914}
+Soit $f$ une fonction de $C_\infty(\rset)$. Si pour tout $k \in \nset$, $f^{(k)}$ est dans $L_1(\rset)$
+alors $\hat{f}$ est {\`a} d{\'e}croissance rapide.
+\end{proposition}
+\begin{proof}
+D'apr{\`e}s la proposition \ref{prop:FourierDerivation} on a, pour tout $k \in \nset$,
+$\widehat{f^{(k)}}(\xi) = (2 \rmi \pi \xi)^k \hat{f}(\xi)$.
+En appliquant le th{\'e}or{\`e}me de Riemann-Lebesgue,  il vient $\lim_{|\xi| \to \infty} |\xi|^k |\hat{f}(\xi)| = 0$.
+\end{proof}
+Autrement dit nous venons de voir que
+\begin{enumerate}
+\item plus $f$ d{\'e}cro{\^i}t rapidement {\`a} l'infini, plus $\hat{f}$ est r{\'e}guli{\`e}re;
+\item plus $f$ est r{\'e}guli{\`e}re, plus $\hat{f}$ d{\'e}cro{\^i}t rapidement {\`a} l'infini.
+En particulier si $f \in C_\infty(\rset)$ et est {\`a} d{\'e}croissance rapide, il en est de m{\^e}me pour
+$\hat{f}$.
+\end{enumerate}
+
+\section{Un exemple remarquable}
+
+Nous allons consid{\'e}rer une famille de fonctions  qui reste stable par transformation de Fourier.
+
+On introduit pour tout $\sigma > 0$ la fonction de \emph{densit{\'e} gaussienne}
+\index{Densit{\'e} gaussienne}
+\begin{equation}
+  \label{eq:gauss_func}
+  g_\sigma(x)=\frac{1}{\sigma \sqrt{2 \pi} }\rme^{- \xi^2/2 \sigma^2}.
+\end{equation}
+
+
+\begin{lemma}\label{lem:gaussenneTF}
+La fonction  $g_1(x)= 1 / \sqrt{2\pi} \exp( -x^2/2)$ est la densit{\'e} d'une probabilit{\'e} sur $\rset$, et sa transform{\'e}e de Fourier
+est $\hat{g_1}(\xi)= \rme^{- 2 \pi^2 \xi^2}$.
+\end{lemma}
+\begin{proof}
+La fonction  est positive et v{\'e}rifie  $\int_\rset g_1(x) \rmd x= 1$ (on peut le montrer en exercice en {\'e}crivant le carr{\'e} de
+l'int{\'e}grale comme une double int{\'e}grale).
+
+La fonction $x\mapsto xg_1(x)$ {\'e}tant aussi dans $L_1(\rset)$, on peut appliquer la
+proposition~\ref{prop:FourierDerivation}(i), et on obtient, pour tout $\xi\in\rset$,
+$$
+\hat{g_1}'(\xi) = - 2\rmi \pi \int x \,g_1(x) \rme^{- \rmi 2 \pi \xi x} \rmd x \eqsp.
+$$
+Un calcul imm{\'e}diat donne $g_1'(x)= -xg_1(x)$; une int{\'e}gration par partie donne donc
+$$
+\hat{g_1}'(\xi) = - 2\rmi \pi  \int g_1'(x) \,(- \rmi 2 \pi \xi)\,\rme^{- \rmi 2 \pi \xi x} \rmd x \eqsp.
+$$
+D'o{\`u} l'on tire finalement que $\hat{g_1}' = - 4 \pi^2 \xi \hat{g_1}$.
+La solution g{\'e}n{\'e}rale de l'{\'e}quation diff{\'e}rentielle {\`a} variables s{\'e}parables  $f'(u)= - 4 \pi^2 u f(u)$
+{\'e}tant $f(u) = C \rme^{- 2 \pi^2 u^2}$, et comme on a  $\hat{g_1}(0) = \int g_1(x) \rmd x = 1$,
+on voit que n{\'e}cessairement $\hat{g_1}(\xi)= \rme^{-2 \pi^2 \xi^2}$.
+\end{proof}
+
+Par un changement de variable {\'e}vident, ce r{\'e}sultat se g{\'e}n{\'e}ralise ais{\'e}ment {\`a} tout $\sigma>0$. En particulier,
+\begin{equation}\label{eq:gaussienneTF}
+\hat{g_\sigma}(\xi) =  \rme^{-2 \pi^2 (\xi\sigma)^2} = \frac1{\sigma\sqrt{2\pi}}\,g_{1/2\pi\sigma}(\xi),\quad\xi\in\rset.
+\end{equation}
+
+Comme r{\'e}v{\'e}l{\'e} plus haut, la famille $(g_\sigma)_{\sigma>0}$ est donc stable par
+transform{\'e} de Fourier. 
+
+%%% Local Variables:
+%%% mode: latex
+%%% ispell-local-dictionary: "francais"
+%%% TeX-master: "Polycopie-Fourier-L1L2"
+%%% End:

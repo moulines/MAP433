@@ -1,0 +1,83 @@
+\documentclass[a4paper,11pt]{book}
+
+\usepackage[latin1]{inputenc}
+\usepackage[french]{babel}
+\usepackage{amsfonts,a4wide,amsmath,amssymb,bbm,fancyhdr,makeidx,latexsym,amsthm,amsbsy,amscd,amstext}
+
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{picins}
+%\usepackage{showkeys}
+
+
+
+\setlength{\parskip}{0.2cm}
+%\setlength{\textwidth}{12.4cm}
+\setlength{\textwidth}{360pt}
+%\setlength{\textwidth}{14.3cm}
+\setlength{\textwidth}{14.8cm}
+%\setlength{\textheight}{19.3cm}
+\setlength{\textheight}{20.4cm}
+%\setlength{\textheight}{21.4cm}
+\linespread{1}
+
+\voffset = 1cm
+
+\pagestyle{fancy}
+% Ceci permet dÕavoir les noms de chapitre et de section
+% en minuscules
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{} % supprime les en-ttes et pieds prŽdŽfinis
+\fancyhead[LE,RO]{\bfseries\thepage}% Left Even, Right Odd
+\fancyhead[LO]{\bfseries\rightmark} % Left Odd
+\fancyhead[RE]{\bfseries\leftmark} % Right Even
+\renewcommand{\headrulewidth}{0.5pt}% filet en haut de page
+\addtolength{\headheight}{0.5pt} % espace pour le filet
+\renewcommand{\footrulewidth}{0pt} % pas de filet en bas
+\fancypagestyle{plain}{ % pages de tetes de chapitre
+\fancyhead{} % supprime lÕentete
+\renewcommand{\headrulewidth}{0pt} % et le filet
+}
+
+\newtheorem{theorem}{Th{\'e}or{\`e}me}[section]
+\newtheorem{definition}[theorem]{D{\'e}finition}
+\newtheorem{corollary}[theorem]{Corollaire}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemme}
+\theoremstyle{break}
+\newtheorem{example}[theorem]{Exemple}
+\newtheorem{remark}[theorem]{Remarque}
+
+
+\input{Smacro}
+\input{notations-hilbertfourier}
+
+\title{Traitement du signal\\
+Partie II}
+\author{St\'ephane Mallat, Eric Moulines}
+\date{\ }
+\begin{document}
+\maketitle
+\tableofcontents
+\input{chapitre1}
+\chapter{Transform{\'e}e de Fourier: propri{\'e}t{\'e}s de base}
+\input{fourierL1}
+\input{fourierS}
+\chapter{Transform{\'e}e de Fourier-Plancherel et {\'e}chantillonnage}
+\input{fourierL2}
+\input{chapitre3}
+\chapter{Introduction au signal al\'eatoire \`a temps-discret}
+\input{IntroductionProcessus}
+\input{IntroductionSecondOrdre}
+\chapter{Filtrage des signaux al\'eatoires \`a temps-discret}
+\input{FiltrageProcessus}
+\chapter{Pr\'ediction des signaux al\'eatoires \`a temps-discret}
+\input{Prediction}
+%\input{chapitre5}
+\input{chapitre6}
+%\input{chapitre7}
+\input{chapitre8}
+\input{chapitre9}
+\input{Sbiblio}
+\end{document}

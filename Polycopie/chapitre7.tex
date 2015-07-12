@@ -1,0 +1,1124 @@
+\chapter{Analyse Temps-Fr\'equence}
+\label{chap-ana-temp-fre}
+
+En \'{e}coutant de la musique, 
+nous percevons clairement les variations temporelles
+des ``fr\'{e}quences'' sonores. 
+On met en \'{e}vidence les propri\'{e}t\'{e}s temporelles
+et fr\'equentielles
+des sons gr\^{a}ce \`{a} 
+la transform\'{e}e de Fourier \`a fen\^etre,
+qui d\'{e}compose les 
+signaux en fonctions \'{e}l\'{e}mentaires bien concentr\'{e}es en 
+temps et en fr\'{e}quence. La 
+mesure des variations temporelles des
+``fr\'{e}quences instantan\'{e}es'' est une application
+importante, qui illustre les limitations impos\'ees par
+le principe d'incertitude de Heisenberg.
+
+\section{Transform\'ee de Fourier \`a Fen\^etre}
+\label{temp-fre-se}
+
+On peut classifier les sons suivant leurs propri\'et\'es 
+fr\'equentielles. 
+Par exemple, les fr\'equences de r\'esonance du conduit
+vocale produisent des ``formants'' qui caract\'erisent les voyelles.
+La transform\'ee de Fourier ne peut pas \^etre utilis\'ee car
+\[
+\hat f (\om) = \int_{-\infty}^{+\infty} f(t) \Exp^{-i\om t} dt
+\]
+d\'epend des valeurs de $f(t)$ \`a tout instant. Pour diff\'erencier
+des sons produits successivement, on d\'efinit une  
+transform\'ee de Fourier \`a fen\^etre qui 
+s\'epare les diff\'erentes
+composantes du signal gr\^ace \`a une fen\^etre translat\'ee.
+
+La fen\^etre $g(t)$
+est une fonction paire dont le support est concentr\'e au
+voisinage de $0$. 
+La transform\'ee de Fourier \`a fen\^etre
+au voisinage de $u$, \`a la fr\'equence $\xi$ est d\'efinie par
+\[
+Sf(u,\xi) = \int_{-\infty}^{+\infty} f(t) \,g(t-u) \,\Exp^{-i\om t} dt .
+\]
+\\
+\\
+{\bf Localisation temps-fr\'equence}
+On d\'efinit
+\[
+g_\uxi (t) = g(t-u) \,\Exp^{i\xi t}
+\] 
+qui peut \^etre interpr\'et\'e comme une ``note de musique''
+localis\'ee au voisinage de $t =u$, et autour de 
+la fr\'equence $\xi$.
+La transform\'ee de Fourier \`a fen\^etre mesure la corr\'elation
+entre le signal $f(t)$ et cette note \'el\'ementaire
+\begin{equation}
+\label{temp-fre-at}
+Sf(u,\xi) = \int_{-\infty}^{+\infty} f(t) g_\uxi^*(t) dt .
+\end{equation}
+Comme $g$ est paire, $g_{u,\xi} (t ) = \Exp^{i \xi t}	g(t-u)$ en 
+centr\'{e} sur $u$. 
+Le produit $f\, g_\uxi$ isole donc les composantes de
+$f$ au voisinage de $u$, et $Sf(u,\xi)$ ne d\'epend que
+des propri\'et\'es de $f$ dans ce voisinage.
+L'\'{e}talement en temps de $g_\uxi$ est 
+ind\'{e}pendant de $u$ et de $\xi$:
+\begin{equation}
+\label{sigma-t}
+\sigma^2_t = \int_{-\infty}^{+\infty} (t-u) ^2 \,
+|g_\uxi (t)|^2\, dt = 
+\int_{-\infty}^{+\infty} t ^2 \,|g(t)|^2\, dt .
+\end{equation}
+
+Si l'on applique la formule de Parseval (\ref{parseval})
+\`a (\ref{temp-fre-at}), on obtient une int\'egrale fr\'equentielle
+\[
+Sf(u,\xi) = \frac 1 {2 \pi} 
+\int_{-\infty}^{+\infty} \hat f(\om) \,\hat g_\uxi^* (\om)\, d\om .
+\]
+La valeur $Sf(u,\xi)$
+ne d\'epend donc que du comportement de $\hat f (\om)$ dans
+le domaine fr\'equentiel o\`u $\hat g_\uxi^* (\om)$ n'est pas
+n\'egligeable.
+La transform\'{e}e de Fourier $\hat g$ de $g$ est r\'{e}elle et 
+sym\'{e}trique car $g$ est r\'{e}elle et sym\'{e}trique. 
+En utilisant les propri\'et\'es (\ref{trans}) et (\ref{modul}),
+on montre que
+la transform\'ee de Fourier de $g_\uxi (t) = g(t-u) e^{i\xi t}$
+peut s'\'ecrire
+\[
+\hat g_\uxi (\om) = \Exp^{-iu(\om-\xi)} \hat g(\om - \xi) .
+\] 
+C'est donc une fonction centr\'ee \`a la fr\'equence $\om = \xi$.
+Son \'{e}talement fr\'{e}quentiel autour de $\xi$ vaut
+\begin{equation}
+\label{sigma-om}
+\sigma^2_\om = \frac 1 {2 \pi}
+\int_{-\infty}^{+\infty} (\om-\xi) ^2\, |\hat g_\uxi (\om)|\, d\om = 
+\frac 1 {2 \pi} \int_{-\infty}^{+\infty} \om ^2\, |\hat g(\om)|\, d\om .
+\end{equation}
+Il est ind\'{e}pendant de $u$ et de $\xi$. 
+Dans un plan temps-fr\'equence $(t,\om)$, 
+on repr\'esente $g_{\uxi}$ par une 
+{\it bo\^{\i}te de Heisenberg} 
+de taille $\sigma_t \times \sigma_\om$, 
+centr\'{e}e en $(u,\xi)$, comme on peut le voir sur la figure 
+\ref{4.2}. 
+La taille de cette bo\^{\i}te ne d\'{e}pend pas de $(u,\xi)$, 
+ce qui veut dire que la r\'{e}solution de la transform\'{e}e de 
+Fourier fen\^{e}tr\'{e}e reste constante sur tout le plan 
+temps-fr\'{e}quence.
+
+\begin{figure}[bhtp]
+\centerline{
+        \epsfxsize=6cm
+        \leavevmode\epsfbox{figures/chap1/wf-tfloc.eps}}
+\caption{
+Les bo\^{\i}tes de Heisenberg de deux atomes de Fourier fen\^{e}tr\'{e}s
+$g_\uxi$ and $g_{\nu,\gamma}$.}
+\label{4.2}
+\end{figure}
+\\
+\\
+\noindent
+{\bf Incertitude de Heisenberg}
+Pour mesurer les composantes de $f$ et de $\hat f$ dans
+des petits voisinages de $u$ et $\xi$ il faut construire
+une fen\^etre $g(t)$ qui est 
+bien localis\'{e}e dans le temps, et dont l'\'{e}nergie de la 
+transform\'{e}e de Fourier est concentr\'{e}e dans un petit domaine 
+fr\'{e}quentiel. 
+Le Dirac $g(t) = \delta(t)$ a un support ponctuel $t=0$, 
+mais sa transform\'{e}e de Fourier  $\hat \delta (\om) = 1$ a une 
+\'{e}nergie qui est distribu\'{e}e uniform\'{e}ment sur toutes les 
+fr\'{e}quences. On sait que $|\hat g(\om)|$ d\'{e}croit rapidement 
+dans les hautes fr\'{e}quences seulement si $g(t)$ est une
+fonction qui varie r\'eguli\`erement.
+L'\'{e}nergie de $g$ est donc n\'ecessairement 
+r\'{e}partie sur un domaine temporel relativement large.
+
+Pour r\'{e}duire l'\'{e}talement temporel de $g$, 
+on peut op\'{e}rer un 
+changement d'\'{e}chelle de temps d'un facteur $s<1$ sans changer son 
+\'{e}nergie totale, soit
+\[
+g_s (t) = \frac 1 {\sqrt s} g( \frac t s ) ~~~\mbox{avec}~~~
+\| g_s \|^2 = \|g \|^2.
+\]
+La transform\'{e}e de Fourier $\hat g_s ( \om ) = \sqrt s\, \hat	g( s \om )$
+est dilat\'{e}e d'un facteur $1/s$, et on perd donc en fr\'{e}quentiel 
+ce qu'on a gagn\'{e} en temporel. On voit appara\^{\i}tre un compromis 
+entre la localisation en temps et celle en fr\'{e}quence.
+
+Les concentrations en temps en en fr\'{e}quences sont limit\'{e}es par 
+le principe d'incertitude d'Heisenberg\index{Principe 
+d'incertitude}\index{Heisenberg!principe d'incertitude}. Ce principe 
+d'incertitude \`{a} une interpr\'{e}tation, particuli\`{e}rement 
+importante en m\'{e}canique quantique, comme une incertitude sur la 
+position et l'impulsion d'une particule libre.
+Plus $\sigma_t$ et $\sigma_\om$ sont grandes, plus on a 
+d'incertitude 
+sur la position et l'impulsion de la particule libre.
+Le th\'eor\`eme suivant montre que le produit
+$\sigma_t \times \sigma_\om$ ne peut \^etre arbitrairement
+petit.
+
+\begin{theorem}
+[Incertitude de Heisenberg]
+\label{uncert}
+On suppose que $g \in \LD$ est une fonction centr\'ee en
+$0$ et dont la transform\'ee de Fourier est aussi centr\'ee en
+$0$:
+\[
+\int_{-\infty}^{+\infty} t \,|g(t)|^2\, dt = 
+\int_{-\infty}^{+\infty} \om \,|\hat g(\om)|^2\, d\om = 0 ~.
+\]
+Alors les variances definies en (\ref{sigma-t},\ref{sigma-om})
+satisfont
+\begin{equation}
+\label{uncertainty}
+\sigma^2_t\, \sigma^2_\om \geq \frac 1 4 .
+\end{equation}
+
+Cette in\'{e}galit\'{e} est une \'{e}galit\'{e} si et seulement si il 
+existe $(a,b) \in \C^2$  tel que
+\begin{equation}
+\label{Gabor}
+g(t) =  a \, \Exp^{-b t^2} .
+\end{equation}
+\end{theorem}
+
+{\bf D\'emonstration}
+La preuve suivante, due \`{a} Weyl, suppose que
+$\lim _{|t| \rightarrow + \infty} \sqrt t g(t) = 0$,
+mais le th\'{e}or\`{e}me est vrai pour tout $g \in \LD$. 
+Remarquons que
+\begin{equation}
+\sigma^2_t\, \sigma^2_\om = \frac 1 {2 \pi \|g\|^4}
+{\int_{- \infty}^{+ \infty} |t\, g(t)|^2\, dt} \,
+{\int_{- \infty}^{+ \infty} |\om\, \hat g( \om )|^2 \,d\om} .
+\end{equation}
+Comme $i	\om	\hat g(\om)$ est la transform\'{e}e de Fourier de $g'(t)$,
+l'identit\'{e} de Plancherel (\ref{plancherel}) appliqu\'{e}e \`{a} 
+$i	\om	\hat g(	\om	)$ donne
+\begin{equation}
+\label{tobeplisch}
+\sigma^2_t \sigma^2_\om = \frac 1 {\|g\|^4}
+{\int_{- \infty}^{+ \infty} |t \,g(t)|^2 \,dt} \,
+{\int_{- \infty}^{+ \infty} |g'( t )|^2\, dt} .
+\end{equation}
+L'in\'{e}galit\'{e} de Schwarz implique
+\begin{eqnarray*}
+\sigma^2_t \sigma^2_\om & \geq & \frac 1 {\|g\|^4}
+\left[ {\int_{- \infty}^{+ \infty} |t\, g'(t) \,g^* (t)|\, dt} \right]^2\\
+& \geq & \frac 1 {\|g\|^4} \left[
+{\int_{- \infty}^{+ \infty} \frac t 2\, [ g'(t)\, g^* (t) 
++ {g'}^*(t)\, g(t)]\, dt}
+\right]^2\\  
+&\geq &\frac 1 { 4 \|g\|^4}
+\left[ {\int_{- \infty}^{+ \infty} t \,(|g(t)|^2)'\, dt} \right]^2 .
+\end{eqnarray*}
+Comme
+$\lim _{|t| \rightarrow + \infty} \sqrt t \,g(t) = 0$,
+on obtient, apr\`{e}s int\'{e}gration par parties
+\begin{equation}
+\sigma^2_t \sigma^2_\om \geq \frac 1 { 4 \|g\|^4}
+\left[ {\int_{- \infty}^{+ \infty} |g(t)|^2 \,dt} \right]^2 
+= \frac 1 4 .
+\end{equation}
+Pour atteindre l'\'{e}galit\'{e}, il faut que l'in\'{e}galit\'{e} de 
+Schwarz appliqu\'{e}e \`{a} (\ref{tobeplisch}) soit elle-m\^{e}me une 
+\'{e}galit\'{e}. Cela implique qu'il existe $b \in \C$ tel que
+\begin{equation}
+g'(t) = -2\,b\, t\, g(t) .
+\end{equation}
+Il existe donc $a \in \C$ tel que
+$g(t) = a \,\Exp^{-b t^2}$.
+Les in\'{e}galit\'{e}s suivantes dans la preuve sont alors des 
+\'{e}galit\'{e}s, ce qui fait qu'on atteint effectivement le minorant.
+$\Box$
+
+
+En m\'{e}canique quantique, ce th\'{e}or\`{e}me montre qu'on ne peut 
+arbitrairement r\'{e}duire l'incertitude \`{a} la fois sur la position 
+et sur l'impulsion d'une particule libre. Les gaussiennes 
+(\ref{Gabor}) ont une localisation minimale \`{a} la fois en 
+temps et en fr\'{e}quences.
+\\
+\\
+{\bf Spectrogramme}
+On peut associer \`a la transfrom\'ee de Fourier \`a fen\^etre
+une densit\'{e} 
+d'\'{e}nergie qu'on appelle {\it spectrogramme}, et qu'on note $P_S$:
+\begin{equation}
+\label{SpectroDef}
+P_S f (u,\xi) = |Sf(u,\xi)|^2 
+= \left|\int_{- \infty}^{+ \infty} f(t)\, g(t-u)\, \Exp^{- i \xi t} \,dt 
+\right|^2 .
+\end{equation}
+Il mesure l'\'{e}nergie de $f$ et de $\hat f$ dans le voisinage 
+temps-fr\'{e}quence ou l'\'energie de $g_\uxi$ est concentr\'ee.
+
+\begin{Examples} 
+\item 
+Une sinuso\"{\i}de $f(t)=	\Exp^{i	\xi_0 t}$, dont la transform\'{e}e 
+de Fourier est le Dirac $\hat f(\om) = 2 \pi \delta	(\om - \xi_0)$ a 
+pour transform\'{e}e de Fourier \`a fen\^{e}tr{e}
+\[
+Sf(u,\xi) = \Exp^{-iu(\xi - \xi_0)} \, \hat g(\xi - \xi_0). 
+\]
+Son \'{e}nergie est r\'{e}partie sur l'intervalle fr\'{e}quentiel
+$[\xi_0 - \frac {\sigma_\om} 2 , \xi_0 + \frac {\sigma_\om} 2 ]$.
+
+\item 
+La transform\'{e}e de Fourier fen\^{e}tr\'{e}e d'un Dirac
+$f(t) = \delta	(t - u_0)$ vaut
+\[
+Sf(u,\xi) = \Exp^{-i \xi u_0} \,g(u_0 - u) .
+\]
+Son \'{e}nergie est localis\'{e}e dans l'intervalle temporel
+$[u_0 - \frac {\sigma_t} 2 , u_0 + \frac {\sigma_t} 2 ]$.
+
+\item 
+Dans la figure \ref{WFTChirps}, on voit le spectrogramme 
+d'un signal qui a une composantes dont la ``fr\'equence
+instantan\'ee''
+augmente lin\'eairement dans le temps (chirp lin\'eaire)
+et une seconde composante
+dont la fr\'equence d\'ecroit de fa\c{c}on quadratique 
+dans le temps (chirp quadratique). S'ajoute \`a cela 
+deux gaussiennes modul\'{e}es. 
+On a calcul\'{e} le spectrogramme avec une 
+fen\^{e}tre gaussienne dilat\'{e}e d'un facteur $s = 50$. 
+Le chirp lin\'{e}aire a des coefficients de grande amplitude 
+le long de la trajectoire de sa fr\'{e}quence instantan\'ee.
+Le chirp quadratique donne des grands coefficients le long 
+d'une parabole. Les deux gaussiennes modul\'{e}es donnent deux taches 
+fr\'{e}quentielles \`{a} haute et basse fr\'{e}quence, en
+ $u =	512$ et $u	= 896$.
+
+\item La figure \ref{spectrogram-parole} 
+montre le spectrogramme du son ``greasy'' dont le graphique
+est donn\'e au-dessus. L'amplitude de $|Sf(u,\xi)|^2$ est
+d'autant plus grande que l'image du spectrogramme est sombre.
+Le ``ea'' tout comme le ``y'' sont
+des sons vois\'es dont les formants apparaissent clairement sur
+le spectrogramme. Le ``s'' est un son non-vois\'e dont l'\'energie
+est diffus\'e en hautes fr\'equences.
+\end{Examples}
+
+\vspace{0cm}\setlength{\tabcolsep}{0cm} % Separation entre les lignes d'images
+\setlength{\fboxsep}{0cm} % Separation entre la boite et l'image
+\avecboite = 0
+\begin{figtab}
+\begin{figrow}{4}
+{{\label{WFTChirps}
+Le signal comprend un chirp lin\'{e}aire de fr\'{e}quence croissante, 
+un chirp quadratique de fr\'{e}quence d\'{e}croissante, et deux 
+gaussiennes modul\'{e}es situ\'{e}es en $t=512$ et $t=896$.
+(a) Spectrogramme $P_S	f(u,\xi)$. Les axes horizontaux et
+verticaux correspondent respectivement au temps $u$ et \`a la
+fr\'equence $\xi$. Les points sombres correspondent
+\`{a} des coefficients de grande amplitude.
+(b) Phase complexe de $Sf(u,\xi)$ dans les r\'{e}gions o\`{u} le 
+module de $P_S	f (u,\xi)$ est non nul.}}\\
+\figentry{8cm}{0cm}{figures/chap4/WFTChirps.eps}\\
+
+\centry{(a)}\\
+
+\figentry{8cm}{0cm}{figures/chap4/WFTPhaseChirps.eps}\\
+
+\centry{(b)}
+\end{figrow} 
+\end{figtab}
+
+\setlength{\tabcolsep}{0cm} % Separation entre les lignes d'images
+\setlength{\fboxsep}{0cm} % Separation entre la boite et l'image
+\avecboite = 0
+\begin{figtab}
+\begin{figrow}{2} {{Le graphique du dessus correspond au son ``greasy''
+enregistr\'e \`a 8kHz. Son spectrogramme $|Sf(u,\xi)|^2$
+est montr\'e au-dessous, dans le plan temps-fr\'equence.}
+\label{spectrogram-parole}}\\
+
+\figentry{10cm}{0cm}{/home/mallat/X/TREX/figures/gribonval/greasy.ps} \\
+\avecboite = 1
+\figentry{8cm}{10cm}{/home/mallat/X/TREX/figures/gribonval/sonog1.ps} 
+
+\end{figrow} 
+\end{figtab} 
+\\
+\\
+\noindent
+{\bf Compl\'etude et stabilit\'e}
+Lorsque les coordonn\'{e}es temps-fr\'{e}quence $(u,\xi)$ parcourent 
+$\R^2$, les bo\^{\i}tes de Heisenberg des atomes $g_\uxi$ recouvrent 
+tout le plan temps-fr\'{e}quence. On peut donc s'attendre \`{a} 
+pouvoir reconstituer $f$ \`{a} partir de sa transform\'{e}e de 
+Fourier \`a fen\^{e}tre $Sf(u,\xi)$. Le th\'{e}or\`{e}me suivant nous fournit 
+une formule de reconstruction et montre qu'on a conservation de 
+l'\'{e}nergie.
+
+\begin{theorem}
+\label{window-four-form}
+\label{formual-WF}
+Si $f \in \LD$ 
+alors
+\begin{equation}
+\label{inverse-WF}
+f(t) = \frac 1 {2 \pi} \int_{-\infty}^{+\infty}  \int_{-\infty}^{+\infty} 
+Sf(u,\xi) \,g(t-u) \,\Exp^{i \xi t} \, d\xi \, du 
+\end{equation}
+et 
+\begin{equation}
+\label{energy-WF}
+\int_{-\infty}^{+\infty} |f(t)|^2 \,dt = 
+\frac 1 {2 \pi} \int_{-\infty}^{+\infty}  \int_{-\infty}^{+\infty} 
+|S f(u,\xi)|^2 \, d\xi \, du .
+\end{equation}
+\end{theorem}
+
+{\bf D\'emonstration\ }
+On commence par la preuve de la formule de reconstruction 
+(\ref{inverse-WF}). Appliquons la formule de Fourier Parseval 
+(\ref{parseval}) \`{a} l'int\'{e}grale (\ref{inverse-WF}) en la 
+variable $u$. On calcule la transform\'{e}e de Fourier de 
+$f_\xi (u) = Sf(u,\xi)$ en $u$ en remarquant que
+\begin{equation}
+\label{wind-filt}
+Sf(u,\xi) = \Exp^{-iu\xi} 
+\int_{- \infty}^{+ \infty} f(t) \,g(t-u)\, \Exp^{i \xi (u-t)}\, dt
+= \Exp^{-iu\xi} \,f \star g_\xi (u) ,
+\end{equation}
+avec $g_\xi	(t)	= g(t) \Exp^{i \xi t}$, car $g(t) =	g(-t)$. Sa 
+transform\'{e}e de Fourier vaut donc
+\[
+\hat f_\xi (\om) = \hat f(\om + \xi) \,\hat g_\xi (\om + \xi) = 
+\hat f(\om + \xi)\, \hat g( \om ) .
+\]
+La transform\'{e}e de Fourier de $g(t-u)$ en $u$ vaut 
+$\hat	g(\om) \Exp^{-it\om}$. On a donc
+\begin{eqnarray*}
+\frac 1 {2 \pi} \left( \int_{-\infty}^{+\infty}  
+\int_{-\infty}^{+\infty} Sf(u,\xi) \,g(t-u) \,
+\Exp^{i \xi t}\,  du \right) d\xi & = & \\
+\frac 1 {2 \pi} \int_{-\infty}^{+\infty}  \left(
+\frac 1 {2 \pi} \int_{-\infty}^{+\infty}  
+\hat f(\om+\xi)\, |\hat g(\om)|^2\, \Exp^{it(\om+\xi)}\, d \om \right)  d\xi &  . &
+\end{eqnarray*}
+Si  on peut appliquer le th\'{e}or\`{e}me de Fubini pour 
+changer l'ordre d'int\'{e}gration. Le th\'{e}or\`{e}me de 
+transform\'{e}e de Fourier inverse montre que
+\[
+\frac 1 {2 \pi} \int_{-\infty}^{+\infty}  
+\hat f(\om + \xi) \,\Exp^{it(\om+\xi)}\,  d\xi = f(t) .
+\]
+Comme
+$\frac 1 {2 \pi} \int_{-\infty}^{+\infty}  
+|\hat g(\om)|^2\,  d\om  = 1,$
+on en d\'{e}duit (\ref{inverse-WF}). Si $\hat	f \nnin	\,\LU$,
+on d\'{e}montre la formule \`{a} partir de l\`{a} gr\^{a}ce \`{a}
+un argument de densit\'{e}.
+
+Occupons nous maintenant de la conservation de l'\'{e}nergie 
+(\ref{energy-WF}). Comme la transform\'{e}e de Fourier en $u$ de 
+$Sf(u,\xi)$ est $\hat	f(\om +	\xi) \,\hat	g(\om )$,
+on obtient, en appliquant la formule de Plancherel au membre de 
+droite de (\ref{energy-WF}):
+\[
+\frac 1 {2 \pi} \int_{-\infty}^{+\infty}  \int_{-\infty}^{+\infty} 
+|Sf(u,\xi)|^2 \,du\, d\xi = 
+\frac 1 {2 \pi} \int_{-\infty}^{+\infty}  
+\frac 1 {2 \pi} \int_{-\infty}^{+\infty}  
+|\hat f(\om + \xi) \,\hat g(\om ) |^2 \,d\om\, d\xi .
+\]
+On peut appliquer le th\'{e}or\`{e}me de Fubini, et la formule de 
+Plancherel montre que
+\[
+\frac 1 {2 \pi} \int_{-\infty}^{+\infty}  
+|\hat f(\om + \xi) |^2\,  d\xi = \|f \|^2,
+\]
+ce qui implique (\ref{energy-WF}). $\Box$
+
+
+On peut r\'{e}\'{e}crire la formule de reconstruction 
+(\ref{inverse-WF}) sous la forme
+\begin{equation}
+f(t) = \frac 1 {2 \pi} \int_{-\infty}^{+\infty}  \int_{-\infty}^{+\infty} 
+\lb f,g_\uxi\rb \, g_\uxi (t)\,  d\xi\, du .
+\end{equation}
+Cette formule ressemble \`{a} celle d'une d\'{e}composition sur une base 
+orthogonale, mais ce n'est pas le cas, car la famille $\{g_\uxi \}_\uxiR$ 
+est largement redondante dans $\LD$. La seconde identit\'{e} 
+(\ref{energy-WF})  justifie qu'on interpr\`{e}te le spectrogramme 
+$P_S f(u,\xi)=|Sf(u,\xi)|^2$ comme une densit\'{e} d'\'{e}nergie, car 
+son int\'{e}grale en temps-fr\'{e}quence est \'{e}gale \`{a} 
+l'\'{e}nergie du signal.
+\\
+\\
+{\bf Discr\'{e}tisation}
+La discr\'{e}tisation et le calcul rapide de la transform\'{e}e de 
+Fourier \`a fen\^{e}tre rel\`{e}ve des m\^{e}mes id\'{e}es que la 
+discr\'{e}tisation de la transform\'{e}e de Fourier classique, 
+d\'{e}crite pr\'{e}c\'edemment dans le paragraphe \ref{finite-sig}. On
+consid\`{e}re des signaux discrets de p\'{e}riode $N$. On prend comme 
+fen\^{e}tre $g[n]$ un signal discret sym\'{e}trique et de p\'{e}riode 
+$N$ et de norme unit\'{e} $\|g \| =	1.$ On d\'{e}finit les atomes de 
+Fourier fen\^{e}tr\'{e}s discrets
+\index{Transform\'{e}e de Fourier!fen\^{e}tr\'{e}e!discr\`{e}te}
+\index{Fourier!transform\'{e}e de!fen\^{e}tr\'{e}e discr\`{e}te}
+par
+\[
+g_\ml [n] = g[n-m] \, \Exp^{\frac {i 2 \pi  ln} N}. 
+\]
+La transform\'{e}e de Fourier discr\`{e}te $g_\ml$ a pour valeurs
+\[
+\hat g_\ml [k] = \hat g[k-l] \, \Exp^{\frac {-i 2 \pi  m (k-l)} N}. 
+\]
+La transform\'{e}e de Fourier fen\^{e}tr\'{e}e discr\`{e}te d'un 
+signal de p\'{e}riode $N$ est
+\begin{equation}
+\label{DisWdinFTa}
+Sf[m,l] = \lb f,g_\ml\rb  = \sum_{n=0}^{N-1} 
+f[n]\, g[n-m]\, \Exp^{\frac {-i2\pi ln} N} ,
+\end{equation}
+Pour chaque $0 \leq	m <	N$, on calcule $Sf[m,l]$ pour $0 \leq l < N$ 
+par transform\'{e}e de Fourier discr\`{e}te sur $f[n] g[n-m]$. On 
+r\'{e}alise ce calcul au moyen de $N$ FFT de taille $N$, ce qui donne 
+un total de $O(N^2 \log_2 N)$ op\'{e}rations. C'est cet algorithme qui 
+a servi pour le calcul des figures \ref{WFTChirps} et 
+\ref{spectrogram-parole}.
+
+
+\section{Fr\'{e}quence instantan\'{e}e}
+\label{inst-fre-sec}
+
+Dans un morceau de musique, on distingue plusieurs fr\'{e}quences 
+variant dans le temps. Il reste \`{a} d\'{e}finire la notion de 
+fr\'{e}quence instantan\'{e}e.  Afin d'estimer plusieurs 
+fr\'{e}quences instantan\'{e}es, on s\'{e}pare les composantes 
+fr\'{e}quentielles \`{a} l'aide d'une transform\'{e}e de 
+r\'{e}solution suffisante en fr\'{e}quence, mais \'{e}galement en 
+temps, de mani\`{e}re \`{a} pouvoir r\'{e}aliser des mesures variables 
+dans le temps. On \'{e}tudie la mesure des fr\'{e}quences 
+instantan\'{e}es par des transform\'{e}es de Fourier 
+fen\^{e}tr\'{e}es.
+\\
+\\
+{\bf 
+Fr\'{e}quence instantan\'{e}e analytique\ } 
+Un cosinus modul\'{e}
+\[
+f(t) = a \cos (w_0 t + \phi_0 ) = a \cos \phi(t)
+\]
+a une fr\'{e}quence $\om_0$ \'{e}gale \`{a} la d\'{e}riv\'{e}e de la 
+phase $\phi(t) =	w_0	t +	\phi_0$. Afin de g\'{e}n\'{e}raliser cette 
+notion, on \'{e}crit les signaux r\'{e}els $f$ comme ayant une 
+amplitude $a$ et un phase $\phi$ variant dans le temps:
+\begin{equation}
+\label{phase-fre}
+f(t) = a(t)\, \cos \phi(t) ~~\mbox{
+avec}~~ a(t) \geq 0~.
+\end{equation}
+On d\'{e}finit {\it la fr\'{e}quence instantan\'{e}e} comme la 
+d\'{e}riv\'{e}e de la phase:\index{Analytique!signal}
+\[
+\om(t) = \phi' (t) \geq 0 ~.
+\]
+On peut se ramener \`{a} une d\'{e}riv\'{e}e positive en jouant sur le 
+signe de $\phi (t)$. Il convient n\'{e}anmoins d'\^{e}tre prudent car
+il existe de nombreuses valeurs pour $a(t)$ et de  $\phi (t)$,
+et $\om (t)$ n'est donc pas d\'{e}fini de mani\`{e}re unique pour un 
+$f$ donn\'{e}.
+
+On obtient une 
+d\'{e}compostion particuli\`{e}re de type (\ref{phase-fre}) 
+en calculant la partie analytique $f_a $ de $f$, 
+dont la transform\'{e}e de Fourier est d\'efinie par
+\begin{equation}
+\label{analyt-par-f}
+\hat f_a (\om) = \left\{
+\begin{array}{ll}
+2\, \hat f(\om) & \mbox{si $\om \geq 0$}\\
+0 & \mbox{si $\om < 0$}
+\end{array} 
+\right. .
+\end{equation}
+On dit que le signal complexe $f_a (t)$ est analytique car
+on peut d\'emontrer qu'il a une extension analytique sur
+le demi plan complexe sup\'erieur.
+Par ailleurs on peut verifier que
+$f = \Real [f_a ]$ car
+$\hat f (\om) = \frac 1 2 (\hat f_a (\om) + \hat f_a^* (-\om))$.
+
+On peut repr\'{e}senter $f_a$ en s\'{e}parant le module de la phase 
+complexe
+\[
+f_a (t) = a (t)\, \Exp^{i \phi (t)}~.
+\]
+On en d\'{e}duit
+\[
+f(t) = a(t) \,\cos \phi(t) .
+\]
+On dira que $a(t)$ est l'amplitude {\it analytique} de $f(t)$, et 
+$\phi'(t) $ sa fr\'{e}quence analytique
+instantan\'{e}e; elles sont d\'{e}finies 
+de mani\`{e}re unique.
+
+\begin{Example}
+\item Si $f(t) = a(t)\, \cos (\om_0 t + \phi_0)$, alors
+\[
+\hat f (\om) =  \frac 1 2
+\left(
+\Exp^{i \phi_0} \, \hat a(\om - \om_0) +
+\Exp^{-i \phi_0} \, \hat a(\om +\om_0)
+\right).
+\]
+Si les variations de $a(t)$ sont lentes en comparaison de la 
+p\'{e}riode $\frac {2 \pi} {\om_0}$, ce qu'on peut obtenir en 
+for\c{c}ant le support de
+$\hat a (\om)$ \`{a} \^{e}tre dans $[-\om_0,\om_0]$, alors
+\[
+\hat f_a (\om) = \Exp^{i \phi_0} \, \hat a(\om - \om_0)
+\]
+d'o\`{u} $f_a (t) = a(t)\, \Exp^{i (\om_0 t + \phi_0)}$.
+\end{Example}
+
+Si $f$ est un  signal constitu\'{e} de la somme de deux 
+sinuso\"{\i}des:
+\[
+f (t) =  a \cos({ \om_1 t}) + a \cos({ \om_2 t}) ,
+\]
+alors
+\[
+f_a (t) = a \,\Exp^{i \om_1 t} + a \,\Exp^{i \om_2 t} =
+ a \, \cos \left( \frac {\om_1 - \om_2} 2\, t \right)
+\,\Exp^{i \frac {\om_1 + \om_2} 2 t}.  
+\]
+La fr\'{e}quence instantan\'{e}e vaut
+$\phi'(t) = \frac {\om_1 + \om_2} 2$
+et l'amplitude instan\'ee est
+\[
+a(t) = a \, \left| \cos \left(\frac {\om_1 - \om_2} 2 \,t\right)\right| .
+\]
+Ce r\'{e}sultat n'est pas satisfaisant parce qu'il ne montre pas que 
+le signal est compos\'{e} de deux sinuso\"{\i}des de m\^{e}me 
+amplitude. On a obtenu une fr\'{e}quence moyenne. Nous allons 
+expliquer dans la section qui suit comment mesurer les 
+fr\'{e}quences instantan\'{e}es de plusieurs composantes spectrales en 
+les s\'{e}parant \`{a} l'aide de transform\'{e}es de Fourier 
+\`a fen\^{e}tre.
+\\
+\\
+{\bf Modulation de fr\'{e}quence\ }
+En communications, on peut transmettre l'information \`{a} travers 
+son amplitude $a(t)$ (modulation d'amplitude) ou sa fr\'{e}quence 
+instantan\'{e}e $\phi'(t)$ (modulation de fr\'{e}quence).
+La modulation de fr\'{e}quence est plus robuste en pr\'{e}sence de 
+bruits blancs gaussiens additifs. De plus, elle r\'{e}siste 
+mieux aux 
+interf\'{e}rences entre chemins 
+multiples, qui d\'{e}truisent l'information d'amplitude. Une 
+modulation de fr\'{e}quence envoie un message $m(t)$ \`{a} 
+travers un signal
+\[
+f(t) = a \cos \phi (t)~~~\mbox{with}~~~ 
+\phi'(t) = \om_0 + k \,m(t) .
+\]
+La largeur de bande de $f$ est proportionnelle \`{a} $k$. On 
+ajuste cette constante en fonction des bruits de transmission et de la 
+bande passante disponible. A la r\'{e}ception, on r\'{e}cup\`{e}re le 
+message $m(t)$ gr\^{a}ce \`{a} une d\'{e}modulation de fr\'{e}quence 
+qui calcule la fr\'{e}quence instantan\'{e}e $\phi'(t)$.
+\\
+\\
+{\bf Mod\`{e}les de sons additifs\ }
+On peux mod\'{e}liser les sons musicaux et les phon\`{e}mes comme des somme de
+{\it partielles} sinuso\"{\i}dales: \index{Partielle}
+\begin{equation}
+\label{NewSoundMOd}
+f(t) = \sum_{k=1}^K f_k (t) =  \sum_{k=1}^K a_k (t) \cos \phi_k (t)~ ,
+\end{equation}
+o\`{u} $a_k$ et $\phi^\prime_k$	sont lentement variables.
+De telles d\'{e}compositions sont 
+utilis\'{e}es pour reconna\^{i}tre des formes et modifier des sons.
+Le paragraphe \ref{sec-wind-four-ridges} explique
+comment calculer les $a_k$ et les fr\'{e}quences instantan\'{e}es 
+$\phi_k'$ de chaque partielle, 
+dont on d\'{e}duit la phase $\phi_k$ par 
+int\'{e}gration.
+
+Pour comprimer de son $f$ d'un facteur $\alpha$ dans le temps, et sans 
+modifier les valeurs des $\phi_k'$ et des $a_k$, on synth\'{e}tise
+\begin{equation}
+\label{Accelerate-sound}
+g (t) =  \sum_{k=1}^K a_k (\alpha\, t)\,
+\cos \Bigl( \frac 1 \alpha \,\phi_k (\alpha\, t) \Bigr) .
+\end{equation}
+Les partielles de $g$ en $t = \alpha \, t_0$ et les partielles de $f$ 
+en $t = t_0$ ont les m\^{e}mes amplitudes et les m\^{e}mes 
+fr\'{e}quences instantan\'{e}es. Pour $\alpha >	1$, le son $g$ est 
+plus court que $f$ tout en \'{e}tant per\c{c}u comme ayant le 
+m\^{e}me ``contenu fr\'{e}quentiel'' que $f$.
+
+On op\`{e}re un d\'{e}placement fr\'{e}quentiel en multipliant chaque 
+phase par une constante $\alpha$:
+\begin{equation}
+\label{Transpose-sound}
+g (t) =  \sum_{k=1}^K b_k (t)\,
+\cos \Bigl( \alpha\, \phi_k (t ) \Bigr) .
+\end{equation}
+La fr\'{e}quence instantan\'{e}e de chaque partielle vaut maintenant 
+$\alpha \, \phi_k'(t)$. Pour calculer les nouvelles amplitudes $b_k (t)$, 
+on utilise un mod\`{e}le de r\'{e}sonnance, qui suppose que ces 
+amplitudes sont les \'{e}chantillons d'une enveloppe fr\'{e}quentielle 
+lisse $F(t,	\om)$:
+\[
+a_k (t) = F\Bigl(t, \phi_k'(t) \Bigr) ~~\mbox{et}~~
+b_k (t) = F\Bigl(t, \alpha\, \phi_k'(t) \Bigr) ~.
+\]
+En traitement de la parole, cette enveloppe est compos\'e de plusieurs
+{formants\/}. 
+Il est fonction du type de phon\`{e}me qui a \'{e}t\'{e} 
+prononc\'{e}. Comme $F(t,\om)$ est une fonction r\'{e}guli\`{e}re\index{Formant}
+de $\om$, on calcule son amplitude en $\om	= \alpha\, \phi_k'(t)$ par 
+interpolation des valeurs $a_k (t)$	correspondant \`{a} $\om = \phi_k'(t)$.
+
+\subsection{Cr\^{e}tes de transform\'ee de Fourier \`a fen\^{e}tre}
+\label{sec-wind-four-ridges}
+
+Le spectrogramme $P_S f(u,\xi)= |Sf(u,\xi)|^2$
+mesure l'\'{e}nergie de $f$ dans un voisinage temps-fr\'{e}quence de $(u,\xi)$.
+L'algorithme de cr\^{e}tes calcule les fr\'{e}quences 
+instantan\'{e}es \`{a} partir des maxima locaux de $P_S	f(u,\xi)$
+\cite{torresani}.
+
+On calcule la transform\'{e}e de Fourier \`a fen\^{e}tre \`{a} 
+l'aide d'une fen\^{e}tre sym\'{e}trique $g(t) =	g(-t)$ de support
+$[-\frac	1 2	, \frac	1 2]$. La transform\'{e}e de Fourier $\hat g$ de 
+$g$ est une fonction sym\'{e}trique r\'{e}elle avec
+$|\hat g	(\om)| \leq	\hat g (0)$	pour tout	$\om \in \R$.
+Son maximum $\hat g(0) =	\int_{1/2}^{-1/2} g(t)\,dt$ est de l'ordre de 
+1. 
+On normalise la fen\^{e}tre $g$ de mani\`{e}re 
+\`{a} avoir $\|g\| = 1$. 
+On d\'efinit la largeur de bande $\Delta \om$ de
+$\hat g$ par
+\begin{equation}
+\label{Band-widt-g}
+|\hat g(\om)| \ll 1 ~~~
+\mbox{
+pour}~~~ |\om| \geq \Delta \om.
+\end{equation}
+
+A une \'{e}chelle donn\'{e}e $s$,
+$g_s	(t)	= \frac	1 {\sqrt s}	g(\frac	t s)$ a un support de taille $s$ 
+et est de norme unit\'{e}. Les atomes de Fourier correspondants sont
+\[
+g_{s,u,\xi} (t) = g_s (t-u) \, \Exp^{i \xi t} .
+\]
+La transform\'{e}e de Fourier \`a fen\^{e}tre est alors
+\begin{equation}
+\label{scale-wind-Four}
+Sf(u,\xi) \,=\, \lb f,g_\suxi \rb \, =\,
+\int_{-\infty}^{+\infty} f(t)\, g_s (t-u)\, \Exp^{-i\xi t} \,dt.
+\end{equation}
+Le th\'{e}or\`{e}me suivant exprime $Sf(u,\xi)$ en fonction de la 
+fr\'{e}quence instantan\'{e}e de $f$.
+
+\begin{theorem}
+\label{approx-window}
+Soit $f(t) = a(t)\, \cos \phi (t)$.
+Si les variations de $a(t)$ et $\phi'(t)$ sont
+n\'egligeables sur le support $[u-s/2,u+s/2]$
+de $g_s(t-u)$ et que $\phi'(u) \geq s^{-1} \, \Delta \om$
+alors pour tout $\xi \geq 0$ on a
+\begin{equation}
+\label{wt-est}
+Sf(u,\xi) 
+\approx \frac {\sqrt s} 2  \,a(u)\,\Exp^{ i (\phi(u) - \xi u)}
+\hat g\Bigl(s[\xi - \phi'(u)]\Bigr) .
+\end{equation}
+\end{theorem}
+
+{\bf D\'emonstration\ }
+Remarquons que
+\begin{eqnarray*}
+\lb f,g_\suxi \rb  &=&
+\int_{-\infty}^{+\infty} a(t) \,\cos \phi(t) \,g_s (t-u)\, \Exp^{-i \xi
+t}\,dt \\
+&=& \frac 1 2
+\int_{-\infty}^{+\infty} a(t) \,\left(
+\Exp^{i \phi(t)} + \Exp^{-i \phi(t)}\right)
+ \,g_s (t-u)\, \Exp^{-i \xi t}\,dt\\
+&=& I(\phi) + I(-\phi) .
+\end{eqnarray*}
+Commen\c{c}ons par \'{e}tudier
+\begin{eqnarray*}
+I(\phi)  &=& \frac 1 2
+\int_{-\infty}^{+\infty} a(t) \,\Exp^{i\phi(t)} \,g_s (t-u)\, \Exp^{-i \xi
+t}\,dt \\
+&=& \frac 1 2
+\int_{-\infty}^{+\infty} a(t+u)\, \Exp^{i \phi(t+u)}\, g_s (t)\, \Exp^{-i \xi
+(t+u)}\, dt .
+\end{eqnarray*}
+Comme $a(t+u) \approx a(u)$ et
+$\phi (t+u) \approx \phi(u) + t \phi'(u)$ pour $|t| \leq s/2$
+il vient
+\[
+I(\phi) \approx
+\frac {a(u)\, \Exp^{ i (\phi(u) - \xi u)}  } 2
+\int_{-\infty}^{+\infty}  g_s (t)\, \Exp^{-i t (\xi - \phi'(u))}
+\, dt = 
+\frac {a(u)\, \Exp^{ i (\phi(u) - \xi u)}  } 2 \,
+\hat g_s (\xi - \phi'(u)) .
+\]
+Puisque $\hat g_s (\om) = \sqrt s \, \hat g(s \om)$ 
+\begin{equation}
+\label{wt-est2}
+I(\phi) \approx
+\frac {\sqrt s} 2  \,a(u)\,\Exp^{ i (\phi(u) - \xi u)}
+\hat g\Bigl(s[\xi - \phi'(u)]\Bigr) .
+\end{equation}
+De m\^eme
+\[
+I(-\phi) \approx
+\frac {\sqrt s} 2  \,a(u)\,\Exp^{ i (-\phi(u) - \xi u)}
+\hat g\Bigl(s[\xi + \phi'(u)]\Bigr) .
+\]
+Comme $\xi \geq 0$, $s[\xi + \phi'(u)] \geq \Delta \om$ donc
+$\hat g\Bigl(s[\xi + \phi'(u)]\Bigr) \ll 1$. On peut donc
+n\'egliger $I(-\phi)$ et l'on d\'eduit (\ref{wt-est}) de
+(\ref{wt-est2}).
+$\Box$
+\\
+\\
+{\bf Points de cr\^{e}te\ } 
+Supposons que $a(t)$ et $\phi'(t)$ ont des variations 
+negligeables sur 
+les intervalles de taille $s$, et que $\phi'(t) \geq \Delta \om/s$.
+Comme $|\hat	g(\om)|$ est maximal en $\om	= 0$,
+(\ref{wt-est}) montre que, pour chaque $u$, le spectrogramme
+$|Sf(u,\xi)|^2 =	|\lb f , g_\suxi \rb|^2$ est maximal en
+$\xi(u) = \phi'(u)$. Les points correspondants $(u,\xi(u))$ du plan 
+temps-fr\'{e}quence sont appel\'{e}s des {\it cr\^{e}tes}.
+Aux points de cr\^{e}te, (\ref{wt-est})	devient
+\begin{equation}
+\label{ridg-wind-fou-ap}
+Sf(u, \xi ) = \frac {\sqrt s  } 2 \,a(u)\, \Exp^{ i
+(\phi(u) - \xi u)} \, \hat g(0) 
+\end{equation}
+La fr\'{e}quence de cr\^{e}te donne la fr\'{e}quence instantan\'{e}e
+$\xi(u) = \phi'(u)$, et on calcule $\xi(u) = \phi'(u)$ avec
+\begin{equation}
+\label{compute-freq}
+a(u) = \frac {2\, \Bigl|Sf\Bigl(u,\xi (u)\Bigr)\Bigr|}
+{\sqrt s\, |\hat g(0)|} .
+\end{equation}
+Soit $\Phi_S (u,\xi)$ la phase complexe de  $Sf(u,\xi)$.
+L'expression 
+(\ref{ridg-wind-fou-ap}) montre que les points de cr\^{e}te sont 
+\'{e}galement des points o\`{u} la phase est stationnaire:
+\[
+\frac {\partial \Phi_S  (u,\xi )} {\partial u} = \phi' (u) -
+\xi  = 0 .
+\]
+La v\'{e}rification de la stationnarit\'{e} de la phase permet de 
+mieux situer les cr\^{e}tes.
+\\
+\\
+\noindent{\bf Fr\'{e}quences multiples\ }
+Lorsque le signal contient plusieurs lignes spectrales de 
+fr\'{e}quences suffisamment distinctes, la transform\'{e}e de Fourier 
+fen\^{e}tr\'{e}e en s\'{e}pare les diverses composantes, et les 
+cr\^{e}tes permettent de d\'{e}tecter l'\'{e}volution temporelle de chacune d'entre 
+elles. Consid\'{e}rons
+\[
+f(t) = a_1 (t) \cos \phi_1 (t) + a_2 (t) \cos \phi_2 (t) ,
+\]
+o\`{u} $a_k (t)$ et $\phi^\prime_k (t)$ sont \`{a} variations petites 
+sur les intervalles de largeur $s$, et o\`{u} on suppose
+$s \phi^\prime_k	(t)	\geq \Delta	\om$.
+Comme la 
+transform\'{e}e de Fourier fen\^{e}tr\'{e}e est lin\'{e}aire, on 
+applique (\ref{wt-est}) \`{a} chaque composante spectrale:
+\begin{eqnarray}
+\label{twospectrems}
+Sf(u, \xi ) & = & 
+\frac {\sqrt s } 2  \,a_1 (u)\,
+\hat g\Bigl(s[\xi - \phi_1 '(u)]\Bigr) \,\Exp^{ i (\phi_1 (u) - \xi u)} \nonumber \\
+&  & +
+\frac {\sqrt s}  2  \,a_2 (u)\,
+\hat g\Bigl(s[\xi - \phi_2 '(u)]\Bigr) \,\Exp^{ i (\phi_2 (u) - \xi u)} .
+\end{eqnarray}
+On arrive \`{a} s\'{e}parer les composantes spectrales si, pour tout $u$
+\begin{equation}
+\label{separ8}
+\hat g\Bigl(s |\phi_1 '(u) - \phi_2 '(u)|\Bigr) \ll 1 ,
+\end{equation}
+ce qui signifie que la diff\'{e}rence entre les fr\'{e}quences est 
+plus grande que la largeur de bande de 	$\hat g(s \om)$:
+\begin{equation}
+\label{separ}
+|\phi_1 '(u) - \phi_2 '(u) | \geq \frac{\Delta \om} s .
+\end{equation}
+Dans ce cas, on peut n\'{e}gliger, pour $\xi = \phi_1 '(u)$, le second 
+terme de (\ref{twospectrems}), et le premier terme engendre un point 
+de cr\^{e}te permettant de reconstituer $\phi'_1	(u)$ et $a_1	(u)$ en 
+utilisant (\ref{compute-freq}).
+De m\^{e}me, on peut n\'{e}gliger le premier terme lorsque $\xi =	
+\phi_2 '(u)$, et on obtient un second point de cr\^{e}te 
+caract\'{e}risant $\phi_2 '	(u)$ et $a_2 (u)$. Les points de cr\^{e}te
+sont distribu\'{e}s sur les deux lignes temps-fr\'{e}quence $\xi(u)	= \phi_1 ' (u)$
+et $\xi(u) = \phi_2	' (u)$. Ce r\'{e}sultat demeure valable pour un 
+nombre quelconque de composantes spectrales instationnaires, tant que 
+la distance entre deux fr\'{e}quences instantan\'{e}es v\'{e}rifie (\ref{separ}). 
+Lorsque les lignes spectrales sont trop proches, elles cr\'{e}ent des 
+interf\'{e}rences qui d\'{e}truisent la structure de cr\^{e}tes.
+
+En g\'{e}n\'{e}ral, on ne connait pas le nombre de fr\'{e}quences 
+instantan\'{e}es. On d\'{e}tecte alors tous les maxima locaux de 
+$|Sf(u,\xi)|^2$ dont la phase est stationnaire 
+$\frac {\partial	\Phi_S	(u,\xi )} {\partial	u} = \phi' (u) - \xi = 0$.
+Ces points d\'{e}finissent des courbes dans le plan $(u,\xi)$ qui 
+sont les cr\^{e}tes de la transform\'{e}e de Fourier fen\^{e}tr\'{e}e. 
+On supprime souvent les cr\^{e}tes de faible amplitude $a(u)$ parce 
+qu'elles peuvent \^{e}tre des artifacts provenant de variations 
+bruit\'{e}es, ou des ``ombres'' d'autres fr\'{e}quences 
+instantan\'{e}es, d\^{u}es aux lobes lat\'{e}raux de $\hat g(\om)$.
+
+Dans la figure \ref{WFTRidgeChirps}, on peut voir les cr\^{e}tes 
+obtenues \`{a} partir du module et de la phase de la transform\'{e}e 
+de Fourier fen\^{e}tr\'{e}e de la figure \ref{WFTChirps}. Pour $t \in 
+[400,500]$, les fr\'{e}quences intantan\'{e}es sont 
+trop proches et la r\'{e}solution en fr\'{e}quence de la fen\^{e}tre 
+ne permet pas de les s\'{e}parer. En cons\'{e}quence, les cr\^{e}tes y 
+d\'{e}tectent une fr\'{e}quence instantan\'{e}e moyenne.
+
+\begin{figure}[bhtp]
+\centerline{
+        \epsfxsize=8cm
+        \leavevmode\epsfbox{figures/chap4/WFTRidgeChirps.eps}}
+\caption{
+Cr\^{e}tes de plus grande amplitude calcul\'{e}es \`{a} partir du 
+spectrogramme de la figure \protect\ref{WFTChirps}. Ces cr\^{e}tes 
+donnent les fr\'{e}quences instantan\'{e}es des chirps lin\'{e}aires et 
+quadratiques, et des transitoires \`{a} basse et haute fr\'{e}quence 
+en  $t=512$ et $t=896$.
+}
+\label{WFTRidgeChirps}
+\end{figure}
+\\
+\\
+\noindent
+{\bf Choix de	la fen\^{e}tre}
+La mesure des fr\'{e}quences instantan\'{e}es 
+aux points de cr\^{e}te 
+a \'{e}t\'{e} valid\'{e}e seulement lorsque la taille $s$ de la 
+fen\^{e}tre $g_s$ est suffisamment petite pour que
+$a(t)$ et $\phi' (t)$ soient approximativement
+constant sur $[u-s/2,u+s/2]$. 
+D'un autre c\^{o}t\'{e}, il faut que la largeur de 
+bande ${\Delta \om}/ s$ soit 
+suffisamment petite pour s\'{e}parer les composantes 
+spectrales succesives en (\ref{separ}). Le choix de l'\'{e}chelle $s$ de la 
+fen\^{e}tre  doit donc r\'{e}aliser un compromis entre ces deux 
+contraintes.
+
+\vspace{0cm}\setlength{\tabcolsep}{0cm} % Separation entre les lignes d'images
+\setlength{\fboxsep}{0cm} % Separation entre la boite et l'image
+\avecboite = 0
+\begin{figtab}
+\begin{figrow}{4}
+{{\label{WFTLinChirps} 
+Somme de deux ``chirps'' lin\'{e}aires prall\`{e}les.
+(a): Spectrogramme $P_S f(u,\xi)=|Sf(u,\xi)|^2$.
+(b): Cr\^{e}tes calcul\'{e}es \`{a} partir du spectrogramme.  
+}}\\
+\figentry{8cm}{0cm}{figures/chap4/WFTLinChirps.eps}\\
+
+\centry{(a)}\\
+
+\figentry{8cm}{0cm}{figures/chap4/WFTRidgeLinChirps.eps}\\
+
+\centry{(b)}
+\end{figrow} 
+\end{figtab}
+
+\vspace{0cm}\setlength{\tabcolsep}{0cm} % Separation entre les lignes d'images
+\setlength{\fboxsep}{0cm} % Separation entre la boite et l'image
+\avecboite = 0
+\begin{figtab}
+\begin{figrow}{4}
+{{\label{WFTHypChirps}
+Somme de deux chirps hyperboliques.
+(a): Spectrogramme $P_S f(u,\xi)$.
+(b): Cr\^{e}tes calcul\'{e}es \`{a} partir du spectrogramme.  
+}}\\
+\figentry{8cm}{0cm}{figures/chap4/WFTHypChirps.eps}\\
+
+\centry{(a)}\\
+
+\figentry{8cm}{0cm}{figures/chap4/WFTRidgeHypChirps.eps}\\
+
+\centry{(b)}
+\end{figrow} 
+\end{figtab}
+
+
+\begin{Examples}
+\item 
+La somme de deux chirps lin\'{e}aires parall\`{e}les
+\begin{equation}
+\label{ParallLineCh}
+f(t) = a_1 \cos (b t^2+ c t) + a_2 \cos (b t^2) 
+\end{equation}
+a deux fr\'{e}quences instantan\'{e}es 
+$\phi_1'	(t)	= 2	bt +c$ et $\phi_2'	(t)	= 2	bt$.
+On voit un exemple num\'{e}rique en figure \ref{WFTLinChirps}. La 
+fen\^{e}tre $g_s$ a une r\'{e}solution fr\'{e}quentielle suffisamment 
+fine pour s\'{e}parer les deux chirps si
+\begin{equation}
+\label{ccondit}
+|\phi_1'(t) - \phi_2'(t) | = |c| \geq \frac {\Delta \om} s .
+\end{equation}
+Son support temporel est assez fin compar\'{e} \`{a} la variation 
+temporelle des chirps si la fr\'equence instantan\'ee
+$\phi'(t)$ est quasiment constante sur $[u-s/2,u+s/2]$,
+ce que l'on obtient si
+\begin{equation}
+\label{bcondit}
+s^2 \,|\phi_1''(u)| = s^2 \,|\phi_2''(u)| = 
+2 \,b\, s^2 \ll 1 .
+\end{equation}
+Les conditions (\ref{ccondit}) et (\ref{bcondit}) montrent qu'on peut 
+trouver une fen\^{e}tre $g$ ad\'{e}quate si et seulement si 
+\begin{equation}
+\label{chirp-paral-co}
+\frac {c} {\sqrt b} \gg \Delta \om .
+\end{equation}
+Comme $g$ est une fen\^{e}tre lisse de support $[-\frac	1 2	, \frac	1 2	]$,
+sa largeur de bande fr\'{e}quentielle $\Delta \om$ est de l'ordre de 
+1. Les chirps lin\'{e}aires de la figure \ref{WFTLinChirps} 
+v\'{e}rifient (\ref{chirp-paral-co}). On a calcul\'{e} leurs 
+cr\^{e}tes en utilisant une fen\^{e}tre gaussienne tronqu\'{e}e 
+avec $s = 50$.
+
+\item 
+Le chirp hyperbolique
+\[
+f(t) = \cos \left(\frac \alpha {\beta -t}\right)
+\]
+pour $0 \leq t < \beta$ a une fr\'{e}quence instantan\'{e}e
+\[
+\phi'(t) = \frac \alpha {(\beta - t)^2},
+\]
+\`{a} variation rapide quand $t$ est proche de $\beta$. Les 
+fr\'{e}quences instantan\'{e}es des chirps hyperboliques vont de $0$ 
+\`{a} $+\infty$ en un temps fini. Cette propri\'{e}t\'{e} est 
+particuli\`{e}rement utile aux radars. 
+Ces chirps sont \'{e}galement 
+produits par les sonars de navigation des chauves-souris 
+\cite{torresani}.
+
+On ne peut pas estimer les fr\'{e}quences instantan\'{e}es des chirps 
+hyperboliques par une transform\'{e}e de Fourier fen\^{e}tr\'{e}e 
+parce que, pour une taille de fen\^{e}tre donn\'{e}e, la fr\'{e}quence 
+instantan\'{e}e varie trop rapidement dans les hautes fr\'{e}quences. 
+Lorsque $u$ est assez proche de $\beta$, on ne peut consid\'erer
+que la fr\'equence instantan\'ee $\phi'(t)$ est constante sur
+le support $[u-s/2,u+s/2]$ de $g_\suxi$ car
+\[
+s^2 |\phi '' (u)| = 
+\frac {s^2 \alpha} {(\beta - u)^3} > 1 .
+\]
+En figure \ref{WFTHypChirps}, on voit un signal compos\'{e} de la 
+somme de deux chirps hyperboliques:
+\begin{equation}
+\label{ParallHypCh}
+f(t) = a_1 \cos \left(\frac {\alpha_1} {\beta_1 - t}\right) +
+a_2 \cos \left(\frac {\alpha_2} {\beta_2 - t}\right),
+\end{equation}
+avec $\beta_1 = 700$	and	$\beta_2 = 740$.
+Au d\'{e}but du signal, les deux chirps ont des fr\'{e}quences 
+instantan\'{e}es voisines qui sont s\'{e}par\'{e}es par la 
+transform\'{e}e de Fourier fen\^{e}tr\'{e}e, qu'on a calcul\'{e}e 
+avec une fen\^{e}tre large. Quand on se rapproche de $\beta_1$ ou de 
+$\beta_2$, la fr\'{e}quence instantan\'{e}e varie trop rapidement en 
+regard de la taille de la fen\^{e}tre. Les cr\^{e}tes correspondantes 
+ne permettent plus de suivre ces fr\'{e}quences instantan\'{e}es. 
+\index{Chirp!hyperbolique}
+\end{Examples}
+
+
+%\section{Reconnaissance de la parole}
+%
+%La d\'ecouverte dans les ann\'ees 50 
+%des propri\'et\'es acoustiques de la parole ainsi que de la structure
+%des formants a ouvert la possibilit\'e d'automatiser la reconnaissance
+%de la parole. Plus de 40 ans plus tard, le probl\`eme se r\'ev\`ele
+%bien plus difficile qu'on ne s'y attendait. 
+%On distingue plusieurs types de probl\`emes. La reconnaissance
+%de mots isol\'es s\'epar\'es par une pause, la
+%d\'etection de mots appartenant \`a un vocabulaire limit\'e dans
+%un flot continu de parole, et la
+%reconnaissance de parole sans pose.
+%Il existe actuellement
+%des produits commerciaux pour la reconnaissance de mots isol\'es mais
+%les performances ne sont pas suffisantes pour la parole continue.
+%Les difficult\'es de la reconnaissance de parole ont diverses 
+%origines.
+%\\
+%$\bullet$ Variations mono-locuteur.
+%La prononciation est souvent d\'eform\'ee. Par exemple, le ``et'' peut
+%\^etre r\'eduit \`a un simple grognement. 
+%La prononciation d'un phon\`eme est aussi affect\'ee par le son avant
+%et apr\`es. Enfin, le d\'ebit de parole peut varier 
+%de fa\c{c}on consid\'erable.\\
+%$\bullet$ Variations multi-locuteurs. Par exemple, pour
+%les sons vois\'es, la position des 2 
+%premiers formants varient d'un locuteur \`a l'autre.\\
+%$\bullet$ Ambigu\"{\i}t\'e des sons. 
+%Les variables acoustiques ne sp\'ecifient pas
+%toujours de fa\c{c}on unique les variables phon\'etiques. Il est souvent
+%n\'ecessaire d'utiliser des informations compl\'ementaires provenant
+%de la structure du langage.\\
+%$\bullet$ Bruits et interf\'erences. Un son de parole est souvent
+%superpos\'e avec d'autres sons provenant \'eventuellement d'une
+%autre conversation, qu'il est n\'ecessaire d'\'eliminer lors de
+%la reconnaissance.\\
+%\\
+%{\bf Reconnaissance de mots isol\'es}
+%Les structures temps-fr\'equences sont parmi les plus importantes
+%pour reconna\^{\i}tre  les phon\`emes et donc les mots isol\'es qu'ils
+%composent. 
+%La position des formants peux se calculer \`a partir de la
+%position des p\^oles du filtre AR associ\'e, comme on l'a expliqu\'e
+%au paragraphe \ref{conduit-sec}. 
+%Il est aussi possible de d\'etecter les zones
+%de haute concentration d'\'energie dans le spectrogramme, comme le
+%montre la figure \ref{spectrogram-parole}. 
+%
+%L'utilisation de structures locales telles que des formants n'est 
+%souvent pas suffisante pour obtenir un bon taux de reconnaissance.
+%On optimise souvent la reconnaissance en mesurant les 
+%probabilit\'es de transition d'un son \`a un autre. 
+%A partir d'un mod\`ele bas\'e sur des cha\^{\i}nes
+%de Markov, on cherche alors 
+%le mot qui a une probabilit\'e conditionnelle
+%maximum, \'etant donn\'e le signal observ\'e.
+%
+%Le d\'ebit de parole \'etant un param\`etre non contr\^ol\'e,
+%il est aussi 
+%n\'ecessaire de renormaliser le temps pour faire correspondre
+%le son avec les structures de r\'ef\'erence utilis\'ees pour la
+%reconnaissance. Cela peut se faire
+%avec des dilatations et compressions arbitraires en essayant 
+%d'optimiser un crit\`ere de correspondance. D'autres algorithmes
+%effectuent
+%des dilatations temporelles locales, guid\'ees par les structures du
+%son.
+%
+%
+

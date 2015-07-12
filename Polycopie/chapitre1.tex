@@ -1,0 +1,86 @@
+\chapter{Introduction}
+
+Initialement appliqu\'e aux t\'el\'ecommunications, le traitement
+du signal se retrouve \`a pr\'esent 
+dans tous les domaines n\'ecessitant d'analyser et transformer
+de l'information num\'erique.
+La manipulation de donn\'ees obtenues par capteurs 
+bio-m\'edicaux, lors d'exp\'eriences physiques ou biologiques, 
+sont aussi des probl\`emes de traitement du signal.
+Le t\'el\'ephone, la radio et la t\'el\'evision ont motiv\'e l'\'elaboration
+d'algorithmes de filtrage lin\'eaires permettant de coder
+des sons ou des images, de les transmettre, et de supprimer 
+certains bruits de transmission. 
+Le chapitre \ref{analogique-chap}
+introduit le filtrage analogique avec une
+application \`a la transmission par
+modulation d'amplitude.
+
+Lorsque la rapidit\'e de calcul le permet,
+le filtrage par circuits d'\'electronique
+analogique est remplac\'e par des calculs num\'eriques
+sur des signaux digitaux. Le calcul digital est en effet plus
+fiable et offre une flexibilit\'e algorithmique bien plus 
+importante.
+C'est pourquoi les disques et 
+cassettes analogiques ont r\'ecemment \'et\'e remplac\'es
+par les disques compacts num\'eriques et les cassettes
+digitales. La conversion analogique-digitale est \'etudi\'ee
+dans le chapitre \ref{discret-chap} 
+ainsi que l'extension des op\'erateurs de filtrage
+aux signaux discrets. L'introduction de
+la transform\'ee de Fourier discr\`ete rapide 
+par Cooley et Tuckey en 1965
+a fait de l'analyse de Fourier un outil algorithmique
+puissant qui se retrouve dans la
+plupart des calculs rapides de traitement du signal.
+
+Lorsque l'on veut d\'ecrire les propri\'et\'es d'une classe de signaux,
+comme un m\^eme son prononc\'e par diff\'erents locuteurs,
+il est utile de se placer dans un cadre probabiliste.
+La vari\'et\'e des signaux d'une telle classe peut en effet
+\^etre caract\'eris\'ee par un processus al\'eatoire.
+La mod\'elisation de signaux par proc\'essus stationnaires est
+introduite dans le
+chapitre \ref{aleatoire-chap} 
+ou nous \'etudions plus particuli\`erement
+les mod\`eles autor\'egressifs.
+L'estimation lin\'eaire, la suppression de bruit
+et la pr\'ediction sont \'etudi\'ees dans le chapitre 
+\ref{wiener-chap} \`a travers le filtrage de Wiener. 
+
+
+La notion d'information contenue dans un signal peut se formaliser
+par la th\'eorie de Shannon qui la relie au nombre de bits minimum
+pour coder le signal. Le chapitre \ref{comp-code-chap}
+en d\'eduit des algorithmes de compression 
+qui suppriment la redondance interne
+d'un signal et le repr\'esentent avec un nombre de bits r\'eduit.
+De tels algorithmes augmentent consid\'erablement les capacit\'es de
+stockage, et permettent de transmettre
+des signaux \`a travers des canaux \`a d\'ebits r\'eduits. 
+Ainsi, le nouveau 
+standard de compression pour la t\'el\'evision haute d\'efinition peut
+diffuser une image de bien plus haute r\'esolution spatiale
+et temporelle, par les m\^emes canaux de transmission 
+que la t\'el\'evision actuelle.
+
+Cependant, la th\'eorie de Shannon ne permet pas d'extraire
+l'information ``utile'' d'un signal.
+La reconnaissance de la parole a 
+motiv\'e un grand nombre de travaux
+sur ce sujet.
+La performance des syst\`emes de reconnaissance de parole
+a progress\'e beaucoup plus lentement que les 
+projections optimistes des ann\'ees 50.
+Les algorithmes de traitement doivent
+s'adapter au contenu tr\`es complexe du
+signal, et sont donc beaucoup plus sophistiqu\'es que des filtrages
+lin\'eaires homog\`enes. 
+Le chapitre \ref{parole-chap} \'etudie
+l'application des mod\`eles autor\'egressifs, et 
+l'extraction d'information
+locale en temps et en fr\'equence,
+gr\^ace \`a une transform\'ee de Fourier \`a fen\^etre.
+
+

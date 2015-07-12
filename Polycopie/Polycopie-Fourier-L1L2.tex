@@ -1,0 +1,93 @@
+\documentclass[a4paper,10pt]{book}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{fancybox}
+\usepackage{hyperref}
+\usepackage[latin1]{inputenc}
+\usepackage[francais]{babel}
+\usepackage{amssymb,amsmath,amsfonts,epsfig,natbib,bbm,ifthen,graphicx,twoopt,enumerate}
+\usepackage[draft]{fixme}
+%\FXRegisterAuthor{em}{aem}{EM}
+\FXRegisterAuthor{fr}{afr}{FR}
+
+\newtheorem{theorem}{Théorème}[section]
+\newtheorem{definition}[theorem]{Définition}
+\newtheorem{corollary}[theorem]{Corollaire}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemme}
+\theoremstyle{break}
+\newtheorem{example}[theorem]{Exemple}
+\newtheorem{remark}[theorem]{Remarque}
+\def\1{\mathbbm{1}}
+\def\mcb{\ensuremath{\mathcal{B}}}
+\def\mcc{\ensuremath{\mathcal{C}}}
+\def\mce{\ensuremath{\mathcal{E}}}
+\def\mcf{\ensuremath{\mathcal{F}}}
+\def\nset{\ensuremath{\mathbb{N}}}
+\def\qset{\ensuremath{\mathbb{Q}}}
+\def\rset{\ensuremath{\mathbb{R}}}
+\def\zset{\ensuremath{\mathbb{R}}}
+\def\cset{\ensuremath{\mathbb{C}}}
+\def\rsetc{\ensuremath{\overline{\rset}}}
+\def\Xset{\ensuremath{\mathsf{X}}}
+\def\Tset{\ensuremath{\mathsf{T}}}
+\def\Yset{\ensuremath{\mathsf{Y}}}
+\def\pp{\ensuremath{\mathrm{p.p.}}}
+\pagestyle{plain}
+\def\rmd{\mathrm{d}}
+\def\Qint{\ensuremath{\mathrm{QInt}}}
+\def\Int{\ensuremath{\mathrm{Int}}}
+\def\eqdef{\ensuremath{\stackrel{\mathrm{def}}{=}}}
+\def\eqsp{\;}
+\def\lleb{\lambda^{\mathrm{Leb}}}
+\newcommand{\coint}[1]{\left[#1\right[}
+\newcommand{\ocint}[1]{\left]#1\right]}
+\newcommand{\ooint}[1]{\left]#1\right[}
+\newcommand{\ccint}[1]{\left[#1\right]}
+
+
+
+\newcommand{\rmi}{\mathrm{i}}
+\newcommand{\rme}{\mathrm{e}}
+
+\input{notations-hilbertfourier}
+
+\begin{document}
+\title{Transformée de Fourier des fonctions}
+\author{E.~Moulines, F.~Roueff}
+
+
+\chapter{Espaces de Hilbert}
+
+\input{hilbert}
+
+\chapter{Espaces $L^p$}
+
+\input{espaceslp}
+
+\chapter{Transformée de Fourier dans $L^1$}
+\input{fourierL1}
+
+
+\chapter{Transformée de Fourier dans $\mcs$}
+\input{fourierS}
+
+\chapter{Transformée de Fourier dans $\mathcal{S}'$}
+\input{fourierSprim}
+
+\chapter{Transformée de Fourier dans $L^2$}
+\input{fourierL2}
+
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% ispell-local-dictionary: "francais"
+%%% TeX-master: "Polycopie-Fourier-L1L2"
+%%% End:
