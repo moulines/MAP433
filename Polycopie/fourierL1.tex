@@ -1,9 +1,7 @@
 
-\section{Transform{\'e}e de Fourier sur $L^1(\rset)$}
+\section{Transform{\'e}e de Fourier sur $L_1(\rset)$}
 
-Nous abordons dans cette partie la d{\'e}finition et les propri{\'e}t{\'e}s de la transform{\'e}e de Fourier des fonctions. L'essentiel
-concerne les r{\`e}gles de calcul qu'il faut savoir manipuler couramment.
-
+Nous abordons dans cette partie la d{\'e}finition et les propri{\'e}t{\'e}s de la transform{\'e}e de Fourier des fonctions.
 \begin{definition}[Transform{\'e}e de Fourier]
 Soit $f \in L_1(\rset)$. On pose, pour tout $\xi\in\rset$,
 \begin{align}
@@ -25,8 +23,8 @@ b-a & \quad \xi = 0, \\
 \frac{\sin \pi (b-a) \xi}{\pi \xi} \rme^{- \rmi \pi (a+b) \xi} & \quad \xi\neq0\eqsp.
 \end{cases}
 $$
-On remarque que, pour cette exemple, $\hat{f}$ n'est pas dans $L_1(\rset)$. En revanche c'est une fonction continue born{\'e}e
-qui tend vers zero aux deux extr{\'e}mit{\'e}s de la droite r{\'e}elle.
+On remarque que $\hat{f} \not \in L_1(\rset)$. En revanche c'est une fonction continue born{\'e}e
+telle que $\lim_{|\xi|\to \infty} \hat{f}(\xi)= 0$.
 \end{example}
 En fait les propri{\'e}t{\'e}s d{\'e}crites pour $\hat{f}$ dans cet exemple sont des propri{\'e}t{\'e}s g{\'e}n{\'e}rales des
 fonctions de $\TF(L^1(\rset))$ comme le montre le r{\'e}sultat suivant.
@@ -43,16 +41,15 @@ Etant donn{\'e} $f \in L_1(\rset)$ on a
 \end{theorem}
 \begin{proof}
 \begin{enumerate}
-\item La continuit{\'e} de $\hat{f}$ d{\'e}coule directement de la continuit{\'e} de l'int{\'e}grale \eqref{eq:TFL1} par rapport au param{\`e}tre
-  $\xi$ par convergence domin{\'e}e. En effet, la fonction $\xi \mapsto \rme^{- \rmi 2 \pi \xi x} f(x)$ est continue sur $\rset$
-  et major{\'e}e en module par $|f(x)|$ (qui ne d{\'e}pende pas de $\xi$), qui est dans $L_1(\rset)$.
-\item La lin{\'e}arit{\'e} de $\TF$ d{\'e}coule directement de celle de l'int{\'e}grale. Pour tout $\xi \in \rset$, on a $|\hat{f}(\xi)| \leq
+\item La fonction $\xi \mapsto \rme^{- \rmi 2 \pi \xi x} f(x)$ est continue sur $\rset$
+  et major{\'e}e en module par $|f(x)|$ (qui ne d{\'e}pend pas de $\xi$), qui est dans $L_1(\rset)$. On conclut en appliquant le th\'eor\`eme de convergence domin\'ee.
+\item La lin{\'e}arit{\'e} de $\TF$ d{\'e}coule directement de la lin\'earit\'e de l'int{\'e}grale. Pour tout $\xi \in \rset$, on a $|\hat{f}(\xi)| \leq
   \int |f(x)| \rmd x = \| f \|_1$. On en d{\'e}duit que $\hat{f}$ est born{\'e}e par $\| f\|_1$ et que $\TF$ est continue.
 \item Supposons tout d'abord que $f$ est continue {\`a} support compact (il existe $M>0$ tel que $f(x)=0$ si $|x|>M$). Par
-  changement de variable $x=t-1/(2\xi)$ dans~(\ref{eq:TFL1}), on a, pour tout $\xi\neq0$,
+  changement de variable $x=t-1/(2\xi)$ dans~\eqref{eq:TFL1}, on a, pour tout $\xi\neq0$,
 $$
-\hat{f}(\xi) = \int_{\rset} \rme^{- \rmi 2 \pi \xi t - \rmi \pi} f(t+1/(2\xi)) dt =
-- \int_{\rset} \rme^{- \rmi 2 \pi \xi t} f(t+1/(2\xi)) dt.
+\hat{f}(\xi) = \int_{\rset} \rme^{- \rmi 2 \pi \xi t - \rmi \pi} f(t+1/(2\xi)) \rmd t =
+- \int_{\rset} \rme^{- \rmi 2 \pi \xi t} f(t+1/(2\xi)) \rmd t \eqsp.
 $$
 D'o{\`u} l'expression, en sommant cette {\'e}quation avec~(\ref{eq:TFL1}),  pour tout $\xi\neq0$,
 $$
@@ -74,14 +71,16 @@ La propri{\'e}t{\'e} {\`a} la fois la plus imm{\'e}diate et la plus  fondamental
 translations.
 \begin{proposition}[Transform{\'e}e de Fourier et translation]
 \label{prop:FourierTranslation}
-Soit $f\in L_1(\rset)$. Alors, pour tout $t\in\rset$, les fonctions $x\mapsto f(x-t)$ et
-$x\mapsto \rme^{\rmi 2 \pi t}f(x)$ sont dans $L_1(\rset)$ et v{\'e}rifient
+Soit $f\in L_1(\rset)$. Alors, pour tout $t\in\rset$, les fonctions $x\mapsto f(x-x_0)$ et
+$x\mapsto \rme^{\rmi 2 \pi \xi_0 x}f(x)$ sont dans $L_1(\rset)$ et v{\'e}rifient
 \begin{enumerate}
-\item $[\TFA{x\mapsto f(x-t)}](\xi)=\rme^{- \rmi 2 \pi t}\hat{f}(\xi)$ pour tout $\xi\in\rset$;
-\item $[\TFA{x\mapsto  \rme^{\rmi 2 \pi t}f(x)}](\xi)=\hat{f}(\xi-t)$ pour tout $\xi\in\rset$.
+\item $[\TFA{x\mapsto f(x-x_0)}](\xi)=\rme^{- \rmi 2 \pi x_0}\hat{f}(\xi)$ pour tout $\xi\in\rset$;
+\item $[\TFA{x\mapsto  \rme^{\rmi 2 \pi \xi_0 x}f(x)}](\xi)=\hat{f}(\xi-\xi_0)$ pour tout $\xi\in\rset$.
 \end{enumerate}
 \end{proposition}
-
+\begin{proof}
+La preuve élémentaire est laissée aux lecteurs.
+\end{proof}
 
 Une des propri{\'e}t{\'e}s remarquables de la transform{\'e}e de Fourier est d'{\'e}changer la \emph{d{\'e}rivation} et la multiplication par un mon{\^o}me
 \begin{proposition}[Transform{\'e}e de Fourier et D{\'e}rivation]
@@ -143,11 +142,10 @@ r{\'e}sulte du th{\'e}or{\`e}me de Fubini que
 \section{D{\'e}croissance et d{\'e}rivation}
 %Nous avons observ{\'e} dans la partie pr{\'e}c{\'e}dente la n{\'e}cessit{\'e} de restreindre l'espace $L_1(\rset)$
 %pour pour d{\'e}finir la transform{\'e}e de Fourier inverse.
-Nous avons observ{\'e} dans la partie pr{\'e}c{\'e}dente d{\'e}s le premier exemple de calcul de transform{\'e}e de Fourier
+Nous avons observ{\'e} dans la partie pr{\'e}c{\'e}dente d{\`e}s le premier exemple de calcul de transform{\'e}e de Fourier
 que $L_1(\rset)$  n'est pas stable sous l'effet de $\TF$.
 Nous allons introduire un sous-espace de $L_1(\rset)$ stable par transformation de Fourier,
-d{\'e}rivation et multiplication par un polyn{\^o}me. Cet espace introduit par Laurent Schwartz et que l'on notera $\mcs$, est {\`a} la
-base de beaucoup de constructions analytiques autour de la transform{\'e}e de Fourier.
+d{\'e}rivation et multiplication par un polyn{\^o}me. Cet espace introduit par Laurent Schwartz et que l'on notera $\mcs$ joue un rôle essentiel en analyse de Fourier.
 
 \begin{definition}[Fonction {\`a} d{\'e}croissance rapide]\index{Fonction|{\`a}
     d{\'e}croissance rapide}
@@ -233,7 +231,7 @@ Un calcul imm{\'e}diat donne $g_1'(x)= -xg_1(x)$; une int{\'e}gration par partie
 $$
 \hat{g_1}'(\xi) = - 2\rmi \pi  \int g_1'(x) \,(- \rmi 2 \pi \xi)\,\rme^{- \rmi 2 \pi \xi x} \rmd x \eqsp.
 $$
-D'o{\`u} l'on tire finalement que $\hat{g_1}' = - 4 \pi^2 \xi \hat{g_1}$.
+D'o{\`u} l'on tire finalement que $\hat{g}_1'(\xi) = - 4 \pi^2 \xi \hat{g}_1(\xi)$.
 La solution g{\'e}n{\'e}rale de l'{\'e}quation diff{\'e}rentielle {\`a} variables s{\'e}parables  $f'(u)= - 4 \pi^2 u f(u)$
 {\'e}tant $f(u) = C \rme^{- 2 \pi^2 u^2}$, et comme on a  $\hat{g_1}(0) = \int g_1(x) \rmd x = 1$,
 on voit que n{\'e}cessairement $\hat{g_1}(\xi)= \rme^{-2 \pi^2 \xi^2}$.
@@ -244,8 +242,8 @@ Par un changement de variable {\'e}vident, ce r{\'e}sultat se g{\'e}n{\'e}ralise
 \hat{g_\sigma}(\xi) =  \rme^{-2 \pi^2 (\xi\sigma)^2} = \frac1{\sigma\sqrt{2\pi}}\,g_{1/2\pi\sigma}(\xi),\quad\xi\in\rset.
 \end{equation}
 
-Comme r{\'e}v{\'e}l{\'e} plus haut, la famille $(g_\sigma)_{\sigma>0}$ est donc stable par
-transform{\'e} de Fourier. 
+Comme annonc\'e plus haut, la famille $(g_\sigma)_{\sigma>0}$ est donc stable par
+transform{\'e} de Fourier.
 
 %%% Local Variables:
 %%% mode: latex
