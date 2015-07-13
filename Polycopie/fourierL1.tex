@@ -244,7 +244,64 @@ Par un changement de variable {\'e}vident, ce r{\'e}sultat se g{\'e}n{\'e}ralise
 
 Comme annonc\'e plus haut, la famille $(g_\sigma)_{\sigma>0}$ est donc stable par
 transform{\'e} de Fourier.
+\section{Quelques exemples classiques}
+Rappelons que  $u$ est la fonction de Heaviside, définie par $u(x)=1$ pour $x>0$ et $u(x)=0$ pour $x\leq 0$.
+\begin{enumerate}[label=(\roman*)]
+\item $f_{1}(x)=\rme^{-ax}u(x)$ , ${\rm Re}(a)>0.$
+$$
+\hat{f_{1}}(\xi)=\int_{0}^{\infty}\rme^{-2i\pi x\xi}\rme^{-ax}dx=\lim_{b\rightarrow+\infty}[\frac{-\rme^{-x(a+2i\pi\xi)}}{a+2i\pi\xi}]_{0}^{b}=\frac{1}{a+2i\pi\xi}.
+$$
+\item $f_{2}(x)=\rme^{ax}u(-x)$ , ${\rm Re}(a)>0.$
+$$
+\hat{f_{2}}(\xi)=\int_{-\infty}^{0}\rme^{-2i\pi x\xi}\rme^{ax}dx=\frac{-1}{-a+2i\pi\xi}.
+$$
+\item $f_{3}(x)=\displaystyle \frac{x^{k}}{k!}\rme^{-ax}u(x)$ , ${\rm Re}(a)>0.$
 
+$f_{3}(x)=\displaystyle \frac{1}{(-2i\pi)^{k}}\frac{1}{k!}(-2i\pi x)^{k}f_{1}(x)$ , and $\displaystyle \hat{f_{3}}(\xi)=\frac{1}{k!}\frac{1}{(-2i\pi)^{k}}\hat{f_{1}}^{(k)}(\xi)$. Comme $\hat{f_{1}}^{(k)}(\xi)=k!(a+2i\pi\xi)^{-(k+1)}(-2i\pi)^{k},$
+$$
+\hat{f_{3}}(\xi)=\frac{1}{(a+2i\pi\xi)^{k+1}}.
+$$
+\item $f_{4}(x)=\displaystyle \frac{x^{k}}{k!}\rme^{ax}u(-x)$ , ${\rm Re}(a)>0.$
+Nous avons
+$$
+\hat{f_{4}}(\xi)=\frac{-1}{(-a+2i\pi\xi)^{k+1}}.
+$$
+\item $f_{5}(x)=\rme^{-a|x|}, {\rm Re}(a)>0$. Nous déduisons des calculs précédents
+$$
+\hat{f_{5}}(\xi)=\frac{2a}{a^{2}+4\pi^{2}\xi^{2}}.
+$$
+\item $f_{6}(x)=\mathrm{sign}(x)\rme^{-a|x|}, {\rm Re}(a)>0$. Nous avons
+$$
+\hat{f_{6}}(\xi)=\frac{-4i\pi\xi}{a^{2}+4\pi^{2}\xi^{2}}.
+$$
+\end{enumerate}
+\section{Formulaire}
+\begin{enumerate}[label=(\roman*)]   
+\item 
+\begin{align*}
+\hat{f}^{(k)}(\xi)&=[(-2\rmi\pi x)^{k}f(x)]^{\sim}(\xi)\\
+\widehat{f^{(k)}}(\xi)&=(2\rmi \pi\xi)^{k}\hat{f}(\xi)
+\end{align*}
+\item 
+\begin{align*}
+f(x-a) &\TFyield \rme^{-2\rmi \pi a\xi}\hat{f}(\xi) \\
+\rme^{2 \rmi \pi ax}f(x)&\TFyield \hat{f}(\xi-a) \\
+\end{align*}
+\item $a\neq 0$. 
+$$ f(ax)\TFyield \frac{1}{|\xi|}\hat{f}(\frac{\xi}{a})$$
+\item  $a\in \cset$, ${\rm Re}(a)>0, k=0,1,2\ldots.$
+\begin{align*}
+\frac{x^{k}}{k!}\rme^{-ax}u(x) &\TFyield \frac{1}{(a+2i\pi\xi)^{k+1}} \\
+\frac{x^{k}}{k!}\rme^{ax}u(-x) &\TFyield \frac{-1}{(-a+2i\pi\xi)^{k+1}} \\
+\rme^{-a|x|} &\TFyield \frac{2a}{a^{2}+4\pi^{2}\xi^{2}} \\
+\mathrm{sign}(x)\rme^{-a|x|} &\TFyield \frac{-4i\pi\xi}{a^{2}+4\pi^{2}\xi^{2}} \\
+\end{align*}
+\item  $a\in \rset$, $a>0$. 
+\begin{align*}
+\rme^{-ax^{2}}  &\TFyield \sqrt{\frac{\pi}{a}}\rme^{-\frac{\pi^{2}}{a}\xi^{2}} \\
+\1_{\ccint{-a,+a}}(x) &\TFyield \frac{\sin 2a\pi\xi}{\pi\xi}
+\end{align*}
+\end{enumerate}
 %%% Local Variables:
 %%% mode: latex
 %%% ispell-local-dictionary: "francais"
