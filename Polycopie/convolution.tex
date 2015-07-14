@@ -329,7 +329,7 @@ $\norm{f - g_\epsilon}[p] \leq \epsilon$.
 \end{theorem}
 \begin{proof}
 Pour tout $\epsilon > 0$, il existe $f_\epsilon \in C_c^0(\rset)$ telle que $\norm{f - f_\epsilon}[p] \leq \epsilon$.
-Pour $\sigma > 0$, on note $g_{\epsilon,\sigma} = f_\epsilon * K_\sigma$ où $K$ est le noyau donn\'e par \eqref{eq:noyau-support-borne}. \Cref{lem:regularisation} montre que $g_{\epsilon,\sigma}$ converge uniformément vers $f_\epsilon$, \ie\ $\lim_{\sigma \to 0} \norm{f_\epsilon - g_{\epsilon,\sigma}}[\infty]= 0$. Comme $f_\epsilon$ et $K_\sigma$ sont à supports compacts, \Cref{lem:support-convolution} montre que $\supp(g_{\epsilon,\sigma}) \subset \ccint{a,b}$ avec $-\infty < a < b < \infty$.
+Pour $\sigma > 0$, on note $g_{\epsilon,\sigma} = f_\epsilon * K_\sigma$ où $K$ est le noyau donn\'e par \eqref{eq:noyau-support-borne}. \Cref{lem:regularisation} montre que $g_{\epsilon,\sigma}$ converge uniform\'ement vers $f_\epsilon$, \ie\ $\lim_{\sigma \to 0} \norm{f_\epsilon - g_{\epsilon,\sigma}}[\infty]= 0$. Comme $f_\epsilon$ et $K_\sigma$ sont à supports compacts, \Cref{lem:support-convolution} montre que $\supp(g_{\epsilon,\sigma}) \subset \ccint{a,b}$ avec $-\infty < a < b < \infty$.
 On a donc aussi 
 $$
 \lim_{\sigma \to 0} \norm{f_\epsilon - g_{\epsilon,\sigma}}[p] = 0 \eqsp,
@@ -338,11 +338,11 @@ ce qui implique que, pour tout $\epsilon > 0$,
 $$
 \lim_{\sigma \to 0} \norm{f - g_{\epsilon,\sigma}}[p] \leq \norm{f-f_\epsilon}[p] \leq \epsilon \eqsp.
 $$
-\Cref{lem:regulairsation-est-reguliere} montre que comme $f$ est à décroissance rapide et $K_\sigma \in \mcs$, alors $g_{\epsilon,\sigma} f * K_\sigma \in \mcs$.
+\Cref{lem:regulairsation-est-reguliere} montre que comme $f$ est à d\'ecroissance rapide et $K_\sigma \in \mcs$, alors $g_{\epsilon,\sigma} f * K_\sigma \in \mcs$.
 \end{proof}
 
 
-\section{Une première extension de la transformation de Fourier inverse}
+\section{Une premi\`ere extension de la transformation de Fourier inverse}
 Ici nous l'appliquons dans le cadre $L_1(\rset)$ grace au r{\'e}sultat suivant, qui nous permettra de compl{\'e}ter la
 proposition~\ref{prop:inversionFourierL1} par un th{\'e}or{\`e}me d'inversion.
 \begin{proposition}\label{prop:DualiteSchwartz}
@@ -362,12 +362,13 @@ lemme~\ref{lem:regularisation} en tout point de la droite r{\'e}elle.
 
 On en d{\'e}duit le r{\'e}sultat annonc{\'e} qui compl{\`e}te la proposition~\ref{prop:inversionFourierL1}.
 \begin{theorem}
+\label{theo:inversion-L1}
 Soit $f\in L_1(\rset)$ et supposons que $\hat{f}$ appartiennent aussi {\`a} $L_1(\rset)$. Alors
 la fonction (continue) $\bar{\TF} \hat{f}$ est l'unique
 repr{\'e}sentant continu de $f$.
 \end{theorem}
 \begin{proof}
-La conitnuit{\'e} de $\bar{\TF} \hat{f}$ d{\'e}coule du th{\'e}or{\`e}me~\ref{thm:rieman-lebesgue}.
+La continuit{\'e} de $\bar{\TF} \hat{f}$ d{\'e}coule du th{\'e}or{\`e}me~\ref{thm:rieman-lebesgue}.
 Pour toute fonction test $\phi$ de $\mcs$, on a, d'apr{\`e}s la proposition~\ref{prop:echangeTF} et le
 th{\'e}or{\`e}me~\ref{thm:Schwarz},
 $$
@@ -381,4 +382,68 @@ $$
 D'o{\`u} le r{\'e}sultat en appliquant la proposition~\ref{prop:DualiteSchwartz}.
 \end{proof}
 
-\section{Convolution et transformée de Fourier dans $L_1(\rset)$}
+\section{Convolution et transform\'ee de Fourier dans $L_1(\rset)$}
+\begin{proposition}
+\label{prop:convolution-L1}
+Soient $f,g \in L_1(\rset)$. 
+\begin{enumerate}[label=(\roman*)]
+\item \label{item:convolution-L1-i} $\widehat{f * g}(\xi)= \hat{f}(\xi) \, \hat{g}(\xi)$ pour tout $\xi \in \rset$,
+\item Si de plus $\hat{f}, \hat{g} \in L_1(\rset)$, alors $\widehat{f \cdot g}(\xi)= \hat{f}(\xi) \, \hat{g}(\xi)$.
+\end{enumerate} 
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\roman*),wide=0pt, labelindent=\parindent]
+\item Comme $f,g \in L_1(\rset)$, \Cref{prop:20.2.1} shows that $f * g \in L_1(\rset)$. On peut donc calculer $\widehat{f * g}(\xi)$. En utilisant le th\'eor\`eme de Fubini, nous avons
+\begin{align*}
+\int \rme^{-\rmi 2 \pi \xi x} f * g(x) \rmd x 
+&= \int \rme^{-\rmi 2 \pi \xi x} \left( \int f(x-t) g(t) \rmd t \right) \\
+&= \int g(t) \left( \int \rme^{-\rmi 2 \pi \xi x} f(x-t) \rmd t \right) \rmd t \\
+&= \int g(t) \rme^{- \rmi 2 \pi \xi t} \hat{f}(\xi) \rmd t = \hat{g}(\xi) \cdot \hat{f}(\xi) 
+\end{align*}
+\item On peut appliquer \eqref{item:convolution-L1-i} avec $\TFAC$ en remplaçant $\rmi$ par $-\rmi$. Comme 
+$\hat{f}$ et $\hat{g} \in L_1(\rset)$, on applique \eqref{item:convolution-L1-i} à $\hat{f}$ et $\hat{g}$ ce qui montre
+\[
+\TFAC( \hat{f} * \hat{g})(x)= \TFAC(\hat{f})(x) \cdot \TFAC(\hat{g}) (x)= f(x) \cdot g(x) \eqsp, \pp 
+\]
+\end{enumerate}
+\end{proof}
+\begin{corollary}
+Soient $f,g \in L_1(\rset)$.
+\begin{enumerate}[label=(\roman*)]
+\item $\widehat{f * g}= \hat{f} \cdot \hat{g}$.
+\item $\widehat{f \cdot g}= \hat{f} * \hat{g}$.
+\end{enumerate}
+\end{corollary}
+\section{Applications aux filtres anaogiques gouvern\'es par une \'equation diff\'erentielle}
+La transform\'ee de Fourier permet d'\'etudier les filtres d\'efinis par une \'equation diff\'erentielle ordinaire à coefficients constants.
+\begin{equation}
+\label{eq:entre-sortie}
+\sum_{k=0}^{q}b_{k}g^{(k)}=\sum_{j=0}^{p}a_{j}f^{(j)},\ a_{p}\cdot b_{q}\neq 0 \eqsp,
+\end{equation}
+où $f$ est l'entr\'ee et $g=A(f)$ est la sortie. Nous allons tout d'abord supposer que $f \in \mcs$
+C'est un cas tr\`es particulier car il n'y a pas de raisons que l'entr\'ee soit aussi r\'eguli\`ere. Nous verrons dans la suite que l'\'etude de ce cas permet de consid\'erer ensuite des situations plus g\'en\'erales.
+
+Nous supposons que $f\in \mcs$ et nous recherchons des solutions $g \in \mcs$. 
+Si une telle solution $g$ existe, nus pouvons calculer la transform\'ee de Fourier des deux membres de \eqref{eq:entre-sortie}:
+\begin{equation}
+\label{eq:entre-sortie-Fourier}
+\sum_{k=0}^{q}b_{k}(2\rmi\pi\lambda)^{k}\hat{g}(\lambda)=\sum_{j=0}^{p}a_{j}(2\rmi \pi\lambda)^{j}\hat{f}(\lambda) \eqsp. 
+\end{equation}
+Consid\'erons les deux polyn\^omes: $P(x)=\displaystyle \sum_{j=0}^{p}a_{j}x^{j}$ and $Q(x)=\displaystyle \sum_{k=0}^{q}b_{k}x^{k}$
+et supposons que la fraction rationnelle $P(x)/Q(x)$ n'a pas de p\^oles sur l'axe imaginaire.
+Alors $P(2 \rmi \pi\lambda)/Q(2 \rmi \pi\lambda)$ est d\'efinie pour tout $\lambda \in \rset$,et \eqref{eq:entre-sortie-Fourier}
+est \'equivalent à
+\begin{equation}
+\label{eq:soln-entre-sortie}
+\hat{g}(\lambda)=\frac{P(2\rmi\pi\lambda)}{Q(2\rmi\pi\lambda)}\hat{f}(\lambda). 
+\end{equation}
+Cette identit\'e d\'etermine $g \in \mcs$ compl\`etement, si cette solution existe, et prouve l'unicit\'e de la solution de \eqref{eq:entre-sortie} dans $\mcs$. L'existence d'une solution d\'ecoule aussi de \eqref{eq:soln-entre-sortie}, comme la fonction
+$$
+G(\lambda)=\frac{P(2i\pi\lambda)}{Q(2i\pi\lambda)}\hat{f}(\lambda)
+$$
+est un \'el\'ement de $\mcs$ d\`es que  $f \in \mcs$.
+En appliquant \Cref{thm:Schwarz}, nous avons $g= \TFAC(G)$ est l'unique solution de \eqref{eq:entre-sortie} dans $\mcs$.
+
+\begin{proposition}
+ Si $P(x)/Q(x)$ n'a pas de p\^oles sur l'axe imaginaire et si $f \in \mcs$, alors \eqref{eq:entre-sortie} poss\`ede une unique solution $g\in \mcs$. Dans ce cas, le syst\`eme $A:\mcs \to \mcs$, $f\mapsto g$ est un \emph{filtre analogique}.
+ \end{proposition}
