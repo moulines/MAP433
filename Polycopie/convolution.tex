@@ -1,0 +1,384 @@
+\section{D\'efinition}
+\begin{definition}
+La convolution de deux fonctions $f$ et $g$ de $\rset$ \`a valeurs dans $\cset$ est une fonction $f*g$ d\'efinie par
+$$
+f*g(x)=\int_{\rset}f(x-t)g(t)\rmd t=\int_{\rset}f(u)g(x-u) \rmd u.
+$$
+\end{definition}
+L'existence du produit de convolution requiert bien entendu des hypoth\`eses que nous pr\'eciserons dans la suite.
+\begin{example}
+\label{example:convolution}
+\begin{enumerate}[label=(\roman*),wide=0pt, labelindent=\parindent]
+\item Let $f=g=\1_{[0,1]}$. Alors
+$$
+\int_{\rset}f(x-t)g(t) \rmd t=\int_{0}^{1}\1_{[0,1]}(x-t) \rmd t= \Leb(\ccint{0,1} \cap \ccint{x-1,\ x})
+$$
+qui est la fonction "triangle"
+$$
+f*g(x)=\begin{cases}
+0 &  x\leq 0,\\
+x &  0\leq x\leq 1,\\
+2-x & 1\leq x\leq 2,\\
+0 &  x\geq 2.
+\end{cases}
+$$
+\begin{figure}
+\includegraphics[width=47.75mm,height=41.99mm]{./gw_184_images/image001.png}
+
+\includegraphics[width=56.22mm,height=38.95mm]{./gw_184_images/image002.png}
+\end{figure}
+Le produit de convolution de deux fonctions discontinues est donc continue.
+\item  Soit $f\in L_1(\rset)$ and $g= (2h)^{-1} \1_{\ccint{1-h,+h}}$ o\`u $h>0$.
+$$
+f*g(x)=\frac{1}{2h}\int_{-h}^{+h}f(x-t) \rmd t=\frac{1}{2h}\int_{x-h}^{x+h}f(u) \rmd  u,
+$$
+qui est la moyenne de $f$ sur l'intervalle $\ccint{x-h,\ x+h}$. Le lecteur montrera que la fonction $f*g$ est continue.
+\end{enumerate}
+\end{example}
+
+
+\section{Convolution dans $L_1(\rset)$}
+
+\begin{definition}[support d'une fonction  measurable]
+Soit $f$ : $\rset\rightarrow \cset$ une fonction mesurable. Soit $O_{i}, i\in I$ la  famille de tous les ouverts de $\rset$ tels que pour tout $i\in I$, $f=0$ p.p. sur $O_{i}$. Soit $O=\bigcup_{i\in I}O_{i}$ et on d\'efinit le support de $f, \supp(f)$ , comme l'ensemble ferm\'e $\rset\backslash O$.
+\end{definition}
+On v\'erifie ais\'ement que si $f=g$ p.p. alors $\supp(f)=\supp(g)$. Dans \Cref{example:convolution} $\supp(f)=\supp(g)=[0,1]$, et la  convolution $f*g$ a pour effet d'\'etendre le support $\supp(f*g)=[0,2]$. De fa\c{c}on g\'en\'erale, nous avons
+\begin{lemma}
+\label{lem:support-convolution}
+Soient $f$ et $g$ deux fonctions telles que $f*g$ existe. Alors
+$$
+\supp(f*g)\subset\overline{\supp(f) + \supp(g)}.
+$$
+\end{lemma}
+\begin{proof}
+  Notons $S= \rset\setminus (\supp(f)+\supp(g))$ et $S^{o}$ l'int\'erieur de $S$. Soit $x\in S$. Pour tout $t\in \supp(f)$ nous avons $(x-t)\not\in \supp(g)$ et par cons\'equent $\displaystyle \int_{\rset}g(x-t)f(t)\rmd t=0$. Soit $O_{f*g}$ le plus grand ensemble ouvert sur lequel $f*g=0$ p.p.  Nous avons montr\'e que si $x\in S^{o}$ alors $x\in O_{f*g}$. Par cons\'equent $\rset\setminus O_{f*g}=\supp(f*g) \subset \rset\setminus S^{o}$. La preuve d\'ecoule de $\rset\setminus S^{o}=\overline{\rset\setminus S}$.
+\end{proof}
+
+\begin{proposition}
+\label{prop:20.2.1}
+Si $f$ et $g$ sont des \'el\'ements $L_1(\rset)$ , alors:
+\begin{enumerate}[label=(\roman*)]
+\item $f*g$ est d\'efini presque-partout et $f*g \in L_1(\rset)$ .
+\item La convolution est op\'erateur bilin\'eaire continu de $L_1(\rset)\times L_1(\rset)$ \`a valeurs dans $L_1(\rset)$ et
+\begin{equation}
+\label{eq:inegalite-norm}
+\norm{f*g}[1] \leq \norm{f}[1] \, \norm{ g}[1] \, .
+\end{equation}
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+ \begin{enumerate}[label=(\roman*), wide=0pt, labelindent=\parindent]
+\item Comme $f, g \in L_1(\rset)$, le th\'eor\`eme de Fubini montre que la fonction $(y,\ z)\mapsto f(y)g(z)$ appartient \`a $L_{1}(\rset^{2})$. Le changement de variables $y=x-t$ et $z=t$ montre
+$$
+\iint_{\rset\times \rset}f(y)g(z)dydz=\iint_{\rset\times \rset}f(x-t)g(t)\rmd x\rmd t.
+$$
+La fonction $x\displaystyle \mapsto\int_{\rset}f(x-t)g(t)\rmd t$ est donc d\'efinie p.p. et appartient \`a  $L_1(\rset)$, en appliquant encore le th\'eor\`eme de Fubini.
+\item Pour \'etablir l'in\'egalit\'e \eqref{eq:inegalite-norm}, nous \'ecrivons
+$$
+|f*g(x)|\leq\int_{\rset}|f(x-t)||g(t)|\rmd t=|f|*|g|(x)\ .
+$$
+Par cons\'equent, nous avons
+\begin{align*}
+\int_{\rset}|f*g|(x)\rmd x
+&\leq\int_{\rset}|f|*|g|(x)\rmd x=\int_{\rset}\rmd x\int_{\rset}|f(x-t)||g(t)|\rmd t \\
+&=\int_{\rset}|g(t)|(\int_{\rset}|f(x-t)|\rmd x)\rmd t= \norm{g}[1] \norm{f}[1].
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+Supposons que $f\in \L1loc(\rset)$ et que $g\in L_1(\rset)$ .
+\begin{enumerate}[label=(\roman*)]
+\item Si $\supp(g)$ est born\'e, alors $f*g(x)$ est d\'efini p.p .et $f * g \in \L1loc(\rset)$ .
+\item Si $f$ est born\'ee alors $f*g(x)$ est d\'efini pour tout $x$ et  $f * g \in L_{\infty}(\rset)$ .
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\roman*), wide=0pt, labelindent=\parindent]
+\item $g = 0$ p.p. sur le compl\'ementaire d'un intervalle $\ccint{-a,\ a}$. Soit $x \in \ccint{\alpha,\ \beta}$. Pour tout $t\in \ccint{-a,\ a}$ et $x\in \ccint{\alpha,\ \beta}$,
+$f(x-t)g(t)=\1_{[\alpha-a,\beta+a]}(x-t)f(x-t)g(t)$  et donc
+$$
+f*g(x)=\int_{-a}^{+a}f(x-t)g(t)\rmd t=(\1_{[\alpha-a,\beta+a]}f)*g(x)\ .
+$$
+$f*g$ coincide sur $[\alpha,\ \beta]$ avec la convolution de deux fonctions appartenant \`a $L_1(\rset)$. \Cref{prop:20.2.1} montre que cette fonction est d\'efinie p.p. et est int\'egrable. Donc $f*g$ est d\'efinie p.p. et est int\'egrable sur tout ensemble compact..
+\item Si $f\in L_{\infty}(\rset)$ , alors
+$$
+|\int_{\rset}f(u)g(x-u)\rmd u|\leq\norm{f}[\infty]\int_{\rset}|g(x-u)|,\ \rmd u=\norm{f}[\infty] \,
+\norm{g}[1] \, .
+$$
+pour tout $x$ et $\norm{f*g}[\infty]\leq \norm{f}[\infty] \, \norm{g}[1].$
+\end{enumerate}
+\end{proof}
+\section{Convolution dans $L_{p}(\rset)$}
+
+
+
+\begin{proposition}
+Supposons que $f\in L_{p}(\rset)$ et $g\in L_{q}(\rset)$ o\`u $p^{-1}+q^{-1}=1$. Alors:
+\begin{enumerate}[label=(\roman*)]
+\item $f*g$ est d\'efini est continue et born\'ee sur  $\rset.$
+\item $\norm{f*g}[\infty]\leq \norm{f}[p] \, \norm{g}[q]$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Nous allons \'etablir ce r\'esultat pour: $p=1,  q=+\infty$ and $p=2, q=2.$
+Consid\'erons tout d'abord le cas $p=1, q=+\infty.$
+Nous avons d\'ej\`a \'etabli  que $f*g$ est d\'efini partout et born\'e; seule la continuit\'e reste \`a \'etablir. Nous avons
+\begin{align*}
+|f*g(x)-f*g(y)| &\leq\int|f(x-t)-f(y-t)||g(t)|\rmd t \\
+&\leq\Vert g\Vert_{\infty}\int|f(x-t)-f(y-t)|\rmd t.
+\end{align*}
+ Supposons tout d'abord que $f$ est continue \`a suppot compact, $\supp(f) \subset\ooint{-a,\ a}$.
+ Pour $|x-y|$ suffisamment petit,
+\begin{align*}
+\int_{\rset}|f(x-t)-f(y-t)|\rmd t
+&=\int_{\rset}|f(x-y+u)-f(u)|\rmd u \\
+&=\int_{-a}^{+a}|f(x-y+u)-f(u)|\rmd u \leq 2a\sup_{|u|\leq a}|f(x-y+u)-f(u)|.
+\end{align*}
+Comme $f$ est uniform\'ement continue sur $[-a,\ a]$,  $f*g$ est (uniform\'ement) continue sur $\rset$.
+
+Les fonctions continues \`a support compact sont denses dans $L_1(\rset)$.
+Soit $\sequence{f}[n][\nset]$ une suite de fonctions continues \`a support compact telles que
+$\lim_{n\rightarrow\infty} \norm{f_{n}-f}[1]=0$. Nous avons
+\begin{align*}
+|f*g(x)-f*g(y)|&\leq|f*g(x)-f_{n}*g(x)|+|f_{n}*g(y)-f*g(y)| +|f_{n}*g(x)-f_{n}*g(y)|,
+\end{align*}
+qui implique
+$$
+|f*g(x)-f*g(y)|\leq 2 \norm{g}[\infty] \norm{f-f_{n}}[1]+|f_{n}*g(x)-f_{n}*g(y)|.
+$$
+Le premier terme tend vers $0$ lorsque $n \to \infty$, et le second terme est uniform\'ement continu pour tout $n$;
+par cons\'equent $f*g$ est uniform\'ement continue sur $\rset.$
+
+
+
+Consid\'erons le cas $p=2$ et  $q=2$. L'in\'egalit\'e de Cauchy-Schwarz montre que
+$$
+|f*g(x)|\displaystyle \leq\int_{\rset}|f(x-t)||g(t)|\rmd t\leq \left(\int_{\rset}|f(x-t)|^{2}\rmd t\right)^{1/2} \left(\int_{\rset}|g(t)|^{2}\rmd t \right)^{1/2}
+$$
+ et donc que $\norm{f*g}[\infty] \leq \norm{f}[2] \, \norm{g}[2]$.
+  La continuit\'e d\'ecoule de la densit\'e de $C_{c}^{0}(\rset)$  (fonctions continues \`a support compact) dans $L_{2}(\rset)$.
+
+La preuve pour $p\neq 1,2$ est similaire en rempla\c{c}ant l'in\'egalit\'ede Cauchy-Schwarz par l'in\'egalit\'e de H\"older et en utilisant la densit\'e de $C_c^0(\rset)$ dans $L_p(\rset)$.
+\end{proof}
+
+Nous consid\'erons dans la proposition suivante la convolution d'une fonction de $L_1(\rset)$
+ et d'une fonction de $L_{2}(\rset)$.
+\begin{proposition}
+Si $f\in L_1(\rset)$ et $g\in L_{2}(\rset)$ , alors
+\begin{enumerate}[label=(\roman*)]
+\item $f*g(x)$ est d\'efini presque-partout.
+\item  $f*g  \in L_{2}(\rset)$  et $\norm{f*g}[2]\leq \norm{f}[1] \, \norm{g}[2]$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\roman*), wide=0pt, labelindent=\parindent]
+\item Nous avons
+\begin{equation}
+|f(u)g(x-u)|=(|f(u)||g(x-u)|^{2})^{1/2}(|f(u)|)^{1/2}
+\end{equation}
+Comme $|f|\in L_1(\rset)$ et $|g|^{2}\in L_1(\rset)$ , la fonction $u\mapsto|f(u)||g(x-u)|^{2}$ est int\'egrable pour presque-tout
+$x$. The right-hand term of (20.4), being the product of two square integrable functions, is integrable. Thus $f*g(x)$ is defined for almost all $x.$
+
+\item En utilisant l'in\'egalit\'e de Cauchy-Schwarz
+\begin{align*}
+|f*g(x)| &\leq\int_{\rset}|f(u)||g(x-u)|\rmd u \\
+&\leq \left(\int_{\rset}|f(u)||g(x-u)|^{2}\rmd u \right)^{1/2} \left(\int_{\rset}|f(u)|\rmd u \right)^{1/2}
+\end{align*}
+et donc
+$$
+|f*g(x)|^{2}\leq(|f|*|g|^{2}(x))\norm{f}[1].
+$$
+En int\'egrant les deux membres de la seconde in\'egalit\'e, nous obtenons,
+\begin{align*}
+\int_{\rset}|f*g(x)|^{2}\rmd x &\leq \norm{f}[1] \int_{\rset}|f|*|g|^{2}(x)\rmd x \\
+&\leq\norm{f}[1] \norm{f}[1] \norm{g^{2}}[1],
+\end{align*}
+ce qui implique $\norm{f*g}[2] \leq \norm{f}[1] \norm{g}[2]$.
+\end{enumerate}
+\end{proof}
+\section{R\'egularisation par convolution}
+Le lemme suivant montre que la convolution peut {\^e}tre utilis{\'e}e dans le but de
+fournir une approximation, ce qui constitue le premier principe de
+r{\'e}gularisation.
+
+\begin{lemma}\label{lem:regularisation}
+  Soit $f\in L_1(\rset)$.
+  Soit $K$ une fonction positive telle que $\int K(x)\,\rmd x=1$ et, pour une
+  constante $C>0$ et un exposant $\alpha>2$, $K(x)\leq C (1+|x|)^{-\alpha}$
+  pour tout $x\in\rset$.  D{\'e}finissons, pour tout $\sigma>0$, la fonction
+  $K_\sigma$ par
+\begin{equation}
+  \label{eq:Kband}
+  K_\sigma(x)=\frac1\sigma K(x/\sigma)\;.
+\end{equation}
+Alors, on a les propri{\'e}t{\'e}s suivantes.
+\begin{enumerate}[label=(\roman*)]
+\item\label{item:regularisation1} En tout point $t$ o{\`u} $f$ est continue, on a
+$$
+\lim_{\sigma\downarrow0} (f \star K_\sigma)(t) = f(t)\;.
+$$
+\item\label{item:regularisation2} Si $f$ est continue {\`a} support compact, alors
+  $f \star K_\sigma$ converge uniform{\'e}ment vers $f$ quand $\sigma\downarrow0$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Comme $\int K_\sigma(x)\, \rmd x= 1$, par un changement de variable {\'e}l{\'e}mentaire,
+\begin{equation}
+\label{eq:inversionL1-2}
+\int f(t-u) K_\sigma(u) \rmd u - f(t) = \int \left\{ f(t - u) - f(t) \right \right\} K_\sigma(u) \rmd u \eqsp.
+\end{equation}
+Montrons le point~\ref{item:regularisation1}.
+Comme $f$ est continue au point $t$, pour tout $\epsilon > 0$, il existe $\eta$ tel que $|u-t| \leq \eta$
+implique que $|f(u) - f(t) | \leq \epsilon$. On a pour tout $\sigma > 0$,
+\begin{equation}
+\label{eq:conv-local}
+\int_{|u| \leq \eta} \left|  f(t-u) - f(t) \right| K_\sigma(u) \rmd u \leq \epsilon \int K_\sigma(u) \rmd u = \epsilon \eqsp.
+\end{equation}
+De plus,
+$$
+\int_{|u| \geq \eta} \left| f(t-u) - f(t) \right| K_\sigma(u) \rmd u  \leq \|f\|_1\,\sup_{|u|\geq\eta} {K}_\sigma(u)
++|f(t)|\,\int_{|u|\geq \eta} {K}_\sigma(u) \rmd u  \eqsp.
+$$
+D'autre part, lorsque $\sigma \downarrow 0$,
+$$
+\sup_{|u|\geq\eta} {K}_\sigma(u) = \frac1\sigma \sup_{|v|\geq\eta/\sigma} {K}_\sigma(v)\leq  \frac{C}\sigma (1+\eta/\sigma)^{-\alpha}
+$$
+et,
+$$
+\int_{u\geq \eta} K_\sigma(u) \rmd u \leq \frac{C}\sigma\int_{|v|\geq\eta/\sigma} (1+|v|)^{-\alpha}\,dv =O(\sigma^{\alpha-2})\eqsp.
+$$
+Par cons{\'e}quent, en combinant ces majorations avec $\alpha>2$,
+\begin{equation}
+\label{eq:conv-hors-local}
+\lim_{\sigma \downarrow 0} \int_{|u| \geq \eta} \left|  f(t-u) - f(t) \right| K_\sigma(u) \rmd u =0 \eqsp.
+\end{equation}
+Le r{\'e}sultat suit donc avec~(\ref{eq:inversionL1-2}).
+
+Le point~\ref{item:regularisation2} se montre de fa\c{c}on semblable.
+Comme $f$ est continue {\`a} support compact, elle est uniform{\'e}ment continue.
+On peut donc choisir $\eta>0$ tel que~(\ref{eq:conv-local}) soit valide pour
+tout $t$. De m{\^e}me la convergence~(\ref{eq:conv-hors-local}) est uniforme en $t$
+en utilisant que $f$ est born{\'e}. D'o{\`u} le r{\'e}sultat.
+\end{proof}
+
+Le second principe de r{\'e}gularisation est que la version convolu{\'e}e $f\star K$ de
+$f$ adopte la r{\'e}gularit{\'e} du \emph{noyau} $K$. Ce principe est donn{\'e} par le
+lemme suivant.
+
+\begin{lemma}\label{lem:regulairsation-est-reguliere}
+  Soient $f,g\in L_1(\rset)$. Alors on a les propri{\'e}t{\'e}s suivantes
+  \begin{enumerate}[label=(\roman*)]
+  \item\label{item:approx-cont-S-1} Si $g$ est $\mathcal{C}^k$, $f\star g$ est
+  $\mathcal{C}^k$ et $(f\star g)^{(k)}=f\star g^{(k)}$.
+\item\label{item:approx-cont-S-2} On a pour tout entier $p\geq0$,
+  \begin{equation}
+    \label{eq:decroissance-concolution}
+    \|(f\star g)\times m_p\|_\infty\leq \|f\times (1+|m_p|)\|_\infty \;
+    \|g\times (1+|m_p|)\|_1  \;,
+  \end{equation}
+o{\`u} $m_p$ d{\'e}signe le mon{\^o}me de degr{\'e} $p$, $m_p(x)=x^p$.
+\item \label{item:approx-cont-S-2prim} Si $f$ et $g$ sont {\`a} d{\'e}croissance rapide,
+  il en est de m{\^e}me de $f\star g$.
+\item\label{item:approx-cont-S-3}  Si $f$ est {\`a} d{\'e}croissance rapide et
+  $g\in\mcs$, $f\star g\in\mcs$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  La propri{\'e}t{\'e}~\ref{item:approx-cont-S-1} est une simple application du lemme
+  de d{\'e}rivation sous le signe somme.
+
+Montrons la propri{\'e}t{\'e}~\ref{item:approx-cont-S-2}.
+Pour tous $t,x\in\rset$, on a $|x|^p\leq(|x-t|+|t|)^p\leq|x-t|^p+|t|^p$.
+D'o{\`u}
+$$
+|f\star g(x)||x|^p \leq \int |f(x-t)|\,|x-t|^p\,|g(t)|\rmd t+
+\int |f(x-t)|\,|t|^p\,|g(t)|\rmd t \;.
+$$
+On obtient donc~(\ref{eq:decroissance-concolution}).
+
+La propri{\'e}t{\'e}~\ref{item:approx-cont-S-2prim} est obtenu en appliquant
+de~\ref{item:approx-cont-S-2} pour tout $p\geq1$.
+
+La propri{\'e}t{\'e}~\ref{item:approx-cont-S-3} d{\'e}coule de \ref{item:approx-cont-S-1}
+et~\ref{item:approx-cont-S-2prim}.
+\end{proof}
+
+\begin{remark}
+On remarque facilement que l'on peut prendre dans les lemmes pr{\'e}c{\'e}dents
+$K=g_1$, c'est-{\`a}-dire $K_\sigma=g_\sigma$, o{\`u} $g_\sigma$ est d{\'e}finie
+en~(\ref{eq:gauss_func}). On peut parler dans ce cas de \emph{r{\'e}gularisation
+  gaussienne}.
+
+On peut prendre aussi 
+\begin{equation}
+\label{eq:noyau-support-borne}
+K(x)= \begin{cases} 
+c^{-1} \rme^{-1/(1-x^2)} & |x| \leq 1 \
+0    & \text{sinon}
+\end{cases}
+\quad \text{avec} \quad c = \int_{-1}^{+1} \rme^{-(1-x^2)^{-1}} \rmd x \eqsp.
+\end{equation}
+
+\end{remark}
+
+\begin{theorem}[densit\'e de $\mcs$ dans $L_p(\rset)$]
+\label{theo:densite-mcs-Lp}
+Soit^$p \geq 1$ et $f \in L_p(\rset)$. Pour tout $\epsilon > 0$, il existe $g_\epsilon \in \mcs$ telle que 
+$\norm{f - g_\epsilon}[p] \leq \epsilon$.
+\end{theorem}
+\begin{proof}
+Pour tout $\epsilon > 0$, il existe $f_\epsilon \in C_c^0(\rset)$ telle que $\norm{f - f_\epsilon}[p] \leq \epsilon$.
+Pour $\sigma > 0$, on note $g_{\epsilon,\sigma} = f_\epsilon * K_\sigma$ où $K$ est le noyau donn\'e par \eqref{eq:noyau-support-borne}. \Cref{lem:regularisation} montre que $g_{\epsilon,\sigma}$ converge uniformément vers $f_\epsilon$, \ie\ $\lim_{\sigma \to 0} \norm{f_\epsilon - g_{\epsilon,\sigma}}[\infty]= 0$. Comme $f_\epsilon$ et $K_\sigma$ sont à supports compacts, \Cref{lem:support-convolution} montre que $\supp(g_{\epsilon,\sigma}) \subset \ccint{a,b}$ avec $-\infty < a < b < \infty$.
+On a donc aussi 
+$$
+\lim_{\sigma \to 0} \norm{f_\epsilon - g_{\epsilon,\sigma}}[p] = 0 \eqsp,
+$$
+ce qui implique que, pour tout $\epsilon > 0$, 
+$$
+\lim_{\sigma \to 0} \norm{f - g_{\epsilon,\sigma}}[p] \leq \norm{f-f_\epsilon}[p] \leq \epsilon \eqsp.
+$$
+\Cref{lem:regulairsation-est-reguliere} montre que comme $f$ est à décroissance rapide et $K_\sigma \in \mcs$, alors $g_{\epsilon,\sigma} f * K_\sigma \in \mcs$.
+\end{proof}
+
+
+\section{Une première extension de la transformation de Fourier inverse}
+Ici nous l'appliquons dans le cadre $L_1(\rset)$ grace au r{\'e}sultat suivant, qui nous permettra de compl{\'e}ter la
+proposition~\ref{prop:inversionFourierL1} par un th{\'e}or{\`e}me d'inversion.
+\begin{proposition}\label{prop:DualiteSchwartz}
+Soient deux fonctions $f$ et $g$ dans $L_1(\rset)$. Si, pour toute fonction \textit{test} $\phi$ dans $\mcs$, on a
+$$
+\int f(x)\,\phi(x)\,\rmd x= \int g(x)\,\phi(x)\,\rmd x,
+$$
+alors $f=g$ (au sens $L_1(\rset)$).
+\end{proposition}
+\begin{proof}
+En prenant la diff{\'e}rence entre les deux membre de l'{\'e}galit{\'e} de l'hypoth{\`e}se, on voit qu'il suffit de montrer ce r{\'e}sultat pour
+$g=0$. De plus, comme les fonctions continues sont denses dans l'ensemble des fonctions int\'egrables, on peut se contenter de prendre $f$ continue, le cas g{\'e}n{\'e}ral {\'e}tant
+obtenu par passage {\`a} la limite. Or, pour $f$ continue et $g=0$, le r{\'e}sultat est imm{\'e}diat par application du principe de
+r{\'e}gularisation en choisissant une fonction $K\in\mcs$ positive int{\'e}grant {\`a} 1 (par exemple $g_1$) puis en appliquant le
+lemme~\ref{lem:regularisation} en tout point de la droite r{\'e}elle.
+\end{proof}
+
+On en d{\'e}duit le r{\'e}sultat annonc{\'e} qui compl{\`e}te la proposition~\ref{prop:inversionFourierL1}.
+\begin{theorem}
+Soit $f\in L_1(\rset)$ et supposons que $\hat{f}$ appartiennent aussi {\`a} $L_1(\rset)$. Alors
+la fonction (continue) $\bar{\TF} \hat{f}$ est l'unique
+repr{\'e}sentant continu de $f$.
+\end{theorem}
+\begin{proof}
+La conitnuit{\'e} de $\bar{\TF} \hat{f}$ d{\'e}coule du th{\'e}or{\`e}me~\ref{thm:rieman-lebesgue}.
+Pour toute fonction test $\phi$ de $\mcs$, on a, d'apr{\`e}s la proposition~\ref{prop:echangeTF} et le
+th{\'e}or{\`e}me~\ref{thm:Schwarz},
+$$
+\int f(x) \phi(x)\,\rmd x=\int \hat{f}(\xi) \TFC(\phi)(\xi)\,d\xi.
+$$
+Mais comme $\hat{f}$, on peut r{\'e}appliquer l'{\'e}quivalent de la proposition~\ref{prop:echangeTF} mais pour la transform{\'e}e
+inverse, ce qui donne alors directement
+$$
+\int \hat{f}(\xi) \TFC(\phi)(\xi)\,d\xi=\int \TFC(\hat{f})(x) \phi(x) \,\rmd x.
+$$
+D'o{\`u} le r{\'e}sultat en appliquant la proposition~\ref{prop:DualiteSchwartz}.
+\end{proof}
+
+\section{Convolution et transformée de Fourier dans $L_1(\rset)$}
