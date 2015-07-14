@@ -88,148 +88,7 @@ soeur jumelle $\TFC$. Le proc{\'e}d{\'e} de r{\'e}gularisation sera fondamental 
 arriver {\`a} cette fin.
 
 
-\section{R{\'e}gularisation par convolution}
 
-On rappelle qu'{\'e}tant donn{\'e}es $f$ et $g$ deux fonctions de $\rset$ dans $\cset$,
-la convolution de $f$ et $g$ est la fonction $f \star g$
-d{\'e}finie par
-$$
-f \star g(x) = \int f(x - t)g(t) \rmd t = \int f(u)g(x - u) \rmd u\;,
-$$
-en tout point $x$ o{\`u} cette int{\'e}grale est correctement d{\'e}finie.\
-
-
-\begin{example}
-Prenons $f = g = \1_{[0,1]}$. On obtient
-$$
-\int f (x - t)g(t) \rmd t = \int_0^1 \1_{[0,1]}(x - t) \rmd t = \mathrm{Leb} ([0,1] \cap [x - 1,x]).
-$$
-La convolution de ces deux fonctions discontinues est donc continue.
-
-Prenons maintenant $f \in L_1(\rset)$ et $g = \frac{1}{2h} \1_{[-h,h]}$ o{\`u} $h > 0$.
-Calculons $f \star g$.
-\begin{equation}
-f * g(x) = \frac{1}{2h} \int_{x-h}^{x+h}  f (u) \rmd u
-\end{equation}
-ce qui repr{\'e}sente la moyenne de $f$ sur $[x - h, x + h]$.
-On voit directement sur l'int{\'e}grale que $f \star g$ est une fonction continue.
-\end{example}
-Ces deux exemples illustrent la propri{\'e}t{\'e} essentielle de la convolution qui est de
-\textit{r{\'e}gulariser} (qui est li{\'e} au fait de moyenner).
-
-
-\section{R\'egularisation par convolution}
-Le lemme suivant montre que la convolution peut {\^e}tre utilis{\'e}e dans le but de
-fournir une approximation, ce qui constitue le premier principe de
-r{\'e}gularisation.
-
-\begin{lemma}\label{lem:regularisation}
-  Soit $f\in\mathcal L^1$.
-  Soit $K$ une fonction positive telle que $\int K(x)\,\rmd x=1$ et, pour une
-  constante $C>0$ et un exposant $\alpha>2$, $K(x)\leq C (1+|x|)^{-\alpha}$
-  pour tout $x\in\rset$.  D{\'e}finissons, pour tout $\sigma>0$, la fonction
-  $K_\sigma$ par
-\begin{equation}
-  \label{eq:Kband}
-  K_\sigma(x)=\frac1\sigma K(x/\sigma)\;.
-\end{equation}
-Alors, on a les propri{\'e}t{\'e}s suivantes.
-\begin{enumerate}
-\item\label{item:regularisation1} En tout point $t$ o{\`u} $f$ est continue, on a
-$$
-\lim_{\sigma\downarrow0} (f \star K_\sigma)(t) = f(t)\;.
-$$
-\item\label{item:regularisation2} Si $f$ est continue {\`a} support compact, alors
-  $f \star K_\sigma$ converge uniform{\'e}ment vers $f$ quand $\sigma\downarrow0$.
-\end{enumerate}
-\end{lemma}
-\begin{proof}
-Comme $\int K_\sigma(x)\, \rmd x= 1$, par un changement de variable {\'e}l{\'e}mentaire,
-\begin{equation}
-\label{eq:inversionL1-2}
-\int f(t-u) K_\sigma(u) \rmd u - f(t) = \int \left\{ f(t - u) - f(t) \right \} K_\sigma(u) \rmd u \eqsp.
-\end{equation}
-Montrons le point~\ref{item:regularisation1}.
-Comme $f$ est continue au point $t$, pour tout $\epsilon > 0$, il existe $\eta$ tel que $|u-t| \leq \eta$
-implique que $|f(u) - f(t) | \leq \epsilon$. On a pour tout $\sigma > 0$,
-\begin{equation}
-\label{eq:conv-local}
-\int_{|u| \leq \eta} \left|  f(t-u) - f(t) \right | K_\sigma(u) \rmd u \leq \epsilon \int K_\sigma(u) \rmd u = \epsilon \eqsp.
-\end{equation}
-De plus,
-$$
-\int_{|u| \geq \eta} \left| f(t-u) - f(t) \right | K_\sigma(u) \rmd u  \leq \|f\|_1\,\sup_{|u|\geq\eta} {K}_\sigma(u)
-+|f(t)|\,\int_{|u|\geq \eta} {K}_\sigma(u) \rmd u  \eqsp.
-$$
-D'autre part, lorsque $\sigma \downarrow 0$,
-$$
-\sup_{|u|\geq\eta} {K}_\sigma(u) = \frac1\sigma \sup_{|v|\geq\eta/\sigma} {K}_\sigma(v)\leq  \frac{C}\sigma (1+\eta/\sigma)^{-\alpha}
-$$
-et,
-$$
-\int_{u\geq \eta} K_\sigma(u) \rmd u \leq \frac{C}\sigma\int_{|v|\geq\eta/\sigma} (1+|v|)^{-\alpha}\,dv =O(\sigma^{\alpha-2})\eqsp.
-$$
-Par cons{\'e}quent, en combinant ces majorations avec $\alpha>2$,
-\begin{equation}
-\label{eq:conv-hors-local}
-\lim_{\sigma \downarrow 0} \int_{|u| \geq \eta} \left|  f(t-u) - f(t) \right | K_\sigma(u) \rmd u =0 \eqsp.
-\end{equation}
-Le r{\'e}sultat suit donc avec~(\ref{eq:inversionL1-2}).
-
-Le point~\ref{item:regularisation2} se montre de façon semblable.
-Comme $f$ est continue {\`a} support compact, elle est uniform{\'e}ment continue.
-On peut donc choisir $\eta>0$ tel que~(\ref{eq:conv-local}) soit valide pour
-tout $t$. De m{\^e}me la convergence~(\ref{eq:conv-hors-local}) est uniforme en $t$
-en utilisant que $f$ est born{\'e}. D'o{\`u} le r{\'e}sultat.
-\end{proof}
-
-Le second principe de r{\'e}gularisation est que la version convolu{\'e}e $f\star K$ de
-$f$ adopte la r{\'e}gularit{\'e} du \emph{noyau} $K$. Ce principe est donn{\'e} par le
-lemme suivant.
-
-\begin{lemma}\label{lem:regulairsation-est-reguliere}
-  Soient $f,g\in L^1$. Alors on a les propri{\'e}t{\'e}s suivantes
-  \begin{enumerate}
-  \item\label{item:approx-cont-S-1} Si $g$ est $\mathcal{C}^k$, $f\star g$ est
-  $\mathcal{C}^k$ et $(f\star g)^{(k)}=f\star g^{(k)}$.
-\item\label{item:approx-cont-S-2} On a pour tout entier $p\geq0$,
-  \begin{equation}
-    \label{eq:decroissance-concolution}
-    \|(f\star g)\times m_p\|_\infty\leq \|f\times (1+|m_p|)\|_\infty \;
-    \|g\times (1+|m_p|)\|_1  \;,
-  \end{equation}
-o{\`u} $m_p$ d{\'e}signe le mon{\^o}me de degr{\'e} $p$, $m_p(x)=x^p$.
-\item \label{item:approx-cont-S-2prim} Si $f$ et $g$ sont {\`a} d{\'e}croissance rapide,
-  il en est de m{\^e}me de $f\star g$.
-\item\label{item:approx-cont-S-3}  Si $f$ est {\`a} d{\'e}croissance rapide et
-  $g\in\mcs$, $f\star g\in\mcs$.
-  \end{enumerate}
-\end{lemma}
-\begin{proof}
-  La propri{\'e}t{\'e}~\ref{item:approx-cont-S-1} est une simple application du lemme
-  de d{\'e}rivation sous le signe somme.
-
-Montrons la propri{\'e}t{\'e}~\ref{item:approx-cont-S-2}.
-Pour tous $t,x\in\rset$, on a $|x|^p\leq(|x-t|+|t|)^p\leq|x-t|^p+|t|^p$.
-D'o{\`u}
-$$
-|f\star g(x)||x|^p \leq \int |f(x-t)|\,|x-t|^p\,|g(t)|\rmd t+
-\int |f(x-t)|\,|t|^p\,|g(t)|\rmd t \;.
-$$
-On obtient donc~(\ref{eq:decroissance-concolution}).
-
-La propri{\'e}t{\'e}~\ref{item:approx-cont-S-2prim} est obtenu en appliquant
-de~\ref{item:approx-cont-S-2} pour tout $p\geq1$.
-
-La propri{\'e}t{\'e}~\ref{item:approx-cont-S-3} d{\'e}coule de \ref{item:approx-cont-S-1}
-et~\ref{item:approx-cont-S-2prim}.
-\end{proof}
-
-
-On remarque facilement que l'on peut prendre dans les lemmes pr{\'e}c{\'e}dents
-$K=g_1$, c'est-{\`a}-dire $K_\sigma=g_\sigma$, o{\`u} $g_\sigma$ est d{\'e}finie
-en~(\ref{eq:gauss_func}). On peut parler dans ce cas de \emph{r{\'e}gularisation
-  gaussienne}.
 
 \section{Formules d'inversion}
 
@@ -277,7 +136,7 @@ comme application de $\mcs$ dans $\mcs$.
 En effet, si $f$ est un {\'e}l{\'e}ment de $\mcs$, $\hat{f}$ est dans $\mcs$ et donc
 int{\'e}grable. $f$ {\'e}tant partout continue, la formule
 d'inversion~(\ref{eq:inversionFT}) est valable pour tout $x \in \rset$. Donc,
-pour tout $f \in \mcs$, $f = \TFAC{\TF f}$. De la m{\^e}me façon, on a $f =
+pour tout $f \in \mcs$, $f = \TFAC{\TF f}$. De la m{\^e}me fa\c{c}on, on a $f =
 \TFA{\TFC f}$. $\TF$ est donc une bijection sur $\mcs$ et son inverse est
 $\TFC$.
 
@@ -286,79 +145,10 @@ La transformation de Fourier $\TF$ est une application lin{\'e}aire bijective de
 L'application inverse est $\TF^{-1} = \TFC$.
 \end{theorem}
 
-Ayant montr{\'e} le th{\'e}or{\`e}me~\ref{thm:Schwarz}, de nombreuses formules d'inversion peuvent \^etre d{\'e}duite par dualit{\'e}.
+Ayant montr{\'e} le th{\'e}or{\`e}me~\ref{thm:Schwarz}, de nombreuses formules d'inversion peuvent \^etre d{\'e}duites par dualit{\'e}.
 Nous verrons dans la section suivante comment appliquer ce principe dans un cadre hilbertien.
-Ici nous l'appliquons dans le cadre $L_1(\rset)$ grace au r{\'e}sultat suivant, qui nous permettra de compl{\'e}ter la
-proposition~\ref{prop:inversionFourierL1} par un th{\'e}or{\`e}me d'inversion.
-\begin{proposition}\label{prop:DualiteSchwartz}
-Soient deux fonctions $f$ et $g$ dans $L_1(\rset)$. Si, pour toute fonction \textit{test} $\phi$ dans $\mcs$, on a
-$$
-\int f(x)\,\phi(x)\,\rmd x= \int g(x)\,\phi(x)\,\rmd x,
-$$
-alors $f=g$ (au sens $L_1(\rset)$).
-\end{proposition}
-\begin{proof}
-En prenant la diff{\'e}rence entre les deux membre de l'{\'e}galit{\'e} de l'hypoth{\`e}se, on voit qu'il suffit de montrer ce r{\'e}sultat pour
-$g=0$. De plus, comme les fonctions continues sont denses dans l'ensemble des fonctions intégrables, on peut se contenter de prendre $f$ continue, le cas g{\'e}n{\'e}ral {\'e}tant
-obtenu par passage {\`a} la limite. Or, pour $f$ continue et $g=0$, le r{\'e}sultat est imm{\'e}diat par application du principe de
-r{\'e}gularisation en choisissant une fonction $K\in\mcs$ positive int{\'e}grant {\`a} 1 (par exemple $g_1$) puis en appliquant le
-lemme~\ref{lem:regularisation} en tout point de la droite r{\'e}elle.
-\end{proof}
 
-On en d{\'e}duit le r{\'e}sultat annonc{\'e} qui compl{\`e}te la proposition~\ref{prop:inversionFourierL1}.
-\begin{theorem}
-Soit $f\in L_1(\rset)$ et supposons que $\hat{f}$ appartiennent aussi {\`a} $L_1(\rset)$. Alors
-la fonction (continue) $\bar{\TF} \hat{f}$ est l'unique
-repr{\'e}sentant continu de $f$.
-\end{theorem}
-\begin{proof}
-La conitnuit{\'e} de $\bar{\TF} \hat{f}$ d{\'e}coule du th{\'e}or{\`e}me~\ref{thm:rieman-lebesgue}.
-Pour toute fonction test $\phi$ de $\mcs$, on a, d'apr{\`e}s la proposition~\ref{prop:echangeTF} et le
-th{\'e}or{\`e}me~\ref{thm:Schwarz},
-$$
-\int f(x) \phi(x)\,\rmd x=\int \hat{f}(\xi) \TFC(\phi)(\xi)\,d\xi.
-$$
-Mais comme $\hat{f}$, on peut r{\'e}appliquer l'{\'e}quivalent de la proposition~\ref{prop:echangeTF} mais pour la transform{\'e}e
-inverse, ce qui donne alors directement
-$$
-\int \hat{f}(\xi) \TFC(\phi)(\xi)\,d\xi=\int \TFC(\hat{f})(x) \phi(x) \,\rmd x.
-$$
-D'o{\`u} le r{\'e}sultat en appliquant la proposition~\ref{prop:DualiteSchwartz}.
-\end{proof}
 
-\section{Convolution et transformée de Fourier}
-
-On conclut se chapitre en explorant l'effet de le transform{\'e}e de Fourier sur la
-convolution. Nous explorons ici uniquement le cas de la convolution d{\'e}finie sur
-$L^1\times L^1$.
-
-\begin{theorem}%\label{thm:inversionFourierL1}
-Etant donn{\'e}es deux fonctions $f$ et $g$ de $L_1(\rset)$ on a:
-\begin{enumerate}
-\item $f \star g$ est d{\'e}finie presque partout et $f \star g$ appartient {\`a} $L_1(\rset)$.
-\item La convolution est un op{\'e}rateur bilin{\'e}aire continu de $L_1(\rset) \times L_1(\rset) \to L_1(\rset)$
-tel que
-$$
-\| f \star g \|_1 \leq \| f \|_1 \| g \|_1
-$$
-\item la transform{\'e}e de Fourier du produit de convolution $\widehat{f \star g}$ est {\'e}gal au produit des transform{\'e}es
-de Fourier des fonctions $\hat{f}$ et $\hat{g}$: $\widehat{f \star g} = \hat{f} \hat{g}$.
-\end{enumerate}
-\end{theorem}
-\begin{proof}
-Comme $f,g \in L_1(\rset)$, la fonction $(y,z) \mapsto f(y) g(z) \in L_1(\rset^2)$ d'apr{\`e}s le th{\'e}or{\`e}me de Fubini.
-En faisant le changement de variable $y = x-t$ et $z=t$, on obtient:
-$$
-\iint f(y) g(z) d y d z = \iint f(x-t) g(t) \rmd x \rmd t \eqsp
-$$
-et les int{\'e}grales des modules sont finies.
-La fonction $x \mapsto \int f(x-t) g(t) \rmd t$ est donc d{\'e}finie presque partout et appartient {\`a} $L_1(\rset)$, toujours d'apr{\`e}s le th{\'e}or{\`e}me de Fubini.
-La seconde in{\'e}galit{\'e} d{\'e}coule de:
-$$
-\int | f \star g(x)| \rmd x = \int |g(t)| \left( \int  |f(x-t) \rmd x \right) \rmd t = \|f\|_1 \| g \|_1 \eqsp.
-$$
-La troisi{\`e}me assertion s'obtient de façon similaire par une application du th{\'e}or{\`e}me de Fubini.
-\end{proof}
 
 %%% Local Variables:
 %%% mode: latex

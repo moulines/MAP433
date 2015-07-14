@@ -1,34 +1,34 @@
-% \section{théorème de Projection}
+% \section{th\'eor\`eme de Projection}
 %     \subsection{Espace de Hilbert}
 %     \subsection{Bases orthonormales}
-%     \subsection{théorème de projection}
+%     \subsection{th\'eor\`eme de projection}
 % \section{Algorithmes de Levinson-Durbin}
 %================================================
 %================================================
-\section{Prédiction linéaire de processus stationnaires}
+\section{Pr\'ediction lin\'eaire de processus stationnaires}
 %================================================
 % %================================================
-% \subsection{Estimation linéaire en moyenne quadratique}
+% \subsection{Estimation lin\'eaire en moyenne quadratique}
 % %================================================
-% Soient $X$ et $\{Y_1,\cdots,Y_p\}$ des variables aléatoires
-% réelles de $L^2(\Omega,\cF,\PP)$. On cherche à
-% déterminer la meilleure approximation de $X$ par une combinaison
-% linéaire des variables $Y_k$. Nous supposons ici que nous
-% connaissons les quantités $\mu=\PE{X}$, $\nu_k=\PE{Y_k}$ ainsi
+% Soient $X$ et $\{Y_1,\cdots,Y_p\}$ des variables al\'eatoires
+% r\'eelles de $L^2(\Omega,\cF,\PP)$. On cherche \`a
+% d\'eterminer la meilleure approximation de $X$ par une combinaison
+% lin\'eaire des variables $Y_k$. Nous supposons ici que nous
+% connaissons les quantit\'es $\mu=\PE{X}$, $\nu_k=\PE{Y_k}$ ainsi
 % que les coefficients de covariance $\cov(X,Y_k)$ et
 % $\cov(Y_k,Y_{\ell})$, pour tout $1\leq k,\ell\leq p$. En pratique,
 % nous verrons au chapitre~\ref{chap:estim-lineaire}
-% comment il est possible, sous certaines hypothèses, de construire des
-% estimateurs consistants et asymptotiquement normaux de ces quantités à partir d'une suite
+% comment il est possible, sous certaines hypoth\`eses, de construire des
+% estimateurs consistants et asymptotiquement normaux de ces quantit\'es \`a partir d'une suite
 % d'observations.
 
-% On considère l'espace fermé de dimension
+% On consid\`ere l'espace ferm\'e de dimension
 % finie ${\cal Y} = \lspan{1, Y_1,\cdots,Y_p}$ et on cherche
-% l'élément $Y\in \cY$ qui minimise la norme de le risque quadratique
-% $\| X - Y\|^2$. Il découle immédiatement du théorème de
-% projection que le prédicteur linéaire optimal est la projection
-% orthogonale $\proj{X}{\cY}$ de $X$ sur ${\cal Y}$ qui vérifie
-% $(X-\proj{X}{\cY})\perp {\cal Y}$. On en déduit que\,:
+% l'\'el\'ement $Y\in \cY$ qui minimise la norme de le risque quadratique
+% $\| X - Y\|^2$. Il d\'ecoule imm\'ediatement du th\'eor\`eme de
+% projection que le pr\'edicteur lin\'eaire optimal est la projection
+% orthogonale $\proj{X}{\cY}$ de $X$ sur ${\cal Y}$ qui v\'erifie
+% $(X-\proj{X}{\cY})\perp {\cal Y}$. On en d\'eduit que\,:
 % \begin{gather}
 % \label{eq:reglin1}
 % \begin{cases}
@@ -36,10 +36,10 @@
 %  \pscal{X - \proj{X}{\cY}}{Y_k} = 0 &\text{pour $k \in \{1, \cdots, p \}$}
 % \end{cases}  \eqsp.
 % \end{gather}
-% Ce sont ces $(p+1)$ équations qui vont nous donner la solution
-% cherchée. En effet la condition $\proj{X}{\cY} \in \cY$ implique (comme $\cY$ est de
+% Ce sont ces $(p+1)$ \'equations qui vont nous donner la solution
+% cherch\'ee. En effet la condition $\proj{X}{\cY} \in \cY$ implique (comme $\cY$ est de
 % dimension finie) que $\proj{X}{\cY}=a_0 + \sum_{k=1}^p a_k (Y_k - \nu_k)$.
-% Il suffit donc de calculer $a_0,a_1,\dots,a_p$. Partant de la première expression de
+% Il suffit donc de calculer $a_0,a_1,\dots,a_p$. Partant de la premi\`ere expression de
 % \eqref{eq:reglin1}, on obtient\,:
 % \begin{equation}
 %  \label{eq:ortho0}
@@ -54,69 +54,69 @@
 %  \\= \pscal{X - \mu}{Y_k-\nu_k} - \sum_{j=1}^p a_j \pscal{Y_j - \nu_j}{Y_k - \nu_k} = 0 \eqsp,
 % \end{multline}
 % qui montrent que $\{a_1, \cdots, a_p\}$ sont solution d'un
-% système de $p$ équations linéaires à $p$ inconnues.
+% syst\`eme de $p$ \'equations lin\'eaires \`a $p$ inconnues.
 
-% Ce système d'équations peut se mettre sous forme plus compacte en
+% Ce syst\`eme d'\'equations peut se mettre sous forme plus compacte en
 % utilisant la matrice $\Gamma = [\cov(Y_k,Y_{\ell})]_{1 \leq k,\ell
 % \leq p}$ des coefficients de covariance de $(Y_1, \cdots, Y_p)$ et
 % le vecteur $\bfgamma= [\cov (X,Y_1), \cdots, \cov(X,Y_p)]^T$ des
 % coefficients de covariance entre $X$ et les composantes $Y_k$.
 % Avec ces notations, le vecteur $\bfalpha = [a_1, \cdots, a_p]^T$
-% est solution de l'équation\,:
+% est solution de l'\'equation\,:
 % \begin{equation}
 % \label{eq:Eqsnormales}
 % \Gamma \bfalpha = \bfgamma
 % \end{equation}
-% Ce système linéaire admet une unique solution si la matrice
-% $\Gamma$ est inversible. Notons enfin qu'en vertu de l'identité de
+% Ce syst\`eme lin\'eaire admet une unique solution si la matrice
+% $\Gamma$ est inversible. Notons enfin qu'en vertu de l'identit\'e de
 % Pythagore, nous avons\,:
 % \[
 % \| X \|^2 = \| \proj{X}{\cY} \|^2 + \| X - \proj{X}{\cY} \|^2
 % \]
-% et donc la norme minimale de l'erreur de prédiction a pour
+% et donc la norme minimale de l'erreur de pr\'ediction a pour
 % expression\,:
 % \[
 % \| X - \proj{X}{\cY} \|^2 = \| X \|^2 - \| \proj{X}{\cY}\|^2 \eqsp.
 % \]
-% Nous allons à présent appliquer ce résultat à la prédiction
-% d'un processus stationnaire au second-ordre à partir de son
-% passé immédiat en prenant $X=X_t$ et $Y_k=X_{t-k}$ avec
+% Nous allons \`a pr\'esent appliquer ce r\'esultat \`a la pr\'ediction
+% d'un processus stationnaire au second-ordre \`a partir de son
+% pass\'e imm\'ediat en prenant $X=X_t$ et $Y_k=X_{t-k}$ avec
 % $k=\{1,\dots,p\}$.
 %==============================================================
 %==============================================================
-%\subsection{Prédiction linéaire de processus stationnaires}
+%\subsection{Pr\'ediction lin\'eaire de processus stationnaires}
 %==============================================================
 Soit $(X_t)_{t\in\Zset}$ un processus stationnaire au
-second ordre à valeurs réelles, \textbf{d'espérance nulle} et de fonction
-d'autocovariance $\gamma(h)= \cov(X_h,X_0)$. On cherche à
-\emph{prédire} la valeur du processus à la date $t$ à partir
-d'une combinaison linéaire des $p$ derniers échantillons du passé
-$X_{t-1}, \dots, X_{t-p}$. La meilleure combinaison linéaire
-(\textit{i.e.} le prédicteur linéaire optimal)
+second ordre \`a valeurs r\'eelles, \textbf{d'esp\'erance nulle} et de fonction
+d'autocovariance $\gamma(h)= \cov(X_h,X_0)$. On cherche \`a
+\emph{pr\'edire} la valeur du processus \`a la date $t$ \`a partir
+d'une combinaison lin\'eaire des $p$ derniers \'echantillons du pass\'e
+$X_{t-1}, \dots, X_{t-p}$. La meilleure combinaison lin\'eaire
+(\textit{i.e.} le pr\'edicteur lin\'eaire optimal)
 est la projection orthogonale de $X_t$ sur
-$\cH_{t-1,p}$  notée $\proj{X_t}{\cH_{t-1,p}}$, où $\cH_{t-1,p}$ est
-défini par :
+$\cH_{t-1,p}$  not\'ee $\proj{X_t}{\cH_{t-1,p}}$, o\`u $\cH_{t-1,p}$ est
+d\'efini par :
 \begin{equation}
 \label{eq:cht}
 \cH_{t-1,p} = \lspan{X_{t-1}, X_{t-2}, \cdots, X_{t-p}}\;.
 \end{equation}
 Les indices dans la notation $\cH_{t-1,p}$ doivent être compris ainsi
-: $\cH_{t-1,p}$ est le sous-espace vectoriel engendré par les
-$p$ observations précédant $X_{t-1}$ à savoir
+: $\cH_{t-1,p}$ est le sous-espace vectoriel engendr\'e par les
+$p$ observations pr\'ec\'edant $X_{t-1}$ \`a savoir
 $X_{t-1}, \dots, X_{t-p}$.
-D'après le théorème \ref{theo:projection},
+D'apr\`es le th\'eor\`eme \ref{theo:projection},
 \begin{equation}\label{eq:def_phi_kp}
 \proj{X_t}{\cH_{t-1,p}}=\sum_{k=1}^p \phi_{k,p} X_{t-k}\;,
 \end{equation}
-où les coefficients $(\phi_{k,p})_{1\leq k\leq p}$ satisfont
+o\`u les coefficients $(\phi_{k,p})_{1\leq k\leq p}$ satisfont
 \begin{equation}\label{eq:scal_1}
 \left\langle X_t-\sum_{k=1}^p \phi_{k,p} X_{t-k},X_{t-j}\right\rangle=0\;,\;
 j=1,\dots,p\;,
 \end{equation}
 la notation $\left\langle \cdot,\cdot\right\rangle$ correspondant au
-produit scalaire dans $\ltwo\espaceproba$ défini pour $X$ et $Y$
+produit scalaire dans $\ltwo\espaceproba$ d\'efini pour $X$ et $Y$
 dans $\ltwo\espaceproba$ par  $\left\langle X,Y\right\rangle=\PE{XY}$.
-L'équation (\ref{eq:scal_1}) se réécrit encore sous la forme
+L'\'equation (\ref{eq:scal_1}) se r\'e\'ecrit encore sous la forme
 \begin{equation}\label{eq:scal_2}
 \left\langle X_t,X_{t-j}\right\rangle=\sum_{k=1}^p \phi_{k,p}
 \left\langle  X_{t-k},X_{t-j}\right\rangle\;,\;
@@ -128,7 +128,7 @@ soit encore
 j=1,\dots,p\;.
 \end{equation}
 En posant $\Gamma_p$ la matrice de covariance
-du vecteur $(X_{t-1},\dots, X_{t-p})$ définie par
+du vecteur $(X_{t-1},\dots, X_{t-p})$ d\'efinie par
 \begin{equation*}
 \Gamma_p =
  \left[
@@ -141,17 +141,17 @@ du vecteur $(X_{t-1},\dots, X_{t-p})$ définie par
  \end{matrix}
  \right]\;,
 \end{equation*}
-on peut réécrire (\ref{eq:scal_3}) comme suit :
+on peut r\'e\'ecrire (\ref{eq:scal_3}) comme suit :
 \begin{equation}\label{eq:YW1}
  \Gamma_p \bfphi_p = \bfgamma_p\;,
 \end{equation}
-où $\bfphi_p=(\phi_{1,p},\dots,\phi_{p,p})^T$ et
+o\`u $\bfphi_p=(\phi_{1,p},\dots,\phi_{p,p})^T$ et
 $\bfgamma_p=(\gamma(1), \gamma(2), \cdots, \gamma(p))^T$.
 
 \begin{definition}
 \index{Innovation!partielle}
 Nous appellerons dans la suite
-\emph{erreur de prédiction directe} d'ordre $p$ ou
+\emph{erreur de pr\'ediction directe} d'ordre $p$ ou
 \emph{innovation partielle} d'ordre $p$ le processus\,:
 \begin{equation}
 \label{eq:deferreurforward}
@@ -159,28 +159,28 @@ Nous appellerons dans la suite
  = X_t - \proj{X_t}{\cH_{t-1,p}}
  = X_t - \sum_{k=1}^{p} \phi_{k,p} X_{t-k}\;.
 \end{equation}
-La variance de l'erreur de prédiction directe d'ordre $p$ est notée
-$\sigma_p^2$ et définie par
+La variance de l'erreur de pr\'ediction directe d'ordre $p$ est not\'ee
+$\sigma_p^2$ et d\'efinie par
 \begin{equation}\label{eq:var_pred_dir}
 \sigma_p^2=\|X_t - \proj{X_t}{\cH_{t-1,p}}\|^2=\PE{|X_t -
   \proj{X_t}{\cH_{t-1,p}}|^2}\;.
 \end{equation}
 \end{definition}
-D'après (\ref{eq:def_phi_kp}) et la proposition \ref{prop:projecteur},
-la variance de l'erreur de prédiction directe d'ordre $p$ a pour expression :
+D'apr\`es (\ref{eq:def_phi_kp}) et la proposition \ref{prop:projecteur},
+la variance de l'erreur de pr\'ediction directe d'ordre $p$ a pour expression :
 \begin{equation}
  \label{eq:YW2}
  \sigma_p^2 = \pscal{X_t}{X_t - \proj{X_t}{\cH_{t-1,p}}}
             =\gamma(0)- \sum_{k=1}^p \phi_{k,p}\gamma(k)
             =\gamma(0)-\bfphi_p^T\bfgamma_p\;.
 \end{equation}
-Les équations \eqref{eq:YW1} et \eqref{eq:YW2} sont appelées les
-\emph{équations de Yule-Walker}.
-% Notons la propriété importante
-% suivante~: pour $p$ fixé, la suite des coefficients
-% $\{\phi_{k,p}\}_{1\leq k \leq p}$ du prédicteur linéaire optimal
-% et la variance de l'erreur minimale de prédiction {\em ne
-% dépendent pas de $t$}.
+Les \'equations \eqref{eq:YW1} et \eqref{eq:YW2} sont appel\'ees les
+\emph{\'equations de Yule-Walker}.
+% Notons la propri\'et\'e importante
+% suivante~: pour $p$ fix\'e, la suite des coefficients
+% $\{\phi_{k,p}\}_{1\leq k \leq p}$ du pr\'edicteur lin\'eaire optimal
+% et la variance de l'erreur minimale de pr\'ediction {\em ne
+% d\'ependent pas de $t$}.
 
 Notons que (\ref{eq:YW1}) a une unique solution si et seulement si
 la matrice $\Gamma_p$ est inversible auquel cas la solution vaut :
@@ -189,16 +189,16 @@ la matrice $\Gamma_p$ est inversible auquel cas la solution vaut :
 \end{equation}
 La proposition \ref{prop:Gammanrangplein} fournit les conditions suffisantes assurant
 que $\Gamma_p$ est inversible pour tout $p$. Une autre preuve de la proposition \ref{prop:Gammanrangplein}
-résultat est proposée dans le problème \ref{prob1:prediction}. On a ainsi des conditions
-sous lesquelles on peut calculer le prédicteur de $X_t$ à partir de
+r\'esultat est propos\'ee dans le probl\`eme \ref{prob1:prediction}. On a ainsi des conditions
+sous lesquelles on peut calculer le pr\'edicteur de $X_t$ \`a partir de
 $X_{t-1},\dots,X_{t-p}$.
 
 
 
-% Ce problème est bien entendu
-% un cas particulier du problème précédent où nous avons $X=
+% Ce probl\`eme est bien entendu
+% un cas particulier du probl\`eme pr\'ec\'edent o\`u nous avons $X=
 % X_t$ et $Y_k = X_{t-k}$, pour $k \in \{1, \dots, p \}$ et
-% où\,:
+% o\`u\,:
 % \begin{equation}
 % \label{eq:cht}
 %   \cH_{t-1,p} = \lspan{1, X_{t-1}, X_{t-2}, \cdots, X_{t-p}}
@@ -217,22 +217,22 @@ $X_{t-1},\dots,X_{t-p}$.
 %  \end{matrix}
 %  \right]
 % \end{equation}
-% Cette matrice est dite de Toeplitz, ses éléments étant égaux
+% Cette matrice est dite de Toeplitz, ses \'el\'ements \'etant \'egaux
 % le long de ses diagonales. Notons $\bfgamma_p$ le vecteur
 % $[\gamma(1), \gamma(2), \cdots, \gamma(p)]^T$ le vecteur des
-% coefficients de corrélation. D'après l'équation
+% coefficients de corr\'elation. D'apr\`es l'\'equation
 % \eqref{eq:Eqsnormales}, les coefficients $\{\phi_{k,p}\}_{1\leq
-% k\leq p}$ du prédicteur linéaire optimal défini par\,:
+% k\leq p}$ du pr\'edicteur lin\'eaire optimal d\'efini par\,:
 % \begin{equation}
 %  \label{eq:formegenedeXtsurH}
 %  \proj{X_t}{\cH_{t-1,p}} - \mu=\sum_{k=1}^p \phi_{k,p} (X_{t-k}-\mu)
 % \end{equation}
-% sont solutions du système d'équations\,:
+% sont solutions du syst\`eme d'\'equations\,:
 % \begin{equation}
 %  \label{eq:YW1}
 %  \Gamma_p \bfphi_p = \bfgamma_p \hspace{1cm}
 % \end{equation}
-% D'autre part l'erreur de prédiction minimale a pour expression\,:
+% D'autre part l'erreur de pr\'ediction minimale a pour expression\,:
 % \begin{eqnarray}
 %  \label{eq:YW2}
 %  &\sigma_p^2 &= \| X_t - \proj{X_t}{\cH_{t-1,p}}\|^2
@@ -240,16 +240,16 @@ $X_{t-1},\dots,X_{t-p}$.
 %             &&=\gamma(0)- \sum_{k=1}^p \phi_{k,p}\gamma(k)
 %             =\gamma(0)-\bfphi_p^T\bfgamma_p
 % \end{eqnarray}
-% Les équations \eqref{eq:YW1} et \eqref{eq:YW2} sont appelées
-% \emph{équations de Yule-Walker}. Notons la propriété importante
-% suivante~: pour $p$ fixé, la suite des coefficients
-% $\{\phi_{k,p}\}_{1\leq k \leq p}$ du prédicteur linéaire optimal
-% et la variance de l'erreur minimale de prédiction {\em ne
-% dépendent pas de $t$}.
+% Les \'equations \eqref{eq:YW1} et \eqref{eq:YW2} sont appel\'ees
+% \emph{\'equations de Yule-Walker}. Notons la propri\'et\'e importante
+% suivante~: pour $p$ fix\'e, la suite des coefficients
+% $\{\phi_{k,p}\}_{1\leq k \leq p}$ du pr\'edicteur lin\'eaire optimal
+% et la variance de l'erreur minimale de pr\'ediction {\em ne
+% d\'ependent pas de $t$}.
 
-% Les équations \eqref{eq:YW1} et
-% \eqref{eq:YW2} peuvent encore être réécrites à partir des
-% coefficients de corrélation $\rho(h)=\gamma(h)/\gamma(0)$. Il
+% Les \'equations \eqref{eq:YW1} et
+% \eqref{eq:YW2} peuvent encore être r\'e\'ecrites \`a partir des
+% coefficients de corr\'elation $\rho(h)=\gamma(h)/\gamma(0)$. Il
 % vient\,:
 % \begin{equation}
 %  \label{eq:YWcorrelation}
@@ -285,11 +285,11 @@ $X_{t-1},\dots,X_{t-p}$.
 %========================================================
 \begin{example}[Cas d'un processus AR$(m)$ causal]
 Soit $(X_t)$ le processus AR$(m)$ causal solution de
-l'équation récurrente\,:
+l'\'equation r\'ecurrente\,:
 \begin{equation}\label{eq:def_ar}
   X_t=\phi_1X_{t-1}+\cdots+\phi_m X_{t-m}+Z_t\;,
 \end{equation}
-où $Z_t\sim \BB(0,\sigma^2)$ et où
+o\`u $Z_t\sim \BB(0,\sigma^2)$ et o\`u
 $\phi(z)=1-\sum_{k=1}^m\phi_k z^{k}\neq 0$ lorsque $|z|\leq 1$.
 Dans ce cas, pour tout $p\geq m$ :
 $$
@@ -299,52 +299,52 @@ $$
     0,& \text{lorsque }  m< k\leq p \;.
  \end{cases}
 $$
-En effet, $(X_t)$ étant causal on a, pour tout $h\geq 1$,
-$\PE{Z_tX_{t-h}}=0$ et donc, d'après (\ref{eq:def_ar}),
+En effet, $(X_t)$ \'etant causal on a, pour tout $h\geq 1$,
+$\PE{Z_tX_{t-h}}=0$ et donc, d'apr\`es (\ref{eq:def_ar}),
 $\PE{(X_t-\sum_{k=1}^m\phi_kX_{t-k})X_{t-h}}=0$.
 Ainsi, pour tout $p\geq m$, $\sum_{k=1}^m\phi_kX_{t-k} \in
 \cH_{t-1,p}$ et $(X_t-\sum_{k=1}^m\phi_kX_{t-k})\perp \cH_{t-1,p}$
-et donc, d'après le théorème \ref{theo:projection}, pour tout $p\geq m$,
+et donc, d'apr\`es le th\'eor\`eme \ref{theo:projection}, pour tout $p\geq m$,
 $$
 \sum_{k=1}^m\phi_kX_{t-k}=\proj{X_t}{\cH_{t-1,p}}\;.
 $$
-% La projection orthogonale d'un AR$(m)$ causal sur son passé de longueur $p\geq m$ coïncide avec la projection
-% orthogonale sur les $m$ dernières valeurs et les coefficients
-% de prédiction sont précisément les coefficients de l'équation
-% récurrente.
+% La projection orthogonale d'un AR$(m)$ causal sur son pass\'e de longueur $p\geq m$ coïncide avec la projection
+% orthogonale sur les $m$ derni\`eres valeurs et les coefficients
+% de pr\'ediction sont pr\'ecis\'ement les coefficients de l'\'equation
+% r\'ecurrente.
 \end{example}
-% Dans le cas où la matrice de covariance $\Gamma_p$, supposée
-% \emph{connue}, est inversible, le problème de la
-% détermination des coefficients de prédiction $\bfphi_p$ et de la
-% variance de l'erreur de prédiction $\sigma_p^2$ a une solution
-% unique. Rappelons que, d'après la propriété
+% Dans le cas o\`u la matrice de covariance $\Gamma_p$, suppos\'ee
+% \emph{connue}, est inversible, le probl\`eme de la
+% d\'etermination des coefficients de pr\'ediction $\bfphi_p$ et de la
+% variance de l'erreur de pr\'ediction $\sigma_p^2$ a une solution
+% unique. Rappelons que, d'apr\`es la propri\'et\'e
 % \ref{prop:Gammanrangplein}, si $\gamma(0)>0$ et si $\limn
-% \gamma(n)=0$, alors la matrice $\Gamma_p$ est inversible à
+% \gamma(n)=0$, alors la matrice $\Gamma_p$ est inversible \`a
 % tout ordre.
 
-% Il est facile de démontrer que\,:
+% Il est facile de d\'emontrer que\,:
 % \begin{multline}
 %  \label{eq:onpeutcenter}
 %  \proj{X_t}{\lspan{1,X_{t-1},\dots,X_{t-p}}}
 % \\ =\mu+
 %  \proj{X_t-\mu}{\lspan{X_{t-1}-\mu,\dots,X_{t-p}-\mu}} \eqsp.
 % \end{multline}
-% Par conséquent, dans le problème de la prédiction,
-% il n'y a aucune perte de généralité à considérer que le
-% processus est centré. S'il ne l'était pas, il suffirait,
-% d'après l'équation \eqref{eq:onpeutcenter}, d'effectuer le
-% calcul des prédicteurs sur le processus centré $X_t^c=X_t-\mu$
+% Par cons\'equent, dans le probl\`eme de la pr\'ediction,
+% il n'y a aucune perte de g\'en\'eralit\'e \`a consid\'erer que le
+% processus est centr\'e. S'il ne l'\'etait pas, il suffirait,
+% d'apr\`es l'\'equation \eqref{eq:onpeutcenter}, d'effectuer le
+% calcul des pr\'edicteurs sur le processus centr\'e $X_t^c=X_t-\mu$
 % puis d'ajouter $\mu$. \emph{Dans la suite, sauf indication
-% contraire, les processus sont supposés centrés}.
+% contraire, les processus sont suppos\'es centr\'es}.
 
 Les
-coefficients de prédiction d'un processus stationnaire au second
-ordre fournissent une décomposition particulière de la matrice
+coefficients de pr\'ediction d'un processus stationnaire au second
+ordre fournissent une d\'ecomposition particuli\`ere de la matrice
 de covariance $\Gamma_{p+1}$ sous la forme d'un produit de matrices
-triangulaires explicitée dans le théorème \ref{theo:choleski}.
+triangulaires explicit\'ee dans le th\'eor\`eme \ref{theo:choleski}.
 \begin{theorem}
  \label{theo:choleski} Soit $(X_t)$ un processus stationnaire au second
-ordre, centré, de fonction d'autocovariance $\gamma(h)$. On
+ordre, centr\'e, de fonction d'autocovariance $\gamma(h)$. On
 note\,:
 \[
 A_{p+1} = \left[
@@ -364,8 +364,8 @@ A_{p+1} = \left[
 \end{matrix}
 \right]\;,
 \]
-où les coefficients $(\phi_{k,p})_{1\leq k\leq p}$ et
-$(\sigma_k^2)_{1\leq k\leq p}$ sont respectivement définis dans
+o\`u les coefficients $(\phi_{k,p})_{1\leq k\leq p}$ et
+$(\sigma_k^2)_{1\leq k\leq p}$ sont respectivement d\'efinis dans
 (\ref{eq:def_phi_kp}) et (\ref{eq:var_pred_dir}).
 On a alors\,:
 \begin{equation}
@@ -385,7 +385,7 @@ En effet, pour $k < \ell$, on a $X_{k} - \proj{X_{k}}{\cH_{k-1}} \in
 \proj{X_{\ell}}{\cH_{\ell-1}} \perp \cH_{\ell-1}$.
 D'autre part, si on note ${\bf X}_{p+1}$ le vecteur :
 $(X_1,\dots,X_{p+1})^T$, alors,
-par définition des coefficients de prédiction (\ref{eq:def_phi_kp}), on peut écrire :
+par d\'efinition des coefficients de pr\'ediction (\ref{eq:def_phi_kp}), on peut \'ecrire :
 \[
 A_{p+1} {\bf X}_{p+1} = \left[
 \begin{array}{llll}
@@ -415,20 +415,20 @@ $$
  \PE{A_{p+1} {\bf X}_{p+1} {\bf X}_{p+1}^T A_{p+1}^T}
  =D_{p+1}\;,
 $$
-d'après \eqref{eq:erreurblanche} et (\ref{eq:var_pred_dir}).
+d'apr\`es \eqref{eq:erreurblanche} et (\ref{eq:var_pred_dir}).
 Par ailleurs,
 $$
 \PE{A_{p+1} {\bf X}_{p+1} {\bf X}_{p+1}^T A_{p+1}^T}
 = A_{p+1} \Gamma_{p+1}A_{p+1}^T\;,
 $$
-ce qui démontre \eqref{eq:decompocholeski} puisque la
-matrice $A_{p+1}$ est inversible, son déterminant étant égal à
+ce qui d\'emontre \eqref{eq:decompocholeski} puisque la
+matrice $A_{p+1}$ est inversible, son d\'eterminant \'etant \'egal \`a
 $1$.
 \qed
 \end{proof}
 % Dans la suite nous notons
 % $\cH_{t-1,p}=\lspan{X_{t-1},\dots,X_{t-p}}$ et nous appelons
-% \emph{erreur de prédiction directe} d'ordre $p$ ou
+% \emph{erreur de pr\'ediction directe} d'ordre $p$ ou
 % \emph{innovation partielle} d'ordre $p$ le processus\,:
 % \begin{equation}
 % \label{eq:deferreurforward}
@@ -436,36 +436,36 @@ $1$.
 %  = X_t - \proj{X_t}{\cH_{t-1,p}}
 %  = X_t - \sum_{k=1}^{p} \phi_{k,p} X_{t-k}
 % \end{equation}
-D'après l'équation \eqref{eq:decompocholeski} lorsque la
+D'apr\`es l'\'equation \eqref{eq:decompocholeski} lorsque la
 matrice $\Gamma_{p+1}$ est inversible, la variance
 $\sigma_p^2=\|\epsilon_{t,p}^+\|^2$ est strictement positive.
 D'autre part, la suite $\sigma_p^2$ est
-décroissante. En effet, par définition de $\cH_{t-1,p}$,
+d\'ecroissante. En effet, par d\'efinition de $\cH_{t-1,p}$,
 $\cH_{t-1,p}$ est inclus dans $\cH_{t-1,p+1}$ donc
 $\proj{X_{p+1}}{\cH_{t-1,p}}$ est dans $\cH_{t-1,p+1}$.
-On déduit donc du théorème \ref{theo:projection} que $\sigma_{p+1}^2\leq\sigma_{p}^2$.
-La suite $(\sigma_p^2)$ étant décroissante et minorée, elle possède
-donc une limite quand $p$ tend vers l'infini. Cela conduit à la définition suivante,
-dont nous verrons au paragraphe \ref{s:wold} qu'elle joue un rôle
-fondamental dans la décomposition des processus stationnaires au
+On d\'eduit donc du th\'eor\`eme \ref{theo:projection} que $\sigma_{p+1}^2\leq\sigma_{p}^2$.
+La suite $(\sigma_p^2)$ \'etant d\'ecroissante et minor\'ee, elle poss\`ede
+donc une limite quand $p$ tend vers l'infini. Cela conduit \`a la d\'efinition suivante,
+dont nous verrons au paragraphe \ref{s:wold} qu'elle joue un r\^ole
+fondamental dans la d\'ecomposition des processus stationnaires au
 second ordre.
 
-\begin{definition}[Processus régulier/déterministe]
+\begin{definition}[Processus r\'egulier/d\'eterministe]
  \label{def:paregulier}
- Soit $(X_t)_{t \in \Zset}$ un processus aléatoire stationnaire au second
-ordre. On note $\sigma^2=\lim_{p\to\infty}\sigma_p^2$ où
+ Soit $(X_t)_{t \in \Zset}$ un processus al\'eatoire stationnaire au second
+ordre. On note $\sigma^2=\lim_{p\to\infty}\sigma_p^2$ o\`u
 $\sigma_p^2$ est la variance de l'innovation partielle
-d'ordre $p$. On dit que le processus $(X_t)$ est \emph{régulier} si
-$\sigma^2 > 0$ et \emph{déterministe} si $\sigma^2=0$.
+d'ordre $p$. On dit que le processus $(X_t)$ est \emph{r\'egulier} si
+$\sigma^2 > 0$ et \emph{d\'eterministe} si $\sigma^2=0$.
 \end{definition}
 
-% \clnote{je me demande si ce qui est écrit à partir d'ici et jusqu'à la
-% fin de la section ne serait pas mieux dans le chapitre sur Wold, à voir.}
+% \clnote{je me demande si ce qui est \'ecrit \`a partir d'ici et jusqu'\`a la
+% fin de la section ne serait pas mieux dans le chapitre sur Wold, \`a voir.}
 
-% D'après \eqref{eq:YW1}, comme nous l'avons déjà remarqué,
-% la suite $\{\phi_{k,p}\}$ ne dépend pas de $t$, pour $p$ fixé, et donc
-% le processus $\epsilon_{t,p}^+$ (relativement à l'indice
-% $t$) est stationnaire au second ordre et centré. On a de plus la
+% D'apr\`es \eqref{eq:YW1}, comme nous l'avons d\'ej\`a remarqu\'e,
+% la suite $\{\phi_{k,p}\}$ ne d\'epend pas de $t$, pour $p$ fix\'e, et donc
+% le processus $\epsilon_{t,p}^+$ (relativement \`a l'indice
+% $t$) est stationnaire au second ordre et centr\'e. On a de plus la
 % relation suivante\,:
 % \begin{equation}
 %  \label{eq:pserreurforward}
@@ -475,7 +475,7 @@ $\sigma^2 > 0$ et \emph{déterministe} si $\sigma^2=0$.
 % $\epsilon_{t,q}^+ \perp \cH_{t-1,q}$, et comme $\cH_{t-1,p}
 % \subseteq \cH_{t-1,q}$, $\epsilon_{t,q}^+ \perp \cH_{t-1,p}$ et en
 % particulier $\epsilon_{t,q}^+\perp \proj{X_t}{\cH_{t-1,p}}$ puisque
-% $\proj{X_t}{\cH_{t-1,p}}\in \cH_{t-1,p}$. Par conséquent, pour $q
+% $\proj{X_t}{\cH_{t-1,p}}\in \cH_{t-1,p}$. Par cons\'equent, pour $q
 % > p$, on a\,:
 % \begin{multline*}
 %  (\epsilon_{t,p}^+, \epsilon_{t,q}^+)
@@ -483,11 +483,11 @@ $\sigma^2 > 0$ et \emph{déterministe} si $\sigma^2=0$.
 %  = \pscal{X_t}{X_t - \proj{X_t}{\cH_{t-1,q}}}
 %  = \pscal{X_t}{X_t - \proj{X_t}{\cH_{t-1,q}}}= \sigma_q^2 \eqsp,
 % \end{multline*}
-% ce qui démontre \eqref{eq:pserreurforward}.
+% ce qui d\'emontre \eqref{eq:pserreurforward}.
 
-Par ailleurs, nous pouvons remarquer que le problème de la recherche des coefficients de prédiction pour
-un processus stationnaire au second ordre se ramène à
-celui de la minimisation de l'intégrale\,:
+Par ailleurs, nous pouvons remarquer que le probl\`eme de la recherche des coefficients de pr\'ediction pour
+un processus stationnaire au second ordre se ram\`ene \`a
+celui de la minimisation de l'int\'egrale\,:
 \[
 %\inf_{\psi \in \cP_p}
    \frac{1}{2\pi}
@@ -496,12 +496,12 @@ celui de la minimisation de l'intégrale\,:
 %             \int_{-\pi}^{\pi} |\phi_p(e^{\rmi x})|^2 \mu_X(dx)
 %           =\sigma_p^2
 \]
-sur l'ensemble $\cP_p$ des polynômes à coefficients réels
-de degré $p$ de la forme $\psi(z) = 1 + \psi_1 z + \cdots + \psi_p
+sur l'ensemble $\cP_p$ des polyn\^omes \`a coefficients r\'eels
+de degr\'e $p$ de la forme $\psi(z) = 1 + \psi_1 z + \cdots + \psi_p
 z^p$. En effet, en utilisant la relation \eqref{eq:dspfiltrage} de
-filtrage des mesures spectrales, on peut écrire que la variance de
+filtrage des mesures spectrales, on peut \'ecrire que la variance de
 $ \| \epsilon_{t,p}^+ \|^2$, qui minimise l'erreur de
-prédiction, a pour expression\,:
+pr\'ediction, a pour expression\,:
 \begin{equation}
 \label{eq:variance:innovation:partielle}
 % \| \epsilon_{t,p}^+ \|^2
@@ -509,33 +509,33 @@ prédiction, a pour expression\,:
  = \frac{1}{2 \pi} \int_{-\pi}^{\pi} |
     \phi_p(\rme^{-\rmi\lambda})|^2 \nu_X(\rmd\lambda)
 \end{equation}
-où\,:
+o\`u\,:
 \[
   \phi_p(z) = 1 - \sum_{k=1}^p \phi_{k,p} z^k
 \]
-désigne le \emph{polynôme prédicteur d'ordre $p$}.
+d\'esigne le \emph{polyn\^ome pr\'edicteur d'ordre $p$}.
 \begin{theorem}
  \label{theo:procregulpredicstable}
- Si $\{ X_t \}$ est un processus régulier, alors, pour
-tout $p$, $\phi_p(z) \ne 0$ pour $|z|\leq 1$. Tous les zéros des
-polynômes prédicteurs sont à l'extérieur du cercle unité.
+ Si $\{ X_t \}$ est un processus r\'egulier, alors, pour
+tout $p$, $\phi_p(z) \ne 0$ pour $|z|\leq 1$. Tous les z\'eros des
+polyn\^omes pr\'edicteurs sont \`a l'ext\'erieur du cercle unit\'e.
 \end{theorem}
 
-\begin{proof}[Preuve du théorème~\ref{theo:procregulpredicstable}]
+\begin{proof}[Preuve du th\'eor\`eme~\ref{theo:procregulpredicstable}]
 \smartqed
-Nous allons tout d'abord montrer que le prédicteur optimal n'a pas
-de racines sur le cercle unité. Raisonnons par contradiction.
-Supposons que le polynôme $\phi_p(z)$ ait deux racines
-complexes conjuguées, de la forme $\exp(\pm i\theta)$, sur le
-cercle unité (on traite de façon similaire le cas de racines
-réelles, $\theta= 0$ ou $\pi$). Nous pouvons écrire\,:
+Nous allons tout d'abord montrer que le pr\'edicteur optimal n'a pas
+de racines sur le cercle unit\'e. Raisonnons par contradiction.
+Supposons que le polyn\^ome $\phi_p(z)$ ait deux racines
+complexes conjugu\'ees, de la forme $\exp(\pm i\theta)$, sur le
+cercle unit\'e (on traite de fa\c{c}on similaire le cas de racines
+r\'eelles, $\theta= 0$ ou $\pi$). Nous pouvons \'ecrire\,:
 \[
  \phi_p(z) = \phi^*_p(z) (1 - 2 \cos(\theta) z + z^2)
 \]
 On note $\bar{\nu}_X(d \lambda) = \nu_X(d \lambda) |\phi^*_p(\rme^{-i
 \lambda})|^2$. $\bar{\nu}_X$ est une mesure positive sur
 $[-\pi,\pi]$ de masse finie. On note $\bar{\gamma}(\tau)$ la suite
-des coefficients de Fourier associés à  $\bar{\nu}_X$\,:
+des coefficients de Fourier associ\'es \`a  $\bar{\nu}_X$\,:
 \[
  \bar{\gamma}(\tau) = \frac{1}{2 \pi} \int_{- \pi}^{\pi}
  \rme^{\rmi \tau \lambda} \bar{\nu}_X(\rmd \lambda)\;.
@@ -550,12 +550,12 @@ Nous avons donc\,:
            |1 + \psi_1 \rme^{-\rmi\lambda} + \psi_2 \rme^{-2 \rmi \lambda}|^2
              \bar{\nu}_X(\rmd \lambda) \eqsp.
 \end{multline*}
-La minimisation de $\sigma_p^2$ par rapport à  $\psi_1$ et $\psi_2$ est équivalente
-à la résolution des équations de Yule-Walker à
+La minimisation de $\sigma_p^2$ par rapport \`a  $\psi_1$ et $\psi_2$ est \'equivalente
+\`a la r\'esolution des \'equations de Yule-Walker \`a
 l'ordre $p=2$ pour la suite des covariances $\bar{\gamma}(h)$.
-Par conséquent la suite des coefficients $\{1,-2\cos(\theta),1\}$
-doit vérifier l'équation\,:
-\clnote{je ne comprends pas cette égalité}
+Par cons\'equent la suite des coefficients $\{1,-2\cos(\theta),1\}$
+doit v\'erifier l'\'equation\,:
+\clnote{je ne comprends pas cette \'egalit\'e}
 \[
 \left[
 \begin{array}{ccc}
@@ -577,35 +577,35 @@ doit vérifier l'équation\,:
 \end{array}
 \right]
 \]
-De cette équation il s'en suit (les première et troisième
-lignes sont égales) que $\sigma_p^2=0$, ce qui est contraire à
-l'hypothèse que le processus est régulier.
+De cette \'equation il s'en suit (les premi\`ere et troisi\`eme
+lignes sont \'egales) que $\sigma_p^2=0$, ce qui est contraire \`a
+l'hypoth\`ese que le processus est r\'egulier.
 
-Démontrons maintenant que les racines des polynômes
-prédicteurs sont toutes \emph{strictement à  l'extérieur du
-cercle unité}. Raisonnons encore par l'absurde. Supposons que le
-polynôme prédicteur à l'ordre $p$ ait $m$ racines $\{a_k,
-|a_k| < 1, 1 \le k \leq m \}$ à l'intérieur du cercle unité et
+D\'emontrons maintenant que les racines des polyn\^omes
+pr\'edicteurs sont toutes \emph{strictement \`a  l'ext\'erieur du
+cercle unit\'e}. Raisonnons encore par l'absurde. Supposons que le
+polyn\^ome pr\'edicteur \`a l'ordre $p$ ait $m$ racines $\{a_k,
+|a_k| < 1, 1 \le k \leq m \}$ \`a l'int\'erieur du cercle unit\'e et
 $(p-m)$ racines $\{ b_{\ell}, |b_{\ell}| > 1, 1 \leq \ell \leq p-m
-\}$ à l'extérieur du cercle unité. Le polynôme prédicteur
-à l'ordre $p$ s'écrit donc\,:
+\}$ \`a l'ext\'erieur du cercle unit\'e. Le polyn\^ome pr\'edicteur
+\`a l'ordre $p$ s'\'ecrit donc\,:
 \[
  \phi_p(z)=
  \prod_{k=1}^m ( 1 - a_k^{-1} z) \prod_{\ell=1}^{p-m} (1 - b_{\ell}^{-1} z)\;.
 \]
-Considérons alors le polynôme\,:
+Consid\'erons alors le polyn\^ome\,:
 \[
  \bar{\phi}_p(z) =
  \prod_{k=1}^m (1 - a_k^{*} z) \prod_{\ell=1}^{p-m} (1 - b_{\ell}^{-1} z)\;.
 \]
-Il a d'une part toutes ses racines strictement à l'extérieur
-du cercle unité et d'autre part il vérifie
+Il a d'une part toutes ses racines strictement \`a l'ext\'erieur
+du cercle unit\'e et d'autre part il v\'erifie
 $|\bar{\phi}_p(\rme^{-i\lambda })|^2< |\phi_p(\rme^{-i\lambda })|^2$. On a
 en effet $| 1 - a_k^* \rme^{-i\lambda } | = |1 - a_k \rme^{\rmi \lambda }|=
 |a_k| |1 - a_k^{-1} \rme^{-i\lambda }|$ et donc
 $|\bar{\phi}_p(\rme^{-i\lambda })|^2 = \left (\prod_{k=1}^m |a_k|^2
-\right )|\phi_p(\rme^{-i\lambda })|^2$, ce qui démontre le résultat
-annoncé puisque $|a_k|<1$. On en déduit alors
+\right )|\phi_p(\rme^{-i\lambda })|^2$, ce qui d\'emontre le r\'esultat
+annonc\'e puisque $|a_k|<1$. On en d\'eduit alors
 que\,:
 \begin{gather*}
 \frac{1}{2 \pi} \int_{-\pi}^{\pi} | \bar{\phi}_p(\rme^{-i\lambda
@@ -617,18 +617,18 @@ ce qui contredit que $\phi_p(z)=\inf_{\psi \in \cP_p}(2\pi)^{-1}
 \end{proof}
 
 \clnote{je ne comprends pas la remarque}
-Une conséquence directe du théorème
-\ref{theo:procregulpredicstable} est qu'à toute matrice de
-covariance de type défini positif, de dimension $(p+1)\times
+Une cons\'equence directe du th\'eor\`eme
+\ref{theo:procregulpredicstable} est qu'\`a toute matrice de
+covariance de type d\'efini positif, de dimension $(p+1)\times
 (p+1)$, on peut associer un processus AR$(p)$ causal dont les
-$(p+1)$ premiers coefficients de covariance sont précisément la
-première ligne de cette matrice. Ce résultat n'est pas général.
+$(p+1)$ premiers coefficients de covariance sont pr\'ecis\'ement la
+premi\`ere ligne de cette matrice. Ce r\'esultat n'est pas g\'en\'eral.
 Ainsi il existe bien un processus AR$(2)$ causal ayant
 $\gamma(0)=1$ et $\gamma(1)=\rho$, comme premiers coefficients de
-covariance, à condition toutefois que la matrice de covariance
-soit positive c'est-à-dire que $|\rho|<1$, tandis qu'il n'existe
+covariance, \`a condition toutefois que la matrice de covariance
+soit positive c'est-\`a-dire que $|\rho|<1$, tandis qu'il n'existe
 pas, pour cette même matrice de processus MA$(1)$. Il faut en
-effet, en plus du caractère positif, que $|\rho|\leq 1/2$
+effet, en plus du caract\`ere positif, que $|\rho|\leq 1/2$
 (voir exemple \ref{exe:testposivite1}).
 %============================================================================
 %============================================================================
@@ -636,32 +636,32 @@ effet, en plus du caractère positif, que $|\rho|\leq 1/2$
 \section{Algorithme de Levinson-Durbin}
 \label{sec:algorithme-levinson-durbin}
 %============================================================================
-La solution directe du système des équations de Yule-Walker
-requiert de l'ordre de $p^3$ opérations~: la résolution classique
-de ce système implique en effet la décomposition de la matrice
+La solution directe du syst\`eme des \'equations de Yule-Walker
+requiert de l'ordre de $p^3$ op\'erations~: la r\'esolution classique
+de ce syst\`eme implique en effet la d\'ecomposition de la matrice
 $\Gamma_p$ sous la forme du produit d'une matrice triangulaire
-inférieure et de sa transposée, $\Gamma_p = L_p L_p^T$
-(décomposition de Choleski) et la résolution par substitution de
-deux systèmes triangulaires. Cette procédure peut s'avérer
-coûteuse lorsque l'ordre de prédiction est grand (on utilise
-généralement des ordres de prédiction de l'ordre de quelques
-dizaines à quelques centaines), ou lorsque, à des fins de
-modélisation, on est amené à évaluer la qualité de prédiction
-pour différents horizons de prédiction. L'algorithme de
-Levinson-Durbin exploite la structure géométrique particulière
-des processus stationnaires au second ordre pour établir une
-formule de récurrence donnant les coefficients de prédiction à
-l'ordre $(p+1)$ à partir des coefficients de prédiction
-obtenus à l'ordre $p$. Il fournit également une relation de récurrence
-entre l'erreur de prédiction directe à l'ordre $p+1$
-et l'erreur de prédiction directe à l'ordre $p$.
+inf\'erieure et de sa transpos\'ee, $\Gamma_p = L_p L_p^T$
+(d\'ecomposition de Choleski) et la r\'esolution par substitution de
+deux syst\`emes triangulaires. Cette proc\'edure peut s'av\'erer
+co\^uteuse lorsque l'ordre de pr\'ediction est grand (on utilise
+g\'en\'eralement des ordres de pr\'ediction de l'ordre de quelques
+dizaines \`a quelques centaines), ou lorsque, \`a des fins de
+mod\'elisation, on est amen\'e \`a \'evaluer la qualit\'e de pr\'ediction
+pour diff\'erents horizons de pr\'ediction. L'algorithme de
+Levinson-Durbin exploite la structure g\'eom\'etrique particuli\`ere
+des processus stationnaires au second ordre pour \'etablir une
+formule de r\'ecurrence donnant les coefficients de pr\'ediction \`a
+l'ordre $(p+1)$ \`a partir des coefficients de pr\'ediction
+obtenus \`a l'ordre $p$. Il fournit \'egalement une relation de r\'ecurrence
+entre l'erreur de pr\'ediction directe \`a l'ordre $p+1$
+et l'erreur de pr\'ediction directe \`a l'ordre $p$.
 
 On supposera dans toute cette partie que {\boldmath$\Gamma_p$} \textbf{est inversible
 pour tout} {\boldmath $p\geq 1$}.
 
 Supposons que les
-coefficients de prédiction linéaire et la variance de l'erreur de
-prédiction directe à l'ordre $p$, pour $p \geq 0$, sont connus :
+coefficients de pr\'ediction lin\'eaire et la variance de l'erreur de
+pr\'ediction directe \`a l'ordre $p$, pour $p \geq 0$, sont connus :
 \begin{gather*}
 %\label{eq:definition:predictionretrograde}
    \proj{X_t}{\cH_{t-1,p}} =
@@ -669,58 +669,58 @@ prédiction directe à l'ordre $p$, pour $p \geq 0$, sont connus :
    \quad\mbox{et}\quad
    \sigma_{p}^2 = \| X_t - \proj{X_t}{\cH_{t-1,p}} \|^2\;,
 \end{gather*}
-et déterminons, à partir de la
-projection à l'ordre $p$ de $X_t$, la projection de $X_t$ à
+et d\'eterminons, \`a partir de la
+projection \`a l'ordre $p$ de $X_t$, la projection de $X_t$ \`a
 l'ordre $p+1$ sur le sous-espace $\cH_{t-1,p+1} =
 \lspan{X_{t-1}, \cdots, X_{t-p-1}}$.
 
-Pour cela, on décompose cet espace
-en somme orthogonale de la façon suivante\,:
+Pour cela, on d\'ecompose cet espace
+en somme orthogonale de la fa\c{c}on suivante\,:
 \begin{multline*}
 \cH_{t-1,p+1} = \cH_{t-1,p}  \oplusperp \lspan{ X_{t-p-1} -\proj{X_{t-p-1}}{\cH_{t-1,p}}}
 \\= \cH_{t-1,p} \oplusperp \lspan{\epsilon_{t-p-1,p}^-}\;,
 \end{multline*}
-où, de façon générale, $\epsilon_{t,p}^-$ correspond à
-l'\emph{erreur de prédiction
-rétrograde à l'ordre $p$} définie par :
+o\`u, de fa\c{c}on g\'en\'erale, $\epsilon_{t,p}^-$ correspond \`a
+l'\emph{erreur de pr\'ediction
+r\'etrograde \`a l'ordre $p$} d\'efinie par :
 \[
 \epsilon_{t,p}^-
      = X_t - \proj{X_t}{\cH_{t+p,p}}
      = X_t - \proj{X_t}{\lspan{X_{t+p}, \cdots, X_{t+1}}}\;.
 \]
-Elle représente la différence entre la valeur à l'instant courant $X_t$ et
-la projection orthogonale de $X_t$ sur les $p$ échantillons
+Elle repr\'esente la diff\'erence entre la valeur \`a l'instant courant $X_t$ et
+la projection orthogonale de $X_t$ sur les $p$ \'echantillons
 \emph{qui suivent} l'instant courant $\{X_{t+1}, \cdots, X_{t+p}\}$.
-Le qualificatif \emph{rétrograde} est clair\,: il
-traduit le fait que l'on cherche à prédire la valeur courante
+Le qualificatif \emph{r\'etrograde} est clair\,: il
+traduit le fait que l'on cherche \`a pr\'edire la valeur courante
 en fonction des valeurs futures.
 
-D'après la proposition \ref{prop:projecteur},
+D'apr\`es la proposition \ref{prop:projecteur},
 \begin{multline*}
 %\label{eq:decomposition}
   \proj{X_t}{\cH_{t-1,p+1}}
   = \proj{X_t}{\cH_{t-1,p}} + \proj{X_t}{\lspan{\epsilon_{t-p-1,p}^-}}\;,
 \end{multline*}
-où d'après l'exemple \ref{exe:proj1vecteur} :
+o\`u d'apr\`es l'exemple \ref{exe:proj1vecteur} :
 $$
 \proj{X_t}{\lspan{\epsilon_{t-p-1,p}^-}} = \alpha \epsilon_{t-p-1,p}^-
  \quad \mbox{avec} \quad
  \alpha=\pscal{X_t}{\epsilon_{t-p-1,p}^-}/\|\epsilon_{t-p-1,p}^-\|^2\;.
 $$
-On en déduit donc que :
+On en d\'eduit donc que :
 \begin{multline}
 \label{eq:decomposition}
   \proj{X_t}{\cH_{t-1,p+1}}
   = \proj{X_t}{\cH_{t-1,p}} \\
 + k_{p+1} \left[X_{t-p-1} - \proj{X_{t-p-1}}{\cH_{t-1,p}} \right] \eqsp,
 \end{multline}
-où
+o\`u
 \begin{equation}\label{eq:k_{p+1}}
 k_{p+1}=\frac{\pscal{X_t}{\epsilon_{t-p-1,p}^-}}{\|\epsilon_{t-p-1,p}^-\|^2}\;.
 \end{equation}
-Montrons à présent que les coefficients de prédiction rétrograde
-coïncident avec les coefficients de prédiction directe.
-Plus précisément, si
+Montrons \`a pr\'esent que les coefficients de pr\'ediction r\'etrograde
+coïncident avec les coefficients de pr\'ediction directe.
+Plus pr\'ecis\'ement, si
 \begin{equation}
 \label{eq:devtdirectretro1}
  \proj{X_t}{\cH_{t-1,p}} = \sum_{k=1}^{p} \phi_{k,p} X_{t-k}\;,
@@ -730,9 +730,9 @@ alors
 \label{eq:devtdirectretro2}
  \proj{X_{t-p-1}}{\cH_{t-1,p}} =\sum_{k=1}^{p} \phi_{k,p} X_{t-p-1+k} =\sum_{k=1}^{p} \phi_{p+1-k,p} X_{t-k}\;.
 \end{equation}
-En effet, les coefficients des deux développements
+En effet, les coefficients des deux d\'eveloppements
 (\ref{eq:devtdirectretro1}) et (\ref{eq:devtdirectretro2}) sont
-tous les deux donnés par (\ref{eq:sol_unique}).
+tous les deux donn\'es par (\ref{eq:sol_unique}).
 En utilisant \eqref{eq:devtdirectretro1} et
 \eqref{eq:devtdirectretro2} dans
 \eqref{eq:decomposition}, on a :
@@ -741,8 +741,8 @@ En utilisant \eqref{eq:devtdirectretro1} et
   = \sum_{k=1}^{p+1} \phi_{k,p+1}X_{t-k}\\
   = \sum_{k=1}^{p} (\phi_{k,p} - k_{p+1} \phi_{p+1-k,p} ) X_{t-k} + k_{p+1} X_{t-p-1}\;.
 \end{multline*}
-On en déduit, par unicité, les formules de récurrence donnant les coefficients
-de prédiction à l'ordre $p+1$ à partir de ceux à
+On en d\'eduit, par unicit\'e, les formules de r\'ecurrence donnant les coefficients
+de pr\'ediction \`a l'ordre $p+1$ \`a partir de ceux \`a
 l'ordre $p$\,:
 \begin{equation}
  \label{eq:recursionLevinson}
@@ -751,7 +751,7 @@ l'ordre $p$\,:
 \phi_{p+1,p+1} = k_{p+1}\;. &
 \end{cases}
 \end{equation}
-Explicitons à présent la relation (\ref{eq:k_{p+1}}) définissant
+Explicitons \`a pr\'esent la relation (\ref{eq:k_{p+1}}) d\'efinissant
 $k_{p+1}$. En utilisant \eqref{eq:devtdirectretro2}, on a :
 \begin{multline*}
 \pscal{X_t}{\epsilon_{t-p-1,p}^-}
@@ -772,16 +772,16 @@ ce qui donne
    \frac{\gamma(p+1) - \sum_{k=1}^{p} \phi_{k,p} \gamma(p+1-k)}
    {\sigma_p^2}\;.
  \end{equation}
- Il nous reste maintenant à déterminer l'erreur de prédiction
-${\sigma_{p+1}^2}$ à l'ordre $(p+1)$ en fonction de $\sigma_p^2$.
-En utilisant l'équation \eqref{eq:decomposition}, on a
+ Il nous reste maintenant \`a d\'eterminer l'erreur de pr\'ediction
+${\sigma_{p+1}^2}$ \`a l'ordre $(p+1)$ en fonction de $\sigma_p^2$.
+En utilisant l'\'equation \eqref{eq:decomposition}, on a
 \begin{multline*}
  \epsilon_{t,p+1}^+ =X_{t} - \proj{X_{t}}{\cH_{t-1,p+1}} \\
  = X_{t} - \proj{X_{t}}{\cH_{t-1,p}} - k_{p+1}
 [X_{t-p-1} - \proj{X_{t-p-1}}{\cH_{t-1,p}}]\\
 =X_{t} - \proj{X_{t}}{\cH_{t-1,p}} - k_{p+1}\epsilon_{t-p-1,p}^-\;,
 \end{multline*}
-dont on déduit d'après \eqref{eq:norme2_epsretro}\,:
+dont on d\'eduit d'apr\`es \eqref{eq:norme2_epsretro}\,:
 \begin{multline*}
   \sigma_{p+1}^2=\|\epsilon_{t,p+1}^+\|^2
 =\sigma_p^2+ k_{p+1}^2 \sigma_p^2-2k_{p+1}\pscal{X_{t} - \proj{X_{t}}{\cH_{t-1,p}}}{\epsilon_{t-p-1,p}^-}\;.
@@ -795,26 +795,26 @@ obtient
 \begin{equation}\label{eq:recursion_sigma_p+1}
  \sigma_{p+1}^2=\sigma_p^2 (1 - k_{p+1}^2)\;.
 \end{equation}
-A partir de ces récursions, nous allons à présent décrire l'algorithme
+A partir de ces r\'ecursions, nous allons \`a pr\'esent d\'ecrire l'algorithme
 de Levinson-Durbin.
 
 
 
-% Indiquons que l'erreur rétrograde
-% joue un rôle absolument essentiel dans tous les algorithmes
-% rapides de résolution des équations de Yule-Walker.
+% Indiquons que l'erreur r\'etrograde
+% joue un r\^ole absolument essentiel dans tous les algorithmes
+% rapides de r\'esolution des \'equations de Yule-Walker.
 
 % Remarquons tout
-% d'abord que les coefficients de prédiction rétrograde
-% coïncident avec les coefficients de prédiction directe :
+% d'abord que les coefficients de pr\'ediction r\'etrograde
+% coïncident avec les coefficients de pr\'ediction directe :
 % Cette
-% propriété, que nous avons rencontrée exemple \ref{exe:predAVAR},
-% est fondamentalement due à la {\em propriété de réversibilité}
+% propri\'et\'e, que nous avons rencontr\'ee exemple \ref{exe:predAVAR},
+% est fondamentalement due \`a la {\em propri\'et\'e de r\'eversibilit\'e}
 % des processus stationnaires au second ordre. En effet, si $Y_t=
 % X_{-t}$, alors $Y_t$ a même moyenne et même fonction de
 % covariance que $X_t$ (voir exemple \ref{exe:stat_retourne}
-% chapitre \ref{chap:passl}) et par conséquent, en utilisant aussi
-% l'hypothèse de stationnarité, on a simultanément pour tout
+% chapitre \ref{chap:passl}) et par cons\'equent, en utilisant aussi
+% l'hypoth\`ese de stationnarit\'e, on a simultan\'ement pour tout
 % $u,v\in\Zset$\,:
 % \begin{multline*}
 %   \proj{X_{t+u}}{\cH_{t+u-1,p}}
@@ -842,11 +842,11 @@ de Levinson-Durbin.
 
 
 
-% Cherchons maintenant à déterminer, à partir de la
-% projection à l'ordre $p$, la projection de $X_t$ à
+% Cherchons maintenant \`a d\'eterminer, \`a partir de la
+% projection \`a l'ordre $p$, la projection de $X_t$ \`a
 % l'ordre $p+1$ sur le sous-espace $\cH_{t-1,p+1} =
-% \lspan{X_{t-1}, \cdots, X_{t-p-1}}$. Pour cela décomposons cet espace
-% en somme orthogonale de la façon suivante\,:
+% \lspan{X_{t-1}, \cdots, X_{t-p-1}}$. Pour cela d\'ecomposons cet espace
+% en somme orthogonale de la fa\c{c}on suivante\,:
 % \begin{multline*}
 % \cH_{t-1,p+1} = \cH_{t-1,p}  \oplusperp \lspan{ X_{t-p-1} -\proj{X_{t-p-1}}{\cH_{t-1,p}}}
 % \\= \cH_{t-1,p} \oplusperp \lspan{\epsilon_{t-p-1,p}^-}
@@ -863,22 +863,22 @@ de Levinson-Durbin.
 %   \proj{X_t}{\cH_{t-1,p+1}}
 %   = \proj{X_t}{\cH_{t-1,p}} + k_{p+1} \left[X_{t-p-1} - \proj{X_{t-p-1}}{\cH_{t-1,p}} \right] \eqsp,
 % \end{equation}
-% où, en utilisant aussi \eqref{eq:eplusemoins}, on peut
-% écrire\,:
+% o\`u, en utilisant aussi \eqref{eq:eplusemoins}, on peut
+% \'ecrire\,:
 % \begin{equation}
 % \label{eq:defkpP1}
 %   k_{p+1}=\frac{\pscal{X_t}{\epsilon_{t-p-1,p}^-}}{\sigma_p^2}=
 %    \frac{\pscal{X_t}{\epsilon_{t-p-1,p}^-}}{\|\epsilon_{t+u,p}^+\| \|\epsilon_{t+v,p}^-\|} \eqsp.
 % \end{equation}
-% En portant à présent \eqref{eq:devtdirectretro} dans
+% En portant \`a pr\'esent \eqref{eq:devtdirectretro} dans
 % \eqref{eq:decomposition}, on obtient l'expression\,:
 % $$
 % \proj{X_{t}}{\cH_{t-1,p+1}}
 %   = \sum_{k=1}^{p+1} \phi_{k,p+1}X_{t-k}
 %   = \sum_{k=1}^{p} (\phi_{k,p} - k_{p+1} \phi_{p+1-k,p} ) X_{t-k} + k_{p+1} X_{t-p-1}
 % $$
-% On en déduit les formules de récurrence donnant les coefficients
-% de prédiction à l'ordre $p+1$ à partir de ceux à
+% On en d\'eduit les formules de r\'ecurrence donnant les coefficients
+% de pr\'ediction \`a l'ordre $p+1$ \`a partir de ceux \`a
 % l'ordre $p$\,:
 % \begin{equation}
 %  \label{eq:recursionLevinson}
@@ -887,7 +887,7 @@ de Levinson-Durbin.
 % \phi_{p+1,p+1} = k_{p+1} &
 % \end{cases}
 % \end{equation}
-% Déterminons maintenant la formule de récurrence donnant $k_{p+1}$.
+% D\'eterminons maintenant la formule de r\'ecurrence donnant $k_{p+1}$.
 % En utilisant encore \eqref{eq:devtdirectretro} et
 % \eqref{eq:decomposition}, on obtient\,:
 % $$
@@ -896,27 +896,27 @@ de Levinson-Durbin.
 %      =\sum_{k=1}^{p} \phi_{k,p} \gamma(p+1-k)
 % $$
 % Partant de l'expression de $\pscal{X_t}{\epsilon_{t-p-1,p}^-}$ on en
-% déduit que\,:
+% d\'eduit que\,:
 % \begin{multline*}
 % \pscal{X_t}{\epsilon_{t-p-1,p}^-}
 %             = \pscal{X_{t}}{X_{t-p-1} - \proj{X_{t-p-1}}{\cH_{t-1,p}}}\\
 %             = \gamma(p+1) - \sum_{k=1}^{p} \phi_{k,p} \gamma(p+1-k)
 % \end{multline*}
-% et donc d'après \eqref{eq:defkpP1}\,:
+% et donc d'apr\`es \eqref{eq:defkpP1}\,:
 % $$
 %   k_{p+1}=
 %    \frac{\gamma(p+1) - \sum_{k=1}^{p} \phi_{k,p} \gamma(p+1-k)}
 %    {\sigma_p^2}
 % $$
-% Il nous reste maintenant à déterminer l'erreur de prédiction
-% ${\sigma_{p+1}^2}$ à l'ordre $(p+1)$. En utilisant l'équation
+% Il nous reste maintenant \`a d\'eterminer l'erreur de pr\'ediction
+% ${\sigma_{p+1}^2}$ \`a l'ordre $(p+1)$. En utilisant l'\'equation
 % \eqref{eq:decomposition}, on a
 % \begin{multline*}
 %  \epsilon_{t,p+1}^+ =X_{t} - \proj{X_{t}}{\cH_{t-1,p+1}} \\
 %  = X_{t} - \proj{X_{t}}{\cH_{t-1,p}} - k_{p+1}
 % (X_{t-p-1} - \proj{X_{t-p-1}}{\cH_{t-1,p}})
 % \end{multline*}
-% dont on déduit d'après \eqref{eq:defkpP1}\,:
+% dont on d\'eduit d'apr\`es \eqref{eq:defkpP1}\,:
 % \begin{multline*}
 %   \sigma_{p+1}^2=\|\epsilon_{t,p+1}^+\|^2
 %       = \sigma_p^2 + k_{p+1}^2 \sigma_p^2
@@ -924,26 +924,26 @@ de Levinson-Durbin.
 %       = \sigma_p^2 (1 - k_{p+1}^2)
 % \end{multline*}
 
-Pour initialiser l'algorithme, nous nous intéressons au cas $p=0$.
-Dans ce cas, la meilleure prédiction de $X_t$ est $\PE{X_t}=0$ et la variance de
-l'erreur de prédiction est donnée par $\sigma_{0}^2
+Pour initialiser l'algorithme, nous nous int\'eressons au cas $p=0$.
+Dans ce cas, la meilleure pr\'ediction de $X_t$ est $\PE{X_t}=0$ et la variance de
+l'erreur de pr\'ediction est donn\'ee par $\sigma_{0}^2
 =\PE{(X_t-0)^2}=\gamma(0)$. Au pas suivant on a
 $k_1=\gamma(1)/\gamma(0)$, en posant $p=0$ dans (\ref{eq:def:k_{p+1}}),
 $\phi_{1,1}=\gamma(1)/\gamma(0)$, en posant $p=0$ dans (\ref{eq:recursionLevinson}) et
 $\sigma_1^2=\gamma(0)(1-k_1^2)$, en posant  $p=0$ dans \eqref{eq:recursion_sigma_p+1}.
 
-L'algorithme de \emph{Levinson-Durbin} qui permet de déterminer les coefficients de prédiction
-$\{\phi_{m,p}\}_{1\leq m\leq p,1\leq p\leq K}$ à partir de
-$\gamma(0),\dots,\gamma(K)$ s'écrit alors de la façon suivante :
+L'algorithme de \emph{Levinson-Durbin} qui permet de d\'eterminer les coefficients de pr\'ediction
+$\{\phi_{m,p}\}_{1\leq m\leq p,1\leq p\leq K}$ \`a partir de
+$\gamma(0),\dots,\gamma(K)$ s'\'ecrit alors de la fa\c{c}on suivante :
 
 
 % Partant d'une suite de $(K+1)$ coefficients de covariance $\gamma(0),\dots,\gamma(K)$, l'\emph{algorithme de Levinson-Durbin}
-% permet de déterminer les coefficients de prédiction
+% permet de d\'eterminer les coefficients de pr\'ediction
 % $\{\phi_{m,p}\}_{1\leq m\leq p,1\leq p\leq K}$\,:
 
 \begin{algorithm}[Levinson-Durbin]
 \item[Initialisation] $k_1=\gamma(1)/\gamma(0)$, $\phi_{1,1}=\gamma(1)/\gamma(0)$ et $\sigma_1^2=\gamma(0)(1-k_1^2)$
-\item[Récursion] Pour $p=\{2,\dots,K\}$ répéter\,:
+\item[R\'ecursion] Pour $p=\{2,\dots,K\}$ r\'ep\'eter\,:
 \begin{enumerate}[label=\emph{\alph*})]
 \item Calculer
 \begin{align*}
@@ -963,8 +963,8 @@ Soit $(X_t)$ un processus stationnaire au second ordre de fonction d'autocovaria
 $\gamma(h)$.
 %telle que $\gamma(0)>0$ et $\gamma(h)\to 0$ lorsque $h$
 %tend vers l'infini.
-Le coefficient $k_{p+1}$ défini par
-(\ref{eq:k_{p+1}}) vérifie, pour tout $p\geq 0$ :
+Le coefficient $k_{p+1}$ d\'efini par
+(\ref{eq:k_{p+1}}) v\'erifie, pour tout $p\geq 0$ :
 \begin{equation}
  \label{eq:defkp}
  k_{p+1}=\frac{\pscal{\epsilon_{t,p}^+}{\epsilon_{t-p-1,p}^-}}
@@ -977,16 +977,16 @@ et
 \end{equation}
 \end{proposition}
 \begin{proof}\smartqed
-En utilisant que $\proj{X_{t}}{\cH_{t-1,p}}$ est orthogonal à
+En utilisant que $\proj{X_{t}}{\cH_{t-1,p}}$ est orthogonal \`a
 $\epsilon_{t-p-1,p}^-$, (\ref{eq:k_{p+1}}) et (\ref{eq:deferreurforward}), on a
 $$
 k_{p+1}=\frac{\pscal{\epsilon_{t,p}^+}{\epsilon_{t-p-1,p}^-}}{\|\epsilon_{t-p-1,p}^- \|^2}\;.
 $$
-Or, d'après (\ref{eq:norme2_epsretro}), $\|\epsilon_{t-p-1,p}^-
-\|^2=\sigma_p^2=\|\epsilon_{t,p}^+ \|^2$, la dernière égalité venant
-de (\ref{eq:var_pred_dir}), d'où l'on déduit \eqref{eq:defkp}.
-L'inégalité \eqref{eq:maj:k_p+1} se déduit alors de \eqref{eq:defkp}
-en utilisant l'inégalité de Cauchy-Schwarz.
+Or, d'apr\`es (\ref{eq:norme2_epsretro}), $\|\epsilon_{t-p-1,p}^-
+\|^2=\sigma_p^2=\|\epsilon_{t,p}^+ \|^2$, la derni\`ere \'egalit\'e venant
+de (\ref{eq:var_pred_dir}), d'o\`u l'on d\'eduit \eqref{eq:defkp}.
+L'in\'egalit\'e \eqref{eq:maj:k_p+1} se d\'eduit alors de \eqref{eq:defkp}
+en utilisant l'in\'egalit\'e de Cauchy-Schwarz.
 \qed
 \end{proof}
 
@@ -995,7 +995,7 @@ en utilisant l'inégalité de Cauchy-Schwarz.
 % $\proj{X_{t}}{\cH_{t-1,p}}\perp \epsilon_{t-p-1,p}^-$ puisque
 % $\proj{X_{t}}{\cH_{t-1,p}}\in\cH_{t-1,p}$ et que
 % $\epsilon_{t-p-1,p}^-\perp \cH_{t-1,p}$. Partant de
-% \eqref{eq:defkpP1} on peut écrire que\,:
+% \eqref{eq:defkpP1} on peut \'ecrire que\,:
 % \begin{equation}
 %  \label{eq:defkp}
 %  k_{p+1}
@@ -1004,17 +1004,17 @@ en utilisant l'inégalité de Cauchy-Schwarz.
 %   =\frac{\pscal{\epsilon_{t,p}^+}{\epsilon_{t-p-1,p}^-}}
 %         {\|\epsilon_{t,p}^+ \| \,\, \|\epsilon_{t-p-1,p}^- \|}
 % \end{equation}
-% En utilisant l'inégalité de Schwarz, on montre que $|k_{p+1}| \leq
+% En utilisant l'in\'egalit\'e de Schwarz, on montre que $|k_{p+1}| \leq
 % 1$.
 % \qed
 %\end{proof}
-%Dans la littérature, $k_p$ est appelé coefficient d'autocorrélation partielle.
-\begin{definition}[Fonction d'autocorrélation partielle]
+%Dans la litt\'erature, $k_p$ est appel\'e coefficient d'autocorr\'elation partielle.
+\begin{definition}[Fonction d'autocorr\'elation partielle]
  \label{def:corrpar}
  Soit $(X_t)$ un processus stationnaire au second ordre de fonction d'autocovariance
-$\gamma(h)$. On appelle \emph{fonction d'autocorrélation partielle} la
-suite des coefficients d'autocorrélation partielle  $(k_p)_{p \geq 1}$
-définie par :
+$\gamma(h)$. On appelle \emph{fonction d'autocorr\'elation partielle} la
+suite des coefficients d'autocorr\'elation partielle  $(k_p)_{p \geq 1}$
+d\'efinie par :
 \begin{equation}
  \label{eq:defcorrpart}
  k_p = \corr(X_t,X_{t-1})= \frac{\pscal{X_t}{X_{t-1}}}{\|X_t\| \,\,
@@ -1032,17 +1032,17 @@ k_p=\corr(\epsilon_{t,p-1}^+,\epsilon_{t-p,p-1}^-)\\
 
 \begin{remark}
 Dans \eqref{eq:defcorrpart}, l'expression pour $p=1$ est en accord
-avec celle pour $p\geq 2$ dans la mesure où on peut noter que
+avec celle pour $p\geq 2$ dans la mesure o\`u on peut noter que
 $\epsilon_{t,0}^+=X_t$ et que $\epsilon_{t-1,0}^-=X_{t-1}$. Notons
 aussi que, dans l'expression de $k_p$, $X_t$ et $X_{t-p}$ sont
-projetés sur le même sous-espace
-$\lspan{X_{t-1},\dots,X_{t-p+1}}$. Le résultat remarquable est
-que la suite des coefficients de corrélation partielle est donnée
+projet\'es sur le même sous-espace
+$\lspan{X_{t-1},\dots,X_{t-p+1}}$. Le r\'esultat remarquable est
+que la suite des coefficients de corr\'elation partielle est donn\'ee
 par\,:
 \begin{equation}
  \label{eq:parcoretcoeffpredic}
   k_p=\phi_{p,p}
-\end{equation} où $\phi_{p,p}$ est défini au moyen des équations de
+\end{equation} o\`u $\phi_{p,p}$ est d\'efini au moyen des \'equations de
 Yule-Walker~(\ref{eq:YW1}).
 \end{remark}
 Dans le cas particulier d'un
@@ -1056,12 +1056,12 @@ $$
    \end{matrix}
    \right.
 $$
-% Notons enfin que contrairement à la fonction d'autocorrélation
-% partielle d'un processus AR$(m)$ causal qui vérifie $k_p= 0$ pour tout $p> m$,
+% Notons enfin que contrairement \`a la fonction d'autocorr\'elation
+% partielle d'un processus AR$(m)$ causal qui v\'erifie $k_p= 0$ pour tout $p> m$,
 % nous avons pour un processus MA$(q)$, $k_p \ne 0$ pour un nombre infini de termes.
-% Il est toutefois possible de montrer qu'il existe un réel $\rho$, $0 < \rho < 1$, et une constante $C$, telle
+% Il est toutefois possible de montrer qu'il existe un r\'eel $\rho$, $0 < \rho < 1$, et une constante $C$, telle
 % que, pour tout $p \geq 1$, $|k_p| \leq C \rho^k$.
-% \clnote{il faut montrer les résultats sur le MA(q).}
+% \clnote{il faut montrer les r\'esultats sur le MA(q).}
 %==================================================================
 %==================================================================
 %==================================================================
@@ -1071,18 +1071,18 @@ $$
 
 % \clnote{Peut-être qu'on pourrait mettre l'algo de Schur en exercice ?}
 
-% Partant des coefficients d'autocorrélation, l'algorithme de
-% Levinson-Durbin évalue à la fois les coefficients des
-% prédicteurs linéaires optimaux et les coefficients
-% d'autocorrélation partielle. Dans certains cas, seuls les
-% coefficients d'autocorrélation partielle sont nécessaires. Il en
-% est ainsi, par exemple, lorsque l'on cherche à calculer les
-% erreurs de prédiction directe et rétrograde à partir du
-% processus $X_t$. Montrons, en effet, que les erreurs de prédiction
-% à l'ordre $(p+1)$ s'expriment, en fonction des erreurs de
-% prédictions à l'ordre $p$, à l'aide d'une formule de
-% récurrence ne faisant intervenir que la valeur du coefficient de
-% corrélation partielle\,:
+% Partant des coefficients d'autocorr\'elation, l'algorithme de
+% Levinson-Durbin \'evalue \`a la fois les coefficients des
+% pr\'edicteurs lin\'eaires optimaux et les coefficients
+% d'autocorr\'elation partielle. Dans certains cas, seuls les
+% coefficients d'autocorr\'elation partielle sont n\'ecessaires. Il en
+% est ainsi, par exemple, lorsque l'on cherche \`a calculer les
+% erreurs de pr\'ediction directe et r\'etrograde \`a partir du
+% processus $X_t$. Montrons, en effet, que les erreurs de pr\'ediction
+% \`a l'ordre $(p+1)$ s'expriment, en fonction des erreurs de
+% pr\'edictions \`a l'ordre $p$, \`a l'aide d'une formule de
+% r\'ecurrence ne faisant intervenir que la valeur du coefficient de
+% corr\'elation partielle\,:
 % \begin{equation}
 %  \label{eq:celluleanalyse}
 % \begin{cases}
@@ -1090,16 +1090,16 @@ $$
 % \epsilon_{t-(p+1),p+1}^-=\epsilon_{(t-1)-p,p}^- -k_{p+1}\epsilon^+_{t,p}
 % \end{cases}
 % \end{equation}
-% Reprenons les expressions de l'erreur de prédiction directe et de
-% l'erreur de prédiction rétrograde\,:
+% Reprenons les expressions de l'erreur de pr\'ediction directe et de
+% l'erreur de pr\'ediction r\'etrograde\,:
 % \begin{eqnarray*}
 %  \epsilon_{t,p}^+ = X_t - \sum_{k=1}^p \phi_{k,p} X_{t-k}
 %  &\mbox{et}&
 %  \epsilon_{t-p-1,p}^- = X_{t-p-1} - \sum_{k=1}^p \phi_{k,p} X_{t-p-1+k}
 % \end{eqnarray*}
-% En utilisant directement la récursion de Levinson-Durbin,
-% équations \eqref{eq:recursionLevinson}, dans l'expression de
-% l'erreur de prédiction directe à l'ordre $p+1$, nous
+% En utilisant directement la r\'ecursion de Levinson-Durbin,
+% \'equations \eqref{eq:recursionLevinson}, dans l'expression de
+% l'erreur de pr\'ediction directe \`a l'ordre $p+1$, nous
 % obtenons\,:
 % \begin{align}
 % \label{eq:predictiondirecte}
@@ -1114,7 +1114,7 @@ $$
 %   \\
 %   &= \epsilon_{t,p}^+ - k_{p+1} \epsilon_{t-p-1,p}^-
 % \end{align}
-% De façon similaire, nous avons\,:
+% De fa\c{c}on similaire, nous avons\,:
 % \begin{align}
 % \label{eq:predictionretrograde}
 %  \epsilon_{t-p-1,p+1}^-
@@ -1128,19 +1128,19 @@ $$
 %   \\
 %    &= \epsilon_{t-p-1,p}^- - k_{p+1} \epsilon_{t,p}^+
 % \end{align}
-% Partant de la suite des autocorrélations, l'algorithme de Schur
-% calcule récursivement les coefficients de corrélation partielle,
-% sans avoir à déterminer les valeurs des coefficients de
-% prédiction. Historiquement, l'algorithme de Schur a été introduit
-% pour tester le caractère défini positif d'une suite (ou de
-% façon équivalente, la positivité des matrices de Toeplitz
-% construites à partir de cette suite). En effet, comme nous
-% l'avons montré ci-dessus, une suite de coefficients de covariance
-% est définie positive si et seulement si les coefficients de
-% corrélation partielle sont de module strictement inférieur à
-% $1$. Déterminons à présent cet algorithme. En faisant $t=0$
-% dans l'équation \eqref{eq:predictiondirecte}, en multipliant à
-% gauche par $X_m$ et en utilisant la stationnarité, il vient\,:
+% Partant de la suite des autocorr\'elations, l'algorithme de Schur
+% calcule r\'ecursivement les coefficients de corr\'elation partielle,
+% sans avoir \`a d\'eterminer les valeurs des coefficients de
+% pr\'ediction. Historiquement, l'algorithme de Schur a \'et\'e introduit
+% pour tester le caract\`ere d\'efini positif d'une suite (ou de
+% fa\c{c}on \'equivalente, la positivit\'e des matrices de Toeplitz
+% construites \`a partir de cette suite). En effet, comme nous
+% l'avons montr\'e ci-dessus, une suite de coefficients de covariance
+% est d\'efinie positive si et seulement si les coefficients de
+% corr\'elation partielle sont de module strictement inf\'erieur \`a
+% $1$. D\'eterminons \`a pr\'esent cet algorithme. En faisant $t=0$
+% dans l'\'equation \eqref{eq:predictiondirecte}, en multipliant \`a
+% gauche par $X_m$ et en utilisant la stationnarit\'e, il vient\,:
 % \begin{equation}
 %  \label{eq:kpplus}
 %  \pscal{X_m}{\epsilon_{0,p+1}^+}
@@ -1149,9 +1149,9 @@ $$
 %  =
 %  \pscal{X_m}{\epsilon_{0,p}^+} - k_{p+1} \pscal{X_{m+p+1}}{\epsilon_{0,p}^-} \eqsp.
 % \end{equation}
-% En faisant $t=p+1$ dans l'équation
-% \eqref{eq:predictionretrograde}, en multipliant à gauche par
-% $X_{m+p+1}$ et en utilisant la stationnarité, il vient\,:
+% En faisant $t=p+1$ dans l'\'equation
+% \eqref{eq:predictionretrograde}, en multipliant \`a gauche par
+% $X_{m+p+1}$ et en utilisant la stationnarit\'e, il vient\,:
 % \begin{multline}
 %  \label{eq:kpmoins}
 %  \pscal{X_{m+p+1}}{\epsilon_{0,p+1}^-}
@@ -1173,33 +1173,33 @@ $$
 % \pscal{X_{p+1}}{\epsilon_{0,p+1}^-}
 %  = \pscal{X_{p+1}}{ X_0 - \proj{X_0}{\lspan{X_1, \cdots, X_{p+1}}}} = 0 \eqsp.
 % \]
-% Nous pouvons donc déduire de l'équation \eqref{eq:kpmoinsen0}\,:
+% Nous pouvons donc d\'eduire de l'\'equation \eqref{eq:kpmoinsen0}\,:
 % \begin{equation}
 % \label{eq:kpshur}
 %   k_{p+1} = \frac{\pscal{X_{p+1}}{ \epsilon_{0,p}^-}}{\pscal{X_0}{\epsilon_{0,p}^+}}
 % \end{equation}
-% En couplant les équations \eqref{eq:kpplus}, \eqref{eq:kpmoins} et
+% En couplant les \'equations \eqref{eq:kpplus}, \eqref{eq:kpmoins} et
 % \eqref{eq:kpshur} et en partant des conditions initiales\,:
 % \[
 %   \pscal{X_m}{\epsilon_{0,0}^+}= \gamma(m)
 %   \quad\mbox{et}\quad
 %   \pscal{X_{m+1}}{\epsilon_{0,0}^-}=\gamma(m+1) \eqsp.
 % \]
-% on peut déterminer les coefficients de corrélation partielle
-% directement, sans avoir à évaluer explicitement les
-% coefficients de prédiction.
+% on peut d\'eterminer les coefficients de corr\'elation partielle
+% directement, sans avoir \`a \'evaluer explicitement les
+% coefficients de pr\'ediction.
 
 % On note $u(m,p)=\pscal{X_m}{\epsilon_{0,p}^+}$ et $v(m,p)=\pscal{X_{m+p+1}}{\epsilon_{0,p}^-}$.
 % Partant des $(K+1)$ coefficients de covariance
 % $\{\gamma(0),\dots,\gamma(K)\}$, l'{\em algorithme de Schur}
-% calcule les $K$ premiers coefficients de corrélation partielle\,:
+% calcule les $K$ premiers coefficients de corr\'elation partielle\,:
 % \begin{description}
 % \item[Initialisation] Pour $m=\{0,\dots,K-1\}$\,:
 % \begin{align*}
 % &u(m,0)=\gamma(m) \\
 % &v(m,0)=\gamma(m+1)
 % \end{align*}
-% \item[Récursion]
+% \item[R\'ecursion]
 % \begin{enumerate}[label=\emph{\alph*})]
 % \item Pour $p=\{1,\dots,K\}$, calculer
 % \[k_p = \frac{v(0,p-1)}{u(0,p-1)} \]
@@ -1212,13 +1212,13 @@ $$
 %   $$
 % \end{enumerate}
 % \end{description}
-% La complexité de l'algorithme de Schur est équivalente à
+% La complexit\'e de l'algorithme de Schur est \'equivalente \`a
 % l'algorithme de Levinson.
 % %==========================================================
 % \subsubsection{Filtres en treillis}
 % %==========================================================
 % En notant $e(t,p)=[\epsilon_{t,p}^+\quad \epsilon_{t-p,p}^-]^T$ et
-% en utilisant l'opérateur de retard $B$, les expressions
+% en utilisant l'op\'erateur de retard $B$, les expressions
 % \eqref{eq:celluleanalyse} peuvent se mettre sous la forme
 % matricielle\,:
 % $$
@@ -1231,43 +1231,43 @@ $$
 %  e(t,p)
 % $$
 % Les erreurs initiales ($p=0$) sont $e(t,0)=[X_t\quad X_t]^T$. Ces
-% équations débouchent sur une structure de filtrage dite en
-% treillis qui calcule, au moyen des coefficients de corrélation
-% partielle, les erreurs de prédiction directe et rétrograde à
-% partir du processus $\{X_t, t \in \Zset\}$. Ce filtre d'analyse est représenté figure
+% \'equations d\'ebouchent sur une structure de filtrage dite en
+% treillis qui calcule, au moyen des coefficients de corr\'elation
+% partielle, les erreurs de pr\'ediction directe et r\'etrograde \`a
+% partir du processus $\{X_t, t \in \Zset\}$. Ce filtre d'analyse est repr\'esent\'e figure
 % \ref{fig:anatreillis}.
 %  %================= FIGURE
 %  %====== FIGURE
 %  \figtit{\FIGPREDIC treillisanalyse}
 %  {Filtre d'analyse en treillis. Ce filtre permet de construire les erreurs de
-%  prédiction directe et rétrograde à partir du processus et de la donnée
-%  des coefficients de corrélation partielle.}
+%  pr\'ediction directe et r\'etrograde \`a partir du processus et de la donn\'ee
+%  des coefficients de corr\'elation partielle.}
 %  {fig:anatreillis}
-% Les équations \eqref{eq:celluleanalyse} peuvent encore s'écrire\,:
+% Les \'equations \eqref{eq:celluleanalyse} peuvent encore s'\'ecrire\,:
 % $$
 % \begin{cases}
 % \epsilon_{t,p}^+=\epsilon_{t,p+1}^+ +k_{p+1}\epsilon_{(t-1)-p,p}^- \\
 % \epsilon_{t-(p+1),p+1}^-=\epsilon_{(t-1)-p,p}^-k_{p+1}\epsilon_{t,p}^+
 % \end{cases}
 % $$
-% qui donne le schéma de filtrage de la figure
+% qui donne le sch\'ema de filtrage de la figure
 % \ref{fig:syntreillis}.
 %  %================= FIGURE
 %  %====== FIGURE
 %  \figtit{\FIGPREDIC treillissynthese}
-%  {Filtre de synthèse en treillis. Ce filtre permet de reconstruire
-%  le processus à partir de la suite des erreurs de
-%  prédiction directe et de la donnée
-%  des coefficients de corrélation partielle.}
+%  {Filtre de synth\`ese en treillis. Ce filtre permet de reconstruire
+%  le processus \`a partir de la suite des erreurs de
+%  pr\'ediction directe et de la donn\'ee
+%  des coefficients de corr\'elation partielle.}
 %  {fig:syntreillis}
 % %==========================================================
 % %==========================================================
 \section{Algorithme des innovations}
 \label{sec:algorithmes-des-innovations}
-L'algorithme des innovations est une application directe de la méthode de Gram-Schmidt et est, à cet
-égard, plus élémentaire que l'algorithme de Levinson-Durbin. De plus, il ne suppose pas que le processus
-$(X_t)_{t \in \Zset}$ soit stationnaire. L'espérance de $X_t$ étant
-supposée nulle dans ce chapitre, nous notons
+L'algorithme des innovations est une application directe de la m\'ethode de Gram-Schmidt et est, \`a cet
+\'egard, plus \'el\'ementaire que l'algorithme de Levinson-Durbin. De plus, il ne suppose pas que le processus
+$(X_t)_{t \in \Zset}$ soit stationnaire. L'esp\'erance de $X_t$ \'etant
+suppos\'ee nulle dans ce chapitre, nous notons
 \[
 \kappa(i,j)= \pscal{X_i}{X_j}= \PE{X_iX_j} \eqsp,
 \]
@@ -1279,23 +1279,23 @@ Notons, pour $n \geq 1$,
 $$\cH_n= \lspan{X_1,\dots,X_n} \textrm{ et }
 \sigma_n^2= \| X_{n+1} - \proj{X_{n+1}}{\cH_n}\|^2\;.
 $$
-La procédure d'orthogonalisation de Gram-Schmidt permet alors d'écrire
+La proc\'edure d'orthogonalisation de Gram-Schmidt permet alors d'\'ecrire
 pour tout $n \geq 1$ :
 \[
 \cH_n= \lspan{X_1, X_2 - \proj{X_2}{X_1}, \dots, X_n - \proj{X_n}{\cH_{n-1}}} \eqsp,
 \]
-où on utilise la convention suivante : $\proj{X_1}{\cH_{0}}=0$.
+o\`u on utilise la convention suivante : $\proj{X_1}{\cH_{0}}=0$.
 On a alors :
 \begin{equation}
 \label{eq:definition-projecteur}
 \proj{X_{n+1}}{\cH_n}= \sum_{j=1}^n \theta_{n,j} \left( X_{n+1-j} - \proj{X_{n+1-j}}{\cH_{n-j}}\right) \eqsp.
 \end{equation}
-L'algorithme des innovations décrit dans la proposition suivante
-fournit une méthode récursive permettant de calculer
+L'algorithme des innovations d\'ecrit dans la proposition suivante
+fournit une m\'ethode r\'ecursive permettant de calculer
 $(\theta_{n,j})_{1\leq j\leq n}$ et $\sigma_n^2$ pour $n\geq 1$.
 
 \begin{proposition}
-Soit $(X_t)$ un processus à moyenne nulle tel que la matrice
+Soit $(X_t)$ un processus \`a moyenne nulle tel que la matrice
 $[\kappa(i,j)]_{1\leq i,j\leq n}$ soit inversible pour tout $n\geq 1$
 alors
 $$
@@ -1306,7 +1306,7 @@ $$
    \proj{X_{n+1-j}}{\cH_{n-j}}\right)\;, \textrm{ si } n\geq 1\;,
 \end{cases}
 $$
-où
+o\`u
 $$
 \begin{cases}
 \sigma_0^2=\kappa(1,1)\;,\\
@@ -1324,36 +1324,36 @@ Remarquons tout d'abord que les vecteurs $(X_i -
 \proj{X_i}{\cH_{i-1}})_{i \geq 1}$ sont orthogonaux. En effet,
 pour $i < j$, $X_i - \proj{X_i}{\cH_{i-1}} \in \cH_{j-1}$ et $X_j -
 \proj{X_j}{\cH_{j-1}} \perp \cH_{j-1}$.
-On en déduit, en faisant le produit scalaire de
+On en d\'eduit, en faisant le produit scalaire de
 \eqref{eq:definition-projecteur} par $X_{k+1}-\proj{X_{k+1}}{\cH_k}$
 que, pour $0 \leq k < n$ :
 \[
 \pscal{\proj{X_{n+1}}{\cH_n}}{X_{k+1}-\proj{X_{k+1}}{\cH_k}}= \theta_{n,n-k} \sigma_{k}^2 \eqsp.
 \]
 Puisque $\pscal{X_{n+1}-\proj{X_{n+1}}{\cH_n}}{X_{k+1}-\proj{X_{k+1}}{\cH_k}}=0$, les coefficients $\theta_{n,n-k}$,
-$k=0,\dots,n-1$ sont donnés par
+$k=0,\dots,n-1$ sont donn\'es par
 \begin{equation}\label{eq:theta_n_n-k}
 \theta_{n,n-k}= \sigma_{k}^{-2} \pscal{X_{n+1}}{X_{k+1}-\proj{X_{k+1}}{\cH_k}} \eqsp.
 \end{equation}
-En utilisant la représentation \eqref{eq:definition-projecteur},
+En utilisant la repr\'esentation \eqref{eq:definition-projecteur},
 \begin{multline*}
 \proj{X_{k+1}}{\cH_k}=\sum_{j=1}^k \theta_{k,j} \left( X_{k+1-j} -
   \proj{X_{k+1-j}}{\cH_{k-j}}\right) \\
 =\sum_{j=0}^{k-1} \theta_{k,k-j} \left( X_{j+1} -
   \proj{X_{j+1}}{\cH_{j}}\right) \eqsp,
 \end{multline*}
-d'où l'on déduit que
+d'o\`u l'on d\'eduit que
 \[
 \theta_{n,n-k}= \sigma_{k}^{-2} \left( \kappa(n+1,k+1) - \sum_{j=0}^{k-1} \theta_{k,k-j} \pscal{X_{n+1}}{X_{j+1}-\proj{X_{j+1}}{\cH_j}}\right) \eqsp.
 \]
-D'après \eqref{eq:theta_n_n-k},
+D'apr\`es \eqref{eq:theta_n_n-k},
  $\pscal{X_{n+1}}{X_{j+1}-\proj{X_{j+1}}{\cH_j}}= \sigma_{j}^{2} \theta_{n,n-j}$ pour $0 \leq j < n$, nous avons donc pour
 $k \in \{1,\dots,n-1\}$,
 \begin{equation}
 \label{eq:mise-a-jour-theta}
 \theta_{n,n-k}= \sigma_{k}^{-2} \left( \kappa(n+1,k+1) - \sum_{j=0}^{k-1} \theta_{k,k-j} \theta_{n,n-j} \sigma_{j}^2 \right) \eqsp.
 \end{equation}
-L'équation \eqref{eq:mise-a-jour-theta} est encore valable lorsque
+L'\'equation \eqref{eq:mise-a-jour-theta} est encore valable lorsque
 $k=0$ en utilisant la convention que la somme sur $j$ dans le membre
 de droite est nulle dans ce cas.
 Par ailleurs, la proposition \ref{prop:projecteur} (Pythagore) implique que
@@ -1365,10 +1365,10 @@ Par ailleurs, la proposition \ref{prop:projecteur} (Pythagore) implique que
 \qed
 \end{proof}
 
-Alors que l'algorithme de Levinson-Durbin permet de déterminer
-les coefficients du développement de $\proj{X_{n+1}}{\cH_n}$ sur
-$X_1,\dots,X_n$ donnés par $\proj{X_{n+1}}{\cH_n}= \sum_{j=1}^n \phi_{n,j} X_{n+1-j}$,
-l'algorithme des innovations calcule les coefficients du développement
+Alors que l'algorithme de Levinson-Durbin permet de d\'eterminer
+les coefficients du d\'eveloppement de $\proj{X_{n+1}}{\cH_n}$ sur
+$X_1,\dots,X_n$ donn\'es par $\proj{X_{n+1}}{\cH_n}= \sum_{j=1}^n \phi_{n,j} X_{n+1-j}$,
+l'algorithme des innovations calcule les coefficients du d\'eveloppement
 de
 $\proj{X_{n+1}}{\cH_n}$ sur $X_1$, $X_2 -
 \proj{X_2}{X_1}$,
@@ -1376,8 +1376,8 @@ $\dots$, $X_{n} - \proj{X_n}{\cH_{n-1}}$.
 
 
 
-\begin{example}[Prédiction d'un processus MA(1)]
-Considérons le processus $X_t = Z_t + \theta Z_{t-1}$ où $(Z_t) \sim \BB(0,\sigma^2)$. Nous avons donc $\kappa(i,j)= 0$ pour $|i-j| > 1$,
+\begin{example}[Pr\'ediction d'un processus MA(1)]
+Consid\'erons le processus $X_t = Z_t + \theta Z_{t-1}$ o\`u $(Z_t) \sim \BB(0,\sigma^2)$. Nous avons donc $\kappa(i,j)= 0$ pour $|i-j| > 1$,
 $\kappa(i,i)= \sigma^2(1+\theta^2)$ et $\kappa(i,i+1)= \theta
 \sigma^2$. Dans ce cas, nous avons
 
@@ -1387,7 +1387,7 @@ $$
  \theta_{n,1}= \sigma_{n-1}^{-2} \theta \sigma^2 \;,\\
 \end{cases}
 $$
-et les variances des innovations qui sont données par
+et les variances des innovations qui sont donn\'ees par
 $$
 \begin{cases}
  \sigma_0^{2} = (1+\theta^2) \sigma^2 \eqsp, \\

@@ -1,145 +1,145 @@
 
-Dans ce chapitre nous nous intéressons à une classe très importante
-de processus du second ordre, les processus autorégressifs à
-moyenne ajustée ou processus ARMA. Afin de pouvoir étudier
-leurs propriétés, nous allons tout d'abord établir les propriétés
-des processus obtenus par un filtrage linéaire de processus stationnaires au
+Dans ce chapitre nous nous int\'eressons \`a une classe tr\`es importante
+de processus du second ordre, les processus autor\'egressifs \`a
+moyenne ajust\'ee ou processus ARMA. Afin de pouvoir \'etudier
+leurs propri\'et\'es, nous allons tout d'abord \'etablir les propri\'et\'es
+des processus obtenus par un filtrage lin\'eaire de processus stationnaires au
 second ordre.
 
 
-\section{Filtrages linéaires de processus au second ordre}
+\section{Filtrages lin\'eaires de processus au second ordre}
 
 
-On s'intéresse dans ce paragraphe aux propriétés du processus
+On s'int\'eresse dans ce paragraphe aux propri\'et\'es du processus
 $(Y_t)$ obtenu comme image du processus $(X_t)$ par le filtre
-linéaire suivant :
+lin\'eaire suivant :
 \begin{equation}\label{eq:filtrage_1}
 Y_t=\sum_{k\in\mathbb{Z}}\psi_k X_{t-k}\;,
 \end{equation}
-où $(\psi_k)$ est une suite de nombres complexes.
+o\`u $(\psi_k)$ est une suite de nombres complexes.
 Lorsqu'il n'y a qu'un nombre fini de $\psi_k$ non nuls,
-la somme (\ref{eq:filtrage_1}) est bien définie. On dit dans ce cas-là
-que le filtre est à réponse impusionnelle finie.
-La question devient plus délicate lorsque l'on considère des
-filtres à réponse impulsionnelle infinie c'est à dire lorsque
-le nombre de $\psi_k$ non nuls est infini. En effet, $Y_t$ défini par
-(\ref{eq:filtrage_1}) est la limite dans un sens à préciser, d'une
-suite de variables aléatoires. Le théorème \ref{theo:filtragepassl}
-donne un sens précis à cette limite.
+la somme (\ref{eq:filtrage_1}) est bien d\'efinie. On dit dans ce cas-l\`a
+que le filtre est \`a r\'eponse impusionnelle finie.
+La question devient plus d\'elicate lorsque l'on consid\`ere des
+filtres \`a r\'eponse impulsionnelle infinie c'est \`a dire lorsque
+le nombre de $\psi_k$ non nuls est infini. En effet, $Y_t$ d\'efini par
+(\ref{eq:filtrage_1}) est la limite dans un sens \`a pr\'eciser, d'une
+suite de variables al\'eatoires. Le th\'eor\`eme \ref{theo:filtragepassl}
+donne un sens pr\'ecis \`a cette limite.
 
-% Pour les processus stationnaires au second ordre, on considère des filtrages
-% linéaires à valeurs dans l'espace engendré par toutes les combinaisons
-% linéaires du processus, étendues à toutes leurs limites $L^2$.
+% Pour les processus stationnaires au second ordre, on consid\`ere des filtrages
+% lin\'eaires \`a valeurs dans l'espace engendr\'e par toutes les combinaisons
+% lin\'eaires du processus, \'etendues \`a toutes leurs limites $L^2$.
 
 % \begin{definition}
 %   Soit $X=\{X_t, t\in \Zset\}$ un processus du second ordre. On note
-%   $\cH^X_\infty$ la fermeture dans $L^2(\Omega)$ du sous-espace engendré par
+%   $\cH^X_\infty$ la fermeture dans $L^2(\Omega)$ du sous-espace engendr\'e par
 %   les v.a. $\{X_t,\,t\in \Zset\}$,
 % $$
 % \cH^X_\infty = \cspan{X_t,\,t\in \Zset}\;.
 % $$
 % \end{definition}
 % Cet ensemble est alors le sous-espace de $L^2(\Omega)$ contenant toute v.a. $Y$
-% pour lesquelles il existe une suite d'éléments $(Y_n)_{n\geq1}$ de
-% $\lspan{X_t,\,t\in \Zset}$ (l'espace des combinaisons linéaires finies formées
-% d'éléments de $\{X_t, t\in \Zset\}$) qui converge vers $Y$ au sens $L^2$ quand
+% pour lesquelles il existe une suite d'\'el\'ements $(Y_n)_{n\geq1}$ de
+% $\lspan{X_t,\,t\in \Zset}$ (l'espace des combinaisons lin\'eaires finies form\'ees
+% d'\'el\'ements de $\{X_t, t\in \Zset\}$) qui converge vers $Y$ au sens $L^2$ quand
 % $n\to\infty$, \textit{i.e.}
 % $$
 % \lim_{n\to\infty}\esp{\left|Y-Y_n\right|^2}\to 0 \; .
 % $$
 
 
-% On introduit l'{\em opérateur de retard} qui facilitera l'écriture
-% des filtrages linéaires à valeurs dans $\cH^X_\infty$.
+% On introduit l'{\em op\'erateur de retard} qui facilitera l'\'ecriture
+% des filtrages lin\'eaires \`a valeurs dans $\cH^X_\infty$.
 
-% \begin{definition}[Opérateur de retard]
-%   Soit $\{X_t,\,t\in\Zset\}$ défini sur $(\Omega,\cF,\PP)$ un processus du
-%   second ordre. On définit l'opérateur de retard $B$ (comme {\em backshift} en
-%   anglais) comme l'opérateur de l'espace $\cH^X_\infty$ dans lui-même
-%   défini par $B(X_t)=X_{t-1}$. (l'extension à $\cH^X_\infty$ tout entier est
-%   obtenu en complétant par linéarité et densité.)
+% \begin{definition}[Op\'erateur de retard]
+%   Soit $\{X_t,\,t\in\Zset\}$ d\'efini sur $(\Omega,\cF,\PP)$ un processus du
+%   second ordre. On d\'efinit l'op\'erateur de retard $B$ (comme {\em backshift} en
+%   anglais) comme l'op\'erateur de l'espace $\cH^X_\infty$ dans lui-même
+%   d\'efini par $B(X_t)=X_{t-1}$. (l'extension \`a $\cH^X_\infty$ tout entier est
+%   obtenu en compl\'etant par lin\'earit\'e et densit\'e.)
 % \end{definition}
 
 
-% On a le résultat suivant dont la preuve élémentaire est omise.
+% On a le r\'esultat suivant dont la preuve \'el\'ementaire est omise.
 % \begin{proposition}
 %   Soit $X=\{X_t,\,t\in\Zset\}$ un processus du second ordre. Supposons que $X$
 %   soit de moyenne constante, pour tout $t$,
 %   $\esp[X_t]=\mu$. Alors $X$ est stationnaire au second ordre si et seulement
-%   si $B$ est une isométrie de $\cH^X_\infty$ dans lui-même.
+%   si $B$ est une isom\'etrie de $\cH^X_\infty$ dans lui-même.
 % \end{proposition}
 
 % On note $B^k = B \circ B^{k-1}$ pour $k \geq 1$ les compositions successives de
-% l'opérateur $B$.  Pour $k<0$, $B^k$ est défini comme l'opérateur inverse de
+% l'op\'erateur $B$.  Pour $k<0$, $B^k$ est d\'efini comme l'op\'erateur inverse de
 % $B^{-k}$.
 
 % \begin{remark}
-%   On remarque que l'opérateur $B$ est très lié à l'opérateur $S^{-1}$. Une
-%   différence essentielle est qu'il opère sur un espace de v.a. (l'espace
-%   $\cH^X_\infty$) alors que $S^{-1}$ opère sur un espace de trajectoires
-%   (l'espace $E^\Zset$). Cette relation est formellement donnée par l'égalité des
+%   On remarque que l'op\'erateur $B$ est tr\`es li\'e \`a l'op\'erateur $S^{-1}$. Une
+%   diff\'erence essentielle est qu'il op\`ere sur un espace de v.a. (l'espace
+%   $\cH^X_\infty$) alors que $S^{-1}$ op\`ere sur un espace de trajectoires
+%   (l'espace $E^\Zset$). Cette relation est formellement donn\'ee par l'\'egalit\'e des
 %   2 v.a.  $B(\Pi_t\circ X)=\Pi_t\circ S^{-1}\circ X$.
 % \end{remark}
 
-% Cette remarque permet immédiatement d'adapter le cas des filtres RIF de
-% l'exemple~\ref{exple:rif} au contexte décrit ci-dessus.
-% Notons $\phi(B)=\sum_k\phi_kB^k$, où $(\phi_k)_{k\in\Zset}$ est une
-% suite à support fini. Alors, pour tout $t\in\Zset$,
+% Cette remarque permet imm\'ediatement d'adapter le cas des filtres RIF de
+% l'exemple~\ref{exple:rif} au contexte d\'ecrit ci-dessus.
+% Notons $\phi(B)=\sum_k\phi_kB^k$, o\`u $(\phi_k)_{k\in\Zset}$ est une
+% suite \`a support fini. Alors, pour tout $t\in\Zset$,
 % $$
 % Y_t=\phi(B)(X_t)= \sum_k\phi_k X_{t-k}
 % $$
-% est un élément de $\cH^X_\infty$. Il est aisé de calculer la moyenne et la
+% est un \'el\'ement de $\cH^X_\infty$. Il est ais\'e de calculer la moyenne et la
 % covariance du processus obtenu $Y=\{Y_t,\,t\in\Zset\}$ en utilisant les
-% propriétés de linéarité et de sesquilinéarité de la covariance. Le théorème
-% suivant traite un cas un peu plus général, qui montre que ces calculs passent
-% aisément à la limite dans le cas d'une somme infinie, pourvu que
+% propri\'et\'es de lin\'earit\'e et de sesquilin\'earit\'e de la covariance. Le th\'eor\`eme
+% suivant traite un cas un peu plus g\'en\'eral, qui montre que ces calculs passent
+% ais\'ement \`a la limite dans le cas d'une somme infinie, pourvu que
 % $\sum_k|\phi_k|<\infty$. Cette condition ne permet cependant pas la description
-% la plus générale du filtrage linéaire à valeurs dans $\cH^X_\infty$, comme nous
+% la plus g\'en\'erale du filtrage lin\'eaire \`a valeurs dans $\cH^X_\infty$, comme nous
 % le verrons au paragraphe~\ref{sec:filtr-des-proc-theo-generale}.
 
 \begin{theorem}
  \label{theo:filtragepassl}
  Soit $(\psi_k)_{k\in\Zset}$ une suite absolument sommable, \ie\ $\sum_{k= -\infty}^\infty |\psi_k| < \infty$
-et soit $(X_{t})$ un processus aléatoire tel que $\sup_{t \in \Zset} \PE {|X_{t}|} < \infty$.
+et soit $(X_{t})$ un processus al\'eatoire tel que $\sup_{t \in \Zset} \PE {|X_{t}|} < \infty$.
 Alors, pour tout $t \in \Zset$, la suite~:
 \[
 Y_{n,t} = \sum_{k=-n}^n \psi_k X_{t-k}
 \]
-converge presque sûrement, quand $n$ tend vers l'infini, vers
+converge presque s\^urement, quand $n$ tend vers l'infini, vers
 une limite $Y_t$ que nous notons
 $$
 Y_{t} = \sum_{k=-\infty}^\infty \psi_s X_{t-s}\eqsp.
 $$
-De plus, la variable aléatoire $Y_t$ est intégrable, \ie\ $\PE{|Y_t|} < \infty$ et la suite $(Y_{n,t})_{n \geq 0}$
+De plus, la variable al\'eatoire $Y_t$ est int\'egrable, \ie\ $\PE{|Y_t|} < \infty$ et la suite $(Y_{n,t})_{n \geq 0}$
 converge vers $Y_t$ dans  $L^1\espaceproba$, \textit{i.e.}
 $$
 \limn \PE{ |Y_{n,t} - Y_{t}|} = 0 \eqsp.
 $$
 Supposons que $\sup_{t \in \Zset} \PE{|X_t|^2} < \infty$ alors
 $\PE{|Y_{t}|^2} < \infty$ et la suite $(Y_{n,t})_{n \geq 0}$ converge en moyenne quadratique vers la variable
-aléatoire $Y_{t}$, \textit{i.e.}
+al\'eatoire $Y_{t}$, \textit{i.e.}
 $$
 \limn \PE {|Y_{n,t} - Y_{t}|^2} = 0 \eqsp.
 $$
 \end{theorem}
 \begin{proof}\smartqed
 Notons pour tout $t \in \Zset$ et $n \in \Nset$, $U_{n,t} = \sum_{k=-n}^{n} |\psi_k| |X_{t-k}|$. La suite
-$(U_{n,t})_{n \geq 0}$ est une suite de variables aléatoires intégrables. Puisque $\limn \uparrow U_{n,t} = \sum_{k\in\Zset}|\psi_k| |X_{t-k}|$, on en déduit que (théorème de Beppo-Levi)
+$(U_{n,t})_{n \geq 0}$ est une suite de variables al\'eatoires int\'egrables. Puisque $\limn \uparrow U_{n,t} = \sum_{k\in\Zset}|\psi_k| |X_{t-k}|$, on en d\'eduit que (th\'eor\`eme de Beppo-Levi)
 $$
 \lim_{n \to \infty} \uparrow \PE{U_{n,t}} = \PE{\sum_{k\in\zset}|\psi_k| |X_{t-k}|}\;,
 $$
-%\clnote{j'ai précisé la notation de la limite croissante}
-où $\lim_{n \to \infty} \uparrow$ signifie qu'il s'agit d'une limite croissante.
+%\clnote{j'ai pr\'ecis\'e la notation de la limite croissante}
+o\`u $\lim_{n \to \infty} \uparrow$ signifie qu'il s'agit d'une limite croissante.
 Comme
 $$
 \PE{U_{n,t}}\leq \sum_{k=-n}^{n} |\psi_k| \PE{|X_{t-k}|} \leq \sup_{t \in \Zset} \PE{|X_t|} \, \sum_{k\in\Zset} |\psi_s|
 <\infty\eqsp,
 $$
-on en déduit que
+on en d\'eduit que
 \[
 \PE {\sum_{k\in\Zset} |\psi_k| |X_{t-k}| }< \infty \eqsp.
 \]
-Par conséquent, il existe un ensemble $\Omega_0 \in \cF$ tel que $\PP(\Omega_0) = 1$
+Par cons\'equent, il existe un ensemble $\Omega_0 \in \cF$ tel que $\PP(\Omega_0) = 1$
 et tel que, pour tout $\omega \in \Omega_0$,
 \[
 \sum_{k\in\Zset} |\psi_k| | X_{t-k}(\omega) | < \infty\; .
@@ -155,10 +155,10 @@ $Y_t(\omega)$, ce qui montre que $\limn Y_{n,t}= Y_t$ \ps\ . Le lemme de Fatou m
 \PE{|Y_t|}= \PE{\liminf_n |Y_{n,t}|} \leq \liminf_n \PE{Y_{n,t}} \leq \sup_t \PE{|X_t|} \sum_{j=-\infty}^\infty |\psi_j| < \infty \eqsp,
 \]
 et donc que $Y_t \in \lone\espaceproba$. Comme $|Y_{n,t} - Y_t| \leq \sum_{k \in \Zset} |\psi_k| |X_{t-k}|$,
-le théorème de convergence dominée montre que $\lim_n \PE{|Y_{n,t}-Y_t|} = 0$ et donc que la suite
+le th\'eor\`eme de convergence domin\'ee montre que $\lim_n \PE{|Y_{n,t}-Y_t|} = 0$ et donc que la suite
 $\{ Y_{n,t} \}$ converge vers $Y_t$ dans $\lone\espaceproba$.
 
-Considérons maintenant le cas où $\sup_{t \in \Zset}
+Consid\'erons maintenant le cas o\`u $\sup_{t \in \Zset}
 \PE{|X_{t}|^2} < \infty$. Remarquons tout d'abord que $\PE{
 |X_{t}|} \leq (\PE {|X_{t}|^2})^{1/2}$ et donc que cette condition
 implique que $\sup_{t \in \Zset} \PE {|X_{t}|} < \infty$. La
@@ -179,10 +179,10 @@ ce qui montre que les limites \ps\ $Y_t$ et $\ltwo\espaceproba$, $Y_t^\star$ coï
 \end{proof}
 
 
-Le résultat suivant établit que le processus $(Y_t)$ obtenu par filtrage
-linéaire d'un processus stationnaire au second ordre $(X_t)$ via
-l'équation (\ref{eq:filtrage_1}) est
-lui-même stationnaire au second ordre, à condition que la
+Le r\'esultat suivant \'etablit que le processus $(Y_t)$ obtenu par filtrage
+lin\'eaire d'un processus stationnaire au second ordre $(X_t)$ via
+l'\'equation (\ref{eq:filtrage_1}) est
+lui-même stationnaire au second ordre, \`a condition que la
 suite des $(\psi_k)$ soit absolument sommable
 \textit{i.e.} $\sum_{k\in\mathbb{Z}}|\psi_k|<\infty$.
 
@@ -210,9 +210,9 @@ et de mesure spectrale~:
 \label{eq:dspfiltrage}
   \nu_Y(\rmd\lambda) = |\psi(\rme^{-i\lambda})|^2 \nu_X(\rmd\lambda)\; ,
 \end{equation}
-où $\psi(\rme^{-\rmi \lambda}) = \sum_{k\in \zset} \psi_k \rme^{-\rmi k \lambda}$.
+o\`u $\psi(\rme^{-\rmi \lambda}) = \sum_{k\in \zset} \psi_k \rme^{-\rmi k \lambda}$.
 %est
-%la transformée de Fourier à temps discret de la suite $\{ \psi_k \}_{k \in \Zset}$.
+%la transform\'ee de Fourier \`a temps discret de la suite $\{ \psi_k \}_{k \in \Zset}$.
 %Enfin l'intercovariance entre
 %les processus $Y_{t}$ et $X_{t}$ a pour expression~:
 %\begin{equation}
@@ -222,7 +222,7 @@ où $\psi(\rme^{-\rmi \lambda}) = \sum_{k\in \zset} \psi_k \rme^{-\rmi k \lambda}
 % \end{equation}
 \end{theorem}
 \begin{proof}\smartqed
-D'après la continuité du produit scalaire dans $L^2\espaceproba$, voir théorème \ref{theo:cont_prod_int}, on a
+D'apr\`es la continuit\'e du produit scalaire dans $L^2\espaceproba$, voir th\'eor\`eme \ref{theo:cont_prod_int}, on a
 \begin{multline*}
 \PE{\sum_{k\in\Zset}\psi_k X_{t-k}}=\PE{\lim_{n\to\infty}\sum_{k=-n}^n \psi_k X_{t-k}}
 =\lim_{n\to\infty}\PE{\sum_{k=-n}^n \psi_k X_{t-k}}\\
@@ -230,8 +230,8 @@ D'après la continuité du produit scalaire dans $L^2\espaceproba$, voir théorème 
 =\mu_X \sum_{k\in\Zset} \psi_k\; .
 \end{multline*}
 
-Montrons à présent le résultat sur la fonction d'auto-covariance.
-D'après la continuité du produit scalaire dans $L^2\espaceproba$, voir théorème \ref{theo:cont_prod_int}, on a
+Montrons \`a pr\'esent le r\'esultat sur la fonction d'auto-covariance.
+D'apr\`es la continuit\'e du produit scalaire dans $L^2\espaceproba$, voir th\'eor\`eme \ref{theo:cont_prod_int}, on a
 \begin{multline*}
 \Cov{Y_t}{Y_{t+h}} =\lim_{n\to\infty}\sum_{k,j=-n}^n\psi_k \bar{\psi}_j\Cov{X_{t-k}}{X_{t+h-j}}\\
 = \sum_{k\in\Zset}\psi_k \bar{\psi}_j\gamma_X(h+k-j)\; ,
@@ -255,13 +255,13 @@ ce qui montre Eq.~\eqref{eq:facfiltrage}
 %     \cov(Y_{t}-Y_{n,t},Y_{t+h}-Y_{n,t+h})\\
 %  &=A+B+C+D
 % \end{align*}
-% L'inégalité~:
+% L'in\'egalit\'e~:
 % \[
 % \Var{Y_{n,t}-Y_{t}}
 %    = \lim_{p \rightarrow \infty} \Var(Y_{n,t} - Y_{p,t})
 %    \leq \left(\sum_{j=n+1}^\infty |\psi_j| \right)^2 \gamma_X(0)
 % \]
-% permet ensuite de déduire, quand $n$ tend vers l'infini, les
+% permet ensuite de d\'eduire, quand $n$ tend vers l'infini, les
 % limites suivantes
 % \begin{align*}
 % &|B|
@@ -272,15 +272,15 @@ ce qui montre Eq.~\eqref{eq:facfiltrage}
 %   \leq (\Var{Y_{t+h}-Y_{n,t+h}})^{1/2} (\Var{Y_{t}- Y_{n,t}} )^{1/2} \rightarrow 0
 % \end{align*}
 % et donc $\cov( Y_{t},Y_{t+h}) = \limn\cov( Y_{n,t},Y_{n,t+h})$, ce
-% qui démontre l'expression~(\ref{eq:facfiltrage})
+% qui d\'emontre l'expression~(\ref{eq:facfiltrage})
 % ~\footnote{Nous
-% venons ici de démontrer directement la propriété de continuité de
-% la covariance dans $L^2$ que nous verrons comme une conséquence de
+% venons ici de d\'emontrer directement la propri\'et\'e de continuit\'e de
+% la covariance dans $L^2$ que nous verrons comme une cons\'equence de
 % la structure d'espace de Hilbert au chapitre~\ref{chap:Prediction}.}.
 
-D'après le théorème \ref{theo:herglotz},
+D'apr\`es le th\'eor\`eme \ref{theo:herglotz},
 $\gamma_X(h)=\int_\tore
-\rme^{\rmi h \lambda}\nu_X(\rmd\lambda)$ où $\nu_X$ désigne la mesure
+\rme^{\rmi h \lambda}\nu_X(\rmd\lambda)$ o\`u $\nu_X$ d\'esigne la mesure
 spectrale du processus $(X_{t})$.
 En reportant cette expression de $\gamma_X(h)$ dans
 \eqref{eq:facfiltrage}, nous obtenons
@@ -294,8 +294,8 @@ Puisque
   \int_\tore |\psi_j| |\psi_k| \nu_X(\rmd\lambda)
   \leq \gamma_X(0) \left( \sum_{j=-\infty}^\infty |\psi_j| \right)^2<\infty\;,
 \]
-on peut appliquer le théorème de Fubini et permuter les
-signes somme et intégrale dans \eqref{eq:gam_Y_spec}. Ce
+on peut appliquer le th\'eor\`eme de Fubini et permuter les
+signes somme et int\'egrale dans \eqref{eq:gam_Y_spec}. Ce
 qui donne~:
 \[
 \gamma_Y(h)
@@ -303,10 +303,10 @@ qui donne~:
             \psi_j \bar{\psi}_k \rme^{\rmi k \lambda}\rme^{-\rmi j\lambda}
    = \int_\tore \rme^{\rmi h \lambda} |\psi(\rme^{-\rmi \lambda})|^2 \nu_X(\rmd\lambda)\;,
 \]
-où $\psi(\rme^{-\rmi \lambda})=\sum_{k\in\Zset} \psi_k \rme^{-\rmi k \lambda}$.
-On en déduit, d'après le théorème \ref{theo:herglotz}
+o\`u $\psi(\rme^{-\rmi \lambda})=\sum_{k\in\Zset} \psi_k \rme^{-\rmi k \lambda}$.
+On en d\'eduit, d'apr\`es le th\'eor\`eme \ref{theo:herglotz}
 que $\nu_Y(\rmd\lambda) = |\psi(\rme^{-\rmi \lambda})|^2\nu_X(\rmd\lambda)$.
-%  Pour déterminer l'expression de
+%  Pour d\'eterminer l'expression de
 % l'intercovariance entre les processus entre les processus $Y_{t}$
 % et $X_{t}$, il suffit de noter $|\cov(Y_{t+h},X_t)|^2 \leq
 % \gamma_Y(0)\gamma_X(0)<+\infty$ et que~:
@@ -324,54 +324,54 @@ que $\nu_Y(\rmd\lambda) = |\psi(\rme^{-\rmi \lambda})|^2\nu_X(\rmd\lambda)$.
 
 
 % La relation~(\ref{eq:dspfiltrage}) qui donne la mesure spectrale
-% du processus filtré en fonction de la fonction de transfert du
-% filtre et de la mesure spectrale du processus de départ est
-% particulièrement simple.
-% \emnote{$\alpha(B)$ et $\beta(B)$ ne sont pas bien définis; je trouve que l'on devrait faire un énoncé de ce résultat que l'on utilise dans la suite fréquemment}
+% du processus filtr\'e en fonction de la fonction de transfert du
+% filtre et de la mesure spectrale du processus de d\'epart est
+% particuli\`erement simple.
+% \emnote{$\alpha(B)$ et $\beta(B)$ ne sont pas bien d\'efinis; je trouve que l'on devrait faire un \'enonc\'e de ce r\'esultat que l'on utilise dans la suite fr\'equemment}
 % Elle montre par exemple que la mise
-% en série de deux filtres $\alpha(B)$, $\beta(B)$ de réponses
-% impulsionnelles absolument sommables conduit àune mesure
+% en s\'erie de deux filtres $\alpha(B)$, $\beta(B)$ de r\'eponses
+% impulsionnelles absolument sommables conduit \`aune mesure
 % spectrale $|\alpha(\rme^{-\rmi\lambda})|^2 |\beta(\rme^{-\rmi\lambda})|^2
-% \nu_X(\rmd\lambda)$ pour le processus filtré, ce qui montre au
-% passage que l'ordre d'application des filtres est indifférent.
+% \nu_X(\rmd\lambda)$ pour le processus filtr\'e, ce qui montre au
+% passage que l'ordre d'application des filtres est indiff\'erent.
 
-Nous définissons à présent une classe très importante de processus
-obtenus par filtrage : les \emph{processus linéaires} qui sont obtenus
+Nous d\'efinissons \`a pr\'esent une classe tr\`es importante de processus
+obtenus par filtrage : les \emph{processus lin\'eaires} qui sont obtenus
 en filtrant un bruit blanc.
 \index{Processus!linaire}
-\begin{definition}[Processus linéaire]
+\begin{definition}[Processus lin\'eaire]
 \label{def:proc_lin}
-Nous dirons que $(X_{t})$ est un \emph{processus linéaire} s'il existe
+Nous dirons que $(X_{t})$ est un \emph{processus lin\'eaire} s'il existe
 un bruit blanc $Z_{t} \sim \BB(0,\sigma^2)$ et une suite de coefficients
 $(\psi_k)_{k \in \Zset}$ absolument sommable telle que\,:
 \begin{equation}
 \label{eq:representationlineaire}
  X_{t}= \mu+\sum_{k=-\infty}^\infty \psi_k Z_{t-k},\quad t\in\zset\;,
 \end{equation}
-où $\mu$ est un nombre complexe. On dira que $(X_t)_{t\in\zset}$ est un
-processus linéaire \emph{causal} par rapport à $(Z_t)_{t\in\zset}$
-si~(\ref{eq:representationlineaire}) est vérifiée avec $\psi_k=0$ pour tout
-$k<0$.  On dira que $(X_t)_{t\in\zset}$ est un processus linéaire
-\emph{inversible} par rapport à $(Z_t)_{t\in\zset}$
-si~(\ref{eq:representationlineaire}) est vérifiée et qu'il existe de plus une
+o\`u $\mu$ est un nombre complexe. On dira que $(X_t)_{t\in\zset}$ est un
+processus lin\'eaire \emph{causal} par rapport \`a $(Z_t)_{t\in\zset}$
+si~(\ref{eq:representationlineaire}) est v\'erifi\'ee avec $\psi_k=0$ pour tout
+$k<0$.  On dira que $(X_t)_{t\in\zset}$ est un processus lin\'eaire
+\emph{inversible} par rapport \`a $(Z_t)_{t\in\zset}$
+si~(\ref{eq:representationlineaire}) est v\'erifi\'ee et qu'il existe de plus une
 suite $(\pi_k)_{k\geq0}$ absolument sommable telle que
 \begin{equation}
 \label{eq:representationlineaireinversible}
  Z_{t}= \sum_{k=0}^\infty \pi_k \; (X_{t-k}-\mu),\quad t\in\Zset\;.
 \end{equation}
 \end{definition}
-D'après le théorème \ref{theo:filtragepassl_stat}, un processus
-linéaire est stationnaire au second ordre de moyenne
+D'apr\`es le th\'eor\`eme \ref{theo:filtragepassl_stat}, un processus
+lin\'eaire est stationnaire au second ordre de moyenne
 $\mu$, de fonction d'autocovariance :
 \begin{equation}\label{eq:gamm_proc_lin}
   \gamma_X(h)= \sigma^2 \sum_{j=-\infty}^\infty \psi_j \bar{\psi}_{j+h}= \sigma^2 \sum_{\ell=-\infty}^\infty \psi_{\ell-h} \bar{\psi}_{\ell}\eqsp,
 \end{equation}
-et dont la mesure spectrale admet une densité  donnée par :
+et dont la mesure spectrale admet une densit\'e  donn\'ee par :
 \begin{equation}
   \label{eq:dps_modlin}
   f_X(\lambda) = \frac{\sigma^2}{2 \pi} |\psi(\rme^{-\rmi\lambda})|^2\; ,
 \end{equation}
-où $\psi(\rme^{-\rmi\lambda}) = \sum_{k\in \zset} \psi_k \rme^{-\rmi k \lambda}$.
+o\`u $\psi(\rme^{-\rmi\lambda}) = \sum_{k\in \zset} \psi_k \rme^{-\rmi k \lambda}$.
 %==================================================
 %==================================================
 %==================================================
@@ -381,34 +381,34 @@ où $\psi(\rme^{-\rmi\lambda}) = \sum_{k\in \zset} \psi_k \rme^{-\rmi k \lambda}$
 \section{Processus ARMA}
 \label{s:procARMA}
 %==================================================
-% Dans ce paragraphe nous nous intéressons à une classe importante
-% de processus du second ordre, les processus autorégressifs à
-% moyenne ajustée ou processus ARMA. Il s'agit de restreindre la
-% classe des processus linéaires en ne considérant que les filtres
+% Dans ce paragraphe nous nous int\'eressons \`a une classe importante
+% de processus du second ordre, les processus autor\'egressifs \`a
+% moyenne ajust\'ee ou processus ARMA. Il s'agit de restreindre la
+% classe des processus lin\'eaires en ne consid\'erant que les filtres
 % dont la fonction de transfert est rationnelle.
-%L'intérêt de cette paramétrisation est qu'à partir d'un nombre fini de
-%paramètres, on peut approcher avec une précision arbitraire toute densité spectrale
-%suffisamment régulière.
+%L'int\'erêt de cette param\'etrisation est qu'\`a partir d'un nombre fini de
+%param\`etres, on peut approcher avec une pr\'ecision arbitraire toute densit\'e spectrale
+%suffisamment r\'eguli\`ere.
 %=====================================
 
-Avant de passer au cas général des processus ARMA, nous nous
-intéressons à deux classes de processus ARMA particuliers :
-les processus à moyenne ajustée (MA) et les processus autorégressifs (AR).
+Avant de passer au cas g\'en\'eral des processus ARMA, nous nous
+int\'eressons \`a deux classes de processus ARMA particuliers :
+les processus \`a moyenne ajust\'ee (MA) et les processus autor\'egressifs (AR).
 
 \subsection{Processus MA$(q)$}
 %=====================================
 \begin{definition}[Processus MA($q$)]
-On dit que le processus $(X_t)$ est à moyenne ajustée d'ordre $q$ (ou MA($q$)) si $X_t$ est donné par\,:
+On dit que le processus $(X_t)$ est \`a moyenne ajust\'ee d'ordre $q$ (ou MA($q$)) si $X_t$ est donn\'e par\,:
 \begin{equation}
  \label{eq:recurrenceMAq}
  X_t= Z_t + \theta_1 Z_{t-1} + \cdots + \theta_q Z_{t-q}
 \end{equation}
-où $Z_t \sim \BB(0,\sigma^2)$ et les $\theta_i$ sont des nombres complexes.
+o\`u $Z_t \sim \BB(0,\sigma^2)$ et les $\theta_i$ sont des nombres complexes.
 \end{definition}
-Le terme ``moyenne ajustée'' est la traduction assez malheureuse
+Le terme ``moyenne ajust\'ee'' est la traduction assez malheureuse
 du nom anglo-saxon ``moving average'' (moyenne mobile). Observons
 que $X_t=\sum_{k=0}^q \theta_k Z_{t-k}$, avec la convention $\theta_0=1$.
-En utilisant les résultats du théorème~\ref{theo:filtragepassl_stat}, on obtient $\PE{X_t}=
+En utilisant les r\'esultats du th\'eor\`eme~\ref{theo:filtragepassl_stat}, on obtient $\PE{X_t}=
 0$, et
 \begin{equation}
 \label{eq:autocovariance-MA}
@@ -421,76 +421,76 @@ En utilisant les résultats du théorème~\ref{theo:filtragepassl_stat}, on obtient
  0, &\text{sinon}\;.
 \end{cases}
 \end{equation}
-Enfin, d'après la formule~(\ref{eq:dps_modlin}), le processus
-admet une densité spectrale dont l'expression est :
+Enfin, d'apr\`es la formule~(\ref{eq:dps_modlin}), le processus
+admet une densit\'e spectrale dont l'expression est :
 $$
  f_X(\lambda)=\frac{\sigma^2}{2\pi}
      \left |1 + \sum_{k=1}^q \theta_k \rme^{-\rmi k\lambda} \right
      |^2\; .
 $$
-Un exemple de densité spectrale pour le processus MA$(1)$ est
-représenté sur la figure~\ref{fig:dspthMA1}.
+Un exemple de densit\'e spectrale pour le processus MA$(1)$ est
+repr\'esent\'e sur la figure~\ref{fig:dspthMA1}.
 %=====================================
 \subsection{Processus AR$(p)$}
 %=====================================
 \begin{definition}[Processus AR($p$)]
-On dit que le processus $\{ X_t \}$ est un processus autorégressif d'ordre $p$ (ou AR($p$)) si
-$\{X_t \}$ est un processus stationnaire au second ordre et s'il est solution de l'équation de récurrence\,:
+On dit que le processus $\{ X_t \}$ est un processus autor\'egressif d'ordre $p$ (ou AR($p$)) si
+$\{X_t \}$ est un processus stationnaire au second ordre et s'il est solution de l'\'equation de r\'ecurrence\,:
 \begin{equation}
  \label{eq:recurrenceARp}
  X_t = \phi_1 X_{t-1} + \cdots + \phi_p X_{t-p} + Z_t\; ,
 \end{equation}
-où $Z_t \sim \BB(0,\sigma^2)$ est un bruit blanc et les $\phi_k$ sont des nombres
+o\`u $Z_t \sim \BB(0,\sigma^2)$ est un bruit blanc et les $\phi_k$ sont des nombres
 complexes.
 \end{definition}
-Le terme ``autorégressif'' provient de la forme de l'équation~(\ref{eq:recurrenceARp}) dans
+Le terme ``autor\'egressif'' provient de la forme de l'\'equation~(\ref{eq:recurrenceARp}) dans
 laquelle la valeur courante du processus s'exprime sous la forme
-d'une régression des
-$p$ valeurs précédentes du processus plus un bruit additif.
+d'une r\'egression des
+$p$ valeurs pr\'ec\'edentes du processus plus un bruit additif.
 
-L'existence et l'unicité d'une solution stationnaire au second ordre de
-l'équation~(\ref{eq:recurrenceARp}) sont des questions délicates (qui ne se posaient pas
-lorsque nous avions défini les modèles MA). Nous détaillons ci-dessous la réponse à cette question
+L'existence et l'unicit\'e d'une solution stationnaire au second ordre de
+l'\'equation~(\ref{eq:recurrenceARp}) sont des questions d\'elicates (qui ne se posaient pas
+lorsque nous avions d\'efini les mod\`eles MA). Nous d\'etaillons ci-dessous la r\'eponse \`a cette question
 dans le cas $p=1$.
 
 %======================================
 \subsubsection{Cas~: $|\phi_1| < 1$}
 %======================================
-L'équation de récurrence (\ref{eq:recurrenceARp}) s'écrit dans le cas $p=1$ :
+L'\'equation de r\'ecurrence (\ref{eq:recurrenceARp}) s'\'ecrit dans le cas $p=1$ :
 \begin{equation}
 \label{eq:recurrenceAR1}
         X_{t} = \phi_1 X_{t-1} + Z_{t}\;,
 \end{equation}
-où $(Z_t)\sim\BB(0,\sigma^2)$. En itérant (\ref{eq:recurrenceAR1}),
+o\`u $(Z_t)\sim\BB(0,\sigma^2)$. En it\'erant (\ref{eq:recurrenceAR1}),
 on obtient :
 \begin{align*}
 X_t&=\phi_1(\phi_1 X_{t-2}+Z_{t-1})+Z_t=\phi_1^2 X_{t-2}+\phi_1 Z_{t-1}+Z_t\\
 &=\phi_1^{k+1} X_{t-k-1}+\phi_1^k Z_{t-k}+\dots+\phi_1^2 Z_{t-2}+\phi_1 Z_{t-1}
 +Z_t\;.
 \end{align*}
-En prenant la limite quand $k \to \infty$, on en déduit que
+En prenant la limite quand $k \to \infty$, on en d\'eduit que
 \begin{equation}\label{AR1sol}
 X_t=\sum_{j=0}^{\infty}\phi_1^j Z_{t-j}\;,
 \end{equation}
-la série convergeant dans $\ltwo\espaceproba$ et \ps\ .
+la s\'erie convergeant dans $\ltwo\espaceproba$ et \ps\ .
 En effet, si on suppose que $X_t$ une solution stationnaire,
 $$
 \PE{\left|X_t-\sum_{j=0}^{k}\phi_1^j Z_{t-j}\right|^2}
 =|\phi_1|^{2k+2} \PE{|X_{t-k-1}|^2}=|\phi_1|^{2k+2} \PE{|X_0|^2}\to 0,\;
 k\to\infty\;,
 $$
-puisque $|\phi_1| < 1$. De plus, d'après la définition \ref{def:proc_lin}, $(X_t)$
-defini par \eqref{AR1sol} est un processus linéaire et est donc stationnaire
-au second ordre. On peut vérifier que $(X_t)$
+puisque $|\phi_1| < 1$. De plus, d'apr\`es la d\'efinition \ref{def:proc_lin}, $(X_t)$
+defini par \eqref{AR1sol} est un processus lin\'eaire et est donc stationnaire
+au second ordre. On peut v\'erifier que $(X_t)$
 defini par \eqref{AR1sol} est bien solution de \eqref{eq:recurrenceAR1}
 en notant que\,:
 \[
   X_t = Z_t + \phi_1 \sum_{k=0}^{+\infty} \phi_1^k Z_{t-1-k}
       = Z_t + \phi_1 X_{t-1}\;.
 \]
-Remarquons que la solution donnée par \eqref{AR1sol} peut être obtenu
-en utilisant le développement la fraction rationnelle $\psi(z)=(1-\phi_1
-z)^{-1}$ en série entière
+Remarquons que la solution donn\'ee par \eqref{AR1sol} peut être obtenu
+en utilisant le d\'eveloppement la fraction rationnelle $\psi(z)=(1-\phi_1
+z)^{-1}$ en s\'erie enti\`ere
 \[
   \psi(z)=\frac{1}{1-\phi_1 z} = \sum_{k=0}^{+\infty} \phi_1^k z^k
 \]
@@ -507,8 +507,8 @@ Ce lien n'a rien de fortuit, comme nous le verrons  dans le paragraphe \ref{sec:
 \end{figure}
 
 La fonction d'autocovariance de $(X_{t})$ solution stationnaire
-de~(\ref{eq:recurrenceAR1}) est donnée par la
-formule~(\ref{eq:gamm_proc_lin}) qui s'écrit\,;
+de~(\ref{eq:recurrenceAR1}) est donn\'ee par la
+formule~(\ref{eq:gamm_proc_lin}) qui s'\'ecrit\,;
 \begin{align}
 \label{eq:autocov:AR1}
 \gamma_X(h)&= \sigma^2 \sum_{k=0}^\infty \phi_1^k \bar{\phi_1}\;^{k+h}
@@ -517,23 +517,23 @@ formule~(\ref{eq:gamm_proc_lin}) qui s'écrit\,;
 &=\overline{\gamma(-h)}\;,\;\textrm{ sinon.}
 \end{align}
 
-Lorsque $\phi_1$ est un réel strictement positif, le processus $(X_{t})$ est positivement
-corrélé, dans le sens où tous ses coefficients
+Lorsque $\phi_1$ est un r\'eel strictement positif, le processus $(X_{t})$ est positivement
+corr\'el\'e, dans le sens o\`u tous ses coefficients
 d'auto-covariance sont positifs. Les exemples de trajectoires
-représentées sur la figure~\ref{fig:figar1} montrent que des valeurs
-de $\phi_1$ proches de 1 correspondent à des trajectoires
+repr\'esent\'ees sur la figure~\ref{fig:figar1} montrent que des valeurs
+de $\phi_1$ proches de 1 correspondent \`a des trajectoires
 ``persistantes''. Inversement, des
-valeurs de $\phi_1$ réelles et négatives conduisent à des trajectoires où une valeur positive a tendance à être
-suivie par une valeur négative.
+valeurs de $\phi_1$ r\'eelles et n\'egatives conduisent \`a des trajectoires o\`u une valeur positive a tendance \`a être
+suivie par une valeur n\'egative.
 %====== FIGURE
 \begin{figure}
 \centering
   \includegraphics[width=0.6\textwidth]{dspthAR1}
-  \caption{Densité spectrale d'un processus AR(1), défini
+  \caption{Densit\'e spectrale d'un processus AR(1), d\'efini
   par~(\ref{eq:recurrenceAR1}) pour $\sigma=1$ et $\phi_1=0.7$.}
   \label{fig:dspthAR1}
 \end{figure}
-la densité spectrale de $(X_t)$ est donnée par
+la densit\'e spectrale de $(X_t)$ est donn\'ee par
 \begin{equation}
 \label{eq:dsp:AR1}
  f_X(\lambda)
@@ -544,30 +544,30 @@ la densité spectrale de $(X_t)$ est donnée par
 %===============================================
 \subsubsection{Cas $|\phi_1| > 1$}
 %===============================================
-Dans ce cas-là, $\PE{|X_t-\sum_{j=0}^{k}\phi_1^j
+Dans ce cas-l\`a, $\PE{|X_t-\sum_{j=0}^{k}\phi_1^j
 Z_{t-j}|^2} = |\phi_1|^{2k+2} \PE{X_{t-k-1}^2}$ diverge
 lorsque $k$ tend vers l'infini. Par contre, on peut
-réécrire l'équation définissant $X_t$ en fonction de $Z_t$ comme suit
+r\'e\'ecrire l'\'equation d\'efinissant $X_t$ en fonction de $Z_t$ comme suit
 $$
 X_t=-\phi_1^{-1} Z_{t+1}+\phi_1^{-1} X_{t+1}.
 $$
-En itérant l'équation précédente, on obtient
+En it\'erant l'\'equation pr\'ec\'edente, on obtient
 \begin{eqnarray*}
 X_t&=&-\phi_1^{-1} Z_{t+1}-\phi_1^{-2} Z_{t+2}+\phi_1^{-2} X_{t+2}=\dots\\
 &=&-\phi_1^{-1} Z_{t+1}-\phi_1^{-2} Z_{t+2}-\dots-\phi_1^{-k-1}
 Z_{t+k+1}+\phi_1^{-k-1} X_{t+k+1}\; .
 \end{eqnarray*}
-En utilisant exactement les mêmes arguments que ceux employés
-précédemment, on déduit que la solution stationnaire dans ce cas vaut
+En utilisant exactement les mêmes arguments que ceux employ\'es
+pr\'ec\'edemment, on d\'eduit que la solution stationnaire dans ce cas vaut
 \begin{equation}
 \label{eq:ar1_sol>1}
 X_t=-\sum_{j\geq 1} \phi_1^{-j} Z_{t+j}\; .
 \end{equation}
-Cette solution est  \textbf{non causale} : elle dépend
+Cette solution est  \textbf{non causale} : elle d\'epend
 uniquement du ``futur'' du processus $(Z_t)$.
 
-Remarquons que, comme précédemment, la solution donnée par \eqref{eq:ar1_sol>1} est obtenu
-en choisissant le développement fraction rationnelle $\psi(z)=(1-\phi_1
+Remarquons que, comme pr\'ec\'edemment, la solution donn\'ee par \eqref{eq:ar1_sol>1} est obtenu
+en choisissant le d\'eveloppement fraction rationnelle $\psi(z)=(1-\phi_1
 z)^{-1}$
 \[
   \psi(z)=\frac{1}{1-\phi_1 z} = \frac{-(\phi_1 z)^{-1}}{1-(\phi_1
@@ -575,20 +575,20 @@ z)^{-1}$
 =-\sum_{k\geq 1}\phi_1^{-k} z^{-k}\;,
 \]
 qui converge sur la couronne $ \{ z \in \Cset \eqsp, |z| > |\phi_1|^{-1} \}$. Nous remarquons que
-nous avons choisi dans les deux cas $|\phi_1| < 1$ et $|\phi_1| > 1$ les développements convergeant
-dans des domaines incluant le cercle unité, $\{ z \in \Cset, |z|=1 \}$.
-Ce lien est expliqué précisément dans le paragraphe \ref{sec:cas_general}.
+nous avons choisi dans les deux cas $|\phi_1| < 1$ et $|\phi_1| > 1$ les d\'eveloppements convergeant
+dans des domaines incluant le cercle unit\'e, $\{ z \in \Cset, |z|=1 \}$.
+Ce lien est expliqu\'e pr\'ecis\'ement dans le paragraphe \ref{sec:cas_general}.
 
 %===============================================
 \subsubsection{Cas $|\phi_1| = 1$}
 %===============================================
 Supposons qu'il existe une solution stationnaire dans ce cas alors,
-par stationnarité de $X_t$,
+par stationnarit\'e de $X_t$,
 $$
 \PE{\left|X_t - \sum_{j=0}^{k-1} \phi_1^j Z_{t-j}\right|^2} = |\phi_1|^{2k} \
 \PE{|X_{t-k}|^2} = |\phi_1|^{2k}\ \PE{|X_{t}|^2}=\PE{|X_{t}|^2}\;.
 $$
-Or, le terme de gauche est aussi égal à
+Or, le terme de gauche est aussi \'egal \`a
 $$
 \PE{|X_{t}|^2} + \PE{\left|\sum_{j=0}^{k-1} \phi_1^j Z_{t-j}\right|^2}
 - 2 \PE{\bar{X}_{t} \sum_{j=0}^{k-1} \phi_1^j Z_{t-j}}\eqsp.
@@ -596,8 +596,8 @@ $$
 Ainsi, $\PE{|\sum_{j=0}^{k-1} \phi_1^j Z_{t-j}|^2}
 =2 \PE{\bar{X}_{t} \sum_{j=0}^{k-1} \phi_1^j Z_{t-j}}$.
 De plus, $\PE{|\sum_{j=0}^{k-1} \phi_1^j Z_{t-j}|^2} = \sum_{j=0}^{k-1}
-|\phi_1|^{2j} \sigma^2 = k \sigma^2 $. D'où, en utilisant
-l'inégalité de Cauchy-Schwarz,
+|\phi_1|^{2j} \sigma^2 = k \sigma^2 $. D'o\`u, en utilisant
+l'in\'egalit\'e de Cauchy-Schwarz,
 $$
 k\sigma^2 \leq 2 \PE{|X_t|^2}^{1/2} \PE{\left|\sum_{j=0}^{k-1}
 \phi_1^j Z_{t-j}\right|^2}^{1/2} \leq 2 (\gamma_X(0)+|\mu_X|^2)^{1/2} \
@@ -608,10 +608,10 @@ Donc, dans ce cas, \textbf{il n'existe pas de solution stationnaire}.
 
 \subsubsection{Conclusion}
 
-Nous avons donc montré, dans le cas $p=1$, que l'équation de  récurrence
+Nous avons donc montr\'e, dans le cas $p=1$, que l'\'equation de  r\'ecurrence
 (\ref{eq:recurrenceARp}) n'admettait pas de solution stationnaire
 lorsque $|\phi_1|=1$ et qu'elle admettait une solution stationnaire
-lorsque $|\phi_1|\neq 1$, donnée par :
+lorsque $|\phi_1|\neq 1$, donn\'ee par :
 $$
 X_t=\sum_{j\geq 0}\phi_1^j Z_{t-j}\;, \textrm{ si } |\phi_1|<1\;,
 $$
@@ -621,50 +621,50 @@ X_t=-\sum_{j\geq 1} \phi_1^{-j} Z_{t+j}\;, \textrm{ si } |\phi_1|>1\;.
 $$
 
 %
-%\begin{definition}[Opérateur de retard]
+%\begin{definition}[Op\'erateur de retard]
 %\label{def:operateur-retard}
-%\index{Opérateur de retard}
-%  Soit $(X_t)_{t\in\Zset}$ défini sur $\espaceproba$ un processus stationnaire au
-%  second ordre et soit $\cH^X_\infty$ son enveloppe linéaire.
-%D'après le théorème \ref{theo:prolongement-isometrie}, il existe une unique
-%isométrie $B^X$ de  $\cH^X_\infty$ dans $L^2\espaceproba$ telle que
+%\index{Op\'erateur de retard}
+%  Soit $(X_t)_{t\in\Zset}$ d\'efini sur $\espaceproba$ un processus stationnaire au
+%  second ordre et soit $\cH^X_\infty$ son enveloppe lin\'eaire.
+%D'apr\`es le th\'eor\`eme \ref{theo:prolongement-isometrie}, il existe une unique
+%isom\'etrie $B^X$ de  $\cH^X_\infty$ dans $L^2\espaceproba$ telle que
 %$B^X(X_t)=X_{t-1}$, pour tout $t\in\Zset$. De plus, $B^X(\cH^X_\infty)=\cH^X_\infty$.
-% On appellera $B^X$ l'opérateur de retard de $X$ (abréviation de {\em backward} en
+% On appellera $B^X$ l'op\'erateur de retard de $X$ (abr\'eviation de {\em backward} en
 %  anglais).
 %\end{definition}
 %
 %On note $(B^X)^k = B^X \circ (B^X)^{k-1}$ pour $k \geq 1$ les compositions successives de
-%l'opérateur $B^X$.  Pour $k<0$, $(B^X)^k$ est défini comme l'opérateur inverse de
-%$(B^X)^{-k}$. Cette notation permet d'écrire les équations définissant un processus
-%MA et un processus AR d'une façon plus condensée : (\ref{eq:recurrenceMAq})
-%se réécrit en : $X_t=\theta(B^Z)Z_t$ et (\ref{eq:recurrenceARp}) se réécrit
-%en : $\phi(B^X)X_t=Z_t$ où $\theta(z)=1+\sum_{k=1}^q \theta_k z^k$ et
+%l'op\'erateur $B^X$.  Pour $k<0$, $(B^X)^k$ est d\'efini comme l'op\'erateur inverse de
+%$(B^X)^{-k}$. Cette notation permet d'\'ecrire les \'equations d\'efinissant un processus
+%MA et un processus AR d'une fa\c{c}on plus condens\'ee : (\ref{eq:recurrenceMAq})
+%se r\'e\'ecrit en : $X_t=\theta(B^Z)Z_t$ et (\ref{eq:recurrenceARp}) se r\'e\'ecrit
+%en : $\phi(B^X)X_t=Z_t$ o\`u $\theta(z)=1+\sum_{k=1}^q \theta_k z^k$ et
 %$\phi(z)=1-\sum_{k=1}^p \phi_k z^k.$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Cas général}\label{sec:cas_general}
-% La notion de processus ARMA généralise les notions de processus MA
+\subsection{Cas g\'en\'eral}\label{sec:cas_general}
+% La notion de processus ARMA g\'en\'eralise les notions de processus MA
 % et AR.
-Avant d'énoncer le théorème \ref{theo:ARMApq} qui donne
-une condition nécessaire et suffisante d'existence d'une solution stationnaire
-à l'équation récurrente \eqref{eq:recurrenceARMApq}
-définissant un processus ARMA($p,q$), nous introduisons un nouvel opérateur
-qui sera utile dans la preuve du théorème \ref{theo:ARMApq}.
+Avant d'\'enoncer le th\'eor\`eme \ref{theo:ARMApq} qui donne
+une condition n\'ecessaire et suffisante d'existence d'une solution stationnaire
+\`a l'\'equation r\'ecurrente \eqref{eq:recurrenceARMApq}
+d\'efinissant un processus ARMA($p,q$), nous introduisons un nouvel op\'erateur
+qui sera utile dans la preuve du th\'eor\`eme \ref{theo:ARMApq}.
 
-Soit $\cS\espaceproba$ l'ensemble des processus indexés par $\zset$
-stationnaires au second ordre et à valeurs complexes. A toute suite de
-coefficients complexes $(\alpha_k)$ vérifiant :
-$\sum_{k\in\Zset}|\alpha_k|<\infty$, on associe un opérateur
-$\operatorname{F}_\alpha$ qui à $X\in\cS\espaceproba$ associe le processus $Y$
-défini par :
+Soit $\cS\espaceproba$ l'ensemble des processus index\'es par $\zset$
+stationnaires au second ordre et \`a valeurs complexes. A toute suite de
+coefficients complexes $(\alpha_k)$ v\'erifiant :
+$\sum_{k\in\Zset}|\alpha_k|<\infty$, on associe un op\'erateur
+$\operatorname{F}_\alpha$ qui \`a $X\in\cS\espaceproba$ associe le processus $Y$
+d\'efini par :
 $$
 \operatorname{F}_\alpha:X\mapsto Y=(Y_t)_{t\in\Zset}=\left(\sum_{k\in\Zset}\alpha_k X_{t-k}\right)_{t\in\Zset}\; .
 $$
-D'après le théorème \ref{theo:filtragepassl_stat}, $Y$ est aussi dans $\cS\espaceproba$.
+D'apr\`es le th\'eor\`eme \ref{theo:filtragepassl_stat}, $Y$ est aussi dans $\cS\espaceproba$.
 
-Le lemme \ref{lem:composition} montre comment composer deux opérateurs
+Le lemme \ref{lem:composition} montre comment composer deux op\'erateurs
 de type $\operatorname{F}_\alpha$.
 
 \begin{lemma}\label{lem:composition}
@@ -675,49 +675,49 @@ $$
 \filtop{\alpha}[\filtop{\beta}X]=[\filtop{\alpha\beta}]X\;, \textrm{
   dans } L^2\espaceproba\;,\;
 $$
-où $(\alpha\beta)_k=\sum_{j\in\mathbb{Z}}\alpha_j\beta_{k-j}$.
+o\`u $(\alpha\beta)_k=\sum_{j\in\mathbb{Z}}\alpha_j\beta_{k-j}$.
 \end{lemma}
 
  \begin{proof}\smartqed
- Soit $Y=\filtop{\beta}X$. D'après le théorème \ref{theo:filtragepassl_stat},
+ Soit $Y=\filtop{\beta}X$. D'apr\`es le th\'eor\`eme \ref{theo:filtragepassl_stat},
 puisque $\sum_k|\beta_k|<\infty$, $Y$ est dans $\cS\espaceproba$.
 Pour les mêmes raisons, $\filtop{\alpha}Y$ est lui aussi dans $\cS\espaceproba$.
 Soient $Z=\filtop{\alpha}[\filtop{\beta}X]$ et $W=[\filtop{\alpha\beta}]X$, on a alors, pour tout $t\in\Zset$,
 $Z_t=\sum_{j\in\Zset}\alpha_j Y_{t-j}$,
-où $Y_t=\sum_{k\in\Zset}\beta_k X_{t-k}$ et $W_t=\sum_{k\in\Zset}(\sum_{j\in\mathbb{Z}}\alpha_j\beta_{k-j})X_{t-k}$. Ainsi,
+o\`u $Y_t=\sum_{k\in\Zset}\beta_k X_{t-k}$ et $W_t=\sum_{k\in\Zset}(\sum_{j\in\mathbb{Z}}\alpha_j\beta_{k-j})X_{t-k}$. Ainsi,
 $Z_t=\sum_{j\in\Zset}\alpha_j(\sum_{k\in\Zset}\beta_k X_{t-j-k})$.
 
-Définissons $Z_{t,m,n}$ et $W_{t,m,n}$ par :
+D\'efinissons $Z_{t,m,n}$ et $W_{t,m,n}$ par :
 $Z_{t,m,n}=\sum_{j=-m}^m\alpha_j(\sum_{k=-n}^n\beta_k X_{t-j-k})$
 et $W_{t,m,n}=\sum_{k=-m}^m(\sum_{j=-n}^n\alpha_j\beta_{k-j})X_{t-k}$.
-En posant $\ell=j+k$, on en déduit que
+En posant $\ell=j+k$, on en d\'eduit que
 \begin{equation}\label{eq:chang_ind}
 Z_{t,m,n}=\sum_{\ell=-(m+n)}^{m+n}(\sum_{j=-m}^m\alpha_j\beta_{\ell-j})X_{t-\ell}
 =W_{t,m+n,m}\;.
 \end{equation}
 En notant $\| X \|_2 = \left( \PE{|X|^2} \right)^{1/2}$, nous pouvons
-écrire en utilisant l'inégalité triangulaire que :
+\'ecrire en utilisant l'in\'egalit\'e triangulaire que :
 \begin{multline}\label{eq:dec_filtre1}
 \|Z_t-W_t\|_2\leq \|Z_t-Z_{t,m,n}\|_2+\|Z_{t,m,n}-W_{t,m+n,m}\|_2
 +\|W_{t,m+n,m}-W_t\|_2\;,
 \end{multline}
-le deuxième terme du membre de droite de (\ref{eq:dec_filtre1}) étant
-nul d'après (\ref{eq:chang_ind}).
+le deuxi\`eme terme du membre de droite de (\ref{eq:dec_filtre1}) \'etant
+nul d'apr\`es (\ref{eq:chang_ind}).
 D'autre part, avec :
 $Z_{t,m}=\sum_{j=-m}^m\alpha_j(\sum_{k\in\Zset}\beta_k X_{t-j-k})
 =\sum_{j=-m}^m\alpha_j Y_{t-j}$, on a :
 \begin{equation}\label{eq:dec_filtre2}
 \|Z_t-Z_{t,m,n}\|_2\leq\|Z_t-Z_{t,m}\|_2+\|Z_{t,m}-Z_{t,m,n}\|_2\;.
 \end{equation}
-En utilisant l'inégalité de Cauchy-Schwarz, le fait que
+En utilisant l'in\'egalit\'e de Cauchy-Schwarz, le fait que
 $Y$ est dans $\cS\espaceproba$ et $\sum_{k\in\Zset}|\alpha_k|<\infty$,  on a
 \begin{multline}\label{eq:dec_filtre3}
 \|Z_t-Z_{t,m}\|_2^2=\left\|\sum_{|j|>m}\alpha_j Y_{t-j}\right\|_2^2
 \leq\PE{\sum_{|j|>m,|j'|>m}|\alpha_j| |\alpha_{j'}| |Y_{t-j}| |Y_{t-j'}|}\\
 \leq \PE{Y_0^2}\left(\sum_{|j|>m} |\alpha_j|\right)^2\to 0\;,\; m\to\infty\;.
 \end{multline}
-D'autre part, en utilisant l'inégalité de Cauchy-Schwarz, le fait que
-$X$ est dans $\cS\espaceproba$ et l'absolue sommabilité de $(\alpha_k)$
+D'autre part, en utilisant l'in\'egalit\'e de Cauchy-Schwarz, le fait que
+$X$ est dans $\cS\espaceproba$ et l'absolue sommabilit\'e de $(\alpha_k)$
 et $(\beta_k)$ :
 \begin{multline}\label{eq:dec_filtre4}
 \|Z_{t,m}-Z_{t,m,n}\|_2^2=\left\|\sum_{|j|\leq
@@ -739,31 +739,31 @@ preuve avec (\ref{eq:dec_filtre1}).
 \end{proof}
 
 
-\begin{theorem}[Existence et unicité des processus ARMA$(p,q)$]
-\label{theo:ARMApq} Soit l'équation récurrente~:
+\begin{theorem}[Existence et unicit\'e des processus ARMA$(p,q)$]
+\label{theo:ARMApq} Soit l'\'equation r\'ecurrente~:
 \begin{equation}
  \label{eq:recurrenceARMApq}
   X_t - \phi_1 X_{t-1} - \cdots - \phi_p X_{t-p}
   =
   Z_t + \theta_1 Z_{t-1} + \cdots + \theta_q Z_{t-q}\;,
-\end{equation} où $Z_t \sim \BB(0,\sigma^2)$ et les
+\end{equation} o\`u $Z_t \sim \BB(0,\sigma^2)$ et les
 $\phi_j$ et les $\theta_j$ sont des nombres complexes. On pose
 $\phi(z)= 1 - \phi_1 z - \dots - \phi_p z^p$ et $\theta(z)= 1 +
 \theta_1 z + \dots + \theta_p z^p$. On suppose que $\phi(z)$ et
-$\theta(z)$ n'ont pas de zéros communs. Alors l'équation
+$\theta(z)$ n'ont pas de z\'eros communs. Alors l'\'equation
 (\ref{eq:recurrenceARMApq}) admet une solution stationnaire au
-second ordre si et seulement si le polynôme $\phi(z) \neq 0$ pour
+second ordre si et seulement si le polyn\^ome $\phi(z) \neq 0$ pour
 $|z| = 1$. Cette solution est unique et a pour expression~:
 \begin{equation}
  \label{eq:solutionARMApq}
  X_t = \sum_{k=-\infty}^{\infty} \psi_k Z_{t-k}\;,
 \end{equation}
-où les $(\psi_k)$ sont donnés par les coefficients du développement
+o\`u les $(\psi_k)$ sont donn\'es par les coefficients du d\'eveloppement
 \begin{equation}\label{eq:dev_laurent_statio}
 \frac{\theta(z)}{\phi(z)}=\sum_{k\in\Zset}\psi_k z^k\;,
 \end{equation}
-convergeant dans la couronne $\left\{ z\in\cset \eqsp,  \delta_1<|z|<\delta_2 \right\}$, où $\delta_1<1$
-et $\delta_2>1$ sont définis par
+convergeant dans la couronne $\left\{ z\in\cset \eqsp,  \delta_1<|z|<\delta_2 \right\}$, o\`u $\delta_1<1$
+et $\delta_2>1$ sont d\'efinis par
 $\delta_1=\max\{ z \in \cset, | z | < 1, \phi(z) =0 \}$
 et
 $\delta_2=\min\{ z \in \cset, |z| > 1, \phi(z) = 0 \}.$
@@ -771,42 +771,42 @@ $\delta_2=\min\{ z \in \cset, |z| > 1, \phi(z) = 0 \}.$
 
 
 \begin{proof}\smartqed
-Nous commençons par énoncer et prouver un lemme utile pour la preuve
-du théorème \ref{theo:ARMApq}.
-%\emnote{il faut se faire une religion ici sur la façon de noter les polynomes, pour le moment on est plutôt
+Nous commen\c{c}ons par \'enoncer et prouver un lemme utile pour la preuve
+du th\'eor\`eme \ref{theo:ARMApq}.
+%\emnote{il faut se faire une religion ici sur la fa\c{c}on de noter les polynomes, pour le moment on est plut\^ot
 %avec des petites lettres grecques, non.. ?}
 \begin{lemma}\label{lem:dev_laurent}
-  Soient $\theta$ et $\phi$ deux polynômes à coefficients complexes tels que
+  Soient $\theta$ et $\phi$ deux polyn\^omes \`a coefficients complexes tels que
   $\phi(z) \neq 0$ pour $|z|=1$ et $\phi(0)=1$ alors la fraction rationnelle
-  $\theta(z)/\phi(z)$ est développable en série de Laurent, c'est-à-dire
+  $\theta(z)/\phi(z)$ est d\'eveloppable en s\'erie de Laurent, c'est-\`a-dire
 $$
 \frac{\theta(z)}{\phi(z)}=\sum_{k\in\Zset} c_k z^k\;,
 $$
-où la série $\sum_{k \in \zset} c_k z^k$ est uniformément convergente dans la
-couronne définie par
-$\left\{ z\in\cset \eqsp, r_1<|z|<r_2 \right\}$, où
+o\`u la s\'erie $\sum_{k \in \zset} c_k z^k$ est uniform\'ement convergente dans la
+couronne d\'efinie par
+$\left\{ z\in\cset \eqsp, r_1<|z|<r_2 \right\}$, o\`u
 \begin{align*}
 r_1&=\max\{ |z|~:~ z \in \cset, | z | < 1, \,\phi(z) =0 \}\\
 r_2&=\min\{ |z|~:~ z  \in \cset, |z| > 1, \,\phi(z) = 0 \}\; .
 \end{align*}
 avec la convention $\max(\emptyset)=0$ et $\min(\emptyset)=\infty$.
 
-Le cas $r_1=0$ correspond à $\phi(z)\neq0$ pour tout complexe $z$ tel que
+Le cas $r_1=0$ correspond \`a $\phi(z)\neq0$ pour tout complexe $z$ tel que
 $|z|\leq1$. Dans ce cas on a $c_k=0$ pour tout $k<0$.
 Sinon, pour tout $\eta\in(0,r_1)$, $c_k=O(\eta^{-k})$ quand $k\to-\infty$.
 
-Le cas $r_2=\infty$ correspond à $\phi(z)\neq0$ pour tout complexe $z$ tel que
+Le cas $r_2=\infty$ correspond \`a $\phi(z)\neq0$ pour tout complexe $z$ tel que
 $|z|\geq1$. Dans ce cas on a $c_k=0$ pour tout $k>\max(-1,\mathrm{deg}(\theta)
 - \mathrm{deg}(\phi))$.  Sinon, pour tout $\eta\in(0,1/r_2)$, $c_k=O(\eta^{k})$
 quand $k\to\infty$.
 \end{lemma}
 \begin{proof}\smartqed
-  La décomposition en éléments simples de la fraction rationnelle
-  $\theta(z)/\phi(z)$ s'écrit comme la somme d'un polynôme de degré
+  La d\'ecomposition en \'el\'ements simples de la fraction rationnelle
+  $\theta(z)/\phi(z)$ s'\'ecrit comme la somme d'un polyn\^ome de degr\'e
   $\mathrm{deg}(\theta) - \mathrm{deg}(\phi)$ (avec la convention que tout
-  polynôme de degré strictement négatif est le polynôme nul) et de termes de la forme~:
-  $a/(z-z_0)^r$, où $z_0$ est une racine de $\phi$ de multiplicité supérieure
-  ou égale à $r$ et $a$ est une constante.  On écrit :
+  polyn\^ome de degr\'e strictement n\'egatif est le polyn\^ome nul) et de termes de la forme~:
+  $a/(z-z_0)^r$, o\`u $z_0$ est une racine de $\phi$ de multiplicit\'e sup\'erieure
+  ou \'egale \`a $r$ et $a$ est une constante.  On \'ecrit :
 \begin{align*}
 \textrm{si }|z_0|<1,& \;
 \frac{1}{(z-z_0)^r}=\frac{z^{-r}}{(1-z_0/z)^r},\;
@@ -835,280 +835,280 @@ Ainsi,
 (z/z_0)^k,\; \\
 &\textrm{qui converge si }|z|<|z_0|\;.
 \end{align*}
-En majorant $(k+r-1)!/k!$ par $k^{r-1}$, on en déduit  que
+En majorant $(k+r-1)!/k!$ par $k^{r-1}$, on en d\'eduit  que
 \begin{align*}
 &\textrm{si }|z_0|<1, \;
 \frac{1}{(z-z_0)^r}=\sum_{k\leq -r} v_k z^k,\; \textrm{qui converge si }|z|>|z_0|\;,\\
 &\textrm{si }|z_0|>1, \;
 \frac{1}{(z-z_0)^r}=\sum_{k\geq 0} w_k z^k,\;\textrm{qui converge si }|z|<|z_0|\;,
 \end{align*}
-où $|v_k|$ et $|w_k|$ sont majorés par $C \eta^{|k|}$, $C$ étant une constante
+o\`u $|v_k|$ et $|w_k|$ sont major\'es par $C \eta^{|k|}$, $C$ \'etant une constante
 strictement positive pour tout $\eta$ choisi dans
 $(0,r_1)$ ou $(0,1/r_2)$, respectivement.
 \qed
 \end{proof}
 
-\textbf{Retour à la preuve du théorème \ref{theo:ARMApq}}\\
+\textbf{Retour \`a la preuve du th\'eor\`eme \ref{theo:ARMApq}}\\
 
-Supposons que $\phi(z)\neq 0$ pour $|z|= 1$, alors d'après le lemme
+Supposons que $\phi(z)\neq 0$ pour $|z|= 1$, alors d'apr\`es le lemme
 \ref{lem:dev_laurent} il existe $r_1<1$ et $r_2>1$ tels que
 \begin{equation}\label{eq:psi_arma}
 \psi(z)=\frac{\theta(z)}{\phi(z)}=\sum_{k=-\infty}^{\infty} \psi_k z^{k},\; r_1<|z|<r_2\;,
 \end{equation}
-où la suite $(\psi_k)_{k\in\Zset}$ vérifie $\sum_k |\psi_k|<\infty$.
-Vérifions que le processus $(X_t)$ défini par : $X_t=\sum_{k\in\Zset} \psi_k Z_{t-k}=(\filtop{\psi} Z)_t$, pour tout
-$t\in\Zset$ est une solution stationnaire de (\ref{eq:recurrenceARMApq}). D'après la définition
-\ref{def:proc_lin}, $(X_t)$ est stationnaire. De plus, d'après le lemme \ref{lem:composition},
+o\`u la suite $(\psi_k)_{k\in\Zset}$ v\'erifie $\sum_k |\psi_k|<\infty$.
+V\'erifions que le processus $(X_t)$ d\'efini par : $X_t=\sum_{k\in\Zset} \psi_k Z_{t-k}=(\filtop{\psi} Z)_t$, pour tout
+$t\in\Zset$ est une solution stationnaire de (\ref{eq:recurrenceARMApq}). D'apr\`es la d\'efinition
+\ref{def:proc_lin}, $(X_t)$ est stationnaire. De plus, d'apr\`es le lemme \ref{lem:composition},
 $\filtop{\phi}[\filtop{\psi} Z]=\filtop{\phi\psi}Z=\filtop{\theta}Z$, ce qui montre l'existence d'une solution
-stationnaire à \eqref{eq:recurrenceARMApq}.
+stationnaire \`a \eqref{eq:recurrenceARMApq}.
 
 D'autre part, si $X$ est un processus stationnaire au second ordre solution de
-(\ref{eq:recurrenceARMApq}) alors $X$ vérifie :
+(\ref{eq:recurrenceARMApq}) alors $X$ v\'erifie :
 \begin{equation}\label{eq:arma_F}
 \filtop{\phi} X=\filtop{\theta}Z\;.
 \end{equation}
-Comme $\phi(z)\neq 0$ pour $|z|= 1$, alors d'après le lemme
+Comme $\phi(z)\neq 0$ pour $|z|= 1$, alors d'apr\`es le lemme
 \ref{lem:dev_laurent} il existe $r_1<1$ et $r_2>1$ tels que :
 $$
 \xi(z)=\frac{1}{\phi(z)}=\sum_{k\in\Zset} \xi_k z^{k},\; r_1<|z|<r_2\;,
 $$
-où la suite $(\xi_k)_{k\in\Zset}$ vérifie $\sum_k |\xi_k|<\infty$.
-On peut donc appliquer l'opérateur $\filtop{\xi}$ aux deux membres de l'équation
-(\ref{eq:arma_F}) d'où l'on déduit en utilisant le lemme \ref{lem:composition}
-que $X=\filtop{\xi\theta}Z=\filtop\psi Z$ où $(\psi_k)$ est définie dans (\ref{eq:psi_arma}).
+o\`u la suite $(\xi_k)_{k\in\Zset}$ v\'erifie $\sum_k |\xi_k|<\infty$.
+On peut donc appliquer l'op\'erateur $\filtop{\xi}$ aux deux membres de l'\'equation
+(\ref{eq:arma_F}) d'o\`u l'on d\'eduit en utilisant le lemme \ref{lem:composition}
+que $X=\filtop{\xi\theta}Z=\filtop\psi Z$ o\`u $(\psi_k)$ est d\'efinie dans (\ref{eq:psi_arma}).
 Donc $X_t=\sum_{k\in\Zset} \psi_k Z_{t-k}=(\filtop{\psi} Z)_t$, pour tout
-$t\in\Zset$, ce qui assure l'unicité de la solution.
+$t\in\Zset$, ce qui assure l'unicit\'e de la solution.
 
-Réciproquement, si $(X_t)$ est un processus stationnaire solution de (\ref{eq:recurrenceARMApq}) de la forme
-$X_t=\sum_{k\in\Zset}\eta_k Z_{t-k}$ où $\sum_k |\eta_k|<\infty$, montrons que
+R\'eciproquement, si $(X_t)$ est un processus stationnaire solution de (\ref{eq:recurrenceARMApq}) de la forme
+$X_t=\sum_{k\in\Zset}\eta_k Z_{t-k}$ o\`u $\sum_k |\eta_k|<\infty$, montrons que
 $\phi(z)\neq 0$ pour $|z|= 1$. En effet, puisque $X$ est solution de (\ref{eq:arma_F})
-alors : $\filtop{\phi} X=\filtop{\phi}[\filtop{\eta} Z]=\filtop{\theta} Z$. D'après le lemme \ref{lem:composition},
+alors : $\filtop{\phi} X=\filtop{\phi}[\filtop{\eta} Z]=\filtop{\theta} Z$. D'apr\`es le lemme \ref{lem:composition},
 $\filtop{\phi\eta}Z=\filtop{\theta} Z$. Posons
 $\zeta_k=\sum_{j\in\Zset}\phi_j \eta_{k-j}$. On a alors, pour tout $t\in\Zset$,
 $\sum_{k\in\Zset}\zeta_k Z_{t-k}=\sum_{j=1}^q\theta_j Z_{t-j}.$
-En multipliant les deux membres de cette équation par $Z_{t-\ell}$
-et en prenant l'espérance, on déduit que $\zeta_\ell=\theta_\ell$,
+En multipliant les deux membres de cette \'equation par $Z_{t-\ell}$
+et en prenant l'esp\'erance, on d\'eduit que $\zeta_\ell=\theta_\ell$,
 $\ell=0,\dots,q$ et $\zeta_\ell=0$, sinon. Ainsi,
 $\theta(z)=\phi(z)\eta(z)$, $|z|=1$. Puisque $\theta$ et $\phi$
 n'ont pas de racines communes et que $|\eta(z)|\leq\sum_{k\in\Zset}|\eta_k|<\infty$,
-si $|z|=1$, $\phi(z)$ ne s'annule pas sur le cercle unité :
-$\{z,\; |z|=1\}$, ce qui conclut la preuve du théorème \ref{theo:ARMApq}.
+si $|z|=1$, $\phi(z)$ ne s'annule pas sur le cercle unit\'e :
+$\{z,\; |z|=1\}$, ce qui conclut la preuve du th\'eor\`eme \ref{theo:ARMApq}.
 
-% Supposons que $\phi(z)\neq 0$ pour $|z|= 1$, alors d'après le lemme
+% Supposons que $\phi(z)\neq 0$ pour $|z|= 1$, alors d'apr\`es le lemme
 % \ref{lem:dev_laurent} il existe $r_1<1$ et $r_2>1$ tels que
 % $$
 % \psi(z)=\frac{\theta(z)}{\phi(z)}=\sum_{k=-\infty}^{\infty} \psi_k z^{k},\; r_1<|z|<r_2\;,
 % $$
-% où la suite $(\psi_k)_{k\in\Zset}$ vérifie $\sum_k |\psi_k|<\infty$.
-% Vérifions que $X_t=\sum_{k\in\Zset} \psi_k Z_{t-k}=\psi(B^Z)Z_t$ pour tout
-% $t\in\Zset$ est une solution stationnaire de (\ref{eq:recurrenceARMApq}). D'après la définition
-% \ref{def:proc_lin}, $(X_t)$ est stationnaire. De plus, par définition, $\cH^X_\infty\subset\cH^Z_\infty$ et
-% d'après le lemme \ref{lem:composition},
+% o\`u la suite $(\psi_k)_{k\in\Zset}$ v\'erifie $\sum_k |\psi_k|<\infty$.
+% V\'erifions que $X_t=\sum_{k\in\Zset} \psi_k Z_{t-k}=\psi(B^Z)Z_t$ pour tout
+% $t\in\Zset$ est une solution stationnaire de (\ref{eq:recurrenceARMApq}). D'apr\`es la d\'efinition
+% \ref{def:proc_lin}, $(X_t)$ est stationnaire. De plus, par d\'efinition, $\cH^X_\infty\subset\cH^Z_\infty$ et
+% d'apr\`es le lemme \ref{lem:composition},
 % $\phi(B^Z)X_t=\phi(B^Z)\psi(B^Z)Z_t=(\phi\psi)(B^Z)Z_t=\theta(B^Z)Z_t.$
 % Montrons que cette solution est unique. Pour cela, notons En effet, soit $(Y_t)$ un autre processus stationnaire
 % solution de (\ref{eq:recurrenceARMApq}) alors :
 % $(X_t-Y_t)-\sum_{k=1}^p\phi_k(X_{t-k}-Y_{t-k})=0$
 
 
-% Réciproquement, si $X_t$ est une solution stationnaire de (\ref{eq:recurrenceARMApq}) de la forme
-% $X_t=\sum_{k\in\Zset}\eta_k Z_{t-k}$ où $\sum_k |\eta_k|<\infty$
-% alors : $\phi(B^X)X_t=\phi(B^Z)\eta(B^Z)Z_t=\theta(B^Z)Z_t$. D'après le lemme \ref{lem:composition},
+% R\'eciproquement, si $X_t$ est une solution stationnaire de (\ref{eq:recurrenceARMApq}) de la forme
+% $X_t=\sum_{k\in\Zset}\eta_k Z_{t-k}$ o\`u $\sum_k |\eta_k|<\infty$
+% alors : $\phi(B^X)X_t=\phi(B^Z)\eta(B^Z)Z_t=\theta(B^Z)Z_t$. D'apr\`es le lemme \ref{lem:composition},
 % $(\phi\eta)(B^Z)Z_t=\theta(B^Z)Z_t$. Posons
 % $\zeta(z)=\phi(z)\eta(z)=\sum_{k\in\Zset}\zeta_k z^k$, lorsque $|z|=1$. On a alors,
 % $\sum_{k\in\Zset}\zeta_k Z_{t-k}=\sum_{j=1}^q\theta_j Z_{t-j}.$
-% En multipliant les deux membres de cette équation par $Z_{t-\ell}$
-% et en prenant l'espérance, on déduit que $\zeta_\ell=\theta_\ell$,
+% En multipliant les deux membres de cette \'equation par $Z_{t-\ell}$
+% et en prenant l'esp\'erance, on d\'eduit que $\zeta_\ell=\theta_\ell$,
 % $\ell=0,\dots,q$ et $\zeta_\ell=0$, sinon. Ainsi,
 % $\theta(z)=\phi(z)\eta(z)$, $|z|=1$. Puisque $\theta$ et $\phi$
 % n'ont pas de racines communes et que $|\eta(z)|\leq\sum_{k\in\Zset}|\eta_k|<\infty$,
-% si $|z|=1$, $\phi(z)$ ne s'annule pas sur le cercle unité :
+% si $|z|=1$, $\phi(z)$ ne s'annule pas sur le cercle unit\'e :
 % $\{z,\; |z|=1\}.$
 \qed
 \end{proof}
-Dans le cas où $\phi(z)$ et $\theta(z)$ ont des zéros communs,
+Dans le cas o\`u $\phi(z)$ et $\theta(z)$ ont des z\'eros communs,
 deux configurations sont possibles~:
 \begin{enumerate}[label=\emph{\alph*})]
-\item Les zéros communs ne sont pas sur le cercle unité. Dans ce
+\item Les z\'eros communs ne sont pas sur le cercle unit\'e. Dans ce
 cas on se
-  ramène au cas sans zéro commun en annulant les facteurs communs.
-\item Certains des zéros communs se trouvent sur le cercle unité.
-  L'équation~(\ref{eq:recurrenceARMApq}) admet une infinité de solutions
+  ram\`ene au cas sans z\'ero commun en annulant les facteurs communs.
+\item Certains des z\'eros communs se trouvent sur le cercle unit\'e.
+  L'\'equation~(\ref{eq:recurrenceARMApq}) admet une infinit\'e de solutions
   stationnaires au second ordre.
-\clnote{je ne comprends pas le 2ème point}
+\clnote{je ne comprends pas le 2\`eme point}
 \end{enumerate}
-Du point de vue de la modélisation, la présence de zéros communs
-ne présente aucun intérêt puisqu'elle est sans influence sur
-la densité spectrale de puissance. Elle conduit de plus à une
-ambiguïté sur l'ordre réel des parties AR et MA.
+Du point de vue de la mod\'elisation, la pr\'esence de z\'eros communs
+ne pr\'esente aucun int\'erêt puisqu'elle est sans influence sur
+la densit\'e spectrale de puissance. Elle conduit de plus \`a une
+ambiguït\'e sur l'ordre r\'eel des parties AR et MA.
 %=========================================================
 \subsubsection{ARMA$(p,q)$ causal}
 %  Comme dans le cas d'un processus AR($p$), on peut
-% distinguer trois cas, suivant que les zéros de $\phi(z)$ sont à
-% l'extérieur, à l'intérieur ou de part et d'autre du cercle unité.
-% Dans le cas où les zéros de $\phi(z)$ sont à l'extérieur du
-% cercle unité, la suite $\xi_k$ est causale ($\xi_k=0$ pour $k<0$)
+% distinguer trois cas, suivant que les z\'eros de $\phi(z)$ sont \`a
+% l'ext\'erieur, \`a l'int\'erieur ou de part et d'autre du cercle unit\'e.
+% Dans le cas o\`u les z\'eros de $\phi(z)$ sont \`a l'ext\'erieur du
+% cercle unit\'e, la suite $\xi_k$ est causale ($\xi_k=0$ pour $k<0$)
 % et donc $\psi_k=\xi_k+\sum_{j=1}^q \theta_j\xi_{k-j}$ est aussi
-% causale. Par conséquent le processus $X_t$ s'exprime causalement
+% causale. Par cons\'equent le processus $X_t$ s'exprime causalement
 % en fonction de $Z_t$.
-Le théorème \ref{theo:ARMApq_causal} donne une condition nécessaire
-et suffisante d'existence d'une solution causale à l'équation
+Le th\'eor\`eme \ref{theo:ARMApq_causal} donne une condition n\'ecessaire
+et suffisante d'existence d'une solution causale \`a l'\'equation
 (\ref{eq:recurrenceARMApq}).
 
-\begin{definition}[Représentation ARMA causale]
-  Sous les hypothèses du théorème~\ref{theo:ARMApq}, on dira que
-  l'équation~(\ref{eq:recurrenceARMApq}) fournit une représentation causale de
+\begin{definition}[Repr\'esentation ARMA causale]
+  Sous les hypoth\`eses du th\'eor\`eme~\ref{theo:ARMApq}, on dira que
+  l'\'equation~(\ref{eq:recurrenceARMApq}) fournit une repr\'esentation causale de
   la solution stationnaire au second ordre $(X_t)$ si $(X_t)_{t\in\zset}$ est
-  un processus linéaire causal par rapport à $(Z_t)_{t\in\zset}$.
+  un processus lin\'eaire causal par rapport \`a $(Z_t)_{t\in\zset}$.
 \end{definition}
 
 \begin{theorem}[ARMA$(p,q)$ causal]
 \label{theo:ARMApq_causal}
-Soit l'équation récurrente~:
+Soit l'\'equation r\'ecurrente~:
 \begin{equation}
  \label{eq:recurrenceARMApqcausal}
   X_t - \phi_1 X_{t-1} - \cdots - \phi_p X_{t-p}
   =
   Z_t + \theta_1 Z_{t-1} + \cdots + \theta_q Z_{t-q}
-\end{equation} où $Z_t \sim \BB(0,\sigma^2)$ et les
+\end{equation} o\`u $Z_t \sim \BB(0,\sigma^2)$ et les
 $\phi_j$ et les $\theta_j$ sont des nombres complexes. On pose
 $\phi(z)= 1 - \phi_1 z - \dots - \phi_p z^p$ et $\theta(z)= 1 +
 \theta_1 z + \dots + \theta_p z^p$. On suppose que $\phi(z)$ et
-$\theta(z)$ n'ont pas de zéros communs. Alors l'équation
+$\theta(z)$ n'ont pas de z\'eros communs. Alors l'\'equation
 (\ref{eq:recurrenceARMApqcausal})
-fournit une représentation causale de la solution stationnaire au second ordre
-si et seulement si le polynôme $\phi(z)
+fournit une repr\'esentation causale de la solution stationnaire au second ordre
+si et seulement si le polyn\^ome $\phi(z)
 \neq 0$ pour $|z| \leq 1$. Cette solution a pour
 expression~:
 \begin{equation}
  \label{eq:solutionARMApq_causal}
   X_t = \sum_{k\geq 0} \psi_k Z_{t-k}
 \end{equation}
-où la suite $(\psi_k)$ est donnée par les coefficients du développement
+o\`u la suite $(\psi_k)$ est donn\'ee par les coefficients du d\'eveloppement
 $$
 \frac{\theta(z)}{\phi(z)}=\sum_{k=0}^{\infty} \psi_k z^k
 $$
 qui converge dans $\{z\in\cset\;,\;|z|\leq 1\}.$
 \end{theorem}
 \begin{proof}\smartqed
-Le théorème~\ref{theo:ARMApq} montre l'existence et l'unicité
-de la solution de l'équation~(\ref{eq:recurrenceARMApqcausal}) et vérifie
+Le th\'eor\`eme~\ref{theo:ARMApq} montre l'existence et l'unicit\'e
+de la solution de l'\'equation~(\ref{eq:recurrenceARMApqcausal}) et v\'erifie
 \begin{equation*}
   X_t = \sum_{k\in\zset} \psi_k Z_{t-k}
 \end{equation*}
-où la suite $(\psi_k)$ est caractérisée par l'équation
+o\`u la suite $(\psi_k)$ est caract\'eris\'ee par l'\'equation
 $$
 \frac{\theta(z)}{\phi(z)}=\sum_{k=0}^{\infty} \psi_k z^k,\quad z\in\cset,\,|z|=1\;.
 $$
-Si maintenant $\phi(z)\neq 0$ pour $|z|\leq 1$, alors, d'après le
+Si maintenant $\phi(z)\neq 0$ pour $|z|\leq 1$, alors, d'apr\`es le
  lemme \ref{lem:dev_laurent}, comme $r_1=0$, on a $\psi_k=0$ pour $k<0$
  et~(\ref{eq:solutionARMApq_causal}) suit.
 
 
-Réciproquement, si $X$ est une solution stationnaire de
+R\'eciproquement, si $X$ est une solution stationnaire de
 (\ref{eq:recurrenceARMApqcausal}) de la forme $X_t=\sum_{k\geq 0}\eta_k
-Z_{t-k}$ où $\sum_k |\eta_k|<\infty$, montrons que $\phi(z)\neq 0$ pour
+Z_{t-k}$ o\`u $\sum_k |\eta_k|<\infty$, montrons que $\phi(z)\neq 0$ pour
 $|z|\leq 1$. En effet, puisque $X$ est solution
 de~(\ref{eq:recurrenceARMApqcausal}), alors : $\filtop{\phi}
-X=\filtop{\phi}[\filtop{\eta} Z]=\filtop{\theta} Z$. D'après le lemme
+X=\filtop{\phi}[\filtop{\eta} Z]=\filtop{\theta} Z$. D'apr\`es le lemme
 \ref{lem:composition}, $\filtop{\phi\eta}Z=\filtop{\theta} Z$. Posons, pour
-tout $k\in\mathbb{N}$, $\zeta_k=\sum_{j\geq 0}\phi_j \eta_{k-j}$, où par
+tout $k\in\mathbb{N}$, $\zeta_k=\sum_{j\geq 0}\phi_j \eta_{k-j}$, o\`u par
 convention, $\eta_\ell=0$, si $\ell<0$.  On a alors, pour tout $t\in\Zset$,
 $\sum_{k\geq 0}\zeta_k Z_{t-k}=\sum_{j=0}^q\theta_j Z_{t-j},$ avec la
-convention $\theta_0=1$.  En multipliant les deux membres de cette équation par
-$Z_{t-\ell}$ et en prenant l'espérance, on déduit que $\zeta_\ell=\theta_\ell$,
+convention $\theta_0=1$.  En multipliant les deux membres de cette \'equation par
+$Z_{t-\ell}$ et en prenant l'esp\'erance, on d\'eduit que $\zeta_\ell=\theta_\ell$,
 $\ell=0,\dots,q$ et $\zeta_\ell=0$, sinon. Ainsi, $\theta(z)=\phi(z)\eta(z)$,
 $|z|\leq 1$. Puisque $\theta$ et $\phi$ n'ont pas de racines communes et que
 $|\eta(z)|\leq\sum_{k\geq 0}|\eta_k|<\infty$, si $|z|\leq 1$, $\phi(z)$ ne
-s'annule pas sur le disque unité : $\{z,\; |z|\leq 1\}$, ce qui conclut la
-preuve du théorème~\ref{theo:ARMApq_causal}.
+s'annule pas sur le disque unit\'e : $\{z,\; |z|\leq 1\}$, ce qui conclut la
+preuve du th\'eor\`eme~\ref{theo:ARMApq_causal}.
 \qed
 \end{proof}
 %==========================================
 
 
-\begin{definition}[Représentation ARMA inversible]
-  Sous les hypothèses du théorème~\ref{theo:ARMApq}, on dira que
-  l'équation~(\ref{eq:recurrenceARMApq}) fournit une représentation inversible
+\begin{definition}[Repr\'esentation ARMA inversible]
+  Sous les hypoth\`eses du th\'eor\`eme~\ref{theo:ARMApq}, on dira que
+  l'\'equation~(\ref{eq:recurrenceARMApq}) fournit une repr\'esentation inversible
   de la solution stationnaire au second ordre $(X_t)$ si $(X_t)_{t\in\zset}$
-  est un processus linéaire inversible par rapport à $(Z_t)_{t\in\zset}$.
+  est un processus lin\'eaire inversible par rapport \`a $(Z_t)_{t\in\zset}$.
 \end{definition}
 
 \begin{theorem}[ARMA$(p,q)$ inversible]
  \label{theo:ARMAinversible}
-Soit l'équation récurrente~:
+Soit l'\'equation r\'ecurrente~:
 \begin{equation}
  \label{eq:recurrenceARMApqinversible}
   X_t - \phi_1 X_{t-1} - \cdots - \phi_p X_{t-p}
   =
   Z_t + \theta_1 Z_{t-1} + \cdots + \theta_q Z_{t-q}
-\end{equation} où $Z_t \sim \BB(0,\sigma^2)$ et les
+\end{equation} o\`u $Z_t \sim \BB(0,\sigma^2)$ et les
 $\phi_j$ et les $\theta_j$ sont des nombres complexes. On pose
 $\phi(z)= 1 - \phi_1 z - \dots - \phi_p z^p$ et $\theta(z)= 1 +
 \theta_1 z + \dots + \theta_p z^p$. On suppose que $\phi(z)$ et
-$\theta(z)$ n'ont pas de zéros communs. Alors l'équation
-(\ref{eq:recurrenceARMApqinversible}) fournit une représentation inversible
-de la solution stationnaire au second ordre si et seulement si le polynôme $\theta(z)
+$\theta(z)$ n'ont pas de z\'eros communs. Alors l'\'equation
+(\ref{eq:recurrenceARMApqinversible}) fournit une repr\'esentation inversible
+de la solution stationnaire au second ordre si et seulement si le polyn\^ome $\theta(z)
 \neq 0$ pour $|z| \leq 1$. Cette solution est unique et a pour
 expression~:
 \begin{equation}
  \label{eq:solutionARMApq_inversible}
   Z_t = \sum_{k\geq 0} \pi_k X_{t-k}
 \end{equation}
-où la suite $(\pi_k)$ est donnée par les coefficients du développement
+o\`u la suite $(\pi_k)$ est donn\'ee par les coefficients du d\'eveloppement
 $$
 \frac{\phi(z)}{\theta(z)}=\sum_{k=0}^{\infty} \pi_k z^k
 $$
 qui converge dans $\{z\in\cset\;,\;|z|\leq 1\}.$
 % Soit $X_t$ un processus ARMA$(p,q)$. On suppose que $\phi(z)$ et
-% $\theta(z)$ n'ont pas de zéros communs. Alors il existe une suite
+% $\theta(z)$ n'ont pas de z\'eros communs. Alors il existe une suite
 % $\{\pi_k\}$ causale absolument sommable telle que~:
 % \begin{equation}
 %  \label{eq:analyseARMApq}
 %  Z_t=\sum_{k=0}^{\infty} \pi_k X_{t-k}
 % \end{equation}
 % si et seulement si $\theta(z)\neq 0$ pour $z\leq 1$. On dit alors
-% que le modèle ARMA$(p,q)$ est inversible. La suite $\pi_k$ est
-% la suite des coefficients du développement en série de
+% que le mod\`ele ARMA$(p,q)$ est inversible. La suite $\pi_k$ est
+% la suite des coefficients du d\'eveloppement en s\'erie de
 % $\phi(z)/\theta(z)$ dans le disque $\{z: |z|\leq 1\}$.
 \end{theorem}
-La preuve de ce théorème est tout à fait analogue à celle du
-théorème~\ref{theo:ARMApq_causal} et n'est donc pas détaillée ici.
-% Remarquons que la notion d'inversibilité, comme celle de causalité, est bien relative au
-% modèle ARMA$(p,q)$ lui-même et pas uniquement au processus
+La preuve de ce th\'eor\`eme est tout \`a fait analogue \`a celle du
+th\'eor\`eme~\ref{theo:ARMApq_causal} et n'est donc pas d\'etaill\'ee ici.
+% Remarquons que la notion d'inversibilit\'e, comme celle de causalit\'e, est bien relative au
+% mod\`ele ARMA$(p,q)$ lui-même et pas uniquement au processus
 % $X_t$.
 %\begin{exercice}
-%  Soit $X_t$ un processus stationnaire au second ordre solution de l'équation
-%  de récurrence~(\ref{eq:recurrenceARMApqcausal}) où le modèle ARMA$(p,q)$
-%  correspondant est supposé sans zéro commun mais pas nécessairement
+%  Soit $X_t$ un processus stationnaire au second ordre solution de l'\'equation
+%  de r\'ecurrence~(\ref{eq:recurrenceARMApqcausal}) o\`u le mod\`ele ARMA$(p,q)$
+%  correspondant est suppos\'e sans z\'ero commun mais pas n\'ecessairement
 %  inversible. Montrer qu'il existe un bruit blanc $\tilde{Z}_t$ tel que $X_t$
 %  soit solution de
 %  \[
 %    \phi(B) X_t = \tilde{\theta}(B) \tilde{Z}_t
 %  \]
-%  où le modèle ARMA$(p,q)$ défini par $\phi_1, \dots \phi_p$ et
+%  o\`u le mod\`ele ARMA$(p,q)$ d\'efini par $\phi_1, \dots \phi_p$ et
 %  $\tilde{\theta}_1, \dots \tilde{\theta}_q$ est inversible
-%  (indication\,: considérer des facteurs passe-tout).
+%  (indication\,: consid\'erer des facteurs passe-tout).
 %\end{exercice}
 
-Un modèle ARMA$(p,q)$ est causal et inversible lorsque
-les racines des polynômes $\phi(z)$ et $\theta(z)$ sont toutes
-situées à l'extérieur du disque unité. Dans ce cas, $X_t$ et $Z_t$
-se déduisent mutuellement l'un de l'autre par des opérations de
+Un mod\`ele ARMA$(p,q)$ est causal et inversible lorsque
+les racines des polyn\^omes $\phi(z)$ et $\theta(z)$ sont toutes
+situ\'ees \`a l'ext\'erieur du disque unit\'e. Dans ce cas, $X_t$ et $Z_t$
+se d\'eduisent mutuellement l'un de l'autre par des op\'erations de
 filtrage causal.
-%, la réponse impulsionnelle de chacun de ces
-%filtres étant {\em à phase minimale} (c'est à dire inversible
+%, la r\'eponse impulsionnelle de chacun de ces
+%filtres \'etant {\em \`a phase minimale} (c'est \`a dire inversible
 %causalement).
 
 \subsubsection{Calcul des covariances d'un processus ARMA$(p,q)$ causal}
-Une première méthode consiste à utiliser l'expression
-(\ref{eq:gamm_proc_lin}) % qui s'écrit, compte tenu du fait que
+Une premi\`ere m\'ethode consiste \`a utiliser l'expression
+(\ref{eq:gamm_proc_lin}) % qui s'\'ecrit, compte tenu du fait que
 % $\{Z_t\}$ est un bruit blanc,
 % $$
 %  \gamma(h)=
 %    \sigma^2 \sum_{k=0}^\infty\psi_k \psi_{k+|h|}
 %    $$
-   où la suite $(\psi_k)$ se détermine de façon récurrente à partir de
-   l'égalité $\psi(z)\theta(z)=\phi(z)$ par identification du terme en $z^k$.
+   o\`u la suite $(\psi_k)$ se d\'etermine de fa\c{c}on r\'ecurrente \`a partir de
+   l'\'egalit\'e $\psi(z)\theta(z)=\phi(z)$ par identification du terme en $z^k$.
    Pour les premiers termes on trouve~:
 \begin{eqnarray*}
  &&\psi_0=1\\
@@ -1116,11 +1116,11 @@ Une première méthode consiste à utiliser l'expression
  &&\psi_2=\theta_2+\psi_0\phi_2+\psi_1\phi_1\\
  &&\cdots
 \end{eqnarray*}
-La seconde méthode utilise une formule de récurrence, vérifiée par
+La seconde m\'ethode utilise une formule de r\'ecurrence, v\'erifi\'ee par
 la fonction d'autocovariance d'un processus ARMA$(p,q)$, qui
 s'obtient en multipliant les deux membres de
 (\ref{eq:recurrenceARMApq}) par $\bar{X}_{t-k}$ et en prenant
-l'espérance. On obtient~:
+l'esp\'erance. On obtient~:
 \begin{align}
  \label{eq:recurrencegamma1}
   &\gamma(k)-\phi_1\gamma(k-1)-\cdots-\phi_p\gamma(k-p)
@@ -1133,21 +1133,21 @@ l'espérance. On obtient~:
   =
   0\;,\; k \geq \max(p,q+1)
 \end{align}
-où nous avons utilisé la causalité du processus pour écrire
+o\`u nous avons utilis\'e la causalit\'e du processus pour \'ecrire
 que $\PE{Z_t \bar{X}_{t-k}}=0$ pour tout $k\geq 1$. Le calcul de la
-suite $\{\psi_k\}$ pour $k=1,\dots, p$ se fait comme précédemment.
+suite $\{\psi_k\}$ pour $k=1,\dots, p$ se fait comme pr\'ec\'edemment.
 En reportant ces valeurs dans~(\ref{eq:recurrencegamma1}) pour
-$0\leq k \leq p$, on obtient $(p+1)$ équations linéaires aux
+$0\leq k \leq p$, on obtient $(p+1)$ \'equations lin\'eaires aux
 $(p+1)$ inconnues $(\gamma(0),\dots,\gamma(p))$ que l'on peut
-résoudre. Pour déterminer les valeurs suivantes on utilise
+r\'esoudre. Pour d\'eterminer les valeurs suivantes on utilise
 l'expression (\ref{eq:recurrencegamma2}).
-\subsubsection{Densité spectrale d'un processus ARMA$(p,q)$}
-\begin{theorem}[Densité spectrale d'un processus ARMA$(p,q)$]
-Soit $(X_t)$ un processus ARMA$(p,q)$ (pas nécessairement causal ou
-inversible) \textit{i.e.} la solution stationnaire de l'équation
-(\ref{eq:recurrenceARMApq}) où les polynômes $\theta(z)$ et $\phi(z)$ sont des
-polynômes de degré $q$ et $p$ n'ayant pas de zéros communs. Alors
-$(X_t)$ possède une densité spectrale qui a pour expression~:
+\subsubsection{Densit\'e spectrale d'un processus ARMA$(p,q)$}
+\begin{theorem}[Densit\'e spectrale d'un processus ARMA$(p,q)$]
+Soit $(X_t)$ un processus ARMA$(p,q)$ (pas n\'ecessairement causal ou
+inversible) \textit{i.e.} la solution stationnaire de l'\'equation
+(\ref{eq:recurrenceARMApq}) o\`u les polyn\^omes $\theta(z)$ et $\phi(z)$ sont des
+polyn\^omes de degr\'e $q$ et $p$ n'ayant pas de z\'eros communs. Alors
+$(X_t)$ poss\`ede une densit\'e spectrale qui a pour expression~:
 \begin{equation}
  \label{eq:dspARMApq}
  f(\lambda)=\frac{\sigma^2}{2\pi}
@@ -1158,29 +1158,29 @@ $(X_t)$ possède une densité spectrale qui a pour expression~:
 \end{theorem}
 
 \begin{remark}
-D'après le théorème \ref{theo:ARMApq}, l'expression de $f$ est bien
-définie puisque $\phi$ ne s'annule pas sur le cercle unité.
+D'apr\`es le th\'eor\`eme \ref{theo:ARMApq}, l'expression de $f$ est bien
+d\'efinie puisque $\phi$ ne s'annule pas sur le cercle unit\'e.
 \end{remark}
 % =======================================================================================
 %=======================================================================================
 %=======================================================================================
-% \section{Preuves des théorèmes~\ref{theo:filtragepassl} et~\ref{theo:filtragepassl_stat}}
+% \section{Preuves des th\'eor\`emes~\ref{theo:filtragepassl} et~\ref{theo:filtragepassl_stat}}
 % \label{sec:c1preuves}
 %=======================================================================================
 % \begin{theorembis}[\ref{theo:filtragepassl}]
 %  Soit $\{ \psi_k \}_{k\in\Zset}$ une suite telle que $\sum_{k= -
 % \infty}^\infty |\psi_k| < \infty$ et soit $\{X_{t}\}$ un processus
-% aléatoire tel que $\sup_{t \in \Zset} \PE {|X_{t}|} < \infty$.
+% al\'eatoire tel que $\sup_{t \in \Zset} \PE {|X_{t}|} < \infty$.
 % Alors, pour tout $t \in \Zset$, la suite~:
 % \[
 % Y_{n,t} = \sum_{s=-n}^n \psi_s X_{t-s}
 % \]
-% converge presque sûrement, quand $n$ tend vers l'infini, vers
+% converge presque s\^urement, quand $n$ tend vers l'infini, vers
 % une limite que nous notons $Y_{t} = \sum_{s=-\infty}^\infty \psi_s
 % X_{t-s}$ et $\limn \PE{
 %   |Y_{n,t} - Y_{t}|} = 0$. Si de plus $\sup_t \PE{X^2(t)} < \infty$, alors
 % $\PE{Y_{t}^2} < \infty$ et $Y_{n,t}$ converge en moyenne
-% quadratique vers $Y_{t}$, c'est à dire que $\limn \PE {|Y_{n,t} -
+% quadratique vers $Y_{t}$, c'est \`a dire que $\limn \PE {|Y_{n,t} -
 % Y_{t}|^2} = 0$.
 % \end{theorembis}
 %===============================================================
@@ -1207,7 +1207,7 @@ définie puisque $\phi$ ne s'annule pas sur le cercle unité.
 % \label{eq:dspfiltragebis}
 %   \nu_Y(\rmd\lambda) = |\psi(e^{-i\lambda})|^2 \nu_X(\rmd\lambda)
 % \end{equation}
-% où $\psi(e^{-i\lambda}) = \sum_k \psi_k e^{-i k \lambda}$ est
+% o\`u $\psi(e^{-i\lambda}) = \sum_k \psi_k e^{-i k \lambda}$ est
 % la fonction de transfert du filtre. Enfin l'intercovariance entre
 % les processus $Y_{t}$ et $X_{t}$ a pour expression~:
 % \begin{equation}
@@ -1217,7 +1217,7 @@ définie puisque $\phi$ ne s'annule pas sur le cercle unité.
 %  \end{equation}
 % \end{theorembis}
 
-% Pour déterminer l'expression de
+% Pour d\'eterminer l'expression de
 % l'intercovariance entre les processus entre les processus $Y_{t}$
 % et $X_{t}$, il suffit de noter $|\cov(Y_{t+h},X_t)|^2 \leq
 % \gamma_Y(0)\gamma_X(0)<+\infty$ et que~:

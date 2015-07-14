@@ -21,6 +21,7 @@
 \def\lleb{\lambda^{\mathrm{Leb}}}
 \newcommand{\rmi}{\mathrm{i}}
 \newcommand{\rme}{\mathrm{e}}
+\def\supp{\mathrm{supp}}
 
 
 
@@ -105,4 +106,11 @@
 \def\cI{\mathcal{I}}
 \def\PP{\mathbb{P}}
 \newcommand\PE[1]{{\mathbb E}\left[ #1 \right]}
+\newcommandx{\norm}[2][2=]{\Vert #1 \Vert_{#2}}
+\def\L1loc{L_{1,\mathrm{loc}}}
+\def\Leb{\mathrm{Leb}} 
 
+\newcommandx\sequence[3][2=,3=]
+{\ifthenelse{\equal{#3}{}}{\ensuremath{\{ #1_{#2}\}}}{\ensuremath{\{ #1_{#2}, \eqsp #2 \in #3 \}}}}
+\newcommandx\sequencePar[3][2=,3=]
+{\ifthenelse{\equal{#3}{}}{\ensuremath{\{ #1({#2})\}}}{\ensuremath{\{ #1({#2}), \eqsp #2 \in #3 \}}}}

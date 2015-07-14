@@ -79,7 +79,7 @@ $x\mapsto \rme^{\rmi 2 \pi \xi_0 x}f(x)$ sont dans $L_1(\rset)$ et v{\'e}rifient
 \end{enumerate}
 \end{proposition}
 \begin{proof}
-La preuve élémentaire est laissée aux lecteurs.
+La preuve \'el\'ementaire est laiss\'ee aux lecteurs.
 \end{proof}
 
 Une des propri{\'e}t{\'e}s remarquables de la transform{\'e}e de Fourier est d'{\'e}changer la \emph{d{\'e}rivation} et la multiplication par un mon{\^o}me
@@ -92,7 +92,7 @@ Soit $n$ un entier naturel.
 $$
 \hat{f}^{(n)} = \TFA{x\mapsto(-2 \rmi \pi x)^n f(x)}
 $$
-\item Si $f$ est $n$ fois continûment d{\'e}rivables avec $f^{(k)} \in L_1(\rset)$ pour tout $k=0,1, \dots, n$, alors
+\item Si $f$ est $n$ fois contin\^ument d{\'e}rivables avec $f^{(k)} \in L_1(\rset)$ pour tout $k=0,1, \dots, n$, alors
 $$
 [\TF(f^{(n)})](\xi) = (2 \rmi \pi \xi)^n \hat{f}(\xi) \quad\text{pour tout $\xi\in\rset$}\eqsp.
 $$
@@ -113,7 +113,7 @@ $$
 \int_{-a}^{+a} \rme^{- \rmi 2 \pi \xi x} f'(x) \rmd x = [ \rme^{- \rmi 2 \pi \xi x} f(x) ]_{-a}^a + \int_{-a}^a (2 \rmi \pi \xi) \rme^{- \rmi 2 \pi \xi x} f(x) \rmd x \eqsp.
 $$
 Comme $f' \in L_1(\rset)$ et $f(a) = f(0) + \int_0^a f'(t) \rmd x$, $\lim_{a \to \infty} \int_0^a f'(t) \rmd x$ existe et donc
-$\lim_{a \to \infty} f(a) $ existe. Cette limite est n{\'e}cessairement nulle car $f \in L_1(\rset)$. De la m{\^e}me façon,
+$\lim_{a \to \infty} f(a) $ existe. Cette limite est n{\'e}cessairement nulle car $f \in L_1(\rset)$. De la m{\^e}me fa\c{c}on,
 $\lim_{a \to \infty} f(-a) = 0$. D'o{\`u} le r{\'e}sultat.
 \end{enumerate}
 \end{proof}
@@ -145,7 +145,7 @@ r{\'e}sulte du th{\'e}or{\`e}me de Fubini que
 Nous avons observ{\'e} dans la partie pr{\'e}c{\'e}dente d{\`e}s le premier exemple de calcul de transform{\'e}e de Fourier
 que $L_1(\rset)$  n'est pas stable sous l'effet de $\TF$.
 Nous allons introduire un sous-espace de $L_1(\rset)$ stable par transformation de Fourier,
-d{\'e}rivation et multiplication par un polyn{\^o}me. Cet espace introduit par Laurent Schwartz et que l'on notera $\mcs$ joue un rôle essentiel en analyse de Fourier.
+d{\'e}rivation et multiplication par un polyn{\^o}me. Cet espace introduit par Laurent Schwartz et que l'on notera $\mcs$ joue un r\^ole essentiel en analyse de Fourier.
 
 \begin{definition}[Fonction {\`a} d{\'e}croissance rapide]\index{Fonction|{\`a}
     d{\'e}croissance rapide}
@@ -245,7 +245,7 @@ Par un changement de variable {\'e}vident, ce r{\'e}sultat se g{\'e}n{\'e}ralise
 Comme annonc\'e plus haut, la famille $(g_\sigma)_{\sigma>0}$ est donc stable par
 transform{\'e} de Fourier.
 \section{Quelques exemples classiques}
-Rappelons que  $u$ est la fonction de Heaviside, définie par $u(x)=1$ pour $x>0$ et $u(x)=0$ pour $x\leq 0$.
+Rappelons que  $u$ est la fonction de Heaviside, d\'efinie par $u(x)=1$ pour $x>0$ et $u(x)=0$ pour $x\leq 0$.
 \begin{enumerate}[label=(\roman*)]
 \item $f_{1}(x)=\rme^{-ax}u(x)$ , ${\rm Re}(a)>0.$
 $$
@@ -266,7 +266,7 @@ Nous avons
 $$
 \hat{f_{4}}(\xi)=\frac{-1}{(-a+2i\pi\xi)^{k+1}}.
 $$
-\item $f_{5}(x)=\rme^{-a|x|}, {\rm Re}(a)>0$. Nous déduisons des calculs précédents
+\item $f_{5}(x)=\rme^{-a|x|}, {\rm Re}(a)>0$. Nous d\'eduisons des calculs pr\'ec\'edents
 $$
 \hat{f_{5}}(\xi)=\frac{2a}{a^{2}+4\pi^{2}\xi^{2}}.
 $$
@@ -276,18 +276,18 @@ $$
 $$
 \end{enumerate}
 \section{Formulaire}
-\begin{enumerate}[label=(\roman*)]   
-\item 
+\begin{enumerate}[label=(\roman*)]
+\item
 \begin{align*}
 \hat{f}^{(k)}(\xi)&=[(-2\rmi\pi x)^{k}f(x)]^{\sim}(\xi)\\
 \widehat{f^{(k)}}(\xi)&=(2\rmi \pi\xi)^{k}\hat{f}(\xi)
 \end{align*}
-\item 
+\item
 \begin{align*}
 f(x-a) &\TFyield \rme^{-2\rmi \pi a\xi}\hat{f}(\xi) \\
 \rme^{2 \rmi \pi ax}f(x)&\TFyield \hat{f}(\xi-a) \\
 \end{align*}
-\item $a\neq 0$. 
+\item $a\neq 0$.
 $$ f(ax)\TFyield \frac{1}{|\xi|}\hat{f}(\frac{\xi}{a})$$
 \item  $a\in \cset$, ${\rm Re}(a)>0, k=0,1,2\ldots.$
 \begin{align*}
@@ -296,7 +296,7 @@ $$ f(ax)\TFyield \frac{1}{|\xi|}\hat{f}(\frac{\xi}{a})$$
 \rme^{-a|x|} &\TFyield \frac{2a}{a^{2}+4\pi^{2}\xi^{2}} \\
 \mathrm{sign}(x)\rme^{-a|x|} &\TFyield \frac{-4i\pi\xi}{a^{2}+4\pi^{2}\xi^{2}} \\
 \end{align*}
-\item  $a\in \rset$, $a>0$. 
+\item  $a\in \rset$, $a>0$.
 \begin{align*}
 \rme^{-ax^{2}}  &\TFyield \sqrt{\frac{\pi}{a}}\rme^{-\frac{\pi^{2}}{a}\xi^{2}} \\
 \1_{\ccint{-a,+a}}(x) &\TFyield \frac{\sin 2a\pi\xi}{\pi\xi}

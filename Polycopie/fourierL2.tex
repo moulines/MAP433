@@ -8,7 +8,7 @@ $$
 On note $L_2(\rset)$ l'espace des classes d'{\'e}quivalence de
 $\mathcal{L}_2(\rset)$ pour la relation d'{\'e}quivalence ``$f=g$ p.p.''.
 Pour $I$ un sous ensemble bor{\'e}lien de $\rset$ (et en particulier, un intervalle), on peut d{\'e}finir
-de la m{\^e}me façon l'espace $\mathcal{L}_2(I)$ des fonctions  de carr{\'e} sommable sur $I$, $\int_I |f(x)|^2 \rmd x < \infty$
+de la m{\^e}me fa\c{c}on l'espace $\mathcal{L}_2(I)$ des fonctions  de carr{\'e} sommable sur $I$, $\int_I |f(x)|^2 \rmd x < \infty$
 et l'espace $L_2(I)$ des classes d'{\'e}quivalence de $\mathcal{L}_2(I)$ par rapport {\`a} la relation d'{\'e}quivalence d'{\'e}galit{\'e} presque-partout.
 
 
@@ -38,7 +38,7 @@ $(L_2(\rset),\pscal{\cdot}{\cdot})$ est un espace
 \begin{proof}
 Pour tout $f\in L_2(\rset)$, on note $f_n$ la fonction {\'e}gale {\`a} $f$ sur $[-n,n]$ et nulle ailleurs.
 Alors $f_n\in L_1(\rset)$ pour tout $n$, et par convergence monotone, $\|f_n-f\|_2\to0$ quand $n\to\infty$ (on dit que
-$f_n$ tend vers $f$ au sens de $L_2(\rset)$. On en conclut que $L_1(\rset)\cap L_2(\rset)$ est dense dans
+$f_n$ tend vers $f$ au sens de $L_2(\rset))$. On en conclut que $L_1(\rset)\cap L_2(\rset)$ est dense dans
 $(L_2(\rset),\|\cdot\|_2)$.
 \end{proof}
 On a imm{\'e}diatement que la proposition~\ref{prop:DualiteSchwartz} s'adapte {\`a} l'espace $L_2(\rset)$.
@@ -49,13 +49,6 @@ $$
 $$
 alors $f=g$ (au sens $L_2(\rset)$).
 \end{corollary}
-On  utilisera par ailleurs le r{\'e}sultat suivant qui peut se montrer directement {\`a} partir du th{\'e}or{\`e}me de densité des
-fonctions continues dans $L_1(\rset)$. 
-
-\begin{theorem}
-  \label{thm:SDenseltwo}
-  L'espace $\mcs$ est un sous-espace vectoriel dense de $(L_2(\rset),\|\cdot\|_2)$.
-\end{theorem}
 
 Nous verrons que $L_2(\rset)$ pose un certain nombre de probl{\`e}mes
 th{\'e}oriques pour d{\'e}finir la transform{\'e}e de Fourier qui ne se pose pas
@@ -123,8 +116,7 @@ ce qui prouve que $\| \tilde{A} \| \leq  \| A \|$. Comme $\tilde{A} f = A f$ pou
 Enfin, $G$ {\'e}tant dense dans $E$, il est clair que $\tilde{A}$ est unique.
 \end{proof}
 D'apr{\`e}s la proposition~\ref{prop:plancherelparseval}, $\TF$ est une isom{\'e}trie sur $\mcs$ muni du produit scalaire
-$\pscal{\cdot}{\cdot}$. On applique le r{\'e}sultat pr{\'e}c{\'e}dent avec $E = F = L_2(\rset)$, $G = \mcs$ (voir le
-th{\'e}or{\`e}me~\ref{thm:SDenseltwo}. On obtient
+$\pscal{\cdot}{\cdot}$. On applique le r{\'e}sultat pr{\'e}c{\'e}dent avec $E = F = L_2(\rset)$, $G = \mcs$ (voir \Cref{theo:densite-mcs-Lp}). On obtient
 \begin{theorem}\label{thm:prolong}
 La transformation de Fourier $\TF$ (respectivement la transformation inverse $\TFC$)
 se prolonge en une isom{\'e}trie de $L_2(\rset)$ sur $L_2(\rset)$.
@@ -170,6 +162,35 @@ Comme $f_n  \in L_1(\rset) \cap L_2(\rset)$ on {\'e}crit $g_n = \hat{f}_n = \TFA
 $ \lim_{n \to \infty} \| \TF f - g_n \|_2^2= 0$.
 \end{proof}
 
+\section{Application au calcul de transform\'ees de Fourier}
+\begin{proposition}
+\label{prop:calcul}
+\begin{enumerate}[label=(\roman*)]
+\item Soit $f \in L_2(\rset)$ On a $\TFA \TFA f = f_\sigma$ p.p. où $f_\sigma(x)= f(-x)$
+\item Si $f \in L_1(\rset) \cap L^2(\rset)$, $\TFA  \hat{f} = f$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\roman*), wide=0pt, labelindent=\parindent]
+\item Montrons que $\TFA f = \TFAC f_\sigma$. Soit $\sequence{f}[n][\nset]$ une suite de fonctions de $\mcs$ telle que
+$\lim_{n \to \infty} \norm{f-f_n}[2]=0$ (voir \Cref{theo:densite-mcs-Lp}). On a $\TFA f_n = \TFA (f_n)_\sigma$. En passant à la limite, on a donc $\TFA f= \TFAC f_\sigma$ (remarquons que $\norm{f_\sigma - (f_n)_\sigma}[2]=0$).
+\item R\'esulte imm\'ediatement du fait que $L_1(\rset) \cap L_2(\rset)$, $\TFA f = \hat{f}$.
+\end{proof}
+\begin{example}
+Consid\'erons la fonction $f_\pm(x)= \rme^{\pm x a x} u(\pm x)$ et $\Re(a) >0$. On a $\hat{f}_{\pm}(\xi)= \pm 1 / (\pm a + 2 \rmi \pi \xi)$. $\hat{f}_{\pm} \not \in \lone(\rset)$ mais \Cref{prop:calcul} montre que $\TFA{\hat{f}}= (f_{\pm})_\sigma$. On a donc
+pour $a \in \cset$, $\Re(a) > 0$, 
+\begin{align*}
+(a + 2 \rmi \pi x)^{-1} &\TFyield \rme^{a \xi} u(-\xi) \\
+(a - 2 \rmi \pi x)^{-1} &\TFyield \rme^{-a \xi} u(\xi) \eqsp.
+\end{align*} 
+En proc\'edant de la même façon on obtient
+\[
+\sin(x) / x \TFyield \pi \1_{\ccint{-(2\pi)^{-1},(2 \pi)^{-1}}} (\xi) \eqsp.
+\]
+\end{example}
+\section{Principe d'incertitude : r\'esolution en temps et en fr\'equence}
+
+\section{Convolution et transformation de Fourier dans $L_2(\rset)$}
 
 %%% Local Variables:
 %%% mode: latex

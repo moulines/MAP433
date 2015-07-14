@@ -2,18 +2,18 @@
 \label{sec:stat-second-ordre}
 
 On a vu dans l'exemple~\ref{exemple:L2Omega} que l'espace $L^2(\Omega)$ des
-variables aléatoires (v.a.) de variance finie est un espace de Hilbert.  Pour
-profiter des propriétés de ces espaces il est donc naturel de travailler sur
+variables al\'eatoires (v.a.) de variance finie est un espace de Hilbert.  Pour
+profiter des propri\'et\'es de ces espaces il est donc naturel de travailler sur
 des processus faisant intervenir des v.a. de cet espace.
 
 \begin{definition}[Processus du second ordre]
-Le processus $X=(X_t)_{t \in T}$ à valeurs dans $\Cset^d$ est dit
-du second ordre, si $\PE {|X_t|^2} < \infty$ pour tout $t\in T$, où $|x|$
+Le processus $X=(X_t)_{t \in T}$ \`a valeurs dans $\Cset^d$ est dit
+du second ordre, si $\PE {|X_t|^2} < \infty$ pour tout $t\in T$, o\`u $|x|$
 est la norme hermitienne de $x\in \Cset^d$.
 \end{definition}
-Notons que la \emph{fonction moyenne} définie sur $T$ par $\mu(t)= \PE{X_t}$
-est à valeurs dans $\cset^d$ et que la \emph{fonction d'autocovariance}
-définie sur $T\times T$ par
+Notons que la \emph{fonction moyenne} d\'efinie sur $T$ par $\mu(t)= \PE{X_t}$
+est \`a valeurs dans $\cset^d$ et que la \emph{fonction d'autocovariance}
+d\'efinie sur $T\times T$ par
 \[
 \Gamma(s,t)
    = \cov(X_s,X_t)
@@ -21,22 +21,22 @@ définie sur $T\times T$ par
 \]
 Elle prend ses valeurs dans l'espace des matrices de dimension $d\times d$. Pour tout $s\in T$, $\Gamma(s,s)$ est une matrice
 d'autocovariance. C'est donc une matrice hermitienne positive. Plus
-généralement, toute fonction d'autocovariance vérifie les propriétés
+g\'en\'eralement, toute fonction d'autocovariance v\'erifie les propri\'et\'es
 suivantes.
 
 \begin{proposition}
  \label{prop:positifcovgene}
  Soit $\Gamma$ la fonction d'autocovariance d'un processus du second ordre
- indexé par $T$ à valeurs dans $\Cset^d$. Elle vérifie alors les propriétés
+ index\'e par $T$ \`a valeurs dans $\Cset^d$. Elle v\'erifie alors les propri\'et\'es
  suivantes.
 \begin{enumerate}
 \item
-Symétrie hermitienne: pour tout $s,t \in T$,
+Sym\'etrie hermitienne: pour tout $s,t \in T$,
 \begin{equation}\label{eq:gamma_hermitienne}
 \Gamma(s,t)= \Gamma(t,s)^H
 \end{equation}
 \item Type positif \index{Fonction d'autocovariance
-\subitem{positivité}}:
+\subitem{positivit\'e}}:
 pour tout $n\geq1$, pour tout $t_1,\dots,t_n\in T$ et pour tout
 $a_1,\cdots,a_n\in\cset^d$,
 \begin{equation}
@@ -46,21 +46,21 @@ $a_1,\cdots,a_n\in\cset^d$,
 \end{enumerate}
 \end{proposition}
 \begin{proof}\smartqed
-La propriété~(\ref{eq:gamma_hermitienne}) est immédiate par définition de la
+La propri\'et\'e~(\ref{eq:gamma_hermitienne}) est imm\'ediate par d\'efinition de la
 covariance.  Pour monntrer~(\ref{eq:typenonnegatif}),
-formons la combinaison linéaire $Y= \sum_{k=1}^n a^H_k X_{t_k}$.
-$Y$ est une variable aléatoire complexe. % Sa variance, qui est
-En utilisant les propriétés de forme hermitienne de la covariance, on obtient
+formons la combinaison lin\'eaire $Y= \sum_{k=1}^n a^H_k X_{t_k}$.
+$Y$ est une variable al\'eatoire complexe. % Sa variance, qui est
+En utilisant les propri\'et\'es de forme hermitienne de la covariance, on obtient
 \[
  \Var{Y}= \sum_{1 \leq k,m \leq n} a_k^H
 \Gamma(t_k,t_m)a_m
 \]
-ce qui établit~(\ref{eq:typenonnegatif}).
+ce qui \'etablit~(\ref{eq:typenonnegatif}).
 \qed
 \end{proof}
 \frnote{Faire la reciproque, distinguer reel et complexe}
-Dans le cas scalaire ($d = 1$), on note en général $\gamma(s,t)$
-la covariance, en réservant la notation $\Gamma(s,t)$ au cas des
+Dans le cas scalaire ($d = 1$), on note en g\'en\'eral $\gamma(s,t)$
+la covariance, en r\'eservant la notation $\Gamma(s,t)$ au cas des
 processus vectoriels ($d > 1$).
 %======================================================
 %======================================================
@@ -70,18 +70,18 @@ ordre}
 
 %==================================================
 %==================================================
-Dorénavant, dans ce chapitre, on prend $T=\zset$.  On définit la stationnarité
-au second ordre en ne retenant que les propriétés du second ordre (moyenne et
-covariance) d'un processus stationnaire au sens strict indexé par $\Zset$.  En
+Dor\'enavant, dans ce chapitre, on prend $T=\zset$.  On d\'efinit la stationnarit\'e
+au second ordre en ne retenant que les propri\'et\'es du second ordre (moyenne et
+covariance) d'un processus stationnaire au sens strict index\'e par $\Zset$.  En
 effet, soit $X=(X_{t})_{t \in \Zset}$ un processus stationnaire au sens strict
-à valeurs dans $\Cset^d$. Supposons de plus qu'il est du second ordre. Alors sa
+\`a valeurs dans $\Cset^d$. Supposons de plus qu'il est du second ordre. Alors sa
 fonction moyenne est constante puisque la loi marginale l'est, et sa fonction
-d'autocovariance $\Gamma$ vérifie $\Gamma(s,t)=\Gamma(s-t,0)$ pour tout
+d'autocovariance $\Gamma$ v\'erifie $\Gamma(s,t)=\Gamma(s-t,0)$ pour tout
 $s,t\in\zset$ puisque les lois bi-dimensionnelles sont invariantes par
-translation.  Cela donne la définition suivante.
-\begin{definition}[Stationnarité au second ordre]\label{def:statio_sec_ordre}
+translation.  Cela donne la d\'efinition suivante.
+\begin{definition}[Stationnarit\'e au second ordre]\label{def:statio_sec_ordre}
   Soit $\mu\in\Cset^d$ et $\Gamma:\Zset\to\Cset^{d\times d}$.  Un processus
-  $(X_{t})_{t \in \Zset}$ à valeurs dans $\Cset^d$ est dit \emph{stationnaire
+  $(X_{t})_{t \in \Zset}$ \`a valeurs dans $\Cset^d$ est dit \emph{stationnaire
     au second ordre} (ou \emph{faiblement stationnaire}) de moyenne $\mu$ et de
   \emph{fonction d'auto-covariance} $\Gamma$ si~:
 \begin{enumerate}[label=\emph{\alph*})]
@@ -94,24 +94,24 @@ $\PE{|X_{t}|^2}<+\infty$,
 \end{definition}
 
 Par convention la fonction d'autocovariance d'un processus stationnaire au
-second ordre indexé par $T$ est définie sur $T$ au lieu de $T\times T$ pour le
-cas général.
+second ordre index\'e par $T$ est d\'efinie sur $T$ au lieu de $T\times T$ pour le
+cas g\'en\'eral.
 
-Comme expliqué en préambule de la définition, un processus du second ordre
+Comme expliqu\'e en pr\'eambule de la d\'efinition, un processus du second ordre
 stationnaire au sens strict est stationnaire au second ordre.  L'implication
-inverse est vraie pour la classe des processus gaussiens définies au
-paragraphe~\ref{sec:proc-gauss-reels} d'après la
+inverse est vraie pour la classe des processus gaussiens d\'efinies au
+paragraphe~\ref{sec:proc-gauss-reels} d'apr\`es la
 proposition~\ref{prop:vect_gaussiens}.
 
 
-On remarque qu'un processus $(X_{t})_{t \in \Zset}$ à valeurs dans $\Cset^d$
+On remarque qu'un processus $(X_{t})_{t \in \Zset}$ \`a valeurs dans $\Cset^d$
 est stationnaire au second ordre de moyenne $\mu$ et de \emph{fonction
   d'auto-covariance} $\Gamma$ si et seulement si pour tout $\lambda\in\Cset^d$,
-le processus $(\lambda^HX_{t})_{t \in \Zset}$ à valeurs dans $\Cset$ est
+le processus $(\lambda^HX_{t})_{t \in \Zset}$ \`a valeurs dans $\Cset$ est
 stationnaire au second ordre de moyenne $\lambda^H\mu$ et de \emph{fonction
-  d'auto-covariance} $\lambda^H\Gamma\lambda$.  L'étude des processus
+  d'auto-covariance} $\lambda^H\Gamma\lambda$.  L'\'etude des processus
 stationnaires au second ordre peut donc se restreindre au cas $d=1$ sans grande
-perte de généralité.
+perte de g\'en\'eralit\'e.
 
 
 
@@ -120,23 +120,23 @@ perte de généralité.
 %=========================================================
 %=========================================================
 %=========================================================
-\subsection{Propriétés}
-Les propriétés de la proposition~\ref{prop:positifcovgene} se déclinent pour un
-processus stationnaire au second ordre de la façon suivante.
+\subsection{Propri\'et\'es}
+Les propri\'et\'es de la proposition~\ref{prop:positifcovgene} se d\'eclinent pour un
+processus stationnaire au second ordre de la fa\c{c}on suivante.
 \begin{proposition}
  \label{prop:stat2}
  La fonction d'autocovariance $\gamma: \Zset \rightarrow \Cset$ d'un processus
- stationnaire au second ordre à valeurs complexes vérifie les propriétés
- suivantes qui sont une conséquence directe de la proposition
+ stationnaire au second ordre \`a valeurs complexes v\'erifie les propri\'et\'es
+ suivantes qui sont une cons\'equence directe de la proposition
  \ref{prop:positifcovgene}.
 \begin{enumerate}
-\item Symétrie hermitienne~: \index{Fonction d'autocovariance
-\subitem{symétrie hermitienne}} Pour tout $s\in\zset$,
+\item Sym\'etrie hermitienne~: \index{Fonction d'autocovariance
+\subitem{sym\'etrie hermitienne}} Pour tout $s\in\zset$,
 \[
 \gamma(-s)= \overline{\gamma(s)}
 \]
 \item\label{item:type_positif} Type positif~: \index{Fonction
-    d'autocovariance \subitem{positivité}} Pour tout entier $n\geq1$ et tout
+    d'autocovariance \subitem{positivit\'e}} Pour tout entier $n\geq1$ et tout
   vecteur $(a_1, \cdots, a_n)$ de valeurs complexes,
 \begin{eqnarray*}
    \sum_{s=1}^{n}\sum_{t=1}^{n}
@@ -144,9 +144,9 @@ processus stationnaire au second ordre de la façon suivante.
 \end{eqnarray*}
 \end{enumerate}
 \end{proposition}
-La matrice de covariance de $n$ valeurs consécutives $X_1,\dots,X_n$ du
-processus possède de plus une structure particulière, dite de \emph{Toeplitz},
-caractérisée par le fait que $(\Gamma_n)_{ij} = \gamma(i-j)$.  On obtient une
+La matrice de covariance de $n$ valeurs cons\'ecutives $X_1,\dots,X_n$ du
+processus poss\`ede de plus une structure particuli\`ere, dite de \emph{Toeplitz},
+caract\'eris\'ee par le fait que $(\Gamma_n)_{ij} = \gamma(i-j)$.  On obtient une
 matrice de la forme
  \begin{align}
  \Gamma_n \nonumber
@@ -163,32 +163,32 @@ matrice de la forme
  \label{eq:matcov}
 \end{align}
 Lorsque $\gamma(0)$ est non-nul il peut être pratique de normaliser la fonction
-d'autocovariance. On obtient la définition suivante.
-\begin{definition}[Fonction d'autocorrélation]
+d'autocovariance. On obtient la d\'efinition suivante.
+\begin{definition}[Fonction d'autocorr\'elation]
   Pour un processus stationnaire au second ordre de variance non nulle, on
-  appelle fonction d'autocorrélation $\rho$ la fonction définie sur $s\in\zset$
-  par $\rho(s)= \gamma(s)/\gamma(0)$. Il s'agit d'une quantité normalisée dans
-  le sens où $\rho(0) = 1$ et $|\rho(s)| \leq 1$ pour tout $s\in\zset$.
+  appelle fonction d'autocorr\'elation $\rho$ la fonction d\'efinie sur $s\in\zset$
+  par $\rho(s)= \gamma(s)/\gamma(0)$. Il s'agit d'une quantit\'e normalis\'ee dans
+  le sens o\`u $\rho(0) = 1$ et $|\rho(s)| \leq 1$ pour tout $s\in\zset$.
 \end{definition}
-En effet, l'inégalité de Cauchy-Schwarz (voir le
-théorème~\ref{theo:cauchyandco}) appliquée à $\gamma$ implique
+En effet, l'in\'egalit\'e de Cauchy-Schwarz (voir le
+th\'eor\`eme~\ref{theo:cauchyandco}) appliqu\'ee \`a $\gamma$ implique
 \[
  |\gamma(s)|
   = \left|\cov(X_{s},X_0)\right| \leq
     \sqrt{\Var{X_{s}}\Var{X_0}} = \gamma(0)
 \]
-la dernière inégalité découlant de l'hypothèse de
-stationnarité.%  Attention, certaines références (livres et
-% publications), en général anciennes, utilisent (incorrectement) le
-% terme de ``fonction d'autocorrélation'' pour $\gamma(h)$.
+la derni\`ere in\'egalit\'e d\'ecoulant de l'hypoth\`ese de
+stationnarit\'e.%  Attention, certaines r\'ef\'erences (livres et
+% publications), en g\'en\'eral anciennes, utilisent (incorrectement) le
+% terme de ``fonction d'autocorr\'elation'' pour $\gamma(h)$.
 % Dans la
-% suite de ce document, le terme autocorrélation est réservée à la
-% quantité normalisée $\rho(h)$.
+% suite de ce document, le terme autocorr\'elation est r\'eserv\'ee \`a la
+% quantit\'e normalis\'ee $\rho(h)$.
 \begin{example}[Retournement du temps (suite)]
-  \label{exe:stat_retourne} Soit $(X_t)_{t\in\zset}$ un processus aléatoire
-  stationnaire au second ordre à valeurs réelles de moyenne $\mu_X$ et de
+  \label{exe:stat_retourne} Soit $(X_t)_{t\in\zset}$ un processus al\'eatoire
+  stationnaire au second ordre \`a valeurs r\'eelles de moyenne $\mu_X$ et de
   fonction d'autocovariance $\gamma_X$. On note, pour tout $t\in\zset$,
-  $Y_t=X_{-t}$ le processus {\it retourné}, comme dans
+  $Y_t=X_{-t}$ le processus {\it retourn\'e}, comme dans
   l'exemple~\ref{exple:time_reversion}. Alors $Y_t$ est un processus
   stationnaire au second ordre de même moyenne et de même fonction
   d'autocovariance que le processus $X_t$. En effet on a~:
@@ -198,39 +198,39 @@ stationnarité.%  Attention, certaines références (livres et
  \end{align*}
 \end{example}
 \begin{definition}[Bruit blanc faible]\index{Bruit blanc!faible}
-  On appelle bruit blanc faible un processus aléatoire stationnaire au second
-  ordre à valeurs complexes ou réelles, centré, de fonction d'autocovariance
-  $\gamma$ définie par $\gamma(0)= \sigma^2>0$ et $\gamma(s)=0$  pour tout
+  On appelle bruit blanc faible un processus al\'eatoire stationnaire au second
+  ordre \`a valeurs complexes ou r\'eelles, centr\'e, de fonction d'autocovariance
+  $\gamma$ d\'efinie par $\gamma(0)= \sigma^2>0$ et $\gamma(s)=0$  pour tout
   $s\neq0$. On le notera $ (X_{t}) \sim  \BB(0,\sigma^2)$.
 \end{definition}
 \begin{definition}[Bruit blanc fort]\index{Bruit blanc!fort}
 On appelle bruit blanc fort une suite de variables
-aléatoires $(X_{t})$, centrées, indépendantes et identiquement
-distribuées (i.i.d.) de variance $\PE{X_{t}^2} = \sigma^2 <
+al\'eatoires $(X_{t})$, centr\'ees, ind\'ependantes et identiquement
+distribu\'ees (i.i.d.) de variance $\PE{X_{t}^2} = \sigma^2 <
 \infty$. On le notera $ (X_{t}) \sim \BBF(0,\sigma^2)$.
 \end{definition}
-Par définition un bruit blanc fort est un bruit blanc faible. La
+Par d\'efinition un bruit blanc fort est un bruit blanc faible. La
 structure de bruit blanc fort est clairement plus contraignante
-que celle du  bruit blanc faible. % En général, il est tout à fait
-% inutile de faire un telle hypothèse lorsque l'on s'intéresse à
+que celle du  bruit blanc faible. % En g\'en\'eral, il est tout \`a fait
+% inutile de faire un telle hypoth\`ese lorsque l'on s'int\'eresse \`a
 % des processus  stationnaires au second ordre.
 % Il arrivera cependant dans la suite que nous adoptions cette
-% hypothèse plus forte afin de simplifier les développements
-% mathématiques.
-Notons que, de même que la stationnarité stricte  d'un processus
-gaussien découle de la stationnarité
+% hypoth\`ese plus forte afin de simplifier les d\'eveloppements
+% math\'ematiques.
+Notons que, de même que la stationnarit\'e stricte  d'un processus
+gaussien d\'ecoule de la stationnarit\'e
 faible, un bruit blanc faible gaussien est un bruit blanc fort.
 
 \begin{example}[Processus MA(1)]
  \label{exe:MA1covth}
 Soit $(X_{t})$ le processus stationnaire au second ordre
-défini par~:
+d\'efini par~:
 \begin{equation}
 \label{eq:recurrenceMA1}
  X_{t}= Z_{t} + \theta Z_{t-1} \; ,
-\end{equation} où $(Z_{t}) \sim \BB(0,\sigma^2)$ réel et $\theta \in
-\Rset$. On vérifie aisément que $\PE{X_{t}}= 0$ et que sa fonction
-d'autocovariance est définie par
+\end{equation} o\`u $(Z_{t}) \sim \BB(0,\sigma^2)$ r\'eel et $\theta \in
+\Rset$. On v\'erifie ais\'ement que $\PE{X_{t}}= 0$ et que sa fonction
+d'autocovariance est d\'efinie par
 \begin{equation}
   \label{eq:ma1-cov}
 \gamma(s)=
@@ -241,23 +241,23 @@ d'autocovariance est définie par
 \end{cases}
 \end{equation}
 Le processus $(X_{t})$ est donc bien stationnaire au second ordre.
-Un tel processus est appelé \emph{processus à moyenne ajustée d'ordre 1}.
-Cette propriété se généralise, sans difficulté, à un processus
-MA($q$). Nous reviendrons plus en détail, paragraphe
-\ref{s:procARMA}, sur la définition et les propriétés de ces
+Un tel processus est appel\'e \emph{processus \`a moyenne ajust\'ee d'ordre 1}.
+Cette propri\'et\'e se g\'en\'eralise, sans difficult\'e, \`a un processus
+MA($q$). Nous reviendrons plus en d\'etail, paragraphe
+\ref{s:procARMA}, sur la d\'efinition et les propri\'et\'es de ces
 processus.
 \end{example}
-\begin{example}[Processus harmonique réel]
+\begin{example}[Processus harmonique r\'eel]
   \label{ex:processusharmonique} Soient $(A_k)_{1 \leq k \leq N}$ $N$
-  v.a. réelles de variance finie. On note $\sigma_k^2=\Var{A_k}$. Soient
-  $(\Phi_k)_{1 \leq k \leq N}$, $N$ variables aléatoires indépendantes et
-  identiquement distribuées (i.i.d), de loi uniforme sur $[-\pi,\pi]$, et
-  indépendantes de $(A_k)_{1 \leq k \leq N}$. On définit~:
+  v.a. r\'eelles de variance finie. On note $\sigma_k^2=\Var{A_k}$. Soient
+  $(\Phi_k)_{1 \leq k \leq N}$, $N$ variables al\'eatoires ind\'ependantes et
+  identiquement distribu\'ees (i.i.d), de loi uniforme sur $[-\pi,\pi]$, et
+  ind\'ependantes de $(A_k)_{1 \leq k \leq N}$. On d\'efinit~:
 \begin{equation}
    X_{t} = \sum_{k=1}^N A_k \cos(\lambda_k t + \Phi_k ) \;,
 \end{equation}
-où $(\lambda_k)_{1 \leq k \leq N}\in [- \pi,\pi]$ sont $N$ pulsations. Le
-processus $(X_{t})$ est appelé processus harmonique. On vérifie aisément que
+o\`u $(\lambda_k)_{1 \leq k \leq N}\in [- \pi,\pi]$ sont $N$ pulsations. Le
+processus $(X_{t})$ est appel\'e processus harmonique. On v\'erifie ais\'ement que
 $\PE {X_{t}}= 0$ et que, pour tout $s,t\in\zset$,
 \[
 \PE{X_{s}X_{t}} = \frac{1}{2}
@@ -265,11 +265,11 @@ $\PE {X_{t}}= 0$ et que, pour tout $s,t\in\zset$,
 \]
 Le processus harmonique est donc stationnaire au second ordre.
 \end{example}
-\begin{example}[Marche aléatoire]
-\label{ex:marche_aleatoire} Soit $(S_{t})$ le processus défini sur
-$t \in \Nset$ par $S_{t}= X_{0} + X_{1} + \cdots + X_{t}$, où
-$(X_{t})$ est un bruit blanc fort réel. Un tel processus est appelé
-\emph{une marche aléatoire}. On en déduit que $\PE{S_{t}}= 0$,
+\begin{example}[Marche al\'eatoire]
+\label{ex:marche_aleatoire} Soit $(S_{t})$ le processus d\'efini sur
+$t \in \Nset$ par $S_{t}= X_{0} + X_{1} + \cdots + X_{t}$, o\`u
+$(X_{t})$ est un bruit blanc fort r\'eel. Un tel processus est appel\'e
+\emph{une marche al\'eatoire}. On en d\'eduit que $\PE{S_{t}}= 0$,
 $\PE{S_t^2}=t\sigma^2$ et, pour $s\leq t\in\nset$, on a~:
 \[
 \PE{S_sS_t} = \PE{ (S_{s} + X_{s+1} + \cdots + X_{t})S_{s}}
@@ -280,7 +280,7 @@ ordre.
 \end{example}
 \begin{example}
  \label{exe:testposivite1}
-Nous allons montrer que la fonction $\chi$ définie sur $\zset$, par
+Nous allons montrer que la fonction $\chi$ d\'efinie sur $\zset$, par
 \begin{equation}
   \label{eq:covma1chi}
  \chi(s)=
@@ -291,156 +291,156 @@ Nous allons montrer que la fonction $\chi$ définie sur $\zset$, par
  \end{cases}
 \end{equation}
 est la fonction d'autocovariance d'un processus stationnaire au
-second ordre réel si et seulement si $\rho \in [-1/2,1/2]$. Nous avons déjà
-montré exemple \ref{exe:MA1covth} que la fonction d'autocovariance
-$\gamma$ d'un processus MA(1) est donnée par~(\ref{eq:ma1-cov}).
+second ordre r\'eel si et seulement si $\rho \in [-1/2,1/2]$. Nous avons d\'ej\`a
+montr\'e exemple \ref{exe:MA1covth} que la fonction d'autocovariance
+$\gamma$ d'un processus MA(1) est donn\'ee par~(\ref{eq:ma1-cov}).
 La fonction $\chi$ est donc la fonction d'autocovariance d'un
 processus MA(1) si et seulement si $\sigma^2(1+\theta^2)= 1$ et
 $\sigma^2 \theta = \rho$. Lorsque $|\rho| \leq 1/2$, ce
-système d'équations admet comme solution~:
+syst\`eme d'\'equations admet comme solution~:
 \[
  \theta = (2 \rho)^{-1}( 1 \pm \sqrt{1 - 4 \rho^2})
  \quad\mbox{et}\quad
  \sigma^2= (1+ \theta^2)^{-1}\;.
 \]
-Lorsque $|\rho| > 1/2$, ce système d'équations n'admet pas de solution réelles
+Lorsque $|\rho| > 1/2$, ce syst\`eme d'\'equations n'admet pas de solution r\'eelles
 et la fonction $\chi$ n'est donc pas la fonction d'autocovariance d'un
-processus MA(1). Plus généralement, on vérifiera dans
+processus MA(1). Plus g\'en\'eralement, on v\'erifiera dans
 l'exercice~\ref{prob1:Ma1second_ordre} que si $|\rho|>1/2$, $\chi$ n'est en
 fait pas de type positif et n'est donc pas une fonction de covariance,
 voir~\ref{prop:stat2}.
 \end{example}
 
-\subsection{Interprétation de la fonction d'autocovariance}
-\label{sec:interp_cov} Dans les exemples précédents, nous avons
-été amenés à évaluer la fonction d'autocovariance de processus pour
-quelques exemples simples de séries temporelles. Dans la plupart
-des problèmes d'intérêt pratique, nous ne
-partons pas de modèles de série temporelle définis \emph{a
+\subsection{Interpr\'etation de la fonction d'autocovariance}
+\label{sec:interp_cov} Dans les exemples pr\'ec\'edents, nous avons
+\'et\'e amen\'es \`a \'evaluer la fonction d'autocovariance de processus pour
+quelques exemples simples de s\'eries temporelles. Dans la plupart
+des probl\`emes d'int\'erêt pratique, nous ne
+partons pas de mod\`eles de s\'erie temporelle d\'efinis \emph{a
 priori}, mais d'\emph{observations}, $\{ x_1, \dots, x_n\}$
-associées à une \emph{réalisation} du processus. Afin de
-comprendre la structure de dépendance entre les différentes
-observations, nous serons amenés à
-\emph{estimer} la loi du processus, ou du moins des caractéristiques de ces lois.
-Pour un processus stationnaire au second ordre, nous pourrons, à titre d'exemple, estimer
+associ\'ees \`a une \emph{r\'ealisation} du processus. Afin de
+comprendre la structure de d\'ependance entre les diff\'erentes
+observations, nous serons amen\'es \`a
+\emph{estimer} la loi du processus, ou du moins des caract\'eristiques de ces lois.
+Pour un processus stationnaire au second ordre, nous pourrons, \`a titre d'exemple, estimer
 sa moyenne par la \emph{moyenne empirique}~:
 \[
  \hat\mu_n = n^{-1} \sum_{k=1}^n x_k
 \]
-et les fonctions d'autocovariance et d'autocorrélation par les
-fonctions d'autocorrélation et d'autocovariance \emph{empiriques}
+et les fonctions d'autocovariance et d'autocorr\'elation par les
+fonctions d'autocorr\'elation et d'autocovariance \emph{empiriques}
 \[
  \hat{\gamma}(h) = n^{-1} \sum_{k=1}^{n - |h|} (x_k - \hat\mu_n)(x_{k+|h|} - \hat\mu_n)
  \quad\mbox{et}\quad
  \hat{\rho}(h) = \hat{\gamma}(h) / \hat{\gamma}(0)\;.
 \]
-Lorsqu'il est \emph{a priori} raisonnable de penser que la série
-considérée est stationnaire au second ordre, la moyenne empirique,
+Lorsqu'il est \emph{a priori} raisonnable de penser que la s\'erie
+consid\'er\'ee est stationnaire au second ordre, la moyenne empirique,
 la fonction d'autocovariance empirique et la fonction
-d'autocorrélation empirique sont de ``bons'' estimateurs, dans un
-sens que nous préciserons dans les chapitres \ref{chap:estim_moyenne}
+d'autocorr\'elation empirique sont de ``bons'' estimateurs, dans un
+sens que nous pr\'eciserons dans les chapitres \ref{chap:estim_moyenne}
 et \ref{chap:estim_covariance}.
-L'analyse de la fonction d'autocovariance empirique est un élément
-permettant de guider le choix d'un modèle approprié pour les
+L'analyse de la fonction d'autocovariance empirique est un \'el\'ement
+permettant de guider le choix d'un mod\`ele appropri\'e pour les
 observations. Par exemple, le fait que la fonction
-d'autocovariance empirique soit \emph{proche} de zéro pour tout
-$h \ne 0$ (proximité qu'il faudra définir dans un sens statistique
-précis) indique par exemple qu'un bruit blanc est un modèle
-adéquat pour les données. La figure \ref{fig:xcorrhr} représente
-les $100$ premières valeurs de la fonction d'autocorrélation
-empirique de la série des battements cardiaques représentée figure
-\ref{fig:figcard1}. On observe que cette série est
-\emph{positivement corrélée} c'est-à-dire que les fonctions
-coefficients d'autocorrélation sont positifs et significativement
-non nuls. Nous avons, à titre de comparaison, représenté aussi la
-fonction d'autocorrélation empirique d'une trajectoire de même
+d'autocovariance empirique soit \emph{proche} de z\'ero pour tout
+$h \ne 0$ (proximit\'e qu'il faudra d\'efinir dans un sens statistique
+pr\'ecis) indique par exemple qu'un bruit blanc est un mod\`ele
+ad\'equat pour les donn\'ees. La figure \ref{fig:xcorrhr} repr\'esente
+les $100$ premi\`eres valeurs de la fonction d'autocorr\'elation
+empirique de la s\'erie des battements cardiaques repr\'esent\'ee figure
+\ref{fig:figcard1}. On observe que cette s\'erie est
+\emph{positivement corr\'el\'ee} c'est-\`a-dire que les fonctions
+coefficients d'autocorr\'elation sont positifs et significativement
+non nuls. Nous avons, \`a titre de comparaison, repr\'esent\'e aussi la
+fonction d'autocorr\'elation empirique d'une trajectoire de même
 longueur d'un bruit blanc gaussien.
  %=========== FIGURE =====================
  \figtit{\FIGPASSL corrHR11839}
- {Courbe de gauche~: fonction d'autocorrélation empirique de la série
+ {Courbe de gauche~: fonction d'autocorr\'elation empirique de la s\'erie
  des battements cardiaques (figure \ref{fig:figcard1}). Courbe de droite~:
- fonction d'autocorrélation
+ fonction d'autocorr\'elation
  empirique d'une trajectoire de même longueur d'un bruit blanc
  gaussien.}
  {fig:xcorrhr}
- Une forte corrélation peut être interprétée comme l'indice d'une dépendance
- linéaire. Ainsi la figure~\ref{fig:xcov} montre que le fait que $\hat{\rho}(1)
- = 0.966$ pour la série des battements cardiaques se traduit par une très forte
- prédictabilité de $X_{t+1}$ en fonction de $X_t$ (les couples de points
+ Une forte corr\'elation peut être interpr\'et\'ee comme l'indice d'une d\'ependance
+ lin\'eaire. Ainsi la figure~\ref{fig:xcov} montre que le fait que $\hat{\rho}(1)
+ = 0.966$ pour la s\'erie des battements cardiaques se traduit par une tr\`es forte
+ pr\'edictabilit\'e de $X_{t+1}$ en fonction de $X_t$ (les couples de points
  successifs s'alignent quasiment sur une droite). Nous montrerons au
  chapitre~\ref{chap:Prediction}, que dans un tel contexte,
- $\PE{(X_{t+1}-\mu)-\rho(1)(X_t-\mu)} = (1-\rho^2) \cov(X_t)$, c'est-à-dire,
- compte tenu de la valeur estimée pour $\rho(1)$, que la variance de ``l'erreur
- de prédiction'' $X_{t+1}-[\mu+\rho(1)(X_t-\mu)]$ est 15 fois plus faible que
+ $\PE{(X_{t+1}-\mu)-\rho(1)(X_t-\mu)} = (1-\rho^2) \cov(X_t)$, c'est-\`a-dire,
+ compte tenu de la valeur estim\'ee pour $\rho(1)$, que la variance de ``l'erreur
+ de pr\'ediction'' $X_{t+1}-[\mu+\rho(1)(X_t-\mu)]$ est 15 fois plus faible que
  celle du signal original.
  %=========== FIGURE =====================
  \figscale{\FIGPASSL cov_hr11839}
- {$X_{t+1}$ en fonction de $X_t$ pour la série
+ {$X_{t+1}$ en fonction de $X_t$ pour la s\'erie
  des battements cardiaques de la figure \ref{fig:figcard1}). Les tirets
- représentent la meilleure droite de régression linéaire de $X_{t+1}$ sur $X_t$.}
+ repr\'esentent la meilleure droite de r\'egression lin\'eaire de $X_{t+1}$ sur $X_t$.}
  {fig:xcov}{0.5}
 %=========== FIGURE =====================
  \figtit{\FIGPASSL logretourSP}
- {Log-Retours de la série S\&P 500 (figure \ref{fig:SP}).}
+ {Log-Retours de la s\'erie S\&P 500 (figure \ref{fig:SP}).}
  {fig:sp-logretour}
- L'indice S\&P$500$ tracé (fig.~\ref{fig:SP}) présente un cas de figure plus
- difficile, d'une part parce que la série de départ ne saurait être tenue pour
- stationnaire et qu'il nous faudra considérer la série des évolutions
- journalières~; d'autre part, parce que selon le choix de la transformation des
- données considérées, la série transformée présente ou non des effets de
- corrélation. On définit tout d'abord les \emph{log-retours} de l'indice
- S\&P$500$ comme les différences des logarithmes de l'indice à deux dates
+ L'indice S\&P$500$ trac\'e (fig.~\ref{fig:SP}) pr\'esente un cas de figure plus
+ difficile, d'une part parce que la s\'erie de d\'epart ne saurait être tenue pour
+ stationnaire et qu'il nous faudra consid\'erer la s\'erie des \'evolutions
+ journali\`eres~; d'autre part, parce que selon le choix de la transformation des
+ donn\'ees consid\'er\'ees, la s\'erie transform\'ee pr\'esente ou non des effets de
+ corr\'elation. On d\'efinit tout d'abord les \emph{log-retours} de l'indice
+ S\&P$500$ comme les diff\'erences des logarithmes de l'indice \`a deux dates
  successives~:
 \[
  X_{t} = \log( S_{t}) - \log(S_{t-1})
       = \log \left( 1 + \frac{S_{t}-S_{t-1}}{S_{t-1}} \right)
 \]
-La série des log-retours de la série S\&P 500 est représentée dans la
+La s\'erie des log-retours de la s\'erie S\&P 500 est repr\'esent\'ee dans la
 figure \ref{fig:sp-logretour}.
  %=========== FIGURE =====================
  \figtit{\FIGPASSL corrsplogretour}
- {Fonction d'autocorrélation empirique de la série des log-retours
+ {Fonction d'autocorr\'elation empirique de la s\'erie des log-retours
  de l'indice S\&P 500.}
  {fig:sp-xcorr}
- Les coefficients d'autocorrélation
-empiriques de la série des log-retours sont représentés dans la figure
+ Les coefficients d'autocorr\'elation
+empiriques de la s\'erie des log-retours sont repr\'esent\'es dans la figure
 \ref{fig:sp-xcorr}. On remarque qu'ils sont approximativement nuls
-pour $h \ne 0$ ce qui suggère de modéliser la série des
+pour $h \ne 0$ ce qui sugg\`ere de mod\'eliser la s\'erie des
 log-retours par un bruit blanc faible.
   %=========== FIGURE =====================
  \figtit{\FIGPASSL corrabssplogretour}
- {Fonction d'autocorrélation empirique de la série des valeurs absolues des
+ {Fonction d'autocorr\'elation empirique de la s\'erie des valeurs absolues des
  log-retours de l'indice S\&P 500.}
  {fig:sp-abs-xcorr}
-Il est intéressant d'étudier aussi la série des log-retours
-absolus, $A(t) = |X_{t}|$. On peut, de la même façon,
-déterminer la suite des coefficients d'autocorrélation empirique
-de cette série, qui est représentée dans la figure
-\ref{fig:sp-abs-xcorr}. On voit, qu'à l'inverse de la série des
-log-retours, la série des valeurs absolues des log-retours est
-positivement corrélée, les valeurs d'autocorrélation étant
-significativement non nulles pour $|h| \leq 100$. On en déduit, en
-particulier, que la suite des log-retours peut être modélisée
+Il est int\'eressant d'\'etudier aussi la s\'erie des log-retours
+absolus, $A(t) = |X_{t}|$. On peut, de la même fa\c{c}on,
+d\'eterminer la suite des coefficients d'autocorr\'elation empirique
+de cette s\'erie, qui est repr\'esent\'ee dans la figure
+\ref{fig:sp-abs-xcorr}. On voit, qu'\`a l'inverse de la s\'erie des
+log-retours, la s\'erie des valeurs absolues des log-retours est
+positivement corr\'el\'ee, les valeurs d'autocorr\'elation \'etant
+significativement non nulles pour $|h| \leq 100$. On en d\'eduit, en
+particulier, que la suite des log-retours peut être mod\'elis\'ee
 comme un bruit blanc, mais pas un bruit blanc fort\,: en effet,
 pour un bruit blanc fort $X_{t}$, nous avons, pour toute fonction
 $f$ telle que $\PE{f(X_{t})^2} = \sigma_f^2 < \infty$,
 $\cov(f(X_{t+h}),f(X_{t}))= 0$ pour $h\neq 0$ (les variables
-$f(X_{t+h})$ et $f(X_{t})$ étant indépendantes, elles sont a
-fortiori non corrélées).
+$f(X_{t+h})$ et $f(X_{t})$ \'etant ind\'ependantes, elles sont a
+fortiori non corr\'el\'ees).
 %Nous reviendrons dans la suite du cours
-%sur des modèles possibles pour de telles séries.
+%sur des mod\`eles possibles pour de telles s\'eries.
 %==================================================
 %==================================================
 \section{Mesure spectrale d'un processus stationnaire}
 %==================================================
-%\frnote{il faudrait rester en processus à valeurs complexes}
-Dans toute la suite, $\tore$ désigne le tore $(-\pi,\pi]$ et
-$\btore$ la tribu borélienne associée. Le théorème
-d'Herglotz ci dessous établit l'équivalence entre la fonction
-d'autocovariance et une mesure finie définie sur
-$(\tore,\btore)$. Cette mesure, appelée \emph{mesure
-  spectrale du processus}, joue un rôle analogue à celui de la transformation
-de Fourier pour les fonctions de carré intégrable.
+%\frnote{il faudrait rester en processus \`a valeurs complexes}
+Dans toute la suite, $\tore$ d\'esigne le tore $(-\pi,\pi]$ et
+$\btore$ la tribu bor\'elienne associ\'ee. Le th\'eor\`eme
+d'Herglotz ci dessous \'etablit l'\'equivalence entre la fonction
+d'autocovariance et une mesure finie d\'efinie sur
+$(\tore,\btore)$. Cette mesure, appel\'ee \emph{mesure
+  spectrale du processus}, joue un r\^ole analogue \`a celui de la transformation
+de Fourier pour les fonctions de carr\'e int\'egrable.
 %================== HERGLOTZ =======================
 \begin{theorem}[Herglotz]
 \label{theo:herglotz}
@@ -451,43 +451,43 @@ mesure positive $\nu$ sur $(\tore,\btore)$ telle que~:
 \label{eq:herglotz}
  \gamma(h) = \int_{\tore} \rme^{\rmi h\lambda} \nu(\rmd\lambda),\; \forall h\in\Zset\;.
 \end{eqnarray}
-%  Si la suite $(\gamma(h))$ est de carré sommable
+%  Si la suite $(\gamma(h))$ est de carr\'e sommable
 % (\textit{i.e.} $\sum_{h\in \zset} \gamma^2(h)<\infty$),
-% la mesure $\nu$ possède une densité $f$ (\textbf{fonction
-% positive}) par rapport à la mesure de Lebesgue sur
-% $(\tore,\btore)$ et s'écrit donc
+% la mesure $\nu$ poss\`ede une densit\'e $f$ (\textbf{fonction
+% positive}) par rapport \`a la mesure de Lebesgue sur
+% $(\tore,\btore)$ et s'\'ecrit donc
 % $$
 % \gamma(h) = \int_{\tore} \rme^{\rmi h\lambda} f(\lambda)\rmd\lambda\; ,
 % $$
-% où $f$ est donnée par la série de Fourier (convergente dans $\ltwo(\tore,\lleb)$ \footnote{voir Théorème~\ref{theo:convergence-series-fourier}})
+% o\`u $f$ est donn\'ee par la s\'erie de Fourier (convergente dans $\ltwo(\tore,\lleb)$ \footnote{voir Th\'eor\`eme~\ref{theo:convergence-series-fourier}})
 % \[
 %  f(\lambda)= \frac{1}{2\pi} \sum_{k \in \Zset} \gamma(k) \rme^{-\rmi k \lambda}\; .
 % \]
 \end{theorem}
 \begin{remark}
 Lorsque $\gamma$ est la fonction d'autocovariance d'un processus
-stationnaire au second ordre, on sait d'après la proposition
+stationnaire au second ordre, on sait d'apr\`es la proposition
 \ref{prop:stat2} que $\{\gamma(h)\}_{h \in
-\Zset}$ est de type positif. Les hypothèses du théorème de Herglotz
-sont donc vérifiées et dans ce cas
-la mesure $\nu$ est appelée la
+\Zset}$ est de type positif. Les hypoth\`eses du th\'eor\`eme de Herglotz
+sont donc v\'erifi\'ees et dans ce cas
+la mesure $\nu$ est appel\'ee la
 \emph{mesure spectrale} du processus.
-Si la mesure $\nu$ possède une densité $f$  par rapport à la mesure de Lebesgue sur
+Si la mesure $\nu$ poss\`ede une densit\'e $f$  par rapport \`a la mesure de Lebesgue sur
  $(\tore,\btore)$ alors  $f$  est
-appelée la \emph{densité spectrale de puissance}
-du processus.\index{Densité spectrale}
+appel\'ee la \emph{densit\'e spectrale de puissance}
+du processus.\index{Densit\'e spectrale}
 %  et la fonction $f$, lorsque qu'elle
 % existe (\textit{i.e.} lorsque $\sum_{h\in\mathbb{Z}} \gamma^2(h) <
-% \infty$), est appelée la \emph{densité spectrale de puissance}
-% \frnote{ce n'est pas une cns, de + dans l'énoncé la condition est
+% \infty$), est appel\'ee la \emph{densit\'e spectrale de puissance}
+% \frnote{ce n'est pas une cns, de + dans l'\'enonc\'e la condition est
 %  $\sum_{h\in\mathbb{Z}} \gamma^2(h) <\infty$: pas fait dans la preuve}),
-% est appelée la \emph{densité spectrale de puissance}
+% est appel\'ee la \emph{densit\'e spectrale de puissance}
 % du processus.
 \end{remark}
 
 \begin{proof}\smartqed
  Si $\gamma(n)$ a la
-représentation~(\ref{eq:herglotz}), montrons que $\gamma(n)$
+repr\'esentation~(\ref{eq:herglotz}), montrons que $\gamma(n)$
 est de type positif. En effet, pour tout $n$ et toute suite
 $\{a_k\in\mathbb{C}\}_{1\leq k\leq n}$,
 $$
@@ -495,8 +495,8 @@ $$
  \int_{\tore} \sum_{k,m} a_k\overline{a_m} \rme^{\rmi k \lambda}\rme^{-im \lambda} \nu(\rmd\lambda)=
  \int_{\tore}\left| \sum_{k} a_k \rme^{\rmi k \lambda}\right |^2 \nu(\rmd\lambda)\geq 0\;.
  $$
- Réciproquement, supposons que $\gamma(n)$ soit une suite de type
- positif et considérons la suite de fonctions indexée par $n$~:
+ R\'eciproquement, supposons que $\gamma(n)$ soit une suite de type
+ positif et consid\'erons la suite de fonctions index\'ee par $n$~:
 \[
  f_n(\lambda)
  = \frac{1}{2\pi n} \sum_{k=1}^n \sum_{m=1}^n \gamma(k-m) \rme^{-\rmi k \lambda} \rme^{\rmi m\lambda}
@@ -504,9 +504,9 @@ $$
                     \gamma(k) \rme^{-\rmi k \lambda}\; .
 % = \frac{1}{2\pi}\sum_{k=-\infty}^{\infty}\gamma_n(k)\rme^{-\rmi k \lambda}
 \]
-$\gamma$ étant de type positif, $f_n(\lambda)\geq 0$, pour tout $\lambda\in \tore.$
+$\gamma$ \'etant de type positif, $f_n(\lambda)\geq 0$, pour tout $\lambda\in \tore.$
 Notons
-$\nu_n$ la mesure (positive) de densité $f_n$ par rapport à la mesure de
+$\nu_n$ la mesure (positive) de densit\'e $f_n$ par rapport \`a la mesure de
 Lebesgue sur $\tore$. On a alors
 \begin{multline}\label{eq:herglotz_1}
 \int_{\tore}\rme^{\rmi h \lambda}\nu_n(\rmd\lambda)
@@ -522,35 +522,35 @@ Lebesgue sur $\tore$. On a alors
 \end{array}
 \right.
 \end{multline}
-% \emnote{Attention à ce genre de citations avec des noms.. donc il faut mettre
-%   une référence explicite, dans un ouvrage si possible récent et diffusé, avec
-%   des noms. Je ne trouve pas idiot de donner un énoncé précis du théorème. Il
-%   manque à mon sens dans l'énoncé et dans la preuve, l'unicité de la limite. Il
-%   me semble que le théorème de Prohorov est en général formulé pour des mesures
-%   de probabilités, donc des mesures dont la masse totale est constante... du
-%   coup, on donne ce théorème dans notre chapitre}
-Quitte à renormaliser $\nu_n$ pour en faire une mesure de probabilité,
-le théorème \ref{thm:prohorov} implique qu'il existe une mesure positive $\nu$ et une sous-suite $\nu_{n_k}$ de
+% \emnote{Attention \`a ce genre de citations avec des noms.. donc il faut mettre
+%   une r\'ef\'erence explicite, dans un ouvrage si possible r\'ecent et diffus\'e, avec
+%   des noms. Je ne trouve pas idiot de donner un \'enonc\'e pr\'ecis du th\'eor\`eme. Il
+%   manque \`a mon sens dans l'\'enonc\'e et dans la preuve, l'unicit\'e de la limite. Il
+%   me semble que le th\'eor\`eme de Prohorov est en g\'en\'eral formul\'e pour des mesures
+%   de probabilit\'es, donc des mesures dont la masse totale est constante... du
+%   coup, on donne ce th\'eor\`eme dans notre chapitre}
+Quitte \`a renormaliser $\nu_n$ pour en faire une mesure de probabilit\'e,
+le th\'eor\`eme \ref{thm:prohorov} implique qu'il existe une mesure positive $\nu$ et une sous-suite $\nu_{n_k}$ de
 $\nu_n$ telle que
 $$
 \int_{\tore}\rme^{\rmi h\lambda}\nu_{n_k}(\rmd\lambda)
 \longrightarrow \int_{\tore}\rme^{\rmi h\lambda}\nu(\rmd\lambda),
 \textrm{ lorsque }k\to\infty\;.
 $$
-En remplaçant $n$ par $n_k$ dans \eqref{eq:herglotz_1} et en faisant
+En rempla\c{c}ant $n$ par $n_k$ dans \eqref{eq:herglotz_1} et en faisant
 tendre $k$ vers l'infini, on a
 $$
 \gamma(h)=\int_{\tore}\rme^{\rmi h \lambda}\nu(\rmd\lambda),\; \forall h\in\Zset\;.
 $$
-Montrons à présent que $\nu$ est unique. En effet, s'il existait une autre mesure
+Montrons \`a pr\'esent que $\nu$ est unique. En effet, s'il existait une autre mesure
 $\mu$ telle que pour tout $h\in\Zset$ : $\int_{\tore}\rme^{\rmi h
   \lambda}\nu(\rmd\lambda)=\int_{\tore}\rme^{\rmi h
   \lambda}\mu(\rmd\lambda)$
-alors d'après le lemme \ref{lem:approxLinfini-convol-noyau},
+alors d'apr\`es le lemme \ref{lem:approxLinfini-convol-noyau},
 $\int_{\tore}
 g(\lambda)\nu(\rmd\lambda)=\int_{\tore}g(\lambda)\mu(\rmd\lambda)$
 pour toute fonction continue $g$ telle que $g(\pi)=g(-\pi)$.
-On en déduit donc que $\nu=\mu$.
+On en d\'eduit donc que $\nu=\mu$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Supposons maintenant que $\sum_h |\gamma(h)| < \infty$. Calculons  $\int_{\tore} \rme^{\rmi h \lambda}f(\lambda)
 % \rmd\lambda$.
@@ -563,7 +563,7 @@ On en déduit donc que $\nu=\mu$.
 % =\frac{1}{2\pi} \sum_{k\in \zset}\gamma(k)
 % \int_{\tore}\rme^{\rmi (h-k) \lambda}\rmd\lambda=\gamma(h)\; ,
 % \end{equation}
-% où on a pu intervertir la somme et l'intégrale d'après le théorème
+% o\`u on a pu intervertir la somme et l'int\'egrale d'apr\`es le th\'eor\`eme
 % de Fubini puisque $\sum_h |\gamma(h)|<\infty$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -574,43 +574,43 @@ On en déduit donc que $\nu=\mu$.
 % pour $|p| \leq n$. En particulier on a $\mu_n(\mathbb{T})=
 % \gamma(0)$. De toute sous-suite $\{ \nu_k = \mu_{n_k} \}$ de la
 % suite $\{ \mu_n \}$, on peut extraire une sous-suite $\{ \nu_{_k}
-% \}$ qui converge étroitement vers une mesure positive $\mu$
-% (dépendant \textit{a priori du choix de la sous suite}) de masse
-% totale $c(0)$ (théorème de Prohorov). On a, pour tout $p$ pour tout
+% \}$ qui converge \'etroitement vers une mesure positive $\mu$
+% (d\'ependant \textit{a priori du choix de la sous suite}) de masse
+% totale $c(0)$ (th\'eor\`eme de Prohorov). On a, pour tout $p$ pour tout
 % $p \in \Zset$
 % \[
 % \hat{\mu}(p) = \lim_k \hat{\mu}_{k}(p)= \gamma(-p)
 % \]
-% La limite $\hat{\nu}(p)$ ne dépend  pas du choix de la sous-suite,
+% La limite $\hat{\nu}(p)$ ne d\'epend  pas du choix de la sous-suite,
 % et donc de toute sous-suite de la suite $\{ \mu_N \}$, on peut
 % extraire une sous-suite qui converge vers la \textbf{même}
-% mesure limite $\mu$.  On en déduit que la suite $\mu_N$ converge
-% étroitement vers $\mu$. Lorsque $\sum_{k} |\gamma(k)| < \infty$,
-% alors $g_N(t)$ converge vers $f(t)$ par application du théorème de
-% convergence dominé.
+% mesure limite $\mu$.  On en d\'eduit que la suite $\mu_N$ converge
+% \'etroitement vers $\mu$. Lorsque $\sum_{k} |\gamma(k)| < \infty$,
+% alors $g_N(t)$ converge vers $f(t)$ par application du th\'eor\`eme de
+% convergence domin\'e.
 % \begin{theorem}
-% Soit $\mu_n$ une suite de probabilité sur $(\Rset,\cB(\Rset)$, telle
+% Soit $\mu_n$ une suite de probabilit\'e sur $(\Rset,\cB(\Rset)$, telle
 % que, pour tout $\epsilon > 0$, il existe un ensemble compact
 % $\cK_\epsilon$, tel que $\mu_n(\cK_\epsilon) \geq (1-\epsilon)$.
 % Alors, pour toute sous-suite $\{ \mu_{n_k} \}$, il existe une
 % sous-suite $\{ \mu_{n_{k(j)}}\}$ extraite de $\{ \mu_{n_k} \}$ et
-% une probabilité $\mu$ telle que $\mu_{n_{k(j)}} \rightarrow_d \mu$
+% une probabilit\'e $\mu$ telle que $\mu_{n_{k(j)}} \rightarrow_d \mu$
 % faiblement.
 % \end{theorem}
 %%%
-%%% Fin de la preuve du théorème d'Herglotz.
+%%% Fin de la preuve du th\'eor\`eme d'Herglotz.
 %%
-%La suite $\gamma$ étant de type positif, $g_N(t) \geq 0$.
+%La suite $\gamma$ \'etant de type positif, $g_N(t) \geq 0$.
 \qed
 \end{proof}
-%\emnote{on peut définir une densité dès que $\sum_h \gamma^2(h) <
-%\infty$, pas inutile avec la longue mémoire quand même !}
+%\emnote{on peut d\'efinir une densit\'e d\`es que $\sum_h \gamma^2(h) <
+%\infty$, pas inutile avec la longue m\'emoire quand même !}
 
-\begin{corollary}[Corollaire du théorème d'Herglotz]
+\begin{corollary}[Corollaire du th\'eor\`eme d'Herglotz]
 \label{prop:testpositif}
- Une suite $(\gamma(h))_{h \in \Zset}$ à valeurs complexes telle que
+ Une suite $(\gamma(h))_{h \in \Zset}$ \`a valeurs complexes telle que
  $\sum_{h\in \zset} |\gamma(h)|^2<\infty$ est de type
-positif si et seulement si la fonction définie par
+positif si et seulement si la fonction d\'efinie par
 $$
  f(\lambda)=\frac{1}{2\pi}\sum_{h\in\mathbb{Z}} \gamma(h)\rme^{-\rmi h \lambda}
 $$
@@ -618,110 +618,110 @@ est positive pour tout $\lambda \in \mathbb{T}$.
 \end{corollary}
 
 \begin{proof}\smartqed
-D'après le théorème de Herglotz (Théorème \ref{theo:herglotz}),
+D'apr\`es le th\'eor\`eme de Herglotz (Th\'eor\`eme \ref{theo:herglotz}),
 $(\gamma(h))_{h \in \Zset}$ est de type
 positif si et seulement si il existe une mesure positive
  $\nu$ sur $(\tore,\btore)$ telle que~:
 \begin{eqnarray*}
  \gamma(h) = \int_{\tore} \rme^{\rmi h\lambda} \nu(\rmd\lambda)\; .
 \end{eqnarray*}
-D'après le théorème~\ref{theo:convergence-series-fourier} et le
-corollaire \ref{cor:completude-base-l2}, comme $\sum_{h\in \zset} |\gamma(h)|^2<\infty$, on peut considérer
-la série de Fourier associée convergente dans
+D'apr\`es le th\'eor\`eme~\ref{theo:convergence-series-fourier} et le
+corollaire \ref{cor:completude-base-l2}, comme $\sum_{h\in \zset} |\gamma(h)|^2<\infty$, on peut consid\'erer
+la s\'erie de Fourier associ\'ee convergente dans
 $\ltwo(\tore,\lleb)$ :
 $(2\pi)^{-1} \sum_{k \in \Zset} \gamma(k) \rme^{-\rmi k
   \lambda}\eqdef f(\lambda)$.
 Ainsi, $\gamma(h) = \int_{\tore} \rme^{\rmi h\lambda} f(\lambda)\rmd\lambda$
-et donc la positivité de $\nu$ revient à la positivité de $f$, ce qui
+et donc la positivit\'e de $\nu$ revient \`a la positivit\'e de $f$, ce qui
 conclut la preuve.
 
 
 % Supposons tout d'abord que $\gamma$ est absolument sommable et
-% montrons que si $f(\lambda)$ définie dans la proposition est positive
-% sur $\tore$ alors $\{\gamma(h)\}$ est de type positif. D'après
+% montrons que si $f(\lambda)$ d\'efinie dans la proposition est positive
+% sur $\tore$ alors $\{\gamma(h)\}$ est de type positif. D'apr\`es
 % \eqref{eq:herglotz_2},
 % $\gamma(h)=\int_\tore \rme^{\rmi h\lambda}f(\lambda)\rmd\lambda$.
-% Comme $f(\lambda)\geq 0$, $f(\lambda)\rmd\lambda$ définit bien une
-% mesure positive sur $\tore$ et donc d'après le théorème de
+% Comme $f(\lambda)\geq 0$, $f(\lambda)\rmd\lambda$ d\'efinit bien une
+% mesure positive sur $\tore$ et donc d'apr\`es le th\'eor\`eme de
 % Herglotz, $\{\gamma(h)\}$ est de type positif.
 
-% Supposons à présent que $\{\gamma(h)\}$ est de type positif et
-% absolument sommable et montrons que $f(\lambda)$ définie dans la proposition est positive
+% Supposons \`a pr\'esent que $\{\gamma(h)\}$ est de type positif et
+% absolument sommable et montrons que $f(\lambda)$ d\'efinie dans la proposition est positive
 % sur $\tore$. On a
 % \emnote{pourquoi on refait la preuve ? si $\gamma(h)$ est de type positif et absolument sommable, Herglotz montre que sa mesure
-% spectrale a une densité par rapport à la mesure de Lebesgue, non ?}
+% spectrale a une densit\'e par rapport \`a la mesure de Lebesgue, non ?}
 % \begin{multline*}
 % 0\leq f_n(\lambda)=\frac{1}{2\pi n}\sum_{1\leq r,s\leq n}
 % \rme^{-\rmi r\lambda}\gamma(r-s)\rme^{\rmi s\lambda}\\
 % =\frac{1}{ 2\pi}\sum_{|m|<n}\left(1-\frac{|m|}{n}\right)\rme^{-\rmi m\lambda}\gamma(m)
 % \to \frac{1}{2\pi}\sum_{m\in\mathbb{Z}}\gamma(m)\rme^{-\rmi m\lambda}=f(\lambda),\textrm{ lorsque }n\to\infty\;,
 % \end{multline*}
-% d'après le théorème de convergence dominée que l'on peut appliquer
+% d'apr\`es le th\'eor\`eme de convergence domin\'ee que l'on peut appliquer
 % puisque $\sum_{h}|\gamma(h)|<\infty$.
 % Ainsi $f(\lambda)\geq 0$ comme limite de fonctions positives.
 \qed
 \end{proof}
 \begin{example}
-En reprenant l'exemple~\ref{exe:testposivite1}, on vérifie
-immédiatement que $(\chi(h))$ est de module sommable et que\,:
+En reprenant l'exemple~\ref{exe:testposivite1}, on v\'erifie
+imm\'ediatement que $(\chi(h))$ est de module sommable et que\,:
 $$
  f(\lambda)=\frac{1}{2\pi}\sum_h \chi(h)\rme^{-\rmi h \lambda}
      =\frac{1}{2\pi}(1+2\rho\cos( \lambda))
      $$
-     et donc que la séquence est une fonction d'autocovariance uniquement
+     et donc que la s\'equence est une fonction d'autocovariance uniquement
      lorsque $|\rho|\leq 1/2$.
 \end{example}
-\begin{example}[Densité spectrale de puissance du bruit blanc]
-  La fonction d'autocovariance d'un bruit blanc est donnée par $\gamma(h)=
-  \sigma^2 \delta(h)$, d'où l'expression de la densité spectrale correspondante
+\begin{example}[Densit\'e spectrale de puissance du bruit blanc]
+  La fonction d'autocovariance d'un bruit blanc est donn\'ee par $\gamma(h)=
+  \sigma^2 \delta(h)$, d'o\`u l'expression de la densit\'e spectrale correspondante
 \[
  f(\lambda) = \frac{\sigma^2}{2\pi}
 \]
-La densité spectrale d'un bruit blanc est donc constante. Cette
-propriété est à l'origine de la terminologie ``bruit blanc'' qui
-provient de l'analogie avec le spectre de la lumière blanche
-constant dans toute la bande de fréquences visibles.
+La densit\'e spectrale d'un bruit blanc est donc constante. Cette
+propri\'et\'e est \`a l'origine de la terminologie ``bruit blanc'' qui
+provient de l'analogie avec le spectre de la lumi\`ere blanche
+constant dans toute la bande de fr\'equences visibles.
 \end{example}
-\begin{example}[Densité spectrale de puissance du processus MA(1)]
+\begin{example}[Densit\'e spectrale de puissance du processus MA(1)]
   \label{ex:MA1dsp}
-  Le processus MA(1) introduit dans l'exemple~\ref{exe:MA1covth} possède une
-  séquence d'autocovariance donnée par $\gamma(0) = \sigma^2(1+\theta^2)$,
+  Le processus MA(1) introduit dans l'exemple~\ref{exe:MA1covth} poss\`ede une
+  s\'equence d'autocovariance donn\'ee par $\gamma(0) = \sigma^2(1+\theta^2)$,
   $\gamma(1) = \gamma(-1) = \sigma^2 \theta$ et $\gamma(h) = 0$ sinon (cf.
-  exemple~\ref{exe:MA1covth}). D'où l'expression de sa densité spectrale~:
+  exemple~\ref{exe:MA1covth}). D'o\`u l'expression de sa densit\'e spectrale~:
 \[
  f(\lambda)= \frac{\sigma^2}{2 \pi} (2 \theta \cos(\lambda) + (1+ \theta^2))
      = \frac{\sigma^2}{2 \pi} \left |1+ \theta \rme^{-\rmi\lambda}\right |^2
 \]
-La densité spectrale d'un tel processus est représentée figure
+La densit\'e spectrale d'un tel processus est repr\'esent\'ee figure
 \ref{fig:dspthMA1} pour $\theta = -0.9$ et $\sigma^2=1$ avec une
-échelle logarithmique (dB).
+\'echelle logarithmique (dB).
 \end{example}
  %================ FIGURE
  \figtit{\FIGPASSL dspthMA1}
- {Densité spectrale (en dB) d'un processus MA-1, défini par l'équation
+ {Densit\'e spectrale (en dB) d'un processus MA-1, d\'efini par l'\'equation
 ~(\ref{eq:recurrenceMA1}) pour $\sigma=1$ et $\theta=-0.9$.}
  {fig:dspthMA1}
 \begin{example}[Mesure spectrale du processus harmonique]
 La fonction d'autocovariance du processus harmonique $X_{t} =
 \sum_{k=1}^N A_k \cos(\lambda_k t + \Phi_k )$ (voir exemple
-\ref{ex:processusharmonique}) est donnée par~:
+\ref{ex:processusharmonique}) est donn\'ee par~:
 \begin{equation}
  \label{eq:cov_harm}
  \gamma(h) = \frac{1}{2} \sum_{k=1}^N \sigma_k^2
   \cos ( \lambda_k h)
 \end{equation}
-où $\sigma_k^2=\PE{A_k^2}$. Cette suite de coefficients
+o\`u $\sigma_k^2=\PE{A_k^2}$. Cette suite de coefficients
 d'autocovariance n'est pas sommable et la mesure spectrale n'admet
-pas de densité. En notant cependant que~:
+pas de densit\'e. En notant cependant que~:
 \[
  \cos(\lambda_k h)
  = \frac{1}{2} \int_{- \pi}^{\pi} \rme^{\rmi  h \lambda}
  (\delta_{\lambda_k}(\rmd\lambda) + \delta_{-\lambda_k}(\rmd\lambda))
 \]
-où $\delta_{x_0}(\rmd\lambda)$ désigne la mesure de Dirac au
-point $x_0$ (cette mesure associe la valeur $1$ à tout borélien de
+o\`u $\delta_{x_0}(\rmd\lambda)$ d\'esigne la mesure de Dirac au
+point $x_0$ (cette mesure associe la valeur $1$ \`a tout bor\'elien de
 $[-\pi,\pi]$ contenant $x_0$ et la valeur $0$ sinon), la mesure
-spectrale du processus harmonique peut s'écrire~:
+spectrale du processus harmonique peut s'\'ecrire~:
 \[
  \nu(\rmd\lambda)=
     \frac{1}{4} \sum_{k=1}^N \sigma_k^2 \delta_{\lambda_k}(\rmd\lambda)
@@ -729,48 +729,48 @@ spectrale du processus harmonique peut s'écrire~:
     \frac{1}{4} \sum_{k=1}^N \sigma_k^2 \delta_{-\lambda_k}(\rmd\lambda)
 \]
 Elle apparaît donc comme une somme de mesures de Dirac, dont
-les masses $\sigma_k^2$ sont localisées aux pulsations des
-différentes composantes harmoniques.
+les masses $\sigma_k^2$ sont localis\'ees aux pulsations des
+diff\'erentes composantes harmoniques.
 \end{example}
 Contrairement aux autres exemples
-étudiés, le processus harmonique possède une fonction d'autocovariance, donnée
+\'etudi\'es, le processus harmonique poss\`ede une fonction d'autocovariance, donn\'ee
 par~\ref{eq:cov_harm}, non absolument sommable ($\gamma(h)$ ne
-tend pas même vers 0 pour les grandes valeurs de $h$). Par suite, il admet une mesure spectrale mais pas une densité
-spectrale. La propriété suivante, à démontrer à titre d'exercice,
-implique que le processus harmonique est en fait entièrement
-prédictible à partir de quelques-unes de ses valeurs passées.
+tend pas même vers 0 pour les grandes valeurs de $h$). Par suite, il admet une mesure spectrale mais pas une densit\'e
+spectrale. La propri\'et\'e suivante, \`a d\'emontrer \`a titre d'exercice,
+implique que le processus harmonique est en fait enti\`erement
+pr\'edictible \`a partir de quelques-unes de ses valeurs pass\'ees.
 \begin{proposition}
   S'il existe un rang $n$ pour lequel la matrice de covariance $\Gamma_n$
-  définie en (\ref{eq:matcov}) est non inversible, le processus correspondant
-  $X_t$ est prédictible dans le sens où il existe une combinaison linéaire
+  d\'efinie en (\ref{eq:matcov}) est non inversible, le processus correspondant
+  $X_t$ est pr\'edictible dans le sens o\`u il existe une combinaison lin\'eaire
   $a_1, \dots a_{l}$ avec $l \leq n-1$ telle que $X_t = \sum_{k=1}^l a_k
-  X_{t-k}$, l'égalité ayant lieu presque sûrement.
+  X_{t-k}$, l'\'egalit\'e ayant lieu presque s\^urement.
 \end{proposition}
 L'expression de la fonction d'autocovariance, obtenue
 en~(\ref{eq:cov_harm}) pour le processus harmonique, montre que
-les matrices de covariances associées s'écrivent comme la somme de
-$2 N$ matrices complexes de rang 1. Par conséquent, les matrices
-$\Gamma_n$ ne sont pas inversibles dès que $n > 2N$, ce qui
-implique que le processus harmonique est prédictible dès lors
-que l'on en a observé $2N$ valeurs. Ce résultat est sans surprise
+les matrices de covariances associ\'ees s'\'ecrivent comme la somme de
+$2 N$ matrices complexes de rang 1. Par cons\'equent, les matrices
+$\Gamma_n$ ne sont pas inversibles d\`es que $n > 2N$, ce qui
+implique que le processus harmonique est pr\'edictible d\`es lors
+que l'on en a observ\'e $2N$ valeurs. Ce r\'esultat est sans surprise
 compte tenu du fait que les trajectoires de ce processus sont des
-sommes de sinusoïdes de fréquences $\lambda_1,\dots,
+sommes de sinusoïdes de fr\'equences $\lambda_1,\dots,
 \lambda_N$ dont seules les amplitudes et les phases sont
-aléatoires. La propriété suivante donne une condition suffisante
-simple pour éviter ce type de comportements ``extrêmes''.
-Cette propriété implique en particulier que, pour une fonction
+al\'eatoires. La propri\'et\'e suivante donne une condition suffisante
+simple pour \'eviter ce type de comportements ``extrêmes''.
+Cette propri\'et\'e implique en particulier que, pour une fonction
 d'autocovariance absolument sommable (tous les exemples vus
 ci-dessus en dehors du processus harmoniques), les valeurs futures
-du processus correspondant ne sont pas prédictibles sans erreur à
-partir d'un ensemble fini de valeurs passées du processus. Nous
-reviendrons en détail sur ces problèmes de prédiction au
+du processus correspondant ne sont pas pr\'edictibles sans erreur \`a
+partir d'un ensemble fini de valeurs pass\'ees du processus. Nous
+reviendrons en d\'etail sur ces probl\`emes de pr\'ediction au
 chapitre~\ref{chap:Prediction}.
 \begin{proposition}
  \label{prop:Gammanrangplein}
 Soit $\gamma(h)$ la fonction d'autocovariance d'un processus
 stationnaire au second ordre. On suppose que $\gamma(0)>0$ et que
 $\gamma(h)\rightarrow 0$ quand $h\rightarrow \infty$. Alors, quel
-que soit $n$, la matrice de covariance définie
+que soit $n$, la matrice de covariance d\'efinie
 en~(\ref{eq:matcov}) est de rang plein et donc inversible.
 \end{proposition}
 \begin{proof}\smartqed
@@ -778,7 +778,7 @@ en~(\ref{eq:matcov}) est de rang plein et donc inversible.
  Supposons qu'il existe une suite de valeurs complexes $(a_1,\dots,a_n)$
 non toutes nulles, telle que $\sum_{k=1}^n\sum_{m=1}^n a_k \overline{a_m}
 \gamma(k-m)=0$. En notant $\nu_X$ la mesure spectrale de $X_t$, on
-peut écrire~:
+peut \'ecrire~:
 \begin{eqnarray*}
   0
     =\sum_{k=1}^n\sum_{m=1}^n a_k \overline{a_m}
@@ -786,22 +786,22 @@ peut écrire~:
     =\int_{\tore} \left| \sum_{k=1}^n a_k \rme^{\rmi k \lambda}\right |^2 \nu_X(\rmd\lambda)
 \end{eqnarray*}
 Ce qui implique que $\left| \sum_{k=1}^n a_k \rme^{\rmi k \lambda}\right
-|^2=0$ $\nu_X$ presque partout, c'est à dire que $\nu_X(\{\lambda
-: \left| \sum_{k=1}^n a_k \rme^{\rmi k \lambda}\right |^2\neq 0\})=\nu_X(\tore-Z)=0$ où
+|^2=0$ $\nu_X$ presque partout, c'est \`a dire que $\nu_X(\{\lambda
+: \left| \sum_{k=1}^n a_k \rme^{\rmi k \lambda}\right |^2\neq 0\})=\nu_X(\tore-Z)=0$ o\`u
 $Z=\{\lambda_1,\dots,\lambda_M\,: \sum_{k=1}^n a_k \rme^{\rmi k \lambda_m}
-= 0\}$ désigne l'ensemble \emph{fini} ($M<n$) des racines $x\in \tore$
-du polynôme trigonométrique $\sum_{k=1}^n a_k \rme^{\rmi k \lambda}$. Par
-conséquent, les seuls éléments de $\btore$, qui peuvent être
+= 0\}$ d\'esigne l'ensemble \emph{fini} ($M<n$) des racines $x\in \tore$
+du polyn\^ome trigonom\'etrique $\sum_{k=1}^n a_k \rme^{\rmi k \lambda}$. Par
+cons\'equent, les seuls \'el\'ements de $\btore$, qui peuvent être
 de mesure non nulle pour $\nu_X$, sont les singletons
 $\{\lambda_m\}$. Ce qui implique que $\nu_X=\sum_{m=1}^M a_m
-\delta_{\lambda_m}$ (où $a_m\geq 0$ ne peuvent être tous
+\delta_{\lambda_m}$ (o\`u $a_m\geq 0$ ne peuvent être tous
 nuls si $\gamma(0)\neq 0$). Mais, dans ce cas,
 $\gamma(h)=\sum_{m=1}^M a_m \rme^{\rmi h\lambda_m}$, ce qui contredit
-l'hypothèse que $\gamma(h)$ tend vers $0$ quand $n$ tend vers
+l'hypoth\`ese que $\gamma(h)$ tend vers $0$ quand $n$ tend vers
 l'infini.
 \qed
 \end{proof}
-%Une autre preuve est donnée exercice \ref{exo:Gammanrangplein}.
+%Une autre preuve est donn\'ee exercice \ref{exo:Gammanrangplein}.
 %==================================================
 %==================================================
 %==================================================

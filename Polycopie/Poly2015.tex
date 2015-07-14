@@ -1,58 +1,106 @@
-\documentclass[a4paper,11pt]{book}
+\documentclass[graybox,francais,envcountchap,envcountsame,sectrefs]{svmono}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx,helvet,type1cm,xargs,srcltx,latexsym,bm,wrapfig,subfigure,multicol,makeidx,stmaryrd}
+\usepackage{amssymb,amsmath,ntheorem,ifthen,amsfonts,bbm,graphicx,twoopt,verbatimbook,hyperref,color}
+\usepackage[bottom]{footmisc} % places footnotes at page bottom
+\usepackage[shortlabels]{enumitem}
+\usepackage[title,titletoc,header]{appendix}          % % %  appendices % % % % %
+\usepackage{leftidx} % permet les subscript a gauche avec la commande \leftidx{-A}{P}{^k}
+\usepackage{french]{babel}
+%\usepackage{courier}
+%\usepackage{algpseudocode}
+%\usepackage[comma]{natbib}
+%\usepackage{algorithm}
+%\usepackage{algorithmicx}
 
-\usepackage[latin1]{inputenc}
-\usepackage[french]{babel}
-\usepackage{amsfonts,a4wide,amsmath,amssymb,bbm,fancyhdr,makeidx,latexsym,amsthm,amsbsy,amscd,amstext,enumitem}
-
-\usepackage{graphics}
-\usepackage{graphicx}
-\usepackage{picins}
-%\usepackage{showkeys}
+\makeindex             % used for the subject index
+                       % please use the style svind.ist with your makeindex program
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%  COMMENT THESE OUT AT FINAL COMPLIE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% pdfsync manual says to comment it out at final version because it can change the page breaks
+\usepackage[novbox]{pdfsync}           %  [novbox] helps
+\usepackage[notref,notcite]{showkeys}  %  comment out for final version
+\renewcommand*\showkeyslabelformat[1]{\fbox{\normalfont\scriptsize\sffamily#1}}   % for showkeys
+\usepackage{showidx}                   % use to check the index - comment out for final version  %%%%%%%%%
 
-\setlength{\parskip}{0.2cm}
-%\setlength{\textwidth}{12.4cm}
-\setlength{\textwidth}{360pt}
-%\setlength{\textwidth}{14.3cm}
-\setlength{\textwidth}{14.8cm}
-%\setlength{\textheight}{19.3cm}
-\setlength{\textheight}{20.4cm}
-%\setlength{\textheight}{21.4cm}
-\linespread{1}
+% [disable] shuts it off:
+%\usepackage[disable]{todonotes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\voffset = 1cm
 
-\pagestyle{fancy}
-% Ceci permet dÕavoir les noms de chapitre et de section
-% en minuscules
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
-\fancyhf{} % supprime les en-ttes et pieds prŽdŽfinis
-\fancyhead[LE,RO]{\bfseries\thepage}% Left Even, Right Odd
-\fancyhead[LO]{\bfseries\rightmark} % Left Odd
-\fancyhead[RE]{\bfseries\leftmark} % Right Even
-\renewcommand{\headrulewidth}{0.5pt}% filet en haut de page
-\addtolength{\headheight}{0.5pt} % espace pour le filet
-\renewcommand{\footrulewidth}{0pt} % pas de filet en bas
-\fancypagestyle{plain}{ % pages de tetes de chapitre
-\fancyhead{} % supprime lÕentete
-\renewcommand{\headrulewidth}{0pt} % et le filet
-}
+\definecolor{dblue}{rgb}{0,.1,.6}  % used for dark blue hyperrefs
+\definecolor{dblue2}{RGB}{0,75,90}  % used for R output in listings
 
-\newtheorem{theorem}{Th{\'e}or{\`e}me}[section]
-\newtheorem{definition}[theorem]{D{\'e}finition}
-\newtheorem{corollary}[theorem]{Corollaire}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{lemma}[theorem]{Lemme}
-\theoremstyle{break}
-\newtheorem{example}[theorem]{Exemple}
-\newtheorem{remark}[theorem]{Remarque}
 
+\usepackage{aliascnt}
+\usepackage{cleveref}
+\renewtheorem{theorem}{Th\'eorème}
+\crefname{theorem}{th\'eor\`eme}{th\'eor\`emes}
+\Crefname{Theorem}{Th\'eor\`eme}{Th\'eor\`emes}
+
+\newaliascnt{lemma}{theorem}
+\renewtheorem{lemma}[lemma]{Lemme}
+\aliascntresetthe{lemma}
+\crefname{lemma}{lemme}{lemmes}
+\Crefname{Lemma}{Lemme}{Lemmes}
+
+\newaliascnt{proposition}{theorem}
+\renewtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+\crefname{proposition}{proposition}{propositions}
+\Crefname{Proposition}{Proposition}{Propositions}
+
+\newaliascnt{corollary}{theorem}
+\renewtheorem{corollary}[corollary]{Corollaire}
+\aliascntresetthe{corollary}
+\crefname{corollary}{corollaire}{corollaires}
+\Crefname{Corollary}{Corollaire}{Corollaires}
+
+\newaliascnt{definition}{theorem}
+\renewtheorem{definition}[definition]{D\'efinition}
+\aliascntresetthe{definition}
+\crefname{definition}{d\'efinition}{d\'efinitions}
+\Crefname{Definition}{D\'efinition}{D\'efinitions}
+
+\theoremstyle{exercise}
+
+\newaliascnt{remark}{theorem}
+\renewtheorem{remark}[remark]{Remarque}
+\aliascntresetthe{remark}
+\crefname{remark}{remarque}{remarques}
+\Crefname{remark}{Remarque}{Remarques}
+
+\newaliascnt{example}{theorem}
+\renewtheorem{example}[example]{Exemple}
+\aliascntresetthe{example}
+\crefname{example}{exemple}{exemples}
+\Crefname{example}{Exemple}{Exemples}
+
+\newtheorem{assumption}[theorem]{\textbf{H}}
+\Crefname{assumption}{\textbf{H}}{\textbf{H}}
+\crefname{assumption}{\textbf{H}}{\textbf{H}}
+
+\newaliascnt{xmpl}{theorem}
+\spnewtheorem{xmpl}[xmpl]{Example}{\bf}{}
+\aliascntresetthe{xmpl}
+\crefname{xmpl}{example}{examples}
+\Crefname{xmpl}{Example}{Examples}
+
+
+% \newcommand\boxendxmpl{\hfill \ensuremath{\blacksquare}}
+% \spnewtheorem{xmpl_duplicate}[theorem]{Example}{\bf}{\rmfamily}
+% \renewenvironment{xmpl}{\begin{xmpl_duplicate}}{\boxendxmpl\end{xmpl_duplicate}}
+
+
+\setcounter{tocdepth}{1}
+
+\usepackage[textsize=footnotesize]{todonotes}
+%\usepackage[textwidth=3cm, textsize=footnotesize]{todonotes}
+%\setlength{\marginparwidth}{3cm}                                %  this goes with todonotes
 
 \input{Smacro}
 \input{notations-hilbertfourier}
-
 \title{Traitement du signal\\
 Partie II}
 \author{St\'ephane Mallat, Eric Moulines}
@@ -63,8 +111,9 @@ Partie II}
 \input{chapitre1}
 \chapter{Transform{\'e}e de Fourier: propri{\'e}t{\'e}s de base}
 \input{fourierL1}
-\chapter{Convolution et régularisation}
 \input{fourierS}
+\chapter{Convolution}
+\input{convolution}
 \chapter{Transform{\'e}e de Fourier-Plancherel}
 \input{fourierL2}
 \chapter{Echantillonnage}
