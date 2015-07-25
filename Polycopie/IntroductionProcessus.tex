@@ -5,13 +5,13 @@ les notions de stationnarit\'e et de fonction d'autocovariance.
 
 \section{Introduction}
 
-% Nous commen\c{c}ons par d\'efinir ce qu'est une s\'erie temporelle.
-
-\index{S\'erie temporelle}\index{S\'erie chronologique|see{S\'erie temporelle}}
-Une s\'erie temporelle (ou s\'erie chronologique) est un ensemble
-d'observations $x_t$, chacune \'etant enregistr\'ee \`a un instant $t$.
-On rencontre des s\'eries temporelles dans des domaines tr\`es
-vari\'es tels que la m\'edecine, les t\'el\'ecommunications ou l'\'econom\'etrie.
+%% Nous commen\c{c}ons par d\'efinir ce qu'est une s\'erie temporelle.
+%
+%\index{S\'erie temporelle}\index{S\'erie chronologique|see{S\'erie temporelle}}
+%Une s\'erie temporelle (ou s\'erie chronologique) est un ensemble
+%d'observations $x_t$, chacune \'etant enregistr\'ee \`a un instant $t$.
+%On rencontre des s\'eries temporelles dans des domaines tr\`es
+%vari\'es tels que la m\'edecine, les t\'el\'ecommunications ou l'\'econom\'etrie.
 
 % Notre but, dans cet ouvrage, est de proposer des m\'ethodes permettant
 % de mod\'eliser de telles donn\'ees en utilisant un mod\`ele
@@ -34,21 +34,24 @@ donnons la d\'efinition dans le paragraphe \ref{sec:gene}. Les quelques
 exemples qui suivent illustrent la diversit\'e des situations dans
 lesquelles la mod\'elisation stochastique (ou al\'eatoire) des s\'eries
 temporelles joue un r\^ole important.
-%\begin{example}[Trafic internet]
-%La figure \ref{fig:figtraf} repr\'esente les temps d'inter-arriv\'ees
-%de paquets TCP, mesur\'es en secondes, sur la passerelle du
-%laboratoire Lawrence Livermore. La trace repr\'esent\'ee a \'et\'e obtenue
-%en enregistrant 2 heures de trafic. Pendant cette dur\'ee, environ
-%1.3 millions de paquets TCP, UDP, etc. ont \'et\'e enregistr\'es, en
-%utilisant la proc\'edure \emph{tcpdump} sur une station Sun.
-%D'autres s\'eries de ce type peuvent être obtenues sur
-%\emph{The Internet Traffic Archive},
-%\emph{http://ita.ee.lbl.gov/}.
-%%======== FIGURE
-% \figscale{\FIGPASSL lbl_tcp_3}
-% {Trace de trafic Internet~: temps d'inter-arriv\'ees de paquets TCP.}
-% {fig:figtraf}{0.5}
-%\end{example}
+\begin{example}[Trafic internet]
+La figure \ref{fig:figtraf} repr\'esente les temps d'inter-arriv\'ees
+de paquets TCP, mesur\'es en secondes, sur la passerelle du
+laboratoire Lawrence Livermore. La trace repr\'esent\'ee a \'et\'e obtenue
+en enregistrant 2 heures de trafic. Pendant cette dur\'ee, environ
+1.3 millions de paquets TCP, UDP, etc. ont \'et\'e enregistr\'es, en
+utilisant la proc\'edure \emph{tcpdump} sur une station Sun.
+D'autres s\'eries de ce type peuvent \^{e}tre obtenues sur
+\emph{The Internet Traffic Archive},
+\emph{http://ita.ee.lbl.gov/}.
+%======== FIGURE
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=\textwidth]{Figures/lbl_tcp_3}\\
+  \caption{Trace de trafic Internet~: temps d'inter-arriv\'ees de paquets TCP.}\label{fig:figtraf}
+\end{figure}
+\end{example}
 \begin{example}[Parole]
 La figure \ref{fig:figspeech} repr\'esente un segment de signal
 vocal \'echantillonn\'e (la fr\'equence d'\'echantillonnage est de 8000
@@ -58,10 +61,15 @@ dit \emph{fricatif}, c'est-\`a-dire produit par les turbulences du
 flot d'air au voisinage d'une constriction (ou resserrement) du
 conduit vocal.
 %======== FIGURE
- \figscale{\FIGPASSL phrase}
- {Signal de parole \'echantillonn\'e \`a $8000$ Hz~:
- son non vois\'e \emph{ch}.}{fig:figspeech}{1}
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=\textwidth]{Figures/phrase}\\
+  \caption{Signal de parole \'echantillonn\'e \`a $8000$ Hz~:
+ son non vois\'e \emph{ch}.}\label{fig:figspeech}
+\end{figure}
 \end{example}
+
 \begin{example}[Indice financier]
 La figure~\ref{fig:SP} repr\'esente les cours d'ouverture
 journaliers de l'indice Standard and Poor 500, du $2$ Janvier
@@ -74,15 +82,16 @@ le prix des actions par le nombre total d'actions, le poids de
 chaque valeur dans l'indice composite \'etant proportionnel \`a la
 capitalisation.
 %======== FIGURE
- \figscale{\FIGPASSL SP}
- {Cours quotidien d'ouverture de l'indice S\&P$500$~:
- entre Janvier 1990 et Ao\^ut 2000.}{fig:SP}{1}
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=\textwidth]{Figures/SP}\\
+  \caption{Cours quotidien d'ouverture de l'indice S\&P$500$~:
+ entre Janvier 1990 et Ao\^ut 2000.}\label{fig:SP}
+\end{figure}
 \end{example}
 
 
-%=================================================================
-%=================================================================
-%=================================================================
 \section{D\'efinition et construction de la loi d'un processus al\'eatoire}
 \label{sec:gene}
 %=================================================================
@@ -107,7 +116,7 @@ Dans le premier cas, on dira que le processus al\'eatoire est
 \emph{scalaire}. Dans le second, nous dirons que le processus est
 \emph{vectoriel}.
 
-Notons qu'un processus peut être vu comme une application $X: \Omega
+Notons qu'un processus peut \^{e}tre vu comme une application $X: \Omega
 \times T \rightarrow E$, $(\omega,t)\mapsto X_t(\omega)$ telle que, \`a
 chaque instant $t \in T$, l'application $\omega \mapsto X_t(\omega)$
 est une variable al\'eatoire de $(E,\cE)$.
@@ -134,7 +143,7 @@ A_2\in\cE_2\}$ est stable par intersection finie, une probabilit\'e sur
 $\cE_1\otimes\cE_2$  est \emph{caract\'eris\'ee} par sa restriction \`a
 cette classe (voir \cite[Corollaire 6.1]{jacod:protter:2003}).
 
-On d\'efinit de même un espace mesurable produit $(E_1\times\dots\times E_n,\cE_1\otimes\dots\otimes\cE_n)$
+On d\'efinit de m\^{e}me un espace mesurable produit $(E_1\times\dots\times E_n,\cE_1\otimes\dots\otimes\cE_n)$
 \`a partir d'un nombre fini $n$ d'espaces mesurables $(E_t,\cE_t)$,
 $t\in T$. Si $T$ n'est pas de cardinal fini, cette d\'efinition se g\'en\'eralise en consid\'erant
  la tribu engendr\'ee par les \emph{cylindres} sur le produit cart\'esien $\prod_{t\in T} E_t$ qui contient l'ensemble des
@@ -238,7 +247,6 @@ classe d'ensembles de $E^T$ stable par intersection finie et par
 passage au compl\'ementaire contenant les cylindres de $E^T$. Par le
 th\'eor\`eme de Carath\'eodory, voir~\cite[Th\'eor\`eme~8]{royden:1988}, on
 obtient une unique extension de $\PP$ \`a la tribu $\cE^{\otimes T})$.
-\qed
 \end{proof}
 
 Ceci nous permet de d\'ecrire les r\'epartitions finies d'un processus
@@ -278,7 +286,7 @@ on appelle la famille canonique  $(\xi_t)_{t\in T}$ d\'efinies sur $(E^T,\cE^T,\
 \end{definition}
 
 On a suppos\'e jusqu'\`a pr\'esent le processus $X=(X_t)_{t\in T}$ donn\'e.
-Le th\'eor\`eme~\ref{th:kolmogorov} peut aussi être utilis\'e pour le
+Le th\'eor\`eme~\ref{th:kolmogorov} peut aussi \^{e}tre utilis\'e pour le
 construire, sous la forme d'un processus canonique, comme le montre
 l'exemple suivant, puis le paragraphe~\ref{sec:proc-gauss-reels} qui
 introduit une classe particuli\`ere de processus~: la classe des
@@ -309,7 +317,7 @@ Nous introduisons \`a pr\'esent une classe importante de processus al\'eatoires 
 mod\'elisation stochastique~: la classe des processus gaussiens.
 Rappelons tout d'abord la d\'efinition des variables al\'eatoires
 gaussiennes, univari\'ees puis multivari\'ees. Une decription plus
-d\'etaill\'ee peut être trouv\'ee dans~\cite[Chapter~16]{jacod:protter:2003}.
+d\'etaill\'ee peut \^{e}tre trouv\'ee dans~\cite[Chapter~16]{jacod:protter:2003}.
 
 
 \begin{definition}[Variable al\'eatoire gaussienne r\'eelle]
@@ -406,7 +414,7 @@ R\'eciproquement pour tout vecteur
    orthogonale. Il suffit alors de prendre $Y\sim\mathcal{N}_n( U^T\mu, \Sigma)$
    et de poser $X=UY$ et le lemme donne $X\sim\mathcal{N}_n( \mu, \Gamma)$
    comme recherch\'e.
- \qed
+ 
 \end{proof}
 
 On montre facilement la proposition suivante
@@ -419,7 +427,7 @@ On montre facilement la proposition suivante
  \end{proposition}
 
 
-En utilisant le même proc\'ed\'e de preuve que pour la
+En utilisant le m\^{e}me proc\'ed\'e de preuve que pour la
 proposition~\ref{prop:vect_gaussiens}, i.e. en consid\'erant le cas $\Gamma$
 diagonale puis la diagonalisation de $\Gamma$ pour passer au cas g\'en\'eral, on
 obtient aussi le r\'esultat suivant (voir~\cite[Corollaire~16.2]{jacod:protter:2003}).
@@ -449,9 +457,9 @@ Nous \'etendons maintenant la notion de vecteur gaussien \`a celle de
 pour tout ensemble fini d'indices $I=\{t_1, t_2, \cdots,t_n\}$,
 $[X_{t_1}, X_{t_2}, \cdots, X_{t_n}]^T$ est un vecteur gaussien.
 \end{definition}
-Ainsi un vecteur gaussien $[X_1,\dots,X_n]^T$ peut être lui-même vu comme un
+Ainsi un vecteur gaussien $[X_1,\dots,X_n]^T$ peut \^{e}tre lui-m\^{e}me vu comme un
 processus gaussien $\{X_t, \,t\in \{1,\dots,n\}\}$. Cette d\'efinition
-n'a donc un int\'erêt que dans le cas o\`u $T$ est de cardinal infini.
+n'a donc un int\'er\^{e}t que dans le cas o\`u $T$ est de cardinal infini.
 D'apr\`es~(\ref{eq:fcarac_vectgaussien}), la famille des r\'epartitions finies est
  caract\'eris\'ee par la donn\'ee de la fonction moyenne $\mu:t\in T \mapsto
 \mu(t)\in \Rset$ et de la fonction de covariance $\gamma:(t,s)\in(T\times T)
@@ -484,7 +492,7 @@ d'apr\`es le th\'eor\`eme \ref{th:kolmogorov}, le r\'esultat suivant~:
   \]
 \end{theorem}
 %Attention le r\'esultat ci-dessus est plus subtil qu'il n'y
-%paraît~: si {\em la loi} du processus est bien d\'efinie de mani\`ere unique,
+%para\^{i}t~: si {\em la loi} du processus est bien d\'efinie de mani\`ere unique,
 %il existe n\'eanmoins plusieurs mani\`eres de construire des processus ayant cette
 %loi. Pour un ensemble $T$ d'indices temporels discret, toutes les
 %constructions sont \'equivalentes \`a la construction canonique du
@@ -505,7 +513,7 @@ d'apr\`es le th\'eor\`eme \ref{th:kolmogorov}, le r\'esultat suivant~:
 %``m\'emoire''),
 % \item pour tout $h \in \Rset$, et tout $0 \leq
 %s < t$, les v.a. $X(t+h) - X(s+h)$ et $X(t) - X(s)$ ont les
-%mêmes lois, et la loi de l'incr\'ement $X(t) - X(s)$ est de
+%m\^{e}mes lois, et la loi de l'incr\'ement $X(t) - X(s)$ est de
 %variance finie $\PE{(X(t)-X(s))^2 } < \infty$,
 % \item les trajectoires sont continues.
 %\end{enumerate}
@@ -528,7 +536,7 @@ d'apr\`es le th\'eor\`eme \ref{th:kolmogorov}, le r\'esultat suivant~:
 % \right \}
 %\end{equation}
 %et donc l'accroissement $X(t) - X(s)$ est la somme d'un grand
-%nombre de variables al\'eatoires ind\'ependantes de même loi
+%nombre de variables al\'eatoires ind\'ependantes de m\^{e}me loi
 %(stationnarit\'e des incr\'ements) et de variance tendant vers $0$
 %lorsque $n \rightarrow \infty$. Une application directe du
 %th\'eor\`eme de la limite centrale montre que $X(t) - X(s)$ suit
@@ -614,14 +622,6 @@ et une notion plus faible, la \emph{stationnarit\'e
 au second ordre}, qui impose l'invariance par translation des moments
 d'ordre un et deux uniquement, lorsque ceux-ci existent.
 
-% \clnote{pourquoi n'\'ecrit-on pas cette d\'efinition pour la stationnarit\'e
-%   stricte ?}
-% \begin{definition}[Stationnarit\'e stricte]
-% Un processus al\'eatoire $(X_t)_{t\in\Zset}$ est stationnaire au sens
-% strict si $(X_{t_1},\dots,X_{t_k})$ et
-% $(X_{t_1+h},\dots,X_{t_k+h})$ ont des lois identiques pour tout entier $k\geq
-% 1$ et pour tous $t_1,\dots,t_k,h\in\Zset$.
-% \end{definition}
 
 
 
@@ -641,7 +641,7 @@ $$
 \begin{definition}[Stationnarit\'e stricte]
 \index{Stationnarit\'e!stricte}
 On pose $T=\Zset$ ou $T=\Nset$.
-Un processus al\'eatoire $\{X_t, t\in T \}$ est stationnaire au sens strict si $X$ et $S\circ X$ ont même loi, \ie\
+Un processus al\'eatoire $\{X_t, t\in T \}$ est stationnaire au sens strict si $X$ et $S\circ X$ ont m\^{e}me loi, \ie\
  $\PP_{S\circ X}=\PP_X$.
 \end{definition}
 
@@ -656,7 +656,7 @@ On en conclut que  $\{X_t, t\in T\}$ est \emph{stationnaire au sens strict} si e
 $$
 \PP_I=\PP_{I+1} \; .
 $$
-On remarque aussi que la stationnarit\'e au sens strict implique que  $X$ et $S^\tau\circ X$ ont même loi pour tout $\tau\in T$
+On remarque aussi que la stationnarit\'e au sens strict implique que  $X$ et $S^\tau\circ X$ ont m\^{e}me loi pour tout $\tau\in T$
 et donc aussi $\PP_I=\PP_{I+\tau}$, o\`u $I + \tau = \{ t+\tau, t \in I \}$.
 
 % Killed by oKp on 01/10/01
@@ -722,12 +722,12 @@ $(X_t)_{t\in\Zset}$ d\'efini par
 \]
 est encore un processus al\'eatoire stationnaire au sens strict.  Par contre, ce
 processus obtenu par transformation n'est plus i.i.d dans la mesure o\`u, d\`es que
-$k \geq 1$, $X_t, X_{t+1}, \dots, X_{t+k-1}$ ont bien la même distribution
+$k \geq 1$, $X_t, X_{t+1}, \dots, X_{t+k-1}$ ont bien la m\^{e}me distribution
 marginale mais sont, en g\'en\'eral, d\'ependants car fonctions de variables
 al\'eatoires communes. Un tel processus est dit $k$-d\'ependant dans la mesure o\`u,
 par contre, $\tau \geq k$ implique que $(X_s)_{s\leq t}$ et $(X_s)_{s\geq
   t+\tau}$ sont ind\'ependants pour tout $t$. Les processus $m$-d\'ependants
-peuvent être utilis\'es pour approcher une grande classe de processus d\'ependants
+peuvent \^{e}tre utilis\'es pour approcher une grande classe de processus d\'ependants
 afin d'\'etudier le comportement asymptotique de statistiques usuelles telles que
 la moyenne empirique.  \index{Processus!$m$-d\'ependant}
 Nous y reviendrons au chapitre~\ref{chap:estim_moyenne}.
@@ -807,7 +807,7 @@ $$
 Y_t=\sum_{s=0}^\infty X_{t-s},\quad t\in \Zset \; .
 $$
 Contrairement aux exemples pr\'ec\'edents, l'application $\phi$ qui d\'efinit ce
-filtrage doit être d\'efinie avec quelques pr\'ecautions. Il faut en effet tout
+filtrage doit \^{e}tre d\'efinie avec quelques pr\'ecautions. Il faut en effet tout
 d'abord d\'efinir $\phi$ sur
 $$
 A=\left\{x=(x_t)_{t\in \Zset}\in E^\Zset~:~\sum_{t=-\infty}^0|x_t|<\infty\right\}\;,

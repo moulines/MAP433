@@ -55,7 +55,7 @@ donne un sens pr\'ecis \`a cette limite.
 % \begin{definition}[Op\'erateur de retard]
 %   Soit $\{X_t,\,t\in\Zset\}$ d\'efini sur $(\Omega,\cF,\PP)$ un processus du
 %   second ordre. On d\'efinit l'op\'erateur de retard $B$ (comme {\em backshift} en
-%   anglais) comme l'op\'erateur de l'espace $\cH^X_\infty$ dans lui-même
+%   anglais) comme l'op\'erateur de l'espace $\cH^X_\infty$ dans lui-m\^{e}me
 %   d\'efini par $B(X_t)=X_{t-1}$. (l'extension \`a $\cH^X_\infty$ tout entier est
 %   obtenu en compl\'etant par lin\'earit\'e et densit\'e.)
 % \end{definition}
@@ -66,7 +66,7 @@ donne un sens pr\'ecis \`a cette limite.
 %   Soit $X=\{X_t,\,t\in\Zset\}$ un processus du second ordre. Supposons que $X$
 %   soit de moyenne constante, pour tout $t$,
 %   $\esp[X_t]=\mu$. Alors $X$ est stationnaire au second ordre si et seulement
-%   si $B$ est une isom\'etrie de $\cH^X_\infty$ dans lui-même.
+%   si $B$ est une isom\'etrie de $\cH^X_\infty$ dans lui-m\^{e}me.
 % \end{proposition}
 
 % On note $B^k = B \circ B^{k-1}$ pour $k \geq 1$ les compositions successives de
@@ -128,7 +128,6 @@ $(U_{n,t})_{n \geq 0}$ est une suite de variables al\'eatoires int\'egrables. Pu
 $$
 \lim_{n \to \infty} \uparrow \PE{U_{n,t}} = \PE{\sum_{k\in\zset}|\psi_k| |X_{t-k}|}\;,
 $$
-%\clnote{j'ai pr\'ecis\'e la notation de la limite croissante}
 o\`u $\lim_{n \to \infty} \uparrow$ signifie qu'il s'agit d'une limite croissante.
 Comme
 $$
@@ -154,9 +153,9 @@ $Y_t(\omega)$, ce qui montre que $\limn Y_{n,t}= Y_t$ \ps\ . Le lemme de Fatou m
 \[
 \PE{|Y_t|}= \PE{\liminf_n |Y_{n,t}|} \leq \liminf_n \PE{Y_{n,t}} \leq \sup_t \PE{|X_t|} \sum_{j=-\infty}^\infty |\psi_j| < \infty \eqsp,
 \]
-et donc que $Y_t \in \lone\espaceproba$. Comme $|Y_{n,t} - Y_t| \leq \sum_{k \in \Zset} |\psi_k| |X_{t-k}|$,
+et donc que $Y_t \in L_1\espaceproba$. Comme $|Y_{n,t} - Y_t| \leq \sum_{k \in \Zset} |\psi_k| |X_{t-k}|$,
 le th\'eor\`eme de convergence domin\'ee montre que $\lim_n \PE{|Y_{n,t}-Y_t|} = 0$ et donc que la suite
-$\{ Y_{n,t} \}$ converge vers $Y_t$ dans $\lone\espaceproba$.
+$\{ Y_{n,t} \}$ converge vers $Y_t$ dans $L_1\espaceproba$.
 
 Consid\'erons maintenant le cas o\`u $\sup_{t \in \Zset}
 \PE{|X_{t}|^2} < \infty$. Remarquons tout d'abord que $\PE{
@@ -174,15 +173,15 @@ En utilisant le lemme de Fatou, nous avons
 \[
 \PE{|Y_t - Y_t^\star|^2} = \PE{\liminf_n |Y_{n,t} - Y_t^{\star}|^2} \leq \liminf_n \PE{|Y_{n,t}- Y_t^{\star}|^2}= 0 \eqsp,
 \]
-ce qui montre que les limites \ps\ $Y_t$ et $\ltwo\espaceproba$, $Y_t^\star$ coïncident \ps\ .
-\qed
+ce qui montre que les limites \ps\ $Y_t$ et $\ltwo\espaceproba$, $Y_t^\star$ co\"{i}ncident \ps\ .
+
 \end{proof}
 
 
 Le r\'esultat suivant \'etablit que le processus $(Y_t)$ obtenu par filtrage
 lin\'eaire d'un processus stationnaire au second ordre $(X_t)$ via
 l'\'equation (\ref{eq:filtrage_1}) est
-lui-même stationnaire au second ordre, \`a condition que la
+lui-m\^{e}me stationnaire au second ordre, \`a condition que la
 suite des $(\psi_k)$ soit absolument sommable
 \textit{i.e.} $\sum_{k\in\mathbb{Z}}|\psi_k|<\infty$.
 
@@ -232,10 +231,10 @@ D'apr\`es la continuit\'e du produit scalaire dans $L^2\espaceproba$, voir th\'e
 
 Montrons \`a pr\'esent le r\'esultat sur la fonction d'auto-covariance.
 D'apr\`es la continuit\'e du produit scalaire dans $L^2\espaceproba$, voir th\'eor\`eme \ref{theo:cont_prod_int}, on a
-\begin{multline*}
-\Cov{Y_t}{Y_{t+h}} =\lim_{n\to\infty}\sum_{k,j=-n}^n\psi_k \bar{\psi}_j\Cov{X_{t-k}}{X_{t+h-j}}\\
+\begin{equation*}
+\Cov{Y_t}{Y_{t+h}} =\lim_{n\to\infty}\sum_{k,j=-n}^n\psi_k \bar{\psi}_j\Cov{X_{t-k}}{X_{t+h-j}}
 = \sum_{k\in\Zset}\psi_k \bar{\psi}_j\gamma_X(h+k-j)\; ,
-\end{multline*}
+\end{equation*}
 ce qui montre Eq.~\eqref{eq:facfiltrage}
 % Pour la fonction
 % d'autocovariance, notons tout d'abord que, pour tout $n$, le
@@ -317,7 +316,7 @@ que $\nu_Y(\rmd\lambda) = |\psi(\rme^{-\rmi \lambda})|^2\nu_X(\rmd\lambda)$.
 %          &=\sum_{k=-\infty}^{\infty} \psi_k \gamma_X(h-k)
 % \end{align*}
 % Ce qui conclut la preuve.
-\qed
+
 \end{proof}
 
 
@@ -386,7 +385,7 @@ o\`u $\psi(\rme^{-\rmi\lambda}) = \sum_{k\in \zset} \psi_k \rme^{-\rmi k \lambda
 % moyenne ajust\'ee ou processus ARMA. Il s'agit de restreindre la
 % classe des processus lin\'eaires en ne consid\'erant que les filtres
 % dont la fonction de transfert est rationnelle.
-%L'int\'erêt de cette param\'etrisation est qu'\`a partir d'un nombre fini de
+%L'int\'er\^{e}t de cette param\'etrisation est qu'\`a partir d'un nombre fini de
 %param\`etres, on peut approcher avec une pr\'ecision arbitraire toute densit\'e spectrale
 %suffisamment r\'eguli\`ere.
 %=====================================
@@ -488,7 +487,7 @@ en notant que\,:
   X_t = Z_t + \phi_1 \sum_{k=0}^{+\infty} \phi_1^k Z_{t-1-k}
       = Z_t + \phi_1 X_{t-1}\;.
 \]
-Remarquons que la solution donn\'ee par \eqref{AR1sol} peut être obtenu
+Remarquons que la solution donn\'ee par \eqref{AR1sol} peut \^{e}tre obtenu
 en utilisant le d\'eveloppement la fraction rationnelle $\psi(z)=(1-\phi_1
 z)^{-1}$ en s\'erie enti\`ere
 \[
@@ -498,8 +497,8 @@ convergeant sur le disque $\{ z \in \Cset \eqsp: |z| < |\phi_1|^{-1}\}$.
 Ce lien n'a rien de fortuit, comme nous le verrons  dans le paragraphe \ref{sec:cas_general}.
 \begin{figure}
 \centering
-  \includegraphics[width=0.6\textwidth]{chronoar1}\\
-  \caption{Trajectoires de longueur $500$ d'un processus AR$(1)$) gaussien.
+  \includegraphics[width=0.6\textwidth]{Figures/chronoar1}\\
+  \caption{Trajectoires de longueur $500$ d'un processus AR$(1)$ gaussien.
  Courbe du haut~: $\phi_1=-0.7$.
  Courbe du milieu~: $\phi_1=0.5$.
  Courbe du bas~: $\phi_1=0.9$}
@@ -523,12 +522,12 @@ d'auto-covariance sont positifs. Les exemples de trajectoires
 repr\'esent\'ees sur la figure~\ref{fig:figar1} montrent que des valeurs
 de $\phi_1$ proches de 1 correspondent \`a des trajectoires
 ``persistantes''. Inversement, des
-valeurs de $\phi_1$ r\'eelles et n\'egatives conduisent \`a des trajectoires o\`u une valeur positive a tendance \`a être
+valeurs de $\phi_1$ r\'eelles et n\'egatives conduisent \`a des trajectoires o\`u une valeur positive a tendance \`a \^{e}tre
 suivie par une valeur n\'egative.
 %====== FIGURE
 \begin{figure}
 \centering
-  \includegraphics[width=0.6\textwidth]{dspthAR1}
+  \includegraphics[width=0.6\textwidth]{Figures/dspthAR1}
   \caption{Densit\'e spectrale d'un processus AR(1), d\'efini
   par~(\ref{eq:recurrenceAR1}) pour $\sigma=1$ et $\phi_1=0.7$.}
   \label{fig:dspthAR1}
@@ -557,7 +556,7 @@ X_t&=&-\phi_1^{-1} Z_{t+1}-\phi_1^{-2} Z_{t+2}+\phi_1^{-2} X_{t+2}=\dots\\
 &=&-\phi_1^{-1} Z_{t+1}-\phi_1^{-2} Z_{t+2}-\dots-\phi_1^{-k-1}
 Z_{t+k+1}+\phi_1^{-k-1} X_{t+k+1}\; .
 \end{eqnarray*}
-En utilisant exactement les mêmes arguments que ceux employ\'es
+En utilisant exactement les m\^{e}mes arguments que ceux employ\'es
 pr\'ec\'edemment, on d\'eduit que la solution stationnaire dans ce cas vaut
 \begin{equation}
 \label{eq:ar1_sol>1}
@@ -681,7 +680,7 @@ o\`u $(\alpha\beta)_k=\sum_{j\in\mathbb{Z}}\alpha_j\beta_{k-j}$.
  \begin{proof}\smartqed
  Soit $Y=\filtop{\beta}X$. D'apr\`es le th\'eor\`eme \ref{theo:filtragepassl_stat},
 puisque $\sum_k|\beta_k|<\infty$, $Y$ est dans $\cS\espaceproba$.
-Pour les mêmes raisons, $\filtop{\alpha}Y$ est lui aussi dans $\cS\espaceproba$.
+Pour les m\^{e}mes raisons, $\filtop{\alpha}Y$ est lui aussi dans $\cS\espaceproba$.
 Soient $Z=\filtop{\alpha}[\filtop{\beta}X]$ et $W=[\filtop{\alpha\beta}]X$, on a alors, pour tout $t\in\Zset$,
 $Z_t=\sum_{j\in\Zset}\alpha_j Y_{t-j}$,
 o\`u $Y_t=\sum_{k\in\Zset}\beta_k X_{t-k}$ et $W_t=\sum_{k\in\Zset}(\sum_{j\in\mathbb{Z}}\alpha_j\beta_{k-j})X_{t-k}$. Ainsi,
@@ -731,11 +730,11 @@ En utilisant (\ref{eq:dec_filtre2}), (\ref{eq:dec_filtre3}) et
 (\ref{eq:dec_filtre4}), on obtient que le premier terme du membre de
 droite de (\ref{eq:dec_filtre1}) tend vers 0 lorsque $m$ et $n$
 tendent vers l'infini.
-On peut montrer en utilisant le même type d'arguments que
+On peut montrer en utilisant le m\^{e}me type d'arguments que
 $\|W_{t,m+n,m}-W_t\|_2$
 tend vers 0 lorsque $m$ et $n$ tendent vers l'infini ce qui conclut la
 preuve avec (\ref{eq:dec_filtre1}).
-\qed
+
 \end{proof}
 
 
@@ -845,7 +844,7 @@ En majorant $(k+r-1)!/k!$ par $k^{r-1}$, on en d\'eduit  que
 o\`u $|v_k|$ et $|w_k|$ sont major\'es par $C \eta^{|k|}$, $C$ \'etant une constante
 strictement positive pour tout $\eta$ choisi dans
 $(0,r_1)$ ou $(0,1/r_2)$, respectivement.
-\qed
+
 \end{proof}
 
 \textbf{Retour \`a la preuve du th\'eor\`eme \ref{theo:ARMApq}}\\
@@ -923,23 +922,22 @@ $\{z,\; |z|=1\}$, ce qui conclut la preuve du th\'eor\`eme \ref{theo:ARMApq}.
 % n'ont pas de racines communes et que $|\eta(z)|\leq\sum_{k\in\Zset}|\eta_k|<\infty$,
 % si $|z|=1$, $\phi(z)$ ne s'annule pas sur le cercle unit\'e :
 % $\{z,\; |z|=1\}.$
-\qed
+
 \end{proof}
 Dans le cas o\`u $\phi(z)$ et $\theta(z)$ ont des z\'eros communs,
 deux configurations sont possibles~:
-\begin{enumerate}[label=\emph{\alph*})]
+\begin{enumerate}[label=(\alph*)]
 \item Les z\'eros communs ne sont pas sur le cercle unit\'e. Dans ce
 cas on se
   ram\`ene au cas sans z\'ero commun en annulant les facteurs communs.
 \item Certains des z\'eros communs se trouvent sur le cercle unit\'e.
   L'\'equation~(\ref{eq:recurrenceARMApq}) admet une infinit\'e de solutions
   stationnaires au second ordre.
-\clnote{je ne comprends pas le 2\`eme point}
 \end{enumerate}
 Du point de vue de la mod\'elisation, la pr\'esence de z\'eros communs
-ne pr\'esente aucun int\'erêt puisqu'elle est sans influence sur
+ne pr\'esente aucun int\'er\^{e}t puisqu'elle est sans influence sur
 la densit\'e spectrale de puissance. Elle conduit de plus \`a une
-ambiguït\'e sur l'ordre r\'eel des parties AR et MA.
+ambigu\"{i}t\'e sur l'ordre r\'eel des parties AR et MA.
 %=========================================================
 \subsubsection{ARMA$(p,q)$ causal}
 %  Comme dans le cas d'un processus AR($p$), on peut
@@ -1021,7 +1019,7 @@ $|z|\leq 1$. Puisque $\theta$ et $\phi$ n'ont pas de racines communes et que
 $|\eta(z)|\leq\sum_{k\geq 0}|\eta_k|<\infty$, si $|z|\leq 1$, $\phi(z)$ ne
 s'annule pas sur le disque unit\'e : $\{z,\; |z|\leq 1\}$, ce qui conclut la
 preuve du th\'eor\`eme~\ref{theo:ARMApq_causal}.
-\qed
+
 \end{proof}
 %==========================================
 
@@ -1074,7 +1072,7 @@ qui converge dans $\{z\in\cset\;,\;|z|\leq 1\}.$
 La preuve de ce th\'eor\`eme est tout \`a fait analogue \`a celle du
 th\'eor\`eme~\ref{theo:ARMApq_causal} et n'est donc pas d\'etaill\'ee ici.
 % Remarquons que la notion d'inversibilit\'e, comme celle de causalit\'e, est bien relative au
-% mod\`ele ARMA$(p,q)$ lui-même et pas uniquement au processus
+% mod\`ele ARMA$(p,q)$ lui-m\^{e}me et pas uniquement au processus
 % $X_t$.
 %\begin{exercice}
 %  Soit $X_t$ un processus stationnaire au second ordre solution de l'\'equation
@@ -1151,9 +1149,8 @@ $(X_t)$ poss\`ede une densit\'e spectrale qui a pour expression~:
 \begin{equation}
  \label{eq:dspARMApq}
  f(\lambda)=\frac{\sigma^2}{2\pi}
-    \frac{\left| 1+\sum_{k=1}^q \theta_k \rme^{-\rmi k \lambda}\right |^2}
-         {\left| 1-\sum_{k=1}^p \phi_k \rme^{-\rmi k \lambda}\right
-           |^2}\;,\; -\pi\leq\lambda\leq\pi\;.
+    \frac{\left| 1+\sum_{k=1}^q \theta_k \rme^{-\rmi k \lambda}\right|^2}
+         {\left| 1-\sum_{k=1}^p \phi_k \rme^{-\rmi k \lambda}\right|^2}\;,\; -\pi\leq\lambda\leq\pi\;.
 \end{equation}
 \end{theorem}
 
@@ -1161,84 +1158,6 @@ $(X_t)$ poss\`ede une densit\'e spectrale qui a pour expression~:
 D'apr\`es le th\'eor\`eme \ref{theo:ARMApq}, l'expression de $f$ est bien
 d\'efinie puisque $\phi$ ne s'annule pas sur le cercle unit\'e.
 \end{remark}
-% =======================================================================================
-%=======================================================================================
-%=======================================================================================
-% \section{Preuves des th\'eor\`emes~\ref{theo:filtragepassl} et~\ref{theo:filtragepassl_stat}}
-% \label{sec:c1preuves}
-%=======================================================================================
-% \begin{theorembis}[\ref{theo:filtragepassl}]
-%  Soit $\{ \psi_k \}_{k\in\Zset}$ une suite telle que $\sum_{k= -
-% \infty}^\infty |\psi_k| < \infty$ et soit $\{X_{t}\}$ un processus
-% al\'eatoire tel que $\sup_{t \in \Zset} \PE {|X_{t}|} < \infty$.
-% Alors, pour tout $t \in \Zset$, la suite~:
-% \[
-% Y_{n,t} = \sum_{s=-n}^n \psi_s X_{t-s}
-% \]
-% converge presque s\^urement, quand $n$ tend vers l'infini, vers
-% une limite que nous notons $Y_{t} = \sum_{s=-\infty}^\infty \psi_s
-% X_{t-s}$ et $\limn \PE{
-%   |Y_{n,t} - Y_{t}|} = 0$. Si de plus $\sup_t \PE{X^2(t)} < \infty$, alors
-% $\PE{Y_{t}^2} < \infty$ et $Y_{n,t}$ converge en moyenne
-% quadratique vers $Y_{t}$, c'est \`a dire que $\limn \PE {|Y_{n,t} -
-% Y_{t}|^2} = 0$.
-% \end{theorembis}
-%===============================================================
-% \begin{theorembis}[\ref{theo:filtragepassl_stat}]
-%  Soit $\{ \psi_k \}$ une suite
-% telle que $\sum_{k= - \infty}^\infty |\psi_k| < \infty$ et soit
-% $\{X_{t}\}$ un processus stationnaire au second ordre de moyenne
-% $\mu_X= \PE{X_{t}}$ et de fonction d'autocovariance $\gamma_X(h)=
-% \cov(X_{t+h},X_{t})$. Alors le processus $Y_{t} =
-% \sum_{s=-\infty}^\infty \psi_s X_{t-s}$ est stationnaire au second
-% ordre de moyenne~:
-% \begin{equation}
-% \label{eq:moyennefiltrebis}
-%  \mu_Y = \mu_X \sum_{k=-\infty}^\infty \psi_k
-% \end{equation}
-% de fonction d'autocovariance~:
-% \begin{equation}
-% \label{eq:facfiltragebis}
-%  \gamma_Y(h)= \sum_{j=-\infty}^\infty
-%     \sum_{k=-\infty}^\infty \psi_j \psi_k \gamma_X(h+k-j)
-% \end{equation}
-% et de mesure spectrale~:
-% \begin{equation}
-% \label{eq:dspfiltragebis}
-%   \nu_Y(\rmd\lambda) = |\psi(e^{-i\lambda})|^2 \nu_X(\rmd\lambda)
-% \end{equation}
-% o\`u $\psi(e^{-i\lambda}) = \sum_k \psi_k e^{-i k \lambda}$ est
-% la fonction de transfert du filtre. Enfin l'intercovariance entre
-% les processus $Y_{t}$ et $X_{t}$ a pour expression~:
-% \begin{equation}
-%  \label{eq:intercovfiltragebis}
-%  \gamma_{YX}(h)=\PE{(Y_{t+h}-\mu_Y)(X_{t}-\mu_X)}
-%                = \sum_{k=-\infty}^\infty \psi_k \gamma_X(h-k)
-%  \end{equation}
-% \end{theorembis}
-
-% Pour d\'eterminer l'expression de
-% l'intercovariance entre les processus entre les processus $Y_{t}$
-% et $X_{t}$, il suffit de noter $|\cov(Y_{t+h},X_t)|^2 \leq
-% \gamma_Y(0)\gamma_X(0)<+\infty$ et que~:
-% \begin{align*}
-%  \PE{(Y_{t+h}-\mu_Y)(X_t-\mu_X)}
-%          &=\limn \cov (Y_{n,t+h},X_t)
-%          =\limn \sum_{k=-n}^n \psi_k \cov(X_{t+h-k}X_t)\\
-%          &=\sum_{k=-\infty}^{\infty} \psi_k \gamma_X(h-k)
-% \end{align*}
-% Ce qui conclut la preuve.
-%\qed
-%\end{proof}
-
-
-
-
-
-%\newpage
-%======================================================================
-%======================================================================
-%======================================================================
 
 
 

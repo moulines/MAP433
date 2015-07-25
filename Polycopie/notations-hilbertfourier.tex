@@ -12,7 +12,6 @@
 \def\Xset{\ensuremath{\mathsf{X}}}
 \def\Tset{\ensuremath{\mathsf{T}}}
 \def\Yset{\ensuremath{\mathsf{Y}}}
-\def\pp{\ensuremath{\mathrm{p.p.}}}
 \def\rmd{\mathrm{d}}
 \def\Qint{\ensuremath{\mathrm{QInt}}}
 \def\Int{\ensuremath{\mathrm{Int}}}
@@ -40,7 +39,6 @@
 \def\Xset{\ensuremath{\mathsf{X}}}
 \def\Tset{\ensuremath{\mathsf{T}}}
 \def\Yset{\ensuremath{\mathsf{Y}}}
-\def\pp{\ensuremath{\mathrm{p.p.}}}
 \def\rmd{\mathrm{d}}
 \def\Qint{\ensuremath{\mathrm{QInt}}}
 \def\Int{\ensuremath{\mathrm{Int}}}
@@ -57,9 +55,44 @@
 \newcommand{\TFC}{\overline{\mathcal{F}}}
 \newcommand{\TFA}[1]{\mathcal{F}\left( #1 \right)}
 \newcommand{\TFAC}[1]{\overline{\mathcal{F}}\left( #1 \right)}
+
 \def\TFyield{\stackrel{\mathcal{F}}{\mapsto}}
 
 \def\tore{\mathbb{T}}
+\def\btore{\mathcal{B}(\tore)}
+\def\espaceproba{(\Omega,\mathcal{A},\PP)}
+\def\limn{\lim_{n \rightarrow \infty}}
+\newcommand{\ps}{\ensuremath{\text{p.s.}}}
+\newcommand{\pp}{\ensuremath{\text{p.p.}}}
+\def\cA{\mathcal{A}}
+\def\cC{\mathcal{C}}
+\def\cL{\mathcal{L}}
+\def\cM{\mathcal{M}}
+\def\cN{\mathcal{N}}
+\def\cO{\mathcal{O}}
+\def\cP{\mathcal{P}}
+\def\cS{\mathcal{S}}
+\newcommand{\filtop}[1]{\operatorname{F}_{#1}}
+\def\bfphi{{\boldsymbol{\phi}}}
+\def\bfpsi{{\boldsymbol{\psi}}}
+\def\bfgamma{{\boldsymbol{\gamma}}}
+\def\bfpi{{\boldsymbol{\pi}}}
+\def\bfsigma{{\boldsymbol{\sigma}}}
+\def\bftheta{{\boldsymbol{\theta}}}
+\def\bfhphi{{\hat{\boldsymbol{\phi}}}}
+\def\bfhrho{{\hat{\boldsymbol{\rho}}}}
+\def\bfhgamma{{\hat{\boldsymbol{\gamma}}}}
+
+\def\ltwo{L_2}
+\newcommand{\lone}{\ensuremath{L_1}}
+
+\newcommand{\pltwo}{\ensuremath{\ell^2}}
+\def\calG{\mathcal{G}}
+\def\calM{\mathcal{M}}
+\def\calI{\mathcal{I}}
+\def\calH{\mathcal{H}}
+
+
 \newcommand\BL[1]{\mathrm{BL}(#1)}%bande limit{\'e}e
 %Espace de Schwarz
 \def\mcs{\ensuremath{\mathcal{S}}}
@@ -106,12 +139,17 @@
 \def\cI{\mathcal{I}}
 \def\PP{\mathbb{P}}
 \newcommand\PE[1]{{\mathbb E}\left[ #1 \right]}
+\newcommand{\Var}[1]{\mathrm{Var}\left( #1 \right)}
+\def\BB{\mathrm{B.B.}}
+\def\BBF{\mathrm{B.B.F.}}
 \newcommandx{\norm}[2][2=]{\Vert #1 \Vert_{#2}}
 \def\L1loc{L_{1,\mathrm{loc}}}
-\def\Leb{\mathrm{Leb}} 
+\def\Leb{\mathrm{Leb}}
+
 
 \newcommandx\sequence[3][2=,3=]
 {\ifthenelse{\equal{#3}{}}{\ensuremath{\{ #1_{#2}\}}}{\ensuremath{\{ #1_{#2}, \eqsp #2 \in #3 \}}}}
 \newcommandx\sequencePar[3][2=,3=]
 {\ifthenelse{\equal{#3}{}}{\ensuremath{\{ #1({#2})\}}}{\ensuremath{\{ #1({#2}), \eqsp #2 \in #3 \}}}}
 \def\pp{\ensuremath{\mathrm{p.p.}}}
+\def\ie{i.e.} 

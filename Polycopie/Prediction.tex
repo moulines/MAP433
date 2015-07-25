@@ -100,7 +100,7 @@ d\'efini par :
 \label{eq:cht}
 \cH_{t-1,p} = \lspan{X_{t-1}, X_{t-2}, \cdots, X_{t-p}}\;.
 \end{equation}
-Les indices dans la notation $\cH_{t-1,p}$ doivent être compris ainsi
+Les indices dans la notation $\cH_{t-1,p}$ doivent \^{e}tre compris ainsi
 : $\cH_{t-1,p}$ est le sous-espace vectoriel engendr\'e par les
 $p$ observations pr\'ec\'edant $X_{t-1}$ \`a savoir
 $X_{t-1}, \dots, X_{t-p}$.
@@ -248,7 +248,7 @@ $X_{t-1},\dots,X_{t-p}$.
 % d\'ependent pas de $t$}.
 
 % Les \'equations \eqref{eq:YW1} et
-% \eqref{eq:YW2} peuvent encore être r\'e\'ecrites \`a partir des
+% \eqref{eq:YW2} peuvent encore \^{e}tre r\'e\'ecrites \`a partir des
 % coefficients de corr\'elation $\rho(h)=\gamma(h)/\gamma(0)$. Il
 % vient\,:
 % \begin{equation}
@@ -308,7 +308,7 @@ et donc, d'apr\`es le th\'eor\`eme \ref{theo:projection}, pour tout $p\geq m$,
 $$
 \sum_{k=1}^m\phi_kX_{t-k}=\proj{X_t}{\cH_{t-1,p}}\;.
 $$
-% La projection orthogonale d'un AR$(m)$ causal sur son pass\'e de longueur $p\geq m$ coïncide avec la projection
+% La projection orthogonale d'un AR$(m)$ causal sur son pass\'e de longueur $p\geq m$ co\"{i}ncide avec la projection
 % orthogonale sur les $m$ derni\`eres valeurs et les coefficients
 % de pr\'ediction sont pr\'ecis\'ement les coefficients de l'\'equation
 % r\'ecurrente.
@@ -424,7 +424,7 @@ $$
 ce qui d\'emontre \eqref{eq:decompocholeski} puisque la
 matrice $A_{p+1}$ est inversible, son d\'eterminant \'etant \'egal \`a
 $1$.
-\qed
+
 \end{proof}
 % Dans la suite nous notons
 % $\cH_{t-1,p}=\lspan{X_{t-1},\dots,X_{t-p}}$ et nous appelons
@@ -459,31 +459,6 @@ d'ordre $p$. On dit que le processus $(X_t)$ est \emph{r\'egulier} si
 $\sigma^2 > 0$ et \emph{d\'eterministe} si $\sigma^2=0$.
 \end{definition}
 
-% \clnote{je me demande si ce qui est \'ecrit \`a partir d'ici et jusqu'\`a la
-% fin de la section ne serait pas mieux dans le chapitre sur Wold, \`a voir.}
-
-% D'apr\`es \eqref{eq:YW1}, comme nous l'avons d\'ej\`a remarqu\'e,
-% la suite $\{\phi_{k,p}\}$ ne d\'epend pas de $t$, pour $p$ fix\'e, et donc
-% le processus $\epsilon_{t,p}^+$ (relativement \`a l'indice
-% $t$) est stationnaire au second ordre et centr\'e. On a de plus la
-% relation suivante\,:
-% \begin{equation}
-%  \label{eq:pserreurforward}
-% \pscal{\epsilon_{t,p}^+}{\epsilon_{t,q}^+}= \sigma_{\max(p,q)}^2 \eqsp.
-% \end{equation}
-% En effet soit $q > p$. Par construction, nous avons
-% $\epsilon_{t,q}^+ \perp \cH_{t-1,q}$, et comme $\cH_{t-1,p}
-% \subseteq \cH_{t-1,q}$, $\epsilon_{t,q}^+ \perp \cH_{t-1,p}$ et en
-% particulier $\epsilon_{t,q}^+\perp \proj{X_t}{\cH_{t-1,p}}$ puisque
-% $\proj{X_t}{\cH_{t-1,p}}\in \cH_{t-1,p}$. Par cons\'equent, pour $q
-% > p$, on a\,:
-% \begin{multline*}
-%  (\epsilon_{t,p}^+, \epsilon_{t,q}^+)
-%  = \pscal{X_t - \proj{X_t}{\cH_{t-1,p}}}{ \epsilon_{t,q}^+} \\
-%  = \pscal{X_t}{X_t - \proj{X_t}{\cH_{t-1,q}}}
-%  = \pscal{X_t}{X_t - \proj{X_t}{\cH_{t-1,q}}}= \sigma_q^2 \eqsp,
-% \end{multline*}
-% ce qui d\'emontre \eqref{eq:pserreurforward}.
 
 Par ailleurs, nous pouvons remarquer que le probl\`eme de la recherche des coefficients de pr\'ediction pour
 un processus stationnaire au second ordre se ram\`ene \`a
@@ -535,7 +510,7 @@ r\'eelles, $\theta= 0$ ou $\pi$). Nous pouvons \'ecrire\,:
 On note $\bar{\nu}_X(d \lambda) = \nu_X(d \lambda) |\phi^*_p(\rme^{-i
 \lambda})|^2$. $\bar{\nu}_X$ est une mesure positive sur
 $[-\pi,\pi]$ de masse finie. On note $\bar{\gamma}(\tau)$ la suite
-des coefficients de Fourier associ\'es \`a  $\bar{\nu}_X$\,:
+des coefficients de Fourier associ\'{e}s  \`{a}  $\bar{\nu}_X$\,:
 \[
  \bar{\gamma}(\tau) = \frac{1}{2 \pi} \int_{- \pi}^{\pi}
  \rme^{\rmi \tau \lambda} \bar{\nu}_X(\rmd \lambda)\;.
@@ -555,7 +530,6 @@ La minimisation de $\sigma_p^2$ par rapport \`a  $\psi_1$ et $\psi_2$ est \'equi
 l'ordre $p=2$ pour la suite des covariances $\bar{\gamma}(h)$.
 Par cons\'equent la suite des coefficients $\{1,-2\cos(\theta),1\}$
 doit v\'erifier l'\'equation\,:
-\clnote{je ne comprends pas cette \'egalit\'e}
 \[
 \left[
 \begin{array}{ccc}
@@ -613,10 +587,8 @@ que\,:
 \end{gather*}
 ce qui contredit que $\phi_p(z)=\inf_{\psi \in \cP_p}(2\pi)^{-1}
 \int_{-\pi}^\pi |\psi(\rme^{-i\lambda })|^2 \nu_X(\rmd\lambda )$.
-\qed
-\end{proof}
 
-\clnote{je ne comprends pas la remarque}
+\end{proof}
 Une cons\'equence directe du th\'eor\`eme
 \ref{theo:procregulpredicstable} est qu'\`a toute matrice de
 covariance de type d\'efini positif, de dimension $(p+1)\times
@@ -627,7 +599,7 @@ Ainsi il existe bien un processus AR$(2)$ causal ayant
 $\gamma(0)=1$ et $\gamma(1)=\rho$, comme premiers coefficients de
 covariance, \`a condition toutefois que la matrice de covariance
 soit positive c'est-\`a-dire que $|\rho|<1$, tandis qu'il n'existe
-pas, pour cette même matrice de processus MA$(1)$. Il faut en
+pas, pour cette m\^{e}me matrice de processus MA$(1)$. Il faut en
 effet, en plus du caract\`ere positif, que $|\rho|\leq 1/2$
 (voir exemple \ref{exe:testposivite1}).
 %============================================================================
@@ -719,7 +691,7 @@ o\`u
 k_{p+1}=\frac{\pscal{X_t}{\epsilon_{t-p-1,p}^-}}{\|\epsilon_{t-p-1,p}^-\|^2}\;.
 \end{equation}
 Montrons \`a pr\'esent que les coefficients de pr\'ediction r\'etrograde
-coïncident avec les coefficients de pr\'ediction directe.
+co\"{i}ncident avec les coefficients de pr\'ediction directe.
 Plus pr\'ecis\'ement, si
 \begin{equation}
 \label{eq:devtdirectretro1}
@@ -806,12 +778,12 @@ de Levinson-Durbin.
 
 % Remarquons tout
 % d'abord que les coefficients de pr\'ediction r\'etrograde
-% coïncident avec les coefficients de pr\'ediction directe :
+% co\"{i}ncident avec les coefficients de pr\'ediction directe :
 % Cette
 % propri\'et\'e, que nous avons rencontr\'ee exemple \ref{exe:predAVAR},
 % est fondamentalement due \`a la {\em propri\'et\'e de r\'eversibilit\'e}
 % des processus stationnaires au second ordre. En effet, si $Y_t=
-% X_{-t}$, alors $Y_t$ a même moyenne et même fonction de
+% X_{-t}$, alors $Y_t$ a m\^{e}me moyenne et m\^{e}me fonction de
 % covariance que $X_t$ (voir exemple \ref{exe:stat_retourne}
 % chapitre \ref{chap:passl}) et par cons\'equent, en utilisant aussi
 % l'hypoth\`ese de stationnarit\'e, on a simultan\'ement pour tout
@@ -944,7 +916,7 @@ $\gamma(0),\dots,\gamma(K)$ s'\'ecrit alors de la fa\c{c}on suivante :
 \begin{algorithm}[Levinson-Durbin]
 \item[Initialisation] $k_1=\gamma(1)/\gamma(0)$, $\phi_{1,1}=\gamma(1)/\gamma(0)$ et $\sigma_1^2=\gamma(0)(1-k_1^2)$
 \item[R\'ecursion] Pour $p=\{2,\dots,K\}$ r\'ep\'eter\,:
-\begin{enumerate}[label=\emph{\alph*})]
+\begin{enumerate}[label=(\alph*)]
 \item Calculer
 \begin{align*}
 &k_p=\sigma_{p-1}^{-2} \left( \gamma(p) - \sum_{k=1}^{p-1} \phi_{k,p-1} \gamma(p-k) \right) \\
@@ -987,7 +959,7 @@ Or, d'apr\`es (\ref{eq:norme2_epsretro}), $\|\epsilon_{t-p-1,p}^-
 de (\ref{eq:var_pred_dir}), d'o\`u l'on d\'eduit \eqref{eq:defkp}.
 L'in\'egalit\'e \eqref{eq:maj:k_p+1} se d\'eduit alors de \eqref{eq:defkp}
 en utilisant l'in\'egalit\'e de Cauchy-Schwarz.
-\qed
+
 \end{proof}
 
 %\begin{proof}\smartqed
@@ -1006,7 +978,7 @@ en utilisant l'in\'egalit\'e de Cauchy-Schwarz.
 % \end{equation}
 % En utilisant l'in\'egalit\'e de Schwarz, on montre que $|k_{p+1}| \leq
 % 1$.
-% \qed
+%
 %\end{proof}
 %Dans la litt\'erature, $k_p$ est appel\'e coefficient d'autocorr\'elation partielle.
 \begin{definition}[Fonction d'autocorr\'elation partielle]
@@ -1035,7 +1007,7 @@ Dans \eqref{eq:defcorrpart}, l'expression pour $p=1$ est en accord
 avec celle pour $p\geq 2$ dans la mesure o\`u on peut noter que
 $\epsilon_{t,0}^+=X_t$ et que $\epsilon_{t-1,0}^-=X_{t-1}$. Notons
 aussi que, dans l'expression de $k_p$, $X_t$ et $X_{t-p}$ sont
-projet\'es sur le même sous-espace
+projet\'es sur le m\^{e}me sous-espace
 $\lspan{X_{t-1},\dots,X_{t-p+1}}$. Le r\'esultat remarquable est
 que la suite des coefficients de corr\'elation partielle est donn\'ee
 par\,:
@@ -1056,12 +1028,6 @@ $$
    \end{matrix}
    \right.
 $$
-% Notons enfin que contrairement \`a la fonction d'autocorr\'elation
-% partielle d'un processus AR$(m)$ causal qui v\'erifie $k_p= 0$ pour tout $p> m$,
-% nous avons pour un processus MA$(q)$, $k_p \ne 0$ pour un nombre infini de termes.
-% Il est toutefois possible de montrer qu'il existe un r\'eel $\rho$, $0 < \rho < 1$, et une constante $C$, telle
-% que, pour tout $p \geq 1$, $|k_p| \leq C \rho^k$.
-% \clnote{il faut montrer les r\'esultats sur le MA(q).}
 %==================================================================
 %==================================================================
 %==================================================================
@@ -1069,7 +1035,6 @@ $$
 % %==================================================================
 % %==================================================================
 
-% \clnote{Peut-être qu'on pourrait mettre l'algo de Schur en exercice ?}
 
 % Partant des coefficients d'autocorr\'elation, l'algorithme de
 % Levinson-Durbin \'evalue \`a la fois les coefficients des
@@ -1200,7 +1165,7 @@ $$
 % &v(m,0)=\gamma(m+1)
 % \end{align*}
 % \item[R\'ecursion]
-% \begin{enumerate}[label=\emph{\alph*})]
+% \begin{enumerate}[label=(\alph*)]
 % \item Pour $p=\{1,\dots,K\}$, calculer
 % \[k_p = \frac{v(0,p-1)}{u(0,p-1)} \]
 % \item Pour $m=\{0,\dots,K-p-1\}$ calculer\,:
@@ -1362,7 +1327,7 @@ Par ailleurs, la proposition \ref{prop:projecteur} (Pythagore) implique que
 \sigma_{n}^2= \| X_{n+1} - \proj{X_{n+1}}{\cH_n} \|^2= \| X_{n+1} \|^2 - \| \proj{X_{n+1}}{\cH_n} \|^2 \\
 = \kappa(n+1,n+1) - \sum_{k=0}^{n-1} \theta^2_{n,n-k} \sigma_{k}^2 \eqsp.
 \end{multline}
-\qed
+
 \end{proof}
 
 Alors que l'algorithme de Levinson-Durbin permet de d\'eterminer

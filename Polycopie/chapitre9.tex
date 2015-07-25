@@ -13,7 +13,7 @@ le but des algorithmes de codage.
 Les applications principales concernent le stockage des donn\'ees
 et la transmission \`a travers des canaux \`a d\'ebit limit\'e.
 
-Nous \'etudions les algorithmes de codage 
+Nous \'etudions les algorithmes de codage
 qui d\'ecomposent le
 signal sur une base orthogonale et approximent efficacement les
 coefficients de d\'ecomposition.
@@ -27,8 +27,8 @@ un ``score d'opinion moyen''.
 Pour un taux de compression donn\'e,
 la qualit\'e des signaux cod\'es est \'evalu\'ee par plusieurs personnes
 et calibr\'es selon une proc\'edure pr\'ecise.
-De telles \'evaluations sont longues \`a faire et les r\'esultats 
-difficiles 
+De telles \'evaluations sont longues \`a faire et les r\'esultats
+difficiles
 \`a interpr\'eter math\'ematiquement. La qualit\'e d'un algorithme de codage
 est donc le plus souvent optimis\'ee avec une distance qui
 a une forme analytique simple et qui tient compte partiellement de
@@ -54,10 +54,10 @@ Ceci peut \^etre consid\'erablement r\'eduit en supprimant certaines
 composantes redondantes de la parole.
 
 Nous avons vu dans le paragraphe \ref{modelisation-paro} que
-la production d'un signal de parole est bien comprise. 
-Des filtres autor\'egressifs 
+la production d'un signal de parole est bien comprise.
+Des filtres autor\'egressifs
 excit\'es par des trains d'impulsions ou un bruit
-blanc Gaussien 
+blanc Gaussien
 permettent de restaurer un signal
 intelligible \`a partir de peu de param\`etres.
 Ces codes d'analyse-synth\`ese, tel que le standard LPC-10 d\'ecrit
@@ -69,7 +69,7 @@ produisent un signal de parole intelligible
 Les signaux audios peuvent inclure de la parole mais aussi de la
 musique et n'importe quel type de son.
 Ils sont donc beaucoup plus difficiles \`a mod\'eliser que la parole.
-Sur un disque compact, le signal audio est limit\'e \`a un maximum 
+Sur un disque compact, le signal audio est limit\'e \`a un maximum
 de 20kHz. Il est \'echantillonn\'e \`a 44.1kHz et chaque \'echantillon est
 cod\'e sur 16bits. Le d\'ebit du code PCM r\'esultant est donc de
 706kb/s. Le signal audio d'un disque compact ou d'une cassette
@@ -82,16 +82,16 @@ n\'ecessitent pas la mise en place d'un mod\`ele.
 Une qualit\'e de disque compact est obtenue par des codeurs
 n\'ecessitant 128kb/s.
 Avec 64kb/s les d\'egradations sont \`a peine audibles.
-Ces algorithmes sont particuli\`erement importants pour les 
+Ces algorithmes sont particuli\`erement importants pour les
 CD-ROM en multim\'edia.\\
 
 {\bf Images}
-Une image couleur est compos\'ee de trois canaux d'intensit\'e 
+Une image couleur est compos\'ee de trois canaux d'intensit\'e
 dans le rouge, le vert et le bleu.
 Chacune de ces images a typiquement
 500 par 500 pixels, qui sont cod\'es sur 8 bits (256 niveaux de gris).
 Un canal t\'el\'ephonique digital ISDN  a un d\'ebit de 64kb/s.
-Il faut donc environ 2 minutes pour transmettre une telle image. 
+Il faut donc environ 2 minutes pour transmettre une telle image.
 
 Les images tout comme les signaux audios incluent le plus souvent
 des structures de type diff\'erent qu'il est difficile de mod\'eliser.
@@ -110,9 +110,9 @@ digitale.
 Un code orthogonal d\'ecompose le signal dans une base
 orthogonale bien choisie de fa\c con \`a optimiser la compression
 des coefficients de d\'ecomposition.
-La classe des signaux cod\'es est represent\'ee 
+La classe des signaux cod\'es est represent\'ee
 par un vecteur al\'eatoire $Y[n]$ de taille $N$.
-On d\'ecompose $Y[n]$ sur une 
+On d\'ecompose $Y[n]$ sur une
 base orthogonale $\{ g_m [n] \}_\ZnN$
 \[
 Y[n] = \sum_{m=0}^{N-1} A[m] \,g_m [n] .
@@ -120,48 +120,48 @@ Y[n] = \sum_{m=0}^{N-1} A[m] \,g_m [n] .
 Les coefficients de d\'ecomposition
 $A[m]$ sont des variables al\'eatoires
 \[
-A[m] = <Y[n] , g_m [n] > = 
+A[m] = <Y[n] , g_m [n] > =
 \sum_{n=0}^{N-1} Y[n] \, g^*_m [n] .
 \]
-Si $A[m]$ n'est pas de moyenne nulle, 
+Si $A[m]$ n'est pas de moyenne nulle,
 on code $A[m] - E\{A[m]\}$ et on m\'emorise la valeur moyenne
-$E\{A[m]\}$. Nous supposerons par la suite que 
+$E\{A[m]\}$. Nous supposerons par la suite que
 $E\{A[m]\}$ = 0.
 \\
 \\
 {\bf Quantification}
-Les valeurs r\'eelles 
+Les valeurs r\'eelles
 $\{A[m]\}_\ZmN$ doivent \^etre approxim\'ees avec une pr\'ecision finie
 pour construire un code de taille finie.
-Une quantification scalaire approxime chaque 
+Une quantification scalaire approxime chaque
 $A[m]$ individuellement.
 Si les coefficients $A[m]$ ont une forte d\'ependance,
-le taux de compression peut \^etre am\'elior\'e 
+le taux de compression peut \^etre am\'elior\'e
 avec une quantification vectorielle qui regroupe les coefficients
 en blocs.
-Cette approche n\'ecessite cependant plus de calculs. 
-Si la base $\{ g_m\}_\ZmN$ est choisie de fa\c con \`a ce que 
-les coefficients $A[m]$ soient presque ind\'ependants, 
+Cette approche n\'ecessite cependant plus de calculs.
+Si la base $\{ g_m\}_\ZmN$ est choisie de fa\c con \`a ce que
+les coefficients $A[m]$ soient presque ind\'ependants,
 l'am\'elioration d'une quantification vectorielle est
 marginale.
 
 Chaque $A[m]$ est une variable al\'eatoire dont la valeur
-quantifi\'ee est $\tilde A[m] = Q_m (A[m])$ 
+quantifi\'ee est $\tilde A[m] = Q_m (A[m])$
 Le signal quantifi\'e reconstruit est
 \[
 \tilde Y[n] = \sum_{m=0}^{N-1} \tilde A[m] \, g_m [n] .
 \]
 Comme la base est orthogonale
 \[
-\| Y - \tilde Y \|^2 = \sum_{m=0}^{N-1} 
+\| Y - \tilde Y \|^2 = \sum_{m=0}^{N-1}
 |A[m] - \tilde A[m]|^2
 \]
 et donc la valeur moyenne de l'erreur est
 \[
-E\{\| Y - \tilde Y \|^2\} = \sum_{m=0}^{N-1} 
+E\{\| Y - \tilde Y \|^2\} = \sum_{m=0}^{N-1}
 E\{|A[m] - \tilde A[m]|^2\}.
 \]
-Si l'on note 
+Si l'on note
 \[
 D_m = E\{|A[m] - \tilde A[m]|^2\} ,
 \]
@@ -172,9 +172,9 @@ D =  \sum_{m=0}^{N-1}  D_m .
 Soit $R_m$ le nombre moyen de bits pour coder $\tilde A [m]$.
 Pour une quantification \`a haute r\'esolution,
 le th\'eor\`eme \ref{quanti-theo} montre que si
-$D_m$ est fix\'e alors on minimise 
+$D_m$ est fix\'e alors on minimise
 $R_m$ avec une quantification scalaire uniforme. On note $\Delta_m$
-la taille des intervales de quantification. On a montr\'e en 
+la taille des intervales de quantification. On a montr\'e en
 (\ref{unifoquantiz}) que
 \[
 D_m = \frac {\Delta_m^2} {12} .
@@ -189,20 +189,20 @@ par (\ref{entropie-dffD}).
 \\
 \\
 {\bf Allocation de bits}
-Si l'on fixe l'erreur totale $D$, il nous faut 
-optimiser le choix de $\{\Delta_m\}_\ZmN$ 
-afin de minimiser le nombre total de bits 
+Si l'on fixe l'erreur totale $D$, il nous faut
+optimiser le choix de $\{\Delta_m\}_\ZmN$
+afin de minimiser le nombre total de bits
 \[
 R  = \sum_{m=0}^{N-1} R_m .
 \]
-Soit $\bar R = \frac R N$ le nombre moyen de bits par 
+Soit $\bar R = \frac R N$ le nombre moyen de bits par
 coefficient.
 Le th\'eor\`eme suivant montre que le codage est optimis\'e
 lorsque tous les $\Delta_m$ sont \'egaux.
 
 \begin{theorem}
-\label{bit-alloc-th} 
-Pour une quantification haute r\'esolution et une erreur 
+\label{bit-alloc-th}
+Pour une quantification haute r\'esolution et une erreur
 totale $D$, on minimize $\bar R$ avec
 \begin{equation}
 \label{allDeltamequal}
@@ -227,8 +227,8 @@ R_m = H_d (A[m]) -  \frac 1 2 \log_2 (12 \, D_m ).
 Donc
 \begin{equation}
 \label{valueofR}
-\bar R = \frac 1 N \sum_{m=0}^{N-1} R_m = 
-\frac 1 N \sum_{m=0}^{N-1}  H_d (A[m]) -  
+\bar R = \frac 1 N \sum_{m=0}^{N-1} R_m =
+\frac 1 N \sum_{m=0}^{N-1}  H_d (A[m]) -
 \frac 1 N \sum_{m=0}^{N-1}  \frac 1 2 \log_2 (12 \, D_m ).
 \end{equation}
 Minimiser $\bar R$ revient \`a minimiser
@@ -237,8 +237,8 @@ En appliquant l'in\'egalit\'e de Jensen (\ref{jensen}) \`a
 la fonction concave $\phi(x) = \log_2 (x)$ pour $p_k = \frac 1 N$
 on obtient
 \[
-\frac 1 N \sum_{m=0}^{N-1} \log_2 (12 \, D_m ) \leq 
-\log_2 \left(\frac {12} N \sum_{m=0}^{N-1} D_m \right) = 
+\frac 1 N \sum_{m=0}^{N-1} \log_2 (12 \, D_m ) \leq
+\log_2 \left(\frac {12} N \sum_{m=0}^{N-1} D_m \right) =
 \log_2 \left(\frac {12 \, D} N \right)  .
 \]
 Cette in\'egalit\'e est une \'egalit\'e si et seulement si tous
@@ -247,36 +247,36 @@ Donc $\frac {\Delta_m^2} {12} = D_m = \frac D N$, ce qui
 prouve (\ref{allDeltamequal}). On d\'eduit aussi de
 (\ref{valueofR}) que
 \[
-\bar R = \frac 1 N \sum_{m=0}^{N-1}  H_d (A[m]) -  
+\bar R = \frac 1 N \sum_{m=0}^{N-1}  H_d (A[m]) -
 \frac 1 2 \log_2 \left(\frac {12\, D} N \right)
 \]
 ce qui implique (\ref{dist-rat-gen}). $\Box$
 
 Ce th\'eor\`eme montre que le codage est optimis\'e en
 introduisant la m\^eme erreur moyenne
-$D_m = \frac {\Delta_m^2} {12} = \frac D N$ dans la direction 
+$D_m = \frac {\Delta_m^2} {12} = \frac D N$ dans la direction
 de chaque vecteur $g_m$ de la base. Le nombre moyen de bits
-$R_m$ pour coder $A[m]$ d\'epend alors seulement 
-de l'entropie diff\'erentielle: 
+$R_m$ pour coder $A[m]$ d\'epend alors seulement
+de l'entropie diff\'erentielle:
 \begin{equation}
 \label{RmOptiBiallO}
 R_m = H_d (A[m]) -  \frac 1 2 \log_2 \left(\frac {12 D} N \right) .
 \end{equation}
-On note $\sigma_m^2$ la variance de $A[m]$, et 
+On note $\sigma_m^2$ la variance de $A[m]$, et
 $\hat A [m] = \frac 1 {\sigma_m} \, A[m]$ la variable al\'eatoire
 normalis\'ee de variance $1$. Un changement de variable dans
 l'int\'egrale de l'entropie diff\'erentielle montre que
 \[
 H_d (A[m]) = H_d (\hat A[m]) + \log_2 \sigma_m~.
 \]
-L'allocation de bit optimal $R_m$ donn\'e par 
+L'allocation de bit optimal $R_m$ donn\'e par
 (\ref{RmOptiBiallO}) peut donc devenir n\'egative si
 la variance $\sigma_m$ est trop petite, ce qui n'est clairement
-pas une solution admissible. 
+pas une solution admissible.
 En pratique $R_m$ doit \^etre un entier positif mais imposer cette
 contrainte suppl\'ementaire ne permet pas de faire un
 calcul analytique simple. La formule (\ref{RmOptiBiallO}) n'est donc
-utilisable que si les valeurs $\{R_m\}_{0 \leq m < N}$ 
+utilisable que si les valeurs $\{R_m\}_{0 \leq m < N}$
 sont positives et on les
 approxime alors par les entiers les plus proches.
 \\
@@ -286,25 +286,25 @@ Nous avons mentionn\'e qu'une erreur quadratique souvent ne
 mesure pas bien l'erreur per\c{c}ue pour des images ou des
 signaux audios. Lorsque les vecteurs
 $g_m$ sont bien localis\'es en temps/espace et en fr\'equence,
-on peut am\'eliorer cette norme 
+on peut am\'eliorer cette norme
 en pond\'erant les erreurs par des poids qui d\'ependent
 de la fr\'equence, afin de se rapprocher de notre sensibilit\'e
 auditive/visuelle, qui varie avec la fr\'equence du signal.
 Une norme pond\'er\'ee est d\'efinie par
 \begin{equation}
 \label{weight-normed}
-D =  \sum_{m=0}^{N-1} \frac{D_m} {w_m^2} , 
+D =  \sum_{m=0}^{N-1} \frac{D_m} {w_m^2} ,
 \end{equation}
 o\`u $\{ w_m^2\}_\ZmN$ sont des constantes.
 
 Le th\'eor\`eme \ref{bit-alloc-th} s'applique
 \`a une norme pond\'er\'ee en observant que
 \[
-D =  \sum_{m=0}^{N-1} D^w_m, 
+D =  \sum_{m=0}^{N-1} D^w_m,
 \]
 o\`u $D^w_m =  \frac {D_m} {w_m^2}$
-est l'erreur de quantification de $A^w [m] = \frac {A[m]} {w_m}$. 
-Le th\'eor\`eme \ref{bit-alloc-th} 
+est l'erreur de quantification de $A^w [m] = \frac {A[m]} {w_m}$.
+Le th\'eor\`eme \ref{bit-alloc-th}
 prouve que l'allocation de bits optimale
 est obtenue en quantifiant uniform\'ement
 tous les $A^w [m]$ avec des intervales de m\^eme tailles $\Delta$.
@@ -316,7 +316,7 @@ $D_m = \frac {w_m^2 D}  {N}$.
 Comme on s'y attendait, en augmentant les poids $w_m$ on
 augment l'erreur dans la direction de $g_m$.
 La quantification uniform
-$Q_{\Delta_m}$ \`a intervales 
+$Q_{\Delta_m}$ \`a intervales
 $\Delta_m$ est souvent calcul\'ee avec un quantificateur
 $Q$ qui associe a tout nombre r\'eel l'entier le plus proche:
 \begin{equation}
@@ -357,44 +357,44 @@ $N$ \'echantillons. Si $f[0] \neq f[N-1]$, ce signal p\'eriodique
 a des transitions brutales en $n=0$ et $n=N-1$ ce qui produit des
 coefficients de Fourier de large amplitude. La quantification
 de ces coefficients de large amplitude cr\'ee des erreurs aux
-bords que l'on veut \'eviter. 
+bords que l'on veut \'eviter.
 On montre que la base
-de cosinus sp\'ecifi\'ee par le Th\'eor\`eme 
+de cosinus sp\'ecifi\'ee par le Th\'eor\`eme
 \ref{th-discr-cos} poss\`ede essentiellement
-les m\^emes propri\'et\'es 
-qu'une base de Fourier discr\`ete, mais ne 
-produit 
+les m\^emes propri\'et\'es
+qu'une base de Fourier discr\`ete, mais ne
+produit
 pas des coefficients de large amplitude par effet de bord.
 Cette base de cosine est bas\'ee sur une extension $\tilde f [n]$
 p\'eriodique de $f[n]$,
 qui \'evite l'introduction de transition brutale aux bords.
 
-Le signal $f[n]$ d\'efini sur $0 \leq n  < N$ 
+Le signal $f[n]$ d\'efini sur $0 \leq n  < N$
 est \'etendu par sym\'etrie par rapport \`a $- \half$ en un
-signal $\tilde f [n]$ de taille $2N$ 
-\begin{equation} 
-\tilde f[n] = 
-   \left\{ \begin{array}{ll} 
+signal $\tilde f [n]$ de taille $2N$
+\begin{equation}
+\tilde f[n] =
+   \left\{ \begin{array}{ll}
         f[n]& \mbox {for $0 \leq n \leq N$}\\
         f[-n-1] &\mbox {for $-N \leq n \leq -1$}
             \end{array}
-   \right.  
+   \right.
 \end{equation}
 La sym\'etrie \'evite d'introduire une transition brutale
 lors de la periodisation sur $2N$ coefficients
 car $\tilde f[0] = \tilde f[2N-1]$.
 La transform\'ee de Fourier discr\`ete
-de taille $2N$ d\'ecompose $\tilde f[n]$ comme une somme de 
-sinus et de cosinus 
+de taille $2N$ d\'ecompose $\tilde f[n]$ comme une somme de
+sinus et de cosinus
 \[
-\tilde f [n] = 
+\tilde f [n] =
 \sum_{k=0}^{N-1} a_k \cos \Bigl[\frac {2 k\pi} {2N} (n+\half)\Bigr] +
 \sum_{k=0}^{N-1} b_k \sin \Bigl[\frac {2k\pi} {2N} (n+\half)\Bigr] .
 \]
 Comme $\tilde f [n]$ est sym\'etrique par rapport
 \`a $-\half$, on d\'eduit que
 $b_k = 0$ pour tout $0 \leq k < N$.
-De plus $f[n] = \tilde f[n]$ pour $0 \leq n <N$, ce qui prouve 
+De plus $f[n] = \tilde f[n]$ pour $0 \leq n <N$, ce qui prouve
 que tout signal $f \in \R^N$ peut s'\'ecrire comme une somme
 de ces cosinus. On v\'erifie aussi facilement que ces
 cosinus sont
@@ -409,13 +409,13 @@ La famille de cosinus discrets
 \cos\Bigl[\frac {k \pi} N (n+\half)\Bigr] \right\}_\ZkN,
 \]
 avec
-\begin{equation} 
-\lambda_k = 
-   \left \{ \begin{array}{ll} 
+\begin{equation}
+\lambda_k =
+   \left \{ \begin{array}{ll}
             \frac 1 {\sqrt 2 } & \mbox{si $k = 0$} \\
-            1 &  \mbox{sinon} 
+            1 &  \mbox{sinon}
             \end{array}
-   \right.  
+   \right.
 \end{equation}
 est une base orthonormale de $\R^N$.
 \end{theorem}
@@ -423,37 +423,37 @@ est une base orthonormale de $\R^N$.
 Les produits scalaires
 \begin{equation}
 \label{DCT_I}
-{\hat f_c [k]}  = <f[n], c_k[n] > = 
+{\hat f_c [k]}  = <f[n], c_k[n] > =
 \lambda_k\, \sqrt {\frac 2 N}\,
-\sum_{n=0} ^{N-1} f[n] \cos\Bigl[\frac {k \pi} N (n+\half)\Bigr]  
+\sum_{n=0} ^{N-1} f[n] \cos\Bigl[\frac {k \pi} N (n+\half)\Bigr]
 \end{equation}
-d\'efinissent la transform\'ee en cosinus de 
+d\'efinissent la transform\'ee en cosinus de
 $f[n]$. Comme ces cosinus forment une base orthonormale
 \begin{equation}
 \label{cosin-recons}
-{f[n]}  = 
+{f[n]}  =
 \sum_{k=0} ^{N-1} <f, c_k >\, c_k [n] =
 \sum_{k=0} ^{N-1} \hat f_c [k] \,c_k [n] .
 \end{equation}
 En modifiant l'algorithme de transform\'ee de Fourier rapide,
 on peut calculer les coefficients $\{\hat f_c [k]\}_\ZkN$
-avec $O(N \log N)$ op\'erations \cite{vetterli}. 
+avec $O(N \log N)$ op\'erations \cite{vetterli}.
 De m\^eme la reconstruction
 (\ref{cosin-recons}) s'obtient avec
-$O(N \log N)$ op\'erations.\\ 
+$O(N \log N)$ op\'erations.\\
 \\
 {\bf Localisation temporelle}
 Lorsque le signal
 inclut des structures vari\'ees \`a diff\'erents instants,
 il est pr\'ef\'erable de s\'eparer ces composantes avec des fen\^etres
 temporelles et d'effectuer une transform\'ee en cosinus \`a l'int\'erieur
-de ces fen\^etres. Cette approche est similaire \`a 
+de ces fen\^etres. Cette approche est similaire \`a
 la transform\'ee de Fourier \`a fen\^etre que nous avons \'etudi\'ee
 dans le chapitre \ref{chap-ana-temp-fre}.
 
 
 Un signal de taille $N$ peut etre s\'epar\'e en $\frac N M$ composantes
-de tailles $M$ en utilisant 
+de tailles $M$ en utilisant
 des fen\^etres rectangulaires de taille $M$
 \[
 g[n] = \left\{
@@ -472,16 +472,16 @@ restriction de $f[n]$ pour $p M \leq n < (p+1) M$.
 On peut d\'ecomposer cette restriction sur une base de
 de cosinus de taille $M$ obtenue en translatant la famille
 \[
-\left\{ c_k [n] = {\lambda_k} \sqrt {\frac 2 M} 
+\left\{ c_k [n] = {\lambda_k} \sqrt {\frac 2 M}
 \cos\Bigl[\frac {k \pi} M (n+\half)\Bigr] \right\}_\ZkM .
 \]
-Chaque partie 
+Chaque partie
 $g[n - pM] f[n]$ se d\'ecompose sur la
-famille $\{ c_k [n-pM] g[n-pM] \}_\ZkM$ restreinte \`a 
+famille $\{ c_k [n-pM] g[n-pM] \}_\ZkM$ restreinte \`a
 $p M \leq n < (p+1) M$.
 Cela revient \`a d\'ecomposer $f[n]$ sur une base orthogonale
 de taille $N$ compos\'ee de $\frac N M$ fen\^etres de taille $M$,
-modul\'ees par des cosinus 
+modul\'ees par des cosinus
 \begin{equation}
 \label{base-loc-cs}
 \Bigl\{ g_{p,k} [n] =
@@ -498,7 +498,7 @@ de signaux mono-dimensionnels $f[n]$ de taille $N$.
 
 \begin{proposition}
 Si $\{e_k [n]\}_\ZkN$ est une
-base orthonormale de l'espace des signaux de taille $N$ alors 
+base orthonormale de l'espace des signaux de taille $N$ alors
 \[
 \left\{e_{k,j} [n,m] = e_k [n] e_j [m] \right\}_{\ZkN, 0 \leq j < N}
 \]
@@ -510,7 +510,7 @@ des images $f[n,m]$ de taille $N^2$.
 Il suffit pour cela de montrer que ces $N^2$ vecteurs sont
 orthogonaux. En effet
 \begin{eqnarray*}
-<e_{k,j} , e_{k',j'}> &=& 
+<e_{k,j} , e_{k',j'}> &=&
 \sum_{n=0}^{N-1}\sum_{m=0}^{N-1}
 e_{k,j}[n,m] e_{k',j'}^* [n,m] \\
 &=&
@@ -522,14 +522,14 @@ Ces produits scalaires sont donc tous nuls si $k \neq k'$
 et $j \neq j'$ car $\{e_k [n]\}_\UkN$ est une base orthogonale.
 $\Box$
 
-Cette proposition nous permet de construire des 
+Cette proposition nous permet de construire des
 bases
-de cosinus locaux d'images par un produit s\'eparable de 
+de cosinus locaux d'images par un produit s\'eparable de
 bases de cosinus locaux (\ref{base-loc-cs})
 de signaux monodimensionnels.
 La famille de $N^2$ fen\^etres modul\'ees
 \begin{equation}
-\left\{ g_{k,j} [n-pM,m-qM] = 
+\left\{ g_{k,j} [n-pM,m-qM] =
 g[n-pM] g[m-qM] c_k [n-pM] c_j [m-qM]
 \right\}_{0 \leq k,l < M, 0 \leq p,q \leq \frac N M}
 \end{equation}
@@ -547,7 +547,7 @@ Les codes par transform\'ee orthogonale sont particuli\`erement
 efficaces pour de larges classes de signaux pour lesquelles on ne
 peut d\'efinir des mod\`eles de production.
 C'est le cas pour les signaux audios ou les images.
-Le choix de la base et la quantification des coefficients 
+Le choix de la base et la quantification des coefficients
 doivent cependant \^etre adapt\'es \`a la perception humaine de
 fa\c con \`a produire des erreurs qui introduisent peu de d\'egradations
 perceptuelles.
@@ -563,7 +563,7 @@ avec un \'echantillonnage a
 Un code ``transparent'' peut introduire des erreurs num\'eriques
 mais ces erreurs doivent rester inaudibles pour un
 auditeur ``moyen''.
-De forts taux de compression sont obtenus en adaptant la 
+De forts taux de compression sont obtenus en adaptant la
 quantification aux propri\'et\'es de masquage auditif.\\
 \\
 {\bf Masquage auditif}
@@ -573,7 +573,7 @@ dans la m\^eme bande de fr\'equence.
 Cet effet de masquage se fait \`a l'int\'erieur de bandes
 de fr\'equence ``critiques'' de la forme
 $[\om_c - \frac {\Delta \om} 2,\om_c + \frac {\Delta \om} 2]$,
-qui ont \'et\'e mesur\'ees 
+qui ont \'et\'e mesur\'ees
 par des exp\'eriences de psycho-physiologie
 auditive.
 Un fort signal dont la transform\'ee de Fourier a un support
@@ -588,7 +588,7 @@ $[0,20$kHz$]$, il y a approximativement
 $\Delta \om$ et la fr\'equence centrale $\om_c$ satisfont
 \begin{equation}
 \label{criticalband}
-{\Delta \om} \approx 
+{\Delta \om} \approx
 \left\{
 \begin{array}{ll}
 100 ~~\mbox{for $\om_c \leq 700$}\\
@@ -600,19 +600,19 @@ $\Delta \om$ et la fr\'equence centrale $\om_c$ satisfont
 Le signal $f[n]$ est d\'ecompos\'e dans une base de cosinus locaux
 \[
 \Bigl\{ g_{p,k} [n] = g[n-pM] c_k [n-pM]  \Bigr\}_
-{\ZkM, 0 \leq p < \frac N M} 
+{\ZkM, 0 \leq p < \frac N M}
 \]
-construits avec une fen\^etre $g[n]$ couvrant g\'en\'eralement 
+construits avec une fen\^etre $g[n]$ couvrant g\'en\'eralement
 $M = 1024$ \'echantillons.
 Par une transform\'ee de Fourier rapide, pour chaque
-composante du signal $f[n] g[n-pM]$ de $M$ \'echantillons, 
+composante du signal $f[n] g[n-pM]$ de $M$ \'echantillons,
 on calcule l'\'energie en fr\'equence dans les
-bandes critiques 
+bandes critiques
 $[\om_c - \frac{\Delta \om} 2, \om_c + \frac{\Delta \om} 2 ]$.
-Cette \'energie permet de calculer le niveau de masquage et 
+Cette \'energie permet de calculer le niveau de masquage et
 donc l'amplitude maximum $\Delta$
 des erreurs de quantification qui ne sont pas audibles dans
-cette bande de fr\'equence. On quantifie alors 
+cette bande de fr\'equence. On quantifie alors
 uniformement avec un pas $\Delta$ chaque produit scalaire
 $<f , g_{p,k}>$ pour des cosinus locaux
 dont la fr\'equence se trouve \`a l'int\'erieur de la bande critique
@@ -623,29 +623,29 @@ de quantification qui sont au-dessous du niveau d'audition.\\
 {\bf MUSICAM}
 L'algorithme MUSICAM
 (Masking-pattern Universal Subband Integrated Coding and
-Multiplexing) utilis\'e par le standard MPEG-I est 
+Multiplexing) utilis\'e par le standard MPEG-I est
 le plus simple des
 codeurs perceptuels. Il d\'ecompose le signal en 32 bandes de fr\'equences
 de tailles \'egales dont la largeur  est de 750Hz.
 Cette d\'ecomposition est tr\`es semblable \`a une d\'ecomposition dans
 une base de cosinus locaux.
 Chaque $8~ 10^{-3}$ seconde
-la quantification est adapt\'ee dans chaque bande de 
+la quantification est adapt\'ee dans chaque bande de
 fr\'equence pour tenir compte des propri\'et\'es de masquage du signal.
-Ce syst\`eme comprime des signaux audios jusqu'\`a 128 kb/s sans 
+Ce syst\`eme comprime des signaux audios jusqu'\`a 128 kb/s sans
 introduire d'erreur audible.
 
 \subsection{Codage d'Images par JPEG}
 \label{still-image-comp}
 
-Le standard JPEG est le plus 
+Le standard JPEG est le plus
 couramment utilis\'e pour la compression
 d'images.
 L'image est d\'ecompos\'ee dans une base s\'eparable de
 cosinus locaux, en utilisant des fen\^etres de $M = 8$ par 8 pixels
 \[
-\left\{ 
-g_{k,j} [n - pM ,m - qM] = g[n-pM] g[m-qM] 
+\left\{
+g_{k,j} [n - pM ,m - qM] = g[n-pM] g[m-qM]
 c_k [n-pM] c_j [n-qM]
 \right\}_{0 \leq k,j < M, 0 \leq p,q \leq \frac N M}.
 \]
@@ -655,7 +655,7 @@ dans une base s\'eparable de cosinus. Dans chaque fen\^etre,
 les $64$ coefficients de d\'ecomposition
 sont quantifi\'es uniform\'ement.
 Dans les zones
-o\`u l'image est r\'eguli\`ere, 
+o\`u l'image est r\'eguli\`ere,
 les cosinus de hautes fr\'equences g\'en\`erent des
 petits coefficients, qui sont annul\'es par la quantification.
 Pour coder efficacement la position de ces coefficients nuls,
@@ -670,10 +670,10 @@ On peut utiliser la redondance de cette source de $0$ et de $1$
 en codant les valeurs sous forme de s\'equences.
 Un code ``run-length'' enregistre la taille
 $Z$ des s\'equences successives de $0$ et la taille $I$ des sequences
-successives de $1$. Les variables al\'eatoires $Z$ et $I$ 
+successives de $1$. Les variables al\'eatoires $Z$ et $I$
 sont ensuite
 enregistr\'ees avec un code entropique.
-Un code ``run-length'' est un algorithme de codage vectoriel 
+Un code ``run-length'' est un algorithme de codage vectoriel
 dont on peut d\'emontrer qu'il est optimal lorsque la s\'equence
 de $0$ et de $1$ est produite par une cha\^{\i}ne de Markov d'ordre 1.
 Ce type de codage binaire est utilis\'e pour la transmission de
@@ -683,7 +683,7 @@ Chaque bloc de 64 coefficients en cosinus est parcouru en
 zig-zag, comme l'illustre la figure \ref{JPEG-zigzag}.
 Sur ce parcours, on enregistre la taille des s\'equences
 de $0$ et de $1$ correspondant aux coefficients quantifi\'es
-\`a zero ou pas. 
+\`a zero ou pas.
 
 \begin{figure}[bhtp]
 \centerline{
@@ -699,20 +699,20 @@ zig-zag depuis les basses vers les hautes fr\'equences.}
 Sur chaque bloc,
 le vecteur de fr\'equence
 z\'ero $g_{0,0} [n-pM,m-qM]$ a une valeur constante.
-Le coefficient correspondant est donc proportionel \`a 
+Le coefficient correspondant est donc proportionel \`a
 l'intensit\'e moyenne de l'image sur le bloc.
-Ces coefficients sont cod\'ees s\'epar\'ements car 
+Ces coefficients sont cod\'ees s\'epar\'ements car
 ils sont fortement
 correl\'ees d'un bloc \`a l'autre. Plut\^ot que de quantifier
 individuellement les
-fr\'equences nulles ($k=j=0$), on code 
-la diff\'erence des coefficients de fr\'equence nulles, 
+fr\'equences nulles ($k=j=0$), on code
+la diff\'erence des coefficients de fr\'equence nulles,
 entre un bloc de l'image
 et le suivant qui se trouve \`a sa droite.
 \\
 \\
 \noindent{\bf Perception visuelle}
-La sensibilit\'e visuelle d\'epend de la fr\'equence 
+La sensibilit\'e visuelle d\'epend de la fr\'equence
 et de l'orientation
 du stimulus.
 Les propri\'et\'es de masquage sont aussi importantes en vision
@@ -720,14 +720,14 @@ que pour l'audition mais sont beaucoup plus compliqu\'ees \`a mod\'eliser.
 Des exp\'eriences psycho-physiologiques montrent qu'un stimulus
 dont la transform\'ee de Fourier est localis\'ee dans une bande
 de fr\'equence \'etroite produit un effet de masquage sur une bande
-de fr\'equence de l'ordre de 
-1 \`a 1.5 octave. Ce masquage d\'epend de la fr\'equence et de 
+de fr\'equence de l'ordre de
+1 \`a 1.5 octave. Ce masquage d\'epend de la fr\'equence et de
 l'orientation du signal mais aussi d'autres param\`etres
 d'intensit\'e, de couleur et de texture.
-Cette complexit\'e rend beaucoup plus difficile l'utilisation 
+Cette complexit\'e rend beaucoup plus difficile l'utilisation
 des propri\'et\'es de masquage en vision.
-Les codeurs adaptent donc plut\^ot l'erreur de quantification 
-suivant 
+Les codeurs adaptent donc plut\^ot l'erreur de quantification
+suivant
 une sensibilit\'e "moyenne" dans chaque bande de fr\'equence,
 sans utiliser les propri\'et\'es de masquage
 Nous sommes typiquement moins sensibles aux oscillations de
@@ -741,9 +741,9 @@ psychophysiques.
 Ceci revient \`a optimiser l'erreur pond\'er\'ee
 (\ref{weight-normed}).
 La table \ref{TableOfWeights} est un exemple de matrice
-de 8 par 8 poids qui peuvent \^etre utilis\'es par 
+de 8 par 8 poids qui peuvent \^etre utilis\'es par
 JPEG. Les poids des fr\'equences les
-plus basses, qui apparaissent en haut \`a gauche de la 
+plus basses, qui apparaissent en haut \`a gauche de la
 table \ref{TableOfWeights}, sont  10 fois plus petit qu'aux
 plus hautes fr\'equences, qui apparaissent en bas \`a droite.
 
@@ -764,7 +764,7 @@ plus hautes fr\'equences, qui apparaissent en bas \`a droite.
 \end{center}
 \normalsize
 \caption{Matrice de poids $w_\kj$ utilis\'es pour la
-quantification des coefficients 
+quantification des coefficients
 correspondant \`a chaque bloc de cosinus
 $g_\kj$. Les fr\'equences augmentent de gauche \`a droite et
 de haut en bas.}
@@ -772,40 +772,28 @@ de haut en bas.}
 \end{table}
 \\
 \\
-{\bf Qualit\'e de compression}
-Lorsque $\bar R \in [0.2,0.5]$bit/pixel, la figure \ref{JPEG} montre que
+\subsection*{Qualit\'e de compression}
+Lorsque $\bar R \in [0.2,0.5]$bit/pixel, la figure \ref{JPEG-1} montre que
 les images restor\'ees \`a partir d'un code JPEG sont de qualit\'e
 mod\'er\'ee.
 A fort taux de compression, on voit appara\^{\i}tre les blocs
 de 8 par 8 pixels sur lesquels la transform\'ee en cosinus est
 calcul\'ee.
 A 0.75-1 bit/pixel, les images cod\'ees avec JPEG sont
-visuellement quasiement parfaites. L'algorithme JPEG est
+visuellement quasiment parfaites. L'algorithme JPEG est
 souvent utilis\'e avec $\bar R \in [0.5,1]$.
+\newpage
+\begin{figure}
+\label{JPEG-1}
+\includegraphics[width=\textwidth]{Figures/JPEG1}
+\end{figure}
+\newpage
+\begin{figure}
+\label{JPEG-12}
+\includegraphics[width=\textwidth]{Figures/JPEG2}
+\end{figure}
 
 
-
-%\begin{figure}
-\vspace{5cm}\setlength{\tabcolsep}{0cm} % Separation entre les lignes d'images
-\setlength{\fboxsep}{0cm} % Separation entre la boite et l'image
-\avecboite = 0
-
-\begin{figtab}
-\begin{figrow}{2} 
-{{Images comprim\'ees avec l'algorithme JPEG.}
-\label{JPEG}}
-\figentry{6cm}{0cm}{/home/mallat/X/TREX/figures/falzon/Compression/PS/lenna.ps}&\figentry{6cm}{0cm}{/home/mallat/X/TREX/figures/falzon/Compression/PS/lenna_1.28.ps}\\
-\centry{image originale}& \centry{ 1.28 bits/pixel}\\ 
-\figentry{6cm}{0cm}{/home/mallat/X/TREX/figures/falzon/Compression/PS/lenna_1.09.ps} & 
-\figentry{6cm}{0cm}{/home/mallat/X/TREX/figures/falzon/Compression/PS/lenna_0.4.ps} \\
-\centry{ 1.09 bits/pixel} & \centry{ 0.4 bits/pixel} \\
-\figentry{6cm}{0cm}{/home/mallat/X/TREX/figures/falzon/Compression/PS/lenna_0.27.ps} &
-\figentry{6cm}{0cm}{/home/mallat/X/TREX/figures/falzon/Compression/PS/lenna_0.18.ps}\\
-\centry{ 0.27 bits/pixel} & \centry{ 0.18 bits/pixel}\\
-\end{figrow} 
-\end{figtab} 
-
-%\end{figure}
 
 
 
