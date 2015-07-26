@@ -23,7 +23,7 @@ x &  0\leq x\leq 1,\\
 \end{cases}
 $$
 Le produit de convolution de deux fonctions discontinues est donc continue.
-\item  Soit $f\in L_1(\rset)$ and $g= (2h)^{-1} \1_{\ccint{1-h,+h}}$ o\`u $h>0$.
+\item  Soit $f\in \lone(\rset)$ and $g= (2h)^{-1} \1_{\ccint{1-h,+h}}$ o\`u $h>0$.
 $$
 f*g(x)=\frac{1}{2h}\int_{-h}^{+h}f(x-t) \rmd t=\frac{1}{2h}\int_{x-h}^{x+h}f(u) \rmd  u,
 $$
@@ -32,12 +32,12 @@ qui est la moyenne de $f$ sur l'intervalle $\ccint{x-h,\ x+h}$. Le lecteur montr
 \end{example}
 
 
-\section{Convolution dans $L_1(\rset)$}
+\section{Convolution dans $\lone(\rset)$}
 
 \begin{definition}[support d'une fonction  measurable]
 Soit $f$ : $\rset\rightarrow \cset$ une fonction mesurable. Soit $O_{i}, i\in I$ la  famille de tous les ouverts de $\rset$ tels que pour tout $i\in I$, $f=0$ p.p. sur $O_{i}$. Soit $O=\bigcup_{i\in I}O_{i}$ et on d\'efinit le support de $f, \supp(f)$ , comme l'ensemble ferm\'e $\rset\backslash O$.
 \end{definition}
-On v\'erifie ais\'ement que si $f=g$ p.p. alors $\supp(f)=\supp(g)$. Dans \Cref{example:convolution} $\supp(f)=\supp(g)=[0,1]$, et la  convolution $f*g$ a pour effet d'\'etendre le support $\supp(f*g)=[0,2]$. De fa\c{c}on g\'en\'erale, nous avons
+On v\'erifie ais\'ement que si $f=g$ p.p. alors $\supp(f)=\supp(g)$. Dans l'example~\ref{example:convolution} $\supp(f)=\supp(g)=[0,1]$, et la  convolution $f*g$ a pour effet d'\'etendre le support $\supp(f*g)=[0,2]$. De fa\c{c}on g\'en\'erale, nous avons
 \begin{lemma}
 \label{lem:support-convolution}
 Soient $f$ et $g$ deux fonctions telles que $f*g$ existe. Alors
@@ -51,10 +51,10 @@ $$
 
 \begin{proposition}
 \label{prop:20.2.1}
-Si $f$ et $g$ sont des \'el\'ements $L_1(\rset)$ , alors:
+Si $f$ et $g$ sont des \'el\'ements $\lone(\rset)$ , alors:
 \begin{enumerate}[label=(\roman*)]
-\item $f*g$ est d\'efini presque-partout et $f*g \in L_1(\rset)$ .
-\item La convolution est op\'erateur bilin\'eaire continu de $L_1(\rset)\times L_1(\rset)$ \`a valeurs dans $L_1(\rset)$ et
+\item $f*g$ est d\'efini presque-partout et $f*g \in \lone(\rset)$ .
+\item La convolution est op\'erateur bilin\'eaire continu de $\lone(\rset)\times \lone(\rset)$ \`a valeurs dans $\lone(\rset)$ et
 \begin{equation}
 \label{eq:inegalite-norm}
 \norm{f*g}[1] \leq \norm{f}[1] \, \norm{ g}[1] \, .
@@ -63,11 +63,11 @@ Si $f$ et $g$ sont des \'el\'ements $L_1(\rset)$ , alors:
 \end{proposition}
 \begin{proof}
  \begin{enumerate}[label=(\roman*), wide=0pt, labelindent=\parindent]
-\item Comme $f, g \in L_1(\rset)$, le th\'eor\`eme de Fubini montre que la fonction $(y,\ z)\mapsto f(y)g(z)$ appartient \`a $L_{1}(\rset^{2})$. Le changement de variables $y=x-t$ et $z=t$ montre
+\item Comme $f, g \in \lone(\rset)$, le th\'eor\`eme de Fubini montre que la fonction $(y,\ z)\mapsto f(y)g(z)$ appartient \`a $L_{1}(\rset^{2})$. Le changement de variables $y=x-t$ et $z=t$ montre
 $$
 \iint_{\rset\times \rset}f(y)g(z)dydz=\iint_{\rset\times \rset}f(x-t)g(t)\rmd x\rmd t.
 $$
-La fonction $x\displaystyle \mapsto\int_{\rset}f(x-t)g(t)\rmd t$ est donc d\'efinie p.p. et appartient \`a  $L_1(\rset)$, en appliquant encore le th\'eor\`eme de Fubini.
+La fonction $x\displaystyle \mapsto\int_{\rset}f(x-t)g(t)\rmd t$ est donc d\'efinie p.p. et appartient \`a  $\lone(\rset)$, en appliquant encore le th\'eor\`eme de Fubini.
 \item Pour \'etablir l'in\'egalit\'e \eqref{eq:inegalite-norm}, nous \'ecrivons
 $$
 |f*g(x)|\leq\int_{\rset}|f(x-t)||g(t)|\rmd t=|f|*|g|(x)\ .
@@ -82,7 +82,7 @@ Par cons\'equent, nous avons
 \end{proof}
 
 \begin{proposition}
-Supposons que $f\in \L1loc(\rset)$ et que $g\in L_1(\rset)$ .
+Supposons que $f\in \L1loc(\rset)$ et que $g\in \lone(\rset)$ .
 \begin{enumerate}[label=(\roman*)]
 \item Si $\supp(g)$ est born\'e, alors $f*g(x)$ est d\'efini p.p .et $f * g \in \L1loc(\rset)$ .
 \item Si $f$ est born\'ee alors $f*g(x)$ est d\'efini pour tout $x$ et  $f * g \in L_{\infty}(\rset)$ .
@@ -95,7 +95,7 @@ $f(x-t)g(t)=\1_{[\alpha-a,\beta+a]}(x-t)f(x-t)g(t)$  et donc
 $$
 f*g(x)=\int_{-a}^{+a}f(x-t)g(t)\rmd t=(\1_{[\alpha-a,\beta+a]}f)*g(x)\ .
 $$
-$f*g$ coincide sur $[\alpha,\ \beta]$ avec la convolution de deux fonctions appartenant \`a $L_1(\rset)$. \Cref{prop:20.2.1} montre que cette fonction est d\'efinie p.p. et est int\'egrable. Donc $f*g$ est d\'efinie p.p. et est int\'egrable sur tout ensemble compact..
+$f*g$ coincide sur $[\alpha,\ \beta]$ avec la convolution de deux fonctions appartenant \`a $\lone(\rset)$. \Cref{prop:20.2.1} montre que cette fonction est d\'efinie p.p. et est int\'egrable. Donc $f*g$ est d\'efinie p.p. et est int\'egrable sur tout ensemble compact..
 \item Si $f\in L_{\infty}(\rset)$ , alors
 $$
 |\int_{\rset}f(u)g(x-u)\rmd u|\leq\norm{f}[\infty]\int_{\rset}|g(x-u)|,\ \rmd u=\norm{f}[\infty] \,
@@ -132,7 +132,7 @@ Nous avons d\'ej\`a \'etabli  que $f*g$ est d\'efini partout et born\'e; seule l
 \end{align*}
 Comme $f$ est uniform\'ement continue sur $[-a,\ a]$,  $f*g$ est (uniform\'ement) continue sur $\rset$.
 
-Les fonctions continues \`a support compact sont denses dans $L_1(\rset)$.
+Les fonctions continues \`a support compact sont denses dans $\lone(\rset)$.
 Soit $\sequence{f}[n][\nset]$ une suite de fonctions continues \`a support compact telles que
 $\lim_{n\rightarrow\infty} \norm{f_{n}-f}[1]=0$. Nous avons
 \begin{align*}
@@ -157,10 +157,10 @@ $$
 La preuve pour $p\neq 1,2$ est similaire en rempla\c{c}ant l'in\'egalit\'ede Cauchy-Schwarz par l'in\'egalit\'e de H\"older et en utilisant la densit\'e de $C_c^0(\rset)$ dans $L_p(\rset)$.
 \end{proof}
 
-Nous consid\'erons dans la proposition suivante la convolution d'une fonction de $L_1(\rset)$
+Nous consid\'erons dans la proposition suivante la convolution d'une fonction de $\lone(\rset)$
  et d'une fonction de $L_{2}(\rset)$.
 \begin{proposition}
-Si $f\in L_1(\rset)$ et $g\in L_{2}(\rset)$ , alors
+Si $f\in \lone(\rset)$ et $g\in L_{2}(\rset)$ , alors
 \begin{enumerate}[label=(\roman*)]
 \item $f*g(x)$ est d\'efini presque-partout.
 \item  $f*g  \in L_{2}(\rset)$  et $\norm{f*g}[2]\leq \norm{f}[1] \, \norm{g}[2]$.
@@ -172,7 +172,7 @@ Si $f\in L_1(\rset)$ et $g\in L_{2}(\rset)$ , alors
 \begin{equation}
 |f(u)g(x-u)|=(|f(u)||g(x-u)|^{2})^{1/2}(|f(u)|)^{1/2}
 \end{equation}
-Comme $|f|\in L_1(\rset)$ et $|g|^{2}\in L_1(\rset)$ , la fonction $u\mapsto|f(u)||g(x-u)|^{2}$ est int\'egrable pour presque-tout
+Comme $|f|\in \lone(\rset)$ et $|g|^{2}\in \lone(\rset)$ , la fonction $u\mapsto|f(u)||g(x-u)|^{2}$ est int\'egrable pour presque-tout
 $x$. The right-hand term of (20.4), being the product of two square integrable functions, is integrable. Thus $f*g(x)$ is defined for almost all $x.$
 
 \item En utilisant l'in\'egalit\'e de Cauchy-Schwarz
@@ -198,7 +198,7 @@ fournir une approximation, ce qui constitue le premier principe de
 r{\'e}gularisation.
 
 \begin{lemma}\label{lem:regularisation}
-  Soit $f\in L_1(\rset)$.
+  Soit $f\in \lone(\rset)$.
   Soit $K$ une fonction positive telle que $\int K(x)\,\rmd x=1$ et, pour une
   constante $C>0$ et un exposant $\alpha>2$, $K(x)\leq C (1+|x|)^{-\alpha}$
   pour tout $x\in\rset$.  D{\'e}finissons, pour tout $\sigma>0$, la fonction
@@ -262,7 +262,7 @@ $f$ adopte la r{\'e}gularit{\'e} du \emph{noyau} $K$. Ce principe est donn{\'e} 
 lemme suivant.
 
 \begin{lemma}\label{lem:regulairsation-est-reguliere}
-  Soient $f,g\in L_1(\rset)$. Alors on a les propri{\'e}t{\'e}s suivantes
+  Soient $f,g\in \lone(\rset)$. Alors on a les propri{\'e}t{\'e}s suivantes
   \begin{enumerate}[label=(\roman*)]
   \item\label{item:approx-cont-S-1} Si $g$ est $\mathcal{C}^k$, $f\star g$ est
   $\mathcal{C}^k$ et $(f\star g)^{(k)}=f\star g^{(k)}$.
@@ -339,14 +339,14 @@ $$
 
 
 \section{Une premi\`ere extension de la transformation de Fourier inverse}
-Ici nous l'appliquons dans le cadre $L_1(\rset)$ grace au r{\'e}sultat suivant, qui nous permettra de compl{\'e}ter la
+Ici nous l'appliquons dans le cadre $\lone(\rset)$ grace au r{\'e}sultat suivant, qui nous permettra de compl{\'e}ter la
 proposition~\ref{prop:inversionFourierL1} par un th{\'e}or{\`e}me d'inversion.
 \begin{proposition}\label{prop:DualiteSchwartz}
-Soient deux fonctions $f$ et $g$ dans $L_1(\rset)$. Si, pour toute fonction \textit{test} $\phi$ dans $\mcs$, on a
+Soient deux fonctions $f$ et $g$ dans $\lone(\rset)$. Si, pour toute fonction \textit{test} $\phi$ dans $\mcs$, on a
 $$
 \int f(x)\,\phi(x)\,\rmd x= \int g(x)\,\phi(x)\,\rmd x,
 $$
-alors $f=g$ (au sens $L_1(\rset)$).
+alors $f=g$ (au sens $\lone(\rset)$).
 \end{proposition}
 \begin{proof}
 En prenant la diff{\'e}rence entre les deux membre de l'{\'e}galit{\'e} de l'hypoth{\`e}se, on voit qu'il suffit de montrer ce r{\'e}sultat pour
@@ -359,7 +359,7 @@ lemme~\ref{lem:regularisation} en tout point de la droite r{\'e}elle.
 On en d{\'e}duit le r{\'e}sultat annonc{\'e} qui compl{\`e}te la proposition~\ref{prop:inversionFourierL1}.
 \begin{theorem}
 \label{theo:inversion-L1}
-Soit $f\in L_1(\rset)$ et supposons que $\hat{f}$ appartiennent aussi {\`a} $L_1(\rset)$. Alors
+Soit $f\in \lone(\rset)$ et supposons que $\hat{f}$ appartiennent aussi {\`a} $\lone(\rset)$. Alors
 la fonction (continue) $\bar{\TF} \hat{f}$ est l'unique
 repr{\'e}sentant continu de $f$.
 \end{theorem}
@@ -378,18 +378,18 @@ $$
 D'o{\`u} le r{\'e}sultat en appliquant la proposition~\ref{prop:DualiteSchwartz}.
 \end{proof}
 
-\section{Convolution et transform\'ee de Fourier dans $L_1(\rset)$}
+\section{Convolution et transform\'ee de Fourier dans $\lone(\rset)$}
 \begin{proposition}
 \label{prop:convolution-L1}
-Soient $f,g \in L_1(\rset)$.
+Soient $f,g \in \lone(\rset)$.
 \begin{enumerate}[label=(\roman*)]
 \item \label{item:convolution-L1-i} $\widehat{f * g}(\xi)= \hat{f}(\xi) \, \hat{g}(\xi)$ pour tout $\xi \in \rset$,
-\item Si de plus $\hat{f}, \hat{g} \in L_1(\rset)$, alors $\widehat{f \cdot g}(\xi)= \hat{f}(\xi) \, \hat{g}(\xi)$.
+\item Si de plus $\hat{f}, \hat{g} \in \lone(\rset)$, alors $\widehat{f \cdot g}(\xi)= \hat{f}(\xi) \, \hat{g}(\xi)$.
 \end{enumerate}
 \end{proposition}
 \begin{proof}
 \begin{enumerate}[label=(\roman*),wide=0pt, labelindent=\parindent]
-\item Comme $f,g \in L_1(\rset)$, \Cref{prop:20.2.1} shows that $f * g \in L_1(\rset)$. On peut donc calculer $\widehat{f * g}(\xi)$. En utilisant le th\'eor\`eme de Fubini, nous avons
+\item Comme $f,g \in \lone(\rset)$, \Cref{prop:20.2.1} shows that $f * g \in \lone(\rset)$. On peut donc calculer $\widehat{f * g}(\xi)$. En utilisant le th\'eor\`eme de Fubini, nous avons
 \begin{align*}
 \int \rme^{-\rmi 2 \pi \xi x} f * g(x) \rmd x
 &= \int \rme^{-\rmi 2 \pi \xi x} \left( \int f(x-t) g(t) \rmd t \right) \\
@@ -397,14 +397,14 @@ Soient $f,g \in L_1(\rset)$.
 &= \int g(t) \rme^{- \rmi 2 \pi \xi t} \hat{f}(\xi) \rmd t = \hat{g}(\xi) \cdot \hat{f}(\xi)
 \end{align*}
 \item On peut appliquer \eqref{item:convolution-L1-i} avec $\TFC$ en rempla\c{c}ant $\rmi$ par $-\rmi$. Comme
-$\hat{f}$ et $\hat{g} \in L_1(\rset)$, on applique \eqref{item:convolution-L1-i} \`{a} $\hat{f}$ et $\hat{g}$ ce qui montre
+$\hat{f}$ et $\hat{g} \in \lone(\rset)$, on applique \eqref{item:convolution-L1-i} \`{a} $\hat{f}$ et $\hat{g}$ ce qui montre
 \[
 \TFAC{\hat{f} * \hat{g}}(x)= \TFAC{\hat{f}}(x) \cdot \TFAC{\hat{g}} (x)= f(x) \cdot g(x) \eqsp, \pp
 \]
 \end{enumerate}
 \end{proof}
 \begin{corollary}
-Soient $f,g \in L_1(\rset)$.
+Soient $f,g \in \lone(\rset)$.
 \begin{enumerate}[label=(\roman*)]
 \item $\widehat{f * g}= \hat{f} \cdot \hat{g}$.
 \item $\widehat{f \cdot g}= \hat{f} * \hat{g}$.

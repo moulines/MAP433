@@ -21,7 +21,7 @@ o{\`u}, pour tout $z \in \cset$, $\bar{z}$ est le conjugu{\'e} de $z$. Lorsque $
 Cette int{\'e}grale est bien d{\'e}finie pour 2 repr{\'e}sentants de $f$ et $g$ car $|f(x) \bar{g}(x)|\leq (|f(x)|+ |\bar{g}(x)|)/2$ et
 sa valeur ne d{\'e}pend {\'e}videmment pas du choix de ses repr{\'e}sentant. D'auter part, $L_2(I)$ est bien le plus ``gros'' espace
 fonctionnel sur lequel ce produit scalaire est bien d{\'e}fini puisqu'il impose justement $\pscal{f}{f}_I<\infty$.
-Mentionnons aussi que, de m\^eme que pour $(L_1(\rset),\|\cdot\|_1)$,  $(L_2(\rset),\|\cdot\|_2)$ est un espace de Banach
+Mentionnons aussi que, de m\^eme que pour $(\lone(\rset),\|\cdot\|_1)$,  $(L_2(\rset),\|\cdot\|_2)$ est un espace de Banach
 (espace vectoriel norm{\'e} complet), o{\`u} la norme $\|\cdot\|_2$ est d{\'e}finie par
 $$
 \|f\|_2:=\sqrt{\pscal{f}{f}}=\left(\int |f(x)|^2\,\rmd x\right)^{1/2}.
@@ -32,12 +32,12 @@ $(L_2(\rset),\pscal{\cdot}{\cdot})$ est un espace
 
 \begin{theorem}
   \label{thm:lunDense}
-  L'ensemble des fonctions int{\'e}grables et de carr{\'e} int{\'e}grable, $L_1(\rset)\cap
+  L'ensemble des fonctions int{\'e}grables et de carr{\'e} int{\'e}grable, $\lone(\rset)\cap
   L_2(\rset)$ est un sous-espace vectoriel dense de $(L_2(\rset),\|\cdot\|_2)$.
 \end{theorem}
 \begin{proof}
 Pour tout $f\in L_2(\rset)$, on note $f_n$ la fonction {\'e}gale {\`a} $f$ sur $[-n,n]$ et nulle ailleurs.
-Alors $f_n\in L_1(\rset)$ pour tout $n$, et par convergence monotone, $\|f_n-f\|_2\to0$ quand $n\to\infty$ (on dit que $f_n$ tend vers $f$ au sens de $L_2(\rset)$). On en conclut que $L_1(\rset)\cap L_2(\rset)$ est dense dans
+Alors $f_n\in \lone(\rset)$ pour tout $n$, et par convergence monotone, $\|f_n-f\|_2\to0$ quand $n\to\infty$ (on dit que $f_n$ tend vers $f$ au sens de $L_2(\rset)$). On en conclut que $\lone(\rset)\cap L_2(\rset)$ est dense dans
 $(L_2(\rset),\|\cdot\|_2)$.
 \end{proof}
 On a imm{\'e}diatement que la proposition~\ref{prop:DualiteSchwartz} s'adapte {\`a} l'espace $L_2(\rset)$.
@@ -51,31 +51,31 @@ alors $f=g$ (au sens $L_2(\rset)$).
 
 Nous verrons que $L_2(\rset)$ pose un certain nombre de probl{\`e}mes
 th{\'e}oriques pour d{\'e}finir la transform{\'e}e de Fourier qui ne se pose pas
-pour une fonction de $L_1(\rset)$. Or, en passant de $L_1(\rset)$ {\`a}
+pour une fonction de $\lone(\rset)$. Or, en passant de $\lone(\rset)$ {\`a}
 $L_2(\rset)$, on impose {\`a} la fonction des conditions locales plus
 contraignantes (toute restriction d'une fonction de $L_2(\rset)$ {\`a} un compact
-est $L_1(\rset)$ mais l'inverse n'est pas vrai) et on autorise des
+est $\lone(\rset)$ mais l'inverse n'est pas vrai) et on autorise des
 comportements en $t=\pm\infty$ un peu plus g{\'e}n{\'e}raux. D{\`e}s lors, on
 peut s'interroger sur l'int{\'e}r{\^e}t d'{\'e}tudier les fonctions  de $L_2(\rset)$ plut{\^o}t que de
-$L_1(\rset)$, qui plus est quand, en pratique, une fonction n'est
+$\lone(\rset)$, qui plus est quand, en pratique, une fonction n'est
 jamais observ{\'e} sur un temps infini. La r{\'e}ponse {\`a} cette question est
 la suivante. Outre que les propri{\'e}t{\'e}s d'espace de Hilbert de
 $L_2(\rset)$ sont fondamentales dans la th{\'e}orie, elles ont un lien
 physique {\'e}vident dans les applications puisque le carr{\'e} de la norme
 d'un signal dans $L_2(\rset)$ n'est rien d'autre que son {\'e}nergie.
 Le fait qu'en pratique les "signaux" observ{\'e}s soient dans
-$L_1(\rset)\cap L_2(\rset)$ explique que l'on peut en g{\'e}n{\'e}ral ne
+$\lone(\rset)\cap L_2(\rset)$ explique que l'on peut en g{\'e}n{\'e}ral ne
 pas se pr{\'e}occuper des subtilit{\'e}s entre transform{\'e}e de Fourier dans
-$L_1(\rset)$ et transform{\'e}e de Fourier dans $L_2(\rset)$, mais,
+$\lone(\rset)$ et transform{\'e}e de Fourier dans $L_2(\rset)$, mais,
 pour {\'e}tablir les r{\'e}sultats g{\'e}n{\'e}raux que l'on utilise pour {\'e}tudier
 les fonctions de carr{\'e} sommable, il serait dommage de les {\'e}noncer dans
-le cas particulier $L_1(\rset)\cap L_2(\rset)$ alors qu'ils sont
+le cas particulier $\lone(\rset)\cap L_2(\rset)$ alors qu'ils sont
 valables dans $L_2(\rset)$, m{\^e}me si l'on doit pour cela donner des
 preuves qui peuvent appara{\^i}tre plus abstraites.
 
 \section{Transform{\'e}e de Fourier sur $L_2(\rset)$}
 L'id{\'e}e de base de la construction consiste {\`a} {\'e}tendre la transform{\'e}e de Fourier
-de $L_1(\rset)$ {\`a} $L_2(\rset)$ par un argument de densit{\'e}.
+de $\lone(\rset)$ {\`a} $L_2(\rset)$ par un argument de densit{\'e}.
 \begin{proposition}
 \label{prop:plancherelparseval}
 Soit $f$ et $g$ dans $\mcs$. On a:
@@ -135,9 +135,9 @@ Remarquons que l'{\'e}galit{\'e} de Parseval peut se r{\'e}{\'e}crire, pour tout
 \begin{proposition}
 \label{prop:prolongementL1L2}
 Le prolongement de $\TF$ sur $\mcs$ par continuit{\'e} {\`a} $(L_2(\rset),\|\cdot\|_2)$ est compatible avec la d{\'e}finition de
-$\TF$ donn{\'e}e pr{\'e}c{\'e}demment dur $L_1(\rset)$. Plus pr{\'e}cis{\'e}ment
+$\TF$ donn{\'e}e pr{\'e}c{\'e}demment dur $\lone(\rset)$. Plus pr{\'e}cis{\'e}ment
 \begin{enumerate}
-\item Pour tout $f\in L_1(\rset) \cap L_2(\rset)$, $\TF f$ d{\'e}fini par le th{\'e}or{\`e}me~\ref{thm:prolong} admet un repr{\'e}sentant
+\item Pour tout $f\in \lone(\rset) \cap L_2(\rset)$, $\TF f$ d{\'e}fini par le th{\'e}or{\`e}me~\ref{thm:prolong} admet un repr{\'e}sentant
  $\hat{f}\in C_\infty$ v{\'e}rifiant
 $$
 \hat{f}(\xi) = \int_{\rset} \rme^{- \rmi 2 \pi \xi x} f(x) dx,\quad\xi\in\rset.
@@ -147,8 +147,8 @@ $$
 \end{enumerate}
 \end{proposition}
 \begin{proof}
-Notons $\hat{f}$ la transform{\'e}e de Fourier sur $L_1(\rset)$ et $\TF f$ celle sur $L_2(\rset)$.
-Prenons $f \in L_1(\rset) \cap L_2(\rset)$. En appliquant la proposition \ref{prop:echangeTF} puis
+Notons $\hat{f}$ la transform{\'e}e de Fourier sur $\lone(\rset)$ et $\TF f$ celle sur $L_2(\rset)$.
+Prenons $f \in \lone(\rset) \cap L_2(\rset)$. En appliquant la proposition \ref{prop:echangeTF} puis
 Parseval (voir~(\ref{eq:echangeL2})), on a pour tout $\psi \in \mcs$,
 $$
 \int \psi \hat{f} = \int \hat{\psi} f = \int \TFA{\psi} f= \int \psi \TFA{f}
@@ -157,7 +157,7 @@ d'o{\`u} $\int  (\hat{f} - \TFA{f}) \psi  = 0$ pour tout $\psi \in \mcs$. Le cor
 premier r{\'e}sultat.
 
 Posons $f_n = f \1_{[-n,n]}$. Par convergence domin{\'e}e, on a $\lim_n \| f_n - f \|_2^2= 0$.
-Comme $f_n  \in L_1(\rset) \cap L_2(\rset)$ on {\'e}crit $g_n = \hat{f}_n = \TFA{f_n}$ et par continuit{\'e} il vient
+Comme $f_n  \in \lone(\rset) \cap L_2(\rset)$ on {\'e}crit $g_n = \hat{f}_n = \TFA{f_n}$ et par continuit{\'e} il vient
 $ \lim_{n \to \infty} \| \TF f - g_n \|_2^2= 0$.
 \end{proof}
 
@@ -166,18 +166,18 @@ $ \lim_{n \to \infty} \| \TF f - g_n \|_2^2= 0$.
 \label{prop:calcul}
 \begin{enumerate}[label=(\roman*)]
 \item Soit $f \in L_2(\rset)$ On a $\TF \TF f = f_\sigma$ p.p. o\`u $f_\sigma(x)= f(-x)$
-\item Si $f \in L_1(\rset) \cap L^2(\rset)$, $\TFA{\hat{f}} = f$.
+\item Si $f \in \lone(\rset) \cap L^2(\rset)$, $\TFA{\hat{f}} = f$.
 \end{enumerate}
 \end{proposition}
 \begin{proof}
 \begin{enumerate}[label=(\roman*), wide=0pt, labelindent=\parindent]
 \item Montrons que $\TFA f = \TFAC f_\sigma$. Soit $\sequence{f}[n][\nset]$ une suite de fonctions de $\mcs$ telle que
 $\lim_{n \to \infty} \norm{f-f_n}[2]=0$ (voir \Cref{theo:densite-mcs-Lp}). On a $\TFA f_n = \TFA (f_n)_\sigma$. En passant \`{a} la limite, on a donc $\TFA{f}= \TFAC{f_\sigma}$ (remarquons que $\norm{f_\sigma - (f_n)_\sigma}[2]=0$).
-\item R\'esulte imm\'ediatement du fait que $L_1(\rset) \cap L_2(\rset)$, $\TFA{f} = \hat{f}$.
+\item R\'esulte imm\'ediatement du fait que $\lone(\rset) \cap L_2(\rset)$, $\TFA{f} = \hat{f}$.
 \end{enumerate}
 \end{proof}
 \begin{example}
-Consid\'erons la fonction $f_\pm(x)= \rme^{\pm x a x} u(\pm x)$ et $\Re(a) >0$. On a $\hat{f}_{\pm}(\xi)= \pm 1 / (\pm a + 2 \rmi \pi \xi)$. $\hat{f}_{\pm} \not \in L_1(\rset)$ mais \Cref{prop:calcul} montre que $\TFA{\hat{f}}= (f_{\pm})_\sigma$. On a donc
+Consid\'erons la fonction $f_\pm(x)= \rme^{\pm x a x} u(\pm x)$ et $\Re(a) >0$. On a $\hat{f}_{\pm}(\xi)= \pm 1 / (\pm a + 2 \rmi \pi \xi)$. $\hat{f}_{\pm} \not \in \lone(\rset)$ mais \Cref{prop:calcul} montre que $\TFA{\hat{f}}= (f_{\pm})_\sigma$. On a donc
 pour $a \in \cset$, $\Re(a) > 0$,
 \begin{align*}
 (a + 2 \rmi \pi x)^{-1} &\TFyield \rme^{a \xi} u(-\xi) \\

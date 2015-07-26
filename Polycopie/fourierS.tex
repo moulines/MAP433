@@ -52,7 +52,7 @@ L'espace $\mcs$ a les propri{\'e}t{\'e}s suivantes :
 \begin{enumerate}
 \item $\mcs$ est stable pour la multiplication par un polyn{\^o}me.
 \item $\mcs$ est stable par d{\'e}rivation ($f \in \mcs \Rightarrow f' \in  \mcs$).
-\item $\mcs \subset  L_1(\rset)$.
+\item $\mcs \subset  \lone(\rset)$.
 \end{enumerate}
 \end{proposition}
 La d{\'e}monstration de cette proposition est laiss{\'e}e en exercice.  Le r{\'e}sultat
@@ -64,12 +64,12 @@ L'espace $\mcs$ est stable par transformation de Fourier: si $f \in \mcs$ alors 
 \end{theorem}
 \begin{proof}
 Soit $f \in \mcs$. Comme
-$f$ est dans $L_1(\rset)$ et {\`a} d{\'e}croissance rapide, $\hat{f} \in C_\infty (\rset)$ d'apr{\`e}s la Proposition \ref{prop:1913}.
+$f$ est dans $\lone(\rset)$ et {\`a} d{\'e}croissance rapide, $\hat{f} \in C_\infty (\rset)$ d'apr{\`e}s la Proposition \ref{prop:1913}.
 Pour tout $k \in \nset$, $f^{(k)}$ {\'e}tant {\`a} d{\'e}croissance rapide est int{\'e}grable d'apr{\`e}s le lemme \ref{lem:decroissancerapide}.
 On en d{\'e}duit de la proposition \ref{prop:1914} que $\hat{f}$ est {\`a} d{\'e}croissance rapide.
 Il reste {\`a} examiner la d{\'e}rivabilit{\'e} de $f$.
 Comme toutes les d{\'e}riv{\'e}es de $f$ sont {\`a} d{\'e}croissance rapide, les fonctions $x\mapsto(x^q f (x))^{(p)}$ sont dans
-$L_1(\rset)$ pour tout entiers $p$ et $q$; d'o{\`u}, d'apr{\`e}s la Proposition \ref{prop:FourierDerivation}, pour tout
+$\lone(\rset)$ pour tout entiers $p$ et $q$; d'o{\`u}, d'apr{\`e}s la Proposition \ref{prop:FourierDerivation}, pour tout
 $\xi\in\rset$,
 \begin{equation}
   \label{eq:stabilite-S-en-action}
@@ -93,7 +93,7 @@ arriver {\`a} cette fin.
 \section{Formules d'inversion}
 
 On est maintenant en mesure de montrer des r{\'e}sultats d'inversion de la
-transform{\'e}e de Fourier dans $L_1(\rset)$. La preuve se base sur l'observation
+transform{\'e}e de Fourier dans $\lone(\rset)$. La preuve se base sur l'observation
 suivante. D'apr{\`e}s~(\ref{eq:gaussienneTF}), $\TF(g_\sigma)$ est une fonction
 r{\'e}elle paire de $\mathcal{L}_1(\rset)$ et
 $\TF\TF(g_\sigma)=\TFC\TF(g_\sigma)=g_\sigma$. Le r{\'e}sultat suivant est une
@@ -120,7 +120,7 @@ $x \mapsto f(x)$ et $x \mapsto \rme^{\rmi 2 \pi t x} \hat{g}_\sigma(x)$ donne do
 \end{equation}
 Lorsque $\sigma \to 0$, on peut passer {\`a} la limite dans l'int{\'e}grale de gauche, puisque l'on a, pour tout
 $x$, $\lim_{\sigma \to 0} \hat{g}_\sigma(x)= 1$ pour tout $x$ et $|\hat{f}(x) \hat{g}_\sigma(x) \rme^{\rmi 2 \pi t x}| \leq |\hat{f}(x)|$.
-Comme $\hat{f} \in L_1(\rset)$, on applique le th{\'e}or{\`e}me de convergence domin{\'e}e, qui montre
+Comme $\hat{f} \in \lone(\rset)$, on applique le th{\'e}or{\`e}me de convergence domin{\'e}e, qui montre
 $$
 \lim_{\sigma \to 0} \int \hat{f}(x) \hat{g}_\sigma(x) \rme^{ \rmi 2 \pi t x} \rmd x = \int \hat{f}(x) \rme^{\rmi 2 \pi t x} \rmd x \eqsp.
 $$

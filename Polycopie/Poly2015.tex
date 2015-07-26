@@ -1,16 +1,14 @@
 \documentclass[graybox,envcountchap,envcountsame,sectrefs]{svmono}
 \usepackage[utf8]{inputenc}
-\usepackage{mathptmx,helvet,type1cm,xargs,srcltx,latexsym,bm,wrapfig,subfigure,multicol,makeidx,stmaryrd}
+\usepackage[french]{babel}
+\usepackage{xargs,latexsym,bm,wrapfig,multicol,makeidx}
 \usepackage{amssymb,amsmath,ntheorem,ifthen,amsfonts,bbm,graphicx,twoopt,color}
 \usepackage[bottom]{footmisc} % places footnotes at page bottom
 \usepackage[shortlabels]{enumitem}
 \usepackage[title,titletoc,header]{appendix}          % % %  appendices % % % % %
-\usepackage{leftidx} % permet les subscript a gauche avec la commande \leftidx{-A}{P}{^k}
-%\usepackage{courier}
-%\usepackage{algpseudocode}
-%\usepackage[comma]{natbib}
-%\usepackage{algorithm}
-%\usepackage{algorithmicx}
+
+\usepackage{algorithm}
+\usepackage{algorithmicx}
 
 \makeindex             % used for the subject index
                        % please use the style svind.ist with your makeindex program
@@ -97,17 +95,17 @@
 \usepackage[textsize=footnotesize]{todonotes}
 %\usepackage[textwidth=3cm, textsize=footnotesize]{todonotes}
 %\setlength{\marginparwidth}{3cm}                                %  this goes with todonotes
+\usepackage{pdfpages}
 
 \input{Smacro}
 \input{notations-hilbertfourier}
-\title{Traitement du signal\\
-Partie II}
+\title{Traitement du signal}
 \author{St\'ephane Mallat, Eric Moulines}
-\date{\ }
+
 \begin{document}
 \maketitle
 \tableofcontents
-\input{chapitre1}
+\part{Analyse de Fourier et Filtrage}
 \chapter{Transform{\'e}e de Fourier: propri{\'e}t{\'e}s de base}
 \input{fourierL1}
 \input{fourierS}
@@ -117,7 +115,10 @@ Partie II}
 \input{fourierL2}
 \chapter{Echantillonnage}
 \input{echantillonnage}
+\chapter{Traitement du signal \`a temps discret}
+\label{discret-chap}
 \input{chapitre3}
+\part{Bases de traitement du signal al\'eatoire \`a temps-discret}}
 \chapter{Introduction au signal al\'eatoire \`a temps-discret}
 \input{IntroductionProcessus}
 \input{IntroductionSecondOrdre}
@@ -125,12 +126,19 @@ Partie II}
 \input{FiltrageProcessus}
 \chapter{Pr\'ediction des signaux al\'eatoires \`a temps-discret}
 \input{Prediction}
-%\input{chapitre5}
-\input{chapitre6}
-%\input{chapitre7}
+\chapter{Applications au signal de parole}
+\includepdf[pages=-]{PhysiologicalProcessSpeech}
+\includepdf[pages=-]{LinearPrediction}
+\part{Information et codage de signaux et d'images}
+\chapter{\'El\'ements de th\'eorie de l'information}
+\label{info-chap}
 \input{chapitre8}
-\input{chapitre9}
+\chapter{Application au codage de parole}
+\includepdf[pages=-]{SpeechCoding}
+\chapter{Application au codage d'images}
+\includepdf[pages=-]{ImageCompression}
 \input{Sbiblio}
 \appendix
+\part{Compl\'ements math\'ematiques}
 \input{Hilbert}
 \end{document}
