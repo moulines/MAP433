@@ -50,7 +50,7 @@ $$
 \end{proof}
 
 \begin{proposition}
-\label{prop:20.2.1}
+\label{prop:20-2-1}
 Si $f$ et $g$ sont des \'el\'ements $\lone(\rset)$ , alors:
 \begin{enumerate}[label=(\roman*)]
 \item $f*g$ est d\'efini presque-partout et $f*g \in \lone(\rset)$ .
@@ -95,7 +95,7 @@ $f(x-t)g(t)=\1_{[\alpha-a,\beta+a]}(x-t)f(x-t)g(t)$  et donc
 $$
 f*g(x)=\int_{-a}^{+a}f(x-t)g(t)\rmd t=(\1_{[\alpha-a,\beta+a]}f)*g(x)\ .
 $$
-$f*g$ coincide sur $[\alpha,\ \beta]$ avec la convolution de deux fonctions appartenant \`a $\lone(\rset)$. \Cref{prop:20.2.1} montre que cette fonction est d\'efinie p.p. et est int\'egrable. Donc $f*g$ est d\'efinie p.p. et est int\'egrable sur tout ensemble compact..
+$f*g$ coincide sur $[\alpha,\ \beta]$ avec la convolution de deux fonctions appartenant \`a $\lone(\rset)$. \Cref{prop:20-2-1} montre que cette fonction est d\'efinie p.p. et est int\'egrable. Donc $f*g$ est d\'efinie p.p. et est int\'egrable sur tout ensemble compact.
 \item Si $f\in L_{\infty}(\rset)$ , alors
 $$
 |\int_{\rset}f(u)g(x-u)\rmd u|\leq\norm{f}[\infty]\int_{\rset}|g(x-u)|,\ \rmd u=\norm{f}[\infty] \,
@@ -389,7 +389,7 @@ Soient $f,g \in \lone(\rset)$.
 \end{proposition}
 \begin{proof}
 \begin{enumerate}[label=(\roman*),wide=0pt, labelindent=\parindent]
-\item Comme $f,g \in \lone(\rset)$, \Cref{prop:20.2.1} shows that $f * g \in \lone(\rset)$. On peut donc calculer $\widehat{f * g}(\xi)$. En utilisant le th\'eor\`eme de Fubini, nous avons
+\item Comme $f,g \in \lone(\rset)$, \Cref{prop:20-2-1} shows that $f * g \in \lone(\rset)$. On peut donc calculer $\widehat{f * g}(\xi)$. En utilisant le th\'eor\`eme de Fubini, nous avons
 \begin{align*}
 \int \rme^{-\rmi 2 \pi \xi x} f * g(x) \rmd x
 &= \int \rme^{-\rmi 2 \pi \xi x} \left( \int f(x-t) g(t) \rmd t \right) \\
