@@ -303,7 +303,7 @@ Consid\'erons le signal $f_n= a^n$ pour $n \geq 0$. Nous avons donc
 \[
 \hat{f}(z) = \sum_{n=0}^\infty a^n z^{-n} = \sum_{n=0}^{\infty} (a z^{-1})^n \eqsp,
 \]
-qui est convergente si 
+qui est convergente si
 \[
 \sum_{n=0}^{\infty} |a z^{-1}|^n < \infty \eqsp.
 \]
@@ -315,13 +315,13 @@ Remarquons que si $|a| > 1$, le signal diverge exponentiellement, et la s\'erie 
 \end{example}
 \begin{example}
 \label{exam:exponential-2}
-Consid\'erons maintenant le signal $\sequence{f}[n][\nset]$ donn\'e par $f_n = - a^n$ pour $n \leq -1$. La transform\'e en $z$ de ce signal est donn\'e par 
+Consid\'erons maintenant le signal $\sequence{f}[n][\nset]$ donn\'e par $f_n = - a^n$ pour $n \leq -1$. La transform\'e en $z$ de ce signal est donn\'e par
 \begin{align*}
 \hat{f}(z)
-&= - \sum_{n=-\infty}^{-1} a^n z^{-n} \\ 
+&= - \sum_{n=-\infty}^{-1} a^n z^{-n} \\
 &= - \sum_{n=1}^\infty a^{-n} z^n = 1 - \sum_{n=0}^\infty (a^{-1} z)^n \eqsp.
 \end{align*}
-Le domaine de convergence est le disque $\ensemble{z \in \cset}{|z| < |a|}$ et sur ce domaine 
+Le domaine de convergence est le disque $\ensemble{z \in \cset}{|z| < |a|}$ et sur ce domaine
 \[
 \hat{f}(z)= 1 - \frac{1}{1-a^{-1} z}= \frac{1}{1-a z^{-1}}= \frac{z}{z-a} \eqsp.
 \]
@@ -510,7 +510,7 @@ g[n] = \frac 1 {a_0} \left(
 se calcule \`a partir de son pass\'e et de $\sequence{f}[n][\zset]$ \`a l'aide de
 $N+M$ multiplications et additions.
 
-Etant donn\'e un signal causal $\sequence{f}[n][\zset]$ (avec $f_k=0$ pour $k \leq -1$), 
+Etant donn\'e un signal causal $\sequence{f}[n][\zset]$ (avec $f_k=0$ pour $k \leq -1$),
 le calcul de $g_n$ pour $n \geq 0$ n\'ecessite la connaissance de ``conditions initiales'',
 par exemple $N$ valeurs cons\'ecutives de $g_n$.
 Si l'on impose que $g_n = 0$ pour $-N \leq n < 0$, alors

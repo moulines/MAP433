@@ -6,7 +6,7 @@
 \def\nset{\ensuremath{\mathbb{N}}}
 \def\qset{\ensuremath{\mathbb{Q}}}
 \def\rset{\ensuremath{\mathbb{R}}}
-\def\zset{\ensuremath{\mathbb{R}}}
+\def\zset{\ensuremath{\mathbb{Z}}}
 \def\cset{\ensuremath{\mathbb{C}}}
 \def\rsetc{\ensuremath{\overline{\rset}}}
 \def\Xset{\ensuremath{\mathsf{X}}}
@@ -88,6 +88,8 @@
 
 \newcommand{\pltwo}{\ensuremath{\ell^2}(\zset)}
 \newcommand{\plone}{\ensuremath{\ell^1}(\zset)}
+\newcommand{\plinfty}{\ensuremath{\ell^\infty}(\zset)}
+
 \def\calG{\mathcal{G}}
 \def\calM{\mathcal{M}}
 \def\calI{\mathcal{I}}
@@ -131,7 +133,7 @@
 \newcommand{\corr}{\mathrm{corr}}
 \newcommand{\vp}{\mathrm{vp}}
 \newcommand{\erf}{\mathrm{erf}}
-\def\mod{{\ \rm mod\ }}
+\newcommandx{\mod}[2][2=N]{#1 \mathrm{mod} #2}
 \def\cF{\mathcal{F}}
 \def\cE{\mathcal{E}}
 \def\cB{\mathcal{B}}
@@ -153,7 +155,7 @@
 \newcommandx\sequencePar[3][2=,3=]
 {\ifthenelse{\equal{#3}{}}{\ensuremath{\{ #1({#2})\}}}{\ensuremath{\{ #1({#2}), \eqsp #2 \in #3 \}}}}
 \def\pp{\ensuremath{\mathrm{p.p.}}}
-\def\ie{i.e.} 
+\def\ie{i.e.}
 
 \newcommand{\ensemble}[2]{\left\{#1\,:\eqsp #2\right\}}
 \newcommand{\set}[2]{\ensemble{#1}{#2}}

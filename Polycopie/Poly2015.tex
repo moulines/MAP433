@@ -97,38 +97,53 @@
 \input{notations-hilbertfourier}
 \title{Traitement du signal}
 \author{St\'ephane Mallat, Eric Moulines}
-
+\includeonly{
+fourierL1,
+fourierS,
+convolution,
+fourierL2,
+echantillonnage,
+FourierDiscret,
+%IntroductionProcessus,
+%IntroductionSecondOrdre,
+%FiltrageProcessus,
+%Prediction,
+%chapitre8,
+%Sbiblio,
+Hilbert
+}
 \begin{document}
 \maketitle
 \tableofcontents
 \part{Analyse de Fourier et Filtrage}
 \chapter{Transformée de Fourier: propriétés de base}
-\input{fourierL1}
-\input{fourierS}
+\include{fourierL1}
+\include{fourierS}
 \chapter{Convolution et Filtrage analogique}
-\input{convolution}
+\include{convolution}
 \chapter{Transformée de Fourier-Plancherel}
-\input{fourierL2}
+\include{fourierL2}
 \chapter{Echantillonnage}
-\input{echantillonnage}
+\include{echantillonnage}
 \chapter{Traitement du signal \`a temps discret}
 \label{discret-chap}
-\input{chapitre3}
+\include{FourierDiscret}
+%\input{chapitre3}
 \part{Bases de traitement du signal al\'eatoire \`a temps-discret}}
 \chapter{Introduction au signal al\'eatoire \`a temps-discret}
-\input{IntroductionProcessus}
-\input{IntroductionSecondOrdre}
+\include{IntroductionProcessus}
+\include{IntroductionSecondOrdre}
 \chapter{Filtrage des signaux al\'eatoires \`a temps-discret}
-\input{FiltrageProcessus}
+\include{FiltrageProcessus}
 \chapter{Pr\'ediction des signaux al\'eatoires \`a temps-discret}
-\input{Prediction}
+\include{Prediction}
 \chapter{Applications au signal de parole}
 \includepdf[pages=-]{PhysiologicalProcessSpeech}
 \includepdf[pages=-]{LinearPrediction}
 \part{Information et codage de signaux et d'images}
 \chapter{\'El\'ements de th\'eorie de l'information}
 \label{info-chap}
-\input{chapitre8}
+\include{chapitre8}
 \chapter{Application au codage de parole}
 \includepdf[pages=-]{SpeechCoding}
 \chapter{Application au codage d'images}
@@ -136,5 +151,5 @@
 \input{Sbiblio}
 \appendix
 \part{Compl\'ements math\'ematiques}
-\input{Hilbert}
+\include{Hilbert}
 \end{document}
