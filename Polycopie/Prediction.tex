@@ -6,86 +6,6 @@
 %================================================
 %================================================
 \section{Pr\'ediction lin\'eaire de processus stationnaires}
-%================================================
-% %================================================
-% \subsection{Estimation lin\'eaire en moyenne quadratique}
-% %================================================
-% Soient $X$ et $\{Y_1,\cdots,Y_p\}$ des variables al\'eatoires
-% r\'eelles de $L^2(\Omega,\cF,\PP)$. On cherche \`a
-% d\'eterminer la meilleure approximation de $X$ par une combinaison
-% lin\'eaire des variables $Y_k$. Nous supposons ici que nous
-% connaissons les quantit\'es $\mu=\PE{X}$, $\nu_k=\PE{Y_k}$ ainsi
-% que les coefficients de covariance $\cov(X,Y_k)$ et
-% $\cov(Y_k,Y_{\ell})$, pour tout $1\leq k,\ell\leq p$. En pratique,
-% nous verrons au chapitre~\ref{chap:estim-lineaire}
-% comment il est possible, sous certaines hypoth\`eses, de construire des
-% estimateurs consistants et asymptotiquement normaux de ces quantit\'es \`a partir d'une suite
-% d'observations.
-
-% On consid\`ere l'espace ferm\'e de dimension
-% finie ${\cal Y} = \lspan{1, Y_1,\cdots,Y_p}$ et on cherche
-% l'\'el\'ement $Y\in \cY$ qui minimise la norme de le risque quadratique
-% $\| X - Y\|^2$. Il d\'ecoule imm\'ediatement du th\'eor\`eme de
-% projection que le pr\'edicteur lin\'eaire optimal est la projection
-% orthogonale $\proj{X}{\cY}$ de $X$ sur ${\cal Y}$ qui v\'erifie
-% $(X-\proj{X}{\cY})\perp {\cal Y}$. On en d\'eduit que\,:
-% \begin{gather}
-% \label{eq:reglin1}
-% \begin{cases}
-%  \pscal{X - \proj{X}{\cY}}{1} = 0  &\\
-%  \pscal{X - \proj{X}{\cY}}{Y_k} = 0 &\text{pour $k \in \{1, \cdots, p \}$}
-% \end{cases}  \eqsp.
-% \end{gather}
-% Ce sont ces $(p+1)$ \'equations qui vont nous donner la solution
-% cherch\'ee. En effet la condition $\proj{X}{\cY} \in \cY$ implique (comme $\cY$ est de
-% dimension finie) que $\proj{X}{\cY}=a_0 + \sum_{k=1}^p a_k (Y_k - \nu_k)$.
-% Il suffit donc de calculer $a_0,a_1,\dots,a_p$. Partant de la premi\`ere expression de
-% \eqref{eq:reglin1}, on obtient\,:
-% \begin{equation}
-%  \label{eq:ortho0}
-%  \pscal{X - a_0 - \sum_{k=1}^p a_k (Y_k - \nu_k)}{1} = \pscal{X}{1} - a_0 = 0 \eqsp,
-% \end{equation}
-% qui donne $a_0=\mu$. En posant $a_0=\mu$ dans la seconde
-% expression de \eqref{eq:reglin1}, on a obtient alors
-% $k\in\{1,\dots,p\}$\,:
-% \begin{multline}
-%  \label{eq:ortho1p}
-%  \pscal{X - \mu - \sum_{j=1}^p a_j (Y_j - \nu_j)}{Y_k - \nu_k}
-%  \\= \pscal{X - \mu}{Y_k-\nu_k} - \sum_{j=1}^p a_j \pscal{Y_j - \nu_j}{Y_k - \nu_k} = 0 \eqsp,
-% \end{multline}
-% qui montrent que $\{a_1, \cdots, a_p\}$ sont solution d'un
-% syst\`eme de $p$ \'equations lin\'eaires \`a $p$ inconnues.
-
-% Ce syst\`eme d'\'equations peut se mettre sous forme plus compacte en
-% utilisant la matrice $\Gamma = [\cov(Y_k,Y_{\ell})]_{1 \leq k,\ell
-% \leq p}$ des coefficients de covariance de $(Y_1, \cdots, Y_p)$ et
-% le vecteur $\bfgamma= [\cov (X,Y_1), \cdots, \cov(X,Y_p)]^T$ des
-% coefficients de covariance entre $X$ et les composantes $Y_k$.
-% Avec ces notations, le vecteur $\bfalpha = [a_1, \cdots, a_p]^T$
-% est solution de l'\'equation\,:
-% \begin{equation}
-% \label{eq:Eqsnormales}
-% \Gamma \bfalpha = \bfgamma
-% \end{equation}
-% Ce syst\`eme lin\'eaire admet une unique solution si la matrice
-% $\Gamma$ est inversible. Notons enfin qu'en vertu de l'identit\'e de
-% Pythagore, nous avons\,:
-% \[
-% \| X \|^2 = \| \proj{X}{\cY} \|^2 + \| X - \proj{X}{\cY} \|^2
-% \]
-% et donc la norme minimale de l'erreur de pr\'ediction a pour
-% expression\,:
-% \[
-% \| X - \proj{X}{\cY} \|^2 = \| X \|^2 - \| \proj{X}{\cY}\|^2 \eqsp.
-% \]
-% Nous allons \`a pr\'esent appliquer ce r\'esultat \`a la pr\'ediction
-% d'un processus stationnaire au second-ordre \`a partir de son
-% pass\'e imm\'ediat en prenant $X=X_t$ et $Y_k=X_{t-k}$ avec
-% $k=\{1,\dots,p\}$.
-%==============================================================
-%==============================================================
-%\subsection{Pr\'ediction lin\'eaire de processus stationnaires}
-%==============================================================
 Soit $(X_t)_{t\in\Zset}$ un processus stationnaire au
 second ordre \`a valeurs r\'eelles, \textbf{d'esp\'erance nulle} et de fonction
 d'autocovariance $\gamma(h)= \cov(X_h,X_0)$. On cherche \`a
@@ -188,8 +108,7 @@ la matrice $\Gamma_p$ est inversible auquel cas la solution vaut :
 \bfphi_p=\Gamma_p^{-1} \bfgamma_p\; .
 \end{equation}
 La proposition \ref{prop:Gammanrangplein} fournit les conditions suffisantes assurant
-que $\Gamma_p$ est inversible pour tout $p$. Une autre preuve de la proposition \ref{prop:Gammanrangplein}
-r\'esultat est propos\'ee dans le probl\`eme \ref{prob1:prediction}. On a ainsi des conditions
+que $\Gamma_p$ est inversible pour tout $p$.  On a ainsi des conditions
 sous lesquelles on peut calculer le pr\'edicteur de $X_t$ \`a partir de
 $X_{t-1},\dots,X_{t-p}$.
 
@@ -509,8 +428,7 @@ r\'eelles, $\theta= 0$ ou $\pi$). Nous pouvons \'ecrire\,:
 \]
 On note $\bar{\nu}_X(d \lambda) = \nu_X(d \lambda) |\phi^*_p(\rme^{-i
 \lambda})|^2$. $\bar{\nu}_X$ est une mesure positive sur
-$[-\pi,\pi]$ de masse finie. On note $\bar{\gamma}(\tau)$ la suite
-des coefficients de Fourier associ\'{e}s  \`{a}  $\bar{\nu}_X$\,:
+$[-\pi,\pi]$ de masse finie. On note:
 \[
  \bar{\gamma}(\tau) = \frac{1}{2 \pi} \int_{- \pi}^{\pi}
  \rme^{\rmi \tau \lambda} \bar{\nu}_X(\rmd \lambda)\;.
@@ -525,7 +443,7 @@ Nous avons donc\,:
            |1 + \psi_1 \rme^{-\rmi\lambda} + \psi_2 \rme^{-2 \rmi \lambda}|^2
              \bar{\nu}_X(\rmd \lambda) \eqsp.
 \end{multline*}
-La minimisation de $\sigma_p^2$ par rapport \`a  $\psi_1$ et $\psi_2$ est \'equivalente
+La minimisation de $\sigma_p^2$ est Ã©quivalente Ã 
 \`a la r\'esolution des \'equations de Yule-Walker \`a
 l'ordre $p=2$ pour la suite des covariances $\bar{\gamma}(h)$.
 Par cons\'equent la suite des coefficients $\{1,-2\cos(\theta),1\}$
@@ -556,8 +474,8 @@ lignes sont \'egales) que $\sigma_p^2=0$, ce qui est contraire \`a
 l'hypoth\`ese que le processus est r\'egulier.
 
 D\'emontrons maintenant que les racines des polyn\^omes
-pr\'edicteurs sont toutes \emph{strictement \`a  l'ext\'erieur du
-cercle unit\'e}. Raisonnons encore par l'absurde. Supposons que le
+pr\'edicteurs sont toutes \emph{strictement \`aÂ  l'ext\'erieur du
+cercle unit\'e. Raisonnons encore par l'absurde. Supposons que le
 polyn\^ome pr\'edicteur \`a l'ordre $p$ ait $m$ racines $\{a_k,
 |a_k| < 1, 1 \le k \leq m \}$ \`a l'int\'erieur du cercle unit\'e et
 $(p-m)$ racines $\{ b_{\ell}, |b_{\ell}| > 1, 1 \leq \ell \leq p-m

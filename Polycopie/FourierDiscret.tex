@@ -6,29 +6,18 @@
 $$
 \sum_{n=-\infty}^\infty |u_{n}|<+\infty,
 $$
-on note
-$$
-\Vert u\Vert_{1}=\sum_{n\in \zset}|u_{n}|
-$$
-qui est une norme sur l'espace des suites sommables.
+on note $\norm{u}[1] =\sum_{n\in \zset}|u_{n}|$ qui est une norme sur l'espace des suites sommables.
 \item On note $\pltwo$ l'espace des suites d'\'{e}nergie finie c'est-\`{a}-dire des suites $u$ qui v\'{e}rifient:
 $$
 \sum_{n\in \zset}|u_{n}|^{2}<+\infty,
 $$
-et on note
-$$
-\Vert u\Vert_{2}=\left(\sum_{n\in \zset}|u_{n}|^{2}\right)^{\frac{1}{2}}
-$$
-qui d\'efinit d'une norme sur l'espace des suites d'\'{e}nergie finie.
+et on note $\norm{u}[2]=\left(\sum_{n\in \zset}|u_{n}|^{2}\right)^{\frac{1}{2}}$
+qui est une norme sur l'espace des suites d'\'{e}nergie finie.
 \item On note $\plinfty$ l'espace des suites born\'{e}es c'est-\`{a}-dire des suites $u$ qui v\'{e}rifient:
 $$
 \sup_{n \in \zset} |u_{n}| < \infty \eqsp,
 $$
-et on note
-$$
-\Vert u\Vert_{\infty}=\sup_{n\in \zset}\{|u_{n}|\}
-$$
-qui d\'efinit une norme sur l'espace des suites born\'{e}es.
+et on note $\norm{u}[\infty]=\sup_{n\in \zset}\{|u_{n}|\}$ qui est une norme sur l'espace des suites born\'{e}es.
 \end{enumerate}
 \end{definition}
 \begin{lemma}
@@ -53,12 +42,11 @@ $$
 (u*v)_{n}=\sum_{m\in \zset}u_{m}v_{n-m}.
 $$
 \end{definition}
-On v\'erifie de fa\c{c}on imm\'ediate que le produit de convolution est commutatif, lin\'{e}aire et associatif.
 Nous donnons dans la proposition suivante les r\`{e}gles qui disent, suivant les espaces auxquels appartiennent $u$ et $v$, l'espace dont  $u*v$ et $u.v$ (produit terme \`{a} terme des deux suites) est \'el\'ement.
 
 \begin{lemma}
 \begin{enumerate}
-\item Si $u\in \plone$et $v\in \olinfty$, alors $u.v\in \plone$ et
+\item Si $u\in \plone$et $v\in \plinfty$, alors $u.v\in \plone$ et
 $$
 \Vert u.v\Vert_{1}\leq\Vert u\Vert_{1}\Vert v\Vert_{\infty}
 $$
@@ -71,7 +59,32 @@ $$
 \begin{proof}
 La preuve \'el\'ementaire est laiss\'ee au lecteur.
 \end{proof}
-Nous obtenons ansi les r\`{e}gles de convolution que nous r\'esumons tableau suivant se lit comme suit, si $u$ appartient \`{a} un espace index de ligne et $v$ se trouve dans l'espace index de colonne, alors $u*v$ se trouve dans l'espace inscrit dans la case correspondante. Par exemple, si $u\in \plone$ et $v\in \plinfty$ alors $u*v\in \plinfty$ Si la case contient un tiret $(-)$ alors l'op\'{e}ration est a priori impossible (la s\'erie  peut ne pas avoir de sens). Et on a aussi \`{a} chaque fois, $\Vert u*v\Vert_{\gamma}\leq\Vert u\Vert_{\alpha}\Vert v\Vert_{\beta}$ (o\`{u} les normes $(y, \beta)$ et $\gamma$ sont les normes index de colonne, ligne et norme dans la case index\'{e}e respectivement. Par exemple $\Vert u*v\Vert_{\infty}\leq\Vert u\Vert_{1}\Vert v\Vert_{\infty}$
+
+\begin{definition}[Opérateur de décalage]
+\label{def:operateur-decalage}
+On note $S$ l'op\'erateur de décalage, l'application de $\cset^{\zset} \mapsto \cset^\zset$ défini pour  $u= \sequence{u}[n][\zset] \in \cset^{\zset}$ par
+\begin{equation}
+\label{eq:operateur-avance}
+(S u)_n = u_{n+1} \eqsp, \quad \text{pour tout $n \in \zset$}.
+\end{equation}
+\end{definition}
+Cet opérateur est inversible. Pour tout $m \in \zset$, $(S^m u)_n= u_{n+m}$. 
+La proposition suivante donne les propriétés du produit de convolution
+\begin{proposition}
+\label{prop:propriete-convolution}
+Soient $u, v, w \in \plone$.
+\begin{enumerate}[label=(\roman*)]
+\item Le produit de convolution est \emph{commutatif}: $u * v= v * u$.
+\item Le produit de convolution est \emph{associatif}: $u * (v * w)= (u * v)* w$.
+\item Le produit de convolution est \emph{linéaire}: $u * (\lambda v + w)= \lambda u*v + u * w$.
+\item Le produit de convolution est \emph{invariant par décalage}: pour tout $m \in \zset$, $(S_m u) * v = S_m (u * v)$, où $S$ est l'opérateur de décalage.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+La preuve est élémentaire et laissée au lecteur.
+\end{proof}
+
+Nous obtenons ansi les r\`{e}gles de convolution que nous r\'esumons tableau suivant se lit comme suit, si $u$ appartient \`{a} un espace index de ligne et $v$ se trouve dans l'espace index de colonne, alors $u*v$ se trouve dans l'espace inscrit dans la case correspondante. Par exemple, si $u\in \plone$ et $v\in \plinfty$ alors $u*v\in \plinfty$ Si la case contient un tiret $(-)$ alors l'op\'{e}ration est a priori impossible (la s\'erie  peut ne pas avoir de sens). On a aussi \`{a} chaque fois, $\Vert u*v\Vert_{\gamma}\leq\Vert u\Vert_{\alpha}\Vert v\Vert_{\beta}$ où $(\alpha, \beta)$ sont les normes indexant les lignes et colonnes et $\gamma$ la norme associée. Par exemple $\Vert u*v\Vert_{\infty}\leq\Vert u\Vert_{1}\Vert v\Vert_{\infty}$
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -89,31 +102,26 @@ Nous obtenons ansi les r\`{e}gles de convolution que nous r\'esumons tableau sui
 \multicolumn{1}{|l|}{ $\plinfty$}&	\multicolumn{1}{|l|}{ $\plinfty$}&	\multicolumn{1}{|l|}{}&	\multicolumn{1}{|l|}{}	\\
 \hline
 \end{tabular}
-
 \end{center}
+Toutes les propriétés énoncées dans \Cref{prop:propriete-convolution} s'étendent au cas de suite $u, v$ à valeurs dans $\pltwo$ et $\plinfty$, à condition que les produits considérés soient définis.
 
-\subsection{La Transform\'{e}e de Fourier \`{a} temps Discret (TFTD)}
-
+\subsection{La Transform\'{e}e de Fourier \`{a} temps Discret (TFtD)}
 \begin{definition}
 Si $u$ est une suite sommable $(u\in \plone)$ , on appelle Transform\'{e}e de Fourier \`{a} temps Discret ( TFtD en abr\'{e}g\'{e}), la fonction d\'{e}finie sur l'intervalle $\coint{-1/2,1/2}$
 et que l'on note soit $\hat{u}$ soit $\TFA{u}$
 $$
-\hat{u}(\nu)=\sum_{n\in \zset}u_{n}\rme^{-2\rmi\pi n \nu }
+\hat{u}(\nu)=\sum_{n\in \zset}u_{n}\rme^{-2\rmi\pi n \nu } \eqsp, \quad \nu \in \coint{-1/2,1/2} \eqsp.
 $$
 \end{definition}
-Quand $u\in \plone$,$\hat{u}$ est une fonction continue et admet une limite en $1/2$ \'{e}gale \`{a} sa valeur en $-1/2$
-(elle est donc continue m\^{e}me si on la consid\`erre comme une fonction d\'{e}finie sur $\rset$)
+Quand $u\in \plone$, $\hat{u}$ est une fonction continue et admet une limite en $1/2$ \'{e}gale \`{a} sa valeur en $-1/2$
+(elle est donc continue m\^{e}me si on la consid\`ere comme une fonction d\'{e}finie sur $\rset$)
 
 Le fait que la d\'{e}finition ait un sens d\'{e}coule du fait que $u$ est suppos\'{e}e sommable. Le fait que $\hat{u}$ soit continue utilise le th\'{e}or\`{e}me de convergence domin\'{e}e.
 
-Pour$m \in \nset$, on note $\theta_m$ l'op\'erateur de retard, d\'efini pour une suite $u= \sequence{u}[n][\nset]$ par
-\begin{equation}
-(\theta_m u)_n = u_{n-m} \eqsp.
-\end{equation}
 \begin{proposition}[Propri\'{e}t\'{e}s de la TFtD]
 \label{prop:propriete-TFTD}
 \begin{enumerate}[label=(\roman*)]
-\item $\TFA{\theta_n u}(\nu)= \rme^{- 2 \rmi \pi m \nu} \TFA{u}(\nu)$ pour tout $\nu \in \coint{-1/2,1/2}$.
+\item $\TFA{S^m u}(\nu)= \rme^{- 2 \rmi \pi m \nu} \TFA{u}(\nu)$ pour tout $\nu \in \coint{-1/2,1/2}$, où $S$ est l'opérateur de décalage (voir \Cref{def:operateur-decalage}).
 \item $\TFA{\delta}(\nu) = 1$ pour tout $\nu \in \coint{-1/2,1/2}$.
 \item Si $u, v \in \plone$, $\TFA{u * v}= \TFA{u} \, \TFA{v}$
 \item Si $u \in \plone$ et $v \in \plinfty$, $\TFA{u \cdot v}=\TFA{u}*\TFA{v}$
@@ -126,39 +134,11 @@ $\TFA{ u \cdot e_{\nu_0}}(\nu)= \TFA{u}(\nu - \nu_0)$, o\`u $e_{\nu_0}(n) = \rme
 Ces propri\'et\'es sont \'el\'ementaires et la preuve est laiss\'ee au lecteur.
 \end{proof}
 
-\begin{definition}[Syst\`eme ln\'eaire invariant dans le temps (SLI)]
-$T$ est un $SLI$ qui transforme une suite born\'{e}e en une suite born\'{e}e, alors on sait que $T$ poss\`{e}de une r\'{e}ponse impulsionnelle sommable  que l'on note $h.$
-
-Si $u$ est une suite sommable (donc born\'{e}e) et $v=T(u)$ la sortie qui lui est associ\'{e}e par $T$ alors on a :
-
-1. La r\'{e}ponse (ou le gain) fr\'{e}quentielle duSLIT est la transform\'{e}e de Fourier de $h.$ 2. La suite $v$ est sommable, car $h*v\in \plone$ d'apr\`{e}s les r\`{e}gles de calcul.
-
-3. Et
-$$
-\hat{v}=\hat{h}\hat{u}.
-$$
-D}'apr\`{e}s les propri\'{e}t\'{e}s de la TFtD}.
-
-Ainsi, un $SLI$ agit sur la transform\'{e}e de Fourier de l'entr\'{e}e par multiplication de celle-ci, point \`{a} point par sa r\'{e}ponse fr\'{e}quentielle}.
-
-\begin{proof}
-Commencons par remarquer que les suite $u, v$ et $h$ ont bien toutes une transform\'{e}e de Fourier \`{a} temps discret, car elles sont toutes sommables.
-
-La seule chose qui reste \`{a} montrer est la premi\`{e}re affirmation. Soit donc une onde de Fourier de fr\'{e}quence $\nu$, son terme g\'{e}n\'{e}ral est $e^{2i\pi\nu n}$ La sortie qui lui est associ\'{e}e est, par d\'{e}finition de la r\'{e}ponse fr\'{e}quentielle, de terme g\'{e}n\'{e}ral $C(\nu)e^{2i\pi 1/n}$, o\`{u} $C(\nu)$ est la r\'{e}ponse fr\'{e}quentielle.
-
-Or la valeur en z\'{e}ro de la r\'{e}ponse de $T$ \`{a} l'harmonique complexe de Fourier est donn\'{e}e par (convolution entre $h$ et l'harmonique complexe de Fourier) :
-$$
-\sum_{m\in \zset}h_{m}e^{2i\pi\nu(0-m)}=\hat{h}(\nu)=C(\nu)
-$$
-La premi\`{e}re \'{e}galit\'{e} vient de la d\'{e}finition de la TFtD, et la seconde de la d\'{e}finition de la r\'{e}ponse fr\'{e}quentielle (la valeur en z\'{e}ro de la sortie associ\'{e}e \`{a} une onde de Fourier).
-\end{proof}
-
 \section{La transform\'ee de Fourier sur $\pltwo$}
 Nous avons d\'{e}fini la TFTD pour les suites sommables. Il est possible d'\'{e}tendre cette d\'{e}finition aux suites $\pltwo$ (rappelons que $\plone \subset \pltwo$).
 
 \begin{theorem}[Extension \`{a} $\pltwo$ et \'{e}galit\'{e} de Parseval]
-Il existe un unique prolongement isom\'etrique  $\TF$ de $\pltwo$ \mapsto $\ltwo(\coint{-1/2,1/2})$ qui co\"incide avec la TFTD sur $\lone$. Pour tout $u \in \pltwo$
-$\Vert\hat{u}\Vert_{2}=\Vert u\Vert_{2}$, soit plus explicitement}:
+Il existe un unique prolongement isom\'etrique  $\TF$ de $\pltwo \mapsto \ltwo(\coint{-1/2,1/2})$ qui coïncide avec la TFTD sur $\plone$. Pour tout $u \in \pltwo$,  $\Vert\hat{u}\Vert_{2}=\Vert u\Vert_{2}$:
 $$
 \int_{-\frac{1}{2}}^{\frac{1}{2}}|\TFA{u}(\nu)|^{2} \rmd\nu=\sum_{n\in \zset}|u_{n}|^{2}
 $$
@@ -169,7 +149,7 @@ Montrons tout d'abord que $\TF$ d\'efini une isom\'etrie sur $\plone$. Soit $u \
 \int_{-1/2}^{1/2} |\hat{u}(\nu)|^2 \rme \nu &= \int_{-1/2}^{1/2} \left| \sum_{k \in \zset} u_k \rme^{-2 \rmi \pi k \nu} \right|^2 \rmd \nu \\
 &= \int_{-1/2}^{1/2} \sum_{k,l=-\infty}^{\infty} u_k \bar{u}_l \rme^{-2 \rmi \pi (k-l)} \rmd \nu \\
 &= \sum_{k,l \in \zset} u_k \bar{u}_l \int_{-1/2}^{1/2} \rme^{- 2 \rmi \pi (k-l) \nu} \rmd \nu \\
-&= \sum_{k=-\infty}^{\infty |u_k|^2 \eqsp.
+&= \sum_{k=-\infty}^{\infty} |u_k|^2 \eqsp.
 \end{align*}
 La permutation des int\'egrales et des sommes est justifi\'ee par application du th\'eor\`eme de Fubini car
 \[
@@ -181,7 +161,7 @@ $u^N_k = u_k$ si $|k| \leq N$ et $u^N_k= 0$ sinon est \'el\'ement de $\lone(\zse
 Les propri\'{e}t\'{e}s de \Cref{{prop:propriete-TFTD}} restent encore vraies en prenant $u$ et $v$ dans $\pltwo$, \`{a} des d\'{e}tails pr\`{e}s : il faut prendre $u\in \pltwo$ et $v\in \plone$, sinon la convolution de $u$ et $v$ n'est a priori ni dans $\plone$ ni dans $\pltwo$
 
 \begin{theorem}[Inversion de la TFtd]
-Si $u\in \pltwo$ est une suite d}'\'{e}nergie finie et $\TFA{u}=\hat{u}$ sa TFtD alors on a, pour tout $n \in \zset$,
+Si $u\in \pltwo$ est une suite d'\'{e}nergie finie et $\TFA{u}=\hat{u}$ sa TFtD alors on a, pour tout $n \in \zset$,
 $$
 u_{n}=\int_{-\frac{1}{2}}^{\frac{1}{2}}\hat{u}(\nu)\rme^{2\rmi \pi \nu} \rmd \nu
 $$
@@ -207,53 +187,122 @@ $\nu \mapsto e_n(\nu)= \rme^{-2 \rmi \pi n \nu }$, nous avons
 On a vu que la r\'{e}ponse fr\'{e}quentielle d'un SLI est la TFtD de sa r\'{e}ponse impulsionnelle. Le th\'{e}or\`{e}me d'inversion nous permet de retrouver la r\'{e}ponse impulsionnelle \`{a} partir de sa r\'{e}ponse fr\'{e}quentielle. Ainsi, pour d\'{e}finir un SLI, il suffit de donner soit sa r\'{e}ponse impul- sionnelle (ce que nous savions d\'{e}j\`{a}) ou sa r\'{e}ponse fr\'{e}quentielle (qui permet de retrouver la r\'{e}ponse impulsionnelle gr\^{a}ce au th\'{e}or\`{e}me d'inversion).
 
 \subsection{D\'{e}croissance \`{a} l'infini et r\'{e}gularit\'{e}}
-Nous savons d\'{e}j\`{a} que si $u$ est sommable alors $\hat{u}$ est continue. La sommabilit\'{e} est une forme de d\'{e}croissance \`{a} l'infini (pour les suites, cela implique m\^{e}me que $u_{n}$ tende vers $0$ \`{a} l'infini). Le th\'{e}or\`{e}me suivant dit que plus la suite $u\mathrm{d}\acute{\mathrm{e}}\mathrm{c}\mathrm{r}\mathrm{o}\hat{\mathrm{l}}\mathrm{t}$ rapidement \`{a} l'infini, plus sa TFtD est r\'{e}guli\`{e}re.
+Nous savons d\'{e}j\`{a} que si $u$ est sommable alors $\hat{u}$ est continue. La sommabilit\'{e} est une forme de d\'{e}croissance \`{a} l'infini (pour les suites, cela implique m\^{e}me que $u_{n}$ tende vers $0$ \`{a} l'infini). Le th\'{e}or\`{e}me suivant dit que plus la suite $u$ décroît rapidement \`{a} l'infini, plus sa TFtD est r\'{e}guli\`{e}re.
 
 \begin{theorem}[D\'{e}croissance \`{a} l'infini et r\'{e}gularit\'{e} de la TFtD]
 Soit $k\geq 0$ un entier, on a :
 \begin{enumerate}[label=(\roman*)]
-\item Si $(\sum_{n\in \zset}|n|^{k}|u_{n}|<\infty$ alors $\hat{u}$ est $k$ fois continuement d\'{e}rivable. 
+\item Si $\sum_{n\in \zset}|n|^{k}|u_{n}|<\infty$ alors $\hat{u}$ est $k$ fois continuement d\'{e}rivable.
 \item Notons $v^{(k)}$ la suite de terme g\'{e}n\'{e}ral
 $$
 v_{n}^{(k)}=(-2 \rmi\pi n)^{k}u_{n} \eqsp.
 $$
-Si $v^{(k)} \in \pltwo$, la TFtD de $v^{(k)}$ est $\TFA{v^{(k)}}=\TFA{u}^{(k)}$ (la d\'{e}riv\'{e}e} $k$-i\`{e}me de $\TFA{u}$ 
+Si $v^{(k)} \in \pltwo$, la TFtD de $v^{(k)}$ est $\TFA{v^{(k)}}=\TFA{u}^{(k)}$ (la d\'{e}riv\'{e}e $k$-i\`{e}me de $\TFA{u}$)
 \end{enumerate}
 \end{theorem}
 \begin{proof}
 La preuve est \'el\'mentaire et laiss\'ee au lecteur
 \end{proof}
+
+
+
+\subsection{Système linéaire invariant  (SLI)}
+\begin{definition}
+\label{def:definition-SLI}
+On dit qu'un opérateur $T$ sur $\plp$ avec $p=1,2,\infty$ est \emph{linéaire} et \emph{invariant} si
+\begin{enumerate}[label=(\roman*)]
+\item \label{item:definition-SLI-continu} $T$ est un opérateur linéaire continue sur $\plp$.
+\item \label{item:defintion-SLI-borne} pour tout $u \in \plp \cap \plinfty$,  $Tu \in \plp \cap \plinfty$ (si $\norm{u}[\infty] < \infty$ alors $\norm{Tu}[\infty] < \infty$).
+\item \label{item:definition-SLI-commute} $T$ commute avec l'opérateur de décalage $S$ (voir \Cref{def:operateur-decalage}): $S \circ T= T \circ S$.
+\end{enumerate}
+\end{definition}
+Remarquons que \Cref{def:definition-SLI}-\ref{item:definition-SLI-commute} implique que pour tout $m \in \zset$, $S^m \circ T= T \circ S^m$.
+Notons $\delta= \sequence{\delta}[k][\zset]$ la suite impulsionnelle
+\begin{equation}
+\label{eq:definition-impulsion}
+\delta_k = \begin{cases} 1 & k = 0 \\ 0 & \text{sinon} \end{cases}
+\end{equation}
+Toute suite $u \in \plp$ ($p=1,2,\infty$) peut s'écrire
+\begin{equation}
+\label{eq:decomposition-u}
+u = \sum_{n \in \zset} u_n S^n \delta \eqsp,
+\end{equation}
+cette série étant absolution convergente car, pour tout $N \in \nset$,
+\[
+\norm{\sum_{|n|\geq N} u_n S^n \delta}[p] \leq \sum_{|n|\geq N} |u_n| \norm{S^n \delta}[p] = \sum_{|n| \geq N} |u_n| \to_{N \to \infty} 0 \eqsp.
+\]
+L'opérateur $T$ étant linéaire et continue sur $\plp$, nous avons donc
+\begin{equation}
+\label{eq:action-operateur}
+T(u)= \sum_{n \in \zset} u_n T(S^n \delta) \eqsp.
+\end{equation}
+En effet, en appelant $u^N= \sum_{|n|\leq N} u_n S^n \delta$ la suite tronquée, la linéarité de l'opérateur $T$ implique que
+\[
+T(u^N)= \sum_{|n|\leq N} u_n T(S^n \delta) \eqsp.
+\]
+D'autre part, la continuité de $T$ implique que
+\[
+\norm{T(u) - T(u^N)}[p] \leq \opernorm{T}[p] \norm{u-u^N}[p] \to_{N \to \infty} 0 \eqsp,
+\]
+où $\opernorm{T}[p]$ est la norme opérateur de $T$. Comme $T$ est invariant par translation, nous avons $T \circ S^n= S^n \circ T$, ce qui implique que
+\begin{equation}
+\label{eq:action-operateur-2}
+T(u)= \sum_{n \in \zset} u_n S^n T(\delta) \eqsp.
+\end{equation}
+Nous en déduisons le résultat important suivant
+\begin{theorem}
+\label{theo:caracterisation-SLI}
+Un SLI $T$ est caractérisé par $T(\delta)$, appelée sa \emph{réponse impusionnelle}, \ie\ pour tout $ u \in \plp$, la suite  $v = T(u)$ est donnée pour tout $k \in \zset$ par
+\[
+v_k = \sum_{n \in zset} u_n h_{k-n} \eqsp, \quad \text{où $h_{k} = [T(\delta)]_{k}$, $k \in \zset$},
+\]
+où de facon plus concise
+\[
+v_k= (u * h)_k \eqsp.
+\]
+\end{theorem}
+Lorsque $p=1,2$, la réponse impulsionnelle du SLI $T$ est $h=T(\delta) \in \plp$; on peut donc calculer la TFtD de la réponse impulsionnelle $h$, qui est appelée la \emph{fonction de transfert}. Dans le domaine de Fourier, l'action du SLI $T$ revient à multiplier la TFtD de l'entrée $u$ par la fonction de transfert $\hat{h}= \TFA{h}$:
+\[
+\hat{v}= \hat{h} \hat{u} \eqsp.
+\]  
+
 \section{Transform\'{e}e de Fourier Discr\`{e}te ou TFD}
 La Transform\'{e}e de Fourier discr\`{e}te est la transformation de Fourier pour les signaux d\'{e}finis sur un ensemble $\{0,\ \ldots,\ N-1\}$. Les suites d\'{e}finies sur cet ensemble sont toutes sommables, born\'{e}es et d'\'{e}nergie finie (car elles sont \`{a} support fini).
 
 \begin{definition}[Transform\'{e}e de Fourier Discr\`{e}te]
-Si $u$ est une suite finie d\'{e}finie sur $\{0,\ \ldots,\ N-1\}$, on note $\hat{u}$  sa Transform\'{e}e de Fourier Discr\`{e}te} (TFD en abr\'{e}g\'{e}}) d\'{e}finie, elle aussi sur} $\{0,\ \ldots,\ N-1\}$, pour tout $k\in\{0,\ \ldots,\ N-1\}$
+Si $\bu= [u_0,\dots,u_{N-1}]'$ est une suite finie d\'{e}finie sur $\{0,\ \ldots,\ N-1\}$, on note $U= [U_0,\dots,U_{N-1}]'$  sa Transform\'{e}e de Fourier Discr\`{e}te (TFD en abr\'{e}g\'{e}) d\'{e}finie, elle aussi sur $\{0,\ \ldots,\ N-1\}$, pour tout $k\in\{0,\ \ldots,\ N-1\}$
 $$
-\hat{u}_k=\sum_{n=0}^{N-1} u_{n}\rme^{-2\rmi\pi \frac{k}{N}n}
+U_k=\sum_{n=0}^{N-1} u_{n}\rme^{-2\rmi\pi \frac{k}{N}n}
 $$
 \end{definition}
-Notons $W_N= \rme^{-2 \rmi \pi /N}$ et pour $k \in \{0,\dots,N-1}$, $E_k= [W_N^{k \cdot 0}, \dots, W_N^{k \cdot (N-1)}]'$.
-Nous avons pour tout $k,l \in \{0, \dots, N-1\}$, $E_k^H E_l= N \delta_{k,l}$ où $\delta_{k,l}$ est le symbole de Kronecker.
-Nous avons donc, en notant $U= [u_0, \dots, u_{N-1}]$,
+Notons, pour $^N \in \nset$ 
+\begin{equation}
+\label{eq:definition-W_N}
+W_N= \rme^{2 \rmi \pi /N}
+\end{equation}
+et pour $k \in \{0,\dots,N-1\}$, le vecteur $E_k= [W_N^{k \cdot 0}, \dots, W_N^{k \cdot (N-1)}]'$.
+Nous avons pour tout $k, \ell \in \{0, \dots, N-1\}$, $E_k^H E_\ell= N \delta_{k,\ell}$ où $\delta_{k,\ell}$ est le symbole de Kronecker.
+Les vecteur $(E_0,E_1,\dots,E_{N-1})$ définissent une base orthogonale de l'espace vectoriel $\cset^N$. 
+Nous avons donc, en notant $\bu= [u_0, \dots, u_{N-1}]'$, pour tout $k \in \{0,\dots,N-1\}$
 \[
-\hat{u}_k = E_k^H U \eqsp.
+U_k = E_k^H \bu \eqsp.
 \]
 \begin{theorem}[Inversion de la TFD]
-Soit $u$ une suite d\'{e}finie sur $\{0,\ \ldots,\ N-1\}$ et $\hat{u}$ sa TFD on a, pour tout $n\in\{0,\ \ldots,\ N-1\}$
+Soit $u$ une suite d\'{e}finie sur $\{0,\ \ldots,\ N-1\}$ et $U$ sa TFD on a, pour tout $n\in\{0,\ \ldots,\ N-1\}$
 $$
-u_{n}=\frac{1}{N}\sum_{k=0}^{n-1} \hat{u}_{k} \rme^{2 \rmi\pi\frac{k}{N}n} \eqsp.
+u_{n}=\frac{1}{N}\sum_{k=0}^{n-1} U_{k} W_N^{nk}  \eqsp.
 $$
 De plus,
 \[
-\sum_{k=0}^{N-1} |u_k|^2 = \frac{1}{N} \sum_{k=0}^{N-1} |\hat{u}_k|^2 \eqsp.
+\sum_{k=0}^{N-1} |u_k|^2 = \frac{1}{N} \sum_{k=0}^{N-1} |U_k|^2 \eqsp.
 \]
 \end{theorem}
 \begin{proof}
 Nous avons, comme les vecteurs $(E_k)_{k=0}^{N-1}$ sont orthogonaux.
 \[
-U = \sum_{k=0}^{N-1} \frac{E_k^H U}{E_k^H E_k} E_k = \frac{1}{N} \sum_{k=0}^{N-1} \hat{u}_k E_k \eqsp.
+\bu = \sum_{k=0}^{N-1} \frac{E_k^H U}{E_k^H E_k} E_k = \frac{1}{N} \sum_{k=0}^{N-1} \hat{u}_k E_k \eqsp.
 \]
-D'autre part, 
+D'autre part,
 \[
 \sum_{k=0}^{N-1} |u_k|^2= \frac{1}{N}^2 \sum_{k=0}^{N-1} |\hat{u}_k|^2 E_k^H E_k= \frac{1}{N} \sum_{k=0}^{N-1} |U_k|^2 \eqsp.
 \]
@@ -263,29 +312,29 @@ Les autres propri\'et\'es de la TFD doivent être consid\'er\'es avec un peu de 
 Remarquons tout d'abord la suite finie $u= \{u_0, \dots, u_{N-1}\}$ peut être prolong\'ee en une suite p\'eriodique de
 p\'eriode $N$,
 \begin{equation}\label{eq:periodisee}
-\tilde{u}_n= u_{ n \pmod{N}} 
+\tilde{u}_n= u_{ n \pmod{N}}
 \end{equation}
-Soit maintenant $m \in \zset$. Il est l\'egitime de consid\'erer
+Soit maintenant $m \in \zset$. Il est l\'egitime de consid\'erer, pour $m \in \zset$,
 $$
-\theta_m \tilde{u}_n = \tilde{u}_{n-m} = u_{ (n-m) \pmod{N} }
+S^m \tilde{u}_n = \tilde{u}_{n+m} = u_{ (n+m) \pmod{N} }
 $$
-Lorsque l'on applique l'op\'erateur retard $\theta_m$ à la suite p\'eriodis\'ee, nous obtenons de nouveau une suite p\'eriodique de p\'eriode $N$.
+Lorsque l'on applique l'op\'erateur décalage $S^m$ à la suite p\'eriodis\'ee, nous obtenons de nouveau une suite p\'eriodique de p\'eriode $N$.
 On peut donc calculer la TFD de cette suite, pour tout $k \in \{0,\dots,N-1\}$, nous avons
 \begin{align*}
-\sum_{n=0}^{N-1} u_{ (n-m) \pmod{N}} W_N^{nk} &= \sum_{n=0}^{N-1} \tilde{u}_{(n-m) \pmod{N}} W_N^{nk}= \sum_{\ell=-m}^{N-m-1} \tilde{u}_{\ell} W_N^{(\ell + m)k} \eqsp.
+\sum_{n=0}^{N-1} u_{ (n+m) \pmod{N}} W_N^{nk} &= \sum_{n=0}^{N-1} \tilde{u}_{(n+m) \pmod{N}} W_N^{nk}= \sum_{\ell=+m}^{N+m-1} \tilde{u}_{\ell} W_N^{(\ell + m)k} \eqsp.
 \end{align*}
 Comme  $W_N^{(\ell +m)k}= W_N^{mk} W_N^{\ell k}$, nous avons
 \[
-\sum_{n=0}^{N-1} u_{ (n-m) \pmod{N}} W_N^{nk} = W_N^{mk} \sum_{\ell=-m}^{N-m-1} \tilde{u}_{\ell} W_N^{\ell k}= W_N^{mk} \hat{u}_k \eqsp,
+\sum_{n=0}^{N-1} u_{ (n+m) \pmod{N}} W_N^{nk} = W_N^{mk} \sum_{\ell=+m}^{N+m-1} \tilde{u}_{\ell} W_N^{\ell k}= W_N^{mk} \hat{u}_k \eqsp,
 \]
-où nous avons utilis\'e que la suite $v_\ell= \tilde{u}_{\ell} W_N^{\ell k}$ est $N$-p\'eriodique et pour tout suite $w$ $N$-p\'eriodique et tout $m \in \zset$, $\sum_{\ell=-m}^{N-m-1} w_{\ell}= \sum_{\ell=0}^{N-1} w_\ell$.
+où nous avons utilis\'e que la suite $v_\ell= \tilde{u}_{\ell} W_N^{\ell k}$ est $N$-p\'eriodique et pour tout suite $w$ $N$-p\'eriodique et tout $m \in \zset$, $\sum_{\ell=+m}^{N+m-1} w_{\ell}= \sum_{\ell=0}^{N-1} w_\ell$. Les propriétés de la TFD vis-à-vis des translations et des convolutions doivent donc être adaptées.
 
 
 
 \subsection{Lien entre TFD et TFtD}
-La TFD est la seule transform\'{e}e de Fourier calculable sur ordinateur. La plupart des signaux naturels sont d\'{e}finis sur un espace \`{a} la fois infini et continu $(\rset$ pour le son, par exemple). La TFD s'int\'{e}resse \`{a} des signaux d\'{e}finis sur un espace fini et discret.  Dans cette partie nous allons voir comment une TFD peut permettre d'analyser un signal d\'{e}fini sur $\zset$, r\'{e}alisant ainsi un p,assage de l'infini au fini.
+La TFD est la seule transform\'{e}e de Fourier calculable sur ordinateur.  La TFD s'int\'{e}resse \`{a} des signaux d\'{e}finis sur un espace fini et discret.  Dans cette partie nous allons voir comment une TFD peut permettre d'analyser un signal d\'{e}fini sur $\zset$, r\'{e}alisant ainsi un p,assage de l'infini au fini.
 
-Evidemment, une TFD ne peut capturer toutes les caract\'{e}ristiques d'un signal quelconque, il nous faut restreindre notre \'{e}tude \`{a} des cas particuliers. Nous verrons : 
+Evidemment, une TFD ne peut capturer toutes les caract\'{e}ristiques d'un signal quelconque, il nous faut restreindre notre \'{e}tude \`{a} des cas particuliers. Nous verrons :
 \begin{enumerate}
 \item Cas d'une suite \`{a} support fini.
 \item D\'{e}termination de la fr\'{e}quence d'une exponentielle complexe.
@@ -299,11 +348,11 @@ Pour tout entier $M\geq N$ on consid\`{e}re la suite finie $v$ d\'{e}finie sur $
 $$
 v_{n}=u_{n}
 $$
-La suite finie $v$ est simplement la restriction de $u$ \`{a} l'ensemble $\{0,\ \ldots,\ M-1\}$. On appelle parfois $v$ la suite z\'{e}ro-padding \`{a} l'ordre $M$ de $u$. On ajoute des z\'{e}ros \`{a} la suite des \'{e}chantillons non nuls de $u$ pour obtenir une suite de taille $M$. Pour tout $k\in\{0,\ \ldots,\ M-1\}$, 
+La suite finie $v$ est simplement la restriction de $u$ \`{a} l'ensemble $\{0,\ \ldots,\ M-1\}$. On appelle parfois $v$ la suite z\'{e}ro-padding \`{a} l'ordre $M$ de $u$. On ajoute des z\'{e}ros \`{a} la suite des \'{e}chantillons non nuls de $u$ pour obtenir une suite de taille $M$. Pour tout $k\in\{0,\ \ldots,\ M-1\}$,
 $$
-\hat{v}(k)=\sum_{n\in\{0,\ldots,M-1\}}v_{n}\rme^{-2\rmi\pi \frac{k}{M}n}=\hat{u}(\frac{k}{M})
+V_k=\sum_{n\in\{0,\ldots,M-1\}}v_{n}\rme^{-2\rmi\pi \frac{k}{M}n}=\hat{u}(k/M)
 $$
-o\`{u} $\hat{u}$ est la TFtD de $u$. la derni\`{e}re \'{e}galit\'{e} provient du fait que $u$ est nulle hors de $\{0,\ \ldots,\ N-1\}$ et donc hors de $\{0,\ \ldots,\ M-1\})$ .
+o\`{u} $\hat{u}$ est la TFtD de $u$. la derni\`{e}re \'{e}galit\'{e} provient du fait que $u$ est nulle hors de $\{0,\ \ldots,\ N-1\}$ et donc hors de $\{0,\ \ldots,\ M-1\}$ .
 
 
 
@@ -340,7 +389,7 @@ On se donne une onde $u_{n}=e^{2i\pi 1/0n}$ On voudrait d\'{e}terminer la fr\'{e
 
 On note $u^{T}$ (pour `` $u$ Tronqu\'{e}e'') la suite d\'{e}finie sur $\zset$ \'{e}gale \`{a} $u$ sur $\{0,\ \ldots,\ N-1\}$ et nulle ailleurs. Ce sont les seules valeurs que nous nous donnons le droit d'utiliser pour d\'{e}terminer $\nu_{0}$. Sa TFtD est
 $$
-\forall\nu\in[-\frac{1}{2},\ \frac{1}{2}[,\ \mathcal{F}(u^{T})(\nu)=e^{-i\pi.(N-1)(1/-1/0)^{sin(N\pi(\nu-\nu_{0}))}}
+\forall\nu\in \coint{-\frac{1}{2},\ \frac{1}{2}},\ \TFA{u^{T}}(\nu)=\rme^{-\rmi \pi.(N-1)(1/-1/0)^{sin(N\pi(\nu-\nu_{0}))}}
 $$
 $$
 sin(\pi(\nu-\nu_{0}))
@@ -350,9 +399,8 @@ Le module de $\mathcal{F}(u^{T})$ et donn\'{e} \`{a} la figure 2.6.
 Si on calcule une TFD d'ordre $M\geq N$, on sait que l'on va \'{e}chantillonner la TFtD de $u^{T}$ aux point $k/M$. Deux TFD d'ordres diff\'{e}rents sont donn\'{e}es aux figures 2.7 et 2.8.
 
 
-Avec une} $TFD$ d}'ordre} $M$ on peut conna\^{i}tre la fr\'{e}quence de l'harmonique complexe} $\nu_{0}$ avec une pr\'{e}cision d}'au moins} $1/M.$
-En effet, quelque soit $\nu_{0}$ il existe au moins un $k$ pour lequel $k/M$ s'approche \`{a} moins $1/M$ de $\nu_{0}.$
-
+Avec une $TFD$ d'ordre $M$ on peut estimer la fr\'{e}quence de l'harmonique complexe $\nu_{0}$ avec une pr\'{e}cision d'au moins $1/M$.
+En effet, quelque soit $\nu_{0} \in \coint{-1/2,1/2}$ il existe au moins un $k$ tel que  $|k/M - \nu_0| \leq 1/M$.
 \begin{figure}
   \centering
   % Requires \usepackage{graphicx}
@@ -459,7 +507,7 @@ $h_{n}=\left\{\begin{array}{l}
 0\ \mathrm{s}\mathrm{i}\mathrm{n}\mathrm{o}\mathrm{n}
 \end{array}\right.$
 
-\Cref{fig:figure2-16} montre la TFtD de la fen\^{e}tre de Hamming. 
+\Cref{fig:figure2-16} montre la TFtD de la fen\^{e}tre de Hamming.
 Par rapport \`{a} celle de $c$ (cr\'{e}neau), on constate deux choses
 \begin{enumerate}
 \item Le lobe central est plus \'{e}tal\'{e} : ceci implique une perte de r\'{e}solution fr\'{e}quentielle. On passe d'une r\'{e}solution de l'ordre de $1/N$ \`{a} une r\'{e}solution de l'ordre de $2/N.$
@@ -487,19 +535,17 @@ Par rapport \`{a} celle de $c$ (cr\'{e}neau), on constate deux choses
 \section{Transformée de Fourier à Court Terme (TFCT)}
 La Transform\'{e}e de Fourier \`{a} Court Terme (TFCT) n'est pas \`{a} proprement parler une transformation de Fourier. Elle n'en a pas les propri\'{e}t\'{e}s alg\'{e}briques remarquables, c'est pourtant un outil essentiel en traitement du signal. Cet outil est bas\'{e} sur la constatation d\'{e}j\`{a} faite plus haut que le contenu fr\'{e}quentiel d'un signal peut \'{e}voluer au cours du temps. Elle se d\'{e}finit naivement comme une analyse locale des composantes fr\'{e}quentielles du si- gnal. Plus pr\'{e}cis\'{e}ment, pour chaque instant $n$, on extrait un certain nombre d'\'{e}chantillons du signal \'{e}tudi\'{e} autour du point $n$ que l'on \'{e}tudie par les moyens $\mathrm{v}\mathrm{u}\mathrm{s}$ ci-dessus (fen\^{e}trage et TFD d'ordres arbitraires).
 
-Si $u$ est une suite d\'{e}finie sur $\zset$. On fixe une fen\^{e}tre} $w_{0}, \ldots, w_{n}$ de taille
+Si $u$ est une suite d\'{e}finie sur $\zset$. On fixe une fen\^{e}tre $w_{0}, \ldots, w_{n}$ de taille
 $N$ et on choisit un entier $M\geq N.$ La Transform\'{e}e de Fourier \`{a} Court Terme de $u$ de
-fen\^{e}tre} $w$ et de pr\'{e}cision} $1/M$ est une fonction, que l'on note $U$ d\'{e}finie sur $\displaystyle \zset\times\frac{\{0,\ldots,M-1\}}{M}$par
+fen\^{e}tre $w$ et de pr\'{e}cision $1/M$ est une fonction, que l'on note $U$ d\'{e}finie sur $\displaystyle \zset\times\frac{\{0,\ldots,M-1\}}{M}$par
 $$
 \forall(n,\ k)\in \zset\times\{0,\ \ldots,\ M-1\},\ U(n,\ \frac{k}{M})=\sum_{m\in \zset}u_{m}w_{n-m}\rme^{-2\rmi\pi \frac{k}{M}m}
 $$
-On peut aussi consid\'{e}rer} $U$ comme une fonction d\'{e}finie sur} $\displaystyle \mathrm{z}\times[-\frac{1}{2}, \displaystyle \frac{1}{2}$ [que l'on \'{e}chantiollonnera aussi finement que l'on veut suivant la seconde variable en augmentant la valeur de $M$
-(ordre de la} $TFD$)
+On peut aussi consid\'{e}rer $U$ comme une fonction d\'{e}finie sur $\displaystyle \zset \times \coint{-1/2,1/2}$ que l'on \'{e}chantillonnera aussi finement que l'on veut suivant la seconde variable en augmentant la valeur de $M$ (ordre de la $TFD$)
 $$
-\forall(n,\ \nu)\in \zset\times[-\frac{1}{2},\ \frac{1}{2}\ [,\ U(n,\ \nu)=\sum_{m\in \zset}u_{m}w_{m-n}\rme^{-2\rmi\pi  1/m}
+\forall(n,\ \nu)\in \zset\times \coint{-1/2,1/2},\ U(n,\ \nu)=\sum_{m\in \zset}u_{m}w_{m-n}\rme^{-2\rmi\pi  1/m}
 $$
-On distingue cette notation de la notation} $U$ pour la} $TFD$ par le fait qu}'elle poss\`{e}de},
-ici, deux variables.
+On distingue cette notation de la notation $U$ pour la $TFD$ par le fait qu'elle dépend de deux variables.
 
 \paragraph{Pour $n$ fix\'{e}}: On remarque que pour un entier $n$ fix\'{e}, la fonction $\nu\mapsto U(n,\ \nu)$ est la TFtD de la suite $l\mapsto u_{l}w_{l-n}$, c'est \`{a} dire la suite $u$ multipli\'{e}e par la $n$-translat\'{e}e de la fen\^{e}tre $w$. Il s'agit bien de ce que nous avions annonc\'{e}, autour de chaque instant $n$, on extrait une fenêtre de signal dont on calcule la TFtD (à l'aide d'une TFD dont le nombre de coefficients peut être choisi de façon arbitraire).
 
@@ -518,13 +564,13 @@ $$
 Ainsi le module de $U$ est celui de la convolution de la sym\'{e}trique de $w$ multipli\'{e}e par une harmonique complexe  de fr\'{e}quence $\nu$. Cela signifie qu'\`{a} $\nu$ fix\'{e}, le module de $U$ refl\`{e}te \`{a} quel point la fr\'{e}quence $\nu$ est pr\'{e}sente dans le signal autour du point $n$. En effet, la TFtD de $\gamma$ est centr\'{e}e autour de la fr\'{e}quence $\nu$ (la fen\^{e}tre $w$, si c'est une fen\^{e}tre de Hamming par exemple, a son spectre centr\'{e} en z\'{e}ro).
 
 
-Le spectrogramme est le module au carr\'{e} de la TFCT $((n,\ \nu)\mapsto|U(n,\ \nu)|^{2})$ . On le visualise comme une image, les deux axes sont ceux des variables $n$ et $\nu$, on repr\'{e}sente la valeur du spectrogramme soit en gris, suivant la valeur (sombre pour grand et clair pour faible). 
+Le spectrogramme est le module au carr\'{e} de la TFCT $((n,\ \nu)\mapsto|U(n,\ \nu)|^{2})$ . On le visualise comme une image, les deux axes sont ceux des variables $n$ et $\nu$, on repr\'{e}sente la valeur du spectrogramme soit en gris, suivant la valeur (sombre pour grand et clair pour faible).
 
 \begin{figure}
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=0.6\textwidth]{Figures/Figure2-19}\\
-  \caption{Spectrogramme d'un morceau de piano. On voit se succ\'{e}der les notes. Chaque note est caract\'{e}ris\'{e}e par l'apparition de raies qui s'affaiblissent \`{a} mesure que le son s'att\'{e}nue. (l'\'{e}chelle des fr\'{e}quences est du haut vers le bas et en $10000$ Hz d'unit\'{e}}\label{fig:figure2-19}
+  \caption{Spectrogramme d'un morceau de piano. On voit se succ\'{e}der les notes. Chaque note est caract\'{e}ris\'{e}e par l'apparition de raies qui s'affaiblissent \`{a} mesure que le son s'att\'{e}nue. (l'\'{e}chelle des fr\'{e}quences est du haut vers le bas et en $10000$ Hz d'unit\'{e})}\label{fig:figure2-19}
 \end{figure}
 
 

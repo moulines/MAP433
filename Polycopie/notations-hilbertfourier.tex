@@ -33,7 +33,6 @@
 \def\nset{\ensuremath{\mathbb{N}}}
 \def\qset{\ensuremath{\mathbb{Q}}}
 \def\rset{\ensuremath{\mathbb{R}}}
-\def\zset{\ensuremath{\mathbb{R}}}
 \def\cset{\ensuremath{\mathbb{C}}}
 \def\rsetc{\ensuremath{\overline{\rset}}}
 \def\Xset{\ensuremath{\mathsf{X}}}
@@ -50,7 +49,7 @@
 \newcommand{\ooint}[1]{\left]#1\right[}
 \newcommand{\ccint}[1]{\left[#1\right]}
 
-
+\def\bu{\mathbf{u}}
 \newcommand{\TF}{\mathcal{F}}
 \newcommand{\TFC}{\overline{\mathcal{F}}}
 \newcommand{\TFA}[1]{\mathcal{F}\left( #1 \right)}
@@ -89,6 +88,7 @@
 \newcommand{\pltwo}{\ensuremath{\ell^2}(\zset)}
 \newcommand{\plone}{\ensuremath{\ell^1}(\zset)}
 \newcommand{\plinfty}{\ensuremath{\ell^\infty}(\zset)}
+\newcommand{\plp}{\ensuremath{\ell^p}(\zset)}
 
 \def\calG{\mathcal{G}}
 \def\calM{\mathcal{M}}
@@ -133,7 +133,6 @@
 \newcommand{\corr}{\mathrm{corr}}
 \newcommand{\vp}{\mathrm{vp}}
 \newcommand{\erf}{\mathrm{erf}}
-\newcommandx{\mod}[2][2=N]{#1 \mathrm{mod} #2}
 \def\cF{\mathcal{F}}
 \def\cE{\mathcal{E}}
 \def\cB{\mathcal{B}}
@@ -145,7 +144,9 @@
 \newcommand{\Var}[1]{\mathrm{Var}\left( #1 \right)}
 \def\BB{\mathrm{B.B.}}
 \def\BBF{\mathrm{B.B.F.}}
-\newcommandx{\norm}[2][2=]{\Vert #1 \Vert_{#2}}
+\newcommandx{\norm}[2][2=]{\left\Vert #1 \right\Vert_{#2}}
+\newcommandx{\opernorm}[2][2=]{{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert #1
+    \right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}_{#2}}
 \def\L1loc{L_{1,\mathrm{loc}}}
 \def\Leb{\mathrm{Leb}}
 
