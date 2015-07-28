@@ -39,8 +39,7 @@ La figure \ref{fig:figtraf} repr\'esente les temps d'inter-arriv\'ees
 de paquets TCP, mesur\'es en secondes, sur la passerelle du
 laboratoire Lawrence Livermore. La trace repr\'esent\'ee a \'et\'e obtenue
 en enregistrant 2 heures de trafic. Pendant cette dur\'ee, environ
-1.3 millions de paquets TCP, UDP, etc. ont \'et\'e enregistr\'es, en
-utilisant la proc\'edure \emph{tcpdump} sur une station Sun.
+1.3 millions de paquets TCP, UDP, etc. ont \'et\'e enregistr\'es.
 D'autres s\'eries de ce type peuvent \^{e}tre obtenues sur
 \emph{The Internet Traffic Archive},
 \emph{http://ita.ee.lbl.gov/}.
@@ -48,7 +47,7 @@ D'autres s\'eries de ce type peuvent \^{e}tre obtenues sur
 \begin{figure}
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=\textwidth]{Figures/lbl_tcp_3}\\
+  \includegraphics[width=0.5\textwidth]{Figures/lbl_tcp_3}\\
   \caption{Trace de trafic Internet~: temps d'inter-arriv\'ees de paquets TCP.}\label{fig:figtraf}
 \end{figure}
 \end{example}
@@ -64,7 +63,7 @@ conduit vocal.
 \begin{figure}
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=\textwidth]{Figures/phrase}\\
+  \includegraphics[width=0.5\textwidth]{Figures/phrase}\\
   \caption{Signal de parole \'echantillonn\'e \`a $8000$ Hz~:
  son non vois\'e \emph{ch}.}\label{fig:figspeech}
 \end{figure}
@@ -85,7 +84,7 @@ capitalisation.
 \begin{figure}
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=\textwidth]{Figures/SP}\\
+  \includegraphics[width=0.5\textwidth]{Figures/SP}\\
   \caption{Cours quotidien d'ouverture de l'indice S\&P$500$~:
  entre Janvier 1990 et Ao\^ut 2000.}\label{fig:SP}
 \end{figure}
@@ -316,9 +315,7 @@ ind\'ependantes telles que $X_t\sim\nu_t$ pour tout $t\in T$.
 Nous introduisons \`a pr\'esent une classe importante de processus al\'eatoires en
 mod\'elisation stochastique~: la classe des processus gaussiens.
 Rappelons tout d'abord la d\'efinition des variables al\'eatoires
-gaussiennes, univari\'ees puis multivari\'ees. Une decription plus
-d\'etaill\'ee peut \^{e}tre trouv\'ee dans~\cite[Chapter~16]{jacod:protter:2003}.
-
+gaussiennes, univari\'ees puis multivari\'ees.
 
 \begin{definition}[Variable al\'eatoire gaussienne r\'eelle]
 \index{Variables al\'eatoires!gaussiennes}
@@ -416,8 +413,7 @@ R\'eciproquement pour tout vecteur
    comme recherch\'e.
 \end{proof}
 
-On montre facilement la proposition suivante
-(voir~\cite[Corollaire~16.1]{jacod:protter:2003}).
+On montre facilement la proposition suivante:
 
 \begin{proposition}\label{prop:vect_gaussiens_indep}
    Soit $X\sim\mathcal{N}_n( \mu, \Gamma)$ avec $\mu\in\Rset^n$ et $\Gamma$
@@ -429,7 +425,7 @@ On montre facilement la proposition suivante
 En utilisant le m\^{e}me proc\'ed\'e de preuve que pour la
 proposition~\ref{prop:vect_gaussiens}, i.e. en consid\'erant le cas $\Gamma$
 diagonale puis la diagonalisation de $\Gamma$ pour passer au cas g\'en\'eral, on
-obtient aussi le r\'esultat suivant (voir~\cite[Corollaire~16.2]{jacod:protter:2003}).
+obtient aussi le r\'esultat suivant:
 
  \begin{proposition}\label{prop:vect_gaussiens_densite}
    Soit $X\sim\mathcal{N}_n( \mu, \Gamma)$ avec $\mu\in\Rset^n$ et $\Gamma$
@@ -624,38 +620,36 @@ d'ordre un et deux uniquement, lorsque ceux-ci existent.
 
 
 
-\begin{definition}[Op\'erateurs de d\'ecalage et de retard]
+\begin{definition}[Op\'erateurs  de retard]
 \label{def:retard}
-On suppose $T=\Zset$ ou $T=\Nset$.
-On note $S$ et l'on appelle \emph{op\'erateur de d\'ecalage} (\emph{Shift}) l'application $E^T\to E^T$ d\'efinie par
+On note $\retard$ et l'on appelle \emph{op\'erateur de d\'ecalage} (\emph{Shift}) l'application $E^\Zset\to E^\Zset$ d\'efinie par
 $$
-S(x)= (x_{t+1})_{t\in T}\quad \text{pour tout}\quad x=(x_t)_{t \in T} \in E^T\;.
+\retard(x)= (x_{t-1})_{t\in \Zset}\quad \text{pour tout}\quad x=(x_t)_{t \in \Zset} \in E^\Zset\;.
 $$
-Pour tout $\tau\in T$, on d\'efinit $S^\tau$ par
+Pour tout $\tau\in \Zset$, on d\'efinit $\retard^\tau$ par
 $$
-S^\tau(x)= (x_{t+\tau})_{t\in T}\quad \text{pour tout}\quad x=(x_t)_{t \in T} \in E^T\;.
+\retard^\tau(x)= (x_{t-\tau})_{t\in \Zset}\quad \text{pour tout}\quad x=(x_t)_{t \in \Zset} \in E^\Zset\;.
 $$
 \end{definition}
 
 \begin{definition}[Stationnarit\'e stricte]
 \index{Stationnarit\'e!stricte}
-On pose $T=\Zset$ ou $T=\Nset$.
-Un processus al\'eatoire $\{X_t, t\in T \}$ est stationnaire au sens strict si $X$ et $S\circ X$ ont m\^{e}me loi, \ie\
+Un processus al\'eatoire $X=\{X_t, t\in \Zset \}$ est stationnaire au sens strict si $X$ et $\retard \circ X$ ont m\^{e}me loi, \ie\
  $\PP_{S\circ X}=\PP_X$.
 \end{definition}
 
-Par caract\'erisation de la loi image par les r\'epartitions finies, on a  $\PP_{S\circ X}=\PP_X$ si et seulement si
+Par caract\'erisation de la loi image par les r\'epartitions finies, on a  $\PP_{\retard \circ X}=\PP_X$ si et seulement si
 $$
-\PP_{S\circ X}\circ\Pi_I^{-1}=\PP_X\circ\Pi_I^{-1}
+\PP_{\retard \circ X}\circ\Pi_I^{-1}=\PP_X\circ\Pi_I^{-1}
 $$
-pour toute partie finie $I \in \mathcal{I}$.  Or $\PP_{S\circ X}\circ\Pi_I^{-1}=\PP_X\circ(\Pi_I\circ S)^{-1}$
-et $\Pi_I\circ S=\Pi_{I+1}$, o\`u $I + 1 = \{ t+1, t \in I \}$.
-On en conclut que  $\{X_t, t\in T\}$ est \emph{stationnaire au sens strict} si et seulement si, pour toute partie finie $I \in
+pour toute partie finie $I \in \mathcal{I}$.  Or $\PP_{\retard \circ X}\circ\Pi_I^{-1}=\PP_X\circ(\Pi_I\circ \retard)^{-1}$
+et $\Pi_I\circ \retard=\Pi_{I-1}$, o\`u $I - 1 = \{ t-1, t \in I \}$.
+On en conclut que  $\{X_t, t\in \Zset\}$ est \emph{stationnaire au sens strict} si et seulement si, pour toute partie finie $I \in
 \mathcal{I}$,
 $$
-\PP_I=\PP_{I+1} \; .
+\PP_I=\PP_{I-1} \; .
 $$
-On remarque aussi que la stationnarit\'e au sens strict implique que  $X$ et $S^\tau\circ X$ ont m\^{e}me loi pour tout $\tau\in T$
+On remarque aussi que la stationnarit\'e au sens strict implique que  $X$ et $\retard^\tau\circ X$ ont m\^{e}me loi pour tout $\tau\in \Zset$
 et donc aussi $\PP_I=\PP_{I+\tau}$, o\`u $I + \tau = \{ t+\tau, t \in I \}$.
 
 % Killed by oKp on 01/10/01
@@ -685,9 +679,9 @@ et donc aussi $\PP_I=\PP_{I+\tau}$, o\`u $I + \tau = \{ t+\tau, t \in I \}$.
 % \end{example}
 \begin{example}[Processus i.i.d]
 \label{exple:iid}
-Soit $(Z_t)_{t\in T}$ une suite de variables al\'eatoires \emph{ind\'ependantes et
+Soit $(Z_t)_{t\in \Zset}$ une suite de variables al\'eatoires \emph{ind\'ependantes et
   identiquement distribu\'ees} (i.i.d) \`a valeurs dans
-$\Rset^d$. Alors $(Z_t)_{t\in T}$ est
+$\Rset^d$. Alors $(Z_t)_{t\in \Zset}$ est
 un processus stationnaire au sens strict, car, pour toute partie finie ordonn\'ee
 $I = \{ t_1, < t_2 < \cdots < t_n \}$ et tous bor\'eliens $A_1,\dots,A_n$ de
 $\Rset^d$, nous
@@ -697,22 +691,14 @@ avons~:
  =
  \prod_{j=1}^n \PP(Z_0 \in A_j)\;,
 \]
-qui ne d\'epend pas de $t_1,\dots,t_n$. Notons que d'apr\`es l'exemple
-\ref{exple:vaindep}, pour toute probabilit\'e $\nu$ sur $\Rset^d$, on
+qui ne d\'epend pas de $t_1,\dots,t_n$. Notons que d'apr\`es \Cref{exple:vaindep}, pour toute probabilit\'e $\nu$ sur $\Rset^d$, on
 sait construire un processus $(Z_t)$ i.i.d. de \emph{loi marginale} \index{Loi marginale}
-$\nu$, c'est-\`a-dire tel que $Z_t\sim \nu$ pour tout $t\in T$.
+$\nu$, c'est-\`a-dire tel que $Z_t\sim \nu$ pour tout $t\in \Zset$.
 \end{example}
-
-
-\subsection{Transformations pr\'eservant la stationnarit\'e}
-
-On pose $T=\Zset$, $E=\Cset^d$ et $\cE=\cB(\Cset^d)$ pour un entier
-$d\geq1$. Commen\c{c}ons par un exemple simple.
-
 
 \begin{example}[Transformation d'un processus i.i.d.]
 \label{exple:trans_iid}
-Soit $Z$ un processus i.i.d. (voir exemple~\ref{exple:iid}).
+Soit $Z$ un processus i.i.d. (voir \Cref{exple:iid}).
 Soient $k$ un entier et $g$ une fonction bor\'elienne de $\Rset^k$
 dans $\Rset$. On peut v\'erifier que le processus al\'eatoire
 $(X_t)_{t\in\Zset}$ d\'efini par
@@ -723,27 +709,29 @@ est encore un processus al\'eatoire stationnaire au sens strict.  Par contre, ce
 processus obtenu par transformation n'est plus i.i.d dans la mesure o\`u, d\`es que
 $k \geq 1$, $X_t, X_{t+1}, \dots, X_{t+k-1}$ ont bien la m\^{e}me distribution
 marginale mais sont, en g\'en\'eral, d\'ependants car fonctions de variables
-al\'eatoires communes. Un tel processus est dit $k$-d\'ependant dans la mesure o\`u,
-par contre, $\tau \geq k$ implique que $(X_s)_{s\leq t}$ et $(X_s)_{s\geq
-  t+\tau}$ sont ind\'ependants pour tout $t$. Les processus $m$-d\'ependants
+al\'eatoires communes. Un tel processus est dit $k$-d\'ependant car pour $\tau \geq k$,
+$(X_s)_{s\leq t}$ et $(X_s)_{s\geq t+\tau}$ sont ind\'ependants pour tout $t$. Les processus $m$-d\'ependants
 peuvent \^{e}tre utilis\'es pour approcher une grande classe de processus d\'ependants
 afin d'\'etudier le comportement asymptotique de statistiques usuelles telles que
 la moyenne empirique.  \index{Processus!$m$-d\'ependant}
 \end{example}
 
-On remarque que dans cet exemple, pour d\'eduire la stationnarit\'e de $X$, il
-n'est pas n\'ecessaire d'utiliser que $Z$ est i.i.d. mais seulement qu'il est
-stationnaire. En fait, pour v\'erifier la stationnarit\'e, il est souvent pratique
-de raisonner directement sur les lois des trajectoires en utilisant la notion
-de filtrage.
 
-\begin{definition}
-  Soit $\phi$ une application mesurable de $(E^T,\cE^{\otimes T})$
-  dans $(F^T,\cF^{\otimes T})$ et $X=(X_t)_{t\in T}$ un processus \`a valeurs dans $(E,\cE)$.
+\subsection{Transformations pr\'eservant la stationnarit\'e}
+
+On pose $E=\Cset^d$ et $\cE=\cB(\Cset^d)$ pour un entier
+$d\geq1$.
+
+
+
+
+\begin{definition}[Filtrage]
+  Soit $\phi$ une application mesurable de $(E^\Zset,\cE^{\otimes \Zset})$
+  dans $(F^\Zset,\cF^{\otimes \Zset})$ et $X=(X_t)_{t\in \Zset}$ un processus \`a valeurs dans $(E,\cE)$.
   On appelle \emph{filtr\'e} du processus $X$ par la transformation $\phi$ le
-  processus $Y=(Y_t)_{t\in T}$ \`a valeurs dans $(F,\cF)$ d\'efini par
+  processus $Y=(Y_t)_{t\in \Zset}$ \`a valeurs dans $(F,\cF)$ d\'efini par
   $Y=\phi\circ X$, c'est-\`a-dire $Y_t=\Pi_t(\phi( X))$ pour tout $t\in
-  T$, o\`u $\Pi_t$ est d\'efini par~(\ref{eq:projectioncanoniquesingle}). Si
+  \Zset$, o\`u $\Pi_t$ est d\'efini par~(\ref{eq:projectioncanoniquesingle}). Si
   $\phi$ est une application lin\'eaire, on parlera de \emph{filtrage lin\'eaire}.
 \end{definition}
 
@@ -845,8 +833,8 @@ $\Pi_0$,
 voir~(\ref{eq:projectioncanoniquesingle}). En effet, notons
 $\phi_0=\Pi_0\circ\phi$. Alors pour tout $s\in \Zset$, $\Pi_s\circ\phi=
 \Pi_0\circ S^{s}\circ\phi=\Pi_0\circ\phi\circ S^{s}$. Il suffit enfin
-d'observer que pour tout $x\in E^T$, $\phi(x)$ est la suite
-$(\pi_s\circ\phi)_{s\in T}$.
+d'observer que pour tout $x\in E^\Zset$, $\phi(x)$ est la suite
+$(\pi_s\circ\phi)_{s\in \Zset}$.
 \end{remark}
 
 

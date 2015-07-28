@@ -18,7 +18,7 @@ $$
 F_T (\lambda) = \sum_{n \in \zset} [\TF f] \left( \lambda - \frac{n}{T} \right) \eqsp.
 $$
 Par construction, la fonction $\lambda \mapsto F_T(\lambda)$ est une fonction p{\'e}riodique de p{\'e}riode $1/T$, et sur chaque
-p{\'e}riode $(k-1/2)/T,(k+1/2)/T]$, la fonction $F_T$ est {\'e}gale {\`a}  $\TF f$ la translat{\'e}e de $k/T$.  Il est donc clair que
+p{\'e}riode $\coint{(k-1/2)/T,(k+1/2)/T}$, la fonction $F_T$ est {\'e}gale {\`a}  $\TF f$ la translat{\'e}e de $k/T$.  Il est donc clair que
 $F_T \in L_2{[-1/2T,1/2T]}$ et  admet donc un d{\'e}veloppement en s{\'e}rie de
 Fourier:
 \begin{equation}
@@ -63,8 +63,8 @@ $$
 $$
 qui doit {\^e}tre comprise au sens $L_2(\rset)$,
 $$
-\lim_{N \to \infty} \int \left | \TF f(\lambda)  - T \sum_{n =-N}^N f(nT) \1_{[-1/(2T),1/(2T)]}(\lambda) \rme^{+ \rmi 2 \pi
-    \lambda n T}  \right|^2 d \lambda = 0 \eqsp.
+\lim_{N \to \infty} \int \left| \TF f(\lambda)  - T \sum_{n =-N}^N f(nT) \1_{[-1/(2T),1/(2T)]}(\lambda) \rme^{+ \rmi 2 \pi
+    \lambda n T}  \right|^2 \rmd \lambda = 0 \eqsp.
 $$
 Comme l'application $\TFC$ est continue de $L_2(\rset) \to L_2(\rset)$ et que
 $$

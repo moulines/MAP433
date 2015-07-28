@@ -405,7 +405,7 @@ pr\'ediction, a pour expression\,:
 \end{equation}
 o\`u\,:
 \[
-  \phi_p(z) = 1 - \sum_{k=1}^p \phi_{k,p} z^k
+  \phi_p(z) = 1 - \sum_{k=1}^p \phi_{k,p} z^{-k}
 \]
 d\'esigne le \emph{polyn\^ome pr\'edicteur d'ordre $p$}.
 \begin{theorem}
@@ -474,8 +474,8 @@ lignes sont \'egales) que $\sigma_p^2=0$, ce qui est contraire \`a
 l'hypoth\`ese que le processus est r\'egulier.
 
 D\'emontrons maintenant que les racines des polyn\^omes
-pr\'edicteurs sont toutes \emph{strictement \`a  l'ext\'erieur du
-cercle unit\'e. Raisonnons encore par l'absurde. Supposons que le
+pr\'edicteurs sont toutes \emph{strictement \`a  l'int\'erieur du
+cercle unit\'e}. Raisonnons encore par l'absurde. Supposons que le
 polyn\^ome pr\'edicteur \`a l'ordre $p$ ait $m$ racines $\{a_k,
 |a_k| < 1, 1 \le k \leq m \}$ \`a l'int\'erieur du cercle unit\'e et
 $(p-m)$ racines $\{ b_{\ell}, |b_{\ell}| > 1, 1 \leq \ell \leq p-m
@@ -483,21 +483,19 @@ $(p-m)$ racines $\{ b_{\ell}, |b_{\ell}| > 1, 1 \leq \ell \leq p-m
 \`a l'ordre $p$ s'\'ecrit donc\,:
 \[
  \phi_p(z)=
- \prod_{k=1}^m ( 1 - a_k^{-1} z) \prod_{\ell=1}^{p-m} (1 - b_{\ell}^{-1} z)\;.
+ \prod_{k=1}^m ( 1 - a_k z^{-1}) \prod_{\ell=1}^{p-m} (1 - b_{\ell} z^{-1})\;.
 \]
 Consid\'erons alors le polyn\^ome\,:
 \[
  \bar{\phi}_p(z) =
- \prod_{k=1}^m (1 - a_k^{*} z) \prod_{\ell=1}^{p-m} (1 - b_{\ell}^{-1} z)\;.
+ \prod_{k=1}^m (1 - a_k z^{-1}) \prod_{\ell=1}^{p-m} (1 - (1/b_{\ell}^{*}) z^{-1})\;.
 \]
-Il a d'une part toutes ses racines strictement \`a l'ext\'erieur
+Il a d'une part toutes ses racines strictement \`a l'int\'erieur
 du cercle unit\'e et d'autre part il v\'erifie
-$|\bar{\phi}_p(\rme^{-i\lambda })|^2< |\phi_p(\rme^{-i\lambda })|^2$. On a
-en effet $| 1 - a_k^* \rme^{-i\lambda } | = |1 - a_k \rme^{\rmi \lambda }|=
-|a_k| |1 - a_k^{-1} \rme^{-i\lambda }|$ et donc
-$|\bar{\phi}_p(\rme^{-i\lambda })|^2 = \left (\prod_{k=1}^m |a_k|^2
-\right )|\phi_p(\rme^{-i\lambda })|^2$, ce qui d\'emontre le r\'esultat
-annonc\'e puisque $|a_k|<1$. On en d\'eduit alors
+$|\bar{\phi}_p(\rme^{-\rmi\lambda })|^2< |\phi_p(\rme^{-\rmi\lambda })|^2$. On a
+en effet $| 1 - (1/b_\ell^*) \rme^{-\rmi\lambda } | = |b_\ell| |1 - b_\ell \rme^{-\rmi \lambda }|$ et donc
+$|\bar{\phi}_p(\rme^{-\rmi \lambda })|^2 = \left (\prod_{\ell=1}^{p-m} |b_\ell|^{-2} \right )|\phi_p(\rme^{-\rmi\lambda })|^2$, ce qui d\'emontre le r\'esultat
+annonc\'e puisque $|b_\ell|<1$. On en d\'eduit alors
 que\,:
 \begin{gather*}
 \frac{1}{2 \pi} \int_{-\pi}^{\pi} | \bar{\phi}_p(\rme^{-i\lambda

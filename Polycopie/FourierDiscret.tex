@@ -60,15 +60,16 @@ $$
 La preuve \'el\'ementaire est laiss\'ee au lecteur.
 \end{proof}
 
-\begin{definition}[Opérateur de décalage]
+\begin{definition}[Opérateur de retard]
 \label{def:operateur-decalage}
-On note $S$ l'op\'erateur de décalage, l'application de $\cset^{\zset} \mapsto \cset^\zset$ défini pour  $u= \sequence{u}[n][\zset] \in \cset^{\zset}$ par
+On note $\retard$ l'op\'erateur de retard, l'application de $\cset^{\zset} \mapsto \cset^\zset$ défini pour  $u= \sequence{u}[n][\zset] \in \cset^{\zset}$ par
 \begin{equation}
 \label{eq:operateur-avance}
-(S u)_n = u_{n+1} \eqsp, \quad \text{pour tout $n \in \zset$}.
+(\retard u)_n = u_{n-1} \eqsp, \quad \text{pour tout $n \in \zset$}.
 \end{equation}
 \end{definition}
-Cet opérateur est inversible. Pour tout $m \in \zset$, $(S^m u)_n= u_{n+m}$. 
+Cet opérateur est inversible et son inverse est l'opérateur d'avance: $(\retard^{-1} u)_n= u_{n+1}$ pour tout $n \in \nset$.
+Pour tout $m \in \zset$, $(\retard^m u)_n= u_{n+m}$.
 La proposition suivante donne les propriétés du produit de convolution
 \begin{proposition}
 \label{prop:propriete-convolution}
@@ -77,7 +78,7 @@ Soient $u, v, w \in \plone$.
 \item Le produit de convolution est \emph{commutatif}: $u * v= v * u$.
 \item Le produit de convolution est \emph{associatif}: $u * (v * w)= (u * v)* w$.
 \item Le produit de convolution est \emph{linéaire}: $u * (\lambda v + w)= \lambda u*v + u * w$.
-\item Le produit de convolution est \emph{invariant par décalage}: pour tout $m \in \zset$, $(S_m u) * v = S_m (u * v)$, où $S$ est l'opérateur de décalage.
+\item Le produit de convolution est \emph{invariant par décalage}: pour tout $m \in \zset$, $(\retard^m u) * v = \retard^m (u * v)$, où $\retard$ est l'opérateur de retard.
 \end{enumerate}
 \end{proposition}
 \begin{proof}
@@ -121,7 +122,7 @@ Le fait que la d\'{e}finition ait un sens d\'{e}coule du fait que $u$ est suppos
 \begin{proposition}[Propri\'{e}t\'{e}s de la TFtD]
 \label{prop:propriete-TFTD}
 \begin{enumerate}[label=(\roman*)]
-\item $\TFA{S^m u}(\nu)= \rme^{- 2 \rmi \pi m \nu} \TFA{u}(\nu)$ pour tout $\nu \in \coint{-1/2,1/2}$, où $S$ est l'opérateur de décalage (voir \Cref{def:operateur-decalage}).
+\item $\TFA{\retard^m u}(\nu)= \rme^{- 2 \rmi \pi m \nu} \TFA{u}(\nu)$ pour tout $\nu \in \coint{-1/2,1/2}$, où $\retard$ est l'opérateur de décalage (voir \Cref{def:operateur-decalage}).
 \item $\TFA{\delta}(\nu) = 1$ pour tout $\nu \in \coint{-1/2,1/2}$.
 \item Si $u, v \in \plone$, $\TFA{u * v}= \TFA{u} \, \TFA{v}$
 \item Si $u \in \plone$ et $v \in \plinfty$, $\TFA{u \cdot v}=\TFA{u}*\TFA{v}$
@@ -213,10 +214,10 @@ On dit qu'un opérateur $T$ sur $\plp$ avec $p=1,2,\infty$ est \emph{linéaire} 
 \begin{enumerate}[label=(\roman*)]
 \item \label{item:definition-SLI-continu} $T$ est un opérateur linéaire continue sur $\plp$.
 \item \label{item:defintion-SLI-borne} pour tout $u \in \plp \cap \plinfty$,  $Tu \in \plp \cap \plinfty$ (si $\norm{u}[\infty] < \infty$ alors $\norm{Tu}[\infty] < \infty$).
-\item \label{item:definition-SLI-commute} $T$ commute avec l'opérateur de décalage $S$ (voir \Cref{def:operateur-decalage}): $S \circ T= T \circ S$.
+\item \label{item:definition-SLI-commute} $T$ commute avec l'opérateur de retard $\retard$ (voir \Cref{def:operateur-decalage}): $\retard \circ T= T \circ \retard$.
 \end{enumerate}
 \end{definition}
-Remarquons que \Cref{def:definition-SLI}-\ref{item:definition-SLI-commute} implique que pour tout $m \in \zset$, $S^m \circ T= T \circ S^m$.
+Remarquons que \Cref{def:definition-SLI}-\ref{item:definition-SLI-commute} implique que pour tout $m \in \zset$, $\retard^m \circ T= T \circ \retard^m$.
 Notons $\delta= \sequence{\delta}[k][\zset]$ la suite impulsionnelle
 \begin{equation}
 \label{eq:definition-impulsion}
@@ -225,29 +226,29 @@ Notons $\delta= \sequence{\delta}[k][\zset]$ la suite impulsionnelle
 Toute suite $u \in \plp$ ($p=1,2,\infty$) peut s'écrire
 \begin{equation}
 \label{eq:decomposition-u}
-u = \sum_{n \in \zset} u_n S^n \delta \eqsp,
+u = \sum_{n \in \zset} u_n \retard^n \delta \eqsp,
 \end{equation}
 cette série étant absolution convergente car, pour tout $N \in \nset$,
 \[
-\norm{\sum_{|n|\geq N} u_n S^n \delta}[p] \leq \sum_{|n|\geq N} |u_n| \norm{S^n \delta}[p] = \sum_{|n| \geq N} |u_n| \to_{N \to \infty} 0 \eqsp.
+\norm{\sum_{|n|\geq N} u_n \retard^n \delta}[p] \leq \sum_{|n|\geq N} |u_n| \norm{\retard^n \delta}[p] = \sum_{|n| \geq N} |u_n| \to_{N \to \infty} 0 \eqsp.
 \]
 L'opérateur $T$ étant linéaire et continue sur $\plp$, nous avons donc
 \begin{equation}
 \label{eq:action-operateur}
-T(u)= \sum_{n \in \zset} u_n T(S^n \delta) \eqsp.
+T(u)= \sum_{n \in \zset} u_n T(\retard^n \delta) \eqsp.
 \end{equation}
-En effet, en appelant $u^N= \sum_{|n|\leq N} u_n S^n \delta$ la suite tronquée, la linéarité de l'opérateur $T$ implique que
+En effet, en appelant $u^N= \sum_{|n|\leq N} u_n \retard^n \delta$ la suite tronquée, la linéarité de l'opérateur $T$ implique que
 \[
-T(u^N)= \sum_{|n|\leq N} u_n T(S^n \delta) \eqsp.
+T(u^N)= \sum_{|n|\leq N} u_n T(\retard^n \delta) \eqsp.
 \]
 D'autre part, la continuité de $T$ implique que
 \[
 \norm{T(u) - T(u^N)}[p] \leq \opernorm{T}[p] \norm{u-u^N}[p] \to_{N \to \infty} 0 \eqsp,
 \]
-où $\opernorm{T}[p]$ est la norme opérateur de $T$. Comme $T$ est invariant par translation, nous avons $T \circ S^n= S^n \circ T$, ce qui implique que
+où $\opernorm{T}[p]$ est la norme opérateur de $T$. Comme $T$ est invariant par translation, nous avons $T \circ \retard^n= \retard^n \circ T$, ce qui implique que
 \begin{equation}
 \label{eq:action-operateur-2}
-T(u)= \sum_{n \in \zset} u_n S^n T(\delta) \eqsp.
+T(u)= \sum_{n \in \zset} u_n \retard^n T(\delta) \eqsp.
 \end{equation}
 Nous en déduisons le résultat important suivant
 \begin{theorem}
@@ -264,7 +265,7 @@ v_k= (u * h)_k \eqsp.
 Lorsque $p=1,2$, la réponse impulsionnelle du SLI $T$ est $h=T(\delta) \in \plp$; on peut donc calculer la TFtD de la réponse impulsionnelle $h$, qui est appelée la \emph{fonction de transfert}. Dans le domaine de Fourier, l'action du SLI $T$ revient à multiplier la TFtD de l'entrée $u$ par la fonction de transfert $\hat{h}= \TFA{h}$:
 \[
 \hat{v}= \hat{h} \hat{u} \eqsp.
-\]  
+\]
 
 \section{Transform\'{e}e de Fourier Discr\`{e}te ou TFD}
 La Transform\'{e}e de Fourier discr\`{e}te est la transformation de Fourier pour les signaux d\'{e}finis sur un ensemble $\{0,\ \ldots,\ N-1\}$. Les suites d\'{e}finies sur cet ensemble sont toutes sommables, born\'{e}es et d'\'{e}nergie finie (car elles sont \`{a} support fini).
@@ -275,14 +276,14 @@ $$
 U_k=\sum_{n=0}^{N-1} u_{n}\rme^{-2\rmi\pi \frac{k}{N}n}
 $$
 \end{definition}
-Notons, pour $^N \in \nset$ 
+Notons, pour $^N \in \nset$
 \begin{equation}
 \label{eq:definition-W_N}
 W_N= \rme^{2 \rmi \pi /N}
 \end{equation}
 et pour $k \in \{0,\dots,N-1\}$, le vecteur $E_k= [W_N^{k \cdot 0}, \dots, W_N^{k \cdot (N-1)}]'$.
 Nous avons pour tout $k, \ell \in \{0, \dots, N-1\}$, $E_k^H E_\ell= N \delta_{k,\ell}$ où $\delta_{k,\ell}$ est le symbole de Kronecker.
-Les vecteur $(E_0,E_1,\dots,E_{N-1})$ définissent une base orthogonale de l'espace vectoriel $\cset^N$. 
+Les vecteur $(E_0,E_1,\dots,E_{N-1})$ définissent une base orthogonale de l'espace vectoriel $\cset^N$.
 Nous avons donc, en notant $\bu= [u_0, \dots, u_{N-1}]'$, pour tout $k \in \{0,\dots,N-1\}$
 \[
 U_k = E_k^H \bu \eqsp.
@@ -316,18 +317,18 @@ p\'eriode $N$,
 \end{equation}
 Soit maintenant $m \in \zset$. Il est l\'egitime de consid\'erer, pour $m \in \zset$,
 $$
-S^m \tilde{u}_n = \tilde{u}_{n+m} = u_{ (n+m) \pmod{N} }
+\retard^m \tilde{u}_n = \tilde{u}_{n-m} = u_{ (n-m) \pmod{N} }
 $$
-Lorsque l'on applique l'op\'erateur décalage $S^m$ à la suite p\'eriodis\'ee, nous obtenons de nouveau une suite p\'eriodique de p\'eriode $N$.
+Lorsque l'on applique l'op\'erateur décalage $\retard^m$ à la suite p\'eriodis\'ee, nous obtenons de nouveau une suite p\'eriodique de p\'eriode $N$.
 On peut donc calculer la TFD de cette suite, pour tout $k \in \{0,\dots,N-1\}$, nous avons
 \begin{align*}
-\sum_{n=0}^{N-1} u_{ (n+m) \pmod{N}} W_N^{nk} &= \sum_{n=0}^{N-1} \tilde{u}_{(n+m) \pmod{N}} W_N^{nk}= \sum_{\ell=+m}^{N+m-1} \tilde{u}_{\ell} W_N^{(\ell + m)k} \eqsp.
+\sum_{n=0}^{N-1} u_{ (n-m) \pmod{N}} W_N^{nk} &= \sum_{n=0}^{N-1} \tilde{u}_{(n-m) \pmod{N}} W_N^{nk}= \sum_{\ell=-m}^{N-m-1} \tilde{u}_{\ell} W_N^{(\ell + m)k} \eqsp.
 \end{align*}
-Comme  $W_N^{(\ell +m)k}= W_N^{mk} W_N^{\ell k}$, nous avons
+Comme  $W_N^{(\ell -m)k}= W_N^{mk} W_N^{\ell k}$, nous avons
 \[
-\sum_{n=0}^{N-1} u_{ (n+m) \pmod{N}} W_N^{nk} = W_N^{mk} \sum_{\ell=+m}^{N+m-1} \tilde{u}_{\ell} W_N^{\ell k}= W_N^{mk} \hat{u}_k \eqsp,
+\sum_{n=0}^{N-1} u_{ (n-m) \pmod{N}} W_N^{nk} = W_N^{mk} \sum_{\ell=-m}^{N-m-1} \tilde{u}_{\ell} W_N^{\ell k}= W_N^{mk} \hat{u}_k \eqsp,
 \]
-où nous avons utilis\'e que la suite $v_\ell= \tilde{u}_{\ell} W_N^{\ell k}$ est $N$-p\'eriodique et pour tout suite $w$ $N$-p\'eriodique et tout $m \in \zset$, $\sum_{\ell=+m}^{N+m-1} w_{\ell}= \sum_{\ell=0}^{N-1} w_\ell$. Les propriétés de la TFD vis-à-vis des translations et des convolutions doivent donc être adaptées.
+où nous avons utilis\'e que la suite $v_\ell= \tilde{u}_{\ell} W_N^{\ell k}$ est $N$-p\'eriodique et pour tout suite $w$ $N$-p\'eriodique et tout $m \in \zset$, $\sum_{\ell=-m}^{N-m-1} w_{\ell}= \sum_{\ell=0}^{N-1} w_\ell$. Les propriétés de la TFD vis-à-vis des translations et des convolutions doivent donc être adaptées.
 
 
 
@@ -385,18 +386,24 @@ o\`{u} $\hat{u}$ est la TFtD de $u$. la derni\`{e}re \'{e}galit\'{e} provient du
 \end{figure}
 
 \subsubsection{Estimation d'une fr\'equence}
-On se donne une onde $u_{n}=e^{2i\pi 1/0n}$ On voudrait d\'{e}terminer la fr\'{e}quence $\nu_{0}$ on ne se donnant le droit que d'observer les \'{e}chantillons $u_{0}, \ldots, u_{N}$. Pourquoi une telle contrainte? Dans un signal, musical par exemple, le contenu fr\'{e}quentiel \'{e}volue au cours du temps. \`{A} chaque changement de note, le signal contient des ondes de fr\'{e}quences diff\'{e}rentes. Si l'on veut, par exemple, transcrire un morceau de musique en notes, on ne peut pas se permettre une observation sur une trop longue p\'{e}riode car cela aurait pour effet de m\'{e}langer entre elles diff\'{e}rentes notes. La m\^{e}me chose vaut pour l'analyse d'un signal de parole o\`{u} l'on risque la confusion entre diff\'{e}rents phon\`{e}mes.
+Soit $u_{n}=e^{2i\pi 1/0n}$ On voudrait d\'{e}terminer la fr\'{e}quence $\nu_{0}$ en ne se donnant le droit que d'observer les \'{e}chantillons $u_{0}, \ldots, u_{N}$. Pourquoi une telle contrainte? Dans un signal, musical par exemple, le contenu fr\'{e}quentiel \'{e}volue au cours du temps. \`{A} chaque changement de note, le signal contient sinusoïdes de fr\'{e}quences diff\'{e}rentes. Si l'on veut, par exemple, transcrire un morceau de musique en notes, on ne peut pas se permettre une observation sur une trop longue p\'{e}riode car cela aurait pour effet de m\'{e}langer entre elles diff\'{e}rentes notes. La m\^{e}me chose vaut pour l'analyse d'un signal de parole o\`{u} l'on risque la confusion entre diff\'{e}rents phon\`{e}mes.
 
-On note $u^{T}$ (pour `` $u$ Tronqu\'{e}e'') la suite d\'{e}finie sur $\zset$ \'{e}gale \`{a} $u$ sur $\{0,\ \ldots,\ N-1\}$ et nulle ailleurs. Ce sont les seules valeurs que nous nous donnons le droit d'utiliser pour d\'{e}terminer $\nu_{0}$. Sa TFtD est
+On note $u^{T}$ la suite d\'{e}finie sur $\zset$ \'{e}gale \`{a} $u$ sur $\{0,\ \ldots,\ N-1\}$ et nulle ailleurs. Ce sont les seules valeurs que nous nous donnons le droit d'utiliser pour d\'{e}terminer $\nu_{0}$. Sa TFtD est donnée pour tout 
+$\nu\in \coint{1/2,1/2}$ par
+$$ 
+\TFA{u^{T}}(\nu)=\rme^{-\rmi \pi (N-1)(\nu- \nu_0)} \frac{\sin(N\pi(\nu-\nu_{0}))}{sin(\pi(\nu-\nu_{0}))}
 $$
-\forall\nu\in \coint{-\frac{1}{2},\ \frac{1}{2}},\ \TFA{u^{T}}(\nu)=\rme^{-\rmi \pi.(N-1)(1/-1/0)^{sin(N\pi(\nu-\nu_{0}))}}
-$$
-$$
-sin(\pi(\nu-\nu_{0}))
-$$
-Le module de $\mathcal{F}(u^{T})$ et donn\'{e} \`{a} la figure 2.6.
+Le module de $\mathcal{F}(u^{T})$ et donn\'{e} \Cref{fig;figure2-6}
 
-Si on calcule une TFD d'ordre $M\geq N$, on sait que l'on va \'{e}chantillonner la TFtD de $u^{T}$ aux point $k/M$. Deux TFD d'ordres diff\'{e}rents sont donn\'{e}es aux figures 2.7 et 2.8.
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.6\textwidth]{Figures/Figure2-6}\\
+  \caption{La TFD d'ordre 30 de l'harmonique complexe tronqu\'{e}e superpos\'{e}e \`{a} la TFtD. Le maximum de la TFD est atteint pour $k=4$, soit une fr\'{e}quence de $4/30=0$, 1333 et une erreur d'estimation de 0,01}\label{fig:figure2-6}
+\end{figure}
+
+
+Si on calcule une TFD d'ordre $M\geq N$, on sait que l'on va \'{e}chantillonner la TFtD de $u^{T}$ aux point $k/M$. Deux TFD d'ordres diff\'{e}rents sont donn\'{e}es \Cref{fig:figure2-7} et \Cref{fig:figure2-8}.
 
 
 Avec une $TFD$ d'ordre $M$ on peut estimer la fr\'{e}quence de l'harmonique complexe $\nu_{0}$ avec une pr\'{e}cision d'au moins $1/M$.
@@ -442,7 +449,7 @@ On constate qu'il faut au moins avoir $|\nu_{0}-\nu_{1}|>1/N$ pour pouvoir disti
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=0.6\textwidth]{Figures/Figure2-10}\\
-  \caption{TFtD de la somme des deux ondes tronqu\'{e}es \`{a} 30 \'{e}chantillons (figure 2.9). On ne peut pas distinguer la superposition des deux harmoniques complexes dans le signal.}\label{fig:figure2-10}
+  \caption{TFtD de la somme des deux ondes tronqu\'{e}es \`{a} 30 \'{e}chantillons (\Cref{fig:figure2-9}). On ne peut pas distinguer la superposition des deux harmoniques complexes dans le signal.}\label{fig:figure2-10}
 \end{figure}
 
 \begin{figure}
@@ -457,7 +464,7 @@ On constate qu'il faut au moins avoir $|\nu_{0}-\nu_{1}|>1/N$ pour pouvoir disti
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=0.6\textwidth]{Figures/Figure2-12}\\
-  \caption{TFtD de la somme des deux ondes tronqu\'{e}es \`{a} 60 \'{e}chantillons (figure 2.11). Cette fois on distingue bien les deux ondes. Il a fallu prendre un nombre d'\'{e}chantillons $N$ sup\'{e}rieur \`{a} $1/(0.13-0.1)=33.3$ pour arriver \`{a} distinguer les deux.}\label{fig:figure2-12}
+  \caption{TFtD de la somme des deux ondes tronqu\'{e}es \`{a} 60 \'{e}chantillons (\Cref{fig:figure2-11}). Cette fois on distingue bien les deux ondes. Il a fallu prendre un nombre d'\'{e}chantillons $N$ sup\'{e}rieur \`{a} $1/(0.13-0.1)=33.3$ pour arriver \`{a} distinguer les deux.}\label{fig:figure2-12}
 \end{figure}
 
 
@@ -582,3 +589,4 @@ Le spectrogramme est le module au carr\'{e} de la TFCT $((n,\ \nu)\mapsto|U(n,\ 
   \caption{Une colonne du spectrogramme. C'est donc le contenu fr\'{e}quentiel local autour d'un certain instant. Le pic le plus pro\'{e}minent est pour la fr\'{e}quence $736$ Hz, qui correspond \`{a} peu pr\`{e}s \`{a} un Fa di\`{e}se.}\label{fig:figure2-20}
 \end{figure}
 
+i

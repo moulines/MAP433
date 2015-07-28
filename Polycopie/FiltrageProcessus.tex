@@ -489,12 +489,12 @@ en notant que\,:
 \]
 Remarquons que la solution donn\'ee par \eqref{AR1sol} peut \^{e}tre obtenu
 en utilisant le d\'eveloppement la fraction rationnelle $\psi(z)=(1-\phi_1
-z)^{-1}$ en s\'erie enti\`ere
+z^{-1} )^{-1}$ en s\'erie enti\`ere
 \[
-  \psi(z)=\frac{1}{1-\phi_1 z} = \sum_{k=0}^{+\infty} \phi_1^k z^k
+  \psi(z)=\frac{1}{1-\phi_1 z^{-1}} = \sum_{k=0}^{+\infty} \phi_1^k z^{-k}
 \]
-convergeant sur le disque $\{ z \in \Cset \eqsp: |z| < |\phi_1|^{-1}\}$.
-Ce lien n'a rien de fortuit, comme nous le verrons  dans le paragraphe \ref{sec:cas_general}.
+convergeant sur le disque $\ensemble{z \in \Cset}{|\phi_1| < |z|}$.
+Ce lien n'a rien de fortuit, comme nous le verrons  dans le \Cref{sec:cas_general}.
 \begin{figure}
 \centering
   \includegraphics[width=0.6\textwidth]{Figures/chronoar1}\\
@@ -567,16 +567,16 @@ uniquement du ``futur'' du processus $(Z_t)$.
 
 Remarquons que, comme pr\'ec\'edemment, la solution donn\'ee par \eqref{eq:ar1_sol>1} est obtenu
 en choisissant le d\'eveloppement fraction rationnelle $\psi(z)=(1-\phi_1
-z)^{-1}$
+z^{-1})^{-1}$
 \[
-  \psi(z)=\frac{1}{1-\phi_1 z} = \frac{-(\phi_1 z)^{-1}}{1-(\phi_1
-    z)^{-1}}=-(\phi_1 z)^{-1}\sum_{k=0}^{+\infty} (\phi_1 z)^{-k}
-=-\sum_{k\geq 1}\phi_1^{-k} z^{-k}\;,
+  \psi(z)=\frac{1}{1-\phi_1 z^{-1}} = \frac{-(\phi_1 z^{-1})^{-1}}{1-(\phi_1
+    z^{-1})^{-1}}=-(\phi_1 z^{-1})^{-1}\sum_{k=0}^{+\infty} (\phi_1 z^{-1})^{-k}
+=-\sum_{k\geq 1}\phi_1^{-k} z^{k}\;,
 \]
-qui converge sur la couronne $ \{ z \in \Cset \eqsp, |z| > |\phi_1|^{-1} \}$. Nous remarquons que
+qui converge sur le disque $ \ensemble{ z \in \Cset}{|z| < |\phi_1|}$. Nous remarquons que
 nous avons choisi dans les deux cas $|\phi_1| < 1$ et $|\phi_1| > 1$ les d\'eveloppements convergeant
-dans des domaines incluant le cercle unit\'e, $\{ z \in \Cset, |z|=1 \}$.
-Ce lien est expliqu\'e pr\'ecis\'ement dans le paragraphe \ref{sec:cas_general}.
+dans des domaines incluant le cercle unit\'e, $\ensemble{ z \in \Cset}{ |z|=1 }$.
+Ce choix est justifié pr\'ecis\'ement dans le paragraphe \ref{sec:cas_general}.
 
 %===============================================
 \subsubsection{Cas $|\phi_1| = 1$}
@@ -671,13 +671,13 @@ de type $\operatorname{F}_\alpha$.
   telles que : $\sum_{k\in\Zset}|\alpha_k|<\infty$ et
   $\sum_{k\in\Zset}|\beta_k|<\infty$.  Si $X\in\cS\espaceproba$ alors
 $$
-\filtop{\alpha}[\filtop{\beta}X]=[\filtop{\alpha\beta}]X\;, \textrm{
+\filtop{\alpha} \circ \filtop{\beta}X = \filtop{\alpha * \beta} X\;, \textrm{
   dans } L^2\espaceproba\;,\;
 $$
-o\`u $(\alpha\beta)_k=\sum_{j\in\mathbb{Z}}\alpha_j\beta_{k-j}$.
+o\`u $(\alpha*\beta)_k=\sum_{j\in\mathbb{Z}}\alpha_j\beta_{k-j}$ est la convolution discrète des suites $\alpha$ et $\beta$.
 \end{lemma}
 
- \begin{proof}\smartqed
+ \begin{proof}
  Soit $Y=\filtop{\beta}X$. D'apr\`es le th\'eor\`eme \ref{theo:filtragepassl_stat},
 puisque $\sum_k|\beta_k|<\infty$, $Y$ est dans $\cS\espaceproba$.
 Pour les m\^{e}mes raisons, $\filtop{\alpha}Y$ est lui aussi dans $\cS\espaceproba$.
@@ -718,14 +718,14 @@ $Y$ est dans $\cS\espaceproba$ et $\sum_{k\in\Zset}|\alpha_k|<\infty$,  on a
 D'autre part, en utilisant l'in\'egalit\'e de Cauchy-Schwarz, le fait que
 $X$ est dans $\cS\espaceproba$ et l'absolue sommabilit\'e de $(\alpha_k)$
 et $(\beta_k)$ :
-\begin{multline}\label{eq:dec_filtre4}
-\|Z_{t,m}-Z_{t,m,n}\|_2^2=\left\|\sum_{|j|\leq
+\begin{align}\label{eq:dec_filtre4}
+\|Z_{t,m}-Z_{t,m,n}\|_2^2&=\left\|\sum_{|j|\leq
   m}\alpha_j(\sum_{|k|>n}\beta_k X_{t-j-k})\right\|_2^2\\
-\leq \PE{X_0^2}\left(\sum_{-m\leq j,j'\leq m}|\alpha_j| |\alpha_{j'}|\right)
+&\leq \PE{X_0^2}\left(\sum_{-m\leq j,j'\leq m}|\alpha_j| |\alpha_{j'}|\right)
 \left(\sum_{|k|,|k'|>n} |\beta_k||\beta_{k'}|\right)\\
-\leq \PE{X_0^2} \left(\sum_{j\in\Zset}|\alpha_j|\right)^2
+&\leq \PE{X_0^2} \left(\sum_{j\in\Zset}|\alpha_j|\right)^2
 \left(\sum_{|k|>n}|\beta_k|\right)^2\to 0\;,\; m,n\to\infty\;.
-\end{multline}
+\end{align}
 En utilisant (\ref{eq:dec_filtre2}), (\ref{eq:dec_filtre3}) et
 (\ref{eq:dec_filtre4}), on obtient que le premier terme du membre de
 droite de (\ref{eq:dec_filtre1}) tend vers 0 lorsque $m$ et $n$
@@ -746,10 +746,14 @@ preuve avec (\ref{eq:dec_filtre1}).
   =
   Z_t + \theta_1 Z_{t-1} + \cdots + \theta_q Z_{t-q}\;,
 \end{equation} o\`u $Z_t \sim \BB(0,\sigma^2)$ et les
-$\phi_j$ et les $\theta_j$ sont des nombres complexes. On pose
-$\phi(z)= 1 - \phi_1 z - \dots - \phi_p z^p$ et $\theta(z)= 1 +
-\theta_1 z + \dots + \theta_p z^p$. On suppose que $\phi(z)$ et
-$\theta(z)$ n'ont pas de z\'eros communs. Alors l'\'equation
+$\phi_j$ et les $\theta_j$ sont des nombres complexes. On note $\phi(z)$ et $\theta(z)$ les transformées en $z$
+\begin{align}
+\label{eq:tz-phi}
+\phi(z)&= 1 - \phi_1 z^{-1} - \dots - \phi_p z^{-p} \\
+\label{eq:tz-theta}
+\theta(z)&= 1 + \theta_1 z^{-1} + \dots + \theta_q z^{-q}  \eqsp.
+\end{align}
+On suppose que $\phi(z)$ et $\theta(z)$ n'ont pas de z\'eros communs. Alors l'\'equation
 (\ref{eq:recurrenceARMApq}) admet une solution stationnaire au
 second ordre si et seulement si le polyn\^ome $\phi(z) \neq 0$ pour
 $|z| = 1$. Cette solution est unique et a pour expression~:
@@ -759,17 +763,26 @@ $|z| = 1$. Cette solution est unique et a pour expression~:
 \end{equation}
 o\`u les $(\psi_k)$ sont donn\'es par les coefficients du d\'eveloppement
 \begin{equation}\label{eq:dev_laurent_statio}
-\frac{\theta(z)}{\phi(z)}=\sum_{k\in\Zset}\psi_k z^k\;,
+\frac{\theta(z)}{\phi(z)}=\sum_{k\in\Zset}\psi_k z^{-k}\;,
 \end{equation}
-convergeant dans la couronne $\left\{ z\in\cset \eqsp,  \delta_1<|z|<\delta_2 \right\}$, o\`u $\delta_1<1$
-et $\delta_2>1$ sont d\'efinis par
-$\delta_1=\max\{ z \in \cset, | z | < 1, \phi(z) =0 \}$
+convergeant dans la couronne
+\begin{equation}
+\label{eq:RC-psi}
+\ensemble{ z\in\cset}{\delta_1<|z|<\delta_2} \eqsp,
+\end{equation}
+o\`u $\delta_1<1$ et $\delta_2>1$ sont d\'efinis par
+\begin{equation}
+\label{eq:definition-delta1}
+\delta_1=\max\{ z \in \cset, | z | < 1, \phi(z) =0 \}
+\end{equation}
 et
-$\delta_2=\min\{ z \in \cset, |z| > 1, \phi(z) = 0 \}.$
+\begin{equation}
+\label{eq:definition-delta2}
+\delta_2=\min \{ z \in \cset, |z| > 1, \phi(z) = 0 \} \eqsp,
+\end{equation}
 \end{theorem}
-
-
-\begin{proof}\smartqed
+avec la convention $\max \emptyset = 0$ et $\min \emptyset = \infty$.
+\begin{proof}
 Nous commen\c{c}ons par \'enoncer et prouver un lemme utile pour la preuve
 du th\'eor\`eme \ref{theo:ARMApq}.
 %\emnote{il faut se faire une religion ici sur la fa\c{c}on de noter les polynomes, pour le moment on est plut\^ot
@@ -779,9 +792,9 @@ du th\'eor\`eme \ref{theo:ARMApq}.
   $\phi(z) \neq 0$ pour $|z|=1$ et $\phi(0)=1$ alors la fraction rationnelle
   $\theta(z)/\phi(z)$ est d\'eveloppable en s\'erie de Laurent, c'est-\`a-dire
 $$
-\frac{\theta(z)}{\phi(z)}=\sum_{k\in\Zset} c_k z^k\;,
+\frac{\theta(z)}{\phi(z)}=\sum_{k\in\Zset} c_k z^{-k}\;,
 $$
-o\`u la s\'erie $\sum_{k \in \zset} c_k z^k$ est uniform\'ement convergente dans la
+o\`u la s\'erie $\sum_{k \in \zset} c_k z^{-k}$ est uniform\'ement convergente dans la
 couronne d\'efinie par
 $\left\{ z\in\cset \eqsp, r_1<|z|<r_2 \right\}$, o\`u
 \begin{align*}
@@ -791,8 +804,8 @@ r_2&=\min\{ |z|~:~ z  \in \cset, |z| > 1, \,\phi(z) = 0 \}\; .
 avec la convention $\max(\emptyset)=0$ et $\min(\emptyset)=\infty$.
 
 Le cas $r_1=0$ correspond \`a $\phi(z)\neq0$ pour tout complexe $z$ tel que
-$|z|\leq1$. Dans ce cas on a $c_k=0$ pour tout $k<0$.
-Sinon, pour tout $\eta\in(0,r_1)$, $c_k=O(\eta^{-k})$ quand $k\to-\infty$.
+$|z|\leq1$. Dans ce cas on a $c_k=0$ pour tout $k>0$.
+Sinon, pour tout $\eta\in(0,r_1)$, $c_k=O(\eta^{-k})$ quand $k\to +\infty$.
 
 Le cas $r_2=\infty$ correspond \`a $\phi(z)\neq0$ pour tout complexe $z$ tel que
 $|z|\geq1$. Dans ce cas on a $c_k=0$ pour tout $k>\max(-1,\mathrm{deg}(\theta)
@@ -808,7 +821,7 @@ quand $k\to\infty$.
   ou \'egale \`a $r$ et $a$ est une constante.  On \'ecrit :
 \begin{align*}
 \textrm{si }|z_0|<1,& \;
-\frac{1}{(z-z_0)^r}=\frac{z^{-r}}{(1-z_0/z)^r},\;
+\frac{1}{(1-z_0 z^{-1})^r}=\frac{z^{-r}}{(1-z_0/z)^r},\;
 \textrm{lorsque }|z_0|<|z|\;,\\
 \textrm{si }|z_0|>1,& \;
 \frac{1}{(z-z_0)^r}=\frac{(-z_0)^{-r}}{(1-z/z_0)^r},\;
@@ -849,16 +862,19 @@ $(0,r_1)$ ou $(0,1/r_2)$, respectivement.
 
 \textbf{Retour \`a la preuve du th\'eor\`eme \ref{theo:ARMApq}}\\
 
-Supposons que $\phi(z)\neq 0$ pour $|z|= 1$, alors d'apr\`es le lemme
-\ref{lem:dev_laurent} il existe $r_1<1$ et $r_2>1$ tels que
+Supposons que $\phi(z)\neq 0$ pour $|z|= 1$, alors d'apr\`es
+le \Cref{lem:dev_laurent} il existe $r_1<1$ et $r_2>1$ tels que
 \begin{equation}\label{eq:psi_arma}
-\psi(z)=\frac{\theta(z)}{\phi(z)}=\sum_{k=-\infty}^{\infty} \psi_k z^{k},\; r_1<|z|<r_2\;,
+\psi(z)=\frac{\theta(z)}{\phi(z)}=\sum_{k=-\infty}^{\infty} \psi_k z^{-k},\; r_1<|z|<r_2\;,
 \end{equation}
 o\`u la suite $(\psi_k)_{k\in\Zset}$ v\'erifie $\sum_k |\psi_k|<\infty$.
 V\'erifions que le processus $(X_t)$ d\'efini par : $X_t=\sum_{k\in\Zset} \psi_k Z_{t-k}=(\filtop{\psi} Z)_t$, pour tout
 $t\in\Zset$ est une solution stationnaire de (\ref{eq:recurrenceARMApq}). D'apr\`es la d\'efinition
-\ref{def:proc_lin}, $(X_t)$ est stationnaire. De plus, d'apr\`es le lemme \ref{lem:composition},
-$\filtop{\phi}[\filtop{\psi} Z]=\filtop{\phi\psi}Z=\filtop{\theta}Z$, ce qui montre l'existence d'une solution
+\ref{def:proc_lin}, $(X_t)$ est stationnaire. De plus, d'apr\`es le \Cref{lem:composition},
+$$
+\filtop{\phi} \circ \filtop{\psi} Z =\filtop{\phi*\psi}Z=\filtop{\theta}Z \eqsp,
+$$
+ce qui montre l'existence d'une solution
 stationnaire \`a \eqref{eq:recurrenceARMApq}.
 
 D'autre part, si $X$ est un processus stationnaire au second ordre solution de
@@ -866,8 +882,8 @@ D'autre part, si $X$ est un processus stationnaire au second ordre solution de
 \begin{equation}\label{eq:arma_F}
 \filtop{\phi} X=\filtop{\theta}Z\;.
 \end{equation}
-Comme $\phi(z)\neq 0$ pour $|z|= 1$, alors d'apr\`es le lemme
-\ref{lem:dev_laurent} il existe $r_1<1$ et $r_2>1$ tels que :
+Comme $\phi(z)\neq 0$ pour $|z|= 1$, alors d'apr\`es le
+\Cref{lem:dev_laurent} il existe $r_1<1$ et $r_2>1$ tels que :
 $$
 \xi(z)=\frac{1}{\phi(z)}=\sum_{k\in\Zset} \xi_k z^{k},\; r_1<|z|<r_2\;,
 $$
@@ -967,15 +983,15 @@ Soit l'\'equation r\'ecurrente~:
   X_t - \phi_1 X_{t-1} - \cdots - \phi_p X_{t-p}
   =
   Z_t + \theta_1 Z_{t-1} + \cdots + \theta_q Z_{t-q}
-\end{equation} o\`u $Z_t \sim \BB(0,\sigma^2)$ et les
-$\phi_j$ et les $\theta_j$ sont des nombres complexes. On pose
-$\phi(z)= 1 - \phi_1 z - \dots - \phi_p z^p$ et $\theta(z)= 1 +
-\theta_1 z + \dots + \theta_p z^p$. On suppose que $\phi(z)$ et
+\end{equation} o\`u $Z_t \sim \BB(0,\sigma^2)$ et
+$\{ \phi_j \}_{j = 1}^p$ et $\{ \theta_j \}_{j=1}^q$ sont des nombres complexes. On pose
+$\phi(z)= 1 - \phi_1 z^{-1} - \dots - \phi_p z^{-p}$ et $\theta(z)= 1 +
+\theta_1 z^{-1} + \dots + \theta_p z^{-p}$. On suppose que $\phi(z)$ et
 $\theta(z)$ n'ont pas de z\'eros communs. Alors l'\'equation
 (\ref{eq:recurrenceARMApqcausal})
 fournit une repr\'esentation causale de la solution stationnaire au second ordre
 si et seulement si le polyn\^ome $\phi(z)
-\neq 0$ pour $|z| \leq 1$. Cette solution a pour
+\neq 0$ pour $|z| \geq 1$. Cette solution a pour
 expression~:
 \begin{equation}
  \label{eq:solutionARMApq_causal}
@@ -983,9 +999,9 @@ expression~:
 \end{equation}
 o\`u la suite $(\psi_k)$ est donn\'ee par les coefficients du d\'eveloppement
 $$
-\frac{\theta(z)}{\phi(z)}=\sum_{k=0}^{\infty} \psi_k z^k
+\frac{\theta(z)}{\phi(z)}=\sum_{k=0}^{\infty} \psi_k z^{-k}
 $$
-qui converge dans $\{z\in\cset\;,\;|z|\leq 1\}.$
+qui converge dans la couronne $\{z\in\cset\;,\;|z|\geq 1\}.$
 \end{theorem}
 \begin{proof}\smartqed
 Le th\'eor\`eme~\ref{theo:ARMApq} montre l'existence et l'unicit\'e
@@ -995,7 +1011,7 @@ de la solution de l'\'equation~(\ref{eq:recurrenceARMApqcausal}) et v\'erifie
 \end{equation*}
 o\`u la suite $(\psi_k)$ est caract\'eris\'ee par l'\'equation
 $$
-\frac{\theta(z)}{\phi(z)}=\sum_{k=0}^{\infty} \psi_k z^k,\quad z\in\cset,\,|z|=1\;.
+\frac{\theta(z)}{\phi(z)}=\sum_{k=0}^{\infty} \psi_k z^{-k},\quad z\in\cset,\,|z|=1\;.
 $$
 Si maintenant $\phi(z)\neq 0$ pour $|z|\leq 1$, alors, d'apr\`es le
  lemme \ref{lem:dev_laurent}, comme $r_1=0$, on a $\psi_k=0$ pour $k<0$
@@ -1054,7 +1070,7 @@ expression~:
 \end{equation}
 o\`u la suite $(\pi_k)$ est donn\'ee par les coefficients du d\'eveloppement
 $$
-\frac{\phi(z)}{\theta(z)}=\sum_{k=0}^{\infty} \pi_k z^k
+\frac{\phi(z)}{\theta(z)}=\sum_{k=0}^{\infty} \pi_k z^{-k}
 $$
 qui converge dans $\{z\in\cset\;,\;|z|\leq 1\}.$
 % Soit $X_t$ un processus ARMA$(p,q)$. On suppose que $\phi(z)$ et

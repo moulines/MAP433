@@ -10,7 +10,7 @@ U(z)=\sum_{n=-\infty}^{\infty} u_n z^{-n}
 \end{equation}
 o\`{u} $z$ est une variable complexe.
 \end{definition}
-On appelle encore \eqref{eq:definition-transformee} la transform\'{e}e directe, car c'est la relation qui permet d'obtenir $U(z)$ \`{a} partir de $\sequence{u}[n][\zset]$ . L'op\'{e}ration inverse porte le nom de transformation inverse.
+On appelle encore \eqref{eq:definition-transformee} la transform\'{e}e directe, car c'est la relation qui permet d'obtenir $U(z)$ \`{a} partir de $\sequence{u}[n][\zset]$. Cette transfomée est bilatérale. L'op\'{e}ration inverse porte le nom de transformation inverse.
 
 Comme cette transformation est une s\'{e}rie infinie, elle n'existe que pour les valeurs de $z$ pour lesquelles cette s\'{e}rie converge. La r\'{e}gion de convergence (RC) est l'ensemble des valeurs de $z$ pour lesquelles la s\'{e}rie prend une valeur finie. D\'{e}s lors, \emph{toute transform\'{e}e en $z$} doit \^{e}tre accompagnée de la région pour laquelle elle converge. Pour d\'{e}terminer la r\'{e}gion de convergence, on utilise le crit\`{e}re de Cauchy sur la convergence des s\'{e}ries de puissance. La s\'{e}rie $ \sum_{n=0}^{\infty} v_n$
 converge si
@@ -131,12 +131,12 @@ o\`{u} le contour $\Gamma$ peut \^{e}tre un cercle de rayon plus grand que l'uni
 $$
 r_{1}=\lim_{z\rightarrow 1}[z^{n}]=1
 $$
-On a donc $u_n=1$ pour tout $n \geq 0$. En ce qui concerne $n<0$, on a cette fois un autre p\^{o}le d'ordre $(-n)$ en $z=0$. 
+On a donc $u_n=1$ pour tout $n \geq 0$. En ce qui concerne $n<0$, on a cette fois un autre p\^{o}le d'ordre $(-n)$ en $z=0$.
 L'application de la formule du r\'{e}sidu donne, pour $q=-n$,
 $$
  r_{q}=\lim {z\rightarrow 0} \frac{1}{(q-1)!}\frac{\rmd ^{q-1}}{\rmd z^{q-1}}[\frac{1}{z-1}]=-1
 $$
-autre r\'{e}sidu vaut toujours 1 et la somme donne donc $0$. 
+autre r\'{e}sidu vaut toujours 1 et la somme donne donc $0$.
 Pour \'{e}vi- ter l'\'{e}valuation fastidieuse du r\'{e}sidu en un p\^{o}le d'ordre non \'{e}gal \`{a} un, on peut recourir \`{a} un changement de variable $w=1/z$. On \`{a} d\`{e}s lors que le domaine de convergence devient $|w|<1$, et l'int\'{e}grale \`{a} \'{e}valuer devient
 \begin{align*}
 u_n\ &=\ \frac{1}{2\pi j}\oint_{\Gamma}\frac{z^{n}}{z-1}\rmd  z \\
@@ -182,7 +182,7 @@ des polyn\^{o}mes en $z^{-1}$ et non pas en $z$.
 \begin{example}
 Consid\'{e}rons la transform\'{e}e donn\'{e}e par
 $$
-U(z)=\frac{1}{1-3z^{-1}+2z^{-2}} 
+U(z)=\frac{1}{1-3z^{-1}+2z^{-2}}
 $$
 pour $|z|>2$. Comme nous consid\'{e}rons que la variable est $z^{-1}$, le degr\'{e} du num\'{e}rateur est bien inf\'{e}rieur \`{a} celui du d\'{e}nominateur.
 Les p\^{o}les sont donn\'{e}s par $z^{-1}=1$ et $z^{-1}=0.5$. On recherche donc une d\'{e}composition en fractions simples du type
@@ -226,9 +226,9 @@ $$
 alors
 \begin{align*}
 U(z)\ &=\ \sum_{n=-\infty}^{\infty} u_n z^{-n} =\ a\ \sum_{n=-\infty}^{\infty}x_{n} z^{-n}+b\sum_{n=-\infty}^{\infty} y_n z^{-n} \\
-&=\ a\ X(z)+bY(z) 
+&=\ a\ X(z)+bY(z)
 \end{align*}
-La r\'{e}gion de convergence est au moins l'intersection des r\'{e}gions associ\'{e}es \`{a} $X(z)$ et $Y(z)$ car la combinaison lin\'{e}aire peut introduire des z\'{e}ros qui com- pensent certains p\^{o}les.
+La r\'{e}gion de convergence est au moins l'intersection des r\'{e}gions associ\'{e}es \`{a} $X(z)$ et $Y(z)$ car la combinaison lin\'{e}aire peut introduire des z\'{e}ros qui compensent certains p\^{o}les.
 
 \subsubsection{D\'{e}calage et transform\'{e}e bilat\'{e}rale}
 Soit
@@ -242,9 +242,9 @@ V(z) &=\ \sum_{n=-\infty}^{\infty} v_n z^{-n} \\
      &=\ \sum_{m=-\infty}^{\infty}u_n z^{-(m+n_{0})} \\
      &=\ z^{-n_{0}} U(z)
 \end{align*}
-e domaine de convergence est le m\^{e}me celuide $U(z)$ sauf que si $n_{0}$ est positif (resp. n\'{e}gatif), on a un p\^{o}le en $0$ (resp. $ z\rightarrow\infty$). Il peut y avoir des compensations de z\'{e}ros ou p\^{o}les. 
+e domaine de convergence est le m\^{e}me celuide $U(z)$ sauf que si $n_{0}$ est positif (resp. n\'{e}gatif), on a un p\^{o}le en $0$ (resp. $ z\rightarrow\infty$). Il peut y avoir des compensations de z\'{e}ros ou p\^{o}les.
 
-Multiplier une transform\'{e}e en $z$ par $z^{-1}$ revient donc \`{a} retarder la suite d'une unit\'{e} (p\'{e}riode d'\'{e}chantillonnage). On se r\'{e}f\`{e}re souvent \`{a} $z^{-1}$ comme op\'{e}rateur de retard unit\'{e}. 
+Multiplier une transform\'{e}e en $z$ par $z^{-1}$ revient donc \`{a} retarder la suite d'une unit\'{e} (p\'{e}riode d'\'{e}chantillonnage). On se r\'{e}f\`{e}re souvent \`{a} $z^{-1}$ comme op\'{e}rateur de retard unit\'{e}.
 
 La propri\'{e}t\'{e} de d\'{e}calage permet de traiter les \'{e}quations aux diff\'{e}rences vues pr\'{e}c\'{e}demment. A partir de
 $$
@@ -252,15 +252,15 @@ v_n = u_n - \sum_{k=1}^p b_k u_{n-k}
 $$
 on trouve par transformation en $z$,
 \begin{align*}
-V(z) &=\ U(z)- \sum_{k=1}^p b_{k}z^{-k}V(z) 
+V(z) &=\ U(z)- \sum_{k=1}^p b_{k}z^{-k}V(z)
 \end{align*}
-ce qui implique qye 
+ce qui implique qye
 \[
 V(z) =\frac{U(z)}{1+ \sum_{k=1}^p b_{k}z^{-k}}
 \]
 Il faut faire attention toutefois avec ce calcul "formel" que les régions de convergence de $U(z)$ et de $1/ (1 + \sum_{k=1}^p b_k z^{-k})$ soient compatibles. Nous reviendrons sur cet aspect plus loin dans l'exposé.
-%\subsubsection{D\'{e}calage et transform\'{e}e unilat\'{e}rale}
-%Dans le cas unilat\'{e}ral, il faut \^{e}tre plus prudent dans ce que l'on \'{e}crit. En effet, la transform\'{e}e unilat\'{e}rale est d\'{e}finie par 2.11. Si on pose $y(n)=x(n-1)$ , la transform\'{e}e bilat\'{e}rale est calcul\'{e}e par
+\subsubsection{D\'{e}calage et transform\'{e}e unilat\'{e}rale}
+Dans le cas unilat\'{e}ral, il faut \^{e}tre plus prudent dans ce que l'on \'{e}crit. En effet, la transform\'{e}e unilat\'{e}rale est d\'{e}finie par 2.11. Si on pose $y(n)=x(n-1)$ , la transform\'{e}e bilat\'{e}rale est calcul\'{e}e par
 %$$
 %Y_{u}(z)\ =\ \sum_{n=0}^{\infty}y(n)z^{-n}
 %$$
