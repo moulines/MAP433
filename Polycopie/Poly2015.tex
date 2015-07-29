@@ -9,8 +9,8 @@
 \usepackage[shortlabels]{enumitem}
 \usepackage[title,titletoc,header]{appendix}          % % %  appendices % % % % %
 \usepackage{ntheorem}
-\usepackage{algorithm}
-\usepackage{algorithmicx}
+%\usepackage{algorithm}
+%\usepackage{algorithmicx}
 
 
 \makeindex             % used for the subject index
@@ -53,6 +53,13 @@
 \aliascntresetthe{proposition}
 \crefname{proposition}{proposition}{propositions}
 \Crefname{Proposition}{Proposition}{Propositions}
+
+\newaliascnt{algorithm}{theorem}
+\newtheorem{algorithm}[algorithm]{Algorithm}
+\aliascntresetthe{algorithm}
+\crefname{algorithm}{algorithm}{algorithms}
+\Crefname{Algorithm}{Algorithm}{Algorithms}
+
 
 \newaliascnt{corollary}{theorem}
 \renewtheorem{corollary}[corollary]{Corollaire}
@@ -153,4 +160,6 @@ Hilbert
 \appendix
 \part{Compl\'ements math\'ematiques}
 \include{Hilbert}
+\part{Transformée de Fourier rapide}
+\includepdf[pages=-]{FastFourierTransform}
 \end{document}

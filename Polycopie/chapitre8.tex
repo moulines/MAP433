@@ -41,7 +41,7 @@ valeurs dans un alphabet $A = \{a_k \}_{1 \leq k \leq K}$
 de taille $K$.
 L'approche probabiliste de Shannon mod\'elise
 ces s\'equences de symboles comme \'etant les valeurs prises
-par des variables al\'eatoires $X_1\, X_2\,...\, X_n$.
+par des variables al\'eatoires $X_1\, X_2\,\dots\, X_n$.
 Pour simplifier l'analyse, nous nous placerons dans le cas le
 plus simple o\`u les $X_i$ sont des variables al\'eatoires
 ind\'ependantes et de m\^eme loi. On note
@@ -51,7 +51,7 @@ p(a_k) = \PP \{ X_i = a_k \} .
 Comme les variables $X_i$ sont ind\'ependantes, la
 probabilit\'e d'une suite de valeurs est:
 \[
-p(x_1,\, ...\,, x_n) = \PP \{X_1 = x_1 ,\, ...\, , X_n = x_n \} =
+p(x_1,\, \dots\,, x_n) = \PP \{X_1 = x_1 ,\, \dots\, , X_n = x_n \} =
 \prod_{k=1}^n \PP \{X_k = x_k \} = \prod_{k=1}^n p(x_k) .
 \]
 On peut d\'efinir $p(X_1 ,\, ..\, X_n) = \prod_{k=1}^n p(X_k)$
@@ -84,7 +84,7 @@ On conna\^{\i}t alors \`a l'avance la valeur de $X_i$.
 Si les $X_i$ sont des variables al\'eatoires ind\'ependantes
 et de m\^eme probabilit\'e $p(x)$ alors
 \[
--\frac 1 n \log_2 p(X_1, ...,X_n)~~\mbox{tend vers $H$ avec
+-\frac 1 n \log_2 p(X_1, \dots,X_n)~~\mbox{tend vers $H$ avec
 une probabilit\'e $1$}
 \]
 lorsque $n$ tend vers $+\infty$.
@@ -97,11 +97,11 @@ On calcule
 \]
 Comme les $X_i$ sont ind\'ependants, les $\log_2 p(X_i)$ sont aussi
 des variables al\'eatoires ind\'ependentes.
-En appliquant la loi forte des grands nombres \cite{neveu}
+En appliquant la loi forte des grands nombres 
 on d\'emontre que
 $- \frac 1 n \sum_{i=1}^n \log_2 p(X_i)$ tend
 vers $- E\{ \log p(X_i)\} = H$ lorsque $n$ tend vers $+\infty$,
-avec probabilit\'e 1. 
+avec probabilit\'e 1.
 \end{proof}
 
 Bien qu'a priori $X_1,\,\dots\,,X_n$ puisse prendre des
@@ -111,10 +111,10 @@ qu'il y a une probabilit\'e presque $1$ pour que ce vecteur soit
 une suite typique appartenant \`a un ensemble beaucoup plus
 petit. On appelle {\it ensemble typique} $T^n_\epsilon$
 relativement \`a $p(x)$ l'ensemble des suites
-$(x_1,...,x_n) \in A^n$ telles que
+$(x_1,\dots,x_n) \in A^n$ telles que
 \begin{equation}
 \label{Typique-def}
-2^{-n (H+\epsilon)} \leq p(x_1,...,x_n) \leq
+2^{-n (H+\epsilon)} \leq p(x_1,\dots,x_n) \leq
 2^{-n (H-\epsilon)} .
 \end{equation}
 On note $|T^n_\epsilon|$ le cardinal de $T^n_\epsilon$.
@@ -129,12 +129,12 @@ suites typiques ont une probabilit\'e presque \'egale
 \item  Si $(x_1, \dots , x_n) \in T^n_\epsilon$ alors
 \begin{equation}
 \label{Typique-th1}
-H - \epsilon \leq - \frac 1 n \,\log_2 p(x_1, ... , x_n)  \leq H + \epsilon .
+H - \epsilon \leq - \frac 1 n \,\log_2 p(x_1, \dots , x_n)  \leq H + \epsilon .
 \end{equation}
 \item Lorsque $n$ est suffisamment grand
 \begin{equation}
 \label{Typique-th2}
-\PP \{(X_1, ...,X_n) \in T^n_\epsilon \} > 1 - \epsilon .
+\PP \{(X_1, \dots,X_n) \in T^n_\epsilon \} > 1 - \epsilon .
 \end{equation}
 \item  Lorsque $n$ est suffisamment grand
 \begin{equation}
@@ -154,13 +154,13 @@ se d\'eduit du th\'eor\`eme \ref{EquiTh} qui montre
 que pour tout $\epsilon>0$ et $\delta > 0$ il existe $n_0$
 tel que pour tout $n \geq n_0$
 \[
-\PP \left\{\left|  -\frac 1 n \log_2 p(X_1, ... , X_n) - H \right|
+\PP \left\{\left|  -\frac 1 n \log_2 p(X_1, \dots , X_n) - H \right|
 < \epsilon \right\} >
 1 - \delta .
 \]
 En prenant $\delta = \epsilon$ on obtient (\ref{Typique-th2}).
 
-On note $\vec x = (x_1 , ... , x_n)$,
+On note $\vec x = (x_1 , \dots , x_n)$,
 \begin{eqnarray*}
 1 &=& \sum_{\vec x \in A^n} p(\vec x) \geq \sum_{\vec x \in T^n_\epsilon} p(\vec x) \\
 & \geq & \sum_{\vec x \in T^n_\epsilon} 2^{-n(H +\epsilon)} =
@@ -172,18 +172,16 @@ ce qui d\'emontre l'in\'egalit\'e (\ref{Typique-th3})
 Lorsque $n$ est suffisament grand, on a montr\'e en
 (\ref{Typique-th2}) que
 \begin{eqnarray*}
-1 - \epsilon & < &\PP \{(X_1, ...,X_n) \in T^n_\epsilon \} \\
+1 - \epsilon & < &\PP \{(X_1, \dots,X_n) \in T^n_\epsilon \} \\
 & \leq & \sum_{x \in T^n_\epsilon} 2^{-n(H-\epsilon)} =
 |T^n_\epsilon| \, 2^{-n(H-\epsilon)} ,
 \end{eqnarray*}
 ce qui d\'emontre l'in\'egalit\'e (\ref{Typique-th3})
-\`a gauche.
 \end{proof}
-\\
-\\
-\subsection{Codage} 
+
+\subsection{Codage}
 On peut effectuer un codage ``$\epsilon$-typique'' des
-valeurs de $X_1\,...,X_n$ qui utilise des mots binaires plus courts
+valeurs de $X_1\,\dots,X_n$ qui utilise des mots binaires plus courts
 pour coder les s\'equences typiques qui sont les plus probables.
 Comme il y a moins de $2^{n(H+\epsilon)}$ \'el\'ements
 dans $T^n_\epsilon$, ces \'el\'ements peuvent \^etre ind\'ex\'es
@@ -196,11 +194,11 @@ ind\'ex\'es par des mots binaires de
 $\lfloor \log_2 K \rfloor + 1$ bits. Afin de savoir si
 $x \in T^n_\epsilon$ on rajoute
 un $0$ au d\'ebut de son code binaire, qui est donc de longueur
-$\lfloor n(H+\epsilon)\rfloor + 2$. Si $x \nnin T^n_\epsilon$
+$\lfloor n(H+\epsilon)\rfloor + 2$. Si $x \in T^n_\epsilon$
 on rajoute un $1$ au d\'ebut de son code binaire, dont la
 taille est donc $\lfloor \log_2 K \rfloor + 2$.
 On note $R$ le nombre moyen de bits pour coder chaque
-symbole d'une sequence $X_1, ... , X_n$.
+symbole d'une sequence $X_1, \dots , X_n$.
 
 
 \begin{theorem}
@@ -214,7 +212,7 @@ R \leq H + C\, \epsilon .
 \end{theorem}
 \begin{proof}
 On note $\vec X = (X_1, \dots , X_n )$,
-$\vec x = (x_1 , ... , x_n )$. Soit $l(x_i)$ la longueur du
+$\vec x = (x_1 , \dots , x_n )$. Soit $l(x_i)$ la longueur du
 mot binaire utilis\'e par un code typique pour coder $x_i$.
 Le nombre total de bits pour coder $\vec x$ est
 \[
@@ -229,7 +227,7 @@ R &=& E \{ l(\vec X)\} =
 &\leq& \PP \{\vec X \in T^n_\epsilon \}\,
 \Bigl(\lfloor n(H+\epsilon)
 \rfloor + 2\Bigr)
-+ \PP \{\vec X \nnin T^n_\epsilon \}\,
++ \PP \{\vec X \in T^n_\epsilon \}\,
 \Bigl( \lfloor n \log_2 K \rfloor +
 2\Bigr) \\
 &\leq& n(H+\epsilon) + 2 + \epsilon ( n \log_2 K + 2) \leq
@@ -251,7 +249,7 @@ Nous considerons dans un premier temps
 les codes instantan\'es, qui d\'efinissent un code binaire
 $w_k$ pour chaque symbole $a_k$ de l'alphabet $A$. Cela
 permet de d\'ecoder symbole par symbole toute
-s\'equence $x_1, ..., x_n$.
+s\'equence $x_1, \dots, x_n$.
 Si $\log_2 K$ est un entier, chaque symbole
 $a_k$ peut \^etre cod\'e par un mot binaire de
 $\lfloor \log_2 K \rfloor + 1$ bits.
@@ -263,7 +261,7 @@ souvent.
 Soit $l_k$ la longeur du code binaire
 $w_k$ associ\'ee \`a $a_k$.
 Le nombre moyen de bits n\'ecessaires pour coder les symboles
-d'une suite de variables al\'eatoires $X_1 \, ...\, X_n$ de
+d'une suite de variables al\'eatoires $X_1 \, \dots\, X_n$ de
 m\^eme probabilit\'e $p(x)$ est
 \begin{equation}
 \label{bit-rate}
@@ -298,12 +296,9 @@ satisfait la condition de pr\'efixe.
 
 
 \begin{figure}[bhtp]
-\centerline{
-        \epsfxsize=5cm
-	\leavevmode\epsfbox{figures/chap11/fig2.eps}}
-\caption{Arbre binaire d'un code de $6$ symboles,
-qui satisfait la condition de pr\'efixe. Le mot binaire
-$w_k$ de chaque feuille est indiqu\'e au-dessous.}
+\includegraphics[width=0.5\textwidth]{Figures/PrefixCode}
+\caption{Arbre binaire d'un code de $4$ symboles,
+qui satisfait la condition de pr\'efixe. }
 \label{prefixe6}
 \end{figure}
 
@@ -315,7 +310,7 @@ qui minimise le nombre de bits moyen $R$.
 Les branches de gauche et de droite de l'arbre binaire sont
 respectivement cod\'ees par 0 et 1.
 La figure \ref{prefixe6} montre un exemple pour un code
-de $6$ symboles.
+de $4$ symboles.
 Le mot binaire $w_k$ associ\'e au symbole $a_k$
 est la succession de $0$ et de $1$ correspondant aux branches
 de gauche et de droite, le long du chemin de la racine de
@@ -334,9 +329,8 @@ L'optimisation d'un code de pr\'efixe est donc \'equivalente \`a
 la construction d'un arbre binaire optimal qui distribue
 les profondeur des feuilles de fa\c con \`a minimiser
 (\ref{bit-rate}).
-\\
-\\
-\subsectuib{Entropie de Shannon}
+
+\subsection{Entropie de Shannon}
 Le th\'eor\`eme de Shannon prouve que le nombre moyen de bit $R$
 par symbole est plus grand que l'entropie.
 
@@ -380,41 +374,31 @@ de l'arbre \`a une profondeur $l_k$ qui d\'epend du mot
 binaire $w_k$. Soit
 \begin{equation}
 \label{mmax}
-m = \max \{l_1, l_2, ... , l_K\} .
+m = \max \{l_1, l_2, \dots , l_K\} .
 \end{equation}
 On consid\'ere l'arbre binaire complet dont toutes les
 feuilles sont \`a la profondeur $m$.
 On note $T_k$ le sous-arbre issu du noeud correspondant au
 mot binaire $w_k$. Ce sous arbre a une profondeur ${m - l_k}$
-et contient donc $2^{m - l_k}$ noeud au niveau $m$, comme
-l'illustre la figure \ref{kraft-fig}.
+et contient donc $2^{m - l_k}$ noeud au niveau $m$.
 Comme il y a $2^m$ noeud \`a la profondeur $m$ de l'arbre binaire
 complet et que
 la propri\'et\'e du pr\'efixe implique
-que tous les sous arbres $T_1 , ... , T_K$ sont distincts, on
+que tous les sous arbres $T_1 , \dots , T_K$ sont distincts, on
 d\'eduit que
 \[
 \sum_{k=1}^K 2^{m-l_k} \leq 2^m ,
 \]
 d'o\`u (\ref{kraft}).
 
-\begin{figure}[bhtp]
-\centerline{
-	\epsfxsize=6cm
-	\leavevmode\epsfbox{/home/mallat/X/TREX/figures/SigFig/FIG7.1.EPS.txt}}
-\caption{Disposition des sous arbres $T_i$ dont la racine est \`a la
-profondeur $l_i$ dans l'arbre d'un code de pr\'efixe.}
-\label{kraft-fig}
-\end{figure}
 
 
 Inversement, on consid\`ere $\{ l_k \}_\UkK$ satisfaisant
-(\ref{kraft}) avec $l_1 \leq l_2 \leq ... \leq l_K$ et
-$m = \max \{l_1, l_2, ... , l_K\}$.
+(\ref{kraft}) avec $l_1 \leq l_2 \leq \dots \leq l_K$ et
+$m = \max \{l_1, l_2, \dots , l_K\}$.
 On d\'efinit les ensembles $N_1$ des $2^{m-l_1}$ premiers
 noeud au niveau $m$ sur la gauche de l'arbre, puis $N_2$
-l'ensemble des $2^{m-l_2}$ noeuds suivants et ainsi de suite
-comme l'indique la figure \ref{kraft-fig}.
+l'ensemble des $2^{m-l_2}$ noeuds suivants et ainsi de suite.
 Les noeuds des ensembles $N_k$ sont les noeuds terminaux
 de sous-arbres $T_k$ qui sont disjoints. On associe
 \`a la racine de l'arbre $T_k$ qui est \`a la profondeur
@@ -443,11 +427,11 @@ J = \sum_{k=1}^K p(a_k) l_k + \lambda \sum_{k=1}^K 2^{-l_k} .
 L'annulation de la d\'erivee par rapport \`a $l_k$ donne
 \[
 \frac {\partial J} {\partial l_k} = p(a_k) - \lambda \,2^{-l_k}\,
-\log_\Exp 2  = 0 .
+\log_{\exp} 2  = 0 .
 \]
 Le minimum est obtenu pour $\sum_{k=1}^K 2^{-l_k} = 1$
 et comme $\sum_{k=1}^K p(a_k) = 1$ on obtient
-$\lambda = 1/\log_\Exp 2$. La longueur optimale minimisant
+$\lambda = 1/\log_{\exp} 2$. La longueur optimale minimisant
 $R$ est donc
 \[
 l_k = -\log_2 p(a_k) ,
@@ -487,7 +471,7 @@ $R$ est plus proche de $H$ en r\'epartissant ce bit
 suppl\'ementaire sur un bloc de $n$ \'el\'ements.
 Au lieu de faire un codage instantan\'e, symbole par symbole,
 on code d'un coup le bloc de symboles
-$\vec X = X_1 , \,...\,,X_n$, qui peut \^etre consid\'er\'e
+$\vec X = X_1 , \,\dots\,,X_n$, qui peut \^etre consid\'er\'e
 comme une variable al\'eatoire \`a valeurs dans
 l'alphabet $A^n$ de taille $K^n$.
 A tout bloc de symboles $\vec a \in A^n$ on associe un
@@ -594,7 +578,7 @@ H \leq R  \leq H + 1 .
 \end{equation}
 \\
 \\
-\subsection*{Exemple}
+\subsection{Exemple}
 Les probabilit\'es des $\{a_k\}_{1 \leq k \leq 6}$ sont
 \begin{equation}
 \label{proba-code}
@@ -714,7 +698,7 @@ $\{ a_k \}_{0 \leq k \leq K}$ est
 D = \frac 1 {12} \sum_{k=1}^{K} {p_k} \, {\Delta_k ^2} .
 \end{equation}
 \end{proposition}
-\begin{proof} 
+\begin{proof}
 Comme $Q(x) = a_k$ si
 $x \in [y_{k-1},y_k)$, on peut re\'ecrire (\ref{quantize-error})
 \[
@@ -732,7 +716,7 @@ pour $a_k = \half (y_{k}+{y_{k-1}})$, et l'int\'egration donne
 (\ref{quadr-error}).
 \end{proof}
 
-\sibsection{Quantification uniforme}
+\subsection{Quantification uniforme}
 Le quantificateur uniforme est un cas particulier important o\`u
 tous les intervalles de quantification sont de m\^eme taille
 \[

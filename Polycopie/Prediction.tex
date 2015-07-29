@@ -474,8 +474,12 @@ lignes sont \'egales) que $\sigma_p^2=0$, ce qui est contraire \`a
 l'hypoth\`ese que le processus est r\'egulier.
 
 D\'emontrons maintenant que les racines des polyn\^omes
-pr\'edicteurs sont toutes \emph{strictement \`a  l'int\'erieur du
-cercle unit\'e}. Raisonnons encore par l'absurde. Supposons que le
+pr\'edicteurs sont toutes \emph{strictement à l'intérieur du disque unité}.
+
+. 
+
+
+Raisonnons encore par l'absurde. Supposons que le
 polyn\^ome pr\'edicteur \`a l'ordre $p$ ait $m$ racines $\{a_k,
 |a_k| < 1, 1 \le k \leq m \}$ \`a l'int\'erieur du cercle unit\'e et
 $(p-m)$ racines $\{ b_{\ell}, |b_{\ell}| > 1, 1 \leq \ell \leq p-m
@@ -495,14 +499,17 @@ du cercle unit\'e et d'autre part il v\'erifie
 $|\bar{\phi}_p(\rme^{-\rmi\lambda })|^2< |\phi_p(\rme^{-\rmi\lambda })|^2$. On a
 en effet $| 1 - (1/b_\ell^*) \rme^{-\rmi\lambda } | = |b_\ell| |1 - b_\ell \rme^{-\rmi \lambda }|$ et donc
 $|\bar{\phi}_p(\rme^{-\rmi \lambda })|^2 = \left (\prod_{\ell=1}^{p-m} |b_\ell|^{-2} \right )|\phi_p(\rme^{-\rmi\lambda })|^2$, ce qui d\'emontre le r\'esultat
-annonc\'e puisque $|b_\ell|<1$. On en d\'eduit alors
+annonc\'e puisque $|b_\ell| >1$, $\ell \in \{1, \dots, p-m\}$. On en d\'eduit alors
 que\,:
 \begin{gather*}
-\frac{1}{2 \pi} \int_{-\pi}^{\pi} | \bar{\phi}_p(\rme^{-i\lambda
+\frac{1}{2 \pi} \int_{-\pi}^{\pi} | \bar{\phi}_p(\rme^{-\rmi\lambda
 })|^2 \nu_X(\rmd\lambda )   < \sigma_p^2\;,
 \end{gather*}
-ce qui contredit que $\phi_p(z)=\inf_{\psi \in \cP_p}(2\pi)^{-1}
-\int_{-\pi}^\pi |\psi(\rme^{-i\lambda })|^2 \nu_X(\rmd\lambda )$.
+ce qui contredit que $\phi_p$ est le prédicteur linéaire optimal, \ie\ minimise la variance de l'erreur de prédiction
+\[
+\phi_p=\inf_{\psi \in \cP_p}(2\pi)^{-1}
+\int_{-\pi}^\pi |\psi(\rme^{-\rmi\lambda })|^2 \nu_X(\rmd\lambda ) \eqsp.
+\]
 
 \end{proof}
 Une cons\'equence directe du th\'eor\`eme

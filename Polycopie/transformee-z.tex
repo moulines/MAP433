@@ -12,56 +12,55 @@ o\`{u} $z$ est une variable complexe.
 \end{definition}
 On appelle encore \eqref{eq:definition-transformee} la transform\'{e}e directe, car c'est la relation qui permet d'obtenir $U(z)$ \`{a} partir de $\sequence{u}[n][\zset]$. Cette transfomée est bilatérale. L'op\'{e}ration inverse porte le nom de transformation inverse.
 
-Comme cette transformation est une s\'{e}rie infinie, elle n'existe que pour les valeurs de $z$ pour lesquelles cette s\'{e}rie converge. La r\'{e}gion de convergence (RC) est l'ensemble des valeurs de $z$ pour lesquelles la s\'{e}rie prend une valeur finie. D\'{e}s lors, \emph{toute transform\'{e}e en $z$} doit \^{e}tre accompagnée de la région pour laquelle elle converge. Pour d\'{e}terminer la r\'{e}gion de convergence, on utilise le crit\`{e}re de Cauchy sur la convergence des s\'{e}ries de puissance. La s\'{e}rie $ \sum_{n=0}^{\infty} v_n$
-converge si
+Comme cette transformation est une s\'{e}rie infinie, elle n'existe que pour les valeurs de $z$ pour lesquelles cette s\'{e}rie converge. La r\'{e}gion de convergence (RC) est l'ensemble des valeurs de $z$ pour lesquelles la s\'{e}rie prend une valeur finie. Dès lors, \emph{toute transform\'{e}e en $z$} doit \^{e}tre accompagnée de la région du plan complexe sur laquelle elle converge. Pour d\'{e}terminer la r\'{e}gion de convergence, on utilise le crit\`{e}re de Cauchy sur la convergence des s\'{e}ries entières. Rappelons que la s\'{e}rie à termes positifs  
+$ \sum_{n=0}^{\infty} v_n$ converge si
 \begin{equation}
 \label{eq:critere-cauchy}
-\lim_{n\rightarrow\infty}|u_{n}|^{1/n}<1 \eqsp.
+\limsup_{n\rightarrow\infty} v_{n}^{1/n}<1 \eqsp.
 \end{equation}
-Pour appliquer le crit\`{e}re, on d\'{e}compose la s\'{e}rie en deux s\'{e}ries:
+Pour appliquer le crit\`{e}re de Cauchy, on d\'{e}compose la s\'{e}rie en deux s\'{e}ries:
 $$
 U(z)\ =\ \sum_{n=-\infty}^{-1} u_n z^{-n}+\sum_{n=0}^{\infty} u_n z^{-n} = U_1(z) + U_2(z) \eqsp.
 $$
-L'application du crit\`{e}re de Cauchy \`{a} la s\'{e}rie $X_{2}(z)$ m\`{e}ne \`{a}
+L'application du crit\`{e}re de Cauchy \`{a} la s\'{e}rie $U_{2}(z)$ m\`{e}ne \`{a}
 \begin{align*}
-&\lim_{n\rightarrow\infty}| u_n z^{-n}|^{1/n}\ <\ 1
-&\lim_{n\rightarrow\infty}| u_n |^{1/n}|z^{-1}|\ <\ 1
+\limsup_{n\rightarrow\infty}| u_n z^{-n}|^{1/n}\ <\ 1  \quad \Rightarrow \quad
+\limsup_{n\rightarrow\infty}| u_n |^{1/n}\ <\ |z|
 \end{align*}
 En appelant $R_{-}$ la limite
 \begin{equation}
 \label{eq:definition-R-}
-R_{-}=\lim_{n\rightarrow\infty}|u_n|^{1/n}
+R_{-}=\limsup_{n\rightarrow\infty}|u_n|^{1/n}
 \end{equation}
-la s\'{e}rie $U_{2}(z)$ converge pour $|z|>R_{-}$.
+la s\'{e}rie $U_{2}(z)$ converge sur la couronne $\ensemble{z \in \cset}{|z|>R_{-}}$.
 Pour ce qui est de la s\'{e}rie $U_{1}(z)$ , apr\`{e}s un changement de variable, on a
 $$
 U_{1}(z)\ =\ \sum_{n=-\infty}^{-1} u_n z^{-n} =\ \sum_{n=1}^{\infty} u_{-n} z^{n}
 $$
 On a convergence si
 \begin{align*}
-&\lim_{n\rightarrow\infty}|u_{-n} z^{n}|^{1/n}\ <\ 1
-&\lim_{n\rightarrow\infty}|u_{-n}|^{1/n}|z|\ <\ 1
+\limsup_{n\rightarrow\infty}|u_{-n} z^{n}|^{1/n}\ <\ 1 \quad \Rightarrow \limsup_{n\rightarrow\infty}|u_{-n}|^{1/n}|z|\ <\ 1
 \end{align*}
-et donc
+et donc la série $U_1(z)$ converge sur le disque 
 \begin{equation}
 \label{eq:definition-R+}
-|z|\ <\ [\lim_{n\rightarrow\infty}|u_{-n}|^{1/n}]^{-1}=R+
+|z|\ <\ \left\{ \lim_{n\rightarrow\infty}|u_{-n}|^{1/n} \right\}^{-1}=R+
 \end{equation}
-En toute g\'{e}n\'{e}ralit\'{e}, une s\'{e}rie converge dans un anneau du plan complexe des $z$ donn\'{e} par
+En toute g\'{e}n\'{e}ralit\'{e}, une s\'{e}rie converge donc  dans un anneau du plan complexe  donn\'{e} par
 $$
 R_{-}<|z|<R+
 $$
-Ceci est illustr\'{e} par \Cref{fig:Zfigure2-2}. Lorsque $R+\leq R_{-}$ il est clair que la s\'{e}rie ne converge pas.
+Lorsque $R+\leq R_{-}$, le domaine de convergence est vide est la transformée en $z$ de la suite n'est alors pas défini.
 
-La s\'{e}quence $U_{2}(z)$ repr\'{e}sente la transform\'{e}e en $z$ d'une suite causale. En g\'{e}n\'{e}ral, une suiite causale converge \`{a} l'ext\'{e}rieur d'un cercle de rayon $R_{-}$ donn\'{e} par \eqref{eq:definition-R-}. La suite $U_{1}(z)$ repr\'{e}sente la transform\'{e}e en $z$ d'une suite anti-causale, c'est-\`{a}-dire ne comportant des \'{e}l\'{e}ments que pourles valeurs n\'{e}gatives de l'indice. En g\'{e}n\'{e}ral, une suite anti-causale converge \`{a} l'int\'{e}rieur d'un cercle de rayon $\mathrm{R}+$donn\'{e} par \eqref{eq:definition-R+}. Quand une suite est \`{a} dur\'{e}e limit\'{e}e, sa transform\'{e}e est donn\'{e}e par
+La s\'{e}quence $U_{2}(z)$ repr\'{e}sente la transform\'{e}e en $z$ d'une \emph{suite causale}: les seules valeurs non-nulles de la suite 
+correspondent aux indices positifs.  
+\begin{proposition}
+\label{prop:caracterisatin
+une suite causale converge \`{a} l'ext\'{e}rieur d'un cercle de rayon $R_{-}$ donn\'{e} par \eqref{eq:definition-R-}. La suite $U_{1}(z)$ repr\'{e}sente la transform\'{e}e en $z$ d'une suite anti-causale, c'est-\`{a}-dire ne comportant des \'{e}l\'{e}ments que pour les valeurs n\'{e}gatives de l'indice. En g\'{e}n\'{e}ral, une suite anti-causale converge \`{a} l'int\'{e}rieur d'un cercle de rayon $\mathrm{R}+$donn\'{e} par \eqref{eq:definition-R+}. Quand une suite est \`{a} dur\'{e}e limit\'{e}e, sa transform\'{e}e est donn\'{e}e par
 \begin{equation}
 \label{eq:z-duree-limitee}
 U(z)=\sum_{n=n_{1}}^{n_{2}} u_n z^{-n}
 \end{equation}
-
-
-FIG. 2.2-Illustration d'un anneau de convergence
-
 Pour autant que dans l'intervalle $[n_{1},\ n_{2}]$ le module de chaque \'{e}l\'{e}ment de la suite soit fini, la s\'{e}rie converge pour toutes les valeurs de $z$, sauf \'{e}ventuellement en $z=0$ ou $|z|\rightarrow\infty$. Les cas suivants peuvent \^{e}tre distingu\'{e}s:
 \begin{enumerate}
 \item si $n_{1}$ et $n_{2}$ sont positifs, on n'a pas convergence pour $z=0$ car les termes $z^{-n}$ divergent pour les $n$ positifs.
@@ -242,7 +241,7 @@ V(z) &=\ \sum_{n=-\infty}^{\infty} v_n z^{-n} \\
      &=\ \sum_{m=-\infty}^{\infty}u_n z^{-(m+n_{0})} \\
      &=\ z^{-n_{0}} U(z)
 \end{align*}
-e domaine de convergence est le m\^{e}me celuide $U(z)$ sauf que si $n_{0}$ est positif (resp. n\'{e}gatif), on a un p\^{o}le en $0$ (resp. $ z\rightarrow\infty$). Il peut y avoir des compensations de z\'{e}ros ou p\^{o}les.
+Le domaine de convergence est le m\^{e}me celuide $U(z)$ sauf que si $n_{0}$ est positif (resp. n\'{e}gatif), on a un p\^{o}le en $0$ (resp. $ z\rightarrow\infty$). Il peut y avoir des compensations de z\'{e}ros ou p\^{o}les.
 
 Multiplier une transform\'{e}e en $z$ par $z^{-1}$ revient donc \`{a} retarder la suite d'une unit\'{e} (p\'{e}riode d'\'{e}chantillonnage). On se r\'{e}f\`{e}re souvent \`{a} $z^{-1}$ comme op\'{e}rateur de retard unit\'{e}.
 
@@ -254,84 +253,61 @@ on trouve par transformation en $z$,
 \begin{align*}
 V(z) &=\ U(z)- \sum_{k=1}^p b_{k}z^{-k}V(z)
 \end{align*}
-ce qui implique qye
+ce qui implique que
 \[
 V(z) =\frac{U(z)}{1+ \sum_{k=1}^p b_{k}z^{-k}}
 \]
 Il faut faire attention toutefois avec ce calcul "formel" que les régions de convergence de $U(z)$ et de $1/ (1 + \sum_{k=1}^p b_k z^{-k})$ soient compatibles. Nous reviendrons sur cet aspect plus loin dans l'exposé.
 \subsubsection{D\'{e}calage et transform\'{e}e unilat\'{e}rale}
-Dans le cas unilat\'{e}ral, il faut \^{e}tre plus prudent dans ce que l'on \'{e}crit. En effet, la transform\'{e}e unilat\'{e}rale est d\'{e}finie par 2.11. Si on pose $y(n)=x(n-1)$ , la transform\'{e}e bilat\'{e}rale est calcul\'{e}e par
-%$$
-%Y_{u}(z)\ =\ \sum_{n=0}^{\infty}y(n)z^{-n}
-%$$
-%$$
-%=\ \sum_{n=0}^{\infty}x(n-1)z^{-n}
-%$$
-%$$
-%=\ z^{-1}\sum_{m=-1}^{\infty}x(m)z^{-m}
-%$$
-%$$
-%=\ z^{-1}[x(-1)z+X_{u}(z)]
-%$$
-%$$
-%=\ x(-1)+z^{-1}X_{u}(z)\text{   }(2.54)
-%$$
-%On voit donc qu'un d\'{e}calage vers la droite permet de faire appara\^{i}tre des \'{e}l\'{e}- ments qui ne sont pas pris en consid\'{e}ration par la transformation de d\'{e}part. Cette propri\'{e}t\'{e} permet de tenir compte de conditions initiales non nulles.
-%
-%{\it 2.2. LA TRANSFORM\'{E}E EN} $Z$
-%
-%25
-%
-%Soit
-%$$
-%y(n)=x(n)+ay(n-1)\ (2.55)
-%$$
-%avec $y(-1)=K$ et une excitation $x(n)=\rme^{2 \rmi \pi \nu_0 n}u(n)$ . En vertu de 2.54,
-%
-%la transform\'{e}e en $z$ donne
-%$$
-%Y_{u}(z)\ =\ X_{u}(z)+ay(-1)+az^{-1}X_{u}(z)
-%$$
-%$$
-%=\ \frac{X_{u}(z)+ay(-1)}{1-az^{-1}}
-%$$
-%$$
-%=\ \frac{aK}{1-az^{-1}}+\frac{1}{(1-az^{-1})(1-e^{j\Omega_{0}}z^{-1})}
-%$$
-%$$
-%=\ \frac{aK}{1-az^{-1}}+\frac{1}{(1-e^{j\Omega_{0}}/a)(1-az^{-1})}
-%$$
-%1
-%$$
-%+
-%$$
-%$$
-%(1-a/e^{j\Omega_{0}})(1-e^{j\Omega_{0}}z^{-1})
-%$$
-%$$
-%=\ \frac{aK}{1-az^{-1}}+\frac{a}{(a-e^{j\Omega_{0}})(1-az^{-1})}
-%$$
-%$$
-%+\ \frac{e^{j\Omega_{0}}}{(e^{j\Omega_{0}}-a)(1-e^{j\Omega_{0}}z^{-1})}\ (2.56)
-%$$
-%De ce fait, en utilisant les transform\'{e}es inverses d\'{e}j\`{a} \'{e}tablies, on
-%
-%trouve
-%$$
-%y(n)=u(n)[a^{n+1}K+\frac{a^{n+1}}{a-e^{j\Omega_{0}}}-\frac{e^{j\Omega_{0}(n+1)}}{a-e^{j\Omega_{0}}}]\ (2.57)
-%$$
-%La premi\`{e}re partie de la r\'{e}ponse correspond \`{a} la r\'{e}ponse libre, c'est-
-%
-%\`{a}-dire l'\'{e}volution du syst\`{e}me sous l'effet des conditions initiales.
-%
-%La seconde partie correspond \`{a} la partie transitoire de la r\'{e}ponse
-%
-%forc\'{e}e. La troisi\`{e}me partie correspond \`{a} la r\'{e}ponse de r\'{e}gime de la
-%
-%r\'{e}ponse forc\'{e}e.
-%
-%On peut bien \'{e}videmment g\'{e}n\'{e}raliser ce qui pr\'{e}c\`{e}de au cas de plusieurs condi- tions initiales.
-%
+Dans le cas unilat\'{e}ral, il faut \^{e}tre plus prudent dans ce que l'on \'{e}crit. La transformée unilatérale de la suite $\sequence{u}[n][\zset]$ est donnée par 
+\begin{equation}
+\label{eq:transformee-unilaterale}
+\tilde{U}(z)= \sum_{k=0}^\infty u_k z^{-k}\eqsp.
+\end{equation}
+Notons que nous ne calculons la somme que pour les indices positifs ! Le rayon de convergence de la transfomrmée monolatérale est une couronne 
+donnée ${z \in \cset}{|z| \geq \limsup_{n \to \infty} |u_n|^{1/n}}$. 
+Si on pose $v_n=u_{n-1}$ , la transform\'{e}e bilat\'{e}rale est calcul\'{e}e par
+\begin{align}
+\nonumber
+\tilde{V}(z)\ &=\ \sum_{n=0}^{\infty}v_nz^{-n} \\
+\nonumber
+&=\ \sum_{n=0}^{\infty}u_{n-1}z^{-n} \\
+\nonumber
+&=\ z^{-1}\sum_{m=-1}^{\infty} u_m z^{-m} \\
+\nonumber
+&=\ z^{-1}[u_{-1} z+\tilde{U}(z)] \\
+&=\ u_{-1}+z^{-1}\tilde{U}(z)
+\label{eq:decalage-unilateral}
+\end{align}
+On voit donc qu'un d\'{e}calage vers la droite permet de faire appara\^{i}tre des \'{e}l\'{e}ments qui ne sont pas pris en consid\'{e}ration par la transformation unilatérale de d\'{e}part. Cette propri\'{e}t\'{e} permet de prendre en compte les conditions initiales non nulles.
+Soit
+\[
+v_n=u_n+av_{n-1}\
+\]
+avec $v_{-1}=K$ et une excitation $u_n=\rme^{2 \rmi \pi \nu_0 n} \1_{\nset}(n)$ . En vertu de \eqref{eq:decalage-unilateral}
+la transform\'{e}e en $z$ donne
+\begin{align*}
+\tilde{V}(z)\ &=\ \tilde{U}(z)+av_{-1}+az^{-1}\tilde{U}(z) \\
+&=\ \frac{\tilde{U}(z)+av_{-1}}{1-az^{-1}} \\
+&=\ \frac{aK}{1-az^{-1}}+\frac{1}{(1-az^{-1})(1- \rme^{2 rmi \pi \nu_{0}}z^{-1})} \\
+& =\ \frac{aK}{1-az^{-1}}+\frac{1}{(1-\rme^{2 \rmi \pi nu_{0}}/a)(1-az^{-1})}
++ \frac{1}{(1-a/\rme^{2 \rmi \pi \nu_{0}})(1-\rme^{2 rmi \pi \nu_{0}}z^{-1})} \\
+&=\ \frac{aK}{1-az^{-1}}+\frac{a}{(a-\rme^{2 \rmi \pi \nu_{0}})(1-az^{-1})}
++\ \frac{\rme^{2 \rmi \pi \nu_{0}}}{(\rme^{2 \rmi \pi \nu_{0}}-a)(1-\rme^{2 \rmi \pi\nu_{0}}z^{-1})}
+\end{align*}
+De ce fait, en utilisant les transform\'{e}es inverses d\'{e}j\`{a} \'{e}tablies, on
+trouve
+\[
+v_n=\1_\nset(n)[a^{n+1}K+\frac{a^{n+1}}{a-\rme^{2 \rmi \pi \nu_{0}}}-\frac{\rme^{2 \rmi \pi \nu_{0}(n+1)}}{a-\rme^{2 \rmi \pi \nu_{0}}}]\
+\]
+La premi\`{e}re partie de la r\'{e}ponse correspond \`{a} la r\'{e}ponse libre, c'est-
+\`{a}-dire l'\'{e}volution du syst\`{e}me sous l'effet des conditions initiales.
+La seconde partie correspond \`{a} la partie transitoire de la r\'{e}ponse
+forc\'{e}e. La troisi\`{e}me partie correspond \`{a} la r\'{e}ponse de r\'{e}gime de la
+r\'{e}ponse forc\'{e}e.
+
+On peut bien \'{e}videmment g\'{e}n\'{e}raliser ce qui pr\'{e}c\`{e}de au cas de plusieurs conditions initiales.
+
 %Changement d'\'{e}chelle
 %
 %Si on effectue un changement de variable complexe $w=az$ o\`{u} $a$ peut \^{e}tre complexe, le domaine de convergence est modffi\'{e} comme suit
@@ -366,76 +342,59 @@ Dans le cas unilat\'{e}ral, il faut \^{e}tre plus prudent dans ce que l'on \'{e}
 %$$
 %et donc $x(n)a^{n}$ est la suite correspondant \`{a} $X(z/a)$ . On verra plus loin combien la position des p\^{o}les et z\'{e}ros est importante car elle conditionne la stabilit\'{e} des syst\`{e}mes lin\'{e}aires. Le fait que la modulation par une suite exponentielle permet de modffier les positions des p\^{o}les et z\'{e}ros est donc de premi\`{e}re importance pour rendre, le cas \'{e}ch\'{e}ant, un syst\`{e}me stable.
 %
-%D\'{e}rivation
+\subsubsection{D\'{e}rivation}
+Comme
+$$
+U(z)=\sum_{n=-\infty}^{\infty}u_{n}z^{-n}
+$$
+on a aussi
+$$
+\frac{\mathrm{d}U(z)}{\mathrm{d}z}=\sum_{n=-\infty}^{\infty}(-n)u_{n}z^{-n-1}
+$$
+Et donc
+$$
+-z\frac{\mathrm{d}U(z)}{\mathrm{d}z}=\sum_{n=-\infty}^{\infty}nu_{n}z^{-n}
+$$
+De ce fait, il appara\^{i}t que $-z\mathrm{d}U(z)/\mathrm{d}z$ est la transform\'{e}e de la suite $\{nu_{n}, n \in \zset\}$ .
 %
-%Comme
-%$$
-%X(z)=\sum_{n=-\infty}^{\infty}x(n)z^{-n}\text{   }(2.60)
-%$$
-%on a aussi
-%$$
-%\frac{\mathrm{d}X(z)}{\mathrm{d}z}=\sum_{n=-\infty}^{\infty}(-n)x(n)z^{-n-1}\text{   }(2.61)
-%$$
-%Et donc
-%$$
-%-z\frac{\mathrm{d}X(z)}{\mathrm{d}z}=\sum_{n=-\infty}^{\infty}nx(n)z^{-n}\text{   }(2.62)
-%$$
-%De ce fait, il appara\^{i}t $\mathrm{q}\mathrm{u}\mathrm{e}-z\mathrm{d}X(z)/\mathrm{d}z$ est la transform\'{e}e de $nx(n)$ .
-%
-%Convolution
-%
-%Cette propri\'{e}t\'{e} est une des plus importantes et justffie \`{a} elle seule l'usage qui est fait de la transform\'{e}e en $z$ pour \'{e}tudier les syst\`{e}mes lin\'{e}aires permanents en temps discret. Si $y(n)$ est obtenu par convolution de $x(n)$ et $g(n)$ , on a que
-%$$
-%y(n)=\sum_{m=-\infty}^{\infty}x(m)\ g(n-m)\text{   }(2.63)
-%$$
-%{\it 2.2. LA TRANSFORM\'{E}E EN} $Z$
-%
-%27
-%
-%La transform\'{e}e en $z,\ Y(z)$ , de $y(n)$ est donc obtenue par
-%$$
-%Y(z)\ =\ \sum_{n=-\infty}^{\infty}y(n)z^{-n}
-%$$
-%$$
-%=\ \sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}x(m)\ g(n-m)z^{-n}
-%$$
-%$$
-%=\ [\sum_{m=-\infty}^{\infty}x(m)z^{-m}][\sum_{n=-\infty}^{\infty}g(n-m)z^{-(n-m)}]
-%$$
-%$$
-%=\ X(z)G(z)\text{   }(2.64)
-%$$
-%Cette op\'{e}ration est valable pour les valeurs de $z$ appartenant \`{a} l'intersection des domaines de convergence des deux transform\'{e}es.
-%
-%Consid\'{e}rons un syst\`{e}me lin\'{e}aire et permanent de r\'{e}ponse impul- sionnelle
-%$$
-%g(n)=a^{n}u(n)\ (2.65)
-%$$
-%et $|a|<1$ dont le signal $x(n)$ \`{a} l'entr\'{e}e est la suite
-%$$
-%x(n)=b^{n}u(n)\ (2.66)
-%$$
-%et $|b|<1$ avec de plus $|b|>|a|$. La sortie $y(n)$ est obtenue par $y(n)=x(n)\otimes g(n)$ o\`{u} $\otimes$ est le symbole utilis\'{e} pour une convolution. Les transform\'{e}es $X(z)$ et $G(z)$ sont donn\'{e}es par
-%
-%$X(z) = \displaystyle \frac{1}{1-bz^{-1}}$ pour $|z|>|b|$ (2.67) $G(z) = \displaystyle \frac{1}{1-az^{-1}}$ pour $|z|>|a|$ (2.68)
-%
-%En vertu de ce qui pr\'{e}c\`{e}de, on a donc pour $|z|>|b|$ qui est donc l'intersection des domaines de convergence,
-%$$
-%Y(z)\ =\ G(z)X(z)\ (2.69)
-%$$
-%$$
-%=\ \frac{1}{1-az^{-1}}\frac{1}{1-bz^{-1}}\ (2.70)
-%$$
-%$$
-%=\ \frac{1}{(1-b/a)(1-az^{-1})}+\frac{1}{(1-a/b)(1-bz^{-1})}(2.71)
-%$$
-%$$
-%=\ \frac{a}{(a-b)(1-az^{-1})}+\frac{b}{(b-a)(1-bz^{-1})}\ (2.72)
-%$$
-%et donc, compte tenu des transform\'{e}es calcul\'{e}es pr\'{e}c\'{e}demment,
-%$$
-%y(n)=u(n)[\frac{a}{(a-b)}a^{n}+\frac{b}{(b-a)}b^{n}]\ (2.73)
-%$$
+\subsubsection{Convolution}
+
+Cette propri\'{e}t\'{e} est une des plus importantes et justffie \`{a} elle seule l'usage qui est fait de la transform\'{e}e en $z$ pour \'{e}tudier les syst\`{e}mes lin\'{e}aires permanents en temps discret. Si $\sequence{y}[n][\zset]$ est obtenu par convolution de $\sequence{x}[n][\zset]$ et $\sequence{g}[n][\nset]$ , on a que
+$$
+y_n=\sum_{m=-\infty}^{\infty}x_m\ g_{n-m}
+$$
+La transform\'{e}e en $z,\ Y(z)$ , de $\sequence{y}[n][\nset]$ est donc obtenue par
+\begin{align*}
+Y(z)\ &=\ \sum_{n=-\infty}^{\infty} y_n z^{-n} \\
+&=\ \sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty} x_m\ g_{n-m}z^{-n} \\
+&=\ [\sum_{m=-\infty}^{\infty} x_m z^{-m}][\sum_{n=-\infty}^{\infty}g_{n-m}z^{-(n-m)}] \\
+&=\ X(z)G(z)
+\end{align*}
+Cette op\'{e}ration est valable pour les valeurs de $z$ appartenant \`{a} l'intersection des domaines de convergence des deux transform\'{e}es.
+
+Consid\'{e}rons un syst\`{e}me lin\'{e}aire et permanent de r\'{e}ponse impulsionnelle
+\[
+g_n=a^{n} \1_{\nset}(z)
+\]
+et $|a|<1$ dont le signal \`{a} l'entr\'{e}e est la suite
+$$
+x_n=b^{n} \1_{\nset}(n)
+$$
+et $|b|<1$ avec de plus $|b|>|a|$. La sortie $\sequence{y}[n][\nset]$ est obtenue par $y=x * g$ Les transform\'{e}es $X(z)$ et $G(z)$ sont donn\'{e}es par
+\begin{align*}
+X(z) &=  \frac{1}{1-bz^{-1}} \quad \text{pour $|z|>|b|$} \\
+G(z) &=  \frac{1}{1-az^{-1}} \quad \text{pour $|z|>|a|$}
+\end{align*}
+En vertu de ce qui pr\'{e}c\`{e}de, on a donc pour $|z|>|b|$ qui est donc l'intersection des domaines de convergence,
+\begin{align*}
+Y(z)\ &=\ G(z)X(z) =\ \frac{1}{1-az^{-1}}\frac{1}{1-bz^{-1}}\\
+&=\ \frac{1}{(1-b/a)(1-az^{-1})}+\frac{1}{(1-a/b)(1-bz^{-1})} \\
+&=\ \frac{a}{(a-b)(1-az^{-1})}+\frac{b}{(b-a)(1-bz^{-1})}\
+\end{align*}
+et donc, compte tenu des transform\'{e}es calcul\'{e}es pr\'{e}c\'{e}demment,
+$$
+y_n=\1_\nset(n)[\frac{a}{(a-b)}a^{n}+\frac{b}{(b-a)}b^{n}]
+$$
 %Ces calculs sont illu str\'{e}s \`{a} la figure 2.4, pour $a=0.8,\ b=0.9$.
 %Sequence $\mathrm{g};\mathrm{a}=0.8$
 %\begin{center}
@@ -452,9 +411,9 @@ Dans le cas unilat\'{e}ral, il faut \^{e}tre plus prudent dans ce que l'on \'{e}
 %FIG. 2.4 --Convolution de deux suites $a^{n}u(n)$ et $b^{n}u(n)$ avec $a=0.8$ et $b=0.9$
 %
 %{\it 2.2. LA TRANSFORM\'{E}E EN} $Z$
-%
-%29
-%
+%%
+%%29
+%%
 %Produit de suites
 %
 %Consid\'{e}rons le signal $y(n)$ obtenu par produit de deux autres $x(n)$ et $g(n)$ . La transform\'{e}e en $z$ est donn\'{e}e par

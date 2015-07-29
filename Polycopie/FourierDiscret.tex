@@ -2,7 +2,7 @@
 \subsection{Les principaux espaces de suites et les r\`{e}gles de calcul}
 \begin{definition}[Espaces de suites]
 \begin{enumerate}[label=(\roman*)]
-\item  $\plone$ l' espace des suites sommables  c' est-\`{a}-dire des suites $u$ qui v\'{e}rifient:
+\item  $\plone$ l' espace des suites sommables  c' est-\`{a}-dire des suites $u = \sequence{u}[n][\zset]$ (que nous noterons aussi parfois $u=\sequencePar{u}[n][\nset]$ qui v\'{e}rifient:
 $$
 \sum_{n=-\infty}^\infty |u_{n}|<+\infty,
 $$
@@ -388,9 +388,9 @@ o\`{u} $\hat{u}$ est la TFtD de $u$. la derni\`{e}re \'{e}galit\'{e} provient du
 \subsubsection{Estimation d'une fr\'equence}
 Soit $u_{n}=e^{2i\pi 1/0n}$ On voudrait d\'{e}terminer la fr\'{e}quence $\nu_{0}$ en ne se donnant le droit que d'observer les \'{e}chantillons $u_{0}, \ldots, u_{N}$. Pourquoi une telle contrainte? Dans un signal, musical par exemple, le contenu fr\'{e}quentiel \'{e}volue au cours du temps. \`{A} chaque changement de note, le signal contient sinusoïdes de fr\'{e}quences diff\'{e}rentes. Si l'on veut, par exemple, transcrire un morceau de musique en notes, on ne peut pas se permettre une observation sur une trop longue p\'{e}riode car cela aurait pour effet de m\'{e}langer entre elles diff\'{e}rentes notes. La m\^{e}me chose vaut pour l'analyse d'un signal de parole o\`{u} l'on risque la confusion entre diff\'{e}rents phon\`{e}mes.
 
-On note $u^{T}$ la suite d\'{e}finie sur $\zset$ \'{e}gale \`{a} $u$ sur $\{0,\ \ldots,\ N-1\}$ et nulle ailleurs. Ce sont les seules valeurs que nous nous donnons le droit d'utiliser pour d\'{e}terminer $\nu_{0}$. Sa TFtD est donnée pour tout 
+On note $u^{T}$ la suite d\'{e}finie sur $\zset$ \'{e}gale \`{a} $u$ sur $\{0,\ \ldots,\ N-1\}$ et nulle ailleurs. Ce sont les seules valeurs que nous nous donnons le droit d'utiliser pour d\'{e}terminer $\nu_{0}$. Sa TFtD est donnée pour tout
 $\nu\in \coint{1/2,1/2}$ par
-$$ 
+$$
 \TFA{u^{T}}(\nu)=\rme^{-\rmi \pi (N-1)(\nu- \nu_0)} \frac{\sin(N\pi(\nu-\nu_{0}))}{sin(\pi(\nu-\nu_{0}))}
 $$
 Le module de $\mathcal{F}(u^{T})$ et donn\'{e} \Cref{fig;figure2-6}
@@ -589,4 +589,4 @@ Le spectrogramme est le module au carr\'{e} de la TFCT $((n,\ \nu)\mapsto|U(n,\ 
   \caption{Une colonne du spectrogramme. C'est donc le contenu fr\'{e}quentiel local autour d'un certain instant. Le pic le plus pro\'{e}minent est pour la fr\'{e}quence $736$ Hz, qui correspond \`{a} peu pr\`{e}s \`{a} un Fa di\`{e}se.}\label{fig:figure2-20}
 \end{figure}
 
-i
+i 
