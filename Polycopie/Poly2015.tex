@@ -103,7 +103,7 @@
 \input{Smacro}
 \input{notations-hilbertfourier}
 \title{Traitement du signal}
-\author{St\'ephane Mallat, Eric Moulines}
+\author{St\'ephane Mallat, Eric Moulines, François Roueff}
 \includeonly{
 fourierL1,
 fourierS,
@@ -151,15 +151,20 @@ Hilbert
 \label{info-chap}
 \include{chapitre8}
 \chapter{Application au codage de parole}
-\includepdf[pages=-]{PhysiologicalProcessSpeech}
-\includepdf[pages=-]{LinearPrediction}
 \includepdf[pages=-]{SpeechCoding}
+\includepdf[pages=-]{Vocoder}
 \chapter{Application au codage d'images}
 \includepdf[pages=-]{ImageCompression}
 \input{Sbiblio}
 \appendix
 \part{Compl\'ements math\'ematiques}
+\chapter{Bases d'analyse Hilbertienne}
 \include{Hilbert}
-\part{Transformée de Fourier rapide}
+\chapter{Une autre approche de la prédiction}
+\includepdf[pages=-]{LinearPrediction}
+\chapter{Transformée de Fourier rapide}
 \includepdf[pages=-]{FFTgw}
+\part{Documents}
+\part{Production du signal de parole}
+\includepdf[pages=-]{PhysiologicalProcessSpeech}
 \end{document}
