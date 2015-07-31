@@ -12,7 +12,7 @@ o\`{u} $z$ est une variable complexe.
 \end{definition}
 On appelle encore \eqref{eq:definition-transformee} la transform\'{e}e directe, car c'est la relation qui permet d'obtenir $U(z)$ \`{a} partir de $\sequence{u}[n][\zset]$. Cette transfomée est bilatérale. L'op\'{e}ration inverse porte le nom de transformation inverse.
 
-Comme cette transformation est une s\'{e}rie infinie, elle n'existe que pour les valeurs de $z$ pour lesquelles cette s\'{e}rie converge. La r\'{e}gion de convergence (RC) est l'ensemble des valeurs de $z$ pour lesquelles la s\'{e}rie prend une valeur finie. Dès lors, \emph{toute transform\'{e}e en $z$} doit \^{e}tre accompagnée de la région du plan complexe sur laquelle elle converge. Pour d\'{e}terminer la r\'{e}gion de convergence, on utilise le crit\`{e}re de Cauchy sur la convergence des s\'{e}ries entières. Rappelons que la s\'{e}rie à termes positifs  
+Comme cette transformation est une s\'{e}rie infinie, elle n'existe que pour les valeurs de $z$ pour lesquelles cette s\'{e}rie converge. La r\'{e}gion de convergence (RC) est l'ensemble des valeurs de $z$ pour lesquelles la s\'{e}rie prend une valeur finie. Dès lors, \emph{toute transform\'{e}e en $z$} doit \^{e}tre accompagnée de la région du plan complexe sur laquelle elle converge. Pour d\'{e}terminer la r\'{e}gion de convergence, on utilise le crit\`{e}re de Cauchy sur la convergence des s\'{e}ries entières. Rappelons que la s\'{e}rie à termes positifs
 $ \sum_{n=0}^{\infty} v_n$ converge si
 \begin{equation}
 \label{eq:critere-cauchy}
@@ -41,7 +41,7 @@ On a convergence si
 \begin{align*}
 \limsup_{n\rightarrow\infty}|u_{-n} z^{n}|^{1/n}\ <\ 1 \quad \Rightarrow \limsup_{n\rightarrow\infty}|u_{-n}|^{1/n}|z|\ <\ 1
 \end{align*}
-et donc la série $U_1(z)$ converge sur le disque 
+et donc la série $U_1(z)$ converge sur le disque
 \begin{equation}
 \label{eq:definition-R+}
 |z|\ <\ \left\{ \lim_{n\rightarrow\infty}|u_{-n}|^{1/n} \right\}^{-1}=R+
@@ -52,11 +52,10 @@ R_{-}<|z|<R+
 $$
 Lorsque $R+\leq R_{-}$, le domaine de convergence est vide est la transformée en $z$ de la suite n'est alors pas défini.
 
-La s\'{e}quence $U_{2}(z)$ repr\'{e}sente la transform\'{e}e en $z$ d'une \emph{suite causale}: les seules valeurs non-nulles de la suite 
-correspondent aux indices positifs.  
-\begin{proposition}
-\label{prop:caracterisatin
-une suite causale converge \`{a} l'ext\'{e}rieur d'un cercle de rayon $R_{-}$ donn\'{e} par \eqref{eq:definition-R-}. La suite $U_{1}(z)$ repr\'{e}sente la transform\'{e}e en $z$ d'une suite anti-causale, c'est-\`{a}-dire ne comportant des \'{e}l\'{e}ments que pour les valeurs n\'{e}gatives de l'indice. En g\'{e}n\'{e}ral, une suite anti-causale converge \`{a} l'int\'{e}rieur d'un cercle de rayon $\mathrm{R}+$donn\'{e} par \eqref{eq:definition-R+}. Quand une suite est \`{a} dur\'{e}e limit\'{e}e, sa transform\'{e}e est donn\'{e}e par
+La suite $U_{2}(z)$ repr\'{e}sente la transform\'{e}e en $z$ d'une \emph{suite causale}: les seules valeurs non-nulles de la suite
+correspondent aux indices positifs. La transformée en $z$ d'une suite causale converge \`{a} l'ext\'{e}rieur d'un cercle de rayon $R_{-}$ donn\'{e} par \eqref{eq:definition-R-}.
+
+La suite $U_{1}(z)$ repr\'{e}sente la transform\'{e}e en $z$ d'une suite anti-causale, c'est-\`{a}-dire ne comportant des \'{e}l\'{e}ments que pour les valeurs n\'{e}gatives de l'indice. En g\'{e}n\'{e}ral, une suite anti-causale converge \`{a} l'int\'{e}rieur d'un cercle de rayon $R_+$donn\'{e} par \eqref{eq:definition-R+}. Quand une suite est \`{a} dur\'{e}e limit\'{e}e, sa transform\'{e}e est donn\'{e}e par
 \begin{equation}
 \label{eq:z-duree-limitee}
 U(z)=\sum_{n=n_{1}}^{n_{2}} u_n z^{-n}
@@ -259,13 +258,13 @@ V(z) =\frac{U(z)}{1+ \sum_{k=1}^p b_{k}z^{-k}}
 \]
 Il faut faire attention toutefois avec ce calcul "formel" que les régions de convergence de $U(z)$ et de $1/ (1 + \sum_{k=1}^p b_k z^{-k})$ soient compatibles. Nous reviendrons sur cet aspect plus loin dans l'exposé.
 \subsubsection{D\'{e}calage et transform\'{e}e unilat\'{e}rale}
-Dans le cas unilat\'{e}ral, il faut \^{e}tre plus prudent dans ce que l'on \'{e}crit. La transformée unilatérale de la suite $\sequence{u}[n][\zset]$ est donnée par 
+Dans le cas unilat\'{e}ral, il faut \^{e}tre plus prudent dans ce que l'on \'{e}crit. La transformée unilatérale de la suite $\sequence{u}[n][\zset]$ est donnée par
 \begin{equation}
 \label{eq:transformee-unilaterale}
 \tilde{U}(z)= \sum_{k=0}^\infty u_k z^{-k}\eqsp.
 \end{equation}
-Notons que nous ne calculons la somme que pour les indices positifs ! Le rayon de convergence de la transfomrmée monolatérale est une couronne 
-donnée ${z \in \cset}{|z| \geq \limsup_{n \to \infty} |u_n|^{1/n}}$. 
+Notons que nous ne calculons la somme que pour les indices positifs ! Le rayon de convergence de la transfomrmée monolatérale est une couronne
+donnée ${z \in \cset}{|z| \geq \limsup_{n \to \infty} |u_n|^{1/n}}$.
 Si on pose $v_n=u_{n-1}$ , la transform\'{e}e bilat\'{e}rale est calcul\'{e}e par
 \begin{align}
 \nonumber
@@ -477,3 +476,124 @@ $$
 %$$
 %x(\mathrm{O})=\lim_{z\rightarrow\infty}X(z)=1\ (2.83)
 %$$
+\subsection{Pôles et zéros}
+Dans de nombreux cas d'intérêt, la transformée en $z$ est une fraction rationnelle
+\begin{equation}
+\label{eq:transformee-z-generale}
+H(z)= \frac{\prod_{m=1}^N (1 -z_m z^{-1})}{\prod_{n=1}^N (1 - p_n z^{-1})}
+\prod^{M}(z-z_{m})
+\end{equation}
+o\`{u} les $\{ z_{m} \}_{m=1}^M$ sont les \emph{z\'{e}ros}, et les $\{ p_{n} \}_{n=1}^N$ sont les \emph{p\^{o}les}. 
+Pour des signaux et systèmes r\'{e}els, ces polyn\^{o}mes sont \`{a} coefficients r\'{e}els, et leurs racines (p\^{o}les et z\'{e}ros) sont soit r\'{e}elles, soit par paires complexes conjugu\'{e}es. 
+
+Consid\'{e}rons  à  titre d'exemple la suite causale  $h_n=a^{n}\1_\nset(n)$ avec $|a|<1$. La transformée en $z$ de cette suite est donnée par
+\begin{equation}
+\label{eq:definition-U}
+H(z)=\frac{1}{1-az^{-1}} = \frac{z}{z-a}
+\end{equation}
+sur la couronne $\ensemble{z \in \cset}{|z|>|a|}$. Remarquons que $z \mapsto U(z)$ est défini aussi sur le disque $\ensemble{z \in \cset}{|z|< a}$ et donc que la donnée de \eqref{eq:definition-U} sans préciser le domaine de convergence ne permet pas de reconstruire la suite. 
+Cette transform\'{e}e poss\`{e}de un z\'{e}ro en $z=z_1=0$ et un p\^{o}le en $z=p_{1}=a$. La \Cref{fig:FigMignotte-1} illustre le cas d'un p\^{o}le
+$a$ r\'{e}el. 
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.6\textwidth]{Figures/FigMignotte-1}\\
+  \caption{Réponse en fréquence de $z \mapsto U(z)= 1/(1-az^{-1})$}\label{fig:FigMignotte-1}
+\end{figure}
+
+Le calcul de la transform\'{e}e de Fourier requiert d'\'{e}valuer la transform\'{e}e en $z$ sur le cercle de rayon unit\'{e}. Pour une fr\'{e}quence
+$F_{0}$, on pose $z=\rme^{2\pi \rmi F_{0}}$ et donc
+$$
+U(\rme^{2\pi  \rmi F_{0}})=\frac{\rme^{2\pi \rmi F_{0}}}{\rme^{2\pi  \rmi F_{0}}-a}\ 
+$$
+Le num\'{e}rateur peut \^{e}tre consid\'{e}r\'{e} comme un vecteur joignant l'origine au point $z=e^{2\pi jF_{0}}$. Le d\'{e}nominateur peut \^{e}tre vu comme un
+vecteur joignant le point $z=a$ au point $z=\rme^{2\pi  \rmi F_{0}}$ Ces deux vecteurs sont not\'{e}s par $N$ et $B$. Le module de la transform\'{e}e de Fourier est donn\'{e} par le rapport entre longueurs des deux vecteurs.
+
+Quand la fr\'{e}quence change, le module du num\'{e}rateur ne change pas. Par contre le module du d\'{e}nominateur d\'{e}cro\^{i}t lorsque l'on se rapproche d'un p\^{o}le. Plus pr\'{e}cis\'{e}ment, lorsque $2\pi F_{0}$ se rapproche de l'argument d'un p\^{o}le, le d\'{e}nominateur devient petit, et le module de la transform\'{e}e de Fourier devient grand. {\it Le module de la transform \'{e}e de Fourier prend donc des valeurs importantes pour des valeurs de pulsations} $\Omega_{0}=2\pi F_{0}$ {\it proches de l}'{\it argument du  p\^{o}le}. Cette
+valeur sera d'autant plus \'{e}lev\'{e}e que le p\^{o}le a un module proche de l'unit\'{e}. On aurait pu tenir le m\^{e}me raisonnement avec les z\'{e}ros, qui occasionnent quant \`{a} eux des valeurs faibles (voire des z\'{e}ros de transmission) de la transform\'{e}e de Fourier. Ici pour $F_{0}=0$, le module du d\'{e}nominateur a une certaine valeur. Ce module cro\^{i}t au fur et \`{a} mesure que l'on s'\'{e}loigne de cette fr\'{e}quence et atteint son maximum en $F_{0}=-1$. Comme le spectre est p\'{e}riodique, cet effet se r\'{e}p\`{e}te. Par ailleurs, le signal est ici r\'{e}el et on a en plus que le module de la transform\'{e}e de Fourier est pair, et l'argument, impair. Ces consid\'{e}rations sont illustr\'{e}es par la transform\'{e}e de Fourier donn\'{e}e \`{a} la \Cref{fig:FigMignotte-2} pour $a=0.9$. L'argument est ici donn\'{e} par la diff\'{e}rence entre les angles $\theta$ et $\phi$ que les vecteurs $N$ et $B$ font avec l'axe r\'{e}el. Cet argument est aussi p\'{e}riodique, et est qu ant \`{a} lui, une fonction impaire de la fr\'{e}quence.
+
+Les consid\'{e}rations qui ont permis de pr\'{e}dire l'allure du spectre en module et argument peuvent aussi \^{e}tre utilis\'{e}es dans des situations plus compliqu\'{e}es. Consid\'{e}rant la transform\'{e}e en $z$ donn\'{e}e par \eqref{eq:transformee-z-generale}. Dans ce cas le module et l'argument sont donn\'{e}s par
+\begin{align*}
+|H\left(\rme^{2 \rmi \pi \nu}\right)|= \frac{\prod_{m=1}^N |1 -z_m \rme^{-2 \rmi \pi \nu}|}{\prod_{n=1}^N |1 - p_n \rme^{-2 \rmi \pi \nu}|} \\
+\end{align*}
+\begin{multline*}
+H\left(\rme^{2 \rmi \pi \nu}\right)\ =\ \arg C+\sum_{m=1}^{M}\arg(\rme^{2 \rmi \pi \nu}-z_{m}) \\-
+\sum_{m=1}^{N}\arg(\rme^{2 \rmi \pi \nu}-p_{n})
+\end{multline*}
+
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.6\textwidth]{Figures/FigMignotte-2}\\
+  \caption{Transform\'{e}e de Fourier, module en haut, argument en bas, de $h_n= a^n \1_\nset(n)$ pour $a=0.9$
+}\label{fig:FigMignotte-2}
+\end{figure}
+\section{Fonction de tranfert}
+On a vu que la sortie $\sequence{v}[n][\nset]$ d'un système linéaire invariant dans le temps de r\'{e}ponse impulsionnelle $\sequence{h}[n][\nset]$ est donn\'{e}e par la convolution du signal d'entr\'{e}e $\sequence{u}[n][\nset]$ et de la réponse impulsionnelle $\sequence{h}[n][\nset]$, \ie\ 
+$v_nj = (h * x)_n$ pour tout $n \in \zset$. La transformée en $z$ d'un produit de convolution étant égal au produit des transformées (la région de convergence étant l'intersection des régions de convergence de $U(z)$ et $H(z)$), nous avons donc
+$$
+V(z)=H(z)U(z) \eqsp.
+$$
+La transform\'{e}e en $z$, $H(z)$  de la r\'{e}ponse impulsionnelle $\sequence{h}[n][\zset]$ porte le nom de \emph{fonction de transfert} du syst\`{e}me lin\'{e}aire invariant. Cette transform\'{e}e en $z$, \'{e}valu\'{e}e sur le cercle de rayon unit\'{e} donne la transform\'{e}e de Fourier $H(\rme^{2 \rmi \pi \nu})$ de cette r\'{e}ponse impulsionnelle porte le nom de \emph{transmittance du syst\`{e}me} (on utilise aussi 
+fonction de transfert pour cette quantité, bien que cette terminologie soit un peu incorrecte).
+
+\subsection{Causalité et Stabilité}
+\begin{definition}[SLI causal]
+On dit qu'un système linéaire invariant dans le temps est causal si $h_n=0$ pour $n < 0$ où $\sequence{h}[n][\zset]$ est sa réponse impulsionnelle 
+\end{definition}
+On a vu que la région de convergence de la transform\'{e}e en $z$ d'une suite causale $\sequence{h}[n][\nset^]$ 
+est une couronne  $\ensemble{z \in \cset}{|z| \geq \limsup_{n \to \infty} |h_n|^{1/n}= R_-}$. Comme par définition
+une transform\'{e}e $H(p)= \infty$ lorsque $z= p$ est un pôle, une suite est causale si et seulement si
+tous les p\^{o}les sont n\'{e}cessairement contenus \`{a} l'int\'{e}rieur d'un disque.
+
+\begin{proposition}
+la fonction de transfert d'un syst\`{e}me causal (c'est-\`{a}-dire dont la r\'{e}ponse impulsionnelle est causale) a ses p\^{o}les \`{a} l'int\'{e}rieur d'un cercle.
+\end{proposition}
+
+\begin{definition}[SLI stable]
+un syst\`{e}me linéaire invariant dans le temps est stable si sa r\'{e}ponse impulsionnelle $\sequence{h}[n][\nset]$ est absolument sommable, 
+$$
+\sum_{n=-\infty}^{\infty}|h_n|<\infty \eqsp.
+$$
+\end{definition}
+Or,
+$$
+|H(z)|=|\sum_{n=-\infty}^{\infty}h_n z^{-n}|\leq\sum_{n=-\infty}^{\infty}|h_nz^{-n}|
+$$
+et sur le cercle de rayon unit\'{e},
+$$
+|H(\rme^{2 \rmi \pi \nu})|=|\sum_{n=-\infty}^{\infty} |h_n|
+$$
+et si le dernier terme est born\'{e}, cela signifie bien que la transform\'{e}e de Fourier à temps-discret existe.  Donc, pour que le syst\`{e}me soit stable, le cercle de rayon unit\'{e} doit être inclus dans la région de convergence de la fonction de transfert qui est un anneau en toute g\'{e}n\'{e}ralit\'{e}.
+
+Pour qu'un syst\`{e}me soit causal et stable, il faut que le cercle de rayon unit\'{e} appartienne au domaine de convergence, qui pour réponse causale est la couronne $\ensemble{z \in \cset}{|z| \geq R_-}$. Compte tenu de ce qui a \'{e}t\'{e} dit pr\'{e}c\'{e}demment, les p\^{o}les du syst\`{e}me doivent donc \^{e}tre contenus dans un disque $\ensemble{z \in \cset}{|z| < R}$ avec $R < 1$. 
+
+\subsection{Equations aux diff\'{e}rences}
+Lorsque le syst\`{e}me est r\'{e}gi par une \'{e}quation aux diff\'{e}rences du type
+$$
+\sum_{l=0}^{L}a_{l}y_{n-l}=\sum_{m=0}^{M}b_{m}x_{n-m}
+$$
+o\`{u} $\sequence{x}[n][\zset]$ et $\sequence{y}[n][\zset]$ sont les suites d'entr\'{e}e (excitation) et de sortie (r\'{e}ponse), on peut obtenir la r\'{e}ponse de r\'{e}gime en passant par la transform\'{e}e en $z$ bilat\'{e}rale. En utilisant les propri\'{e}t\'{e}s de lin\'{e}arit\'{e} et d\'{e}calage, on trouve finalement
+\begin{equation}
+\label{eq:tz-equation-difference}
+Y(z)\sum_{l=0}^{L}a_{l}z^{-l}=X(z)\sum_{m=0}^{M}b_{m}z^{-m}
+\end{equation}
+On en d\'{e}duit que la fonction de transfert $G(z)$ s'\'{e}crit
+$$
+G(z)=\frac{\sum^{M}b_{m}z^{-m}}{\sum_{l=0}b_{l}z^{-l}} \eqsp.
+$$
+Cette fonction de transfert peut encore se mettre sous la forme
+$$
+\prod^{M}(1-z_{m}z^{-1})
+$$
+$$
+G(z)=G_{0}\frac{m=1}{N}\text{   }(2.110)
+$$
+$$
+\prod_{n=1}(1-p_{n}z^{-1})
+$$
+avec $G_{0}=\displaystyle \lim_{z\rightarrow\infty}G(z)$ . Pour trouver la r\'{e}ponse impulsionnelle, il suffit de d\'{e}- composer cette \'{e}quation en fractions simples et d'inverser ces derni\`{e}res.
+
+A ce stade-ci, la r\'{e}gion de convergence de la transform\'{e}e n'est pas pr\'{e}cis\'{e}e.
+
+
