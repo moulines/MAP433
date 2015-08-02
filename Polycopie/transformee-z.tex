@@ -1,6 +1,4 @@
-\section{La transform\'{e}e en $z$}
-L'objet de cette section est de d\'{e}finir la transform\'{e}e en $z$, et de voir sous quelles conditions elle converge.
-\subsection{Transformée en $z$ directe}
+\section{Transformée en $z$: définition}
 \begin{definition}[Transformée en $z$]
 \label{def:transformee}
 La transform\'{e}e en $z$ d'une suite $\sequence{u}[n][\zset]$ est d\'{e}finie comme la s\'{e}rie $U(z)$ calcul\'{e}e comme suit:
@@ -87,7 +85,7 @@ $$
 avec un domaine de convergence $|z|>1$.
 \item La suite $u_n= a^n$ pour $n \in \zset$ n'a pas de transformée en $z$.
 \end{enumerate}
-\subsection{Transformée inverse}
+\section{Transformée inverse}
 Pour inverser une transform\'{e}e en $z$, on peut s'aider utilement du \emph{théorème de Cauchy} qui \'{e}tablit que
 \begin{equation}
 \label{eq:cauchy}
@@ -122,8 +120,7 @@ U(z)=\frac{1}{1-z^{-1}}
 $$
 et le domaine de convergence $|z|>1$. En utilisant la formule d'inversion, on a donc que
 \begin{align*}
-u_n\ &=\ \frac{1}{2\pi \rmi}\oint_{\Gamma}\frac{z^{n-1}}{1-z^{-1}}\rmd z
-&=\ \frac{1}{2\pi \rmi}\oint_{\Gamma}\frac{z^{n}}{z-1}\rmd z
+u_n\ =\ \frac{1}{2\pi \rmi}\oint_{\Gamma}\frac{z^{n-1}}{1-z^{-1}}\rmd z= \frac{1}{2\pi \rmi}\oint_{\Gamma}\frac{z^{n}}{z-1}\rmd z
 \end{align*}
 o\`{u} le contour $\Gamma$ peut \^{e}tre un cercle de rayon plus grand que l'unit\'{e}. Pour $n\geq 0$, on n'a qu'un p\^{o}le d'ordre 1 en $z=1$ qui est entour\'{e} par le contour. Le r\'{e}sidu en ce p\^{o}le est donn\'{e} par $r_{1}$ valant
 $$
@@ -143,7 +140,7 @@ u_n\ &=\ \frac{1}{2\pi j}\oint_{\Gamma}\frac{z^{n}}{z-1}\rmd  z \\
 \end{align*}
 o\`{u} le contour $\Gamma^{-}$ peut \^{e}tre un cercle de rayon inf\'{e}rieur \`{a} l'unit\'{e} et parcouru dans le sens anti-trogonométrique (à cause du changement de variable). Le contour $\Gamma^{+}$ est parcouru dans le sens trigonométrique et compense le signe -. Pour $n<0$, on n'a pas de p\^{o}le en $0$. Le seul p\^{o}le est en $w=1$ mais n'est pas entour\'{e} par le domaine d'int\'{e}gration qui doit appartenir au domaine de convergence, soit $|w|<1$. Aucun p\^{o}le n'est donc entour\'{e} et la somme des r\'{e}sidus est nulle.
 \end{example}
-\subsection{D\'{e}compositions en fractions simples}
+\section{D\'{e}compositions en fractions simples}
 En utilisant d'ores et d\'{e}j\`{a} la propri\'{e}t\'{e} de lin\'{e}arit\'{e} de la transform\'{e}e en $z$, qui sera vue plus loin, on peut d\'{e}composer une fonction de forme compliqu\'{e}e en une somme de fonctions simples, et prendre la transform\'{e}e inverse de chacun des \'{e}l\'{e}ments. Comme on le verra, de nombreux syst\`{e}mes requi\`{e}rent l'\'{e}tude de transform\'{e}es du type
 \begin{equation}
 \label{eq:definition-U}
@@ -215,8 +212,8 @@ u_n=\delta_n +4\times 2^{n-1} \1_{\nset}(n-1)-\1_{\nset}(n-1) \eqsp.
 $$
 Cette forme est moins concise que la pr\'{e}c\'{e}dente.
 \end{example}
-\subsection{Propri\'{e}t\'{e}s de la transform\'{e}e en $z$}
-\subsubsection{Lin\'{e}arit\'{e}}
+\section{Propri\'{e}t\'{e}s de la transform\'{e}e en $z$}
+\subsection{Lin\'{e}arit\'{e}}
 La lin\'{e}arit\'{e} de la transformation signifie que la transform\'{e}e d'une suite obtenue par combinaison lin\'{e}aire d'autres suites n'est rien d'autre que la combinaison lin\'{e}aire des transform\'{e}es correspondantes. Sidonc
 $$
 u_n=a x_n +b y_n
@@ -476,24 +473,23 @@ $$
 %$$
 %x(\mathrm{O})=\lim_{z\rightarrow\infty}X(z)=1\ (2.83)
 %$$
-\subsection{Pôles et zéros}
+\section{Pôles et zéros}
 Dans de nombreux cas d'intérêt, la transformée en $z$ est une fraction rationnelle
 \begin{equation}
 \label{eq:transformee-z-generale}
 H(z)= \frac{\prod_{m=1}^N (1 -z_m z^{-1})}{\prod_{n=1}^N (1 - p_n z^{-1})}
-\prod^{M}(z-z_{m})
 \end{equation}
-o\`{u} les $\{ z_{m} \}_{m=1}^M$ sont les \emph{z\'{e}ros}, et les $\{ p_{n} \}_{n=1}^N$ sont les \emph{p\^{o}les}. 
-Pour des signaux et systèmes r\'{e}els, ces polyn\^{o}mes sont \`{a} coefficients r\'{e}els, et leurs racines (p\^{o}les et z\'{e}ros) sont soit r\'{e}elles, soit par paires complexes conjugu\'{e}es. 
+o\`{u} les $\{ z_{m} \}_{m=1}^M$ sont les \emph{z\'{e}ros}, et les $\{ p_{n} \}_{n=1}^N$ sont les \emph{p\^{o}les}.
+Pour des signaux et systèmes r\'{e}els, ces polyn\^{o}mes sont \`{a} coefficients r\'{e}els, et leurs racines (p\^{o}les et z\'{e}ros) sont soit r\'{e}elles, soit par paires complexes conjugu\'{e}es.
 
 Consid\'{e}rons  à  titre d'exemple la suite causale  $h_n=a^{n}\1_\nset(n)$ avec $|a|<1$. La transformée en $z$ de cette suite est donnée par
 \begin{equation}
 \label{eq:definition-U}
 H(z)=\frac{1}{1-az^{-1}} = \frac{z}{z-a}
 \end{equation}
-sur la couronne $\ensemble{z \in \cset}{|z|>|a|}$. Remarquons que $z \mapsto U(z)$ est défini aussi sur le disque $\ensemble{z \in \cset}{|z|< a}$ et donc que la donnée de \eqref{eq:definition-U} sans préciser le domaine de convergence ne permet pas de reconstruire la suite. 
+sur la couronne $\ensemble{z \in \cset}{|z|>|a|}$. Remarquons que $z \mapsto U(z)$ est défini aussi sur le disque $\ensemble{z \in \cset}{|z|< a}$ et donc que la donnée de \eqref{eq:definition-U} sans préciser le domaine de convergence ne permet pas de reconstruire la suite.
 Cette transform\'{e}e poss\`{e}de un z\'{e}ro en $z=z_1=0$ et un p\^{o}le en $z=p_{1}=a$. La \Cref{fig:FigMignotte-1} illustre le cas d'un p\^{o}le
-$a$ r\'{e}el. 
+$a$ r\'{e}el.
 \begin{figure}
   \centering
   % Requires \usepackage{graphicx}
@@ -502,15 +498,13 @@ $a$ r\'{e}el.
 \end{figure}
 
 Le calcul de la transform\'{e}e de Fourier requiert d'\'{e}valuer la transform\'{e}e en $z$ sur le cercle de rayon unit\'{e}. Pour une fr\'{e}quence
-$F_{0}$, on pose $z=\rme^{2\pi \rmi F_{0}}$ et donc
+$\nu$, on pose $z=\cfoo$ et donc
 $$
-U(\rme^{2\pi  \rmi F_{0}})=\frac{\rme^{2\pi \rmi F_{0}}}{\rme^{2\pi  \rmi F_{0}}-a}\ 
+U(\cfoo)=\frac{\cfoo}{\rme^{\cfoo-a}}\
 $$
-Le num\'{e}rateur peut \^{e}tre consid\'{e}r\'{e} comme un vecteur joignant l'origine au point $z=e^{2\pi jF_{0}}$. Le d\'{e}nominateur peut \^{e}tre vu comme un
-vecteur joignant le point $z=a$ au point $z=\rme^{2\pi  \rmi F_{0}}$ Ces deux vecteurs sont not\'{e}s par $N$ et $B$. Le module de la transform\'{e}e de Fourier est donn\'{e} par le rapport entre longueurs des deux vecteurs.
-
-Quand la fr\'{e}quence change, le module du num\'{e}rateur ne change pas. Par contre le module du d\'{e}nominateur d\'{e}cro\^{i}t lorsque l'on se rapproche d'un p\^{o}le. Plus pr\'{e}cis\'{e}ment, lorsque $2\pi F_{0}$ se rapproche de l'argument d'un p\^{o}le, le d\'{e}nominateur devient petit, et le module de la transform\'{e}e de Fourier devient grand. {\it Le module de la transform \'{e}e de Fourier prend donc des valeurs importantes pour des valeurs de pulsations} $\Omega_{0}=2\pi F_{0}$ {\it proches de l}'{\it argument du  p\^{o}le}. Cette
-valeur sera d'autant plus \'{e}lev\'{e}e que le p\^{o}le a un module proche de l'unit\'{e}. On aurait pu tenir le m\^{e}me raisonnement avec les z\'{e}ros, qui occasionnent quant \`{a} eux des valeurs faibles (voire des z\'{e}ros de transmission) de la transform\'{e}e de Fourier. Ici pour $F_{0}=0$, le module du d\'{e}nominateur a une certaine valeur. Ce module cro\^{i}t au fur et \`{a} mesure que l'on s'\'{e}loigne de cette fr\'{e}quence et atteint son maximum en $F_{0}=-1$. Comme le spectre est p\'{e}riodique, cet effet se r\'{e}p\`{e}te. Par ailleurs, le signal est ici r\'{e}el et on a en plus que le module de la transform\'{e}e de Fourier est pair, et l'argument, impair. Ces consid\'{e}rations sont illustr\'{e}es par la transform\'{e}e de Fourier donn\'{e}e \`{a} la \Cref{fig:FigMignotte-2} pour $a=0.9$. L'argument est ici donn\'{e} par la diff\'{e}rence entre les angles $\theta$ et $\phi$ que les vecteurs $N$ et $B$ font avec l'axe r\'{e}el. Cet argument est aussi p\'{e}riodique, et est qu ant \`{a} lui, une fonction impaire de la fr\'{e}quence.
+Quand la fr\'{e}quence change, le module du num\'{e}rateur ne change pas. Par contre le module du d\'{e}nominateur d\'{e}cro\^{i}t lorsque l'on se rapproche d'un p\^{o}le. Plus pr\'{e}cis\'{e}ment, lorsque $2\pi \nu$ se rapproche de l'argument d'un p\^{o}le, le d\'{e}nominateur devient petit, et le module de la transform\'{e}e de Fourier devient grand.  Le module de la transform \'{e}e de Fourier prend donc des valeurs importantes pour des valeurs de pulsations proches de l'argument du  p\^{o}le. Cette
+valeur sera d'autant plus \'{e}lev\'{e}e que le p\^{o}le a un module proche de l'unit\'{e}. On aurait pu tenir le m\^{e}me raisonnement avec les z\'{e}ros, qui occasionnent quant \`{a} eux des valeurs faibles (voire des z\'{e}ros de transmission) de la transform\'{e}e de Fourier. 
+Ici pour $\nu=0$, le module du d\'{e}nominateur a une certaine valeur. Ce module cro\^{i}t au fur et \`{a} mesure que l'on s'\'{e}loigne de cette fr\'{e}quence et atteint son maximum en $\nu=-1$.  Par ailleurs, le signal est ici r\'{e}el et on a en plus que le module de la transform\'{e}e de Fourier est pair, et l'argument, impair. Ces consid\'{e}rations sont illustr\'{e}es par la transform\'{e}e de Fourier donn\'{e}e \`{a} la \Cref{fig:FigMignotte-2} pour $a=0.9$. 
 
 Les consid\'{e}rations qui ont permis de pr\'{e}dire l'allure du spectre en module et argument peuvent aussi \^{e}tre utilis\'{e}es dans des situations plus compliqu\'{e}es. Consid\'{e}rant la transform\'{e}e en $z$ donn\'{e}e par \eqref{eq:transformee-z-generale}. Dans ce cas le module et l'argument sont donn\'{e}s par
 \begin{align*}
@@ -529,19 +523,19 @@ H\left(\rme^{2 \rmi \pi \nu}\right)\ =\ \arg C+\sum_{m=1}^{M}\arg(\rme^{2 \rmi \
 }\label{fig:FigMignotte-2}
 \end{figure}
 \section{Fonction de tranfert}
-On a vu que la sortie $\sequence{v}[n][\nset]$ d'un système linéaire invariant dans le temps de r\'{e}ponse impulsionnelle $\sequence{h}[n][\nset]$ est donn\'{e}e par la convolution du signal d'entr\'{e}e $\sequence{u}[n][\nset]$ et de la réponse impulsionnelle $\sequence{h}[n][\nset]$, \ie\ 
+On a vu que la sortie $\sequence{v}[n][\nset]$ d'un système linéaire invariant dans le temps de r\'{e}ponse impulsionnelle $\sequence{h}[n][\nset]$ est donn\'{e}e par la convolution du signal d'entr\'{e}e $\sequence{u}[n][\nset]$ et de la réponse impulsionnelle $\sequence{h}[n][\nset]$, \ie\
 $v_nj = (h * x)_n$ pour tout $n \in \zset$. La transformée en $z$ d'un produit de convolution étant égal au produit des transformées (la région de convergence étant l'intersection des régions de convergence de $U(z)$ et $H(z)$), nous avons donc
 $$
 V(z)=H(z)U(z) \eqsp.
 $$
-La transform\'{e}e en $z$, $H(z)$  de la r\'{e}ponse impulsionnelle $\sequence{h}[n][\zset]$ porte le nom de \emph{fonction de transfert} du syst\`{e}me lin\'{e}aire invariant. Cette transform\'{e}e en $z$, \'{e}valu\'{e}e sur le cercle de rayon unit\'{e} donne la transform\'{e}e de Fourier $H(\rme^{2 \rmi \pi \nu})$ de cette r\'{e}ponse impulsionnelle porte le nom de \emph{transmittance du syst\`{e}me} (on utilise aussi 
+La transform\'{e}e en $z$, $H(z)$  de la r\'{e}ponse impulsionnelle $\sequence{h}[n][\zset]$ porte le nom de \emph{fonction de transfert} du syst\`{e}me lin\'{e}aire invariant. Cette transform\'{e}e en $z$, \'{e}valu\'{e}e sur le cercle de rayon unit\'{e} donne la transform\'{e}e de Fourier $H(\rme^{2 \rmi \pi \nu})$ de cette r\'{e}ponse impulsionnelle porte le nom de \emph{transmittance du syst\`{e}me} (on utilise aussi
 fonction de transfert pour cette quantité, bien que cette terminologie soit un peu incorrecte).
 
-\subsection{Causalité et Stabilité}
+\section{Causalité et Stabilité}
 \begin{definition}[SLI causal]
-On dit qu'un système linéaire invariant dans le temps est causal si $h_n=0$ pour $n < 0$ où $\sequence{h}[n][\zset]$ est sa réponse impulsionnelle 
+On dit qu'un système linéaire invariant dans le temps est causal si $h_n=0$ pour $n < 0$ où $\sequence{h}[n][\zset]$ est sa réponse impulsionnelle
 \end{definition}
-On a vu que la région de convergence de la transform\'{e}e en $z$ d'une suite causale $\sequence{h}[n][\nset^]$ 
+On a vu que la région de convergence de la transform\'{e}e en $z$ d'une suite causale $\sequence{h}[n][\nset^]$
 est une couronne  $\ensemble{z \in \cset}{|z| \geq \limsup_{n \to \infty} |h_n|^{1/n}= R_-}$. Comme par définition
 une transform\'{e}e $H(p)= \infty$ lorsque $z= p$ est un pôle, une suite est causale si et seulement si
 tous les p\^{o}les sont n\'{e}cessairement contenus \`{a} l'int\'{e}rieur d'un disque.
@@ -551,7 +545,7 @@ la fonction de transfert d'un syst\`{e}me causal (c'est-\`{a}-dire dont la r\'{e
 \end{proposition}
 
 \begin{definition}[SLI stable]
-un syst\`{e}me linéaire invariant dans le temps est stable si sa r\'{e}ponse impulsionnelle $\sequence{h}[n][\nset]$ est absolument sommable, 
+un syst\`{e}me linéaire invariant dans le temps est stable si sa r\'{e}ponse impulsionnelle $\sequence{h}[n][\nset]$ est absolument sommable,
 $$
 \sum_{n=-\infty}^{\infty}|h_n|<\infty \eqsp.
 $$
@@ -566,34 +560,110 @@ $$
 $$
 et si le dernier terme est born\'{e}, cela signifie bien que la transform\'{e}e de Fourier à temps-discret existe.  Donc, pour que le syst\`{e}me soit stable, le cercle de rayon unit\'{e} doit être inclus dans la région de convergence de la fonction de transfert qui est un anneau en toute g\'{e}n\'{e}ralit\'{e}.
 
-Pour qu'un syst\`{e}me soit causal et stable, il faut que le cercle de rayon unit\'{e} appartienne au domaine de convergence, qui pour réponse causale est la couronne $\ensemble{z \in \cset}{|z| \geq R_-}$. Compte tenu de ce qui a \'{e}t\'{e} dit pr\'{e}c\'{e}demment, les p\^{o}les du syst\`{e}me doivent donc \^{e}tre contenus dans un disque $\ensemble{z \in \cset}{|z| < R}$ avec $R < 1$. 
+Pour qu'un syst\`{e}me soit causal et stable, il faut que le cercle de rayon unit\'{e} appartienne au domaine de convergence, qui pour réponse causale est la couronne $\ensemble{z \in \cset}{|z| \geq R_-}$. Compte tenu de ce qui a \'{e}t\'{e} dit pr\'{e}c\'{e}demment, les p\^{o}les du syst\`{e}me doivent donc \^{e}tre contenus dans un disque $\ensemble{z \in \cset}{|z| < R}$ avec $R < 1$.
 
-\subsection{Equations aux diff\'{e}rences}
+\section{Equations aux diff\'{e}rences}
+\subsection{fonction de transfert}
 Lorsque le syst\`{e}me est r\'{e}gi par une \'{e}quation aux diff\'{e}rences du type
-$$
-\sum_{l=0}^{L}a_{l}y_{n-l}=\sum_{m=0}^{M}b_{m}x_{n-m}
-$$
+\begin{equation}
+\label{eq:equation-aux-differences}
+\sum_{l=0}^{N}a_{l}y_{n-l}=\sum_{m=0}^{M}b_{m}x_{n-m}
+\end{equation}
 o\`{u} $\sequence{x}[n][\zset]$ et $\sequence{y}[n][\zset]$ sont les suites d'entr\'{e}e (excitation) et de sortie (r\'{e}ponse), on peut obtenir la r\'{e}ponse de r\'{e}gime en passant par la transform\'{e}e en $z$ bilat\'{e}rale. En utilisant les propri\'{e}t\'{e}s de lin\'{e}arit\'{e} et d\'{e}calage, on trouve finalement
 \begin{equation}
 \label{eq:tz-equation-difference}
-Y(z)\sum_{l=0}^{L}a_{l}z^{-l}=X(z)\sum_{m=0}^{M}b_{m}z^{-m}
+Y(z)\sum_{l=0}^{N}a_{l}z^{-l}=X(z)\sum_{m=0}^{M}b_{m}z^{-m}
 \end{equation}
-On en d\'{e}duit que la fonction de transfert $G(z)$ s'\'{e}crit
+On en d\'{e}duit que la fonction de transfert $G(z)$
 $$
-G(z)=\frac{\sum^{M}b_{m}z^{-m}}{\sum_{l=0}b_{l}z^{-l}} \eqsp.
+G(z)=\frac{\sum^{M}b_{m}z^{-m}}{\sum_{l=0}^L a_{l}z^{-l}} \eqsp
 $$
-Cette fonction de transfert peut encore se mettre sous la forme
+est une fraction rationnelle (en $z^{-1}$). Il est souvent pratique de factoriser les polynômes apparaissant
+au numérateur et au dénominateur, \ie\ d'écrire
 $$
-\prod^{M}(1-z_{m}z^{-1})
+G(z)= \frac{b_0}{a_0} \frac{\prod_{k=1}^M (1-c_k z^{-1})}{\prod_{l=1}^N (1-d_k z^{-1})}
 $$
-$$
-G(z)=G_{0}\frac{m=1}{N}\text{   }(2.110)
-$$
-$$
-\prod_{n=1}(1-p_{n}z^{-1})
-$$
-avec $G_{0}=\displaystyle \lim_{z\rightarrow\infty}G(z)$ . Pour trouver la r\'{e}ponse impulsionnelle, il suffit de d\'{e}- composer cette \'{e}quation en fractions simples et d'inverser ces derni\`{e}res.
+Chaque facteur au numérateur $(1-c_k z^{-1})$ sont associés à un zéro en $z= c_k$ et un pôle en $z=0$.
+Chaque facteur au dénominateur est  associé à un pôle en $z=d_k$
+et un zéro en  $z=0$.
+\subsection{causalité et stabilité}
+Pour obtenir \eqref{eq:tz-equation-difference} à partir de \eqref{eq:equation-aux-differences}, nous avons supposé que \eqref{eq:equation-aux-differences} représentait un système linéaire invariant dans le temps, mais nous n'avons pas fait d'hypothèses supplémentaires sur la stabilité ou la causalité du système. Pour spécifier réellement la relation d'entrée-sortie associée à \eqref{eq:equation-aux-differences}, il est maintenant important de considérer précisément les domaines de convergence, car comme nous le verrons \eqref{eq:equation-aux-differences} ne spécifie pas une unique relation de filtrage mais un ensemble de relations de filtrages, associées à la fois aux différents domaines de convergence de la fonction de transfert $G(z)$ et du domaine de convergence de l'entrée $X(z)$. Pour une fraction rarionnelle, chaque choix de la région de convergence sera associé à une réponse impulsionnelle différente, bien qu'étant associée à la \emph{même} équation aux différences. Une certaine prudence s'impose donc !
+Supposons que $M < N$ et que les pôles sont simples. Dans ce cas $G(z)$ peut se développer de la façon suivante
+\[
+G(z)= \sum_{k=1}^N \frac{A_k}{1 - d_k z^{-1}} \eqsp,
+\]
+où $A_k= (1-d_k z^{-1}) A(z)\vert_{z=d_k}$.  Lorsque $M > N$, on doit tout d'abord procéder à la division euclidienne du numérateur par le dénominateur, puis on applique le résultat précédent au reste de cette division euclidienne
+\[
+G(z)= \sum_{r=0}^{M-N} B_r z^{-r} + \sum_{k=1}^N \frac{A_k}{1-d_k z^{-1}} \eqsp.
+\]
+Pour obtenir les solutions causales, nous développons
+\[
+\frac{1}{1-d_k z^{-1}} = \sum_{j=0}^{\infty} d_k^j z^{-j} \eqsp,
+\]
+qui converge sur la couronne $\ensemble{z \in \cset}{|d_k| \leq |z|}$. Le domaine de convergence de la solution causale est donc $R_- = \max ( |d_k|, k \in \{1,\dots,N\})$ et la réponse associée est donc
+\[
+G(z)= \sum_{r=0}^{M-N} B_r z^{-r} + \sum_{k=1}^N A_k \sum_{j=0}^{\infty} d_k^j z^{-j} \eqsp.
+\]
+La réponse impusionnelle est stable si le cercle unité est élément de la région de convergence, ce qui implique que tous les pôles sont \emph{à l'intérieur du disque unité} (dans ce cas, $R_- < 1$).
 
-A ce stade-ci, la r\'{e}gion de convergence de la transform\'{e}e n'est pas pr\'{e}cis\'{e}e.
+Si cette condition n'est pas satisfaite, il peut néanmoins exister une réponse stable. Supposons que $A(z) \ne 0$ pour $|z|=1$ (le système n'a pas de pôles sur le cercle unité). Nous utilisons les développements suivants
+\begin{equation}
+\label{eq:developpement-pole}
+\begin{cases}
+|d_k| < 1 & \frac{1}{1-d_k z^{-1}}= \sum_{j=0}^\infty d_k^j z^{-j} \\
+ \mathrm{DC} \quad \ensemble{ z \in \cset}{|d_k| \leq |z|} \\
+|d_k| > 1 & \frac{1}{1-d_k z^{-1}}= - \frac{d_k^{-1} z}{1 - d_k^{-1} z} = - \sum_{j=1}^\infty d_k^j z^{-j} \\
+ \mathrm{DC} \quad \ensemble{z \in \cset}{|z| < |d_k|}
+\end{cases}
+\end{equation}
+Le domaine de convergence est alors une couronne $R_- = \max \{ |d_k| < 1, k \in \{1, \dots, N\} \}$ et $R_+= \min \{ |d_k| > 1, k \in \{1, \dots, N\} \}$.
+\begin{example}
+Considérons la fonction de transfert
+\[
+G(z)= \frac{1-az^{-1}}{1-bz^{-1}} .
+\]
+Supposons que $|a| < 1$ et $|b| < 1$. La fonction de transfert a un zéro en $z=a$ et un pôle en $z=b$. Ce pôle est élément du disque unité ouvert et cette fonction de transfert admet donc un développement causal stable. Nous avons en effet
+\[
+\frac{1-az^{-1}}{1-bz^{-1}} = c + \frac{1-c}{1-b z^{-1}} \eqsp, \quad c= a/b \eqsp.
+\]
+Cette fraction rationelle admet un développement causal stable sur la couronne $\ensemble{z \in \cset}{|b| \leq |z|}$:
+\[
+G(z) = c + (1-c) \sum_{j=0}^\infty b^j z^{-j} \eqsp.
+\]
+On peut chercher à inverser ce système, c'est à dire trouver la fonction de transfert $G_1(z)$ qui soit telle que $G(z) G_1(z)= 1$.
+Nous avons alors 
+\[
+G_1(z)= \frac{1-bz^{-1}}{1-a z^{-1}}
+\]
+Cette fonction de transfert admet un pôle en $a$ et comme $|a| < 1$, la fonction de transfert inverse admet aussi un développement causal stable. 
+\end{example}
+\begin{example}[filtre passe-tout]
+Considérons le filtre de fonction de transfert
+\[
+G(z)= \frac{z^{-1} - \bar{a}}{1-a z^{-1}} \eqsp, \quad |a| \ne 1
+\]
+On remarque que le module de la réponse en fréquence de ce filtre est constant, \ie\ 
+\[
+G(\cfoo)= \frac{\foo - \bar{a}}{1 - a \foo}= \foo \frac{1 - \bar{a} \cfoo}{1 - a \foo} \eqsp,
+\]
+ce qui implique que $|G(\cfoo)|= 1$ pour tout $\nu \in \toref$. Un tel système est appelé un "passe-tout". De façon générale, la fonction de transfert d'un filtre passe-tout est donnée par
+\[
+G(z)= \prod_{k=1}^M \frac{z^{-1} - d_k}{1 - d_k z^{-1}} \prod_{k=1}^M \frac{(z^{-1} - \bar{e}_k)(z^{-1}-e_k)}{(1-e_k z^{-1})(1-\bar{e}_k z^{-1})} \eqsp, 
+\]
+où $d_k$, $k \in \{1,\dots,M\}$ sont les pôles réels et $e_k$, $k \in \{1,\dots,M\}$ sont les pôles complexes.
+ 
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \begin{tabular}{cc}
+  \includegraphics[width=0.4\textwidth]{Figures/polezero}& \includegraphics[width=0.4\textwidth]{Figures/phasedelay1}\\
+  \caption{Pôles et zéros et phase d'un filtre passe tout du premier ordre avec $a=0.9$}\label{fig:passetout-1}
+  \end{tabular}
+\end{figure}
 
 
+\end{example}
+
+\begin{example}[Filtre de Karplus-Strong]
+
+\end{example}
