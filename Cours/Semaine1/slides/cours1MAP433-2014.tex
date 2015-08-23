@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb,amstext}
 \usepackage{amsfonts}
+\usepackage{bbm}
 
 %\usepackage[latin1]{inputenc}
 \usepackage[french]{babel}
@@ -23,7 +24,9 @@
 \newtheorem{terminologie}{Terminologie}
 \newenvironment{dem}{\textbf{Proof}}{\flushright$\blacksquare$\\}
 
+\def\eqsp{\,}
 \DeclareMathOperator{\E}{{\mathbb E}}
+\def\PE{\E}
 \DeclareMathOperator{\F}{{\mathbb F}}
 \DeclareMathOperator{\G}{{\mathbb G}}
 \DeclareMathOperator{\D}{{\mathbb D}}
@@ -55,14 +58,19 @@
 \DeclareMathOperator{\estMVc}{\widehat \vartheta_{n,0}^{\,{\tt mv}}}
 \DeclareMathOperator{\Xbar}{\overline{\mathnormal{X}}_\mathnormal{n}}
 
-
+\newcommand{\indi}[1]{\mathbbm{1}_{#1}}
+\newcommand{\coint}[1]{\left[#1\right)}
+\newcommand{\ocint}[1]{\left(#1\right]}
+\newcommand{\ooint}[1]{\left(#1\right)}
+\newcommand{\ccint}[1]{\left[#1\right]}
+\newcommand{\Id}{\mathrm{I}}
 
 
 \title{MAP 433 : Introduction aux méthodes statistiques}
 %\author{M. Hoffmann}
 %\institute{Université Paris-Est and ETG}
 \begin{document}
-\date{31 janvier 2014}
+\date{28 Ao˚t 2015}
 \maketitle
 
 
@@ -89,35 +97,22 @@
 
 %Alexandre Tsybakov, ENSAE (cours 1 \`a 5)\\
 %{\small \hspace{3mm} alexandre.tsybakov@ensae.fr}\\
-Marc Hoffmann, Universit\'e Paris-Dauphine \\
+Eric  MOULINES, Ecole Polytechnique \\
 %\begin{center}
-{\small \hspace{3mm} hoffmann@ceremade.dauphine.fr}
+{\small \hspace{3mm} eric.moulines@polytechnique.edu}
 %\end{center}
 \vspace{4mm}
 
 {\color{red} PC}
 \begin{itemize}
-\item Stéphane Gaiffas, \'Ecole Polytechnique.
-\item Christophe Giraud, Université Paris-Sud et \'Ecole Polytechnique. 
-\item Guillaume Lecu\'e,  \'Ecole Polytechnique.
-\item Mathieu Rosenbaum, Université Pierre-et-Marie Curie.
+\item Gersende Fort, DR CNRS, T\'el\'ecom ParisTech,
+\item Lucas G\'erin, \'Ecole Polytechnique,
+\item Christophe Giraud, Université Paris-Sud et \'Ecole Polytechnique,
+\item Marc Lavielle, DR INRIA, INRIA Saclay, 
+\item Matthieu Lerasle, CR CNRS, Universit\'e de Nice,
+\item Mathieu Rosenbaum, Université Pierre-et-Marie Curie,
+\item Francois Roueff, Professeur, T\'el\'ecom ParisTech.
 \end{itemize}
-\end{frame}
-\begin{frame}
-\frametitle{Organisation : agenda} {\color{red} Cours et PC
-\vspace{2mm}}
-
-Les vendredis 31 janvier, 7 février, 14 février, 21 février, 7 mars, 21 mars, 28
-mars, 4 avril, 11 avril. \vspace{0.7cm}
-
-{\color{red} Evaluation}
-\begin{itemize}
-\item {\color{red} Contrôle classant} : noté sur $20$.
-%\item {\color{red} Participation aux PC} : noté sur 2.
-\item {\color{red} Projet en binôme} : (présentés le 7 février) noté sur 4.
-\end{itemize}
-%\hline
-Fournit une note tronquée à 20 et convertie en note littérale.
 \end{frame}
 
 
@@ -134,16 +129,15 @@ Fournit une note tronquée à 20 et convertie en note littérale.
 \end{itemize}
 \end{frame}
 
-\section{Présentation (succinte) du cours}
+\section{Présentation (succincte) du cours}
 
 \begin{frame}
-\frametitle{Présentation (succinte) du cours}
+\frametitle{Présentation (succincte) du cours}
 \begin{itemize}
 \item Echantillonnage et modélisation statistique. Expérience statistique {\color{red} (2 cours)}.
 \item Méthodes d'estimation classique  {\color{red} (2 cours)}.
 \item Information statistique, théorie asymptotique pour l'estimation  {\color{red} (2 cours)}.
 \item Décision statistique et tests  {\color{red} (2 cours)}.
-\item {\color{red} 1 cours} d'ouverture ou de compléments {\small (en fonction de l'auditoire)}.
 \end{itemize}
 \end{frame}
 
@@ -221,7 +215,6 @@ d'activit\'e par tranche d'\^age hommes vs. femmes}
 \begin{itemize}
 \item \og Statistik\fg\; (dérivé du latin Statisticum). Allemagne, 1740 (Achenwall). {\color{red}Ensemble de mesures} et recueil de données nécessaires au fonctionnement et à l'organisation de l'état : recensements et estimations de la population, des richesses, de l'impôt, des armées.
 \item Les progrès de la statistique : représenta\-tion graphique et {\color{red}organisation des données en tableaux} (statistique descriptive, dominée par l'école allemande au $18^e$ siècle). Activité importante aussi en Grande Bretagne\footnote{William Playfair (1759--1823), 1786, "The Commercial and Political Atlas" contenant le premier diagramme en barres connu.} et dans une France centralisée.\footnote{Vauban, 1686,  "Méthode générale et facile pour faire le dénombrement des peuples".}
-%En 1800, Bonaparte institue les préfets et un "bureau de la statistique de la République".}\\
 \end{itemize}
 \end{frame}
 
@@ -232,15 +225,15 @@ d'activit\'e par tranche d'\^age hommes vs. femmes}
 \item Basculement de la statistique vers une {\color{red}discipline scientifique} à part entière. Préfigure l'actuariat moderne\footnote{les frêres Hyugens, premier calcul de l'espérance de vie humaine en 1669, Graunt (1620--1674), William Petty (1623--1687), Laplace.}.
 \item L'exemple historique incontournable : {\color{red}John Arbuthnott} (1667--1735) et le déficit des naissances et morts selon le sexe.
 -- la première reflexion \og moderne \fg\; de statistique.
-% et qui préfugurent l'actuariat. 
-%Les noms souvent cités sont  Nous exposons brièvement la figure de 
+% et qui préfugurent l'actuariat.
+%Les noms souvent cités sont  Nous exposons brièvement la figure de
 \end{itemize}
 \end{frame}
 \begin{frame}
 \frametitle{John Arbuthnott et \og{}la divine providence\fg{}}
 \begin{itemize}
 \item 1712, Arbuthnott (médecin de la Reine Anne) examine le nombre de baptêmes de filles et de garçons à Londres, entre 1629 et 1710.
-%, voir le Tableau \ref{}, extrait\footnote{{\tt http://www.taieb.net/auteurs/Arbuthnot/Arbuthnot.html}.} de Arbuthnott \ref{ARBU}, pp. 189--190. 
+%, voir le Tableau \ref{}, extrait\footnote{{\tt http://www.taieb.net/auteurs/Arbuthnot/Arbuthnot.html}.} de Arbuthnott \ref{ARBU}, pp. 189--190.
 \item Sur 82 années retenues, le nombre de naissances masculines est toujours supérieur au nombre de naissance féminines.
 \item Arbuthnott calcule la probabilité que les naissances masculines (avec équi-probabilité filles/garçons) soient plus nombreuses que les naissances féminines, 82 fois de suite ($=(1/2)^{82}$), {\it \og which will be found easily by the Table of Logarithms to be 1/4 8360 0000 0000 0000 0000 0000 \fg}.
 \end{itemize}
@@ -248,7 +241,7 @@ d'activit\'e par tranche d'\^age hommes vs. femmes}
 
 \begin{frame}
 \frametitle{An Argument for Divine Providence}
-% {\it An Argument for Divine Providence, taken frome the constant Regularity observed in the Births of both Sexes} 
+% {\it An Argument for Divine Providence, taken frome the constant Regularity observed in the Births of both Sexes}
 \begin{itemize}
 \item {\it An Argument for Divine Providence, taken frome the constant Regularity observed in the Births of both Sexes}
 %l'excédent de naissnces masculines de la manière suivante
@@ -385,11 +378,11 @@ $$
 \end{frame}
 \begin{frame}
 c'est-à-dire
-$$\boxed{\PP^X(dx) = f(x)1_{\big\{x < 1\big\}}dx + \Big( \int_{[1,+\infty)}f(u)du\Big)\delta_1(dx)}$$
+$$\boxed{\PP^X(dx) = f(x)1_{\big\{x < 1\big\}}dx + \Big( \int_{\coint{1,+\infty}}f(u)du\Big)\delta_1(dx)}$$
 \underline{Formule de calcul}
 \begin{align*}
 \E\big[\varphi(X)\big] &= \int_{\R}\varphi(x)\PP^X(dx)\\
-& = \int_{(-\infty,1)}\varphi(x)f(x)dx+\Big(\int_{[1,+\infty)}f(u)du\Big)\varphi(1).
+& = \int_{(-\infty,1)}\varphi(x)f(x)dx+\Big(\int_{\coint{1,+\infty}}f(u)du\Big)\varphi(1).
 \end{align*}
 \end{frame}
 \subsection{Fonction de répartition empirique}
@@ -417,7 +410,7 @@ $$F(x) := \PP\big[X \leq x\big],\;x\in \R.$$
 \item
 $F$ est croissante, cont. à droite, $F(-\infty)=0$, $F(+\infty)=1$
 \item $F$ {\color{red} caractérise} la loi $\PP^X$ :
-$$\boxed{\PP^X\big[(a,b]\big] = \PP\big[a < X \leq b\big] = F(b)-F(a)}$$
+$$\boxed{\PP^X\big[\ocint{a,b}\big] = \PP\big[a < X \leq b\big] = F(b)-F(a)}$$
 \item Désormais, la {\color{red} loi (distribution)} de $X$ désignera indifféremment $F$ ou $\PP^X$.
 \end{itemize}
 \end{frame}
@@ -523,9 +516,26 @@ Problèmes de même types :
 \end{frame}
 
 \begin{frame}
+\frametitle{In\'egalit\'e de Markov}
+\begin{itemize}
+\item Si $Y$ est une v.a. positive, \alert{$Y \indi{ Y \geq t} \geq t \indi{Y \geq t}$}
+\item \alert{In\'egalit\'e de Markov}
+\[
+\PP( Y \geq t) \leq \PE[ Y ] / t \eqsp.
+\]
+\item \alert{am\'elioration} Si $\phi$ est une fonction positive monotone croissante, $\phi(t) > 0$ pour tout $t > 0$,
+\[
+\PP( Y \geq t)= \PP( \phi(Y) \geq \phi(t))  \leq \PE [\phi(Y)] / \phi(t) \, .
+\]
+\item Bien entendu, cette in\'Ègalit\'e est int\'eressante ssi $\PE[\phi(Y)] < \infty$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
 \frametitle{Approche naïve : contrôle de la variance}
 Soit {\color{red}$\alpha >0$ donné} (petit). On veut {\color{red} trouver $\varepsilon$}, le plus petit possible, de sorte que
-$$\PP\big[|\widehat F_n(x_0)-F(x_0)|\geq \varepsilon\big] \leq \alpha.$$
+$$\PP\left(|\widehat F_n(x_0)-F(x_0)|\geq \varepsilon\right) \leq \alpha.$$
 On a {\color{red}(Tchebychev)}
 \begin{align*}
 \PP\big[|\widehat F_n(x_0)-F(x_0)|\geq \varepsilon\big] & \leq \frac{1}{\varepsilon^2}\text{Var}\big[\widehat F_n(x_0)\big]\\
@@ -537,6 +547,8 @@ On a {\color{red}(Tchebychev)}
 Conduit à
 $$\boxed{\varepsilon = \frac{1}{2\sqrt{n\alpha}}}$$
 \end{frame}
+
+
 \begin{frame}
 \frametitle{Intervalle de confiance}
 \underline{Conclusion} : pour tout $\alpha >0$,
@@ -561,11 +573,25 @@ est un intervalle de confiance pour $F(x_0)$ au niveau de confiance $1-\alpha$.
 \end{itemize}
 \end{itemize}
 \end{frame}
+
+\begin{frame}
+\frametitle{InÈgalitÈ de Markov}
+\begin{itemize}
+\item \alert{Moments d'ordres plus \'elev\'es} Pour tout $q > 0$,  on a en posant $\phi(t) = t^q$
+\[
+\PP\big(|\widehat F_n(x_0)-F(x_0)|\geq \varepsilon\big)  \leq \frac{1}{\varepsilon^q} \PE\left( |F_n(x_0)-F(x_0)|^q \right) 
+\]
+\item... ‡ part pour $q=2$ (ou plus g\'en\'eralement $q$ entier pair), $ \PE\left( |F_n(x_0)-F(x_0)|^q \right)$ ne se calcule par tr\`es ais\'ement...
+\item Plus int\'eressant de consid\'erer une in\'egalit\'e \alert{exponentielle}.
+\end{itemize}
+\end{frame}
+
 \begin{frame}
 \frametitle{Inégalité de Hoeffding}
 \begin{prop}
 $Y_1,\ldots, Y_n$ i.i.d. de loi de Bernoulli de paramètre $p$. Alors
-$$\PP\big[\big|\tfrac{1}{n}\sum_{i = 1}^nY_i-p\big|\geq t\big] \leq 2\exp(-2nt^2).$$
+$$\PP\left(\left|n^{-1} \sum_{i = 1}^nY_i-p\right|\geq t\right) \leq 2\exp(-2nt^2).
+$$
 \end{prop}
 Application : on fait $Y_i=1_{\{x_I \leq x_0\}}$ et $p = F(x_0)$. On en déduit
 $$\PP\big[\big|\widehat F_n(x_0)-F(x_0)\big|\geq \varepsilon \big] \leq 2\exp(-2n\varepsilon^2).$$
@@ -654,17 +680,17 @@ $$\PP\big[F(x_0)\in{\mathcal I}_{n,\alpha}^{{\tt asymp}} \big] \rightarrow 1-\al
 \end{prop}
 Le passage $\sigma({\color{red}F}) \longrightarrow \widehat F_n(x_0)^{1/2}\big(1-\widehat F_n(x_0)\big)^{1/2}$ est licite via le lemme de Slutsky.
 \end{frame}
-%\begin{frame}
-%\frametitle{Lemme de Slutsky}
-%\begin{itemize}
-%\item Le vecteur $(X_n,Y_n) \stackrel{d}{\rightarrow} (X,Y)$ si
-%$$\E\big[\varphi(X_n,Y_n)\big]\rightarrow \E\big[\varphi(X,Y)\big],$$
-%pour $\varphi$ {\color{red} continue bornée}.
-%\item {\color{red} Attention !} Si $X_n \stackrel{d}{\rightarrow} X$ et $Y_n \stackrel{d}{\rightarrow} Y$, on {\color{red} n'a pas en général} $(X_n,Y_n) \stackrel{d}{\rightarrow} (X,Y)$.
-%\item {\color{red} Mais} (lemme de Slutsky) si $X_n \stackrel{d}{\rightarrow} X$ et $Y_n \stackrel{\PP}{\rightarrow} c$ (constante), alors $(X_n,Y_n) \stackrel{d}{\rightarrow} (X,Y)$.
-%\item Par suite, sous les hypothèses du lemme, {\color{red}pour toute fonction continue} $g$, on a $g(X_n,Y_n) \stackrel{d}{\rightarrow} g(X,Y)$.
-%\end{itemize}
-%\end{frame}
+\begin{frame}
+\frametitle{Lemme de Slutsky}
+\begin{itemize}
+\item Le vecteur $(X_n,Y_n) \stackrel{d}{\rightarrow} (X,Y)$ si
+$$\E\big[\varphi(X_n,Y_n)\big]\rightarrow \E\big[\varphi(X,Y)\big],$$
+pour $\varphi$ {\color{red} continue bornée}.
+\item {\color{red} Attention !} Si $X_n \stackrel{d}{\rightarrow} X$ et $Y_n \stackrel{d}{\rightarrow} Y$, on {\color{red} n'a pas en général} $(X_n,Y_n) \stackrel{d}{\rightarrow} (X,Y)$.
+\item {\color{red} Mais} (lemme de Slutsky) si $X_n \stackrel{d}{\rightarrow} X$ et $Y_n \stackrel{\PP}{\rightarrow} c$ (constante), alors $(X_n,Y_n) \stackrel{d}{\rightarrow} (X,Y)$.
+\item Par suite, sous les hypothèses du lemme, {\color{red}pour toute fonction continue} $g$, on a $g(X_n,Y_n) \stackrel{d}{\rightarrow} g(X,Y)$.
+\end{itemize}
+\end{frame}
 %\begin{frame}
 %\frametitle{Observation finale}
 %Comparaison des longueurs des 3 intervalles de confiance :
