@@ -1,18 +1,28 @@
 
 \documentclass{beamer}
-\usetheme{Montpellier}
 \usepackage{graphicx}
-\usepackage{amsmath,amssymb,amstext}
+\usepackage{amsmath,amssymb,amstext,amsthm}
 \usepackage{amsfonts}
 \usepackage{bbm}
+\usepackage{beamerthemesplit}
 
 %\usepackage[latin1]{inputenc}
 \usepackage[french]{babel}
 \usepackage[applemac]{inputenc}
 
+\usetheme{Antibes}
+\mode<presentation>
+\useoutertheme{tree}
+\usecolortheme{beaver}
+\useinnertheme{rectangles}
+
+\setbeamerfont{block title}{size={}}
+%\usecolortheme[rgb={0.55,0.1,0.05}]{structure}
+%\usecolortheme[rgb={0.75,0.1,0.05}]{structure}
+\usepackage{color}
 
 \newenvironment{disarray}{\everymath{\displaystyle\everymath{}}\array} {\endarray}
-\newtheorem{theo}{Theoreme}
+\newtheorem{theo}{Th\'eor\`eme}
 \newtheorem{prop}[theo]{Proposition}
 \newtheorem{conj}[theo]{Conjecture}
 \newtheorem{cor}{Corollary}[theo]
@@ -26,6 +36,8 @@
 \def\rmi{\mathrm{i}}
 \def\rset{\mathbb{R}}
 \def\dlim{\stackrel{d}{\rightarrow}}
+\def\plim{\stackrel{\PP}{\longrightarrow}}
+\def\iid{i.i.d.}
 \newenvironment{dem}{\textbf{Proof}}{\flushright$\blacksquare$\\}
 %\def\blankframe{
 %\mode<presentation>{
@@ -65,13 +77,13 @@
 \DeclareMathOperator{\bx}{\boldsymbol{x}}
 \DeclareMathOperator{\vp}{\boldsymbol{p}}
 \DeclareMathOperator{\vq}{\boldsymbol{q}}
-\DeclareMathOperator{\estMC}{\widehat \vartheta_n^{\,\,{\tt mc}}}
-\DeclareMathOperator{\estMCNL}{\widehat \vartheta_n^{\,\,{\tt mcnl}}}
-\DeclareMathOperator{\estMV}{\widehat \vartheta_n^{\,\,{\tt mv}}}
+\DeclareMathOperator{\estMC}{\widehat \theta_n^{\,\,{\tt mc}}}
+\DeclareMathOperator{\estMCNL}{\widehat \theta_n^{\,\,{\tt mcnl}}}
+\DeclareMathOperator{\estMV}{\widehat \theta_n^{\,\,{\tt mv}}}
 \DeclareMathOperator{\design}{\mathbb{M}}
-\DeclareMathOperator{\est}{\widehat \vartheta_{\mathnormal{n}}}
+\DeclareMathOperator{\est}{\widehat \theta_{\mathnormal{n}}}
 \DeclareMathOperator{\var}{\mathrm{Var}}
-\DeclareMathOperator{\estMVc}{\widehat \vartheta_{n,0}^{\,{\tt mv}}}
+\DeclareMathOperator{\estMVc}{\widehat \theta_{n,0}^{\,{\tt mv}}}
 \DeclareMathOperator{\Xbar}{\overline{\mathnormal{X}}_\mathnormal{n}}
 
 \newcommand{\indi}[1]{\mathbbm{1}_{\{#1\}}}
@@ -98,8 +110,15 @@
 %  \end{frame}
 %}
 
+%\AtBeginSubsection[]
+%{
+%  \begin{frame}[plain]{Plan}
+%    \tableofcontents[currentsection,currentsubsection]
+%  \end{frame}
+%}
 
-\section{Agenda}
+
+\section{Pr\'esentation}
 
 \begin{frame}
 \frametitle{Organisation : \'equipe enseignante}
@@ -118,7 +137,8 @@ Eric  MOULINES, Ecole Polytechnique \\
 
 {\color{red} PC}
 \begin{itemize}
-\item Gersende Fort, DR CNRS, T\'el\'ecom ParisTech,
+\item Olivier Capp\'e, DR CNRS, T\'el\'ecom-ParisTech
+\item Gersende Fort, DR CNRS, T\'el\'ecom-ParisTech,
 \item Lucas G\'erin, \'Ecole Polytechnique,
 \item Christophe Giraud, Universit\'e Paris-Sud et \'Ecole Polytechnique,
 \item Marc Lavielle, DR INRIA, INRIA Saclay,
@@ -130,7 +150,7 @@ Eric  MOULINES, Ecole Polytechnique \\
 
 
 \begin{frame}
-\frametitle{Organisation : materiel}
+\frametitle{Organisation : mat\'eriel}
 %{\color{gray} Materiel}
 \begin{itemize}
 \item {\color{red}Transparents} du cours t\'el\'echargeables ˆ l'adresse
@@ -143,15 +163,15 @@ Eric  MOULINES, Ecole Polytechnique \\
 \end{itemize}
 \end{frame}
 
-\section{Pr\'esentation (succincte) du cours}
 
 \begin{frame}
 \frametitle{Pr\'esentation (succincte) du cours}
 \begin{itemize}
-\item Introduction aux statistiques et rappels de probabilit\'es {\color{red} (1 cours)}
-\item Exp\'erience statistique {\color{red} (1 cours)}.
+\item Introduction aux statistiques et rappels de probabilit\'es {\color{red} (1 cours)}.
+\item Introduction th\'eorie de la d\'ecision  {\color{red} (1 cours)}.
+\item R\'egression lin\'eaire et non-lin\'eaire (1 cours).
 \item M\'ethodes d'estimation classique  {\color{red} (2 cours)}.
-\item Information statistique, th\'eorie asymptotique pour l'estimation  {\color{red} (2 cours)}.
+\item Information statistique, th\'eorie asymptotique pour l'estimation  {\color{red} (1 cours)}.
 \item D\'ecision statistique et tests  {\color{red} (2 cours)}.
 \end{itemize}
 \end{frame}
@@ -181,33 +201,28 @@ Eric  MOULINES, Ecole Polytechnique \\
 \end{frame}
 
 
-\section{Applications}
 \begin{frame}
-\frametitle{E-medecine}
+\frametitle{Biostatistique}
 \begin{figure}
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=0.7\textwidth]{prostate}
-  \caption{Identifier les facteurs de risque pour le d\'eveloppement d'un cancer}
+  \begin{tabular}{cc}
+  \includegraphics[width=0.4\textwidth]{prostate} &   \includegraphics[width=0.4\textwidth]{biopuce1}
+  \end{tabular}
+  \caption{Identifier les facteurs de risque pour le d\'eveloppement d'un cancer; classifier des tissus en fonctions de donn\'ees d'expression de g\`enes}
 \end{figure}
 \end{frame}
 
-\begin{frame}
-\frametitle{G\'enomique-Prot\'eomique}
-\begin{figure}
-  \centering
-  % Requires \usepackage{graphicx}
-  \includegraphics[width=0.7\textwidth]{biopuce1}
-  \caption{classifier des tissus en fonctions de donn\'ees d'expression de g\^enes}
-\end{figure}
-\end{frame}
 
 \begin{frame}
-\frametitle{\'Economie}
+\frametitle{\'Econom\'etrie}
 \begin{figure}
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=0.8\textwidth]{income}
+\begin{tabular}{c}
+\includegraphics[width=0.6\textwidth]{income} \\ 
+ \includegraphics[width=0.5\textwidth]{or}
+\end{tabular}
 \end{figure}
 \end{frame}
 
@@ -225,11 +240,11 @@ Eric  MOULINES, Ecole Polytechnique \\
 \begin{frame}
 \frametitle{Et plein d'autres choses}
 \begin{itemize}
-\item Finance 
 \item Opinion
-\item Marketing 
-\item Sport 
-\item 
+\item Marketing
+\item Sport
+\item Assurance
+\item Analyse du risque
 \end{itemize}
 \end{frame}
 
@@ -293,20 +308,20 @@ $$X_1(\omega),\ldots, X_n(\omega)\;\;\text{de v.a.r.}\;\;X_1,\ldots, X_n.$$
 %$X_1,\ldots, X_n$.
 \item
 La {\color{red}loi} $\PP^{(X_1,\ldots, X_n)}$ de $(X_1,\ldots, X_n)$ {\color{red} est inconnue}, mais appartient ˆ une famille donn\'ee
-$$\boxed{\big\{\PP_\vartheta^n,\vartheta \in \Theta\big\}.}$$
+$$\boxed{\big\{\PP_\theta^n,\theta \in \Theta\big\}.}$$
 \end{itemize}
-\item {\color{red} Probl\'ematique}: ˆ partir de \og l'observation \fg{} $X_1,\ldots, X_n$, peut-on {\color{red}retrouver} $\PP_\vartheta^n$ ? et donc $\vartheta$ ?
+\item {\color{red} Probl\'ematique}: ˆ partir de \og l'observation \fg{} $X_1,\ldots, X_n$, peut-on {\color{red}retrouver} $\PP_\theta^n$ ? et donc $\theta$ ?
 \end{itemize}
 \end{frame}
 \begin{frame}
 \frametitle{Probl\'ematique statistique (suite)}
 \begin{itemize}
-\item $\vartheta$ est le {\color{red} paramtre} et $\Theta$ {\color{red} l'ensemble} des paramtres.
+\item $\theta$ est le {\color{red} paramtre} et $\Theta$ {\color{red} l'ensemble} des paramtres.
 %\item Deux grandes classes de problmes
 %\begin{itemize}
 \item {\color{red}Estimation}
-: ˆ partir de $X_1,\ldots, X_n$, construire $\varphi_n(X_1,\ldots,X_n)$ qui \og approche au mieux \fg{} $\vartheta$.
-\item {\color{red} Test} : ˆ partir de  $X_1,\ldots, X_n$, \'etablir une {\color{red}d\'ecision} $\varphi_n(X_1,\ldots,X_n) \in \{\text{ensemble de d\'ecisions}\}$ concernant $\vartheta$ pouvant tre vraie ou fausse.
+: ˆ partir de $X_1,\ldots, X_n$, construire $\varphi_n(X_1,\ldots,X_n)$ qui \og approche au mieux \fg{} $\theta$.
+\item {\color{red} Test} : ˆ partir de  $X_1,\ldots, X_n$, \'etablir une {\color{red}d\'ecision} $\varphi_n(X_1,\ldots,X_n) \in \{\text{ensemble de d\'ecisions}\}$ concernant $\theta$ pouvant tre vraie ou fausse.
 %\end{itemize}
 %\item Si $\Theta$ est un sous-ensemble de $\R^d$, statistique {\color{red}param\'etrique}. Si $\Theta$ sous-ensemble d'un espace fonctionnel, statistique {\color{red}non-param\'etrique}.
 \end{itemize}
@@ -314,11 +329,11 @@ $$\boxed{\big\{\PP_\vartheta^n,\vartheta \in \Theta\big\}.}$$
 \begin{frame}
 \frametitle{Exemple le plus simple}
 \begin{itemize}
-\item On lance une pice de monnaie 18 fois et on observe ($P=0$, $F=1$)
+\item On lance une pice de monnaie $n$ fois et on observe ($P=0$, $F=1$)
 $$0,0,0,1,1,0,1,0,0,1,1,0,1,0,0,1,1,0.$$
-\item Modle statistique : on observe $n=18$ variables al\'eatoires $X_i$ ind\'ependantes, de Bernoulli de paramtre {\color{red}inconnu} $\vartheta \in \Theta = [0,1]$.
+\item Modle statistique : on observe $n$ variables al\'eatoires $X_i$ ind\'ependantes, de Bernoulli de paramtre {\color{red}inconnu} $\theta \in \Theta = [0,1]$.
 \begin{itemize}
-\item {\color{red} Estimation}. Estimateur $\bar X_{18} = \frac{1}{18}\sum_{i = 1}^{18}X_i \stackrel{\text{ici}}{=} 8/18=0.44$. Quelle pr\'ecision ?
+\item {\color{red} Estimation}. Estimateur $\bar X_{n} = n^{-1} \sum_{i = 1}^{n} X_i$. Quelle pr\'ecision ? 
 \item {\color{red} Test}. D\'ecision ˆ prendre : \og la pice est-elle \'equilibr\'ee \fg{} ?. Par exemple : on compare $\bar X_{18}$ ˆ 0.5.
 Si $|\bar X_{18}-0.5|$ \og petit\fg{}, on accepte l'hypothse \og la pice est \'equilibr\'ee\fg{}. Sinon, on rejette. Quel seuil choisir, et avec quelles cons\'equences (ex. probabilit\'e de se tromper).
 \end{itemize}
@@ -328,9 +343,9 @@ Si $|\bar X_{18}-0.5|$ \og petit\fg{}, on accepte l'hypothse \og la pice est \
 \frametitle{Echantillonnage}
 \begin{itemize}
 \item
-\underline{L'exp\'erience statistique la plus centrale} : on observe la r\'ealisation de $X_1,\ldots, X_n$, v.a.r. o les $X_i$ sont {\color{red} ind\'ependantes}, {\color{red} identiquement distribu\'ees}, de mme loi commune $\PP^X$.
+\underline{L'exp\'erience statistique la plus \'el\'ementaire} : on observe la r\'ealisation de $X_1,\ldots, X_n$, v.a.r. o\`u   $X_i$ sont {\color{red} ind\'ependantes}, {\color{red} identiquement distribu\'ees}, de m\^eme loi  $\PP^X$.
 \item Que dire de la loi $\PP^X$ commune des $X_i$ ?
-\item Structure stochastique {\color{red} trs simple} (variable al\'eatoires ind\'ependantes, de mme loi). Mais : espace des paramtres {\color{red} immense} (toutes les lois de probabilit\'es).
+\item Structure stochastique {\color{red} trs simple} (variable al\'eatoires ind\'ependantes, de \^eme loi) mais espace de param\`etres immense. 
 \end{itemize}
 \end{frame}
 \begin{frame}
@@ -470,16 +485,34 @@ Fonction de r\'epartition empirique associ\'ee au $n$-\'echantillon $(X_1,\ldots
 $$\widehat F_n(x) = \frac{1}{n}\sum_{i = 1}^n 1_{\{X_i \leq x\}},\;x \in \R.$$
 \end{definition}
 \begin{itemize}
-\item C'est une fr\'equence empirique
-% (nombres d'observations avant $x$ renormalis\'e par le nombre total d'observations).
 \item Terminologie : $\widehat F_n$ est un {\color{red} estimateur} : fonction des observations qui ne d\'epend {\color{red} pas} de la quantit\'e inconnue.
-\item Pour tout $x_0\in \R$
+\item Pour tout $x_0\in \R$, 
 $$\boxed{\widehat F_n(x_0) \stackrel{\PP}{\longrightarrow} F(x_0),\;\;n\rightarrow \infty}$$
-(loi faible des grands nombres appliqu\'ee aux $1_{\{X_i \leq x_0\}}$).
-%\item (Aussi  : convergence p.s. et dans $L^2$ par la loi forte.)
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Convergence en probabilit\'e}
+\begin{itemize}
+\item Mode de convergence \og naturel \fg{} en statistique
+\item {\color{red} Rappel} : $X_n \stackrel{\PP}{\longrightarrow} X$ si
+$$\forall \varepsilon >0,\;\PP\big[|X_n-X|\geq \varepsilon\big] \rightarrow 0,\;\;\; \rightarrow \infty.$$
+\item {\color{red} Interpr\'etation} : pour tout niveau de risque $\alpha >0$ (petit) et tout niveau de pr\'ecision $\varepsilon >0$, il existe un rang
+$N = N(\alpha, \varepsilon)$ tel que
+$$n>N\;\;\text{implique}\;\;|X_n-X| \leq \varepsilon\;\;\text{avec proba.}\;\geq 1-\alpha.$$
+\item En pratique, on souhaite simultan\'ement $N$, $\alpha$ et $\varepsilon$ petits. Quantit\'es {\color{red} antagonistes} (ˆ suivre...).
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Loi faible des grands nombres}
+\begin{theo}
+Soit $(Y_i)_{i=1}^\infty$ une suite de v.a. i.i.d. int\'egrables (v\'erifiant $\PE[ |Y_1|]< \infty$). Alors,
+\[
+n^{-1} \sum_{i=1}^n Y_i \plim \PE[Y_1] \eqsp.
+\] 
+\end{theo}
+\end{frame}
 
 \begin{frame}
 \begin{figure}[htbp]
@@ -490,6 +523,8 @@ $$\boxed{\widehat F_n(x_0) \stackrel{\PP}{\longrightarrow} F(x_0),\;\;n\rightarr
  \caption{{\small $\widehat F_n$ (noir), $F$ (rouge), $n=20$. $F \sim {\mathcal N}(0,1)$.}}
 \end{figure}
 \end{frame}
+
+
 
 \begin{frame}
 \begin{figure}[htbp]
@@ -514,18 +549,6 @@ $$\boxed{\widehat F_n(x_0) \stackrel{\PP}{\longrightarrow} F(x_0),\;\;n\rightarr
 
 \subsection{pr\'ecision d'estimation}
 
-\begin{frame}
-\frametitle{Convergence en probabilit\'e}
-\begin{itemize}
-\item Mode de convergence \og naturel \fg{} en statistique
-\item {\color{red} Rappel} : $X_n \stackrel{\PP}{\longrightarrow} X$ si
-$$\forall \varepsilon >0,\;\PP\big[|X_n-X|\geq \varepsilon\big] \rightarrow 0,\;\;\; \rightarrow \infty.$$
-\item {\color{red} Interpr\'etation} : pour tout niveau de risque $\alpha >0$ (petit) et tout niveau de pr\'ecision $\varepsilon >0$, il existe un rang
-$N = N(\alpha, \varepsilon)$ tel que
-$$n>N\;\;\text{implique}\;\;|X_n-X| \leq \varepsilon\;\;\text{avec proba.}\;\geq 1-\alpha.$$
-\item En pratique, on souhaite simultan\'ement $N$, $\alpha$ et $\varepsilon$ petits. Quantit\'es {\color{red} antagonistes} (ˆ suivre...).
-\end{itemize}
-\end{frame}
 \begin{frame}
 \frametitle{Vers la pr\'ecision d'estimation}
 \begin{itemize}
@@ -572,8 +595,7 @@ On a {\color{red}(Tchebychev)}
 \begin{align*}
 \PP\big[|\widehat F_n(x_0)-F(x_0)|\geq \varepsilon\big] & \leq \frac{1}{\varepsilon^2}\text{Var}\big[\widehat F_n(x_0)\big]\\
 & = \frac{{\color{red}F(x_0)}\big(1-{\color{red}F(x_0)}\big)}{n\varepsilon^2} \\
-& \leq \frac{1}{4n\varepsilon^2}\\
-& \;{\color{red} \leq \alpha}
+& \leq \frac{1}{4n\varepsilon^2} {\color{red} \leq \alpha}
 %%\;\;\;\text{(ce qu'on veut)}.
 \end{align*}
 Conduit ˆ
@@ -613,7 +635,7 @@ est un intervalle de confiance pour $F(x_0)$ au niveau de confiance $1-\alpha$.
 \[
 \PP\big(|\widehat F_n(x_0)-F(x_0)|\geq \varepsilon\big)  \leq \frac{1}{\varepsilon^q} \PE\left( |F_n(x_0)-F(x_0)|^q \right)
 \]
-\item ... à part pour $q=2$ (ou plus g\'en\'eralement $q$ entier pair), $ \PE\left( |F_n(x_0)-F(x_0)|^q \right)$ ne se calcule par tr\`es ais\'ement...
+\item ... \`a part pour $q=2$ (ou plus g\'en\'eralement $q$ entier pair), $ \PE\left( |F_n(x_0)-F(x_0)|^q \right)$ ne se calcule par tr\`es ais\'ement...
 \item Plus int\'eressant de consid\'erer une in\'egalit\'e \alert{exponentielle}.
 \end{itemize}
 \end{frame}
@@ -625,7 +647,7 @@ est un intervalle de confiance pour $F(x_0)$ au niveau de confiance $1-\alpha$.
 \[
 \PP(Z > t) \leq \rme^{-\lambda t} \PE[ \rme^{\lambda Z}]
 \]
-o\`u $\Phi(\lambda)= \PE[\rme^{\lambda Z}]$ est la \alert{fonction g\'en\'eratrice} des moments ou \emph{transform\'ee de Laplace}.
+o\`u $\lambda \mapsto \PE[\rme^{\lambda Z}]$ est la \alert{fonction g\'en\'eratrice} des moments ou \emph{transform\'ee de Laplace}.
 \item En notant $\psi_Z(\lambda)= \log \PE[ \rme^{\lambda Z}]$ le logarithme la transfom\'ee de Laplace et en introduisant
 \[
 \psi_Z^*(t)= \sup_{\lambda \geq 0} \{ \lambda t - \psi_Z(\lambda) \}
@@ -638,21 +660,57 @@ nous obtenons la borne de \alert{Cram\'er-Chernoff}
 \end{frame}
 
 
+\begin{frame}\frametitle{In\'egalit\'e de Chernoff pour une somme de variables ind\'ependantes}
+\begin{itemize}
+ \item Posons $Z=X_{1}+\cdots+ X_{n}$ o\`u $X_{1},\ \ldots,\ X_{n}$ sont des variables \iid\
+ \item On note  $\psi_{X}(\lambda)=\log \PE[\rme^{\lambda X}]$ et la transform\'ee de Cram\'er correspondante par     $\psi_{X}^{*}(t)$ .
+\item \alert{Ind\'ependance}:
+\begin{align*}
+\psi_Z(\lambda)&= \log \PE\left[ \rme^{\lambda \sum_{i=1}^n X_i}  \right] \\
+&= \log \prod_{i=1}^n \PE\left[ \rme^{\lambda X_i}\right] = n \psi_X(\lambda)
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{In\'egalit\'e de Chernoff pour les sommes de variables ind\'ependantes}
+\begin{itemize}
+\item \alert{Transform\'ee de Cram\'er}de la somme
+\begin{align*}
+\psi_Z^*(t) &= \sup_{\lambda > 0} \left( \lambda t - \psi_Z(\lambda) \right) \\
+&= \sup_{\lambda > 0} \left( \lambda t - n \psi_X(\lambda) \right) = n \psi_X^*(t/n)
+\end{align*}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Lemme de Hoeffding}
+\begin{lem}
+Soit $Y$ une variable al\'eatoire telle que $\PE[Y]= 0$ et $Y \in \ccint{a,b}$ avec une probabilit\'e $1$. On pose $\psi_Y(\lambda)= \log \PE[\rme^{\lambda Y}]$. Alors 
+$$
+\psi''_Y(\lambda) \leq (b-a)^2/4
+$$
+et
+$$
+\psi_Y(\lambda) \leq \lambda^2 (b-a)^2/8 \eqsp.
+$$
+\end{lem}
+\end{frame}
 
 
 
 \begin{frame}
 \frametitle{In\'egalit\'e de Hoeffding}
 \begin{prop}
-$Y_1,\ldots, Y_n$ i.i.d. de loi de Bernoulli de param\`etre $p$. Alors
+$Y_1,\dots, Y_n$ i.i.d. de loi de Bernoulli de param\`etre $p$. Alors
 $$\PP\left(\left|n^{-1} \sum_{i = 1}^nY_i-p\right|\geq t\right) \leq 2\exp(-2nt^2).
 $$
 \end{prop}
 \alert{Application} : on pose $Y_i=1_{\{x_I \leq x_0\}}$ et $p = F(x_0)$. On en d\'eduit
 $$\PP\big[\big|\widehat F_n(x_0)-F(x_0)\big|\geq \varepsilon \big] \leq 2\exp(-2n\varepsilon^2).$$
-On r\'esout en $\varepsilon$:
-$$2\exp(-2n\varepsilon^2) = \alpha,$$
-soit
+On r\'esout en $\varepsilon$: $2\exp(-2n\varepsilon^2) = \alpha,$ soit
 $$\boxed{\varepsilon = \sqrt{\frac{1}{2n}\log \frac{2}{\alpha}}}.$$
 \end{frame}
 \begin{frame}
@@ -683,7 +741,7 @@ La suite $(X_n)_{n \geq 0}$ converge en loi vers $X$ ($X_n \dlim X$) ssi l'une d
 \begin{itemize}
 \item Pour toute fonction $f$ continue born\'ee,
 \[
-\lim_{n \to \infty} \PE[f(X_n)]
+\lim_{n \to \infty} \PE[f(X_n)]= \PE[f(X)] \eqsp.
 \]
 \item   $$\PP\left(X_n \leq x\right) \rightarrow \PP\left(X \leq x\right)$$
 en tout point $x$ o\`u la fonction de r\'epartition de $X$ est continue
@@ -697,9 +755,9 @@ $$
 \begin{frame}
 \frametitle{Convergence en loi}
 \begin{itemize}
-\item \alert{Attention...}  ce sont les lois qui \alert{convergent}... Si $X$ et $-X$ ont la même loi (par exemple, $X \sim \mathcal{N}(0,1)$), on a simultan\'ement
+\item \alert{Attention...}  ce sont les lois qui \alert{convergent}... Si $X$ et $-X$ ont la m\^eme loi (par exemple, $X \sim \mathcal{N}(0,1)$), on a simultan\'ement
 $$
-X_n \dlim X \quad \text{et} \quad X_n \dlim X
+X_n \dlim X \quad \text{et} \quad X_n \dlim -X
 $$
 \item On peut avoir $X_n \dlim X$ et $Y_n \dlim Y$ \alert{sans avoir}
 $(X_n,Y_n) \dlim (X,Y)$ (on n'a d'ailleurs pas sp\'ecifi\'e la loi jointe du couple $(X,Y)$)
@@ -955,7 +1013,7 @@ Le passage $\sigma({\color{red}F}) \longrightarrow \widehat F_n(x_0)^{1/2}\big(1
 %%%\item {\color{red} hypothse suppl\'ementaire} : $F$ admet une densit\'e {\color{red}continue} $x \leadsto f(x)$ par rapport ˆ la mesure de Lebesgue. Estimation de
 %%%$$T(F) = f(x_0)\;?$$
 %%%On a $F'(x) = f(x)$, mais {\color{red} on ne peut pas r\'ealiser} $\widehat F_n'(x_0)$ : $x \leadsto \widehat F_n(x)$ est constante par morceaux !
-%%%\item  {\color{red} hypothse suppl\'ementaire} : $F$ est de la forme $F_\vartheta(x) = G(x-\vartheta)$, $\vartheta \in \R$, o
+%%%\item  {\color{red} hypothse suppl\'ementaire} : $F$ est de la forme $F_\theta(x) = G(x-\theta)$, $\theta \in \R$, o
 %%%$$G(x) = x1_{x \in [0,1)}+1_{\{x >1\}}\;\;(\text{loi uniforme sur $[0,1]$}).$$
 %%%Alors
 %%%\end{itemize}
