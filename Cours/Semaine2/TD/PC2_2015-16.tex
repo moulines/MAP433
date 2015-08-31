@@ -1,0 +1,349 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amsthm, amsfonts, amssymb}
+\usepackage{dsfont} % utilisation : {\mathds N} (au lieu de mathbb)
+\usepackage{mathrsfs,bbm} % utilisation : {\mathscr B} (plus joli que mathcal qu'il remplace)
+
+\usepackage{epsfig,graphics}
+
+%\usepackage{caption}
+%\captionsetup[figure]{labelformat=empty}
+
+\usepackage{ccaption}
+
+\usepackage{verbatim} % utile notamment pour l'environnement "comment"
+
+\usepackage[T1]{fontenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[french]{babel}
+
+\usepackage{xcolor}
+\usepackage{fancybox}
+\def\loigauss{\mathcal{N}}
+\def\loibeta{\operatorname{Beta}}
+\def\loigamma{\operatorname{Gamma}}
+\def\loiunif{\operatorname{Unif}}
+\def\iid{i.i.d.}
+\def\rset{\R}
+\def\rme{\mathrm{e}}
+\def\eqdef{\triangleq}
+\def\1{\mathbbm{1}}
+\definecolor{mongris}{gray}{0.9}
+
+%%%%%%%%%%%%%%%% mise en page
+\setlength{\topmargin}{-1.7cm} \setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm} \setlength{\textwidth}{15.5truecm}
+\setlength{\textheight}{25truecm}
+
+
+\def\ds{\displaystyle}
+
+\newcommand{\C}{{\mathds C}}
+\newcommand{\E}{{\mathds E}}
+\newcommand{\N}{{\mathds N}}
+\renewcommand{\P}{{\mathds P}}
+\newcommand{\R}{{\mathds R}}
+\newcommand{\Z}{{\mathds Z}}
+\newcommand{\PP}{{\mathbb P}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\ii}{{\textup{i}}}
+\newcommand{\ee}{{\textup{e}}}
+
+\newcommand{\boF}{{\mathscr F}}
+\newcommand{\boG}{{\mathscr G}}
+\newcommand{\boB}{{\mathscr B}}
+\newcommand{\p}{\ensuremath{\mathbb{P}}}
+\newcommand{\pa}[1]{\left(#1\right)}
+
+%\def\N{\mathscr N}
+
+\DeclareMathOperator{\Pto}{\stackrel{\P}{\longrightarrow}}
+\DeclareMathOperator{\Lto}{\stackrel{\scriptscriptstyle{\textup{loi}}}{\longrightarrow}}
+\DeclareMathOperator{\PSto}{\stackrel{p.s.}{\longrightarrow}}
+
+\DeclareMathOperator{\ind}{{\mathds 1}}
+\DeclareMathOperator{\Var}{\mathop{\rm Var}\nolimits}
+
+%partie rŽelle d'un complexe
+\renewcommand{\Re}{\operatorname{Re}}
+
+%partie imaginaire d'un complexe
+\renewcommand{\Im}{\operatorname{Im}}
+
+\theoremstyle{definition}
+\newtheorem{exercice}{Exercice}
+\def\cl{\Rightarrow_d}
+\def\eqsp{\,}
+
+ % barre pour separer les exos
+\newcommand{\barre}{
+\begin{center}
+\rule{.3\linewidth}{1pt}
+\end{center}
+}
+
+\parindent=0pt
+
+%-- Si cette ligne est lue, le corrigé ne s'affiche pas :
+\newcommand{\Corrige}[1]{}
+%-- Si la ligne suivante est lue, le corrigé s'affiche :
+%\newcommand{\Corrige}[1]{\noindent {\small {\bf Corrigé :}\\ #1} }
+
+
+\begin{document}
+
+\textsc{\'Ecole Polytechnique}\hskip 3.2cm {\bf MAP 433} \hskip 4.5cm
+2015/2016 \par \hrule
+
+\par\vspace{0.2cm}
+
+\begin{center} {\bf \Large PC 2 (Modèle statistique)}\end{center}
+
+\barre
+{\small
+\section{TCL pour la médiane \emph{(Emprunté à la PC1)}}
+Soit $(X_1,X_2,\dots ,X_{2n+1})$ un échantillon de $2n+1$ v.a. i.i.d. uniformes sur $[0,1]$, on note $Y_n$ la médiane de l'échantillon. On s'attend à ce que $(Y_n)$  tende vers $1/2$, nous allons montrer que $(Y_n -1/2)$ a des fluctuations gaussiennes.
+\begin{enumerate}
+\item Se convaincre que $Y_n$ a pour densité
+$$
+(2n+1)\binom{2n}{n}x^n(1-x)^n \mathbf{1}_{x\in[0,1]}.
+$$
+\item Déterminer la densité $g_n$ de
+$$
+Z_n=2\sqrt{2n}\left(Y_n-1/2\right)
+$$
+et en déduire que $Z_n$ converge en loi vers une $\mathcal{N}(0,1)$. On rappelle la formule de Stirling : $n! \sim n^ne^{-n}\sqrt{2\pi n}$.\\
+
+\emph{(On pourra utiliser le Théorème de Scheffé : si chaque $Z_n$ a pour densité $g_n$ et que la suite $(g_n)$ converge simplement vers une densité $g$, alors $(Z_n)$ converge en loi vers la loi de densité $g$.)}
+
+\item Comment généraliser ce résultat et cette preuve à des variables continues non-uniformes?
+\end{enumerate}
+}
+\barre
+
+\section{Mod\`ele exponentiel}
+Une grande partie des mod\`eles utilis\'es dans les exemples élémentaires sont des
+mod\`eles exponentiels (mod\`ele gaussien, log-normal, exponentiel,
+gamma, Bernouilli, Poisson, etc). Nous allons \'etudier quelques
+propri\'et\'es de ces mod\`eles. On appelle mod\`ele exponentiel une
+famille de lois $\{\PP_{\theta},\ \theta\in\Theta\}$ ayant une
+densit\'e par rapport \`a une mesure $\mu$ $\sigma$-finie sur $\R$
+ou $\N$ de la forme
+$$p_{\theta}(x)=c(\theta)\exp\pa{m(\theta)f(x)+h(x)}.$$
+On supposera que $\Theta$ est un intervalle ouvert de $\R$, $m(\theta)=\theta$
+et $c(\cdot)\in C^2$, $c(\theta)>0$ pour tout $\theta\in \Theta$. On
+notera $X$ une variable al\'eatoire de loi $\PP_{\theta}$ et on
+admettra que
+$${d^i\over d \theta^i}\int\exp(\theta f(x)+h(x))\, \mu(dx)=\int f(x)^i\exp(\theta f(x)+h(x))\, \mu(dx)<+\infty,\quad \textrm{pour }i=1,2.$$
+ \begin{enumerate}
+\item Montrez que
+$\varphi(\theta):=\E_{\theta}\pa{f(X)}=-{d\over
+d\theta}\log(c(\theta))$.
+\item Montrez que ${\rm Var_{\theta}}(f(X))=\varphi'(\theta)=-{d^2\over d\theta^2}\log( c\pa{\theta}).$
+\item On dispose d'un $n$-\'echantillon $X_{1},\ldots,X_{n}$ de loi $\p_{\theta}$. On note
+$\hat \theta_{n}$ l'estimateur obtenu en r\'esolvant $\varphi(\hat
+\theta_{n})={1\over n}\sum_{i=1}^n f(X_{i})$.
+En supposant ${\rm Var_{\theta}}(f(X))>0$, montrez que
+$$\sqrt{n}\pa{\hat\theta_{n}-\theta}\stackrel{\textrm{loi}}{\to}\mathcal N\pa{0,{1\over {\rm Var}_{\theta}\pa{f(X)}}}.$$
+\end{enumerate}
+
+\section{Estimation par la m\'ethode plug-in} \label{Plugin}
+Soit $X_1,\ldots,X_n$ des variables al\'eatoires r\'eelles i.i.d. de fonction de r\'epartition $F$, soit $a<b$ deux réels et soit $\theta=F(b)-F(a)$.
+\begin{enumerate}
+\item D\'eterminer l'estimateur plug-in $\widehat{\theta}$ de $\theta$.
+\item D\'eterminer l'estimateur plug-in de la variance de $\widehat{\theta}$ et en d\'eduire un intervalle de confiance asymptotique pour $\theta$ de niveau $1-\alpha$.
+\end{enumerate}
+
+\section{Stabilisation de la variance}
+ On dispose d'un
+\'echantillon $X_{1},\ldots,X_{n}$ i.i.d. de loi de Bernoulli de
+param\`etre $0<\theta<1$.
+\begin{enumerate}
+\item On note $\bar X_{n}$ la moyenne empirique des $X_{i}$. Que
+disent la loi des grands nombres et le TCL?
+\item Cherchez une fonction $g$ telle que $\sqrt{n}(g(\bar X_{n})-g(\theta))$
+converge en loi vers $Z$ de loi $\mathcal{N}(0,1)$.
+\item On note $z_{\alpha}$ le quantile d'ordre $1-\alpha/2$ de la loi normale
+standard. En d\'eduire un intervalle $\hat I_{n, \alpha}$ fonction
+de $z_{\alpha}, n, \bar X_{n}$ tel que $\lim_{n\to
+\infty}\p(\theta\in \hat I_{n,\alpha})=1-\alpha$.
+\end{enumerate}
+
+\section{Mod\`ele d'autor\'egression}
+On consid\`ere l'observation $Z=(X_1,\dots,X_n)$, o\`u les $X_i$
+sont issus du processus d'autor\'egression:
+$$
+X_i=\theta X_{i-1} + \xi_i, \quad i=1,\dots,n, \quad\quad X_0=0,
+$$
+avec les $\xi_i$ i.i.d. de loi normale ${\mathcal N}(0,\sigma^2)$ et
+$\theta\in \R$. \'Ecrire le mod\`ele statistique engendr\'e
+par l'observation $Z$.
+
+
+
+
+\section{Quantile central}
+
+
+\begin{exercice}\label{exo:LimiteBeta}
+Pour tout $\alpha > 0$, on appelle loi $\loigamma(\alpha)$ la loi sur $\rset^+$ de densité
+$$
+g_\alpha(x) = \frac{1}{\Gamma(\alpha)} x^{\alpha-1} \rme^{-x} \;, \quad\text{où}\quad
+\Gamma(\alpha) \eqdef \int_0^\infty x^{\alpha-1} \rme^{-x} dx\;.
+$$
+Pour $a,b > 0$, on appelle loi $\loibeta(a,b)$ la loi sur $[0,1]$ de densité
+$$
+h_{a,b}(x)= \frac{\Gamma(a+b)}{\Gamma(a) \Gamma(b)} x^{a-1} (1-x)^{b-1} \eqsp.
+$$
+\begin{enumerate}
+\item Soit $s$ et $t > 0$ et soit $X$ et $Y$ deux variables indépendantes de loi $\loigamma(s)$ et $\loigamma(t)$, respectivement.
+On pose
+\begin{align*}
+&U= X+Y \\
+& V= X / (X+Y)
+\end{align*}
+Montrer que $U$ et $V$ sont indépendantes et que $U$ est distribuée suivant une loi $\loigamma(s+t)$ et
+$V$ suivant une loi $\loibeta(s,t)$. [\emph{Indication~:} on pourra considérer la densité jointe de $(U,V)$ sans se
+préoccuper des constantes de normalisation.]
+\item Soit $\{Z_n\}_{n \geq 0}$ une suite de variables aléatoires telles que, pour tout $n\geq0$, $Z_n$ est de loi
+  $\loigamma(n)$. Montrer que
+\[
+\sqrt{n}\left(\frac{Z_n}{n}-1\right) \cl \loigauss(0,1) \;.
+\]
+\item Soient $p \in (0,1)$ et $\{ k_n \}$ une suite monotone croissante d'entiers vérifiant
+\begin{equation}
+\label{eq:condition-suite}
+\sqrt{n} \left( \frac{k_n}{n} - p \right) \rightarrow 0 \;.
+\end{equation}
+Soient $\{X_n\}_{n \geq 0}$ et $\{Y_n\}_{n \geq 0}$ deux suites indépendantes telles que $X_n \sim \loigamma(k_n)$ et $Y_n \sim \loigamma(n-k_n)$.
+On pose
+\[
+V_n = \frac{X_n}{X_n+Y_n} \;.
+\]
+Montrer que
+$$
+\sqrt{n} \left( V_n - p \right) \cl\loigauss(0,p(1-p)) \;.
+$$
+[\emph{Indication~:} on pourra, dans un premier temps, considérer le comportement asymptotique du couple $\frac1n(X_n,Y_n)-(p,1-p)$.]
+\item Conclure.
+\end{enumerate}
+\end{exercice}
+
+
+
+\begin{exercice}\label{exo:medianeCLT}
+Soit $f$ une densité de probabilité portée par un intervalle  (non nécessairement borné)
+$(a,b) \subset \rset$. On suppose que $f$ est continue et ne s'annulle pas sur $(a,b)$.
+On note $F(x)= \int_{-\infty}^x f(u) du$ la fonction de répartition associée.
+Cette fonction de répartition est alors strictement monotone sur $x\in[a,b]$
+et définit une bijection de $[a,b] \to [0,1]$. On note $F^{-1}$ la fonction réciproque de $F$ de  $[0,1]\to[a,b]$. De plus,
+par continuité de $f$, $F$ est continuement dérivable sur $(a,b)$ de dérivée $f$ et il s'en suit que  $F^{-1}$ est dérivable sur $(0,1)$.
+
+\begin{enumerate}
+\item Soit $U$ une variable uniforme sur $[0,1]$, $U \sim \loiunif([0,1])$. Montrer que la variable $X$ définie par $X= F^{-1}(U)$
+a pour densité $f$. Réciproquement, montrer que si $X$ est une loi de densité $f$, alors $U= F(X)$ est une loi uniforme sur $[0,1]$.
+\item Soient $g$ une densité et $Y_1, \dots, Y_n$, $n$ v.a. \iid\ de densité $g$. On note $(Y_{(1)}, \dots, Y_{(n)})$ la statistique d'ordre
+de l'échantillon, $Y_{(1)} < Y_{(2)} < \dots < Y_{(n)}$. Montrer que $Y_{(k)}$ a pour densité
+\[
+g_{Y_{(k)}}(y) = \frac{n!}{(k-1)!(n-k)!} G(y)^{k-1}[1 - G(y)]^{n-k} g(y) \;,
+\]
+où $G$ est la fonction de répartition associée à $g$.
+[\emph{Indication~:} on pourra montrer successivement
+$g_{Y_{(k)}}(y) = n!\PP(Y_1<\dots<Y_{k-1} <y <Y_{k+1}<\dots<Y_n) g(y)$ puis
+$\PP(\max(Y_1,\dots,Y_{k-1}) <y)=(k-1)!\;\PP(Y_1<\dots<Y_{k-1} <y)$ et $\PP(y<\min(Y_{k+1},\dots,Y_n))=(n-k)!\;\PP(y <Y_{k+1}<\dots<Y_n)$.]
+% que la densité jointe de $(Y_{(1)} , Y_{(2)} ,\dots , Y_{(n)})$ est donnée par $n!\prod_{k=1}^ng(y_k)\1( y_1<y_2<\dots<y_n)$.]
+%en remarquant
+%que, pour toute fonction de $h:\rset^n\to\rset$,
+%$h(Y_{(1)} , Y_{(2)} ,\dots , Y_{(n)})=\sum_{\sigma\in\calP_n} h(Y_{\sigma(1)},\dots,Y_{\sigma(n)})\1( Y_{\sigma(1)}<\dots<Y_{\sigma(n)}),
+%$$
+%où $\calP_n$ est l'ensemble des permutations de $\{1,\dots,n\}$,
+%puis en prenant l'espérance de cette expression.]
+\item Quelle est la loi de  $Y_{(k)}$ si $g= \1_{[0,1]}$ est la densité de la loi uniforme sur $[0,1]$ ?
+\item Soit $p \in (0,1)$. On note $x_p$ le quantile d'ordre $p$, \emph{i.e.} $x_p = F^{-1}(p)$. Montrer que
+\[
+\sqrt{n} (X_{(k_n)} - x_p) \cl\loigauss\left(0,\frac{p(1-p)}{f^2(x_p)}\right) \;.
+\]
+\item Soit $X_1, \dots, X_n$ une suite de v.a. \iid\ normales de moyenne $\mu$ et de variance $\sigma^2$. Montrer que la médiane est un estimateur consistant et asymptotiquement normal de la moyenne.
+Déterminer la variance asymptotique de cet estimateur. Cet estimateur doit-il être préféré à la moyenne empirique ?
+\item Reprendre la question précédente avec $X_1, \dots, X_n$ suite de v.a. \iid\ distribuées suivant une loi de Laplace de
+densité $f_\mu(x)= \frac{1}{2} \rme^{-|x-\mu|}$. Commenter.
+\end{enumerate}
+
+\end{exercice}
+
+
+\section{Survie}
+Un syst\`eme fonctionne en utilisant deux machines de types
+diff\'erents. Les dur\'ees de vie $X_1$ et $X_2$ des deux machines
+suivent des lois exponentielles de param\`etres $\lambda_1$ et
+$\lambda_2$. Les variables al\'eatoires $X_1$ et $X_2$ sont
+suppos\'ees ind\'ependantes.
+\begin{enumerate}
+\item Montrer que une variable al\'eatoire $X$ suit la loi exponentielle $\mathcal{E}(\lambda)$ si et seulement si
+$$\forall x>0:  \  \P(X > x)=\text{exp}(-\lambda x).$$
+\item Calculer la probabilit\'e pour que le syst\`eme ne tombe pas en panne
+avant la date $t$. En d\'eduire la loi de la dur\'ee de vie $Z$ du
+syst\`eme. Calculer la probabilit\'e pour que la panne du syst\`eme
+soit due \`a une d\'efaillance de la machine $1$.
+\item Soit $I = 1$ si la
+panne du syst\`eme est due \`a une d\'efaillance de la machine $1$,
+$I = 0$ sinon. Calculer $\P(Z > t; I = \delta)$, pour tout $t\geq 0$
+et $\delta\in\{0,1\}$. En d\'eduire que $Z$ et $I$ sont
+ind\'ependantes.
+\item On dispose de $n$ syst\`emes identiques et fonctionnant
+ind\'ependamment les uns des autres dont on observe les dur\'ees de
+vie
+$Z_1,\ldots,Z_n$.\\
+(a) \'Ecrire le mod\`ele statistique correspondant. Les param\`etres
+$\lambda_1$ et $\lambda_2$ sont-ils identifiables?\\
+(b) Supposons maintenant que l'on observe \`a la fois les dur\'ees de vie des syst\`emes $Z_1,\ldots,Z_n$ et
+les causes de la d\'efaillance correspondantes $I_1,\dots,I_n$, $I_i\in\{0,1\}$.  \'Ecrire le mod\`ele statistique dans ce cas. Les param\`etres
+$\lambda_1$ et $\lambda_2$ sont-ils identifiables?
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+%%%%%%%%%%%%%%% VIEUX EXOS
+
+\section{Mod\`ele probit}
+\label{probit}
+Nous disposons d'une information relative au comportement de remboursement ou
+de non-remboursement d'emprunteurs :
+\begin{equation*}
+Y_{i}=\left\{
+    \begin{array}{cc}
+      1 & \text{si l'emprunteur }i\text{ rembourse}, \\
+      0 & \text{si l'emprunteur }i\text{ est d\'efaillant}.%
+    \end{array}%
+  \right.
+\end{equation*}%
+Afin de mod\'eliser ce ph\'enom\`ene, on suppose l'existence d'une variable al\'eatoire
+$Y_{i}^{\ast }$ normale, d'esp\'erance $m$ et de variance $\sigma ^{2}$, que l'on
+appellera \emph{capacit\'e de remboursement} de l'individu $i$, telle que :
+\begin{equation*}
+  Y_{i}=\left\{
+    \begin{array}{cc}
+      1 & \text{si }Y_{i}^{\ast }>0, \\
+      0 & \text{si }Y_{i}^{\ast }\leq 0.%
+    \end{array}%
+  \right.
+\end{equation*}
+On note $\Phi$ la fonction de r\'epartition de la loi normale $\mathcal{N}%
+\left( 0,1\right) $.
+\begin{enumerate}
+\item Exprimer la loi de $Y_{i}$ en fonction de $\Phi$.
+\item Les param\`etres $m$ et $\sigma^{2}$ sont-ils identifiables~?
+\end{enumerate}
+
