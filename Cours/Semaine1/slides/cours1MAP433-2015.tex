@@ -164,17 +164,17 @@ Eric  MOULINES, Ecole Polytechnique \\
 \end{frame}
 
 
-\begin{frame}
-\frametitle{Pr\'esentation (succincte) du cours}
-\begin{itemize}
-\item Introduction aux statistiques et rappels de probabilit\'es {\color{red} (1 cours)}.
-\item Introduction th\'eorie de la d\'ecision  {\color{red} (1 cours)}.
-\item R\'egression lin\'eaire et non-lin\'eaire (1 cours).
-\item M\'ethodes d'estimation classique  {\color{red} (2 cours)}.
-\item Information statistique, th\'eorie asymptotique pour l'estimation  {\color{red} (1 cours)}.
-\item D\'ecision statistique et tests  {\color{red} (2 cours)}.
-\end{itemize}
-\end{frame}
+%\begin{frame}
+%\frametitle{Pr\'esentation (succincte) du cours}
+%\begin{itemize}
+%\item Introduction aux statistiques et rappels de probabilit\'es {\color{red} (1 cours)}.
+%\item Introduction th\'eorie de la d\'ecision  {\color{red} (1 cours)}.
+%\item R\'egression lin\'eaire et non-lin\'eaire (1 cours).
+%\item M\'ethodes d'estimation classique  {\color{red} (2 cours)}.
+%\item Information statistique, th\'eorie asymptotique pour l'estimation  {\color{red} (1 cours)}.
+%\item D\'ecision statistique et tests  {\color{red} (2 cours)}.
+%\end{itemize}
+%\end{frame}
 
 %\begin{frame}
 %%\frametitle{La Statistique dans le monde du travail}
@@ -191,14 +191,14 @@ Eric  MOULINES, Ecole Polytechnique \\
 %\end{enumerate}
 %\end{frame}
 
-\begin{frame}
-\frametitle{Plan}
-\begin{itemize}
-\item {\color{red} Probl\'ematique statistique} : de quoi s'agit-il ?
-\item {\color{red} Echantillonnage}.
-\item Estimation d'une distribution inconnue à partir d'un $n$-\'echantillon, {\color{red} m\'ethodes empiriques}.
-\end{itemize}
-\end{frame}
+%\begin{frame}
+%\frametitle{Plan}
+%\begin{itemize}
+%\item {\color{red} Probl\'ematique statistique} : de quoi s'agit-il ?
+%\item {\color{red} Echantillonnage}.
+%\item Estimation d'une distribution inconnue à partir d'un $n$-\'echantillon, {\color{red} m\'ethodes empiriques}.
+%\end{itemize}
+%\end{frame}
 
 
 \begin{frame}
@@ -220,7 +220,7 @@ Eric  MOULINES, Ecole Polytechnique \\
   \centering
   % Requires \usepackage{graphicx}
 \begin{tabular}{c}
-\includegraphics[width=0.6\textwidth]{income} \\ 
+\includegraphics[width=0.6\textwidth]{income} \\
  \includegraphics[width=0.5\textwidth]{or}
 \end{tabular}
 \end{figure}
@@ -248,7 +248,15 @@ Eric  MOULINES, Ecole Polytechnique \\
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Data Scientist}
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.9\textwidth]{bestjob}
+\end{figure}
 
+\end{frame}
 
 %\subsection{Les donn\'ees hier...}
 %
@@ -333,9 +341,9 @@ $$\boxed{\big\{\PP_\theta^n,\theta \in \Theta\big\}.}$$
 $$0,0,0,1,1,0,1,0,0,1,1,0,1,0,0,1,1,0.$$
 \item Modèle statistique : on observe $n$ variables al\'eatoires $X_i$ ind\'ependantes, de Bernoulli de paramètre {\color{red}inconnu} $\theta \in \Theta = [0,1]$.
 \begin{itemize}
-\item {\color{red} Estimation}. Estimateur $\bar X_{n} = n^{-1} \sum_{i = 1}^{n} X_i$. Quelle pr\'ecision ? 
-\item {\color{red} Test}. D\'ecision à prendre : \og la pièce est-elle \'equilibr\'ee \fg{} ?. Par exemple : on compare $\bar X_{18}$ à 0.5.
-Si $|\bar X_{18}-0.5|$ \og petit\fg{}, on accepte l'hypothèse \og la pièce est \'equilibr\'ee\fg{}. Sinon, on rejette. Quel seuil choisir, et avec quelles cons\'equences (ex. probabilit\'e de se tromper).
+\item {\color{red} Estimation}. Estimateur $\bar X_{n} = n^{-1} \sum_{i = 1}^{n} X_i$. Quelle pr\'ecision ? Peut-on construire un meilleur estimateur ?
+\item {\color{red} Test}. D\'ecision à prendre : \og la pièce est-elle \'equilibr\'ee \fg{} ?. Par exemple : on compare $\bar X_{n}$ à 0.5.
+Si $|\bar X_{n}-0.5|$ \og petit\fg{}, on accepte l'hypothèse \og la pièce est \'equilibr\'ee\fg{}. Sinon, on rejette. Quel seuil choisir, et avec quelles cons\'equences ?
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -345,14 +353,13 @@ Si $|\bar X_{18}-0.5|$ \og petit\fg{}, on accepte l'hypothèse \og la pièce est \
 \item
 \underline{L'exp\'erience statistique la plus \'el\'ementaire} : on observe la r\'ealisation de $X_1,\ldots, X_n$, v.a.r. o\`u   $X_i$ sont {\color{red} ind\'ependantes}, {\color{red} identiquement distribu\'ees}, de m\^eme loi  $\PP^X$.
 \item Que dire de la loi $\PP^X$ commune des $X_i$ ?
-\item Structure stochastique {\color{red} très simple} (variable al\'eatoires ind\'ependantes, de \^eême loi) mais espace de param\`etres immense. 
+\item Structure stochastique {\color{red} très simple} (variable al\'eatoires ind\'ependantes, de \^eême loi) mais espace de param\`etres immense.
 \end{itemize}
 \end{frame}
-\begin{frame}
 
 \section{Rappels de probabilit\'es}
-\subsection{Loi d'une variable al\'eatoire}
-
+%\subsection{Loi d'une variable al\'eatoire}
+\begin{frame}
 \frametitle{Rappel : loi d'une variable al\'eatoire r\'eelle}
 \begin{definition}
 $$X:\big(\Omega, {\mathcal A}, \PP\big) \longrightarrow \big(\R, {\mathcal B}\big)$$
@@ -364,73 +371,73 @@ $$\boxed{\E\big[\varphi(X)\big]= \int_{\Omega}\varphi\big(X(\omega)\big)\PP(d\om
 $$
 $\varphi$ fonction test.
 \end{frame}
-\begin{frame}
-\frametitle{Loi d'une variable al\'eatoire (suite)}
-{\color{red} Exemple 1 :} $X$ suit la loi de Bernoulli de paramètre $1/3$.
-\begin{itemize}
-\item \underline{La loi de $X$} est d\'ecrite par
-$$\PP\big[X=1\big]=\tfrac{1}{3} = 1- \PP\big[X=0\big].$$
-\item \underline{Ecriture de} $\PP^X(dx)$ :
-$$\boxed{\PP^X(dx) = \tfrac{1}{3}\delta_1(dx)+\tfrac{2}{3}\delta_0(dx).}$$
-\item {\small \underline{Formule de calcul}
-\begin{align*}
-\E\big[\varphi(X)\big] & = \int_{\R} \varphi(x) \PP^X(dx)
-%= \int_{\R} \varphi(x)  \big(\tfrac{1}{3}\delta_1(dx)+\tfrac{2}{3}\delta_0(dx)\big)
-\\
-&= \tfrac{1}{3}\int_{\R}\varphi(x)\delta_1(dx)+\tfrac{2}{3}\int_{\R}\varphi(x)\delta_0(dx) \\
-&= \tfrac{1}{3}\,\varphi(1)+\tfrac{2}{3}\,\varphi(0).
-\end{align*}}
-\end{itemize}
-\end{frame}
-\begin{frame}
-\frametitle{Loi d'une variable al\'eatoire (suite)}
-{\color{red} Exemple 2 :} $X \sim$ loi de Poisson de paramètre $2$.
-\begin{itemize}
-\item \underline{La loi de $X$} est d\'ecrite par
-$$\PP\big[X=k\big]=e^{-2}\frac{2^k}{k!},\;\;k=0,1,\ldots$$
-\item \underline{Ecriture de} $\PP^X(dx)$ :
-$$\boxed{\PP^X(dx) = e^{-2}\sum_{k \in \N}\tfrac{2^k}{k!}\delta_k(dx).}$$
-\item {\small \underline{Formule de calcul}
-$$\E\big[\varphi(X)\big] = \int_{\R}\varphi(x)\PP^X(dx) = e^{-2}\sum_{k\in \N}\varphi(k)\tfrac{2^k}{k!}.$$}
-\end{itemize}
-\end{frame}
-\begin{frame}
-\frametitle{Loi d'une variable al\'eatoire (suite)}
-{\color{red} Exemple 3 :} $X \sim {\mathcal N}(0,1)$ (loi normale standard).
-\begin{itemize}
-\item \underline{La loi de $X$} est d\'ecrite par
-$$\PP\big[X \in [a,b]\big]= \int_{[a,b]}e^{-x^2/2}\tfrac{dx}{\sqrt{2\pi}}$$
-\item \underline{Ecriture de} $\PP^X(dx)$ :
-$$\boxed{\PP^X(dx) = \tfrac{1}{\sqrt{2\pi}}e^{-x^2/2} {\color{red}dx}}$$
-{\color{red}$dx$: mesure de Lebesgue}.
-\item {\small \underline{Formule de calcul}
-$$\E\big[\varphi(X)\big] = \int_{\R}\varphi(x)\PP^X(dx) = \int_{\R}\varphi(x)e^{-x^2/2}\tfrac{dx}{\sqrt{2\pi}}.$$}
-\end{itemize}
-\end{frame}
-\begin{frame}
-\frametitle{Loi d'une variable al\'eatoire (suite)}
-{\color{red} Exemple 4 :} $X = Z \wedge 1$, où la loi de $Z$ a une densit\'e $f$ par rapport à la mesure de Lebesgue sur $\R$\vspace{4mm}.
-
-\underline{{\color{red} Loi de $X$}}
-\begin{itemize}
-\item Sur l'\'ev\'enement $\big\{Z < 1\big\}$, on observe $X = Z$.
-\item Sur l'\'ev\'enement $\big\{Z \geq 1\big\}$, on observe $X = 1$.
-\end{itemize}
-
-\underline{{\color{red}Ecriture de} $\PP^X(dx)$} :
-$$
-\PP^X(dx) = f(x)1_{\big\{x < 1\big\}}dx + \PP\big[Z \geq 1\big]\delta_1(dx),
-$$
-\end{frame}
-\begin{frame}
-c'est-à-dire
-$$\boxed{\PP^X(dx) = f(x)1_{\big\{x < 1\big\}}dx + \Big( \int_{\coint{1,+\infty}}f(u)du\Big)\delta_1(dx)}$$
-\underline{Formule de calcul}
-\begin{align*}
-\E\big[\varphi(X)\big] &= \int_{\R}\varphi(x)\PP^X(dx)\\
-& = \int_{(-\infty,1)}\varphi(x)f(x)dx+\Big(\int_{\coint{1,+\infty}}f(u)du\Big)\varphi(1).
-\end{align*}
-\end{frame}
+%\begin{frame}
+%\frametitle{Loi d'une variable al\'eatoire (suite)}
+%{\color{red} Exemple 1 :} $X$ suit la loi de Bernoulli de paramètre $1/3$.
+%\begin{itemize}
+%\item \underline{La loi de $X$} est d\'ecrite par
+%$$\PP\big[X=1\big]=\tfrac{1}{3} = 1- \PP\big[X=0\big].$$
+%\item \underline{Ecriture de} $\PP^X(dx)$ :
+%$$\boxed{\PP^X(dx) = \tfrac{1}{3}\delta_1(dx)+\tfrac{2}{3}\delta_0(dx).}$$
+%\item {\small \underline{Formule de calcul}
+%\begin{align*}
+%\E\big[\varphi(X)\big] & = \int_{\R} \varphi(x) \PP^X(dx)
+%%= \int_{\R} \varphi(x)  \big(\tfrac{1}{3}\delta_1(dx)+\tfrac{2}{3}\delta_0(dx)\big)
+%\\
+%&= \tfrac{1}{3}\int_{\R}\varphi(x)\delta_1(dx)+\tfrac{2}{3}\int_{\R}\varphi(x)\delta_0(dx) \\
+%&= \tfrac{1}{3}\,\varphi(1)+\tfrac{2}{3}\,\varphi(0).
+%\end{align*}}
+%\end{itemize}
+%\end{frame}
+%\begin{frame}
+%\frametitle{Loi d'une variable al\'eatoire (suite)}
+%{\color{red} Exemple 2 :} $X \sim$ loi de Poisson de paramètre $2$.
+%\begin{itemize}
+%\item \underline{La loi de $X$} est d\'ecrite par
+%$$\PP\big[X=k\big]=e^{-2}\frac{2^k}{k!},\;\;k=0,1,\ldots$$
+%\item \underline{Ecriture de} $\PP^X(dx)$ :
+%$$\boxed{\PP^X(dx) = e^{-2}\sum_{k \in \N}\tfrac{2^k}{k!}\delta_k(dx).}$$
+%\item {\small \underline{Formule de calcul}
+%$$\E\big[\varphi(X)\big] = \int_{\R}\varphi(x)\PP^X(dx) = e^{-2}\sum_{k\in \N}\varphi(k)\tfrac{2^k}{k!}.$$}
+%\end{itemize}
+%\end{frame}
+%\begin{frame}
+%\frametitle{Loi d'une variable al\'eatoire (suite)}
+%{\color{red} Exemple 3 :} $X \sim {\mathcal N}(0,1)$ (loi normale standard).
+%\begin{itemize}
+%\item \underline{La loi de $X$} est d\'ecrite par
+%$$\PP\big[X \in [a,b]\big]= \int_{[a,b]}e^{-x^2/2}\tfrac{dx}{\sqrt{2\pi}}$$
+%\item \underline{Ecriture de} $\PP^X(dx)$ :
+%$$\boxed{\PP^X(dx) = \tfrac{1}{\sqrt{2\pi}}e^{-x^2/2} {\color{red}dx}}$$
+%{\color{red}$dx$: mesure de Lebesgue}.
+%\item {\small \underline{Formule de calcul}
+%$$\E\big[\varphi(X)\big] = \int_{\R}\varphi(x)\PP^X(dx) = \int_{\R}\varphi(x)e^{-x^2/2}\tfrac{dx}{\sqrt{2\pi}}.$$}
+%\end{itemize}
+%\end{frame}
+%\begin{frame}
+%\frametitle{Loi d'une variable al\'eatoire (suite)}
+%{\color{red} Exemple 4 :} $X = Z \wedge 1$, où la loi de $Z$ a une densit\'e $f$ par rapport à la mesure de Lebesgue sur $\R$\vspace{4mm}.
+%
+%\underline{{\color{red} Loi de $X$}}
+%\begin{itemize}
+%\item Sur l'\'ev\'enement $\big\{Z < 1\big\}$, on observe $X = Z$.
+%\item Sur l'\'ev\'enement $\big\{Z \geq 1\big\}$, on observe $X = 1$.
+%\end{itemize}
+%
+%\underline{{\color{red}Ecriture de} $\PP^X(dx)$} :
+%$$
+%\PP^X(dx) = f(x)1_{\big\{x < 1\big\}}dx + \PP\big[Z \geq 1\big]\delta_1(dx),
+%$$
+%\end{frame}
+%\begin{frame}
+%c'est-à-dire
+%$$\boxed{\PP^X(dx) = f(x)1_{\big\{x < 1\big\}}dx + \Big( \int_{\coint{1,+\infty}}f(u)du\Big)\delta_1(dx)}$$
+%\underline{Formule de calcul}
+%\begin{align*}
+%\E\big[\varphi(X)\big] &= \int_{\R}\varphi(x)\PP^X(dx)\\
+%& = \int_{(-\infty,1)}\varphi(x)f(x)dx+\Big(\int_{\coint{1,+\infty}}f(u)du\Big)\varphi(1).
+%\end{align*}
+%\end{frame}
 \subsection{Fonction de r\'epartition empirique}
 \begin{frame}
 \frametitle{Identification de la loi : fonction de r\'epartition}
@@ -486,7 +493,7 @@ $$\widehat F_n(x) = \frac{1}{n}\sum_{i = 1}^n 1_{\{X_i \leq x\}},\;x \in \R.$$
 \end{definition}
 \begin{itemize}
 \item Terminologie : $\widehat F_n$ est un {\color{red} estimateur} : fonction des observations qui ne d\'epend {\color{red} pas} de la quantit\'e inconnue.
-\item Pour tout $x_0\in \R$, 
+\item Pour tout $x_0\in \R$,
 $$\boxed{\widehat F_n(x_0) \stackrel{\PP}{\longrightarrow} F(x_0),\;\;n\rightarrow \infty}$$
 \end{itemize}
 \end{frame}
@@ -510,7 +517,7 @@ $$n>N\;\;\text{implique}\;\;|X_n-X| \leq \varepsilon\;\;\text{avec proba.}\;\geq
 Soit $(Y_i)_{i=1}^\infty$ une suite de v.a. i.i.d. int\'egrables (v\'erifiant $\PE[ |Y_1|]< \infty$). Alors,
 \[
 n^{-1} \sum_{i=1}^n Y_i \plim \PE[Y_1] \eqsp.
-\] 
+\]
 \end{theo}
 \end{frame}
 
@@ -688,7 +695,7 @@ nous obtenons la borne de \alert{Cram\'er-Chernoff}
 \begin{frame}
 \frametitle{Lemme de Hoeffding}
 \begin{lem}
-Soit $Y$ une variable al\'eatoire telle que $\PE[Y]= 0$ et $Y \in \ccint{a,b}$ avec une probabilit\'e $1$. On pose $\psi_Y(\lambda)= \log \PE[\rme^{\lambda Y}]$. Alors 
+Soit $Y$ une variable al\'eatoire telle que $\PE[Y]= 0$ et $Y \in \ccint{a,b}$ avec une probabilit\'e $1$. On pose $\psi_Y(\lambda)= \log \PE[\rme^{\lambda Y}]$. Alors
 $$
 \psi''_Y(\lambda) \leq (b-a)^2/4
 $$
@@ -752,18 +759,18 @@ $$
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Convergence en loi}
-\begin{itemize}
-\item \alert{Attention...}  ce sont les lois qui \alert{convergent}... Si $X$ et $-X$ ont la m\^eme loi (par exemple, $X \sim \mathcal{N}(0,1)$), on a simultan\'ement
-$$
-X_n \dlim X \quad \text{et} \quad X_n \dlim -X
-$$
-\item On peut avoir $X_n \dlim X$ et $Y_n \dlim Y$ \alert{sans avoir}
-$(X_n,Y_n) \dlim (X,Y)$ (on n'a d'ailleurs pas sp\'ecifi\'e la loi jointe du couple $(X,Y)$)
-\item Par contre, si $(X_n,Y_n) \dlim (X,Y)$, on a pour toute fonction $\phi$ continue, $\phi(X_n,Y_n) \dlim \phi(X,Y)$, et donc $X_n \dlim X$ et $Y_n \dlim Y$.
-\end{itemize}
-\end{frame}
+%\begin{frame}
+%\frametitle{Convergence en loi}
+%\begin{itemize}
+%\item \alert{Attention...}  ce sont les lois qui \alert{convergent}... Si $X$ et $-X$ ont la m\^eme loi (par exemple, $X \sim \mathcal{N}(0,1)$), on a simultan\'ement
+%$$
+%X_n \dlim X \quad \text{et} \quad X_n \dlim -X
+%$$
+%\item On peut avoir $X_n \dlim X$ et $Y_n \dlim Y$ \alert{sans avoir}
+%$(X_n,Y_n) \dlim (X,Y)$ (on n'a d'ailleurs pas sp\'ecifi\'e la loi jointe du couple $(X,Y)$)
+%\item Par contre, si $(X_n,Y_n) \dlim (X,Y)$, on a pour toute fonction $\phi$ continue, $\phi(X_n,Y_n) \dlim \phi(X,Y)$, et donc $X_n \dlim X$ et $Y_n \dlim Y$.
+%\end{itemize}
+%\end{frame}
 
 
 
@@ -1024,5 +1031,5 @@ Le passage $\sigma({\color{red}F}) \longrightarrow \widehat F_n(x_0)^{1/2}\big(1
 \setbeamertemplate{background canvas}[default]
 \setbeamercolor{background canvas}{bg=black}
 \begin{frame}[plain]{}
-\end{frame}    
+\end{frame}
 \end{document}

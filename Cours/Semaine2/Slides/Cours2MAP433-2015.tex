@@ -7,7 +7,6 @@
 \maketitle
 
 
-
 \begin{frame}
 \frametitle{Aujourd'hui}
 \tableofcontents
@@ -36,9 +35,9 @@ $$\widehat F_n(x) = \frac{1}{n}\sum_{i = 1}^n \indi{X_i \leq x},\;\;x \in \R.$$
 \begin{frame}
 \frametitle{Vers la précision d'estimation}
 \begin{itemize}
-\item On a $\forall x_0 \in \R,\,\widehat F_n(x_0)\stackrel{\PP}{\rightarrow} F(x_0)$. Avec \alert{quelle précision ?}
+\item On a $\forall x_0 \in \R,\,\widehat F_n(x_0)\stackrel{\PP}{\rightarrow} F(x_0)$. 
 %Si on se donne un nombre d'observation $n$ et un niveau de risque $\alpha$, quelle précision $\varepsilon$ garantir ?
-\alert{Problèmes de même types} :
+\alert{Questions (auxquelles on a répondu)} :
 \begin{itemize}
 \item $n$ \alert{information} et $\alpha$ \alert{risque} donnés $\rightarrow$ quelle  \alert{précision} $\varepsilon$ ?
 \item risque $\alpha$ et précision $\varepsilon$ donnés $\rightarrow$ quel nombre minimal de données $n$ nécessaires ?
@@ -47,9 +46,9 @@ $$\widehat F_n(x) = \frac{1}{n}\sum_{i = 1}^n \indi{X_i \leq x},\;\;x \in \R.$$
 
 \item Plusieurs approches :
 \begin{itemize}
-\item non-asymptotique naïve
-\item non-asymptotique
-\item \alert{approche asymptotique (via des théorèmes limites)}
+\item non-asymptotique naïve (Bienaymé-Techbyshev) 
+\item non-asymptotique (concentration exponentielle)
+\item approche asymptotique (via des théorèmes limites)
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -217,37 +216,47 @@ $$\big(F(x), x \in \R\big) ?$$
 \end{itemize}
 \end{frame}
 \begin{frame}
-\frametitle{Glivenko-Cantelli, Kolmogorov-Smirnov}
+\frametitle{Glivenko-Cantelli}
 $X_1,\ldots, X_n$ i.i.d. de loi $F$, $\widehat F_n$ leur fonction de répartition empirique.
-\begin{prop}
-\begin{itemize}
-\item (Glivenko-Cantelli) $$\sup_{x \in \R}\big|\widehat F_n(x)-F(x)\big|
+\begin{theo}[Glivenko-Cantelli]
+$$\sup_{x \in \R}\big|\widehat F_n(x)-F(x)\big|
 \stackrel{\mathrm{p.s.}}{\rightarrow}0, \quad {\text quand} \ n\to
 \infty.$$
-\item (Kolmogorov-Smirnov) Si $F$ est continue,
-$$\sqrt{n}\sup_{x \in \R}\big|\widehat F_n(x)-F(x)\big|
-\stackrel{d}{\rightarrow} \mathbb{B}, \quad {\text quand} \ n\to
-\infty.$$
-$\mathbb{B}$ v.a. dont la loi est connue et \alert{
-ne dépend pas} de $F$.
-\end{itemize}
-\end{prop}
+\end{theo}
 \end{frame}
 \begin{frame}
 \frametitle{Glivenko-Cantelli}
-Supposons que $F$ est continue. Soit $k \in \nset$. 
+Supposons que $F$ est continue. Soit $k \in \nset$.
 \begin{itemize}
-\pause \item Comme $F$ est continue, il existe des points $-\infty= x_{k,0} < x_{k,1} < \dots < x_{k,k}= \infty$ tels que $F(x_{k,i})= i /k$.
-\pause \item Comme $F$ et $\hat{F}_n$ sont \alert{monotones} nous avons pour $x \in \ccint{x_{k,i-1},x_{k,i}}$
+\item Comme $F$ est continue, il existe des points $-\infty= x_{k,0} < x_{k,1} < \dots < x_{k,k}= \infty$ tels que $F(x_{k,i})= i /k$.
+\item Comme $F$ et $\hat{F}_n$ sont \alert{monotones} nous avons pour $x \in \ccint{x_{k,i-1},x_{k,i}}$
+\begin{equation*}
+\hat{F}_n(x) - F(x) \leq \hat{F}_n(x_{k,i}) - F(x_{k,i-1})= \hat{F}_n(x_{k,i}) - F(x_{k,i}) + 1/k 
+\end{equation*}
+et
 \begin{align*}
-\hat{F}_n(x) - F(x) &\leq \hat{F}_n(x_{k,i}) - F(x_{k,i-1})= \hat{F}_n(x_{k,i}) - F(x_{k,i}) + 1/k \\
-&\geq \hat{F}_n(x_{k,i-1}) - F(x_{k,i}) = \hat{F}_n(x_{k,i-1})- F(x_{k,i-1}) - 1/k \eqsp;
+\hat{F}_n(x) - F(x) &\geq \hat{F}_n(x_{k,i-1}) - F(x_{k,i}) \\
+&= \hat{F}_n(x_{k,i-1})- F(x_{k,i-1}) - 1/k \eqsp;
 \end{align*}
-ce qui implique 
+ce qui implique
 \[
 \sup_{x \in \rset} |\hat{F}_n(x) - F(x)| \leq \sup_i |\hat{F}_n(x_{k,i}) - F(x_{k,i})| + 1/k
 \]
 \pause \item On conclut car $i \in \{1,\dots,k\}$, $|\hat{F}_n(x_{k,i})- F(x_{k,i})| \plim 0$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Kolmogorov-Smirnov}
+\begin{theo}[Kolmogorov-Smirnov] 
+Si $F$ est continue, $$\sqrt{n}\sup_{x \in \R}\big|\widehat F_n(x)-F(x)\big|
+\stackrel{d}{\rightarrow} \mathbb{B}, \quad {\text quand} \ n\to
+\infty.$$
+$\mathbb{B}$ v.a. dont la loi est connue et \alert{
+ne dépend pas} de $F$.
+\end{theo}
+\begin{itemize}
+\item \alert{Difficile}.. théorème limite \alert{fonctionnel} !
 \end{itemize}
 \end{frame}
 
@@ -293,11 +302,12 @@ alors $T(\widehat F_n)$  est un \alert{bon}  estimateur de $T(F)$ (estimateur pa
 %\item $\int_{\R} \varphi(x)dF(x) = \int_{\R}\varphi(x) \PP^X(dx)$, où $X \sim F$.
 \item \underline{Formule de calcul} :
 $$\boxed{\int_{\R}g(x)d\widehat F_n(x) =
-\frac{1}{n}\sum_{i = 1}^n g(X_i).}$$ Traduction : \alert{une
-variable aléatoire de loi $\widehat F_n$ prend les valeurs $X_i$
-avec probabilité $1/n$.}
+\frac{1}{n}\sum_{i = 1}^n g(X_i).}$$ 
+%Traduction : \alert{une
+%variable aléatoire de loi $\widehat F_n$ prend les valeurs $X_i$
+%avec probabilité $1/n$.}
 \item Estimateur par \alert{substitution} ou {\it plug-in} de $T(F)$ :
-$$\boxed{T(\widehat F_n) = h\Big(\tfrac{1}{n}\sum_{i = 1}^ng(X_i)\Big)}$$
+$$\boxed{T(\widehat F_n) = h\Big(n^{-1} \sum_{i = 1}^ng(X_i)\Big)}$$
 \end{itemize}
 \end{frame}
 
@@ -327,12 +337,34 @@ T(\widehat F_n)=\sigma^2(\widehat F_n) & =
 \end{frame}
 
 \begin{frame}
-\frametitle{Exemples}
+\frametitle{Exemple}
 \begin{itemize}
-\item \underline{Asymétrie ({\it skewness})} :
-$$T(F)=\alpha(F)=\frac{\int_{\R}\big(x-m(F)\big)^3dF(x)}{\sigma^2(F)^{3/2}}=\cdots.$$
-\item \underline{Aplatissement ({\it kurtosis})} :
-$$T(F)=\kappa(F) = \frac{\int_{\R}\big(x-m(F)\big)^4dF(x)}{\sigma^2(F)^2}=\cdots.$$
+\item On modélise les arrivées d'évènements dans un système à évènements discrets (file d'attente, fiabilité)
+\item On observe $X_1,X_2,\dots,X_n$ les intervalles de temps entre $n$ arrivées successives.
+\item \alert{Modèle}: 
+\begin{enumerate}[(i)]
+\item $\{(X_i)\}_{i=1}^n$ sont indépendantes et identiquement distribuées,
+\item Les variables $X_i$ sont distribuées suivant une loi exponentielle de paramètre $\theta$, de densité
+    $$
+    p_\theta(x) = \theta \rme^{-\theta x} \1_{\rset^+}(x) \eqsp, \quad \theta \in \rset^+
+    $$
+    \alert{Absence de mémoire:} $\PP_\theta(X > x + y | X > x)= \PP_\theta(X > y)$ 
+\end{enumerate}
+\end{itemize} 
+\end{frame}
+
+\begin{frame}
+\frametitle{Problème: estimer $\theta$}
+\begin{itemize}
+\item Pour tout $k \in \nset$, $\PE_\theta[X^k]= k ! \theta^{-k}$ et donc
+$$
+\theta = \left( k! /\PE_{\theta}[X^k] \right)^{1/k}  = h_k( \PE_\theta[X^k] ) \eqsp.
+$$
+\item \alert{Estimateur par substitution}
+$$
+\hat{\theta}_n = (k! )^{1/k} \left(n^{-1} \sum_{i=1}^n X_i^k \right)^{-1/k}
+$$
+\item \alert{Meilleur choix de $k$ ?}
 \end{itemize}
 \end{frame}
 
@@ -446,11 +478,12 @@ $$
 \end{frame}
 
 \begin{frame}
-    \frametitle{Exemple d'application du boxplot}
-\begin{center}
-\vspace{-0.5cm}
-\includegraphics[height=1.20\textheight, angle=0]{boxplots_Rice.pdf}
-\end{center}
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=1.1\textwidth]{agedistribution.png}\\
+  %\caption{}\label{}
+\end{figure}
 \end{frame}
 
 
@@ -463,7 +496,7 @@ T(F)= h \left( \int_\rset g(x) dF(x) \right) \quad \text{et} \quad T(\hat{F}_n)=
 \]
 \begin{theo}[Convergence]
  si $g,h:\R\rightarrow \R$, $h$
-continue et $\E|g(X)|<\infty$, alors 
+continue et $\E|g(X)|<\infty$, alors
 $$
 T(\widehat F_n) \plim T(F)
 $$
@@ -473,7 +506,7 @@ $$
 \begin{frame}
 \frametitle{Delta-méthode: cas scalaire}
 \begin{theo}
-Soit $\phi : \mathbb{D}_\phi \subset \rset \mapsto \rset$ une fonction définie sur un sous-ensemble ouvert de $\rset$ et différentiable au point $\mu$. Soit $(T_n)_{n \geq 0}$ une suite de v.a. à valeurs dans $\mathbb{D}_\phi$ et $(r_n)_{n \geq 0}$ une suite croissante telle que $\lim_{n \to \infty} r_n = \infty$. Si $r_n(T_n- \mu) \dlim T$, alors  
+Soit $\phi : \mathbb{D}_\phi \subset \rset \mapsto \rset$ une fonction définie sur un sous-ensemble ouvert de $\rset$ et différentiable au point $\mu$. Soit $(T_n)_{n \geq 0}$ une suite de v.a. à valeurs dans $\mathbb{D}_\phi$ et $(r_n)_{n \geq 0}$ une suite croissante telle que $\lim_{n \to \infty} r_n = \infty$. Si $r_n(T_n- \mu) \dlim T$, alors
 $$
 r_n \{ \phi(T_n) - \phi(\mu) \} \dlim \phi'(\mu) T \eqsp.
 $$
@@ -483,11 +516,11 @@ $$
 \begin{frame}
 \frametitle{Preuve}
 \begin{itemize}
-\item La fonction $\phi$ est différentiable au point $\mu$; 
+\item La fonction $\phi$ est différentiable au point $\mu$;
 \[
 \phi(t)= \phi(\mu) + \phi'(\mu) (t-\mu) + (t-\mu) \psi(t) \eqsp.
 \]
-\pause \item Donc, 
+\pause \item Donc,
 \[
 r_n \{ \phi(T_n) - \phi(\mu) \} = \phi'(\mu) r_n \{ T_n - \mu \} + r_n \{ T_n - \mu \} \psi_\mu(T_n) \eqsp.
 \]
@@ -520,12 +553,11 @@ T(F)= h \left( \int_\rset g(x) dF(x) \right) \quad \text{et} \quad T(\hat{F}_n)=
 \begin{itemize}
 \item \alert{TCL} :
 $$\sqrt{n}\big(n^{-1}\sum_{i=1}^ng(X_i)-\int_{\R}g(x)dF(x)\big) \dlim \gauss\left(0,\mathrm{Var}\big[g(X)\big]\right),$$
-\item Delta-méthode 
+\item \alert{Delta-méthode}
 \[
-\sqrt{n} \{ T(F_n) - T(F) \} \dlim \gauss\left(0, \{ h'(\PE[g(X)]) \}^2 \Var[ g(X) ] \right)
+\sqrt{n} \{ T(F_n) - T(F) \} \dlim \gauss\left(0, \{ h'(\PE[g(X)]) \}^2 \var[ g(X) ] \right)
 \]
 car si $Z \sim \gauss(0,\sigma^2)$, $a Z \sim \gauss(0, a^2 \sigma^2)$.
-\end{align*}
 \end{itemize}
 \end{frame}
 
@@ -770,7 +802,7 @@ $${\mathcal E}^n = \big(\R^n,{\mathcal B}(\R^n),\big\{\PP_\theta^n,\,\theta \in 
 \begin{frame}
 \frametitle{Expérience (mod\`ele) paramétrique, non-paramétrique}
 \begin{itemize}
-\item Si $\Theta$ peut-être \og pris \fg{} comme un sous-ensemble
+\item Si $\Theta$ est  un sous-ensemble
 de $\R^d$ : \alert{expérience (=mod\`ele) paramétrique}.
 \item Sinon (par exemple si le paramètre $\theta$ est un élément d'un espace fonctionnel) : \alert{expérience (=mod\`ele) non-paramétrique}.
 \end{itemize}
@@ -895,6 +927,5 @@ $$
 
 
 
-\subsection{Modèle de régression}
 
 \end{document}
