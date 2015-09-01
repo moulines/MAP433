@@ -1,0 +1,484 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amsthm, amsfonts, amssymb}
+\usepackage{dsfont} % utilisation : {\mathds N} (au lieu de mathbb)
+\usepackage{mathrsfs} % utilisation : {\mathscr B} (plus joli que mathcal qu'il remplace)
+
+\usepackage{epsfig,graphics}
+
+%\usepackage{caption}
+%\captionsetup[figure]{labelformat=empty}
+
+\usepackage{ccaption}
+
+\usepackage{verbatim} % utile notamment pour l'environnement "comment"
+
+\usepackage[T1]{fontenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[french]{babel}
+
+\usepackage{xcolor}
+\usepackage{fancybox}
+\definecolor{mongris}{gray}{0.9}
+
+%%%%%%%%%%%%%%%% mise en page
+\setlength{\topmargin}{-1.7cm} \setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm} \setlength{\textwidth}{15.5truecm}
+\setlength{\textheight}{25truecm}
+
+
+\def\ds{\displaystyle}
+
+\newcommand{\C}{{\mathds C}}
+\newcommand{\E}{{\mathds E}}
+\newcommand{\N}{{\mathds N}}
+\renewcommand{\P}{{\mathds P}}
+\newcommand{\R}{{\mathds R}}
+\newcommand{\Z}{{\mathds Z}}
+\newcommand{\PP}{{\mathbb P}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\un}{\mathsf{1}}
+
+\def\rme{\mathrm{e}}
+\def\rmi{\mathrm{i}}
+\def\rset{\mathbb{R}}
+
+\newcommand{\ii}{{\textup{i}}}
+\newcommand{\ee}{{\textup{e}}}
+
+\newcommand{\boF}{{\mathscr F}}
+\newcommand{\boG}{{\mathscr G}}
+\newcommand{\boB}{{\mathscr B}}
+
+%\def\N{\mathscr N}
+
+\DeclareMathOperator{\Pto}{\stackrel{\P}{\longrightarrow}}
+\DeclareMathOperator{\Lto}{\stackrel{\scriptscriptstyle{\textup{loi}}}{\longrightarrow}}
+\DeclareMathOperator{\PSto}{\stackrel{p.s.}{\longrightarrow}}
+
+\DeclareMathOperator{\ind}{{\mathds 1}}
+\DeclareMathOperator{\Var}{\mathop{\rm Var}\nolimits}
+
+%partie rŽelle d'un complexe
+\renewcommand{\Re}{\operatorname{Re}}
+
+%partie imaginaire d'un complexe
+\renewcommand{\Im}{\operatorname{Im}}
+
+\theoremstyle{definition}
+\newtheorem{exo}{Exercice}
+\newtheorem{definition}{D\'efinition}
+
+ % barre pour separer les exos
+\newcommand{\barre}{
+\begin{center}
+\rule{.3\linewidth}{1pt}
+\end{center}
+}
+
+%-- Si cette ligne est lue, le corrigé ne s'affiche pas :
+%\newcommand{\Corrige}[1]{}
+%-- Si la ligne suivante est lue, le corrigé s'affiche :
+\newcommand{\Corrige}[1]{\vspace*{0.5cm} \noindent {\small {\bf Corrigé :} #1} }
+
+\newcommand{\Rappel}[1]{}
+%\newcommand{\Rappel}[1]{\footnote{#1} }
+
+\parindent=0pt
+
+
+\begin{document}
+
+\textsc{\'Ecole Polytechnique}\hskip 3.2cm {\bf MAP 433} \hskip 4.5cm
+2015/2016 \par \hrule
+
+\par\vspace{0.2cm}
+
+\begin{center} {\bf \Large PC 1 (Rappels de Probabilités)}\end{center}
+
+\barre %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace{4mm}
+
+
+\section{Lemme de Slutsky} \label{slutski1}
+\begin{enumerate}
+\item Donner un exemple de suites $(X_{n})$ et $(Y_{n})$ telles que $X_{n}\stackrel{\textrm{loi}}{\to}X$ et $Y_{n}\stackrel{\textrm{loi}}{\to}Y$, mais $X_{n}+Y_{n}$ ne converge pas en loi vers $X+Y$.
+\item Soient $(X_n)$, $(Y_n)$ deux suites
+de variables aléatoires r\'eelles,
+$X$ et $Y$ des variables aléatoires r\'eelles, telles que
+$$
+X_{n}\stackrel{\textrm{loi}}{\to}X,\qquad Y_{n}\stackrel{\mathbb{P}}{\to}c,
+$$
+où $c$ est une constante.
+Montrer que le couple $(X_n,Y_n)$ converge en loi vers $(X,c)$.
+\item En d\'eduire que $(X_n+Y_n)$ converge en
+loi vers $X+c$ et $X_nY_n$ converge en loi vers $cX$.
+\end{enumerate}
+
+
+\Corrige{
+\begin{enumerate}
+\item  Soit $X_n =X+1/n$ pour tout $n$ où $X$ est une loi symétrique ($X$ et $-X$ ont même loi, e.g. $X \sim \mathcal{N}(0,\sigma^2)$).
+  On pose $Y_n = -X_n$. Alors $X_n+Y_n = X_n -X_n = 0$ presque-sûrement.
+  D'autre part, $X_n$ converge en loi vers $X$ tandis que $Y_n=-X_n$ converge en loi vers $-X$, et donc également vers $X$.
+
+   Si la proposition était vraie, $X_n+Y_n$ convergerait en loi, à la fois vers 0 et vers $2X$, ce qui n'est pas possible dès que $X$ prend des valeurs non nulles.
+
+
+
+\item Soient $s,t$ deux réels
+\hspace{-1cm}
+\begin{align*}
+\left|\mathbb{E}(e^{itX_n+isY_n})-\mathbb{E}(e^{itX+isc})\right|
+&=\left|\mathbb{E}(e^{itX_n+isY_n})-\mathbb{E}(e^{itX_n+isc})+\mathbb{E}(e^{itX_n+isc})-\mathbb{E}(e^{itX+isc})\right|\\
+&\leq \left|\mathbb{E}(e^{itX_n+isY_n}-e^{itX_n+isc})\right|+\left|\mathbb{E}(e^{itX_n+isc}-\mathbb{E}(e^{itX+isc})\right|\\
+&\leq \mathbb{E}(|e^{itX_n}||e^{isY_n}-e^{isc}|)+|e^{isc}|\left|\mathbb{E}(e^{itX_n}-e^{itX})\right|\\
+&= \mathbb{E}(|e^{isY_n}-e^{isc}|)+\left|\mathbb{E}(e^{itX_n}-e^{itX})\right|.
+\end{align*}
+\begin{itemize}
+\item
+\begin{enumerate}
+\item Solution 1: La convergence en proba de $Y_n$ vers $c$ implique que $e^{isY_n}$ converge en proba vers  $e^{isc}$. D'autre part, comme $e^{isY_n}$ est une v.a (complexe) bornée, alors  $e^{isY_n}$ converge vers  $e^{isc}$ dans $L^1$. On en conclut que le premier terme tend vers zéro.
+\item Solution 2: pour tout $\delta>0$,
+\begin{align*}
+\mathbb{E}(|e^{isY_n}-e^{isc}|) &= \mathbb{E}(|e^{isY_n}-e^{isc}|\un_{|Y_n-c|\geq \delta}) + \mathbb{E}(|e^{isY_n}-e^{isc}|\un_{|Y_n-c|< \delta}) \\
+&\leq
+\end{align*}
+\end{enumerate}
+\item Le deuxième terme tend vers zéro par hypothèse.
+\end{itemize}
+
+\item On vient de voir que $(X_n, Y_n)$ converge en loi vers $(X,c)$.  Les applications $(x,y)
+  \mapsto x+y$ et $(x,y) \mapsto xy$ sont continues. Puisque l'application
+  d'une fonction continue conserve la convergence en loi, on en déduit que $X_n+Y_n \to
+    X+c$ en loi et que $X_n Y_n \to c X$ en loi.
+\end{enumerate}
+}
+
+
+\section{TCL pour la médiane}
+Soit $(X_1,X_2,\dots ,X_{2n+1})$ un échantillon de $2n+1$ v.a. i.i.d. uniformes sur $[0,1]$, on note $Y_n$ la médiane de l'échantillon. On s'attend à ce que $(Y_n)$  tende vers $1/2$, nous allons montrer que $(Y_n -1/2)$ a des fluctuations gaussiennes.
+\begin{enumerate}
+\item Se convaincre que $Y_n$ a pour densité
+$$
+(2n+1)\binom{2n}{n}x^n(1-x)^n \mathbf{1}_{x\in[0,1]}.
+$$
+\item Déterminer la densité $g_n$ de
+$$
+Z_n=2\sqrt{2n}\left(Y_n-1/2\right)
+$$
+et en déduire que $Z_n$ converge en loi vers une $\mathcal{N}(0,1)$.\\
+
+\emph{(On pourra utiliser le Théorème de Scheffé : si chaque $Z_n$ a pour densité $g_n$ et que la suite $(g_n)$ converge simplement vers une densité $g$, alors $(Z_n)$ converge en loi vers la loi de densité $g$.)}
+
+\item Comment généraliser ce résultat et cette preuve à des variables continues non-uniformes?
+\end{enumerate}
+
+
+\Corrige{
+\begin{enumerate}
+\item On s'autorise à manipuler les $dx$ comme des vrais nombres, calculons $\mathbb{P}(Y_n\in (x,x+dx))$. Il faut choisir la médiane parmi les $2n+1$ et ensuite les $n$ qui seront plus petites que $x$ parmi les $2n$ variables restantes. Les autres $n$ variables sont plus grandes que $x+dx$. En considérant $dx$ suffisament petit pour que la probabilité que deux variables prennent leurs valeurs dans le même intervalle de longueur $dx$ soit négligeable, on a donc
+$$
+\mathbb{P}(Y_n\in (x,x+dx))=dx\times (2n+1)\binom{2n}{n}x^n(1-x-dx)^n.
+$$
+On définit la densité de $Y_n$ comme la limite de $\mathbb{P}(Y_n\in (x,x+dx))/dx$ quand $dx\to 0$.
+
+
+\item On effectue le changement de variable $Z_n = Z_n=2\sqrt{2n}\left(Y_n-1/2\right)=h(Y_n)$.
+Donc,
+\footnote{Soit $Y$ une v.a. réelle continue et $Z=h(Y)$ où $h$ est une fonction dérivable, strictement croissante. Pour tout $t$,
+$$F_Z(t) = \P(Z\leq t) = \P(h^{-1}(Z)\leq h^{-1}(t)) = F_Y(h^{-1}(t)).$$
+Donc, $f_Z(t) = (h^{-1})'(t)f_Y(h^{-1}(t)) = f_Y(h^{-1}(t))/h'(h^{-1}(t))$.
+ }
+\begin{align*}
+g_n(z) & =\frac{1}{2\sqrt{2n}}(2n+1)\binom{2n}{n}\left(\frac{1}{2} + \frac{z}{\sqrt{2n}}\right)^n\left(\frac{1}{2} - \frac{z}{\sqrt{2n}}\right)^n \mathbf{1}_{-\sqrt{2n} \leq z\leq \sqrt{2n}} \\
+& = \frac{1}{2\sqrt{2n}}(2n+1) \binom{2n}{n}\frac{1}{2^{2n}}\left(1-\tfrac{z^2}{2n} \right)^n\mathbf{1}_{|z|\leq \sqrt{2n}}
+\end{align*}
+avec Stirling ($n! \approx n^n e^{-n} \sqrt{2\pi n}$) on trouve que
+\begin{align*}
+\binom{2n}{n} &= \frac{2n!}{n!n!} \\
+&\approx \frac{ (2n)^{2n} e^{-2n} \sqrt{4\pi n}}{n^(2n) e^{-2n} (2\pi n)} \\
+&\approx \frac{ 2^{2n} }{\sqrt{\pi n}}
+\end{align*}
+et donc,
+$$\frac{1}{2\sqrt{2n}}(2n+1) \binom{2n}{n}\frac{1}{2^{2n}} \approx \frac{1}{\sqrt{2\pi}}$$
+D'autre part, $\lim{n\to \infty}\left(1-\tfrac{z^2}{2n} \right)^n = e^{-z^2/2}$. Donc,
+pour tout $z$
+$$
+g_n(z)\to \frac{1}{\sqrt{2\pi}}e^{-z^2/2}.
+$$
+On en déduit alors d'après le théorème de Scheffé que $Z_n \Lto \mathcal{N}(0,1)$ et donc que \\
+$2\sqrt{2n}(Y_n - 0.5) \Lto \mathcal{N}(0,1)$. On trouve finalement que
+$$\sqrt{n}(Y_n -0.5) \Lto \mathcal{N}(0,1/8).$$
+
+\item Si l'on suppose que $F$ (fonction de répartition) est un $C^1$-difféomorphisme (bijection dérivable), alors $\hat{m}=F^{-1}(Y_n)$ a même loi que la médiane empirique d'un échantillon de densité $f=F'$.
+
+    En effet, $\xi_i = F^{-1}(X_i) \sim F$ puisque $X_i$ suit une loi uniforme sur $[0,1]$. D'autre part, $F$ étant strictement croissante, l'ordre est conservé et $\xi_{(i)} = F^{-1}(X_{(i)})$. En particulier, $\hat{m}$, la médiane empirique des $\xi_i$ est la transformée par $F^{-1}$ de $Y_n$, la médiane empirique des $X_i$. D'autre part, $F(m)=0.5$ par définition et donc $m=F^{-1}(0.5)$.
+
+Du coup on utilise la méthode delta, sachant que $(F^{-1})'=1/f(F^{-1})$ et on trouve
+$$
+\sqrt{n}\left(F^{-1}(Y_n) - F^{-1}(0.5)\right) \to \mathcal{N}\left(0,\frac{1}{8}(F^{-1})'(0.5)\right)
+$$
+C'est à dire
+$$
+\sqrt{n}\left(\hat{m}-m\right) \to \mathcal{N}\left(0,\frac{1}{8f(m)^2}\right)
+$$
+On vérifie donc que la variance de l'estimateur de la médiane est d'autant plus petite que la loi $F$ est concentrée autour de la médiane $m$.
+\end{enumerate}
+}
+
+
+
+\section{Estimateur de la variance}
+Soient $X_{1},\ldots,X_{n}$ des variables al\'eatoires i.i.d.,
+$X_i\sim f(\cdot-\theta)$, o\`u $f$ est une densit\'e de
+probabilit\'e sur $\mathbb{R}$ sym\'etrique dont on note $\mu_k =
+\int_{\R}x^kf(x)\, dx$ les moments d'ordre $k=2$ et $k=4$. On note
+$\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$.
+ Montrer que l'estimateur $\frac{1}{n}\sum_{i=1}^n (X_i -\bar{X}_n)^2$
+ de la variance des $X_{i}$ v\'erifie un th\'eor\`eme central limite.
+
+ \medskip
+
+
+  {\it Indication}~: on montrera d'abord que l'on peut se ramener au cas
+  o\`u $\theta=0$, puis on exprimera l'estimateur comme une transformation de $S_n
+  = \frac{1}{n}\sum_{i=1}^n X_i^2$ et de $\bar{X}_n$.
+
+\Corrige{ On n'utilise pas le fait que $f$ est symétrique mais on montre tout d'abord que l'on peut se ramener au cas $\E(X) =0$.
+En effet, posons $Y_i = X_i -\theta$. Alors pour toute fonction test $h$
+\[
+\E\left(h(Y_i) \right) = \E\left(h(X_i -\theta) \right) = \int h(x-\theta) \
+f(x-\theta) dx = \int h(y) f(y) dy.
+\]
+Donc $Y_i$ a pour densité $f$. Remarquons aussi que l'on a
+\begin{align*}
+\E(Y_i) &= \E(X_i) - \theta \\
+{\rm Var}(Y_i) &= {\rm Var}(X_i) \\
+\hat{\sigma}^2_n &= \frac{1}{n}\sum_{i=1}^n (X_i -\bar{X}_n)^2 =
+\frac{1}{n}\sum_{i=1}^n (Y_i -\bar{Y}_n)^2
+\end{align*}
+de sorte que l'on peut considérer dans la suite que $\E(X_i)=0$.
+
+
+\begin{align*}
+  \hat{\sigma}^2_n & = \frac{1}{n} \sum_{i=1}^n \left(X_i^2 + (\bar X_n)^2 - 2 X_i \bar X_n \right) \\
+& = \frac{1}{n} \sum_{i=1}^n X_i^2 + (\bar X_n)^2 - 2 \bar X_n \frac{1}{n} \sum_{i=1}^n X_i \\
+& = \frac{1}{n} \sum_{i=1}^n X_i^2 -  (\bar X_n)^2
+\end{align*}
+Etudions alors
+$$\sqrt{n}\left( \hat{\sigma}^2_n - \sigma^2\right) = \sqrt{n}\left( \frac{1}{n}\sum_{i=1}^n X_i^2- \sigma^2 \right) - \sqrt{n} (\bar X_n)^2$$
+
+$\E(X_i^2) = \sigma^2$ puisque $\E(X_i)=0$. D'autre part,
+$X_i^2$ a bien une variance finie puisque $\mu_4$, le moment d'ordre 4, existe.
+Le TCL pour des v.a. i.i.d. prouve la convergence en loi de la moyenne des carrés:
+$$\sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n X_i^2 - \sigma^2 \right) \Lto \mathcal{N}\left(0, \E((X_1^2 - \E(X_1^2))^2) \right) $$
+
+D'autre part,  $\bar X_n = {\mathcal O}_P(1/\sqrt(n)$. Donc $\sqrt{n} (\bar X_n)^2$ converge vers 0 en probabilité.
+On peut utiliser Slutzky pour conclure:
+$$  \sqrt{n} \left( \hat{\sigma}^2_n - \sigma^2 \right) \Lto  \mathcal{N}\left(0, \mu_4-\mu_2^2 \right)$$
+}
+
+\section{Taux de d\'efaillance}
+Une cha\^{\i}ne de production  doit
+garantir une qualit\'e minimale de ses produits. En particulier,
+elle doit garantir que la proportion $\theta$ des produits
+d\'efaillants reste inf\'erieure \`a un taux fix\'e par le client.
+Un
+\'echantillon de  $n$ produits  est pr\'elev\'e et
+analys\'e. %On
+%suppose que le nombre $n$ de composants pr\'elev\'es est faible
+%devant le nombre de composants produits.
+On note $\hat \theta_{n}$ la proportion de produits d\'efectueux
+dans l'\'echantillon.
+\begin{enumerate}
+\item Proposer un mod\`ele statistique pour ce probl\`eme. Quelle est la loi de $n\hat\theta_{n}$?
+\item Quelle information donne la loi des grands nombres et le th\'eor\`eme central limite sur le comportement asymptotique de $\hat\theta_{n}$?
+\item On donne $\PP(N>1.64)=5\%$ pour $N\sim\mathcal{N}(0,1)$.
+En d\'eduire $\eps_{n}$ (d\'ependant de $n$ et $\theta$) tel que
+$\PP(\theta \geq \hat\theta_{n}+\eps_{n})\stackrel{n\to \infty}{\to} 5\%$.
+\item La valeur $\eps_{n}$ pr\'ec\'edente d\'epend de $\theta$. A l'aide du lemme de Slutsky, donner $\eps'_{n}$ ne d\'ependant que de $n$ et $\hat\theta_{n}$ tel que $\PP(\theta \geq \hat\theta_{n}+\eps'_{n})\stackrel{n\to \infty}{\to} 5\%$.
+\end{enumerate}
+
+\Corrige{
+\begin{enumerate}
+\item  Soit $X_i$ une v.a. qui vaut $1$
+  (défaillance) ou $0$ (bon état) selon l'état du produit $i$; c'est une v.a.
+  de Bernoulli de paramètre $\theta$. Alors la proportion de produits
+  défaillants est $\hat{\theta}_n = \frac{1}{n} \sum_{i=1}^n X_i$.
+  On supposera de plus que les produits sont indépendants.
+
+Par suite, $n \hat{\theta}_n = \sum_{i=1}^n X_i$ représente le nombre de produit défectueux et suit une loi Binomiale de paramètres $(n,p)$.
+
+\item  Par la LGN, $\hat{\theta}_n$ converge p.s. vers $\E(X_1)
+  = \theta$. On dit que l'estimateur est fortement consistant.
+
+
+  Le TCL dit que $\sqrt{n}\left( \hat{\theta}_n -\theta \right)$ converge en
+  loi vers une gaussienne centrée et de variance $\theta (1-\theta)$.
+
+  Autrement dit, $\hat{\theta}_n = \theta + \frac{\sqrt{\theta
+      (1-\theta)}}{\sqrt{n}} \mathcal{N}(0,1)$ (en loi).
+
+
+\item
+On cherche un seuil tel que la probabilité pour que le vrai taux de défaillance soit
+supérieur à ce seuil est faible (ici $5 \%$). On a lorsque $n$ est grand
+\begin{align*}
+  \PP\left( \theta \geq \hat{\theta}_n +\epsilon_n\right) &= \PP\left( \sqrt{n} \left(
+      \hat{\theta}_n -\theta \right)/ \sqrt{\theta (1-\theta)} \leq -\sqrt{n}
+    \epsilon_n / \sqrt{\theta (1-\theta)} \right) \\
+& \approx \Phi(-\sqrt{n} \epsilon_n /\sqrt{\theta (1-\theta)}
+\end{align*}
+où $\Phi$ est la fonction de répartition d'une $\mathcal{N}(0,1)$.
+
+On veut que cette intégrale soit de l'ordre de $5\%$: il suffit de prendre
+$-\sqrt{n} \epsilon_n /\sqrt{\theta (1-\theta)} = -1.64$. Soit
+\[
+\epsilon_n = 1.64 \ \sqrt{\frac{\theta(1-\theta)}{n}}
+\]
+
+
+
+\item  Slutsky dit
+  que le TCL reste encore vrai si on remplace la variance $\theta (1-\theta)$
+  par $\hat{\theta}_n (1-\hat{\theta}_n)$ (qui converge p.s. et donc en proba
+    vers $\theta (1-\theta)$). Donc en procédant de même, on a
+\[
+\epsilon_n = 1.64 \ \sqrt{\frac{\hat{\theta}_n(1-\hat{\theta}_n)}{n}}
+\]
+
+\textcolor{blue}{On mesure une probabilité de défaillance $\hat{\theta}_n$. En
+  vue du contrat avec le client, on cherche une valeur seuil qui est dépassée
+  rarement. On cherche donc une zone de confiance de la forme $\{\theta >
+  \hat{\theta}_n + \epsilon_n \}$.}
+
+\end{enumerate}
+}
+
+\newpage
+
+\begin{center}
+{\bf Exercice bonus}
+\end{center}
+
+\section{Pas de convergence en proba dans le TCL} %
+Soit $\left( X_{n}\right)_{n}$ une suite de variables aléatoires
+i.i.d. centrées de variance $\sigma^2>0$. Soit
+\begin{equation*}
+  Z_{n}=\frac{1}{\sigma\sqrt{n}}\sum_{j=1}^{n} X_{j}\,.
+\end{equation*}%
+Par le théorème central limite, cette variable converge en loi vers la
+loi normale centrée réduite, c'est-à-dire, pour tout $t \in \R$, on a   $
+\lim_{n\rightarrow +\infty} \E(e^{itZ_{n}})=e^{-\frac{t^{2}}{2}}$. L'objet de
+cet exercice est de montrer que la suite $(Z_{n})$ ne peut pas converger en probabilité.
+\begin{enumerate}
+\item Calculer la fonction caractéristique de $Z_{2n}-Z_{n}$ et montrer que
+  cette différence converge en loi.
+\item On suppose que $(Z_n)$ converge en probabilité vers une variable $Z_\infty$. Que peut-on dire de la limite en probabilité de $(Z_{2n}-Z_{n})$? Conclure.
+\end{enumerate}
+
+\Corrige{
+
+\textcolor{blue}{
+  Contre-exemple: soit $U$ une v.a. à valeur dans $\{0,1\}$ telle que $\PP(U=1)=\PP(U=0)=0.5$. Si $n$ est pair, on pose $X_n = 0$ si
+    $U=0$ et $1$ sinon; si $n$ est impair, on pose $X_n=0$  si $U=1$ et $1$ sinon. \\
+    Alors $X_n$ converge en loi vers $0.5 \delta_0+ 0.5 \delta_1$. D'autre
+    part, $\PP(|X_{2n} - X_1| =1) =1$ donc il n'y a pas convergence en proba.
+}
+
+
+
+\begin{enumerate}
+\item  Par définition,
+\begin{align*}
+\sigma( Z_{2n} - Z_n)&  = \frac{1}{\sqrt{2n}} \sum_{k=1}^{2n} X_k - \frac{1}{\sqrt{n}}  \sum_{k=1}^n X_k \\
+& = \frac{1}{\sqrt{2n}} \sum_{k=n+1}^{2n} X_k + \left( \frac{1}{\sqrt{2n}}- \frac{1}{\sqrt{n}}  \right) \sum_{k=1}^n X_k \\
+& =  \frac{1}{\sqrt{2n}} \sum_{k=n+1}^{2n} X_k + \left( \frac{1}{\sqrt{2}}- 1 \right)\frac{1}{\sqrt{n}}  \sum_{k=1}^n X_k
+\end{align*}
+Soit $t \in \R$.  En observant que les deux sommes sont indépendantes, il vient
+\begin{align*}
+  \E\left( \exp(it(Z_{2n} - Z_n)) \right) & =  \E\left( \exp \left\{it  \sigma^{-1} \left( \frac{1}{\sqrt{2n}} \sum_{k=n+1}^{2n} X_k + \left( \frac{1}{\sqrt{2}}- 1 \right)\frac{1}{\sqrt{n}}  \sum_{k=1}^n X_k  \right) \right\} \right) \\
+  & = \E\left( \exp \left\{it \sigma^{-1} \left( \frac{1}{\sqrt{2n}}
+        \sum_{k=n+1}^{2n} X_k  \right) \right\}\right) \E\left( \exp \left\{it  \sigma^{-1}  \left( \frac{1}{\sqrt{2}}- 1
+        \right)\frac{1}{\sqrt{n}} \sum_{k=1}^n X_k  \right\} \right).
+\end{align*}
+Puisque les v.a. $(X_k)_k$ ont même loi, il vient
+\begin{align*}
+ \E\left( \exp(it(Z_{2n} - Z_n)) \right) &= \E\left( \exp \left\{it \sigma^{-1} \left( \frac{1}{\sqrt{2n}}
+        \sum_{k=1}^{n} X_k  \right) \right\}\right) \E\left( \exp \left\{it  \sigma^{-1}  \left( \frac{1}{\sqrt{2}}- 1
+        \right)\frac{1}{\sqrt{n}} \sum_{k=1}^n X_k  \right\} \right) \\
+& = \phi_{Z_n}(t/\sqrt{2}) \  \phi_{Z_n}(t (1/\sqrt{2}-1))
+\end{align*}
+Ainsi, la limite de cette quantité est
+\[
+\exp\left(-\frac{t^2}{2}  \left( \frac{1}{2} +  \left(\frac{1}{\sqrt{2}}-1 \right)^2\right)\right) = \exp\left(-t^2  \left(1 - 1/\sqrt{2} \right) \right)
+\]
+On en déduit que la limite en loi de $(Z_{2n}-Z_n)_n$ est une loi gaussienne centrée et de variance $2 - \sqrt{2}$.
+\item  Si $(Z_n)_n$ converge en probabilité vers $Z$, alors
+    $(Z_{2n})_n$ converge aussi en probabilité vers $Z$. \footnote{En effet
+      pour tout $\delta, \epsilon>0$, il existe $N$ tel que pour tout $n \geq
+      N$,
+$\PP( |Z_n - Z| \geq \delta) \leq \epsilon.$
+On en déduit que pour tout $n \geq N/2$,
+$\PP( |Z_{2n} - Z| \geq \delta) \leq \epsilon.$
+Ce qui prouve que $\lim_n \PP( |Z_{2n} - Z| \geq \delta ) = 0$.}
+
+
+
+%\item Supposons que $(Z_n)_n$ converge en probabilité vers $Z$, où $Z$ est une loi gaussienne centrée réduite.
+En écrivant
+\begin{align*}
+\PP\left( |Z_{2n} - Z_n| \geq \delta \right) & = \PP\left( |(Z_{2n} - Z)+ (Z -
+  Z_n)| \geq \delta \right) \leq \PP\left(|Z_{2n} - Z | + |Z - Z_n| \geq \delta
+\right) \\
+& \leq \PP\left( |Z_{2n} - Z |  \geq \delta/2\right) + \PP\left( |Z - Z_n| \geq \delta/2\right)
+\end{align*}
+on voit que la convergence en probabilité des suites $(Z_n)_n$ et $(Z_{2n})_n$
+vers $Z$ entraine la convergence en probabilité de $(Z_{2n} - Z_n)_n$ vers
+zero.   \footnote{Plus généralement,
+    \begin{itemize}
+    \item si $X_n \to X$ et $Y_n \to Y$ en probabilité
+  alors $X_n + Y_n \to X+Y$ en probabilité.
+\item si $X_n \to X$ en probabilité, alors $c X_n$ converge vers $c X$ en
+  probabilité.
+    \end{itemize}
+  En effet,
+  \begin{align*}
+    \PP\left( |X_n + Y_n - X-Y| \geq \delta \right) & \leq \PP\left( |X_n - X|
+      +
+      |Y_n - Y| \geq \delta \right) \\
+    & \leq  \PP\left( |X_n - X|  \geq \delta /2 \right) + \PP\left(  |Y_n - Y| \geq \delta /2 \right) \to 0.
+  \end{align*}
+De plus,
+\[
+\PP\left( | c X_n - c X | \geq \delta \right)  = \PP\left( |X_n - X| \geq \delta/|c| \right) \to 0 .
+\]
+}
+
+Maintenant, si $Z_{2n} - Z_n \to 0$ en probabilité, alors $Z_{2n} - Z_n \to 0$ également en loi,
+\footnote{
+Si $ X_n$ converge en probabilité vers $ X$, alors $X_n$ converge en loi vers $X$.
+
+{\bf Démonstration:} D'après le théorème porte-manteau, il suffit de montrer que, pour toute fonction $f$  bornée et \emph{uniformément} continue,
+  $\mathbb{E}(f(X_n))\to \mathbb{E}(f(X))$.
+
+Soit donc $f$  bornée et uniformément continue et $ \varepsilon>0$. Il existe, $f$ étant uniformément continue, $ \alpha>0$ tel que  $ \vert f(x)-f(y)\vert\leq
+\varepsilon$ si  $ \vert x-y\vert\leq \alpha$. On a alors
+\begin{align*}
+\vert\mathbb{E}(f(X_n))-\mathbb{E}f(X))\vert &\leq \mathbb{E}(\vert f(X_n))-f(X)\vert \un_{\vert X_n-X\vert\leq\alpha} +
+\mathbb{E}(\vert f(X_n))-f(X)\vert \un_{\vert X_n-X\vert > \alpha} \\
+&\leq \varepsilon+2\vert\vert f\vert\vert P(\vert X_n-X\vert>\alpha)
+\end{align*}
+d'où  $ \overline{\lim}_n \vert\mathbb{E}(f(X_n))-\mathbb{E}f(X))\vert \leq \varepsilon$ et  $\mathbb{E}(f(X_n))\to \mathbb{E}(f(X))$.}
+ce qui contredit le résultat de 1).
+
+On ne peut donc avoir $\Z_n \Pto Z$.
+
+
+\end{enumerate}
+}
+
+\end{document}
