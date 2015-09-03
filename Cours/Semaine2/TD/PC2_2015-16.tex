@@ -1,6 +1,6 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 
-\usepackage{amsmath, amsthm, amsfonts, amssymb}
+\usepackage{amsmath, amsthm, amsfonts, amssymb,enumerate}
 \usepackage{dsfont} % utilisation : {\mathds N} (au lieu de mathbb)
 \usepackage{mathrsfs,bbm} % utilisation : {\mathscr B} (plus joli que mathcal qu'il remplace)
 
@@ -14,7 +14,7 @@
 \usepackage{verbatim} % utile notamment pour l'environnement "comment"
 
 \usepackage[T1]{fontenc}
-\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
 
 \usepackage{xcolor}
@@ -25,6 +25,7 @@
 \def\loiunif{\operatorname{Unif}}
 \def\iid{i.i.d.}
 \def\rset{\R}
+\def\Rset{\mathbb{R}}
 \def\rme{\mathrm{e}}
 \def\eqdef{\triangleq}
 \def\1{\mathbbm{1}}
@@ -40,12 +41,14 @@
 
 \newcommand{\C}{{\mathds C}}
 \newcommand{\E}{{\mathds E}}
+\newcommand{\PE}{{\mathds E}}
 \newcommand{\N}{{\mathds N}}
 \renewcommand{\P}{{\mathds P}}
 \newcommand{\R}{{\mathds R}}
 \newcommand{\Z}{{\mathds Z}}
 \newcommand{\PP}{{\mathbb P}}
 \newcommand{\eps}{\varepsilon}
+\newcommand{\un}{\mathsf{1}}
 
 \newcommand{\ii}{{\textup{i}}}
 \newcommand{\ee}{{\textup{e}}}
@@ -55,6 +58,10 @@
 \newcommand{\boB}{{\mathscr B}}
 \newcommand{\p}{\ensuremath{\mathbb{P}}}
 \newcommand{\pa}[1]{\left(#1\right)}
+\newcommand{\dlim}{\ensuremath{\stackrel{\mathcal{L}}{\longrightarrow}}}
+\newcommand{\plim}{\ensuremath{\stackrel{\mathrm{P}}{\longrightarrow}}}
+\newcommand{\pslim}{\ensuremath{\stackrel{\text{p.s.}}{\longrightarrow}}}
+
 
 %\def\N{\mathscr N}
 
@@ -73,7 +80,7 @@
 
 \theoremstyle{definition}
 \newtheorem{exercice}{Exercice}
-\def\cl{\Rightarrow_d}
+\def\cl{\stackrel{\text{(loi)}}{\to}}
 \def\eqsp{\,}
 
  % barre pour separer les exos
@@ -85,10 +92,10 @@
 
 \parindent=0pt
 
-%-- Si cette ligne est lue, le corrig� ne s'affiche pas :
-\newcommand{\Corrige}[1]{}
-%-- Si la ligne suivante est lue, le corrig� s'affiche :
-%\newcommand{\Corrige}[1]{\noindent {\small {\bf Corrig� :}\\ #1} }
+%-- Si cette ligne est lue, le corrigé ne s'affiche pas :
+%%\newcommand{\Corrige}[1]{}
+%-- Si la ligne suivante est lue, le corrigé s'affiche :
+\newcommand{\Corrige}[1]{\noindent {\small {\bf Corrigé :}\\ #1} }
 
 
 \begin{document}
@@ -98,32 +105,12 @@
 
 \par\vspace{0.2cm}
 
-\begin{center} {\bf \Large PC 2 (Mod�le statistique)}\end{center}
+\begin{center} {\bf \Large PC 2 (Modèle statistique)}\end{center}
 
-\barre
-{\small
-\section{TCL pour la m�diane \emph{(Emprunt� � la PC1)}}
-Soit $(X_1,X_2,\dots ,X_{2n+1})$ un �chantillon de $2n+1$ v.a. i.i.d. uniformes sur $[0,1]$, on note $Y_n$ la m�diane de l'�chantillon. On s'attend � ce que $(Y_n)$  tende vers $1/2$, nous allons montrer que $(Y_n -1/2)$ a des fluctuations gaussiennes.
-\begin{enumerate}
-\item Se convaincre que $Y_n$ a pour densit�
-$$
-(2n+1)\binom{2n}{n}x^n(1-x)^n \mathbf{1}_{x\in[0,1]}.
-$$
-\item D�terminer la densit� $g_n$ de
-$$
-Z_n=2\sqrt{2n}\left(Y_n-1/2\right)
-$$
-et en d�duire que $Z_n$ converge en loi vers une $\mathcal{N}(0,1)$. On rappelle la formule de Stirling : $n! \sim n^ne^{-n}\sqrt{2\pi n}$.\\
-
-\emph{(On pourra utiliser le Th�or�me de Scheff� : si chaque $Z_n$ a pour densit� $g_n$ et que la suite $(g_n)$ converge simplement vers une densit� $g$, alors $(Z_n)$ converge en loi vers la loi de densit� $g$.)}
-
-\item Comment g�n�raliser ce r�sultat et cette preuve � des variables continues non-uniformes?
-\end{enumerate}
-}
 \barre
 
 \section{Mod\`ele exponentiel}
-Une grande partie des mod\`eles utilis\'es dans les exemples �l�mentaires sont des
+Une grande partie des mod\`eles utilis\'es dans les exemples élémentaires sont des
 mod\`eles exponentiels (mod\`ele gaussien, log-normal, exponentiel,
 gamma, Bernouilli, Poisson, etc). Nous allons \'etudier quelques
 propri\'et\'es de ces mod\`eles. On appelle mod\`ele exponentiel une
@@ -131,11 +118,10 @@ famille de lois $\{\PP_{\theta},\ \theta\in\Theta\}$ ayant une
 densit\'e par rapport \`a une mesure $\mu$ $\sigma$-finie sur $\R$
 ou $\N$ de la forme
 $$p_{\theta}(x)=c(\theta)\exp\pa{m(\theta)f(x)+h(x)}.$$
-On supposera que $\Theta$ est un intervalle ouvert de $\R$, $m(\theta)=\theta$
-et $c(\cdot)\in C^2$, $c(\theta)>0$ pour tout $\theta\in \Theta$. On
+On supposera que $\Theta$ est un intervalle ouvert de $\R$, $m(\theta)=\theta$, $c$ de classe $C^2$, $c(\theta)>0$ pour tout $\theta\in \Theta$. On
 notera $X$ une variable al\'eatoire de loi $\PP_{\theta}$ et on
 admettra que
-$${d^i\over d \theta^i}\int\exp(\theta f(x)+h(x))\, \mu(dx)=\int f(x)^i\exp(\theta f(x)+h(x))\, \mu(dx)<+\infty,\quad \textrm{pour }i=1,2.$$
+$${\partial^i\over \partial \theta^i}\int\exp(\theta f(x)+h(x))\, \mu(dx)=\int f(x)^i\exp(\theta f(x)+h(x))\, \mu(dx)<+\infty,\quad \textrm{pour }i=1,2.$$
  \begin{enumerate}
 \item Montrez que
 $\varphi(\theta):=\E_{\theta}\pa{f(X)}=-{d\over
@@ -147,13 +133,69 @@ $\hat \theta_{n}$ l'estimateur obtenu en r\'esolvant $\varphi(\hat
 En supposant ${\rm Var_{\theta}}(f(X))>0$, montrez que
 $$\sqrt{n}\pa{\hat\theta_{n}-\theta}\stackrel{\textrm{loi}}{\to}\mathcal N\pa{0,{1\over {\rm Var}_{\theta}\pa{f(X)}}}.$$
 \end{enumerate}
+\Corrige{ Observer que puisque $p_\theta$ est une densité, on a $c(\theta) =
+  \left( \int \exp(\theta f(x) + h(x)) \mu(dx) \right)^{-1}$.
+  \begin{enumerate}
+  \item D'après le résultat admis, 
+\[
+\phi(\theta) = c(\theta) \frac{d}{d\theta} \left( \frac{1}{c(\theta)} \right)
+\]
+ce qui donne le résultat demandé.
+\item De même, on a 
+\[
+\int f^2(x) p_\theta(x) \mu(dx) = c(\theta) \frac{d^2}{d\theta^2}
+\frac{1}{c(\theta)}
+\]
+ce qui donne 
+\[
+\int f^2(x) p_\theta(x) \mu(dx) = -\frac{c''(\theta)}{c(\theta)} + 2 \left(
+  \frac{c'(\theta)}{c(\theta)} \right)^2
+\]
+En combinant ce calcul avec la question précédente, on obtient
+\[
+\mathrm{Var}_\theta(f(X)) = \left(\frac{c'(\theta)}{c(\theta)} \right)^2 -
+\frac{c''(\theta)}{c(\theta)}
+\]
+ce qui donne le résultat demandé.
+\item Par le TCL pour des v.a. i.i.d. 
+\[
+\sqrt{n} \left( \phi(\hat{\theta}_n) - \PE_\theta[f(X)] \right) \dlim 
+\mathcal{N}(0, {\rm Var}_{\theta}\pa{f(X)})
+\]
+puis on conclut par la méthode delta appliquée avec la fonction $\phi^{-1}$.
+  \end{enumerate}
+}
 
 \section{Estimation par la m\'ethode plug-in} \label{Plugin}
-Soit $X_1,\ldots,X_n$ des variables al\'eatoires r\'eelles i.i.d. de fonction de r\'epartition $F$, soit $a<b$ deux r�els et soit $\theta=F(b)-F(a)$.
+Soit $X_1,\ldots,X_n$ des variables al\'eatoires r\'eelles i.i.d. de fonction de r\'epartition $F$, soit $a<b$ deux réels et soit $\theta=F(b)-F(a)$.
 \begin{enumerate}
 \item D\'eterminer l'estimateur plug-in $\widehat{\theta}$ de $\theta$.
 \item D\'eterminer l'estimateur plug-in de la variance de $\widehat{\theta}$ et en d\'eduire un intervalle de confiance asymptotique pour $\theta$ de niveau $1-\alpha$.
 \end{enumerate}
+\Corrige{
+  \begin{enumerate}
+  \item L'estimateur de substitution est donné par
+\[
+\hat{\theta}_n = \widehat{F}_n(b) - \widehat{F}_n(a) = \frac{1}{n} \sum_{k=1}^n \un_{a < X_k \leq b}.
+\]
+\item Notons $\widehat{\sigma}^2_n$ l'estimateur plug-in de la variance de $\widehat{\theta}_n$. On a 
+\[
+\widehat{\sigma}^2_n = \frac{\widehat{\theta}_n \left(1 - \widehat{\theta}_n \right)}{n}.
+\]
+Le TCL pour des v.a. i.i.d. et le lemme de Slutsky (noter que $n
+\widehat{\sigma}^2_n \pslim \theta (1-\theta)$) donnent 
+\[
+\frac{1}{\widehat{\sigma}_n} \left( \widehat{\theta}_n - \theta \right) \dlim  \mathcal{N}(0, 1).
+\]
+Notons $z_{1-\alpha/2}$ le quantile d'ordre $1-\alpha/2$ d'une loi
+$\mathcal{N}(0,1)$. On déduit de cette convergence en loi un intervalle de
+confiance asymptotique pour $\theta$ au niveau $(1-\alpha)$
+\[
+\left[\widehat{\theta}_n - z_{1-\alpha/2} \widehat{\sigma}_n;
+  \widehat{\theta}_n + z_{1-\alpha/2} \widehat{\sigma}_n\right]
+\]
+  \end{enumerate}
+}
 
 \section{Stabilisation de la variance}
  On dispose d'un
@@ -169,6 +211,26 @@ standard. En d\'eduire un intervalle $\hat I_{n, \alpha}$ fonction
 de $z_{\alpha}, n, \bar X_{n}$ tel que $\lim_{n\to
 \infty}\p(\theta\in \hat I_{n,\alpha})=1-\alpha$.
 \end{enumerate}
+\Corrige{
+  \begin{enumerate}
+  \item On a 
+\[
+\overline{X}_n \pslim \PE_\theta[X]= \theta \qquad \sqrt{n}\left(
+  \overline{X}_n - \PE_\theta[X] \right) \dlim \mathcal{N}(0, \theta
+(1-\theta)).
+\]
+\item Par la méthode delta, on cherche une fonction $g$ continûment
+  différentiable telle que $\left(g'(\theta)\right)^2 \theta (1-\theta) = 1 $. Plusieurs solutions possibles
+\[
+\theta \mapsto \arccos(2\theta-1) \qquad \theta \mapsto \arcsin(2\theta-1)
+\qquad \theta \mapsto 2 \arccos{\sqrt{\theta}}
+\]
+\item On en déduit l'intervalle de confiance asympotique de niveau $1-\alpha$
+\[
+I_{n,\alpha} = \left[ \frac{1}{2} \left( 1+ \cos\left( g(\overline{X}_n) + \frac{z_\alpha}{\sqrt{n}} \right)\right);  \frac{1}{2} \left( 1+ \cos\left( g(\overline{X}_n) - \frac{z_\alpha}{\sqrt{n}} \right)\right)  \right]
+\]
+  \end{enumerate}
+}
 
 \section{Mod\`ele d'autor\'egression}
 On consid\`ere l'observation $Z=(X_1,\dots,X_n)$, o\`u les $X_i$
@@ -180,20 +242,51 @@ avec les $\xi_i$ i.i.d. de loi normale ${\mathcal N}(0,\sigma^2)$ et
 $\theta\in \R$. \'Ecrire le mod\`ele statistique engendr\'e
 par l'observation $Z$.
 
-
-
-
-
+\Corrige{\begin{itemize}
+\item espace probabilisable: $\Rset^n$ muni de la tribu borélienne.
+\item une famille de lois $\PP_\psi$ sur $\Rset^n$ données par
+\[
+\PP_\psi(A) = \int_A \frac{1}{(\sqrt{2 \pi} \sigma)^n}
+\frac{1}{\sqrt{\mathrm{det}(\Gamma)}} \ \exp\left(- \frac{1}{2\sigma^2}
+  \underline{x}^T \Gamma^{-1} \underline{x} \right) d  \underline{x}
+\]
+où $\psi = (\theta, \sigma) \in \Rset \times ]0, \infty[$ et 
+\[
+\Gamma^{-1} = 
+\left[\begin{matrix}
+  1+\theta^2 & -\theta & 0 & \cdots & \cdots \\
+-\theta & 1+\theta^2 & -\theta & 0 & \cdots \\
+0 & -\theta & 1+\theta^2 & -\theta & \cdots \\
+\cdots & \cdots & \cdots & \cdots & \cdots  \\
+\cdots & \cdots & -\theta & 1+\theta^2 & -\theta \\
+\cdots & \cdots &0 &-\theta&1
+\end{matrix} \right]
+\]
+Noter que $\Gamma = A A^T$ avec
+\[
+A = \left[
+  \begin{matrix}
+    1 & 0 &  \cdots & 0 & 0 \\
+\theta & 1 & \cdots & 0 & 0 \\
+\theta^2 & \theta & 1 & 0 & \cdots \\
+\cdots &  \cdots & \cdots & \cdots & \cdots \\
+\theta^{n-1} & \theta^{n-2} & \cdots & \theta & 1
+  \end{matrix} \right]
+\]
+\end{itemize} 
+Pour obtenir l'expression de la loi $\PP_\psi$, on peut remarquer que $X_k$ est
+une combinaison linéaire des v.a. $\xi_1, \cdots, \xi_k$; et écrire le vecteur
+$Z$ comme une transformation affine du vecteur gaussien $(\xi_1, \cdots,
+\xi_n)$. }
 
 \section{Survie}
-Un syst\`eme fonctionne en utilisant deux machines de types
-diff\'erents. Les dur\'ees de vie $X_1$ et $X_2$ des deux machines
+On étudie un syst\`eme qui fonctionne si deux machines de types
+diff\'erents fonctionnent. Les dur\'ees de vie $X_1$ et $X_2$ des deux machines
 suivent des lois exponentielles de param\`etres $\lambda_1$ et
-$\lambda_2$. Les variables al\'eatoires $X_1$ et $X_2$ sont
+$\lambda_2$ : $\P(X_i > x)=e^{-\lambda_i x}$.
+Les variables al\'eatoires $X_1$ et $X_2$ sont
 suppos\'ees ind\'ependantes.
 \begin{enumerate}
-\item Montrer que une variable al\'eatoire $X$ suit la loi exponentielle $\mathcal{E}(\lambda)$ si et seulement si
-$$\forall x>0:  \  \P(X > x)=\text{exp}(-\lambda x).$$
 \item Calculer la probabilit\'e pour que le syst\`eme ne tombe pas en panne
 avant la date $t$. En d\'eduire la loi de la dur\'ee de vie $Z$ du
 syst\`eme. Calculer la probabilit\'e pour que la panne du syst\`eme
@@ -212,46 +305,97 @@ $\lambda_1$ et $\lambda_2$ sont-ils identifiables?\\
 (b) Supposons maintenant que l'on observe \`a la fois les dur\'ees de vie des syst\`emes $Z_1,\ldots,Z_n$ et
 les causes de la d\'efaillance correspondantes $I_1,\dots,I_n$, $I_i\in\{0,1\}$.  \'Ecrire le mod\`ele statistique dans ce cas. Les param\`etres
 $\lambda_1$ et $\lambda_2$ sont-ils identifiables?
-
-
 \end{enumerate}
 
+\Corrige{
+  \begin{enumerate}
+  \item La probabilité que le système ne tombe pas en panne avant la date $t$
+    est 
+\[
+\PP(Z>t) = \exp(-(\lambda_1 +\lambda_2) t).
+\]
+La probabilité que la panne soit dûe à la défaillance de la machine 1 est
+\[
+ \PP(Z=X_1) = \PP(X_2 \geq X_1) =  \frac{\lambda_1}{\lambda_1+\lambda_2}.
+\]
+\item  Pour tout $t\geq 0$,
+\[
+\PP(Z >t, I=1) = \PP( X_2 \geq X_1, X_1 > t) = \frac{\lambda_1}{\lambda_1 +
+  \lambda_2} \exp(-(\lambda_1+ \lambda_2) t) = \PP(Z=X_1) \ \PP(Z>t).
+\]
+Résultat analogue pour $\PP(Z>t, I=0)$.
+\item 
+  \begin{enumerate}[(a)]
+  \item Modèle statistique
+\begin{itemize}
+\item Espace probabilisable: $]0, +\infty[^n$ muni de la tribu borélienne.
+\item Famille de fonctions de répartition $F_\theta$ sur $]0, \infty[$ indexées par  $\theta = (\lambda_1,
+  \lambda_2) \in \Theta = ]0, +\infty[^2$ et définies par
+\[
+F_\theta(x) = \left( 1 - \exp(-(\lambda_1+\lambda_2) x) \right) \un_{\Rset^+}(x) 
+\]
+\end{itemize} 
+Modèle non identifiable.
+\item Modèle statistique
+\begin{itemize}
+\item Espace probabilisable: $(]0, +\infty[ \times \{0,1\})^n$ muni de la tribu
+  engendrée par les ensembles $A\times\{0\}, A \times \{1 \}$ où $A$ est un borélien.
+\item Famille de fonctions de répartition $F_\theta$ sur $]0, \infty[ \times
+  \{0,1\}$ indexées par $\theta = (\lambda_1, \lambda_2) \in \Theta = ]0,
+  +\infty[^2$ et définies par
+  \begin{align*}
+    F_\theta(x,1) & = \left( 1 - \exp(-(\lambda_1+\lambda_2) x) \right)
+    \un_{\Rset^+}(x) \ \frac{\lambda_1}{ \lambda_1+\lambda_2} \\
+    F_\theta(x,0) & = \left( 1 - \exp(-(\lambda_1+\lambda_2) x) \right)
+    \un_{\Rset^+}(x) \ \frac{\lambda_2}{ \lambda_1+\lambda_2}
+  \end{align*}
+\end{itemize}
+Modèle identifiable.  \end{enumerate}
+  \end{enumerate}}
 
+\hrule
 
-\section{Probl�me bonus: Quantile central}
+\vspace{4mm}
 
+\begin{center}
+{\bf Exercices bonus}
+\end{center}
+
+{\small
 
 \begin{exercice}\label{exo:LimiteBeta}
-Pour tout $\alpha > 0$, on appelle loi $\loigamma(\alpha)$ la loi sur $\rset^+$ de densit�
+Pour tout $\alpha > 0$, on appelle loi $\loigamma(\alpha)$ la loi sur $\rset^+$ de densité
 $$
-g_\alpha(x) = \frac{1}{\Gamma(\alpha)} x^{\alpha-1} \rme^{-x} \;, \quad\text{o�}\quad
-\Gamma(\alpha) \eqdef \int_0^\infty x^{\alpha-1} \rme^{-x} dx\;.
+g_\alpha(x) = \frac{1}{\Gamma(\alpha)} x^{\alpha-1} \rme^{-x} \;,
+\quad\text{où}\quad \Gamma(\alpha) \eqdef \int_0^\infty x^{\alpha-1}
+\rme^{-x} dx\;.
 $$
-Pour $a,b > 0$, on appelle loi $\loibeta(a,b)$ la loi sur $[0,1]$ de densit�
+Pour $a,b > 0$, on appelle loi $\loibeta(a,b)$ la loi sur $[0,1]$ de densité
 $$
 h_{a,b}(x)= \frac{\Gamma(a+b)}{\Gamma(a) \Gamma(b)} x^{a-1} (1-x)^{b-1} \eqsp.
 $$
 \begin{enumerate}
-\item Soit $s$ et $t > 0$ et soit $X$ et $Y$ deux variables ind�pendantes de loi $\loigamma(s)$ et $\loigamma(t)$, respectivement.
+\item \label{qu:bonus1} Soit $s$ et $t > 0$ et soit $X$ et $Y$ deux variables indépendantes de loi $\loigamma(s)$ et $\loigamma(t)$, respectivement.
 On pose
 \begin{align*}
 &U= X+Y \\
 & V= X / (X+Y)
 \end{align*}
-Montrer que $U$ et $V$ sont ind�pendantes et que $U$ est distribu�e suivant une loi $\loigamma(s+t)$ et
-$V$ suivant une loi $\loibeta(s,t)$. [\emph{Indication~:} on pourra consid�rer la densit� jointe de $(U,V)$ sans se
-pr�occuper des constantes de normalisation.]
-\item Soit $\{Z_n\}_{n \geq 0}$ une suite de variables al�atoires telles que, pour tout $n\geq0$, $Z_n$ est de loi
+Montrer que $U$ et $V$ sont indépendantes et que $U$ est distribuée suivant une loi $\loigamma(s+t)$ et
+$V$ suivant une loi $\loibeta(s,t)$. [\emph{Indication~:} on pourra considérer la densité jointe de $(U,V)$ sans se
+préoccuper des constantes de normalisation.]
+\item Soit $\{Z_n\}_{n \geq 0}$ une suite de variables aléatoires telles que, pour tout $n\geq0$, $Z_n$ est de loi
   $\loigamma(n)$. Montrer que
 \[
 \sqrt{n}\left(\frac{Z_n}{n}-1\right) \cl \loigauss(0,1) \;.
 \]
-\item Soient $p \in (0,1)$ et $\{ k_n \}$ une suite monotone croissante d'entiers v�rifiant
+\item \label{bonus:qu3:exo1} oient $p \in (0,1)$ et $\{ k_n \}$ une suite
+  monotone croissante d'entiers vérifiant
 \begin{equation}
 \label{eq:condition-suite}
 \sqrt{n} \left( \frac{k_n}{n} - p \right) \rightarrow 0 \;.
 \end{equation}
-Soient $\{X_n\}_{n \geq 0}$ et $\{Y_n\}_{n \geq 0}$ deux suites ind�pendantes telles que $X_n \sim \loigamma(k_n)$ et $Y_n \sim \loigamma(n-k_n)$.
+Soient $\{X_n\}_{n \geq 0}$ et $\{Y_n\}_{n \geq 0}$ deux suites indépendantes telles que $X_n \sim \loigamma(k_n)$ et $Y_n \sim \loigamma(n-k_n)$.
 On pose
 \[
 V_n = \frac{X_n}{X_n+Y_n} \;.
@@ -260,53 +404,212 @@ Montrer que
 $$
 \sqrt{n} \left( V_n - p \right) \cl\loigauss(0,p(1-p)) \;.
 $$
-[\emph{Indication~:} on pourra, dans un premier temps, consid�rer le comportement asymptotique du couple $\frac1n(X_n,Y_n)-(p,1-p)$.]
+[\emph{Indication~:} on pourra, dans un premier temps, considérer le comportement asymptotique du couple $\frac1n(X_n,Y_n)-(p,1-p)$.]
 \item Conclure.
 \end{enumerate}
 \end{exercice}
 
 
+\Corrige{
+  \begin{enumerate}
+  \item Les v.a. $X,Y$ étant indépendantes, la loi jointe est donnée par
+\[
+f_{(X,Y)}(x,y) = f_X(x) \, f_Y(y) \propto x^{s-1} \exp(-x) y^{t-1} \exp(-y) \un_{\Rset^+}(x) \un_{\Rset^+}(y).
+\]
+Par le changement de variable 
+\[
+\phi: \left[\begin{matrix} x \\ y \end{matrix} \right] \to \left[\begin{matrix} u \\ v \end{matrix} \right] = \left[ 
+  \begin{matrix}
+  x+y \\ \frac{x}{x+y}
+  \end{matrix}
+\right] 
+\]
+on obtient pour toute fonction $h$ mesurable positive
+\[
+\PE\left[h(U,V) \right] \propto \int_{\Rset^+_\star \times ]0,1[} h(u,v)
+u^{s+t-1} \exp(-u) \ v^{s-1} (1-v)^{t-1} \ du \, dv
+\]
+dont on déduit que $(U,V)$ sont deux variables indépendantes; $U$ est une loi
+Gamma de paramètre $s+t$ et $V$ est une loi Beta de paramètres $(s,t)$.
+\item Par la question précédente, $Z_n$ a même loi que $\sum_{k=1}^n W_k$ où
+  $\{W_k, k \geq 1 \}$ sont i.i.d. de loi Gamma de paramètre $1$. Donc la limite en loi de $\sqrt{n}(Z_n/n -1)$ est la limite en loi de 
+\[
+\sqrt{n} \left(\frac{1}{n} \sum_{k=1}^n W_k -1 \right)
+\] 
+Puisque $\PE[W_1] = \mathrm{Var}(W_1) = 1$, on obtient le résultat demandé en
+appliquant le TCL pour des v.a. i.i.d.
+\item \textcolor{red}{On propose une preuve basée sur l'indication suivante:
+    établir la loi de $X_n/Y_n$ puis observer que $V_n = g(X_n/Y_n)$ avec $g(x)
+    = x/(1+x)$} \\
+  $\bullet$ D'après la question~\ref{qu:bonus1}, en observant que $X/Y =
+  V/(1-V)$, on obtient par la méthode d'identification
+\[
+\PE\left[h\left( \frac{X}{Y}\right) \right] = \frac{\Gamma(s+t)}{\Gamma(s)
+  \Gamma(t)} \int_0^\infty h(z) \frac{z^{s-1}}{(z+1)^{s+t}} dz
+\]
+(on reconnaît une Loi Beta de seconde espèce). Soit $R_n = X_n/Y_n$; sa densité
+est proportionnelle à $ z^{k_n-1} (1+z)^{-n} \un_{\Rset^+}(z)$.  \\
+$\bullet$ Montrons que~\footnote{intuiter le terme de recentrage et la variance
+  limite pour que l'application de la méthode delta permette d'aboutir au
+  résultat demandé.}
+\begin{equation}
+  \label{eq:bonus:qu3}
+  \sqrt{n} \left(R_n - \frac{p}{1-p}\right) \dlim \mathcal{N} \left(0,\frac{p}{(1-p)^3} \right).
+\end{equation}
+Soit $h$ une fonction continue bornée.  Posons $c = p/(1-p)$.
+\begin{align*}
+  & \PE\left[h\left( \sqrt{n}(R_n - c)\right) \right] =
+  \frac{\Gamma(n)}{\Gamma(k_n) \Gamma(n-k_n)} \int_0^\infty
+  h\left( \sqrt{n} (z - c) \right) z^{k_n-1} (1+z)^{-n}  dz \\
+  & = \frac{1}{\sqrt{n}} \frac{\Gamma(n)}{\Gamma(k_n) \Gamma(n-k_n)} \int_{-c
+    \sqrt{n}}^{+\infty} h(v) \left( \frac{v}{\sqrt{n}}+c\right)^{k_n-1} \ 
+  \left( 1 + c
+    + \frac{v}{\sqrt{n}}\right)^{-n}  \ dv  \\
+  & = \frac{1}{\sqrt{n}} \frac{c^{k_n-1}}{(1-c)^n}\frac{\Gamma(n)}{\Gamma(k_n)
+    \Gamma(n-k_n)}\int_{-c \sqrt{n}}^{+\infty} h(v) \left( 1+ \frac{v}{c
+      \sqrt{n}}\right)^{k_n-1} \ \left( 1 + \frac{v}{(1+c)\sqrt{n}}\right)^{-n}
+  \ dv
+\end{align*}
+On écrit $\ln(1+x) = x - x^2/2 + o(x^2)$ au voisinage de zero, puis on applique
+le lemme de Scheffé.  Pour identifier la densité limite, observer que
+\begin{multline*}
+  \left(k_n-1 \right) \ln \left( 1+ \frac{v}{c \sqrt{n}}\right) - n \ln\left(
+    1 + \frac{v}{(1+c)\sqrt{n}}\right) \\
+  = \frac{\sqrt{n} v}{c} \left(\frac{k_n-1}{n} - \frac{c}{1+c} \right) -
+  \frac{v^2}{2c^2} \left(\frac{k_n-1}{n} - \frac{c^2}{(1+c)^2}\right) \left(1 +
+    o(1)\right).
+\end{multline*}
+Puisque $c/(1+c) = p$, en utilisant (\ref{eq:condition-suite}) le terme de
+droite converge vers (à $v$ fixé, quand $n \to \infty$)
+\[
+- \frac{v^2}{2 c^2 } p (1-p) = - \frac{v^2}{2 } \frac{(1-p)^3}{p}.
+\]
+On vérifie ensuite que le terme constant converge vers la constante de
+normalisation de $v \mapsto \exp(-v^2 (1-p)^3/(2p))$. \\
+$\bullet$ On a $V_n = R_n/(1+R_n) = g(R_n)$ en ayant posé $g(x) = x/(x+1)$.
+Notons que $g$ est $C^1$ sur $\Rset^+$ et que $g'(x) = 1/(1+x)^2$.  En
+observant que
+\[
+g\left( \frac{p}{1-p}\right) = p \qquad g'\left( \frac{p}{1-p}\right) = (1-p)^{2}
+\]
+on obtient le résultat demandé en appliquant la méthode delta à la convergence
+(\ref{eq:bonus:qu3}).
+  \end{enumerate}
+}
+
 
 \begin{exercice}\label{exo:medianeCLT}
-Soit $f$ une densit� de probabilit� port�e par un intervalle  (non n�cessairement born�)
-$(a,b) \subset \rset$. On suppose que $f$ est continue et ne s'annulle pas sur $(a,b)$.
-On note $F(x)= \int_{-\infty}^x f(u) du$ la fonction de r�partition associ�e.
-Cette fonction de r�partition est alors strictement monotone sur $x\in[a,b]$
-et d�finit une bijection de $[a,b] \to [0,1]$. On note $F^{-1}$ la fonction r�ciproque de $F$ de  $[0,1]\to[a,b]$. De plus,
-par continuit� de $f$, $F$ est continuement d�rivable sur $(a,b)$ de d�riv�e $f$ et il s'en suit que  $F^{-1}$ est d�rivable sur $(0,1)$.
+Soit $f$ une densité de probabilité portée par un intervalle  (non nécessairement borné)
+$(a,b) \subset \rset$. On suppose que $f$ est continue et ne s'annule pas sur $(a,b)$.
+On note $F(x)= \int_{-\infty}^x f(u) du$ la fonction de répartition associée.
+Cette fonction de répartition est alors strictement monotone sur $x\in[a,b]$
+et définit une bijection de $[a,b] \to [0,1]$. On note $F^{-1}$ la fonction réciproque de $F$ de  $[0,1]\to[a,b]$. De plus,
+par continuité de $f$, $F$ est continuement dérivable sur $(a,b)$ de dérivée $f$ et il s'en suit que  $F^{-1}$ est dérivable sur $(0,1)$.
 
 \begin{enumerate}
-\item Soit $U$ une variable uniforme sur $[0,1]$, $U \sim \loiunif([0,1])$. Montrer que la variable $X$ d�finie par $X= F^{-1}(U)$
-a pour densit� $f$. R�ciproquement, montrer que si $X$ est une loi de densit� $f$, alors $U= F(X)$ est une loi uniforme sur $[0,1]$.
-\item Soient $g$ une densit� et $Y_1, \dots, Y_n$, $n$ v.a. \iid\ de densit� $g$. On note $(Y_{(1)}, \dots, Y_{(n)})$ la statistique d'ordre
-de l'�chantillon, $Y_{(1)} < Y_{(2)} < \dots < Y_{(n)}$. Montrer que $Y_{(k)}$ a pour densit�
+\item Soit $U$ une variable uniforme sur $[0,1]$, $U \sim \loiunif([0,1])$. Montrer que la variable $X$ définie par $X= F^{-1}(U)$
+a pour densité $f$. Réciproquement, montrer que si $X$ est une loi de densité $f$, alors $U= F(X)$ est une loi uniforme sur $[0,1]$.
+\item Soient $g$ une densité et $Y_1, \dots, Y_n$, $n$ v.a. \iid\ de densité $g$. On note $(Y_{(1)}, \dots, Y_{(n)})$ la statistique d'ordre
+de l'échantillon, $Y_{(1)} < Y_{(2)} < \dots < Y_{(n)}$. Montrer que $Y_{(k)}$ a pour densité
 \[
 g_{Y_{(k)}}(y) = \frac{n!}{(k-1)!(n-k)!} G(y)^{k-1}[1 - G(y)]^{n-k} g(y) \;,
 \]
-o� $G$ est la fonction de r�partition associ�e � $g$.
+où $G$ est la fonction de répartition associée à $g$.
 [\emph{Indication~:} on pourra montrer successivement
 $g_{Y_{(k)}}(y) = n!\PP(Y_1<\dots<Y_{k-1} <y <Y_{k+1}<\dots<Y_n) g(y)$ puis
 $\PP(\max(Y_1,\dots,Y_{k-1}) <y)=(k-1)!\;\PP(Y_1<\dots<Y_{k-1} <y)$ et $\PP(y<\min(Y_{k+1},\dots,Y_n))=(n-k)!\;\PP(y <Y_{k+1}<\dots<Y_n)$.]
-% que la densit� jointe de $(Y_{(1)} , Y_{(2)} ,\dots , Y_{(n)})$ est donn�e par $n!\prod_{k=1}^ng(y_k)\1( y_1<y_2<\dots<y_n)$.]
+% que la densité jointe de $(Y_{(1)} , Y_{(2)} ,\dots , Y_{(n)})$ est donnée par $n!\prod_{k=1}^ng(y_k)\1( y_1<y_2<\dots<y_n)$.]
 %en remarquant
 %que, pour toute fonction de $h:\rset^n\to\rset$,
 %$h(Y_{(1)} , Y_{(2)} ,\dots , Y_{(n)})=\sum_{\sigma\in\calP_n} h(Y_{\sigma(1)},\dots,Y_{\sigma(n)})\1( Y_{\sigma(1)}<\dots<Y_{\sigma(n)}),
 %$$
-%o� $\calP_n$ est l'ensemble des permutations de $\{1,\dots,n\}$,
-%puis en prenant l'esp�rance de cette expression.]
-\item Quelle est la loi de  $Y_{(k)}$ si $g= \1_{[0,1]}$ est la densit� de la loi uniforme sur $[0,1]$ ?
-\item Soit $p \in (0,1)$. On note $x_p$ le quantile d'ordre $p$, \emph{i.e.} $x_p = F^{-1}(p)$. Montrer que
+%où $\calP_n$ est l'ensemble des permutations de $\{1,\dots,n\}$,
+%puis en prenant l'espérance de cette expression.]
+\item Quelle est la loi de  $Y_{(k)}$ si $g= \1_{[0,1]}$ est la densité de la loi uniforme sur $[0,1]$ ?
+\item \label{bonus:qu4:exo2} Soit $p \in (0,1)$. On note $x_p$ le quantile d'ordre $p$, \emph{i.e.} $x_p = F^{-1}(p)$. Montrer que
 \[
 \sqrt{n} (X_{(k_n)} - x_p) \cl\loigauss\left(0,\frac{p(1-p)}{f^2(x_p)}\right) \;.
 \]
-\item Soit $X_1, \dots, X_n$ une suite de v.a. \iid\ normales de moyenne $\mu$ et de variance $\sigma^2$. Montrer que la m�diane est un estimateur consistant et asymptotiquement normal de la moyenne.
-D�terminer la variance asymptotique de cet estimateur. Cet estimateur doit-il �tre pr�f�r� � la moyenne empirique ?
-\item Reprendre la question pr�c�dente avec $X_1, \dots, X_n$ suite de v.a. \iid\ distribu�es suivant une loi de Laplace de
-densit� $f_\mu(x)= \frac{1}{2} \rme^{-|x-\mu|}$. Commenter.
+\item Soit $X_1, \dots, X_n$ une suite de v.a. \iid\ normales de moyenne $\mu$ et de variance $\sigma^2$. Montrer que la médiane est un estimateur consistant et asymptotiquement normal de la moyenne.
+Déterminer la variance asymptotique de cet estimateur. Cet estimateur doit-il être préféré à la moyenne empirique ?
+\item Reprendre la question précédente avec $X_1, \dots, X_n$ suite de v.a. \iid\ distribuées suivant une loi de Laplace de
+densité $f_\mu(x)= \frac{1}{2} \rme^{-|x-\mu|}$. Commenter.
 \end{enumerate}
 \end{exercice}
-
-
+\Corrige{
+  \begin{enumerate}
+  \item Pour tout $x \in [a,b]$, $\{ F^{-1}(U) \leq x \} = \{U \leq F(x) \}$ et
+    pour tout $t \in [0,1]$, on a $\{F(X) \leq t \} = \{X \leq F^{-1}(t) \}$.
+    Ce qui donne le résultat.
+  \item \textcolor{red}{La correction ne suit pas l'indication: on calcule
+      d'abord la fonction de répartition puis on obtient la densité par
+      dérivation}  On a 
+\[
+\{ Y_{(k)} \leq t\} = \bigcup_{j=k}^n \{ \text{il existe exactement $j$
+  variables dans $]-\infty,t]$ et $(n-j)$ dans $]t, \infty[$} \};
+\]
+Il s'agit d'une union disjointe et chaque événement décrit le résultat d'une
+Binômiale de paramètres $(n,G(t))$. On en déduit que
+\[
+\PP(Y_{(k)} \leq t) = \sum_{j=k}^n \binom{n}{j} G(t)^{j} (1-G(t))^{n-j}
+\]
+puis par dérivation, on obtient pour densité
+\[
+t \mapsto n \binom{n-1}{k-1} \left( G(t) \right)^{k-1} \ \left(1-G(t)
+\right)^{n-k} g(t)
+\]
+\item Le cas uniforme correspond à $g(t) = \un_{[0,1]}(t)$ et $G(t)=t$ pour
+  tout $t \in [0,1]$.
+\item \textcolor{red}{Ici, $\{k_n, n \geq 1\}$ est une suite d'entiers telle
+    que $\lim_n \sqrt{n}(k_n/n - p) = 0$}. On établit la propriété dans le cas
+  où les v.a. $\{X_k, k \geq 1 \}$ sont i.i.d. uniformes sur $[0,1]$ (ce qui
+  entraine $x_p = p$). Le cas général est une conséquence de la méthode delta
+  appliquée avec la fonction $t \mapsto F^{-1}(t)$ dont la dérivée est
+  $1/f(F^{-1}(t))$. \\
+En utilisant la question précédente, pour toute fonction $h$ mesurable positive
+\begin{align*}
+  & \PE\left[h\left( \sqrt{n} \left(X_{k_n} - p \right) \right) \right]  \\
+& 
+  \sqrt{n} \binom{n-1}{k_n-1} p^{k_n-1} (1-p)^{n-k_n} \int_{- p
+    \sqrt{n}}^{\sqrt{n}(1-p)} h(y) \left(1+ \frac{y}{p \sqrt{n}}
+  \right)^{k_n-1} \ \left(1 - \frac{y}{(1-p)\sqrt{n}} \right)^{n-k_n} dy
+\end{align*}
+En procédant comme dans la question~\ref{bonus:qu3:exo1} de
+l'exercice~\ref{exo:LimiteBeta}, on obtient par le lemme se Scheffé (voir PC1
+exercice 2) que
+\[
+\lim_n \PE\left[h\left( \sqrt{n} \left(X_{k_n} - p \right) \right) \right]
+\propto \int h(y) \  \exp(- \frac{y^2}{2p(1-p)}) dy.
+\]
+On en déduit que 
+\[
+\sqrt{n}\left( X_{k_n} -p \right) \dlim \mathcal{N}(0, p(1-p)).
+\]
+\item Par la moyenne empirique, un intervalle de confiance (non asymptotique)
+  au noveau $(1-\alpha)$ est
+\[
+\left[ n^{-1} \sum_{k=1}^n X_n \pm z_{1-\alpha/2} \frac{\sigma}{\sqrt{n}}
+\right]
+\]
+où $z_{1-\alpha/2}$ est le quantile d'ordre $1-\alpha/2$ d'une loi
+$\mathcal{N}(0,1)$. \\
+Par l'estimateur de la médiane, en utilisant la question précédente, on obtient
+un intervalle de confiance (asymptotique) de niveau $1-\alpha$
+\[
+\left[ X_{k_n} \pm z_{1-\alpha/2} \sqrt{\frac{\pi}{2}}\frac{\sigma}{\sqrt{n}}
+\right]
+\]
+\item  D'après la question~\ref{bonus:qu4:exo2}, il vient 
+\[
+\sqrt{n} \left( X_{\lfloor n/2\rfloor} - \mu \right) \dlim \mathcal{N}(0,1).
+\] 
+Par le TCL, puisque $\mathrm{Var}(X_1) = 2$,
+\[
+\sqrt{n} \left( n^{-1} \sum_{k=1}^n X_k - \mu \right) \dlim \mathcal{N}(0, 2).
+\]
+  \end{enumerate}
+}
+}
 
 
 
