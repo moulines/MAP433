@@ -35,7 +35,7 @@ $$\widehat F_n(x) = \frac{1}{n}\sum_{i = 1}^n \indi{X_i \leq x},\;\;x \in \R.$$
 \begin{frame}
 \frametitle{Vers la précision d'estimation}
 \begin{itemize}
-\item On a $\forall x_0 \in \R,\,\widehat F_n(x_0)\stackrel{\PP}{\rightarrow} F(x_0)$. 
+\item On a $\forall x_0 \in \R,\,\widehat F_n(x_0)\stackrel{\PP}{\rightarrow} F(x_0)$.
 %Si on se donne un nombre d'observation $n$ et un niveau de risque $\alpha$, quelle précision $\varepsilon$ garantir ?
 \alert{Questions (auxquelles on a répondu)} :
 \begin{itemize}
@@ -46,7 +46,7 @@ $$\widehat F_n(x) = \frac{1}{n}\sum_{i = 1}^n \indi{X_i \leq x},\;\;x \in \R.$$
 
 \item Plusieurs approches :
 \begin{itemize}
-\item non-asymptotique naïve (Bienaymé-Techbyshev) 
+\item non-asymptotique naïve (Bienaymé-Techbyshev)
 \item non-asymptotique (concentration exponentielle)
 \item approche asymptotique (via des théorèmes limites)
 \end{itemize}
@@ -231,7 +231,7 @@ Supposons que $F$ est continue. Soit $k \in \nset$.
 \item Comme $F$ est continue, il existe des points $-\infty= x_{k,0} < x_{k,1} < \dots < x_{k,k}= \infty$ tels que $F(x_{k,i})= i /k$.
 \item Comme $F$ et $\hat{F}_n$ sont \alert{monotones} nous avons pour $x \in \ccint{x_{k,i-1},x_{k,i}}$
 \begin{equation*}
-\hat{F}_n(x) - F(x) \leq \hat{F}_n(x_{k,i}) - F(x_{k,i-1})= \hat{F}_n(x_{k,i}) - F(x_{k,i}) + 1/k 
+\hat{F}_n(x) - F(x) \leq \hat{F}_n(x_{k,i}) - F(x_{k,i-1})= \hat{F}_n(x_{k,i}) - F(x_{k,i}) + 1/k
 \end{equation*}
 et
 \begin{align*}
@@ -248,7 +248,7 @@ ce qui implique
 
 \begin{frame}
 \frametitle{Kolmogorov-Smirnov}
-\begin{theo}[Kolmogorov-Smirnov] 
+\begin{theo}[Kolmogorov-Smirnov]
 Si $F$ est continue, $$\sqrt{n}\sup_{x \in \R}\big|\widehat F_n(x)-F(x)\big|
 \stackrel{d}{\rightarrow} \mathbb{B}, \quad {\text quand} \ n\to
 \infty.$$
@@ -278,37 +278,35 @@ $$\PP\Big[\forall x \in \R, F(x)\in \big[\widehat F_n(x)\pm\sqrt{\tfrac{1}{2n}\l
 \begin{itemize}
 \item \alert{Objectif :} estimation d'une caractéristique
 scalaire de la loi inconnue $F$ $\equiv$ estimation d'une
-fonctionnelle $T(F)$ à valeurs dans $\R$.
-\item Exemples
+fonctionnelle $F \leadsto T(F)$ à valeurs réelles.
+\item \alert{Exemples}
 \begin{itemize}
-\item \underline{Déjà vu} : valeur en un point  $T(F) = F(x_0)$
-\item \underline{Fonctionnelle régulière} :
-$$T(F) = h\left(\int_{\R}g(x)dF(x)\right),$$
+\item valeur en un point  $T(F) = F(x_0)$
+\item  $T(F) = h\left(\int_{\R}g(x)dF(x)\right),$
 où $g,h: \R \rightarrow \R$ sont \alert{régulières}
-%\item \alert{Autres cas...}
+\item \alert{Autres cas...} 
 \end{itemize}
 \item \underline{Principe} \alert{méthode de substitution} : si $F \leadsto T(F)$ est
 ``régulière'', un estimateur ``naturel'' est $T(\widehat{F}_n)$
-
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Estimation de fonctionnelles régulières}
+\frametitle{Exemple}
+$$
+T(F) = h\big(\int_{\R}g(x)dF(x)\big)
+$$
 \begin{itemize}
-\item \underline{Principe} : si $F \leadsto T(F)$ est \alert{régulière},
-alors $T(\widehat F_n)$  est un \alert{bon}  estimateur de $T(F)$ (estimateur par substitution).
-\item Cas où $T(F) = h\big(\int_{\R}g(x)dF(x)\big)$
 %\item $\int_{\R} \varphi(x)dF(x) = \int_{\R}\varphi(x) \PP^X(dx)$, où $X \sim F$.
-\item \underline{Formule de calcul} :
+\item \alert{Formule de calcul} :
 $$\boxed{\int_{\R}g(x)d\widehat F_n(x) =
-\frac{1}{n}\sum_{i = 1}^n g(X_i).}$$ 
+\frac{1}{n}\sum_{i = 1}^n g(X_i).}$$
 %Traduction : \alert{une
 %variable aléatoire de loi $\widehat F_n$ prend les valeurs $X_i$
 %avec probabilité $1/n$.}
 \item Estimateur par \alert{substitution} ou {\it plug-in} de $T(F)$ :
 $$\boxed{T(\widehat F_n) = h\Big(n^{-1} \sum_{i = 1}^ng(X_i)\Big)}$$
-\end{itemize}
+\end{itemize} 
 \end{frame}
 
 
@@ -341,16 +339,16 @@ T(\widehat F_n)=\sigma^2(\widehat F_n) & =
 \begin{itemize}
 \item On modélise les arrivées d'évènements dans un système à évènements discrets (file d'attente, fiabilité)
 \item On observe $X_1,X_2,\dots,X_n$ les intervalles de temps entre $n$ arrivées successives.
-\item \alert{Modèle}: 
+\item \alert{Modèle}:
 \begin{enumerate}[(i)]
-\item $\{(X_i)\}_{i=1}^n$ sont indépendantes et identiquement distribuées,
+\item $\{X_i\}_{i=1}^n$ sont indépendantes et identiquement distribuées,
 \item Les variables $X_i$ sont distribuées suivant une loi exponentielle de paramètre $\theta$, de densité
     $$
     p_\theta(x) = \theta \rme^{-\theta x} \1_{\rset^+}(x) \eqsp, \quad \theta \in \rset^+
     $$
-    \alert{Absence de mémoire:} $\PP_\theta(X > x + y | X > x)= \PP_\theta(X > y)$ 
+    \alert{Absence de mémoire:} $\PP_\theta(X > x + y | X > x)= \PP_\theta(X > y)$
 \end{enumerate}
-\end{itemize} 
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -518,7 +516,7 @@ $$
 \begin{itemize}
 \item La fonction $\phi$ est différentiable au point $\mu$;
 \[
-\phi(t)= \phi(\mu) + \phi'(\mu) (t-\mu) + (t-\mu) \psi(t) \eqsp.
+\phi(t)= \phi(\mu) + \phi'(\mu) (t-\mu) + (t-\mu) \psi_\mu(t) \eqsp.
 \]
 \pause \item Donc,
 \[
@@ -536,11 +534,10 @@ T(F)= h \left( \int_\rset g(x) dF(x) \right) \quad \text{et} \quad T(\hat{F}_n)=
 \]
 \begin{itemize}
 \item \alert{TCL} :
-$$\sqrt{n}\big(\tfrac{1}{n}\sum_{i=1}^ng(X_i)-\int_{\R}g(x)dF(x)\big) \stackrel{d}{\rightarrow} {\mathcal N}\big(0,\mathrm{Var}\big[g(X)\big]\big),$$
-où $X$ est une v.a. de loi $F$ et
+$$\sqrt{n}\left(n^{-1}\sum_{i=1}^ng(X_i)-\int_{\R}g(x)dF(x)\right) \stackrel{d}{\rightarrow} {\mathcal N}\big(0,\mathrm{Var}\big[g(X)\big]\big),$$
+où 
 \begin{align*}
-\text{Var}\big[g(X)\big] &= \E\big[g(X)^2\big]-\big(\E[g(X)]\big)^2 \\
-&= \int_{\R}g(x)^2dF(x)-\big(\int_{\R}g(x)dF(x)\big)^2.
+\text{Var}\big[g(X)\big]  &= \int_{\R}g(x)^2dF(x)-\big(\int_{\R}g(x)dF(x)\big)^2.
 \end{align*}
 \end{itemize}
 \end{frame}
@@ -632,8 +629,7 @@ $\rightarrow$ autres approches.
 \end{itemize}
 %
 \underline{Exemple}. \alert{Hypothèse} : $F$ admet une densité
-$f$ par rapport à le mesure de Lebesgue, \alert{continue} ($=$
-pp à une fonction continue $f$).
+$f$ par rapport à le mesure de Lebesgue, \alert{continue} ($=$ presque-partout à une fonction continue $f$).
 $$T(F) = f(x_0),\;\;x_0\in \R \,\;\text{(donné)}.$$
 On ne \alert{peut pas prendre} comme estimateur $\widehat
 F_n'(x_0)$ car $\widehat F_n$ n'est pas diff\'erentiable (constante
