@@ -26,3 +26,9 @@ for i=1:nMC,
     hmlea(i)= ha2^2;
     hmleb(i)= hmlea(i)/barX;
 end
+figure(1)
+boxplot([halpha,hmlea]);
+title('Paramètre \alpha')
+figure(2)
+boxplot([hbeta,hmleb]);
+title('Paramètre \beta')
