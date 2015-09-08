@@ -133,12 +133,16 @@ $\hat \theta_{n}$ l'estimateur obtenu en r\'esolvant $\varphi(\hat
 En supposant ${\rm Var_{\theta}}(f(X))>0$, montrez que
 $$\sqrt{n}\pa{\hat\theta_{n}-\theta}\stackrel{\textrm{loi}}{\to}\mathcal N\pa{0,{1\over {\rm Var}_{\theta}\pa{f(X)}}}.$$
 \end{enumerate}
-\Corrige{ Observer que puisque $p_\theta$ est une densité, on a $c(\theta) =
-  \left( \int \exp(\theta f(x) + h(x)) \mu(dx) \right)^{-1}$.
-  \begin{enumerate}
-  \item D'après le résultat admis, 
+\Corrige{ Observer que puisque $p_\theta$ est une densité, on a 
 \[
-\phi(\theta) = c(\theta) \frac{d}{d\theta} \left( \frac{1}{c(\theta)} \right)
+\frac{1}{c(\theta)} = \int \exp(\theta f(x) + h(x)) \ \mu(dx),
+\]
+et que le résultat admis dit que $\theta \mapsto 1/c(\theta)$ est de classe $C^2$.
+  \begin{enumerate}
+  \item D'après le résultat admis,
+\[
+\int f(x) p_\theta(x) \mu(dx) = c(\theta) \frac{d}{d\theta} \left(
+  \frac{1}{c(\theta)} \right)
 \]
 ce qui donne le résultat demandé.
 \item De même, on a 
@@ -219,16 +223,20 @@ de $z_{\alpha}, n, \bar X_{n}$ tel que $\lim_{n\to
   \overline{X}_n - \PE_\theta[X] \right) \dlim \mathcal{N}(0, \theta
 (1-\theta)).
 \]
-\item Par la méthode delta, on cherche une fonction $g$ continûment
-  différentiable telle que $\left(g'(\theta)\right)^2 \theta (1-\theta) = 1 $. Plusieurs solutions possibles
+\item Par la méthode delta, on cherche une fonction $g$ dérivable en $\theta$,
+  pour tout $\theta \in ]0,1[$, telle que $\left(g'(\theta)\right)^2 \theta
+  (1-\theta) = 1 $.  Plusieurs solutions possibles
 \[
-\theta \mapsto \arccos(2\theta-1) \qquad \theta \mapsto \arcsin(2\theta-1)
-\qquad \theta \mapsto 2 \arccos{\sqrt{\theta}}
+\theta \mapsto \arccos(2\theta-1) \qquad \qquad \theta \mapsto 2
+\arccos{\sqrt{\theta}}
 \]
+et puis les analogues avec $\arcsin$ puisque $\arcsin(u) + \arccos(u) = \pi/2$
+pour tout $u \in [-1,1]$.
 \item On en déduit l'intervalle de confiance asympotique de niveau $1-\alpha$
 \[
 I_{n,\alpha} = \left[ \frac{1}{2} \left( 1+ \cos\left( g(\overline{X}_n) + \frac{z_\alpha}{\sqrt{n}} \right)\right);  \frac{1}{2} \left( 1+ \cos\left( g(\overline{X}_n) - \frac{z_\alpha}{\sqrt{n}} \right)\right)  \right]
 \]
+avec $g(x) = \arccos(2 x-1)$.
   \end{enumerate}
 }
 
@@ -438,8 +446,14 @@ Gamma de paramètre $s+t$ et $V$ est une loi Beta de paramètres $(s,t)$.
 \] 
 Puisque $\PE[W_1] = \mathrm{Var}(W_1) = 1$, on obtient le résultat demandé en
 appliquant le TCL pour des v.a. i.i.d.
-\item \textcolor{red}{On propose une preuve basée sur l'indication suivante:
-    établir la loi de $X_n/Y_n$ puis observer que $V_n = g(X_n/Y_n)$ avec $g(x)
+\item {\bf $\blacktriangleright$ Solution 1 (plus rapide)} D'après la
+  question~\ref{qu:bonus1}, $V_n$ suit une loi Beta de paramètres $(k_n, n -
+  k_n)$. On en déduit le résultat demandé en étudiant la limite simple de sa
+  densité (quand $n \to \infty$) et en appliquant le lemme de Scheffé.
+  \\
+  {\bf $\blacktriangleright$ Solution 2} \textcolor{red}{On propose une preuve
+    basée sur l'indication suivante: établir la loi de $X_n/Y_n$ puis observer
+    que $V_n = g(X_n/Y_n)$ avec $g(x)
     = x/(1+x)$} \\
   $\bullet$ D'après la question~\ref{qu:bonus1}, en observant que $X/Y =
   V/(1-V)$, on obtient par la méthode d'identification
@@ -566,24 +580,26 @@ t \mapsto n \binom{n-1}{k-1} \left( G(t) \right)^{k-1} \ \left(1-G(t)
   entraine $x_p = p$). Le cas général est une conséquence de la méthode delta
   appliquée avec la fonction $t \mapsto F^{-1}(t)$ dont la dérivée est
   $1/f(F^{-1}(t))$. \\
-En utilisant la question précédente, pour toute fonction $h$ mesurable positive
-\begin{align*}
-  & \PE\left[h\left( \sqrt{n} \left(X_{k_n} - p \right) \right) \right]  \\
-& 
-  \sqrt{n} \binom{n-1}{k_n-1} p^{k_n-1} (1-p)^{n-k_n} \int_{- p
-    \sqrt{n}}^{\sqrt{n}(1-p)} h(y) \left(1+ \frac{y}{p \sqrt{n}}
-  \right)^{k_n-1} \ \left(1 - \frac{y}{(1-p)\sqrt{n}} \right)^{n-k_n} dy
-\end{align*}
-En procédant comme dans la question~\ref{bonus:qu3:exo1} de
-l'exercice~\ref{exo:LimiteBeta}, on obtient par le lemme se Scheffé (voir PC1
-exercice 2) que
+  D'après la question précédente, $X_{(k_n)}$ suit une loi Beta de paramètres
+  $(k_n, n-k_n)$. En utilisant l'exercice précédent, on a
+%% En utilisant la question précédente, pour toute fonction $h$ mesurable positive
+%% \begin{align*}
+%%   & \PE\left[h\left( \sqrt{n} \left(X_{(k_n)} - p \right) \right) \right]  \\
+%% & 
+%%   \sqrt{n} \binom{n-1}{k_n-1} p^{k_n-1} (1-p)^{n-k_n} \int_{- p
+%%     \sqrt{n}}^{\sqrt{n}(1-p)} h(y) \left(1+ \frac{y}{p \sqrt{n}}
+%%   \right)^{k_n-1} \ \left(1 - \frac{y}{(1-p)\sqrt{n}} \right)^{n-k_n} dy
+%% \end{align*}
+%% En procédant comme dans la question~\ref{bonus:qu3:exo1} de
+%% l'exercice~\ref{exo:LimiteBeta}, on obtient par le lemme se Scheffé (voir PC1
+%% exercice 2) que
+%% \[
+%% \lim_n \PE\left[h\left( \sqrt{n} \left(X_{(k_n)} - p \right) \right) \right]
+%% \propto \int h(y) \ \exp(- \frac{y^2}{2p(1-p)}) dy.
+%% \]
+%% On en déduit que 
 \[
-\lim_n \PE\left[h\left( \sqrt{n} \left(X_{k_n} - p \right) \right) \right]
-\propto \int h(y) \  \exp(- \frac{y^2}{2p(1-p)}) dy.
-\]
-On en déduit que 
-\[
-\sqrt{n}\left( X_{k_n} -p \right) \dlim \mathcal{N}(0, p(1-p)).
+\sqrt{n}\left( X_{(k_n)} -p \right) \dlim \mathcal{N}(0, p(1-p)).
 \]
 \item Par la moyenne empirique, un intervalle de confiance (non asymptotique)
   au noveau $(1-\alpha)$ est
@@ -596,7 +612,7 @@ $\mathcal{N}(0,1)$. \\
 Par l'estimateur de la médiane, en utilisant la question précédente, on obtient
 un intervalle de confiance (asymptotique) de niveau $1-\alpha$
 \[
-\left[ X_{k_n} \pm z_{1-\alpha/2} \sqrt{\frac{\pi}{2}}\frac{\sigma}{\sqrt{n}}
+\left[ X_{(k_n)} \pm z_{1-\alpha/2} \sqrt{\frac{\pi}{2}}\frac{\sigma}{\sqrt{n}}
 \right]
 \]
 \item  D'après la question~\ref{bonus:qu4:exo2}, il vient 
