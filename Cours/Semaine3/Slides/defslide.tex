@@ -1,0 +1,109 @@
+\documentclass{beamer}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amstext,amsthm}
+\usepackage{amsfonts}
+\usepackage{bbm}
+\usepackage{beamerthemesplit}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{bbm}
+
+\usetheme{Antibes}
+\mode<presentation>
+\useoutertheme{tree}
+\usecolortheme{beaver}
+\useinnertheme{rectangles}
+
+\setbeamerfont{block title}{size={}}
+%\usecolortheme[rgb={0.55,0.1,0.05}]{structure}
+%\usecolortheme[rgb={0.75,0.1,0.05}]{structure}
+\usepackage{color}
+
+\newenvironment{disarray}{\everymath{\displaystyle\everymath{}}\array} {\endarray}
+\newtheorem{theo}{Théorème}
+\newtheorem{prop}[theo]{Proposition}
+\newtheorem{conj}[theo]{Conjecture}
+\newtheorem{cor}{Corollary}[theo]
+\newtheorem{lem}{Lemme}
+\newtheorem{nota}{Notation}
+\newtheorem{rk}{Remark}
+\newtheorem{exa}{Example}
+\newtheorem{df}{Definition}
+\newtheorem{terminologie}{Terminologie}
+\def\rme{\mathrm{e}}
+\def\rmi{\mathrm{i}}
+\def\rset{\mathbb{R}}
+\def\nset{\mathbb{N}}
+\def\dlim{\stackrel{d}{\rightarrow}}
+\def\plim{\stackrel{\PP}{\longrightarrow}}
+\def\iid{i.i.d.}
+\def\1{\mathbbm{1}}
+\newenvironment{dem}{\textbf{Proof}}{\flushright$\blacksquare$\\}
+%\def\blankframe{
+%\mode<presentation>{
+%  { \setbeamertemplate{background canvas}[default]
+%    \setbeamercolor{background canvas}{bg=black}
+%    \begin{frame}[plain]{}
+%    \end{frame}
+%  }
+%}
+%\mode<presentation>{
+%\setbeamertemplate{background canvas}[default]
+%\setbeamercolor{background canvas}{bg=white}}
+%\mode*
+%}
+\def\eqsp{\,}
+\DeclareMathOperator{\E}{{\mathbb E}}
+\def\PE{\E}
+\DeclareMathOperator{\F}{{\mathbb F}}
+\DeclareMathOperator{\G}{{\mathbb G}}
+\DeclareMathOperator{\D}{{\mathbb D}}
+\DeclareMathOperator{\R}{{\mathbb R}}
+\DeclareMathOperator{\C}{{\mathbb C}}
+\DeclareMathOperator{\Z}{{\mathbb Z}}
+\DeclareMathOperator{\N}{{\mathbb N}}
+\DeclareMathOperator{\K}{{\mathbb K}}
+\DeclareMathOperator{\T}{{\mathbb T}}
+\DeclareMathOperator{\PP}{{\mathbb P}}
+\DeclareMathOperator{\QQ}{{\mathbb Q}}
+\DeclareMathOperator{\Q}{{\mathbb Q}}
+\DeclareMathOperator{\IF}{{\mathbb I}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Pour le modle lin\'eaire
+
+\DeclareMathOperator{\bX}{\boldsymbol{X}}
+\DeclareMathOperator{\bY}{\boldsymbol{Y}}
+\DeclareMathOperator{\bx}{\boldsymbol{x}}
+\DeclareMathOperator{\vp}{\boldsymbol{p}}
+\DeclareMathOperator{\vq}{\boldsymbol{q}}
+\DeclareMathOperator{\estMC}{\widehat \theta_n^{\,\,{\tt mc}}}
+\DeclareMathOperator{\estMCNL}{\widehat \theta_n^{\,\,{\tt mcnl}}}
+\DeclareMathOperator{\estMV}{\widehat \theta_n^{\,\,{\tt mv}}}
+\DeclareMathOperator{\design}{\mathbb{M}}
+\DeclareMathOperator{\est}{\widehat \theta_{\mathnormal{n}}}
+\DeclareMathOperator{\var}{\mathrm{Var}}
+\DeclareMathOperator{\estMVc}{\widehat \theta_{n,0}^{\,{\tt mv}}}
+\DeclareMathOperator{\Xbar}{\overline{\mathnormal{X}}_\mathnormal{n}}
+
+\newcommand{\indi}[1]{\mathbbm{1}_{\{#1\}}}
+\newcommand{\coint}[1]{\left[#1\right)}
+\newcommand{\ocint}[1]{\left(#1\right]}
+\newcommand{\ooint}[1]{\left(#1\right)}
+\newcommand{\ccint}[1]{\left[#1\right]}
+\newcommand{\Id}{\mathrm{I}}
+
+\definecolor{LightYell}{rgb}{0.95,0.83,0.70}
+\definecolor{orange}{rgb}{1.0,0.50,0.01}
+\definecolor{StroYell}{rgb}{0.95,0.88,0.72}
+\definecolor{lightred}{rgb}{0.75,0.033,0}
+\definecolor{shadecolor1}{rgb}{0.90,0.83,0.70}
+\definecolor{myem}{rgb}{0.797,0.598,0.598}
+\definecolor{BrickRed}{cmyk}{0,0.89,0.94,0.28}
+\definecolor{RoyalPurple}{cmyk}{0.75,0.9,0,0}
+
+\newcommand{\tco}[1]{\textcolor{orange}{#1}}
+\newcommand{\tcr}[1]{\textcolor{lightred}{#1}}
+
+\def\gauss{\mathcal{N}}
