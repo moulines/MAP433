@@ -1,17 +1,15 @@
-
-\documentclass{beamer}
+Ôªø\documentclass{beamer}
 \usetheme[right,hideothersubsections]{Berkeley}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb,amstext}
 \usepackage{amsfonts}
 
-%\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
-\usepackage[applemac]{inputenc}
 
 
 \newenvironment{disarray}{\everymath{\displaystyle\everymath{}}\array} {\endarray}
-\newtheorem{theo}{Théorème}
+\newtheorem{theo}{Th√©or√®me}
 \newtheorem{prop}[theo]{Proposition}
 \newtheorem{conj}[theo]{Conjecture}
 \newtheorem{cor}{Corollary}[theo]
@@ -19,7 +17,7 @@
 \newtheorem{nota}{Notation}
 \newtheorem{rk}{Remark}
 \newtheorem{exa}{Example}
-\newtheorem{df}{Définition}
+\newtheorem{df}{D√©finition}
 \newtheorem{terminologie}{Terminologie}
 \newenvironment{dem}{\textbf{Proof}}{\flushright$\blacksquare$\\}
 
@@ -39,7 +37,7 @@
 \DeclareMathOperator{\IF}{{\mathbb I}}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Pour le modèle linéaire
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Pour le mod√®le lin√©aire
 
 \DeclareMathOperator{\bX}{\boldsymbol{X}}
 \DeclareMathOperator{\bY}{\boldsymbol{Y}}
@@ -58,11 +56,11 @@
 
 
 
-\title{MAP 433 : Introduction aux méthodes statistiques. Cours 3}
+\title{MAP 433 : Introduction aux m√©thodes statistiques. Cours 3}
 %\author{M. Hoffmann}
-%\institute{Université Paris-Est and ETG}
+%\institute{Universit√© Paris-Est and ETG}
 \begin{document}
-\date{14 février 2014}
+\date{14 f√©vrier 2014}
 \maketitle
 
 
@@ -74,18 +72,18 @@
 \section{Rappel succint du Cours 2}
 
 \begin{frame}
-\frametitle{Estimation de fonctionnelles régulières}
+\frametitle{Estimation de fonctionnelles r√©guli√®res}
 \begin{itemize}
 \item $X_1,\ldots, X_n \sim_{\text{i.i.d.}} F$.
-%\item \underline{Principe} : si $F \leadsto T(F)$ est \og régulière \fg{}, alors $T(\widehat F_n)$ est un \og bon \fg{} estimateur de $T(F)$ (estimateur par plug-in).
+%\item \underline{Principe} : si $F \leadsto T(F)$ est \og r√©guli√®re \fg{}, alors $T(\widehat F_n)$ est un \og bon \fg{} estimateur de $T(F)$ (estimateur par plug-in).
 \item Estimation de $T(F) = h\big(\int_{\R}g(x)dF(x)\big)$.
-%\item $\int_{\R} \varphi(x)dF(x) = \int_{\R}\varphi(x) \PP^X(dx)$, où $X \sim F$.
+%\item $\int_{\R} \varphi(x)dF(x) = \int_{\R}\varphi(x) \PP^X(dx)$, o√π $X \sim F$.
 %\item \underline{Formule de calcul} :
 %$$\boxed{\int_{\R}g(x)d\widehat F_n(x) =
-%\frac{1}{n}\sum_{i = 1}^n g(X_i).}$$ 
+%\frac{1}{n}\sum_{i = 1}^n g(X_i).}$$
 %Traduction : {\color{red}une
-%variable aléatoire de loi $\widehat F_n$ prend les valeurs $X_i$
-%avec probabilité $1/n$.}
+%variable al√©atoire de loi $\widehat F_n$ prend les valeurs $X_i$
+%avec probabilit√© $1/n$.}
 \item Estimateur par {\color{red} substitution} ou {\it plug-in} de $T(F)$ :
 $$\boxed{T(\widehat F_n) = h\Big(\tfrac{1}{n}\sum_{i = 1}^ng(X_i)\Big)}$$
 \end{itemize}
@@ -102,7 +100,7 @@ $$\boxed{T(\widehat F_n) = h\Big(\tfrac{1}{n}\sum_{i = 1}^ng(X_i)\Big)}$$
 %\item {\color{red} Vitesse de convergence, Etape 1.}
 %TCL :
 %$$\sqrt{n}\big(\tfrac{1}{n}\sum_{i=1}^ng(X_i)-\int_{\R}g(x)dF(x)\big) \stackrel{d}{\rightarrow} {\mathcal N}\big(0,\mathrm{Var}\big[g(X)\big]\big),$$
-%où $X$ est une v.a. de loi $F$ et
+%o√π $X$ est une v.a. de loi $F$ et
 %\begin{align*}
 %\text{Var}\big[g(X)\big] &= \E\big[g(X)^2\big]-\big(\E[g(X)]\big)^2 \\
 %&= \int_{\R}g(x)^2dF(x)-\big(\int_{\R}g(x)dF(x)\big)^2.
@@ -114,9 +112,9 @@ $$\boxed{T(\widehat F_n) = h\Big(\tfrac{1}{n}\sum_{i = 1}^ng(X_i)\Big)}$$
 %\frametitle{Vitesse de convergence (suite)}
 %\begin{itemize}
 %\item{\color{red} Etape 2.} On a $\sqrt{n}(Z_n -c_1)
-%\stackrel{d}{\rightarrow} {\mathcal N}(0,c_2)$. Comment transférer
-%ce résultat à $\sqrt{n}(h(Z_n) - h(c_1))\stackrel{d}{\rightarrow}$ ?
-%\item {\color{red} Méthode \og delta\fg{}} : si $h$ continûment différentiable
+%\stackrel{d}{\rightarrow} {\mathcal N}(0,c_2)$. Comment transf√©rer
+%ce r√©sultat √† $\sqrt{n}(h(Z_n) - h(c_1))\stackrel{d}{\rightarrow}$ ?
+%\item {\color{red} M√©thode \og delta\fg{}} : si $h$ contin√©ment diff√©rentiable
 %$$\sqrt{n}\big(h(Z_n)-h(c_1)\big) = \sqrt{n}(Z_n-c_1)h'(\eta_n),\;\;\eta_n \in \big[Z_n,c_1\big].$$
 %On a  $\sqrt{n}(Z_n-c_1)\stackrel{d}{\rightarrow} {\mathcal N}(0,c_2)$ et $h'(\eta_n)\stackrel{\PP}{\rightarrow}h'(c_1)$.
 %%car $Z_n\stackrel{\PP}{\rightarrow} c_1$.
@@ -133,58 +131,58 @@ $$\boxed{T(\widehat F_n) = h\Big(\tfrac{1}{n}\sum_{i = 1}^ng(X_i)\Big)}$$
 %\begin{frame}
 %\frametitle{Conclusion}
 %\begin{prop}
-%Si $\E[g(X)^2]<+\infty$ et $h$ continûment différentiable, alors
+%Si $\E[g(X)^2]<+\infty$ et $h$ contin√©ment diff√©rentiable, alors
 %$$\sqrt{n}\big(T(\widehat F_n)-T(F)\big)\stackrel{d}{\rightarrow} {\mathcal N}\big(0,v({\color{red}F})\big),
 %$$
-%où $v({\color{red}F}) = h'\big(\E\big[g(X)\big]\big)^2\mathrm{Var}\big[g(X)\big]$.
+%o√π $v({\color{red}F}) = h'\big(\E\big[g(X)\big]\big)^2\mathrm{Var}\big[g(X)\big]$.
 %\end{prop}
 %Pour construire un {\color{red} intervalle de confiance}, il faut encore remplacer $v({\color{red}F})$ par $v(\widehat F_n)$.
 %{\color{red}On montre que} $v(\widehat F_n)\stackrel{\PP}{\rightarrow} v(F)$ et, via le lemme de Slutsky,
 %$$
 %\sqrt{n}\frac{T(\widehat F_n)-T(F)}{v(\widehat F_n)^{1/2}}\stackrel{d}{\rightarrow} {\mathcal N}\big(0,1\big).
 %$$
-%On {\color{red}en déduit} un intervalle de confiance asymptotique comme précédemment.
+%On {\color{red}en d√©duit} un intervalle de confiance asymptotique comme pr√©c√©demment.
 %\end{frame}
 %\begin{frame}
 %\frametitle{Le cas de la dimension $d>1$}
 %\begin{itemize}
 %\item Il s'agit de fonctionnelles de la forme
 %$$T(F) = h\left(\int_{\R}g_1(x)dF(x),\ldots, \int_{\R}g_k(x)dF(x)\right)$$
-%où $h:\R^k\rightarrow \R$ continûment différentiable.
-%\item {\color{red} Exemple} : le coefficient d'asymétrie
+%o√π $h:\R^k\rightarrow \R$ contin√©ment diff√©rentiable.
+%\item {\color{red} Exemple} : le coefficient d'asym√©trie
 %$$T(F) = \frac{\int_{\R}\big(x-m(F)\big)^3dF(x)}{\sigma^{3/2}(F)},$$
 %$m(F)=$ moyenne de $F$, $\sigma^2(F) =$ variance de $F$.
-%\item {\color{red} Outil :} Version multidimensionnelle du TCL et de la \og méthode delta \fg{}.
+%\item {\color{red} Outil :} Version multidimensionnelle du TCL et de la \og m√©thode delta \fg{}.
 %\end{itemize}
 %\end{frame}
 %
 %\begin{frame}
-%\frametitle{Méthode \og delta\fg{} multidimensionnelle}
+%\frametitle{M√©thode \og delta\fg{} multidimensionnelle}
 %\begin{itemize}
 %\item {\color{red}TCL multidimensionnel :}
-%$(\bX_n)_{n\ge 1}$ vecteurs aléatoires dans $\R^k$, i.i.d., de
+%$(\bX_n)_{n\ge 1}$ vecteurs al√©atoires dans $\R^k$, i.i.d., de
 %moyenne ${\boldsymbol \mu} = \E[\bX_1]$ et de matrice de
 %variance-covariance $\Sigma =
 %\E\big[(\bX_1-\boldsymbol{\mu})(\bX_1-\boldsymbol{\mu})^T\big]$ bien
-%définie. Alors $\bar \bX_n=\tfrac{1}{n}\sum_{i = 1}^n\bX_i$
+%d√©finie. Alors $\bar \bX_n=\tfrac{1}{n}\sum_{i = 1}^n\bX_i$
 %v\'erifie:
 %$$\sqrt{n}\big(\overline{\bX}_n-\boldsymbol{\mu}\big) \stackrel{d}{\rightarrow} {\mathcal N}\big(0,\Sigma\big).$$
 %%\end{itemize}
 %%\end{frame}
 %%\begin{frame}
 %%\begin{itemize}
-%\item {\color{red} Méthode \og delta\fg{} multidimensionnelle :} Si, de plus, $h : \R^k \rightarrow \R$ continûment différentiable, alors
+%\item {\color{red} M√©thode \og delta\fg{} multidimensionnelle :} Si, de plus, $h : \R^k \rightarrow \R$ contin√©ment diff√©rentiable, alors
 %$$\sqrt{n}\big(h(\overline{\bX}_n)-h(\boldsymbol{\mu})\big) \stackrel{d}{\rightarrow} {\mathcal N}\Big(0, \nabla h(\boldsymbol{\mu}) \Sigma \nabla h(\boldsymbol{\mu})^T\Big).$$
 %\end{itemize}
 %\end{frame}
 %\begin{frame}
-%\frametitle{Application : coefficient d'asymétrie}
+%\frametitle{Application : coefficient d'asym√©trie}
 %\begin{itemize}
-%\item {\color{red} Coefficient d'asymétrie :} on a
+%\item {\color{red} Coefficient d'asym√©trie :} on a
 %$$T(F) = h\Big(\int_{\R} xdF(x),\int_{\R} x^2 dF(x), \int_{\R} x^3 dF(x)\Big)$$ avec
 %$$h(\alpha,\beta,\gamma) = \frac{\gamma-3\alpha \beta+2\alpha^3}{(\beta-\alpha^2)^{3/2}}.$$
 %$$T(\widehat F_n) = h\Big(\tfrac{1}{n}\sum_{i = 1}^n X_i, \tfrac{1}{n}\sum_{i = 1}^n X_i^2,\tfrac{1}{n}\sum_{i = 1}^n X_i^3\Big).$$
-%\item On applique le TCL multidimensionnel avec $\bX_i = (X_i,X_i^2,X_i^3)^T$ et $\boldsymbol{\mu} = \big(\int_{\R} xdF(x),\int_{\R} x^2 dF(x),\int_{\R} x^3 dF(x)\big)^T$, puis la méthode \og delta\fg{} avec $h$.
+%\item On applique le TCL multidimensionnel avec $\bX_i = (X_i,X_i^2,X_i^3)^T$ et $\boldsymbol{\mu} = \big(\int_{\R} xdF(x),\int_{\R} x^2 dF(x),\int_{\R} x^3 dF(x)\big)^T$, puis la m√©thode \og delta\fg{} avec $h$.
 %\end{itemize}
 %\end{frame}
 \begin{frame}
@@ -193,16 +191,16 @@ par $T(\widehat F_n)$ n'est pas toujours {\color{red}possible}:
 %
 %
 \begin{itemize}
-\item La fonctionnelle $F \leadsto T(F)$ n'est pas \og régulière\fg{},
-\item La paramétrisation $F \leadsto T(F)$ ne donne {\color{red}pas} lieu à une {\color{red}forme analytique simple}.
-%et ne s'étudie pas à force d'arguments standard basés sur la loi des grands nombres et le TCL
+\item La fonctionnelle $F \leadsto T(F)$ n'est pas \og r√©guli√®re\fg{},
+\item La param√©trisation $F \leadsto T(F)$ ne donne {\color{red}pas} lieu √† une {\color{red}forme analytique simple}.
+%et ne s'√©tudie pas √† force d'arguments standard bas√©s sur la loi des grands nombres et le TCL
 $\rightarrow$ autres approches.
 \end{itemize}
 %
-\underline{Exemple}. {\color{red} Hypothèse} : $F$ admet une densité
-$f$ par rapport à le mesure de Lebesgue, {\color{red}continue} ($=$
-pp à une fonction continue $f$).
-$$T(F) = f(x_0),\;\;x_0\in \R \,\;\text{(donné)}.$$
+\underline{Exemple}. {\color{red} Hypoth√®se} : $F$ admet une densit√©
+$f$ par rapport √† le mesure de Lebesgue, {\color{red}continue} ($=$
+pp √† une fonction continue $f$).
+$$T(F) = f(x_0),\;\;x_0\in \R \,\;\text{(donn√©)}.$$
 On ne {\color{red}peut pas prendre} comme estimateur $\widehat
 F_n'(x_0)$ car $\widehat F_n$ n'est pas diff\'erentiable (constante
 par morceaux...)
@@ -215,56 +213,56 @@ par $T(\widehat F_n)$ n'est pas toujours {\color{red}souhaitable} :
 \begin{itemize}
 \item
 Souvent on dispose d'information {\color{red} a priori}
-supplémentaire : $F$ appartient à une sous-classe {\color{red}
-particulière} de distributions, et il y a des choix plus judicieux
+suppl√©mentaire : $F$ appartient √† une sous-classe {\color{red}
+particuli√®re} de distributions, et il y a des choix plus judicieux
 que l'estimateur par plug-in.
 \end{itemize}
 \end{frame}
 
 %\begin{frame}
-%\frametitle{Exemple 2 : information supplémentaire}
+%\frametitle{Exemple 2 : information suppl√©mentaire}
 %\end{frame}
 %\begin{frame}
-%\frametitle{Exemple 3 : paramétrisation non-standard}
+%\frametitle{Exemple 3 : param√©trisation non-standard}
 %\end{frame}
 
 \begin{frame}
 \frametitle{Conclusion}
 \begin{itemize}
-\item {\color{red}L'approche empirique}, basée sur $\widehat F_n$ permet d'estimer une distribution inconnue $F$ ou une fonctionnelle $T(F)\in \R$ à partir d'un $n$-échantillon, mais
+\item {\color{red}L'approche empirique}, bas√©e sur $\widehat F_n$ permet d'estimer une distribution inconnue $F$ ou une fonctionnelle $T(F)\in \R$ √† partir d'un $n$-√©chantillon, mais
 \begin{itemize}
-\item reste très générale, pas toujours adaptée.
-%(cas de fonctionnelles irrégulières ou difficiles à paramétriser en $F$)
-\item restreinte à la situation d'un $n$-échantillon.
-%\item reste très générale...
-%(en particulier, n'incorpore pas d'information supplémentaire de modélisation)
+\item reste tr√®s g√©n√©rale, pas toujours adapt√©e.
+%(cas de fonctionnelles irr√©guli√®res ou difficiles √† param√©triser en $F$)
+\item restreinte √† la situation d'un $n$-√©chantillon.
+%\item reste tr√®s g√©n√©rale...
+%(en particulier, n'incorpore pas d'information suppl√©mentaire de mod√©lisation)
 \end{itemize}
-\item Formalisation de la notion {\color{red}d'expérience statistique }
+\item Formalisation de la notion {\color{red}d'exp√©rience statistique }
 \begin{itemize}
-\item incorporation d'information de modélisation {\color{red}supplémentaire}.
-\item construction de méthodes d'estimation -- de décision -- {\color{red}systématiques}.
-\item comparaison et {\color{red}optimalité} des méthodes.
+\item incorporation d'information de mod√©lisation {\color{red}suppl√©mentaire}.
+\item construction de m√©thodes d'estimation -- de d√©cision -- {\color{red}syst√©matiques}.
+\item comparaison et {\color{red}optimalit√©} des m√©thodes.
 \end{itemize}
 \end{itemize}
 \end{frame}
 
-\section{Modélisation statistique}
-\subsection{Expérience statistique}
+\section{Mod√©lisation statistique}
+\subsection{Exp√©rience statistique}
 \begin{frame}
-\frametitle{Expérience statistique} Consiste à identifier:
+\frametitle{Exp√©rience statistique} Consiste √† identifier:
 \begin{itemize}
 \item {\color{red}Des observations}
 $${\tt x}_1,{\tt x}_2,\ldots, {\tt x}_n$$
-{\color{red}considérées} comme des {\color{red} réalisations} de variables aléatoires $Z = (X_1,\ldots, X_n)$ de loi $\PP^Z$.
+{\color{red}consid√©r√©es} comme des {\color{red} r√©alisations} de variables al√©atoires $Z = (X_1,\ldots, X_n)$ de loi $\PP^Z$.
 \item {\color{red}Une famille de lois}
 $$\left\{\PP_\vartheta,\,\vartheta \in \Theta\right\}.$$
-\item {\color{red}Une problématique} : retrouver le paramètre
-$\vartheta$ tel que $\PP^Z=\PP_\vartheta$ (estimation) ou bien prendre une décision sur une propriété relative à $\vartheta$ (test).
+\item {\color{red}Une probl√©matique} : retrouver le param√®tre
+$\vartheta$ tel que $\PP^Z=\PP_\vartheta$ (estimation) ou bien prendre une d√©cision sur une propri√©t√© relative √† $\vartheta$ (test).
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Expérience statistique}
+\frametitle{Exp√©rience statistique}
 \begin{itemize}
 \item Approche g\'en\'erale empirique:
 \begin{itemize}
@@ -294,7 +292,7 @@ que l'estimateur $\bar X_n$ bas\'e sur l'approche empirique?
 
 
 \begin{frame}
-\frametitle{Expérience statistique}
+\frametitle{Exp√©rience statistique}
 \begin{itemize}
 \item En \'ecrivant
 $$ X_i= \vartheta +\xi_i, \quad i=1,\dots,n,$$
@@ -310,57 +308,57 @@ pour tout $A\in {\mathcal B}(\R^n)$.
 
 
 \begin{frame}
-\frametitle{Expérience statistique}
+\frametitle{Exp√©rience statistique}
 \begin{df}
-Une expérience (un modèle) statistique ${\mathcal E}$ est le triplet
+Une exp√©rience (un mod√®le) statistique ${\mathcal E}$ est le triplet
 $${\mathcal E} = \left(\mathfrak{Z}, {\mathcal Z}, \,\big\{\PP_\vartheta, \vartheta \in \Theta\big\}\right),$$
 avec
 \begin{itemize}
 \item $\big(\mathfrak{Z}, {\mathcal Z}\big)$ espace mesurable (souvent
 $(\R^n,{\mathcal B}(\R^n))$),
-\item $\{\PP_\vartheta,\,\vartheta \in \Theta\}$ famille de probabilités définies {\color{red}simultanément} sur le même espace  $\big(\mathfrak{Z}, {\mathcal Z}\big)$,
-\item $\vartheta$ est le {\color{red}paramètre inconnu}, et $\Theta$ est {\color{red} l'ensemble des paramètres connu}.
+\item $\{\PP_\vartheta,\,\vartheta \in \Theta\}$ famille de probabilit√©s d√©finies {\color{red}simultan√©ment} sur le m√™me espace  $\big(\mathfrak{Z}, {\mathcal Z}\big)$,
+\item $\vartheta$ est le {\color{red}param√®tre inconnu}, et $\Theta$ est {\color{red} l'ensemble des param√®tres connu}.
 \end{itemize}
 \end{df}
 \end{frame}
 
 
 %\begin{frame}
-%\frametitle{Description (mathématique) d'une expérience statistique}
+%\frametitle{Description (math√©matique) d'une exp√©rience statistique}
 %\begin{itemize}
-%\item Deux points de vue {\color{red} équivalents} et (parfois ?) source de confusion :
+%\item Deux points de vue {\color{red} √©quivalents} et (parfois ?) source de confusion :
 %\begin{itemize}
-%\item Expérience \underline{engendrée par une observation}.
-%\item Expérience \underline{canonique}
+%\item Exp√©rience \underline{engendr√©e par une observation}.
+%\item Exp√©rience \underline{canonique}
 %\end{itemize}
-%\item {\color{red}Traitement sur un exemple} : on \og observe \fg{} $X_1,\ldots, X_n$ i.i.d. de loi exponentielle de paramètre $\vartheta >0$.
+%\item {\color{red}Traitement sur un exemple} : on \og observe \fg{} $X_1,\ldots, X_n$ i.i.d. de loi exponentielle de param√®tre $\vartheta >0$.
 %\end{itemize}
 %\end{frame}
 
 
 \begin{frame}
-\frametitle{Experience engendrée par ($X_1,\ldots, X_n$)}
+\frametitle{Experience engendr√©e par ($X_1,\ldots, X_n$)}
 \begin{itemize}
 \item {\color{red}Traitement sur un exemple} : on observe
 $$Z = (X_1,\ldots, X_n), \quad\quad X_i= \vartheta + \xi_i,$$
 $\xi_i$ v.a. i.i.d. de densit\'e {\color{red} connue} $f$.
 \item La famille de lois $\big\{\PP_\vartheta^n,\vartheta \in \Theta  =
-\R\big\}$ est définie sur $\mathfrak{Z}=\R^n$ par
+\R\big\}$ est d√©finie sur $\mathfrak{Z}=\R^n$ par
 $$\PP_\vartheta^n\big[A\big] = \int_A
 \left(\prod_{i=1}^n f(x_i-\vartheta)\right) dx_1\ldots dx_n,
 $$
 pour $A\in{\mathcal Z}= {\mathcal B}(\R^n)$ (et $\PP^Z$ est l'une
 des $\PP_\vartheta^n$).
-\item Expérience {\color{red}engendrée par l'observation $Z$} :
+\item Exp√©rience {\color{red}engendr√©e par l'observation $Z$} :
 $${\mathcal E}^n = \big(\R^n,{\mathcal B}(\R^n),\big\{\PP_\vartheta^n,\,\vartheta \in \Theta\big\}\big).$$
 \end{itemize}
 \end{frame}
 
 %\begin{frame}
-%\frametitle{Expérience -- observation canonique}
+%\frametitle{Exp√©rience -- observation canonique}
 %\begin{itemize}
 %\item Si on part de ${\mathcal E}^n = \big(\R^n,{\mathcal B}(\R^n),\big\{\PP_\vartheta^n,\,\vartheta \in \Theta\big\}\big)$, {\color{red}il n'y a plus d'observation !} On a perdu la structure (trop lourde) de tout l'espace $\big(\Omega, {\mathcal F}, \PP\big)$ et des observations $X_1,\ldots, X_n$.
-%\item On peut {\color{red}toujours \og fabriquer \fg{} une observation} $Z$ dont l'expérience engendrée soit ${\mathcal E}^n$.
+%\item On peut {\color{red}toujours \og fabriquer \fg{} une observation} $Z$ dont l'exp√©rience engendr√©e soit ${\mathcal E}^n$.
 %Il suffit de poser
 %$$\big(\Omega, {\mathcal F}\big):=\big(\mathfrak{Z}, {\mathcal Z}\big) \stackrel{\text{ici}}{=}\big(\R^n,{\mathcal B}(\R^n)\big),$$
 %et
@@ -369,89 +367,89 @@ $${\mathcal E}^n = \big(\R^n,{\mathcal B}(\R^n),\big\{\PP_\vartheta^n,\,\varthet
 %\end{frame}
 
 \begin{frame}
-\frametitle{Expérience (mod\`ele) paramétrique, non-paramétrique}
+\frametitle{Exp√©rience (mod\`ele) param√©trique, non-param√©trique}
 \begin{itemize}
-\item Si $\Theta$ peut être \og pris \fg{} comme un sous-ensemble
-de $\R^d$ : {\color{red} expérience (=mod\`ele) paramétrique}.
-\item Sinon (par exemple si le paramètre $\vartheta$ est un élément d'un espace fonctionnel) : {\color{red} expérience (=mod\`ele) non-paramétrique}.
+\item Si $\Theta$ peut √™tre \og pris \fg{} comme un sous-ensemble
+de $\R^d$ : {\color{red} exp√©rience (=mod\`ele) param√©trique}.
+\item Sinon (par exemple si le param√®tre $\vartheta$ est un √©l√©ment d'un espace fonctionnel) : {\color{red} exp√©rience (=mod\`ele) non-param√©trique}.
 \end{itemize}
 \end{frame}
 
-\subsection{Expériences dominées}
+\subsection{Exp√©riences domin√©es}
 \begin{frame}
-\frametitle{Expériences dominées}
+\frametitle{Exp√©riences domin√©es}
 \begin{itemize}
-\item On fait une hypothèse minimale de \og complexité \fg{} sur le modèle statistique. {\color{red} But} : ramener l'étude de la famille
+\item On fait une hypoth√®se minimale de \og complexit√© \fg{} sur le mod√®le statistique. {\color{red} But} : ramener l'√©tude de la famille
 $$\{\PP_\vartheta,\,\vartheta \in \Theta\}$$
-à l'étude d'une famille de fonctions
+√† l'√©tude d'une famille de fonctions
 $$\left\{z \in \mathfrak{Z} \leadsto f(\vartheta,z) \in \R_+,\,\vartheta \in \Theta\right\}.$$
 \item Via la notion de {\color{red} domination}. Si $\mu,\nu$ sont deux mesures $\sigma$-finies sur $\mathfrak{Z}$, alors $\mu$ {\color{red} domine} $\nu$ (notation $\nu \ll \mu$) si
 $$\mu\big[A\big]=0 \Rightarrow \nu\big[A\big]=0.$$
 \end{itemize}
 \end{frame}
 \begin{frame}
-\frametitle{Théorème de Radon-Nikodym}
+\frametitle{Th√©or√®me de Radon-Nikodym}
 \begin{theo}
 Si $\nu \ll \mu$, il existe une fonction positive
-$$z \leadsto  p(z) \stackrel{\text{notation}}{=} \frac{d\nu}{d\mu}(z),$$ définie $\mu-$p.p., $\mu-$ intégrable, telle que
+$$z \leadsto  p(z) \stackrel{\text{notation}}{=} \frac{d\nu}{d\mu}(z),$$ d√©finie $\mu-$p.p., $\mu-$ int√©grable, telle que
 $$\nu\big[A\big] = \int_{A}p(z) \mu(dz) = \int_{A}\tfrac{d\nu}{d\mu}(z)\mu(dz),\;\;A \in {\mathcal Z}.$$
 %\underline{Notation} :
-%$$p(z)=\frac{d\nu}{d\mu}(z),\;\;\text{densité de}\;\nu\;\text{par rapport à}\;\mu.$$
+%$$p(z)=\frac{d\nu}{d\mu}(z),\;\;\text{densit√© de}\;\nu\;\text{par rapport √†}\;\mu.$$
 \end{theo}
 \end{frame}
 \begin{frame}
-\frametitle{Expérience dominée}
+\frametitle{Exp√©rience domin√©e}
 \begin{df}
-Une expérience statistique ${\mathcal E} = \big(\mathfrak{Z}, {\mathcal Z}, \big\{\PP_\vartheta, \vartheta \in \Theta\big\}\big)$ est {\color{red}dominée} par la mesure $\sigma$-finie $\mu$ définie sur $\mathfrak{Z}$ si
+Une exp√©rience statistique ${\mathcal E} = \big(\mathfrak{Z}, {\mathcal Z}, \big\{\PP_\vartheta, \vartheta \in \Theta\big\}\big)$ est {\color{red}domin√©e} par la mesure $\sigma$-finie $\mu$ d√©finie sur $\mathfrak{Z}$ si
 $$\forall \vartheta \in \Theta : \PP_\vartheta \ll \mu.$$
 \end{df}
-On appelle {\color{red} densités} de la famille $\{\PP_\vartheta,\vartheta \in \Theta\}$ la famille de fonctions (définies $\mu-$ p.p.)
+On appelle {\color{red} densit√©s} de la famille $\{\PP_\vartheta,\vartheta \in \Theta\}$ la famille de fonctions (d√©finies $\mu-$ p.p.)
 $$z\leadsto \frac{d\PP_\vartheta}{d\mu}(z),\;z\in \mathfrak{Z},\;\vartheta \in \Theta.$$
 \end{frame}
 
 \begin{frame}
-\frametitle{Densité, régression}
-Deux classes d'expériences statistiques {\color{red}dominées} fondamentales :
+\frametitle{Densit√©, r√©gression}
+Deux classes d'exp√©riences statistiques {\color{red}domin√©es} fondamentales :
 \begin{itemize}
-\item Le modèle de {\color{red} densité}
-\item Le modèle de {\color{red}régression } 
+\item Le mod√®le de {\color{red} densit√©}
+\item Le mod√®le de {\color{red}r√©gression }
 \end{itemize}
 \end{frame}
 
 
-\subsection{Modèle de densité}
+\subsection{Mod√®le de densit√©}
 
 \begin{frame}
-\frametitle{Modèle de densité (paramétrique)}
+\frametitle{Mod√®le de densit√© (param√©trique)}
 \begin{itemize}
-\item On observe un $n$-échantillon de v.a.r. $X_1,\ldots, X_n$.
-\item La loi des $X_i$ appartient à
-$\{\PP_\vartheta,\,\vartheta \in \Theta\}$, famille de {\color{red}probabilités sur $\R$}, {\color{red} dominée} par une mesure ($\sigma$-finie) $\mu(dx)$ sur $\R$.
-\item La loi de $(X_1,\ldots,X_n)$ s'écrit
+\item On observe un $n$-√©chantillon de v.a.r. $X_1,\ldots, X_n$.
+\item La loi des $X_i$ appartient √†
+$\{\PP_\vartheta,\,\vartheta \in \Theta\}$, famille de {\color{red}probabilit√©s sur $\R$}, {\color{red} domin√©e} par une mesure ($\sigma$-finie) $\mu(dx)$ sur $\R$.
+\item La loi de $(X_1,\ldots,X_n)$ s'√©crit
 \begin{align*}
 \PP_\vartheta^n(dx_1\cdots dx_n) & = \PP_\vartheta(dx_1)\otimes \cdots \otimes \PP_\vartheta(dx_n) \\
 & \ll  \mu(dx_1)\otimes \cdots \otimes \mu(dx_n) \\
 & \stackrel{\text{{\color{red}notation}}}{=} \mu^n(dx_1\cdots dx_n)
 \end{align*}
-%\item {\color{red}L'expérience statistique} engendrée par $(X_1,\ldots, X_n)$ s'écrit :
+%\item {\color{red}L'exp√©rience statistique} engendr√©e par $(X_1,\ldots, X_n)$ s'√©crit :
 %$${\mathcal E}^n = \Big(\R^n, {\mathcal B}(\R^n), \big\{\PP_\vartheta^n,\vartheta \in \Theta\big\}\Big),\;\;{\color{red}\Theta \subset \R^d}.$$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Modèle de densité (paramétrique)}
+\frametitle{Mod√®le de densit√© (param√©trique)}
 \begin{itemize}
-\item {\color{red} Densité du modèle} : on part de
+\item {\color{red} Densit√© du mod√®le} : on part de
 $$f(\vartheta,x)=\frac{d\PP_\vartheta}{d\mu}(x),\;\;x\in \R$$
 et
 $$\frac{d\PP_\vartheta^n}{d\mu^{n}}(x_1,\ldots, x_n) = \prod_{i = 1}^n f(\vartheta,x_i),\;\;x_1,\ldots, X_n \in \R.$$
-\item  {\color{red}L'expérience statistique} engendrée par $(X_1,\ldots, X_n)$ s'écrit :
+\item  {\color{red}L'exp√©rience statistique} engendr√©e par $(X_1,\ldots, X_n)$ s'√©crit :
 $${\mathcal E}^n = \Big(\R^n, {\mathcal B}(\R^n), \big\{\PP_\vartheta^n,\vartheta \in \Theta\big\}\Big),\;\;{\color{red}\Theta \subset \R^d}.$$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Exemple 1 : modèle de densité gaussienne univariée}
+\frametitle{Exemple 1 : mod√®le de densit√© gaussienne univari√©e}
 \begin{itemize}
 \item $X_i\sim {\mathcal N}(m,\sigma^2)$,
 avec
@@ -470,7 +468,7 @@ avec $x_1,\ldots,x_n \in \R$.
 \end{frame}
 
 \begin{frame}
-\frametitle{Exemple 2 :  modèle de Bernoulli}
+\frametitle{Exemple 2 :  mod√®le de Bernoulli}
 \begin{itemize}
 \item $X_i \sim \text{Bernoulli}(\vartheta)$, avec $\vartheta \in \Theta = [0,1]$.
 \begin{align*}
@@ -486,119 +484,119 @@ $$\frac{d\PP_\vartheta^n}{d\mu^n}(x_1\cdots x_n) = \prod_{i = 1}^n \vartheta^{x_
 \end{frame}
 
 \begin{frame}
-\frametitle{Exemple 3 : temps de panne \og arrêtés\fg{}}
+\frametitle{Exemple 3 : temps de panne \og arr√™t√©s\fg{}}
 \begin{itemize}
-\item On observe $X_1,\ldots, X_n$, où $X_i = Y_i \wedge T$, avec $Y_i$ {\color{red}lois exponentielles} de paramètre $\vartheta$ et $T$ {\color{red}temps fixe} (censure).
+\item On observe $X_1,\ldots, X_n$, o√π $X_i = Y_i \wedge T$, avec $Y_i$ {\color{red}lois exponentielles} de param√®tre $\vartheta$ et $T$ {\color{red}temps fixe} (censure).
 \item Cas 1 : $T=\infty$ (pas de censure). Alors  $\vartheta \in \Theta = \R_+\setminus \{0\}$ et
 $$\PP_\vartheta(dx) = \vartheta \exp(-\vartheta x)1_{\{x \geq 0\}}dx \ll \mu(dx) = dx$$
 et
 $$\frac{d\PP_{\color{red}\vartheta}^n}{d\mu^n}(x_1,\ldots,x_n) = {\color{red}\vartheta}^n \exp\Big(-{\color{red}\vartheta} \sum_{i = 1}^n x_i\Big),$$
 {\color{red}avec $x_i \in \R_+$} (et $0$ sinon).
-\item Cas 2 : {\color{red}Comment s'écrit le modèle} dans la cas où $T<\infty$ (présence de censure) ? Comment choisir $\mu$ ?
+\item Cas 2 : {\color{red}Comment s'√©crit le mod√®le} dans la cas o√π $T<\infty$ (pr√©sence de censure) ? Comment choisir $\mu$ ?
 \end{itemize}
 \end{frame}
 
 
 
 
-%\subsection{Modèle de régression}
+%\subsection{Mod√®le de r√©gression}
 %
 %
 %
 %
 %\begin{frame}
-%\frametitle{Expérience statistique}
+%\frametitle{Exp√©rience statistique}
 %%\begin{itemize}
-%%\item 
-%Une {\color{red}expérience (un modèle) statistique} ${\mathcal E}$ est la donnée d'un triplet
+%%\item
+%Une {\color{red}exp√©rience (un mod√®le) statistique} ${\mathcal E}$ est la donn√©e d'un triplet
 %$$\boxed{{\mathcal E} = \left(\mathfrak{Z}, {\mathcal Z}, \,\big\{\PP_\vartheta, \vartheta \in \Theta\big\}\right)}$$
 %avec
 %\begin{itemize}
-%\item $\big(\mathfrak{Z}, {\mathcal Z}\big)$ espace d'état (des observables, en général $\R^n$),
-%\item $\{\PP_\vartheta,\,\vartheta \in \Theta\}$ famille de probabilités définies {\color{red}simultanément} sur le même espace  $\big(\mathfrak{Z}, {\mathcal Z}\big)$,
-%\item $\vartheta$ {\color{red}paramètre inconnu}, $\Theta$ {\color{red} l'ensemble des paramètres}.
+%\item $\big(\mathfrak{Z}, {\mathcal Z}\big)$ espace d'√©tat (des observables, en g√©n√©ral $\R^n$),
+%\item $\{\PP_\vartheta,\,\vartheta \in \Theta\}$ famille de probabilit√©s d√©finies {\color{red}simultan√©ment} sur le m√™me espace  $\big(\mathfrak{Z}, {\mathcal Z}\big)$,
+%\item $\vartheta$ {\color{red}param√®tre inconnu}, $\Theta$ {\color{red} l'ensemble des param√®tres}.
 %\end{itemize}
-%%\item L'expérience ${\mathcal E}$ est {\color{red} dominée} s'il existe une mesure $\sigma$-finie $\mu$ sur $\mathfrak{Z}$ telle que $\PP_\vartheta \ll \mu$ pour tout $\vartheta \in \Theta$.
+%%\item L'exp√©rience ${\mathcal E}$ est {\color{red} domin√©e} s'il existe une mesure $\sigma$-finie $\mu$ sur $\mathfrak{Z}$ telle que $\PP_\vartheta \ll \mu$ pour tout $\vartheta \in \Theta$.
 %%\end{itemize}
 %\end{frame}
 %
 %
 %\begin{frame}
-%\frametitle{Experience engendrée par ($X_1,\ldots, X_n$)}
+%\frametitle{Experience engendr√©e par ($X_1,\ldots, X_n$)}
 %\begin{itemize}
 %\item {\color{red}Traitement sur un exemple} : on observe
 %$$Z = (X_1,\ldots, X_n), \quad\quad X_i= \vartheta + \xi_i,$$
 %$\xi_i$ v.a. i.i.d. de densit\'e {\color{red} connue} $f$.
 %\item La famille de lois $\big\{\PP_\vartheta^n,\vartheta \in \Theta  =
-%\R\big\}$ est définie sur $\mathfrak{Z}=\R^n$ par
+%\R\big\}$ est d√©finie sur $\mathfrak{Z}=\R^n$ par
 %$$\PP_\vartheta^n\big[A\big] = \int_A
 %\left(\prod_{i=1}^n f(x_i-\vartheta)\right) dx_1\ldots dx_n,
 %$$
 %pour $A\in{\mathcal Z}= {\mathcal B}(\R^n)$ (et $\PP^Z$ est l'une
 %des $\PP_\vartheta^n$).
-%\item Expérience {\color{red}engendrée par l'observation $Z$} :
+%\item Exp√©rience {\color{red}engendr√©e par l'observation $Z$} :
 %$${\mathcal E}^n = \big(\R^n,{\mathcal B}(\R^n),\big\{\PP_\vartheta^n,\,\vartheta \in \Theta\big\}\big).$$
 %\end{itemize}
 %\end{frame}
 %
 %
 %\begin{frame}
-%\frametitle{Expérience (mod\`ele) paramétrique, non-paramétrique}
+%\frametitle{Exp√©rience (mod\`ele) param√©trique, non-param√©trique}
 %\begin{itemize}
-%\item Si $\Theta$ peut être \og pris \fg{} comme un sous-ensemble
-%de $\R^d$ : {\color{red} expérience (=mod\`ele) paramétrique}.
-%\item Sinon (par exemple si le paramètre $\vartheta$ est un élément d'un espace fonctionnel) : {\color{red} expérience (=mod\`ele) non-paramétrique}.
+%\item Si $\Theta$ peut √™tre \og pris \fg{} comme un sous-ensemble
+%de $\R^d$ : {\color{red} exp√©rience (=mod\`ele) param√©trique}.
+%\item Sinon (par exemple si le param√®tre $\vartheta$ est un √©l√©ment d'un espace fonctionnel) : {\color{red} exp√©rience (=mod\`ele) non-param√©trique}.
 %\end{itemize}
 %\end{frame}
 %
-%\subsection{Expériences dominées}
+%\subsection{Exp√©riences domin√©es}
 %\begin{frame}
-%\frametitle{Expériences dominées}
+%\frametitle{Exp√©riences domin√©es}
 %\begin{itemize}
-%\item On fait une hypothèse minimale de \og complexité \fg{} sur le modèle statistique. {\color{red} But} : ramener l'étude de la famille
+%\item On fait une hypoth√®se minimale de \og complexit√© \fg{} sur le mod√®le statistique. {\color{red} But} : ramener l'√©tude de la famille
 %$$\{\PP_\vartheta,\,\vartheta \in \Theta\}$$
-%à l'étude d'une famille de fonctions
+%√† l'√©tude d'une famille de fonctions
 %$$\left\{z \in \mathfrak{Z} \leadsto f(\vartheta,z) \in \R_+,\,\vartheta \in \Theta\right\}.$$
 %\item Via la notion de {\color{red} domination}. Si $\mu,\nu$ sont deux mesures $\sigma$-finies sur $\mathfrak{Z}$, alors $\mu$ {\color{red} domine} $\nu$ (notation $\nu \ll \mu$) si
 %$$\mu\big[A\big]=0 \Rightarrow \nu\big[A\big]=0.$$
 %\end{itemize}
 %\end{frame}
 %\begin{frame}
-%\frametitle{Théorème de Radon-Nikodym}
+%\frametitle{Th√©or√®me de Radon-Nikodym}
 %\begin{theo}
 %Si $\nu \ll \mu$, il existe une fonction positive
-%$$z \leadsto  p(z) \stackrel{\text{notation}}{=} \frac{d\nu}{d\mu}(z),$$ définie $\mu-$p.p., $\mu-$ intégrable, telle que
+%$$z \leadsto  p(z) \stackrel{\text{notation}}{=} \frac{d\nu}{d\mu}(z),$$ d√©finie $\mu-$p.p., $\mu-$ int√©grable, telle que
 %$$\nu\big[A\big] = \int_{A}p(z) \mu(dz) = \int_{A}\tfrac{d\nu}{d\mu}(z)\mu(dz),\;\;A \in {\mathcal Z}.$$
 %%\underline{Notation} :
-%%$$p(z)=\frac{d\nu}{d\mu}(z),\;\;\text{densité de}\;\nu\;\text{par rapport à}\;\mu.$$
+%%$$p(z)=\frac{d\nu}{d\mu}(z),\;\;\text{densit√© de}\;\nu\;\text{par rapport √†}\;\mu.$$
 %\end{theo}
 %\end{frame}
 %\begin{frame}
-%\frametitle{Expérience dominée}
+%\frametitle{Exp√©rience domin√©e}
 %\begin{df}
-%Une expérience statistique ${\mathcal E} = \big(\mathfrak{Z}, {\mathcal Z}, \big\{\PP_\vartheta, \vartheta \in \Theta\big\}\big)$ est {\color{red}dominée} par la mesure $\sigma$-finie $\mu$ définie sur $\mathfrak{Z}$ si
+%Une exp√©rience statistique ${\mathcal E} = \big(\mathfrak{Z}, {\mathcal Z}, \big\{\PP_\vartheta, \vartheta \in \Theta\big\}\big)$ est {\color{red}domin√©e} par la mesure $\sigma$-finie $\mu$ d√©finie sur $\mathfrak{Z}$ si
 %$$\forall \vartheta \in \Theta : \PP_\vartheta \ll \mu.$$
 %\end{df}
-%On appelle {\color{red} densités} de la famille $\{\PP_\vartheta,\vartheta \in \Theta\}$ la famille de fonctions (définies $\mu-$ p.p.)
+%On appelle {\color{red} densit√©s} de la famille $\{\PP_\vartheta,\vartheta \in \Theta\}$ la famille de fonctions (d√©finies $\mu-$ p.p.)
 %$$z\leadsto \frac{d\PP_\vartheta}{d\mu}(z),\;z\in \mathfrak{Z},\;\vartheta \in \Theta.$$
 %\end{frame}
 %
 %\begin{frame}
-%\frametitle{Densité, régression}
-%Deux classes d'expériences statistiques {\color{red}dominées} fondamentales :
+%\frametitle{Densit√©, r√©gression}
+%Deux classes d'exp√©riences statistiques {\color{red}domin√©es} fondamentales :
 %\begin{itemize}
-%\item Le modèle de {\color{red} densité} (Cours 3)
-%\item Le modèle de {\color{red}régression } (Cours 4)
+%\item Le mod√®le de {\color{red} densit√©} (Cours 3)
+%\item Le mod√®le de {\color{red}r√©gression } (Cours 4)
 %\end{itemize}
 %\end{frame}
 %
 %
 %\begin{frame}
-%\frametitle{Modèle de densité paramétrique}
+%\frametitle{Mod√®le de densit√© param√©trique}
 %\begin{itemize}
-%\item On observe un $n$-échantillon de v.a.r. $X_1,\ldots, X_n$.
-%\item La loi des $X_i$ appartient à
-%$\{\PP_\vartheta,\,\vartheta \in \Theta\}$, famille de {\color{red}probabilités sur $\R$}, indicée par $\Theta \subset \R^d$, {\color{red} dominée} par une mesure ($\sigma$-finie) $\mu(dx)$ sur $\R$.
+%\item On observe un $n$-√©chantillon de v.a.r. $X_1,\ldots, X_n$.
+%\item La loi des $X_i$ appartient √†
+%$\{\PP_\vartheta,\,\vartheta \in \Theta\}$, famille de {\color{red}probabilit√©s sur $\R$}, indic√©e par $\Theta \subset \R^d$, {\color{red} domin√©e} par une mesure ($\sigma$-finie) $\mu(dx)$ sur $\R$.
 %\item Loi de $(X_1,\ldots,X_n)$
 %$$
 %\boxed{\PP_\vartheta^n(dx_1\cdots dx_n)  =\prod_{i=1}^n f(\vartheta, x_i)\mu^n(dx_1\ldots dx_n)}$$
@@ -610,7 +608,7 @@ $$\frac{d\PP_{\color{red}\vartheta}^n}{d\mu^n}(x_1,\ldots,x_n) = {\color{red}\va
 %
 %
 %\begin{frame}
-%\frametitle{Exemple : modèle de Bernoulli}
+%\frametitle{Exemple : mod√®le de Bernoulli}
 %\begin{itemize}
 %\item $X_i \sim \text{Bernoulli}(\vartheta)$, avec $\vartheta \in \Theta = [0,1]$.
 %\begin{align*}
@@ -630,9 +628,9 @@ $$\frac{d\PP_{\color{red}\vartheta}^n}{d\mu^n}(x_1,\ldots,x_n) = {\color{red}\va
 %\end{frame}
 %
 %\begin{frame}
-%\frametitle{Exemple : temps de panne \og arrêtés\fg{}}
+%\frametitle{Exemple : temps de panne \og arr√™t√©s\fg{}}
 %\begin{itemize}
-%\item On observe $X_1,\ldots, X_n$, où $X_i = Y_i \wedge T$, avec $Y_i$ {\color{red}lois exponentielles} de paramètre $\vartheta$ et $T$ {\color{red}temps fixe} (censure).
+%\item On observe $X_1,\ldots, X_n$, o√π $X_i = Y_i \wedge T$, avec $Y_i$ {\color{red}lois exponentielles} de param√®tre $\vartheta$ et $T$ {\color{red}temps fixe} (censure).
 %\item Cas 1 : $T=\infty$ (pas de censure). Alors  $\vartheta \in \Theta = \R_+\setminus \{0\}$ et
 %$$\PP_\vartheta(dx) = \vartheta \exp(-\vartheta x)1_{\{x \geq 0\}}dx \ll \mu(dx) = dx$$
 %et
@@ -645,23 +643,23 @@ $$\frac{d\PP_{\color{red}\vartheta}^n}{d\mu^n}(x_1,\ldots,x_n) = {\color{red}\va
 %\end{frame}
 %
 \begin{frame}
-\frametitle{Exemple : temps de panne \og arrêtés\fg{}}
+\frametitle{Exemple : temps de panne \og arr√™t√©s\fg{}}
 \begin{itemize}
-%\item Cas 2 : {\color{red}Comment s'écrit le modèle} dans la cas où $T<\infty$ (présence de censure) ? Comment choisir $\mu$ ?
-\item \underline{Loi $\PP_\vartheta(dx)$ de $X = Y \wedge T$} : $Y \sim$ exponentielle de paramètre $\vartheta$ :
+%\item Cas 2 : {\color{red}Comment s'√©crit le mod√®le} dans la cas o√π $T<\infty$ (pr√©sence de censure) ? Comment choisir $\mu$ ?
+\item \underline{Loi $\PP_\vartheta(dx)$ de $X = Y \wedge T$} : $Y \sim$ exponentielle de param√®tre $\vartheta$ :
 $$\boxed{X = Y 1_{\{Y < T\}} + T 1_{\{Y \geq T\}}}$$
-d'où
+d'o√π
 \begin{align*}\PP_\vartheta(dx) &
 = \vartheta e^{-\vartheta x} 1_{\{0 \leq x < T\}} dx+ \big(\int_{T}^{+\infty}\vartheta e^{-\vartheta y}dy\big) \delta_T(dx)\\
 &= \vartheta e^{-\vartheta x} 1_{\{0 \leq x < T\}}dx + e^{-\vartheta T} \delta_T(dx) \\
 &\ll \mu(dx) = dx + \delta_T(dx)\;\;\; \text{(par exemple)}.
 \end{align*}
-%(définie $\mu$-pp).
+%(d√©finie $\mu$-pp).
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Exemple : temps de panne \og arrêtés\fg{} (fin)}
+\frametitle{Exemple : temps de panne \og arr√™t√©s\fg{} (fin)}
 \begin{itemize}
 \item Alors, pour ce choix de mesure dominante
 $$\boxed{\frac{d\PP_{\color{red}\vartheta}}{d\mu}(x) = {\color{red}\vartheta} e^{-{\color{red}\vartheta} x} 1_{\{0 \leq x < T\}} +  e^{-{\color{red}\vartheta} T}1_{\{x=T\}}}$$
@@ -682,14 +680,14 @@ et
 
 
 
-\section{Méthodes d'estimation pour le modèle de densité}
+\section{M√©thodes d'estimation pour le mod√®le de densit√©}
 
 
 \begin{frame}
-\frametitle{Méthodes d'estimation }
+\frametitle{M√©thodes d'estimation }
 \begin{itemize}
 %\item Situation
-\item Méthode de substitution (ou des moments)
+\item M√©thode de substitution (ou des moments)
 \item $Z$-estimation
 \item $M$-estimation
 \item Le principe du {\color{red} maximum de vraisemblance}
@@ -700,29 +698,29 @@ et
 %\frametitle{Situation}
 %\end{frame}
 
-\subsection{Méthode des moments}
+\subsection{M√©thode des moments}
 
 \begin{frame}
-\frametitle{Méthode des moments : dimension 1}
+\frametitle{M√©thode des moments : dimension 1}
 \begin{itemize}
 \item $X_1,\ldots, X_n \sim_{\text{i.i.d.}} \PP_\vartheta$, avec $\vartheta \in \Theta \;{\color{red} \subset \R}$.
-\item \underline{Principe} : trouver $g:\R\rightarrow \R$ (en général $g(x)=x^k$) et $h:\R\rightarrow \R$ {\color{red} régulières} de sorte que
+\item \underline{Principe} : trouver $g:\R\rightarrow \R$ (en g√©n√©ral $g(x)=x^k$) et $h:\R\rightarrow \R$ {\color{red} r√©guli√®res} de sorte que
 $$\vartheta  = h\big(\E_{{\color{red}\vartheta}}\big[g(X)\big]\big) = h\Big(\int_{\R}g(x)dF_{{\color{red}\vartheta}}(x)\Big)=T(F_{{\color{red}\vartheta}})$$
-et $T$ fonctionnelle régulière de la distribution inconnnue $F_{{\color{red}\vartheta}}$.
+et $T$ fonctionnelle r√©guli√®re de la distribution inconnnue $F_{{\color{red}\vartheta}}$.
 \item \underline{Estimateur} : \og plug-in \fg{}
 $$\widehat \vartheta_n = h\big(\tfrac{1}{n}\sum_{i = 1}^n g(X_i)\big).$$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Méthode des moments}
+\frametitle{M√©thode des moments}
 \begin{itemize}
-\item \underline{Précision d'estimation} via les techniques empiriques :
+\item \underline{Pr√©cision d'estimation} via les techniques empiriques :
 $$\sqrt{n}\big(\widehat \vartheta_n - \vartheta\big) \stackrel{d}{\rightarrow} {\mathcal N}\big(0, h'(\E_{{\color{red}\vartheta}}[g(X)])^2\mathrm{Var}_{{\color{red} \vartheta}}[g(X)]\big)$$
-en {\color{red} loi sous $\PP_\vartheta$} et la variance asymptotique dépend en général de ${\color{red}\vartheta}$ $\rightarrow$ élimination par estimation préliminaire licite via le lemme de Slutsky.
-\item \underline{Exemple} : $X_1,\ldots, X_n\sim_{\text{i.i.d.}}$ exponentielle de paramètre $\vartheta$. On a
+en {\color{red} loi sous $\PP_\vartheta$} et la variance asymptotique d√©pend en g√©n√©ral de ${\color{red}\vartheta}$ $\rightarrow$ √©limination par estimation pr√©liminaire licite via le lemme de Slutsky.
+\item \underline{Exemple} : $X_1,\ldots, X_n\sim_{\text{i.i.d.}}$ exponentielle de param√®tre $\vartheta$. On a
 $$\E_\vartheta\big[X\big] = \frac{1}{\vartheta},$$
-l'estimateur par moment associé s'écrit
+l'estimateur par moment associ√© s'√©crit
 $$\est = \frac{1}{\overline{X}_n}.$$
 \end{itemize}
 \end{frame}
@@ -731,9 +729,9 @@ $$\est = \frac{1}{\overline{X}_n}.$$
 \frametitle{Exemple en dimension $d>1$}
 \begin{itemize}
 %\item Le cas de la dimension $d >1$ {\color{red}sur un exemple} :
-\item $X_1,\ldots,X_n \sim_{\text{i.i.d.}}$ Béta$(\alpha,\beta)$, de densité
+\item $X_1,\ldots,X_n \sim_{\text{i.i.d.}}$ B√©ta$(\alpha,\beta)$, de densit√©
 $$x \leadsto \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}1_{\{0 < x < 1\}},$$
-\item Le paramètre est ${\color{red}\vartheta} = (\alpha,\beta) \in {\color{red}\Theta}=\R_+\setminus\{0\} \times \R_+\setminus\{0\}$.
+\item Le param√®tre est ${\color{red}\vartheta} = (\alpha,\beta) \in {\color{red}\Theta}=\R_+\setminus\{0\} \times \R_+\setminus\{0\}$.
 \item On a
 $$\boxed{\E_\vartheta\big[X\big]=\frac{\alpha}{\alpha+\beta},\;\;\E_\vartheta\big[X^2\big]=\frac{\alpha(\alpha+1)}{(\alpha+\beta+1)(\alpha+\beta)}}$$
 \end{itemize}
@@ -742,7 +740,7 @@ $$\boxed{\E_\vartheta\big[X\big]=\frac{\alpha}{\alpha+\beta},\;\;\E_\vartheta\bi
 \begin{frame}
 \frametitle{Exemple en dimension $d>1$}
 \begin{itemize}
-\item {\color{red}L'estimateur par moment} $\est = (\widehat \vartheta_n^{(1)},\widehat \vartheta_n^{(2)})$ associé est défini par
+\item {\color{red}L'estimateur par moment} $\est = (\widehat \vartheta_n^{(1)},\widehat \vartheta_n^{(2)})$ associ√© est d√©fini par
 $$
 \left\{\begin{array}{cll}
 \overline{X}_n & = &\displaystyle \frac{\widehat \vartheta_n^{(1)}}{\widehat \vartheta_n^{(1)}+\widehat \vartheta_n^{(2)}} \\
@@ -750,28 +748,28 @@ $$
 \end{array}
 \right.
 $$
-\item {\color{red}Etude asymptotique} via le TCL multidimensionnel et la méthode \og delta\fg{} multidimensionnelle.
+\item {\color{red}Etude asymptotique} via le TCL multidimensionnel et la m√©thode \og delta\fg{} multidimensionnelle.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Limites de la méthode des moments}
+\frametitle{Limites de la m√©thode des moments}
 \begin{itemize}
 %\item \underline{{\color{red}Limites} de l'approche par moments} :
 %\begin{itemize}
-\item Méthode {\color{red}non systématique}
-\item Représentation pas toujours explicite
-\item Choix de la fonction $g$, notion d'optimalité parmi une classe d'estimateurs...
+\item M√©thode {\color{red}non syst√©matique}
+\item Repr√©sentation pas toujours explicite
+\item Choix de la fonction $g$, notion d'optimalit√© parmi une classe d'estimateurs...
 %\end{itemize}
-\item {\color{red}Généralisation} : $Z$-estimation (ou estimation par méthode
-des moments généralisés, GMM= {\it generalized method of moments}).
+\item {\color{red}G√©n√©ralisation} : $Z$-estimation (ou estimation par m√©thode
+des moments g√©n√©ralis√©s, GMM= {\it generalized method of moments}).
 \end{itemize}
 \end{frame}
 \subsection{$Z$-estimation}
 \begin{frame}
 \frametitle{$Z$-estimation}
 \begin{itemize}
-\item La méthode des moments  (en dimension 1) est basée sur l'inversibilité de la fonction
+\item La m√©thode des moments  (en dimension 1) est bas√©e sur l'inversibilit√© de la fonction
 $$m_g(\vartheta) = \int_{\R} g(x)\PP_\vartheta(dx)$$
 i.e. pour tout $\vartheta \in \Theta$
 $$\int_{\R}\big(m_g(\vartheta)-g(x)\big)\PP_\vartheta(dx)=0.$$
@@ -787,15 +785,15 @@ $$\boxed{\forall \vartheta \in \Theta,\int_{\R}\phi(\vartheta, x) \PP_\vartheta(
 \begin{frame}
 \frametitle{$Z$-estimation}
 \begin{itemize}
-\item Résoudre l'équation {\color{red} empirique} associée :
+\item R√©soudre l'√©quation {\color{red} empirique} associ√©e :
 $$\boxed{\frac{1}{n}\sum_{i = 1}^n \phi(a, X_i)=0\;\;\text{pour}\;\;a\in \Theta.}$$
 \end{itemize}
 \begin{df}
-On appelle {\color{red}$Z$-estimateur} associé à $\phi$ tout estimateur ${\color{red}\est}$ satisfaisant
+On appelle {\color{red}$Z$-estimateur} associ√© √† $\phi$ tout estimateur ${\color{red}\est}$ satisfaisant
 $$\sum_{i = 1}^n \phi({\color{red}\est}, X_i)=0$$
 \end{df}
 \begin{itemize}
-\item Il n'y a pas unicité de $\est$ (à ce niveau).
+\item Il n'y a pas unicit√© de $\est$ (√† ce niveau).
 \item \underline{Programme} {\color{red} Etablir des conditions}
 sur $\phi$ et sur la famille $\{\PP_\vartheta, \vartheta \in
 \Theta\}$ pour obtenir la convergence et les performances
@@ -816,7 +814,7 @@ $$\phi(a,x)={\rm Arctg}(x-a).$$
 $$a \leadsto \E_{\color{red}\vartheta}\big[\phi(a,X)\big] =
 \int_{\R}{\rm Arctg}(x-a)f(x-{\color{red}\vartheta})dx$$ est
 strictement d\'ecroissante et s'annule seulement en $a=\vartheta.$
-\item {\color{red}$Z$-estimateur associé :} solution $\est$ de
+\item {\color{red}$Z$-estimateur associ√© :} solution $\est$ de
 $$\sum_{i = 1}^n{\rm Arctg}(X_i-\est) = 0$$
 {\color{red} (unicit\'e)}.
 \end{itemize}
@@ -825,10 +823,10 @@ $$\sum_{i = 1}^n{\rm Arctg}(X_i-\est) = 0$$
 
 \begin{frame}
 \frametitle{Le cas multidimensionnel}
-Si ${\color{red} \Theta \subset \R^d}$ avec {\color{red} $d  >1$}, la fonction $\phi$ est remplacée par
+Si ${\color{red} \Theta \subset \R^d}$ avec {\color{red} $d  >1$}, la fonction $\phi$ est remplac√©e par
 $$\Phi = (\phi_1,\ldots,\phi_d):\Theta \times \R \rightarrow \R^d.$$
 \begin{definition}
-On appelle $Z$-estimateur associé à $\Phi$ tout estimateur ${\color{red}\est}$ satisfaisant
+On appelle $Z$-estimateur associ√© √† $\Phi$ tout estimateur ${\color{red}\est}$ satisfaisant
 $$\sum_{i = 1}^n \phi_\ell({\color{red}\est}, X_i)=0,\;\;\ell = 1,\ldots, d.$$
 \end{definition}
 \end{frame}
@@ -838,12 +836,12 @@ $$\sum_{i = 1}^n \phi_\ell({\color{red}\est}, X_i)=0,\;\;\ell = 1,\ldots, d.$$
 \begin{itemize}
 \item \underline{En dimension 1} : si
 $$\boxed{\phi(\vartheta,x) = \partial_\vartheta\psi(\vartheta, x)}$$
-pour une certaine fonction $\psi$, résoudre
+pour une certaine fonction $\psi$, r√©soudre
 $\sum_{i = 1}^n \phi(\vartheta, X_i)=0$
-revient à {\color{red}chercher un point critique} de
+revient √† {\color{red}chercher un point critique} de
 $$\vartheta \leadsto \sum_{i = 1}^n\psi(\vartheta, X_i).$$
-\item \underline{En dimension $d \geq 1$}, il faut $\phi(\vartheta, x) = \nabla_\vartheta \psi(\vartheta, x)$ (moins facile à obtenir).
-\item {\color{red} Invite à généraliser} la recherche d'estimateurs via la maximisation d'un critère $\rightarrow M$-estimation.
+\item \underline{En dimension $d \geq 1$}, il faut $\phi(\vartheta, x) = \nabla_\vartheta \psi(\vartheta, x)$ (moins facile √† obtenir).
+\item {\color{red} Invite √† g√©n√©raliser} la recherche d'estimateurs via la maximisation d'un crit√®re $\rightarrow M$-estimation.
 \end{itemize}
 \end{frame}
 
@@ -857,16 +855,16 @@ $$a \leadsto \E_\vartheta\big[\psi(a,X)\big] = \int \psi(a,x)\PP_\vartheta(dx)$$
 admet {\color{red}un maximum en $a=\vartheta$}.
 \end{itemize}
 \begin{df}
-On appelle $M$-estimateur associé à $\psi$ tout estimateur ${\color{red}\est}$ satisfaisant
+On appelle $M$-estimateur associ√© √† $\psi$ tout estimateur ${\color{red}\est}$ satisfaisant
 $$\sum_{i = 1}^n \psi({\color{red}\est}, X_i) = \max_{a \in \Theta}\sum_{i = 1}^n\psi(a, X_i).$$
 \end{df}
 \begin{itemize}
-\item Il n'y a pas unicité de $\est$ (à ce niveau).
+\item Il n'y a pas unicit√© de $\est$ (√† ce niveau).
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Un exemple classique : paramètre de localisation}
+\frametitle{Un exemple classique : param√®tre de localisation}
 \begin{itemize}
 \item $\Theta = \R$, $\PP_{\color{red}\vartheta}(dx) = f(x-{\color{red}\vartheta})dx$, et $\int_{\R}xf(x)dx=0$, $\int_{\R}x^2\PP_\vartheta(dx)<+\infty$ pour tout $\vartheta \in \R$. On pose
 $$\boxed{\psi(a,x)=-(a-x)^2}$$
@@ -874,20 +872,20 @@ $$\boxed{\psi(a,x)=-(a-x)^2}$$
 $$a \leadsto \E_\vartheta\big[\psi(a,X)\big] =
 -\int_{\R}(a-X)^2f(x-\vartheta)dx$$
 admet un {\color{red}maximum} en $a=\E_\vartheta\big[X\big] = \int_{\R}xf(x-\vartheta)dx=\vartheta.$
-\item {\color{red}$M$-estimateur associé :}
+\item {\color{red}$M$-estimateur associ√© :}
 $$\sum_{i = 1}^n(X_i-\est)^2 = \min_{a \in \R}\sum_{i = 1}^n (X_i-a)^2.$$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Paramètre de localisation}
+\frametitle{Param√®tre de localisation}
 \begin{itemize}
-\item C'est {\color{red}aussi} un $Z$-estimateur associé à $\phi(a,x)=2(x-a)$: on résout
-$$\sum_{i = 1}^n (a-X_i)=0\;\;\text{d'où}\;\;\est = \overline{X}_n.$$
-\item Dans cet {\color{red}exemple très simple},
-tous les points de vue coïncident.
+\item C'est {\color{red}aussi} un $Z$-estimateur associ√© √† $\phi(a,x)=2(x-a)$: on r√©sout
+$$\sum_{i = 1}^n (a-X_i)=0\;\;\text{d'o√π}\;\;\est = \overline{X}_n.$$
+\item Dans cet {\color{red}exemple tr√®s simple},
+tous les points de vue co‚Ä¢ncident.
 %
-\item Si, dans le même contexte,
+\item Si, dans le m√™me contexte,
 $\int_{\R}x^2\PP_\vartheta(dx)=+\infty$ et $f(x)=f(-x)$, on peut
 utiliser $Z$-estimateur avec $\phi(a,x)={\rm Arctg}(x-a)$. M\'ethode
 robuste, mais est-elle optimale? Peut-on faire mieux {\color{red}si
@@ -898,12 +896,12 @@ $f$ est connue? A suivre...}
 \begin{frame}
 \frametitle{Lien entre $Z$- et $M$- estimateurs}
 \begin{itemize}
-\item {\color{red}Pas d'inclusion} entre ces deux classes d'estimateurs {\color{red}en général} :
+\item {\color{red}Pas d'inclusion} entre ces deux classes d'estimateurs {\color{red}en g√©n√©ral} :
 \begin{itemize}
-\item Si $\psi$ non-régulière, $M$-estimateur $\nRightarrow$ $Z$-estimateur
-\item Si une équation d'estimation admet plusieurs solutions distinctes, $Z$-estimateur $\nRightarrow$ $M$-estimateur (cas d'un extremum local).
+\item Si $\psi$ non-r√©guli√®re, $M$-estimateur $\nRightarrow$ $Z$-estimateur
+\item Si une √©quation d'estimation admet plusieurs solutions distinctes, $Z$-estimateur $\nRightarrow$ $M$-estimateur (cas d'un extremum local).
 \end{itemize}
-\item Toutefois, si $\psi$ {\color{red}est régulière}, les $M$-estimateurs {\color{red}sont} des $Z$-estimateurs : si $\Theta \subset \R$ ($d=1$), en posant
+\item Toutefois, si $\psi$ {\color{red}est r√©guli√®re}, les $M$-estimateurs {\color{red}sont} des $Z$-estimateurs : si $\Theta \subset \R$ ($d=1$), en posant
 $$\phi(a,x) = \partial_a\psi(a,x),$$
 on a
 $$\boxed{\sum_{i = 1}^n \partial_{a} \psi(\vartheta, X_i)\big|_{a = \est}
@@ -925,14 +923,14 @@ $$\boxed{\sum_{i = 1}^n \partial_{a} \psi(\vartheta, X_i)\big|_{a = \est}
 {\color{red}incontournable} en statistique. Cas particuliers connus
 depuis le XVIII\`eme si\`ecle. D\'efinition g\'en\'erale:
 Fisher~(1922).
-\item Fournit une première {\color{red}méthode systématique} de construction d'un $M$-estimateur
+\item Fournit une premi√®re {\color{red}m√©thode syst√©matique} de construction d'un $M$-estimateur
 (souvent un $Z$-estimateur, souvent aussi {\it a posteriori} un
 estimateur par substitution simple).
-\item Procédure {\color{red}optimale} (dans quel sens ?)
-sous des hypothèses de {\color{red} régularité} de la famille
+\item Proc√©dure {\color{red}optimale} (dans quel sens ?)
+sous des hypoth√®ses de {\color{red} r√©gularit√©} de la famille
 $\{\PP_\vartheta, \vartheta \in \Theta\}$ (Cours 6).
-\item Parfois difficile à mettre en oeuvre en pratique
-$\rightarrow$ {\color{red}méthodes numériques}, statistique
+\item Parfois difficile √† mettre en oeuvre en pratique
+$\rightarrow$ {\color{red}m√©thodes num√©riques}, statistique
 computationnelle.
 \end{itemize}
 \end{frame}
@@ -940,30 +938,30 @@ computationnelle.
 \begin{frame}
 \frametitle{Fonction de vraisemblance}
 \begin{itemize}
-\item La famille $\{\PP_\vartheta,\vartheta \in \Theta\}$ est dominée par une mesure $\sigma$-finie $\mu$. On se donne, pour $\vartheta \in \Theta$
+\item La famille $\{\PP_\vartheta,\vartheta \in \Theta\}$ est domin√©e par une mesure $\sigma$-finie $\mu$. On se donne, pour $\vartheta \in \Theta$
 $$f(\vartheta,x) = \frac{d\PP_\vartheta}{d\mu}(x),\;x \in \R.$$
 \end{itemize}
 \begin{df}
-{\color{red}Fonction de vraisemblance} du $n$-échantillon associée à la famille $\{f(\vartheta,\cdot),\vartheta \in \Theta\}$ :
+{\color{red}Fonction de vraisemblance} du $n$-√©chantillon associ√©e √† la famille $\{f(\vartheta,\cdot),\vartheta \in \Theta\}$ :
 $$\boxed{\vartheta \leadsto {\mathcal L}_n(\vartheta, X_1,\ldots, X_n) = \prod_{i = 1}^n f(\vartheta, X_i)}$$
 \end{df}
 %\end{frame}
 \begin{itemize}
-\item C'est une fonction aléatoire (définie $\mu$-presque partout).
+\item C'est une fonction al√©atoire (d√©finie $\mu$-presque partout).
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Exemples}
 \begin{itemize}
-\item \underline{Exemple 1}: {\color{red}Modèle de Poisson}. On observe
+\item \underline{Exemple 1}: {\color{red}Mod√®le de Poisson}. On observe
 $$X_1,\ldots, X_n \sim_{\text{i.i.d.}}\text{Poisson}({\color{red}\vartheta}),$$
 ${\color{red}\vartheta} \in \Theta = \R_+\setminus \{0\}$ et prenons
 $\mu(dx) = \sum_{k \in \N}\delta_k(dx)$.
 \item La densit\'e de $\PP_\vartheta$ par rapport \`a $\mu$ est
 $$f({\color{red}\vartheta}, x) = e^{-{\color{red}\vartheta}}
 \frac{{\color{red}\vartheta}^x}{x!}, \quad x=0,1,2,\dots.$$
-\item La {\color{red} fonction de vraisemblance} associée s'écrit
+\item La {\color{red} fonction de vraisemblance} associ√©e s'√©crit
 \begin{align*}
 \vartheta \leadsto {\mathcal L}_n(\vartheta, X_1,\ldots, X_n)
 &= \prod_{i = 1}^n e^{-\vartheta}\frac{\vartheta^{X_i}}{X_i!} \\
@@ -980,7 +978,7 @@ $$X_1,\ldots, X_n \sim_{\text{i.i.d.}}\text{Cauchy},$$
 ${\color{red}\vartheta} \in \Theta = \R$ et $\mu(dx)=dx$ ({\color{red} par exemple}).
 \item On a alors
 $$\PP_{\color{red}\vartheta}(dx)=f({\color{red}\vartheta},x)dx=\frac{1}{\pi\big(1+(x-{\color{red}\vartheta})^2\big)}dx.$$
-\item La {\color{red} fonction de vraisemblance} associée s'écrit
+\item La {\color{red} fonction de vraisemblance} associ√©e s'√©crit
 $$\vartheta \leadsto {\mathcal L}_n(\vartheta, X_1,\ldots, X_n) = \frac{1}{\pi^n}\prod_{i = 1}^n \big(1+(X_i-\vartheta)^2\big)^{-1}.$$
 \end{itemize}
 \end{frame}
@@ -988,9 +986,9 @@ $$\vartheta \leadsto {\mathcal L}_n(\vartheta, X_1,\ldots, X_n) = \frac{1}{\pi^n
 \begin{frame}
 \frametitle{Principe de maximum de vraisemblance}
 \begin{itemize}
-\item Cas d'une famille de lois {\color{red} restreinte à deux points}
+\item Cas d'une famille de lois {\color{red} restreinte √† deux points}
 $$\Theta  = \{\vartheta_1,\vartheta_2\} \subset \R,$$
-avec $\PP_{\vartheta_i}$ discrète et $\mu(dx)$ la mesure de comptage.
+avec $\PP_{\vartheta_i}$ discr√®te et $\mu(dx)$ la mesure de comptage.
 \item {\color{red}A priori}, pour tout $(x_1,\ldots, x_n)$, et pour $\vartheta \in \{\vartheta_1,\vartheta_2\}$,
 \begin{align*}
 \PP_\vartheta\big[X_1=x_1,\ldots, X_n=x_n\big] & = \prod_{i=1}^n \PP_\vartheta\big[X_i=x_i\big] \\
@@ -1004,11 +1002,11 @@ x_n)$.
 \begin{frame}
 \frametitle{Principe de maximum de vraisemblance}
 \begin{itemize}
-\item {\color{red}A posteriori, on observe $(X_1,\ldots, X_n)$.} L'événement
+\item {\color{red}A posteriori, on observe $(X_1,\ldots, X_n)$.} L'√©v√©nement
 $$\Big\{\prod_{i = 1}^n f({\color{red}\vartheta_1},X_i) > \prod_{i = 1}^n f({\color{blue}\vartheta_2},X_i)\Big\}\;\;\;\text{(Cas 1)}$$
-{\color{red}ou bien} l'événement
+{\color{red}ou bien} l'√©v√©nement
 $$\Big\{\prod_{i = 1}^n f({\color{blue}\vartheta_2},X_i) > \prod_{i = 1}^n f({\color{red}\vartheta_1},X_i)\Big\}\;\;\;\text{(Cas 2)}$$
-est réalisé. (On ignore le cas d'égalité.)
+est r√©alis√©. (On ignore le cas d'√©galit√©.)
 \item {\color{red} Principe de maximum de vraisemblance:}
 $$\estMV = {\color{red}\vartheta_1} 1_{\{\text{Cas 1}\}}+ {\color{blue}\vartheta_2} 1_{\{\text{Cas 2}\}}.$$
 \end{itemize}
@@ -1017,15 +1015,15 @@ $$\estMV = {\color{red}\vartheta_1} 1_{\{\text{Cas 1}\}}+ {\color{blue}\vartheta
 \begin{frame}
 \frametitle{Estimateur du maximum de vraisemblance}
 \begin{itemize}
-\item On généralise le principe précédent pour une famille de lois et un ensemble de paramètres {\color{red}quelconques}.
-\item \underline{Situation} : $X_1,\ldots, X_n\sim_{\text{i.i.d.}}\PP_\vartheta$, $\{\PP_\vartheta,\vartheta \in \Theta\}$ dominée, $\Theta \subset \R^d$, $\vartheta \leadsto {\mathcal L}_n(\vartheta, X_1,\ldots, X_n)$ vraisemblance associée.
+\item On g√©n√©ralise le principe pr√©c√©dent pour une famille de lois et un ensemble de param√®tres {\color{red}quelconques}.
+\item \underline{Situation} : $X_1,\ldots, X_n\sim_{\text{i.i.d.}}\PP_\vartheta$, $\{\PP_\vartheta,\vartheta \in \Theta\}$ domin√©e, $\Theta \subset \R^d$, $\vartheta \leadsto {\mathcal L}_n(\vartheta, X_1,\ldots, X_n)$ vraisemblance associ√©e.
 \end{itemize}
 \begin{df}
 On appelle {\color{red} estimateur du maximum de vraisemblance} tout estimateur $\estMV$ satisfaisant
 $${\mathcal L}_n(\estMV,X_1,\ldots, X_n) = \max_{\vartheta \in \Theta} {\mathcal L}_n(\vartheta, X_1,\ldots, X_n).$$
 \end{df}
 \begin{itemize}
-\item {\color{red}Existence, unicité...}
+\item {\color{red}Existence, unicit√©...}
 \end{itemize}
 \end{frame}
 
@@ -1036,18 +1034,18 @@ $${\mathcal L}_n(\estMV,X_1,\ldots, X_n) = \max_{\vartheta \in \Theta} {\mathcal
 \begin{align*}\vartheta \leadsto \ell_n(\vartheta, X_1,\ldots, X_n)& = \log {\mathcal L}_n(\vartheta, X_1,\ldots, X_n)\\
 & = \sum_{i = 1}^n \log f(\vartheta, X_i).
 \end{align*}
-{\color{red}Bien défini} si $f(\vartheta, \cdot) >0$ $\mu$-pp.
+{\color{red}Bien d√©fini} si $f(\vartheta, \cdot) >0$ $\mu$-pp.
 $$\text{Max. vraisemblance = max. log-vraisemblance.}$$
-\item L'estimateur du maximum de vraisemblance {\color{red} ne dépend pas} du choix de la mesure dominante $\mu$.
-\item Notion de {\color{red} racine de l'équation de vraisemblance} : tout estimateur $\widehat \vartheta_n^{\,{\tt rv}}$ vérifiant
+\item L'estimateur du maximum de vraisemblance {\color{red} ne d√©pend pas} du choix de la mesure dominante $\mu$.
+\item Notion de {\color{red} racine de l'√©quation de vraisemblance} : tout estimateur $\widehat \vartheta_n^{\,{\tt rv}}$ v√©rifiant
 $$\nabla_\vartheta \ell_n(\widehat \vartheta_n^{\,{\tt rv}}, X_1,\ldots, X_n) = 0.$$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Exemple : modèle normal } L'expérience statistique est
-engendrée par un $n$-échantillon de loi ${\mathcal
-N}(\mu,\sigma^2)$, le paramètre est $\vartheta = (\mu,\sigma^2)\in
+\frametitle{Exemple : mod√®le normal } L'exp√©rience statistique est
+engendr√©e par un $n$-√©chantillon de loi ${\mathcal
+N}(\mu,\sigma^2)$, le param√®tre est $\vartheta = (\mu,\sigma^2)\in
 \Theta = \R\times \R_+\setminus\{0\}$.
 \begin{itemize}
 \item
@@ -1062,7 +1060,7 @@ $$\ell_n\big((\mu,\sigma^2),X_1,\ldots, X_n\big) = -\frac{n}{2}
 \end{frame}
 
 \begin{frame}
-\frametitle{Exemple : modèle normal }
+\frametitle{Exemple : mod√®le normal }
 %\begin{itemize}
 %\item
 {\color{red}Equation(s) de vraisemblance}
@@ -1079,7 +1077,7 @@ $$
 Solution de ces \'equations (pour $n \geq 2$):
 $$\boxed{\widehat
 \vartheta_n^{\,{\tt rv}} = \big(\overline{X}_n,\frac{1}{n} \sum_{i =
-1}^n(X_i-\overline{X}_n)^2\big)}$$ et on vérifie que $\widehat
+1}^n(X_i-\overline{X}_n)^2\big)}$$ et on v√©rifie que $\widehat
 \vartheta_n^{\,{\tt rv}} =\estMV$.
 %\end{itemize}
 \end{frame}
@@ -1087,7 +1085,7 @@ $$\boxed{\widehat
 
 
 \begin{frame}
-\frametitle{Exemple : modèle de Poisson}
+\frametitle{Exemple : mod√®le de Poisson}
 \begin{itemize}
 \item
 {\color{red}Vraisemblance}
@@ -1099,17 +1097,17 @@ $$\ell_n(\vartheta, X_1,\ldots, X_n) = c(X_1,\ldots, X_n)-n\vartheta +\sum_{i =1
 $$-n+\sum_{i = 1}^n X_i \frac{1}{\vartheta} = 0,\;\;
 \text{soit}\;\;
 \boxed{\widehat \vartheta_n^{\,{\tt rv}} = \frac{1}{n}\sum_{i = 1}^n X_i=\overline{X}_n}$$
-et on vérifie que $\widehat \vartheta_n^{\,{\tt rv}} =\estMV$.
+et on v√©rifie que $\widehat \vartheta_n^{\,{\tt rv}} =\estMV$.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Exemple : mod\`ele de Laplace} L'expérience statistique
-est engendrée par un $n$-échantillon de loi de Laplace de paramètre
-$\vartheta \in \Theta = \R$. La densité par rapport à la mesure de
+\frametitle{Exemple : mod\`ele de Laplace} L'exp√©rience statistique
+est engendr√©e par un $n$-√©chantillon de loi de Laplace de param√®tre
+$\vartheta \in \Theta = \R$. La densit√© par rapport √† la mesure de
 Lebesgue :
 $$f(\vartheta,x) = \frac{1}{2\sigma}\exp\big(-\frac{|x-\vartheta|}{\sigma}\big),$$
-où $\sigma >0$ est {\color{red}connu}.
+o√π $\sigma >0$ est {\color{red}connu}.
 \begin{itemize}
 \item {\color{red}Vraisemblance}
 $${\mathcal L}_n(\vartheta, X_1,\ldots, X_n) = (2\sigma)^{-n}
@@ -1122,9 +1120,9 @@ $$\ell_n(\vartheta,X_1,\ldots, X_n) = - n \log(2\sigma)-
 
 \begin{frame}
 \frametitle{Exemple : mod\`ele de Laplace} Maximiser ${\mathcal
-L}_n(\vartheta, X_1,\ldots, X_n)$ revient à minimiser la fonction
+L}_n(\vartheta, X_1,\ldots, X_n)$ revient √† minimiser la fonction
 $\vartheta \leadsto \sum_{i = 1}^n \big|X_i-\vartheta\big|$,
-dérivable presque partout de dérivée constante par morceaux.
+d√©rivable presque partout de d√©riv√©e constante par morceaux.
 {\color{red}Equation de vraisemblance:}
 $$\sum_{i = 1}^n \text{sign}(X_i-\vartheta)=0.$$
 Soit $X_{(1)}\leq \ldots \leq X_{(n)}$ la statistique d'ordre.
@@ -1138,7 +1136,7 @@ est un EMV.
 l'EMV est unique. Mais $\widehat \vartheta_n^{\,{\tt rv}}$ n'existe
 pas.
 \item {\color{red}pour tout} $n$, la
-médiane empirique est un EMV.
+m√©diane empirique est un EMV.
 \end{itemize}
 \end{frame}
 
@@ -1151,7 +1149,7 @@ $${\mathcal L}_n(\vartheta, X_1,\ldots, X_n) = \pi^{-n} \prod_{i =1}^n \frac{1}{
 $$\ell_n(\vartheta,X_1,\ldots, X_n) = -n\log \pi -\sum_{i = 1}^n \log\big(1+(X_i-\vartheta)^2\big)$$
 \item {\color{red}Equation de vraisemblance}
 $$\boxed{\sum_{i = 1}^n \frac{X_i-\vartheta}{1+(X_i-\vartheta)^2}=0}$$
-pas de solution explicite et admet en général plusieurs solutions.
+pas de solution explicite et admet en g√©n√©ral plusieurs solutions.
 \end{itemize}
 \end{frame}
 
@@ -1159,22 +1157,22 @@ pas de solution explicite et admet en général plusieurs solutions.
 \begin{frame}
 \frametitle{Maximum de vraisemblance = $M$-estimateur}
 \begin{itemize}
-\item \underline{Une inégalité de convexité} : $\mu$ mesure $\sigma$-finie sur $\R$ ; $f,g$ deux {\color{red}densités de probabilités} par rapport à $\mu$. Alors
+\item \underline{Une in√©galit√© de convexit√©} : $\mu$ mesure $\sigma$-finie sur $\R$ ; $f,g$ deux {\color{red}densit√©s de probabilit√©s} par rapport √† $\mu$. Alors
 $$\boxed{\int_{\R}f(x)\log f(x) \mu(dx) \geq \int_{\R} f(x) \log g(x) \mu(dx)}$$
-(si les intégrales sont finies) avec égalité {\color{red}ssi} $f=g$ $\mu$-pp.
-\item \underline{Preuve}: à montrer
+(si les int√©grales sont finies) avec √©galit√© {\color{red}ssi} $f=g$ $\mu$-pp.
+\item \underline{Preuve}: √† montrer
 $$\int_{\R} f(x) \log \frac{g(x)}{f(x)}\mu(dx) \leq 0.$$
-(avec une convention de notation appropriée)
+(avec une convention de notation appropri√©e)
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Une inégalité de convexité}
+\frametitle{Une in√©galit√© de convexit√©}
 \begin{itemize}
-\item On a $\log(1+x)\leq x$ pour $x \geq -1$ avec égalité ssi $x=0$.
+\item On a $\log(1+x)\leq x$ pour $x \geq -1$ avec √©galit√© ssi $x=0$.
 \item Donc
 $$\log \frac{g(x)}{f(x)} = \log\Big(1+\big(\frac{g(x)}{f(x)}-1\big)\Big) \leq \frac{g(x)}{f(x)}-1$$
-(avec égalité ssi $f(x)=g(x)$).
+(avec √©galit√© ssi $f(x)=g(x)$).
 \item Finalement
 \begin{align*}
 \int_{\R}f(x)\log \frac{g(x)}{f(x)}\mu(dx)& \leq \int_{\R} f(x)\Big(\frac{g(x)}{f(x)}-1\Big)\mu(dx) \\
@@ -1185,29 +1183,29 @@ $$\log \frac{g(x)}{f(x)} = \log\Big(1+\big(\frac{g(x)}{f(x)}-1\big)\Big) \leq \f
 \end{frame}
 
 \begin{frame}
-\frametitle{Conséquence pour l'EMV}
+\frametitle{Cons√©quence pour l'EMV}
 \begin{itemize}
 \item On pose
 $$\boxed{\psi(a,x):=\log f(a,x),\;\;a \in \Theta,\;x\in\R}$$
-(avec une convention pour le cas où on n'a pas $f(a,\cdot) >0$.)
+(avec une convention pour le cas o√π on n'a pas $f(a,\cdot) >0$.)
 \item La fonction
 $$a \leadsto \E_\vartheta \big[\psi(a,X)\big]=\int_{\R}\log f(a,x) f(\vartheta,x) \mu(dx)$$
-a un maximum en $a=\vartheta$ d'après {\color{red}l'inégalité de convexité}.
+a un maximum en $a=\vartheta$ d'apr√®s {\color{red}l'in√©galit√© de convexit√©}.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 %\frametitle{}
 \begin{itemize}
-\item Le $M$-estimateur associé à $\psi$ maximise la fonction
+\item Le $M$-estimateur associ√© √† $\psi$ maximise la fonction
 $$a \leadsto \sum_{i = 1}^n \log f(a, X_i) = \ell_n(a, X_1,\ldots, X_n)$$
-c'est-à-dire la {\color{red} log-vraisemblance}. C'est {\color{red}l'estimateur du maximum de vraisemblance}.
+c'est-√†-dire la {\color{red} log-vraisemblance}. C'est {\color{red}l'estimateur du maximum de vraisemblance}.
 
-\item C'est aussi un $Z$-estimateur si la fonction $\vartheta \leadsto \log f(\vartheta, \cdot)$ est régulière, associé à la fonction
+\item C'est aussi un $Z$-estimateur si la fonction $\vartheta \leadsto \log f(\vartheta, \cdot)$ est r√©guli√®re, associ√© √† la fonction
 $$\phi(\vartheta, x) = \partial_\vartheta \log f(\vartheta, x) = \frac{\partial_\vartheta f(\vartheta, x)}{f(\vartheta, x)},\;\vartheta \in \Theta, x\in \R$$
 lorsque $\Theta \subset \R$, \`a condition que le maximum de
 log-vraisemblance n'est pas atteint sur la fronti\`ere de $\Theta$.
-(Se généralise en dimension $d$.)
+(Se g√©n√©ralise en dimension $d$.)
 \end{itemize}
 \end{frame}
 
@@ -1243,7 +1241,7 @@ et
 {\mathcal L}_n(\vartheta, X_1,\ldots, X_n)& = \vartheta^{-n}\prod_{i = 1}^n 1_{[0,\vartheta]}(X_i) \\
 & = \vartheta^{-n}1_{\{\max_{1 \leq i \leq n} X_i \leq \vartheta\}}
 \end{align*}
-\item La fonction de vraisemblance {\color{red}n'est pas régulière}.
+\item La fonction de vraisemblance {\color{red}n'est pas r√©guli√®re}.
 \item {\color{red}L'estimateur du maximum de vraisemblance est}
 $\estMV = \max_{1 \leq i \leq n}X_i$. %{\color{red} A suivre...}
 \end{itemize}
@@ -1263,11 +1261,11 @@ $\estMV = \max_{1 \leq i \leq n}X_i$. %{\color{red} A suivre...}
 %%\epsffile{}
 %%\\
 %%\\
-%$$\mbox{\footnotesize ModËle uniforme: $\estMV=X_{(n)}.$}$$
+%$$\mbox{\footnotesize Mod√®le uniforme: $\estMV=X_{(n)}.$}$$
 %%\end{array}
 %%$$
 %\begin{itemize}
-%\item La fonction de vraisemblance {\color{red}n'est pas régulière}.
+%\item La fonction de vraisemblance {\color{red}n'est pas r√©guli√®re}.
 %\item {\color{red}L'estimateur du maximum de vraisemblance est}
 %$\estMV = \max_{1 \leq i \leq n}X_i$. {\color{red} A suivre...}
 %\end{itemize}
@@ -1280,7 +1278,7 @@ Cours 4}
 %\frametitle{Asymptotique des $Z$- et $M$- estimateurs}
 %\end{frame}
 
-%\subsection{Modèle de régression}
+%\subsection{Mod√®le de r√©gression}
 
 
 

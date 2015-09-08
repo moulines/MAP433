@@ -7,9 +7,9 @@
 
 \RequirePackage[OT1]{fontenc}
 
-\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
 % THE variable
-\newcommand{\thisyear}{Ann\'ee 2014-2015}
+\newcommand{\thisyear}{Ann\'ee 2015-2016}
 
 % Definitions (pas trop!)
 \def\1{\mathbbm{1}}
@@ -21,7 +21,6 @@
 \newcommand{\E}{\ensuremath{\mathbb{E}}}
 \newcommand{\V}{\ensuremath{\mathbb{V}}}
 \newcommand{\gaus}{\ensuremath{\mathcal{N}}}
-\newcommand{\1}{\ensuremath{\mathbbm{1}}}
 \newcommand{\dlim}{\ensuremath{\stackrel{\mathcal{L}}{\longrightarrow}}}
 \newcommand{\plim}{\ensuremath{\stackrel{\mathrm{P}}{\longrightarrow}}}
 \newcommand{\PP}{\ensuremath{\mathbb{P}}}
@@ -31,6 +30,10 @@
 
 \theoremstyle{definition}
 \newtheorem{exercice}{Exercice}
+\newcommand{\coint}[1]{\left[#1\right)}
+\newcommand{\ocint}[1]{\left(#1\right]}
+\newcommand{\ooint}[1]{\left(#1\right)}
+\newcommand{\ccint}[1]{\left[#1\right]}
 
 
 % Style
@@ -48,7 +51,7 @@ MAP433 Statistique, \thisyear, PC3}}}
 \title{{\bf MAP433 Statistique}\\
 {\bf PC3: maximum de vraisemblance}}
 
-\date{12 septembre 2014}
+\date{11 septembre 2015}
 
 \begin{document}
 
@@ -66,7 +69,7 @@ param\`etre $\theta$ \`a partir
 \begin{enumerate}
 %\item Proposez un estimateur par la m\'ethode des moments.
 \item  Calculez l'estimateur du maximum de vraisemblance $\hat \theta_n$ de $\theta$.
-\item  Que vaut $\E(\hat \theta_n)$?  Quelle est la variance de $\hat \theta_n$?
+\item  Calculez $\E(\hat \theta_n)$?  Quelle est la variance de $\hat \theta_n$?
 \end{enumerate}
 \end{exercice}
 
@@ -91,10 +94,10 @@ Soit $X_{1},\ldots,X_{n}$ un \'echantillon i.i.d.\;de densit\'e $p_{\theta}$, av
 \begin{exercice}
 Soient $\{(Y_i,Z_i)\}_{i=1}^n$ $n$ vecteurs aléatoires i.i.d. ; On suppose que $Y_1$ et $Z_1$ sont indépendants et distribués suivant des lois exponentielles de paramètres $\lambda > 0$ and $\mu > 0$.
 \begin{enumerate}
-\item On  observe $\{(Y_i,Z_i) \]}_{i=1}^n$. Donnez le modèle statistique et déterminez l'estimateur du MV de $\lambda$ et $\mu$.
-\item Déterminer la distribution limite de cet estimateur. 
+\item On  observe $\{(Y_i,Z_i) \}_{i=1}^n$. Donnez le modèle statistique et déterminez l'estimateur du MV de $\lambda$ et $\mu$.
+\item Déterminer la distribution limite de cet estimateur.
 \item On observe $\{(X_i,\Delta_i)\}_{i=1}^n$ où $X_i= \min(Y_i,Z_i)$ et $\Delta_i= 1$ si $Y_i = X_i$ $\Delta_i=0$ autrement. Donnez le modèle statistique et l'estimateur de vraisemblance de $\lambda$ et $\mu$ dans ce modèle.
-\item Déterminer la distribution limite de cet estimateur. 
+\item Déterminer la distribution limite de cet estimateur.
 \end{enumerate}
 \end{exercice}
 
@@ -114,10 +117,10 @@ Calculez l'estimateur du maximum de vraisemblance  $(\hat \theta_n,\hat \sigma_{
 %\end{enumerate}
 
 
-\begin{figure}
-\includegraphics[width=13cm]{../images/AR.pdf}
-\caption{Figure 1. Trajectoires simul\'ees d'un AR(1) pour $\theta\in\{0,0.8,1\}$}
-\end{figure}
+%\begin{figure}
+%\includegraphics[width=13cm]{../images/AR.pdf}
+%\caption{Figure 1. Trajectoires simul\'ees d'un AR(1) pour $\theta\in\{0,0.8,1\}$}
+%\end{figure}
 \end{exercice}
 
 \begin{exercice}[R\'epartition de g\'enotypes dans une population]
@@ -152,7 +155,7 @@ $$
 %Pareto$(\alpha,\theta)$ avec $\alpha>1$ et $\theta>0$, si elle a
 %pour densit\'e par rapport \`a la mesure de Lebesgue
 %$$f_{X}(x)={\alpha-1\over \theta}\pa{\theta\over x}^{\alpha}{\bf
-%1}_{[\theta,\infty[}(x).$$ Les paquets d'information arrivent
+%1}_\coint{\theta,\infty}}(x).$$ Les paquets d'information arrivent
 %al\'eatoirement dans un canal de communication et le temps entre
 %deux paquets est mod\'elis\'e par une loi de Pareto. On dispose
 %d'un \'echantillon $X_{1},\ldots,X_{n}$ de temps d'attente,
