@@ -1,6 +1,4 @@
-﻿\input{defslide}
-
-
+\input{defslide}
 \title{MAP 433 : Introduction aux méthodes statistiques. Cours 3}
 %\author{M. Hoffmann}
 %\institute{Université Paris-Est and ETG}
@@ -805,9 +803,9 @@ $$\nabla_\theta \ell_n(\widehat \theta_n^{\,{\tt rv}}, X_1,\ldots, X_n) = 0.$$
 \frametitle{Modèle binomial}
 L'expérience statistique est générée par un $n$-échantillon de loi de Bernoulli de paramètre $\theta \in \Theta= \ccint{0,1}$.
 \begin{itemize}
-\item \alert{Vraisemblance} 
+\item \alert{Vraisemblance}
 $$
-\mathcal{L}_n(\theta) = \prod_{i=1} \theta^{X_i} (1-\theta)^{1-X_i} = \theta^{n\bar{X}_n} (1-\theta)^{n (1 - \bar{X}_n)} \eqsp. 
+\mathcal{L}_n(\theta) = \prod_{i=1} \theta^{X_i} (1-\theta)^{1-X_i} = \theta^{n\bar{X}_n} (1-\theta)^{n (1 - \bar{X}_n)} \eqsp.
 $$
 où $\bar{X}_n = n^{-1} \sum_{i=1}^n X_i$ est la moyenne empirique.
 \item \alert{Log-vraisemblance}
@@ -826,7 +824,7 @@ $$
 $$
 \item Si $0 < \bar{X}_n < 1$, cette équation admet une solution unique, $\bar{X}_n$.
 \item Si $\bar{X}_n=0$, alors $\mathcal{L}_n(\theta)= (1-\theta)^n$: la vraisemblance est maximum en $\theta=0$.
-\item Si $\bar{X}_n=1$ alors $\mathcal{L}_n(\theta)= \theta^n$: la vraisemblance est maximum en $\theta=1$. 
+\item Si $\bar{X}_n=1$ alors $\mathcal{L}_n(\theta)= \theta^n$: la vraisemblance est maximum en $\theta=1$.
 \end{itemize}
 \end{frame}
 
@@ -997,7 +995,6 @@ log-vraisemblance n'est pas atteint sur la fronti\`ere de $\Theta$.
 \end{itemize}
 \end{frame}
 
-
 \begin{frame}
 \frametitle{Un $M$-estimateur qui n'est pas un $Z$-estimateur}
 \begin{itemize}
@@ -1015,10 +1012,60 @@ $\estMV = \max_{1 \leq i \leq n}X_i$. %\alert{ A suivre...}
 \end{frame}
 
 
+\begin{frame}
+\frametitle{Estimation des paramètres de la loi Gamma}
+\begin{itemize}
+\item Soit $(X_1,X_2,\dots,X_n)$ $n$ observations i.i.d. de loi Gamma($\theta=(\alpha,\beta) \in \Theta= (\rset^*_+ \times \rset_+^*)$)
+\[
+f_\theta(x) = \Gamma(\alpha)^{-1} \beta^\alpha x^{\alpha-1} \rme^{-\beta x} \eqsp.
+\]
+\item On montre aisément que
+\[
+\alpha = \frac{(\PE_\theta[X_1])^2}{\Var_\theta(X_1)} \quad \text{et} \quad \beta = \frac{\PE_\theta[X_1]}{\Var_\theta(X_1)}
+\]
+\item Estimateurs de moments
+\[
+\hat{\alpha}_n = \frac{\bar{X}^2_n}{S_n^2} \quad \text{et} \quad \hat{\beta}_n= \frac{\bar{X}_n}{S_n^2}
+\]
+où $\bar{X}_n= n ^{-1} \sum_{i=1}^n X_i$ est la \alert{moyenne empirique} et $S_n^2= n^{-1} \sum_{i=1}^n (X_i - \bar{X}_n)^2$ est \alert{la variance empirique}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Estimateur du maximum de vraisemblance}
+\begin{itemize}
+\item \alert{log-vraisemblance}
+\[
+\ell_n(\alpha,\beta)= - n \log \Gamma(\alpha) + n \alpha \log(\beta) + (\alpha-1) \sum_{i=1}^n \log(X_i) - \beta \sum_{i=1}^n X_i \eqsp.
+\]
+\alert{Le maximum ne se calcule pas explicitement.}
+\item La minimimisation par rapport à $\beta$  pour $\alpha$ fixée est explicite: $\hat{\beta}_n(\alpha)= \alpha / \bar{X}_n$. L'estimateur du MV est obtenu en maximisant par rapport à $\alpha$ la fonction $\alpha \mapsto \ell_n(\alpha,\hat{\beta}_n(\alpha))$.
+\item On apprendra bientôt que l'estimateur du maximum de vraisemblance est préférable à l'estimateur des moments.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Boxplot}
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.9\textwidth]{boxplot1}\\
+  \caption{Boxplot: paramètres $\alpha=3$, $\beta=2$, $n=100$, $5000$ réplications indépendantes}
+\end{figure}
+\end{frame}
 
 
+\begin{frame}
+\frametitle{Distribution}
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.9\textwidth]{distribution}\\
+  \caption{Boxplot: paramètres $\alpha=3$, $\beta=2$, $n=500$, distribution asymptotique, bootstrap et bootstrap paramétrique}
+\end{figure}
 
 
+\end{frame}
 
 
 \end{document}
