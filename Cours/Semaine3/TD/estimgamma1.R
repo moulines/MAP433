@@ -4,7 +4,7 @@ profile <- function(a, n, barX, barlX){
 
 a <- 3
 b <- 2
-n <- 30
+n <- 500
 nMC <- 5000
 
 ha1 <- vector(length=nMC)
@@ -28,6 +28,8 @@ ha <- data.frame(ha1=ha1,ha2=ha2)
 hb <- data.frame(hb1=hb1,hb2=hb2)
 
 par(mfrow=c(1,2))
+# par(mfrow=c(1,2))
 boxplot(ha)
 boxplot(hb)
+title(paste0("n = ",n), line=-2, outer=TRUE)
 par(mfrow=c(1,1))
