@@ -5,17 +5,17 @@ a <- 3
 b <- 2
 alpha=0.05
 
-read.data <- TRUE
-# read.data <- FALSE
+  read.data <- TRUE
+#  read.data <- FALSE
 
 if (read.data==FALSE){
   n <- 500
-  X <- rgamma(n,a,b)
-  write.table(round(X,3),"gamma500_data.txt",
-              quote=FALSE,row.names=FALSE,col.names=FALSE)
+   X <- rgamma(n,a,b)
+#   X <- rnorm(n,4,0.5)
+#   write.table(round(X,3),"gamma500_data.txt",quote=FALSE,row.names=FALSE,col.names=FALSE)
 }else{
-#   X <- read.table("gamma20_data.txt")
-    X <- read.table("gamma500_data.txt")
+     X <- read.table("gamma20_data.txt")
+#      X <- read.table("gamma500_data.txt")
   X <- X[,1]
   n <- length(X)
 }
@@ -43,7 +43,7 @@ n.mc <- 5000
 ha.mc <- vector(length=n.mc)
 hb.mc <- vector(length=n.mc)
 for (k in (1:n.mc)){
-  X.mc <- sample(X, size=n, replace = TRUE)
+  X.mc <- rgamma(n,ha,hb)
   barX.mc <- mean(X.mc)  
   barlX.mc <- mean(log(X.mc))
   r <- optimize(profile,c(0,20),n, barX.mc, barlX.mc)
@@ -122,9 +122,9 @@ require(ggplot2)
 ggplot <- function(...) {ggplot2::ggplot(...) + theme_bw() +
                            theme(plot.background = element_rect(fill=rgb(1,1,1))) }
 
-pla <- ggplot(da, aes(a,densité)) + geom_line(aes(colour = methode))
+pla <- ggplot(da, aes(a,densité)) + geom_line(aes(colour = methode)) 
 plb <- ggplot(db, aes(b,densité)) + geom_line(aes(colour = methode))
 
 require(gridExtra)
-grid.arrange(pla,plb)
+grid.arrange(pla,plb,main=textGrob(paste0("n = ",n),gp=gpar(fontsize=20)))
 
