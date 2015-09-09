@@ -1,3 +1,5 @@
+# Pour un jeu de données, comparaison de la loi de l'EMV estimée 
+# par différentes méthodes: TCL, Monte Carlo, Bootstrap
 
 a <- 3
 b <- 2
