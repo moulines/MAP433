@@ -4,7 +4,7 @@ profile <- function(a, n, barX, barlX){
 
 a <- 3
 b <- 2
-n <- 100
+n <- 30
 nMC <- 5000
 
 ha1 <- vector(length=nMC)
