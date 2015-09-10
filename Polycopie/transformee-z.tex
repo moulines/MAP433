@@ -503,8 +503,8 @@ $$
 U(\cfoo)=\frac{\cfoo}{\rme^{\cfoo-a}}\
 $$
 Quand la fr\'{e}quence change, le module du num\'{e}rateur ne change pas. Par contre le module du d\'{e}nominateur d\'{e}cro\^{i}t lorsque l'on se rapproche d'un p\^{o}le. Plus pr\'{e}cis\'{e}ment, lorsque $2\pi \nu$ se rapproche de l'argument d'un p\^{o}le, le d\'{e}nominateur devient petit, et le module de la transform\'{e}e de Fourier devient grand.  Le module de la transform \'{e}e de Fourier prend donc des valeurs importantes pour des valeurs de pulsations proches de l'argument du  p\^{o}le. Cette
-valeur sera d'autant plus \'{e}lev\'{e}e que le p\^{o}le a un module proche de l'unit\'{e}. On aurait pu tenir le m\^{e}me raisonnement avec les z\'{e}ros, qui occasionnent quant \`{a} eux des valeurs faibles (voire des z\'{e}ros de transmission) de la transform\'{e}e de Fourier. 
-Ici pour $\nu=0$, le module du d\'{e}nominateur a une certaine valeur. Ce module cro\^{i}t au fur et \`{a} mesure que l'on s'\'{e}loigne de cette fr\'{e}quence et atteint son maximum en $\nu=-1$.  Par ailleurs, le signal est ici r\'{e}el et on a en plus que le module de la transform\'{e}e de Fourier est pair, et l'argument, impair. Ces consid\'{e}rations sont illustr\'{e}es par la transform\'{e}e de Fourier donn\'{e}e \`{a} la \Cref{fig:FigMignotte-2} pour $a=0.9$. 
+valeur sera d'autant plus \'{e}lev\'{e}e que le p\^{o}le a un module proche de l'unit\'{e}. On aurait pu tenir le m\^{e}me raisonnement avec les z\'{e}ros, qui occasionnent quant \`{a} eux des valeurs faibles (voire des z\'{e}ros de transmission) de la transform\'{e}e de Fourier.
+Ici pour $\nu=0$, le module du d\'{e}nominateur a une certaine valeur. Ce module cro\^{i}t au fur et \`{a} mesure que l'on s'\'{e}loigne de cette fr\'{e}quence et atteint son maximum en $\nu=-1$.  Par ailleurs, le signal est ici r\'{e}el et on a en plus que le module de la transform\'{e}e de Fourier est pair, et l'argument, impair. Ces consid\'{e}rations sont illustr\'{e}es par la transform\'{e}e de Fourier donn\'{e}e \`{a} la \Cref{fig:FigMignotte-2} pour $a=0.9$.
 
 Les consid\'{e}rations qui ont permis de pr\'{e}dire l'allure du spectre en module et argument peuvent aussi \^{e}tre utilis\'{e}es dans des situations plus compliqu\'{e}es. Consid\'{e}rant la transform\'{e}e en $z$ donn\'{e}e par \eqref{eq:transformee-z-generale}. Dans ce cas le module et l'argument sont donn\'{e}s par
 \begin{align*}
@@ -631,34 +631,35 @@ Cette fraction rationelle admet un développement causal stable sur la couronne 
 G(z) = c + (1-c) \sum_{j=0}^\infty b^j z^{-j} \eqsp.
 \]
 On peut chercher à inverser ce système, c'est à dire trouver la fonction de transfert $G_1(z)$ qui soit telle que $G(z) G_1(z)= 1$.
-Nous avons alors 
+Nous avons alors
 \[
 G_1(z)= \frac{1-bz^{-1}}{1-a z^{-1}}
 \]
-Cette fonction de transfert admet un pôle en $a$ et comme $|a| < 1$, la fonction de transfert inverse admet aussi un développement causal stable. 
+Cette fonction de transfert admet un pôle en $a$ et comme $|a| < 1$, la fonction de transfert inverse admet aussi un développement causal stable.
 \end{example}
 \begin{example}[filtre passe-tout]
 Considérons le filtre de fonction de transfert
 \[
 G(z)= \frac{z^{-1} - \bar{a}}{1-a z^{-1}} \eqsp, \quad |a| \ne 1
 \]
-On remarque que le module de la réponse en fréquence de ce filtre est constant, \ie\ 
+On remarque que le module de la réponse en fréquence de ce filtre est constant, \ie\
 \[
 G(\cfoo)= \frac{\foo - \bar{a}}{1 - a \foo}= \foo \frac{1 - \bar{a} \cfoo}{1 - a \foo} \eqsp,
 \]
 ce qui implique que $|G(\cfoo)|= 1$ pour tout $\nu \in \toref$. Un tel système est appelé un "passe-tout". De façon générale, la fonction de transfert d'un filtre passe-tout est donnée par
 \[
-G(z)= \prod_{k=1}^M \frac{z^{-1} - d_k}{1 - d_k z^{-1}} \prod_{k=1}^M \frac{(z^{-1} - \bar{e}_k)(z^{-1}-e_k)}{(1-e_k z^{-1})(1-\bar{e}_k z^{-1})} \eqsp, 
+G(z)= \prod_{k=1}^M \frac{z^{-1} - d_k}{1 - d_k z^{-1}} \prod_{k=1}^M \frac{(z^{-1} - \bar{e}_k)(z^{-1}-e_k)}{(1-e_k z^{-1})(1-\bar{e}_k z^{-1})} \eqsp,
 \]
 où $d_k$, $k \in \{1,\dots,M\}$ sont les pôles réels et $e_k$, $k \in \{1,\dots,M\}$ sont les pôles complexes.
- 
+
 \begin{figure}
   \centering
   % Requires \usepackage{graphicx}
   \begin{tabular}{cc}
-  \includegraphics[width=0.4\textwidth]{Figures/polezero}& \includegraphics[width=0.4\textwidth]{Figures/phasedelay1}\\
-  \caption{Pôles et zéros et phase d'un filtre passe tout du premier ordre avec $a=0.9$}\label{fig:passetout-1}
-  \end{tabular}
+  \includegraphics[width=0.4\textwidth]{Figures/polezero}& \includegraphics[width=0.4\textwidth]{Figures/phasedelay1}
+    \end{tabular}
+  \caption{Pôles et zéros et phase d'un filtre passe tout du premier ordre avec $a=0.9$}
+  \label{fig:passetout-1}
 \end{figure}
 
 
@@ -666,4 +667,4 @@ où $d_k$, $k \in \{1,\dots,M\}$ sont les pôles réels et $e_k$, $k \in \{1,\do
 
 \begin{example}[Filtre de Karplus-Strong]
 
-\end{example}
+\end{example} 

@@ -1,6 +1,5 @@
-\section{Convolution}
 
-\section{L'espace de Schwarz}
+\section{L'espace de Schwartz}
 
 Nous avons vu comment les propri{\'e}t{\'e}s de d{\'e}croissances se traduisent par des
 propri{\'e}t{\'e}s de d{\'e}rivabilit{\'e} sur la transform{\'e}e de Fourier, et \textit{vice
@@ -9,14 +8,14 @@ Afin de construire un espace fonctionnel stable par transformation de Fourier,
 il est donc naturel d'introduire un espace contenant des fonctions comportant
 {\`a} la fois ces deux propri{\'e}t{\'e}s.
 
-\index{Espace de Schwarz}
+\index{Espace de Schwartz}
 \begin{definition} On d{\'e}signe par $\mcs(\rset)$ ou tout simplement $\mcs$
 l'espace vectoriel des fonctions de $\rset$ dans $\cset$ qui v{\'e}rifient les deux propri{\'e}t{\'e}s suivantes:
 \begin{enumerate}
 \item $f$ est ind{\'e}finiment d{\'e}rivable sur $\rset$;
 \item $f$ est {\`a} d{\'e}croissance rapide, ainsi que toutes ses d{\'e}riv{\'e}es.
 \end{enumerate}
-On appelle $\mcs(\rset)$ l'\emph{espace de Schwarz}.
+On appelle $\mcs(\rset)$ l'\emph{espace de Schwartz}.
 \end{definition}
 
 Donnons quelques exemples importants de fonctions appartenant {\`a} $\mcs(\rset)$.
@@ -111,12 +110,12 @@ Soit $f\in\mathcal{L}_1(\rset)$ et supposons que $\hat{f}$ appartiennent aussi
 \begin{proof}
 On a vu ci-dessus que la fonction $\hat{g}_\sigma(x) = \rme^{- 2 \pi^2 \sigma^2 x^2}$
 a ${g}_\sigma$ pour transform{\'e}e de Fourier. Donc
-$[\TF(x\mapsto \hat{g}_\sigma(x)\rme^{\rme 2 \pi t x})](\xi)={g}_\sigma(\xi-t)={g}_\sigma(t-\xi)$ par la
+$[\TF(x\mapsto \hat{g}_\sigma(x)\rme^{\rmi 2 \pi t x})](\xi)={g}_\sigma(\xi-t)={g}_\sigma(t-\xi)$ par la
 proposition~\ref{prop:FourierTranslation} puis par parit{\'e} de $g_\sigma$. La proposition \ref{prop:echangeTF} appliqu{\'e}e avec
 $x \mapsto f(x)$ et $x \mapsto \rme^{\rmi 2 \pi t x} \hat{g}_\sigma(x)$ donne donc, pour tout $t\in \rset$,
 \begin{equation}
 \label{eq:inversionL1-1}
-\int \hat{f}(x) \hat{g}_\sigma(x) \rme^{\rmi 2 \pi t x} \rmd x = \int f(u) {g}_\sigma(t-u) \rmd u = f\star g_\sigma(t) \eqsp.
+\int \hat{f}(x) \hat{g}_\sigma(x) \rme^{\rmi 2 \pi t x} \rmd x = \int f(u) {g}_\sigma(t-u) \rmd u  \eqsp.
 \end{equation}
 Lorsque $\sigma \to 0$, on peut passer {\`a} la limite dans l'int{\'e}grale de gauche, puisque l'on a, pour tout
 $x$, $\lim_{\sigma \to 0} \hat{g}_\sigma(x)= 1$ pour tout $x$ et $|\hat{f}(x) \hat{g}_\sigma(x) \rme^{\rmi 2 \pi t x}| \leq |\hat{f}(x)|$.
@@ -127,6 +126,67 @@ $$
 Le passage {\`a} la limite dans le membre de droite de~(\ref{eq:inversionL1-1}) est lui une cons{\'e}quence du
 lemme~\ref{lem:regularisation}. On obtient bien le r{\'e}sultat annonc{\'e} si $f$ est continue en $t$.
 \end{proof}
+
+\begin{lemma}\label{lem:regularisation}
+  Soit $f\in \lone(\rset)$.
+  Soit $K$ une fonction positive telle que $\int K(x)\,\rmd x=1$ et, pour une
+  constante $C>0$ et un exposant $\alpha>2$, $K(x)\leq C (1+|x|)^{-\alpha}$
+  pour tout $x\in\rset$.  D{\'e}finissons, pour tout $\sigma>0$, la fonction
+  $K_\sigma$ par
+\begin{equation}
+  \label{eq:Kband}
+  K_\sigma(x)=\frac1\sigma K(x/\sigma)\;.
+\end{equation}
+Alors, on a les propri{\'e}t{\'e}s suivantes.
+\begin{enumerate}[label=(\roman*)]
+\item\label{item:regularisation1} En tout point $t$ o{\`u} $f$ est continue, on a
+$$
+\lim_{\sigma\downarrow0}  \int f(u) K_\sigma(t-u) = f(t)\;.
+$$
+\item\label{item:regularisation2} Si $f$ est continue {\`a} support compact, alors
+  $t \mapsto \int f(u) K_\sigma(t-u)$ converge uniform{\'e}ment vers $f$ quand $\sigma\downarrow0$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Comme $\int K_\sigma(x)\, \rmd x= 1$, par un changement de variable {\'e}l{\'e}mentaire,
+\begin{equation}
+\label{eq:inversionL1-2}
+\int f(t-u) K_\sigma(u) \rmd u - f(t) = \int \left\{ f(t - u) - f(t)  \right\} K_\sigma(u) \rmd u \eqsp.
+\end{equation}
+Montrons le point~\ref{item:regularisation1}.
+Comme $f$ est continue au point $t$, pour tout $\epsilon > 0$, il existe $\eta$ tel que $|u-t| \leq \eta$
+implique que $|f(u) - f(t) | \leq \epsilon$. On a pour tout $\sigma > 0$,
+\begin{equation}
+\label{eq:conv-local}
+\int_{|u| \leq \eta} \left|  f(t-u) - f(t) \right| K_\sigma(u) \rmd u \leq \epsilon \int K_\sigma(u) \rmd u = \epsilon \eqsp.
+\end{equation}
+De plus,
+$$
+\int_{|u| \geq \eta} \left| f(t-u) - f(t) \right| K_\sigma(u) \rmd u  \leq \|f\|_1\,\sup_{|u|\geq\eta} {K}_\sigma(u)
++|f(t)|\,\int_{|u|\geq \eta} {K}_\sigma(u) \rmd u  \eqsp.
+$$
+D'autre part, lorsque $\sigma \downarrow 0$,
+$$
+\sup_{|u|\geq\eta} {K}_\sigma(u) = \frac1\sigma \sup_{|v|\geq\eta/\sigma} {K}_\sigma(v)\leq  \frac{C}\sigma (1+\eta/\sigma)^{-\alpha}
+$$
+et,
+$$
+\int_{u\geq \eta} K_\sigma(u) \rmd u \leq \frac{C}\sigma\int_{|v|\geq\eta/\sigma} (1+|v|)^{-\alpha}\,dv =O(\sigma^{\alpha-2})\eqsp.
+$$
+Par cons{\'e}quent, en combinant ces majorations avec $\alpha>2$,
+\begin{equation}
+\label{eq:conv-hors-local}
+\lim_{\sigma \downarrow 0} \int_{|u| \geq \eta} \left|  f(t-u) - f(t) \right| K_\sigma(u) \rmd u =0 \eqsp.
+\end{equation}
+Le r{\'e}sultat suit donc avec~(\ref{eq:inversionL1-2}).
+
+Le point~\ref{item:regularisation2} se montre de fa\c{c}on semblable.
+Comme $f$ est continue {\`a} support compact, elle est uniform{\'e}ment continue.
+On peut donc choisir $\eta>0$ tel que~(\ref{eq:conv-local}) soit valide pour
+tout $t$. De m{\^e}me la convergence~(\ref{eq:conv-hors-local}) est uniforme en $t$
+en utilisant que $f$ est born{\'e}. D'o{\`u} le r{\'e}sultat.
+\end{proof}
+
 
 
 Le r{\'e}sultat pr{\'e}c{\'e}dent conjugu{\'e} avec le th{\'e}or{\`e}me~\ref{theo:stabiliteS} permet de
@@ -140,12 +200,12 @@ pour tout $f \in \mcs$, $f = \TFAC{\TF f}$. De la m{\^e}me fa\c{c}on, on a $f =
 \TFA{\TFC f}$. $\TF$ est donc une bijection sur $\mcs$ et son inverse est
 $\TFC$.
 
-\begin{theorem}\label{thm:Schwarz}
+\begin{theorem}\label{thm:Schwartz}
 La transformation de Fourier $\TF$ est une application lin{\'e}aire bijective de $\mcs$ sur $\mcs$.
 L'application inverse est $\TF^{-1} = \TFC$.
 \end{theorem}
 
-Ayant montr{\'e} le th{\'e}or{\`e}me~\ref{thm:Schwarz}, de nombreuses formules d'inversion peuvent \^etre d{\'e}duites par dualit{\'e}.
+Ayant montr{\'e} le th{\'e}or{\`e}me~\ref{thm:Schwartz}, de nombreuses formules d'inversion peuvent \^etre d{\'e}duites par dualit{\'e}.
 Nous verrons dans la section suivante comment appliquer ce principe dans un cadre hilbertien.
 
 

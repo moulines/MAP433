@@ -154,7 +154,7 @@ $$
  et donc que $\norm{f*g}[\infty] \leq \norm{f}[2] \, \norm{g}[2]$.
   La continuit\'e d\'ecoule de la densit\'e de $C_{c}^{0}(\rset)$  (fonctions continues \`a support compact) dans $L_{2}(\rset)$.
 
-La preuve pour $p\neq 1,2$ est similaire en rempla\c{c}ant l'in\'egalit\'ede Cauchy-Schwarz par l'in\'egalit\'e de H\"older et en utilisant la densit\'e de $C_c^0(\rset)$ dans $L_p(\rset)$.
+La preuve pour $p\neq 1,2$ est similaire en rempla\c{c}ant l'in\'egalit\'e de Cauchy-Schwarz par l'in\'egalit\'e de H\"older et en utilisant la densit\'e de $C_c^0(\rset)$ dans $L_p(\rset)$.
 \end{proof}
 
 Nous consid\'erons dans la proposition suivante la convolution d'une fonction de $\lone(\rset)$
@@ -192,72 +192,7 @@ En int\'egrant les deux membres de la seconde in\'egalit\'e, nous obtenons,
 ce qui implique $\norm{f*g}[2] \leq \norm{f}[1] \norm{g}[2]$.
 \end{enumerate}
 \end{proof}
-\section{R\'egularisation par convolution}
-Le lemme suivant montre que la convolution peut {\^e}tre utilis{\'e}e dans le but de
-fournir une approximation, ce qui constitue le premier principe de
-r{\'e}gularisation.
-
-\begin{lemma}\label{lem:regularisation}
-  Soit $f\in \lone(\rset)$.
-  Soit $K$ une fonction positive telle que $\int K(x)\,\rmd x=1$ et, pour une
-  constante $C>0$ et un exposant $\alpha>2$, $K(x)\leq C (1+|x|)^{-\alpha}$
-  pour tout $x\in\rset$.  D{\'e}finissons, pour tout $\sigma>0$, la fonction
-  $K_\sigma$ par
-\begin{equation}
-  \label{eq:Kband}
-  K_\sigma(x)=\frac1\sigma K(x/\sigma)\;.
-\end{equation}
-Alors, on a les propri{\'e}t{\'e}s suivantes.
-\begin{enumerate}[label=(\roman*)]
-\item\label{item:regularisation1} En tout point $t$ o{\`u} $f$ est continue, on a
-$$
-\lim_{\sigma\downarrow0} (f \star K_\sigma)(t) = f(t)\;.
-$$
-\item\label{item:regularisation2} Si $f$ est continue {\`a} support compact, alors
-  $f \star K_\sigma$ converge uniform{\'e}ment vers $f$ quand $\sigma\downarrow0$.
-\end{enumerate}
-\end{lemma}
-\begin{proof}
-Comme $\int K_\sigma(x)\, \rmd x= 1$, par un changement de variable {\'e}l{\'e}mentaire,
-\begin{equation}
-\label{eq:inversionL1-2}
-\int f(t-u) K_\sigma(u) \rmd u - f(t) = \int \left\{ f(t - u) - f(t)  \right\} K_\sigma(u) \rmd u \eqsp.
-\end{equation}
-Montrons le point~\ref{item:regularisation1}.
-Comme $f$ est continue au point $t$, pour tout $\epsilon > 0$, il existe $\eta$ tel que $|u-t| \leq \eta$
-implique que $|f(u) - f(t) | \leq \epsilon$. On a pour tout $\sigma > 0$,
-\begin{equation}
-\label{eq:conv-local}
-\int_{|u| \leq \eta} \left|  f(t-u) - f(t) \right| K_\sigma(u) \rmd u \leq \epsilon \int K_\sigma(u) \rmd u = \epsilon \eqsp.
-\end{equation}
-De plus,
-$$
-\int_{|u| \geq \eta} \left| f(t-u) - f(t) \right| K_\sigma(u) \rmd u  \leq \|f\|_1\,\sup_{|u|\geq\eta} {K}_\sigma(u)
-+|f(t)|\,\int_{|u|\geq \eta} {K}_\sigma(u) \rmd u  \eqsp.
-$$
-D'autre part, lorsque $\sigma \downarrow 0$,
-$$
-\sup_{|u|\geq\eta} {K}_\sigma(u) = \frac1\sigma \sup_{|v|\geq\eta/\sigma} {K}_\sigma(v)\leq  \frac{C}\sigma (1+\eta/\sigma)^{-\alpha}
-$$
-et,
-$$
-\int_{u\geq \eta} K_\sigma(u) \rmd u \leq \frac{C}\sigma\int_{|v|\geq\eta/\sigma} (1+|v|)^{-\alpha}\,dv =O(\sigma^{\alpha-2})\eqsp.
-$$
-Par cons{\'e}quent, en combinant ces majorations avec $\alpha>2$,
-\begin{equation}
-\label{eq:conv-hors-local}
-\lim_{\sigma \downarrow 0} \int_{|u| \geq \eta} \left|  f(t-u) - f(t) \right| K_\sigma(u) \rmd u =0 \eqsp.
-\end{equation}
-Le r{\'e}sultat suit donc avec~(\ref{eq:inversionL1-2}).
-
-Le point~\ref{item:regularisation2} se montre de fa\c{c}on semblable.
-Comme $f$ est continue {\`a} support compact, elle est uniform{\'e}ment continue.
-On peut donc choisir $\eta>0$ tel que~(\ref{eq:conv-local}) soit valide pour
-tout $t$. De m{\^e}me la convergence~(\ref{eq:conv-hors-local}) est uniforme en $t$
-en utilisant que $f$ est born{\'e}. D'o{\`u} le r{\'e}sultat.
-\end{proof}
-
-Le second principe de r{\'e}gularisation est que la version convolu{\'e}e $f\star K$ de
+La version convolu{\'e}e $f\star K$ de
 $f$ adopte la r{\'e}gularit{\'e} du \emph{noyau} $K$. Ce principe est donn{\'e} par le
 lemme suivant.
 
