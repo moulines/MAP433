@@ -3,7 +3,7 @@
 \usepackage[francais]{babel}
 %\usepackage[latin1]{inputenc}
 %\usepackage[applemac]{inputenc}
-\usepackage{a4wide,amsmath,amssymb,amsthm,bbm,fancyhdr,graphicx,bbm}
+\usepackage{a4wide,amsmath,amssymb,amsthm,bbm,fancyhdr,graphicx,bbm,enumerate}
 
 \RequirePackage[OT1]{fontenc}
 
@@ -19,6 +19,7 @@
 \newcommand{\rset}{\ensuremath{\mathbb{R}}}
 \renewcommand{\P}{\ensuremath{\operatorname{P}}}
 \newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\PE}{\ensuremath{\mathbb{E}}}
 \newcommand{\V}{\ensuremath{\mathbb{V}}}
 \newcommand{\gaus}{\ensuremath{\mathcal{N}}}
 \newcommand{\dlim}{\ensuremath{\stackrel{\mathcal{L}}{\longrightarrow}}}
@@ -27,14 +28,14 @@
 \newcommand{\p}{\ensuremath{\mathbb{P}}}
 \newcommand{\eps}{\varepsilon}
 \newcommand{\pa}[1]{\left(#1\right)}
-
+\newcommand{\un}{\mathsf{1}}
 \theoremstyle{definition}
 \newtheorem{exercice}{Exercice}
 \newcommand{\coint}[1]{\left[#1\right)}
 \newcommand{\ocint}[1]{\left(#1\right]}
 \newcommand{\ooint}[1]{\left(#1\right)}
 \newcommand{\ccint}[1]{\left[#1\right]}
-
+\newcommand{\Rset}{\ensuremath{\mathbb{R}}}
 
 % Style
 \pagestyle{fancyplain}
@@ -46,6 +47,16 @@ MAP433 Statistique, \thisyear, PC3}}}
 \thisyear / \rightmark}}]{\fancyplain{}{\thepage}}
 \cfoot[\fancyplain{}{}]{\fancyplain{}{}}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+
+%-- Si cette ligne est lue, le corrigé ne s'affiche pas :
+%%\newcommand{\Corrige}[1]{}
+%-- Si la ligne suivante est lue, le corrigé s'affiche :
+\newcommand{\Corrige}[1]{\noindent {\small {\bf Corrigé :}\\ #1} }
+
+
+
 
 % Titre
 \title{{\bf MAP433 Statistique}\\
@@ -76,6 +87,46 @@ où $\overline{\ln(X)}_n= n^{-1} \sum_{i=1}^n \ln(X_i)$.
 \end{enumerate}
 \end{exercice}
 
+
+\Corrige{
+  \begin{enumerate}
+  \item  On définit
+\[
+ \bar X_n=  \frac{1}{n} \sum_{k=1}^n X_k \qquad  \qquad \hat{\sigma}_n^2 = \frac{1}{n} \sum_{k=1}^n \left( X_k - \bar X_n \right)^2.
+\]
+Estimateur proposé:
+\[
+\hat{\theta}_n = \frac{\bar X_n}{\hat{\sigma}^2_n} \times \begin{bmatrix}
+  \bar X_n  \\
+  1
+\end{bmatrix}
+\]
+\item La vraisemblance est donnée par (on note $Z_n = (X_1, \cdots, X_n)$)
+\[
+\theta \mapsto L_n(Z_n, \theta) = \prod_{k=1}^n p_\theta(X_k) =
+\left(\frac{b^a}{\Gamma(a)} \right)^n \left(\prod_{k=1}^n X_k \right)^{a-1}
+\exp(-b \sum_{k=1}^n X_n) \prod_{k=1}^n \un_{\Rset^+}(X_k).
+\]
+Dont on déduit les équations de vraisemblance ($\psi$ désigne la fonction Digamma)
+\begin{align*}
+  \ln b - \psi(a) + \frac{1}{n} \sum_{k=1}^n \ln X_k = 0, \qquad \frac{a}{b} -
+  \bar X_n = 0.
+\end{align*}
+puis $\hat b_n (a) = \frac{a}{\bar X_n}$.
+\item $L_n(a)$ correspond à ce que l'on note $L_n(Z_n, (a, \hat{b}_n(a)))$. Par
+  définition de $\hat{b}_n(a)$ et  $\hat{a}_n$ on a pour tout $a,b>0$,
+\[
+L_n(Z_n,(a,b)) \leq L_n(Z_n, (a, \hat{b}_n(a))  \qquad L_n(Z_n, (a, \hat{b}_n(a)) \leq L_n(Z_n, (\hat{a}_n, \hat{b}_n(\hat{a}_n))
+\]
+dont on déduit que $(\hat{a}_n, \hat{b}_n(\hat{a}_n))$ est estimateur MV.
+\item On fait successivement
+\begin{enumerate}[(i)]
+  \item une méthode numérique (par exemple, un algorithme  de gradient)  pour calculer $\hat{a}_n^{MV}$.
+  \item puis poser $\hat b_n^{MV} = \hat{b}_n(\hat{a}_n^{MV})$.
+  \end{enumerate}
+  \end{enumerate}
+}
+
 \begin{exercice}[Mod\`ele exponentiel]
 Consid\'erons une famille de fonctions de r\'epartition $\{F_{\theta},\ \theta\in\Theta\}$ ayant une
 densit\'e par rapport \`a la mesure de Lebesgue sur $\R$
@@ -93,12 +144,17 @@ Soit $X_{1},\ldots,X_{n}$ un \'echantillon i.i.d.\;de densit\'e $p_{\theta}$, av
 %\end{enumerate}
 \end{exercice}
 
+\Corrige{
+L'estimateur REV  et MV coïncident et sont donnés comme la solution de l'équation en $\theta$
+\[
+\PE_\theta\left[f(X) \right] = \frac{1}{n} \sum_{k=1}^n f(X_k)
+\]
+}
 
 
 \begin{exercice}[Mod\`ele d'autor\'egression]
-
-On consid\`ere les observations $X_1,\dots,X_n$, o\`u les $X_i$
-sont issus du {\it mod\`ele d'autor\'egression}:
+  On consid\`ere les observations $X_1,\dots,X_n$, o\`u les $X_i$ sont issus du
+  {\it mod\`ele d'autor\'egression}:
 $$
 X_i=\theta X_{i-1} + \xi_i, \quad i=1,\dots,n, \quad\quad X_0=0,
 $$
@@ -110,6 +166,24 @@ $\theta\in \R$.
 Calculez l'estimateur du maximum de vraisemblance  $(\hat \theta_n,\hat \sigma_{n}^2)$ de $(\theta,\sigma^2)$.
 %\end{enumerate}
 
+
+\Corrige{ On a établi en PC2 que la densité de $(X_1, \cdots, X_n)$ est donnée
+  par
+\[
+(x_1, \cdots, x_n) \mapsto (2\pi\sigma^2)^{-n/2} \exp\left(-
+  \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \theta x_{i-1})^2 \right)
+\]
+avec la convention $x_0 =0$. On en déduit les estimateurs MV
+\[
+\hat{\theta}_n = \frac{C_n}{S_{n-1}} \qquad \qquad \hat{\sigma}^2_n = \frac{S_n
+  S_{n-1} - C_n^2}{S_{n-1}}
+\]
+en ayant posé
+\[
+S_n = \frac{1}{n}\sum_{k=1}^n X_k^2 \qquad C_n = \frac{1}{n} \sum_{k=1}^n X_k X_{k-1} = \frac{1}{n}\sum_{k=2}^n
+X_k X_{k-1}.
+\]
+}
 
 
 %\begin{figure}
@@ -128,14 +202,86 @@ Soient $\{(Y_i,Z_i)\}_{i=1}^n$ $n$ vecteurs aléatoires i.i.d. ; On suppose que 
 \end{enumerate}
 \end{exercice}
 
+\Corrige{
+  \begin{enumerate}
+  \item On munit $(\Rset^+ \times \Rset^+)^n$ de sa tribu borélienne; et cet
+    espace mesurable de la famille de lois
+\[
+\PP_\theta(dy_1, dz_1, \cdots, dy_n, dz_n) = \lambda^n \mu^n \exp(-\lambda
+\sum_{k=1}^n y_k) \exp(-\mu \sum_{k=1}^n z_k) \prod_{k=1}^n \un_{\Rset^+ \times
+  \Rset^+}(y_k, z_k) \ dy_1 dz_1 \cdots dy_n dz_n,
+\]
+où $\theta = (\lambda, \mu)$. L'estimateur MV $(\hat{\lambda}_n, \hat{\mu}_n)$
+est donné par
+\[
+\hat \lambda_n = \frac{1}{\bar Y_n} \qquad \hat \mu_n = \frac{1}{\bar Z_n} 
+\]
+en ayant posé $ \bar Y_n = \frac{1}{n} \sum_{k=1}^n Y_k \qquad \bar Z_n =
+\frac{1}{n} \sum_{k=1}^n Z_k $.
+\item On commence par écrire le TCL pour le couple $(\bar Y_n, \bar Z_n)$. Puis
+  on applique la méthode delta avec $g(x,y) = (1/x, 1/y)$ et on obtient
+\[
+\sqrt{n} \left(\begin{bmatrix}
+    1/\bar Y_n \\
+    1/\bar Z_n
+\end{bmatrix} - 
+\begin{bmatrix}
+  \lambda \\
+  \mu
+\end{bmatrix} \right) \dlim \mathcal{N}_2\left(0; 
+\begin{bmatrix}
+\lambda^{2} & 0 \\
+0 & \mu^{2}
+\end{bmatrix}
+\right).
+\]
+\item On a établi en PC2 exercice 5 que pour tout $t >0$ et $u \in
+  \{0,1\}$,
+\[
+\PP_\theta\left( X_i > t, \Delta_i = u \right) = \exp(-(\lambda+\mu)t)\frac{\lambda^u \mu^{1-u}}{\lambda+\mu}  = \PP(X_i>t) \PP(\Delta_i =u).
+\]
+On pose $\theta = (\lambda, \mu)$ et $\Theta = \Rset^+_\star \times
+\Rset^+_\star$. Et le modèle statistique sur $(\Rset^+_\star \times \{0,1
+\})^n$,
+\begin{align*}
+  \PP_\theta( A_1 \times \{b_1\} \times \cdots \times A_n \times \{b_n \}) & =
+  \prod_{i=1}^n \left\{ \frac{\lambda^{b_i} \mu^{1-b_i}}{\lambda+\mu}
+    \ \int_{A_i} (\lambda + \mu) \exp(-(\lambda+\mu) x_i) dx_i \right\} \\
+  & = \prod_{i=1}^n \left\{ \lambda^{b_i} \mu^{1-b_i} \ \int_{A_i}
+    \exp(-(\lambda+\mu) x_i) dx_i \right\}
+\end{align*}
+L'estimateur MV est donné par
+\[
+\hat \lambda_n = \frac{\bar \Delta_n}{\bar X_n} \qquad \hat \mu_n =
+\frac{1-\bar \Delta_n}{\bar X_n}
+\]
+en ayant posé $\bar X_n = n^{-1} \sum_{k=1}^n X_k$ et $\bar \Delta_n = n^{-1}
+\sum_{k=1}^n \Delta_k$.
+\item On commence par écrire le TCL pour le couple $(\bar X_n, \bar \Delta_n)$.
+  Puis on applique la méthode delta avec $g(x,y) = (x/y, (1-x)/y)$ et on obtient
+\[
+\sqrt{n} \left( 
+  \begin{bmatrix}
+  \bar \Delta_n / \bar X_n \\
+(1-\bar \Delta_n) / \bar X_n 
+  \end{bmatrix} - 
+  \begin{bmatrix}
+   \lambda  \\
+\mu
+  \end{bmatrix}
+\right) \dlim \mathcal{N}\left(0; (\lambda + \mu) \begin{bmatrix}
+    \lambda  & 0 \\
+    0 & \mu
+  \end{bmatrix} \right)
+\]
+  \end{enumerate}}
 
 \begin{exercice}[R\'epartition de g\'enotypes dans une population]
-Quand les fr\'equences de g\`enes sont en \'equilibre, les
-g\'enotypes AA, Aa et aa se manifestent dans une population avec
-probabilit\'es $(1-\theta)^2$, $2\theta(1-\theta)$ et $\theta^2$
-respectivement, o\`u $\theta$ est un param\`etre inconnu. Plato {\it et
-al.} (1964) ont publi\'e les donn\'ees suivantes sur le type de
-haptoglobine dans un \'echantillon de 190 personnes:
+  Quand les fr\'equences de g\`enes sont en \'equilibre, les g\'enotypes AA, Aa
+  et aa se manifestent dans une population avec probabilit\'es $(1-\theta)^2$,
+  $2\theta(1-\theta)$ et $\theta^2$ respectivement, o\`u $\theta$ est un
+  param\`etre inconnu. Plato {\it et al.} (1964) ont publi\'e les donn\'ees
+  suivantes sur le type de haptoglobine dans un \'echantillon de 190 personnes:
 $$
 %\\
 %\hline
@@ -155,6 +301,43 @@ $$
 %$\theta$.
 \end{enumerate}
 \end{exercice}
+
+
+\Corrige{
+  \begin{enumerate}
+  \item On peut modéliser les observations comme une réalisation $(X_1, \cdots, X_n)$ où $X_i \in \{1, 2, 3 \}$ et $(X_k)_k$ sont indépendants et de même loi
+\[
+\PP_\theta(\{1\}) = (1 - \theta)^2 \qquad \PP_\theta(\{2\}) = 2 \theta (1-\theta)
+\]
+de sorte que le modèle statistique est
+\begin{itemize}
+\item un espace probabilisable: $\{1,2,3\}^n$ muni de la tribu de ses parties.
+\item une famille de lois $\{\PP_\theta, \theta \in ]0,1[ \}$ définies comme
+  ci-dessus.
+\end{itemize}
+ \item La log-vraisemblance normalisée est donnée par
+ \[
+ \theta \mapsto \frac{2 N_1}{n} \ln(1-\theta) + \frac{N_2}{n} \ln(2
+ \theta(1-\theta)) + \frac{2 N_3}{n} \ln \theta \qquad N_j = \sum_{k=1}^n
+ \un_{X_k =j}
+ \]
+ dont on déduit l'estimateur MV
+ \[
+ \hat{\theta}_n  = \frac{N_3}{n} + \frac{N_2}{2 n}
+ \]
+\item Par le TCL pour des v.a. i.i.d. on a 
+ \[
+ \sqrt{n}(\hat{\theta}_n - \theta) = \sqrt{n} \left( \frac{1}{n} \sum_{k=1}^n
+   (\un_{X_k=3} + \frac{1}{2} \un_{X_k=2}) -\theta\right)\dlim \mathcal{N}(0,
+ \upsilon^2)
+ \]
+ avec 
+ \[
+ \upsilon^2 = \mathrm{Var}\left( \un_{X_k=3} + \frac{1}{2} \un_{X_k=2}\right) =
+ \frac{\theta-\theta^2}{2} = \frac{\theta(1-\theta)}{2}.
+ \]
+  \end{enumerate}
+}
 
 %\section{Analyse d'un canal de communication}
 %Une variable al\'eatoire r\'eelle $X$ suit une loi de
