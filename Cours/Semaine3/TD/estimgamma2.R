@@ -14,16 +14,28 @@ if (read.data==FALSE){
 #   X <- rnorm(n,4,0.5)
 #   write.table(round(X,3),"gamma500_data.txt",quote=FALSE,row.names=FALSE,col.names=FALSE)
 }else{
-     X <- read.table("gamma20_data.txt")
-#      X <- read.table("gamma500_data.txt")
+#       X <- read.table("gamma20_data.txt")
+       X <- read.table("gamma500_data.txt")
   X <- X[,1]
   n <- length(X)
 }
 
-# Estimateur de (a,b) par la méthode du maximum de vraisemblance
+
+# look at the profile neg log likelihood with some synthetic data
 profile <- function(a, n, barX, barlX){
   ll <- -n*a*log(a)+n*a*log(barX)+n*log(gamma(a))-n*(a-1)*barlX +n*a
 }
+
+boxplot(X)
+
+barX <- mean(X)
+barlX <- mean(log(X))
+prl <- c()
+aseq <- seq(from=0.1, to=10, by=0.01)
+prl <- profile(aseq,n,barX,barlX)
+plot(aseq,prl,type="l",main=paste0("n = ",n),xlab="a",ylab="(-) profile log-likelihood ")
+
+# Estimateur de (a,b) par la méthode du maximum de vraisemblance
 
 barX <- mean(X)
 barlX <- mean(log(X))
