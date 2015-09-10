@@ -1,0 +1,408 @@
+\documentclass[a4paper,11pt,fleqn]{article}
+
+\usepackage[francais]{babel}
+%\usepackage[latin1]{inputenc}
+%\usepackage[applemac]{inputenc}
+\usepackage{a4wide,amsmath,amssymb,amsthm,bbm,fancyhdr,graphicx,bbm,enumerate}
+
+\RequirePackage[OT1]{fontenc}
+
+\usepackage[utf8]{inputenc}
+% THE variable
+\newcommand{\thisyear}{Ann\'ee 2015-2016}
+
+% Definitions (pas trop!)
+\def\1{\mathbbm{1}}
+\def\rme{\mathrm{e}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\rset}{\ensuremath{\mathbb{R}}}
+\renewcommand{\P}{\ensuremath{\operatorname{P}}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\PE}{\ensuremath{\mathbb{E}}}
+\newcommand{\V}{\ensuremath{\mathbb{V}}}
+\newcommand{\gaus}{\ensuremath{\mathcal{N}}}
+\newcommand{\dlim}{\ensuremath{\stackrel{\mathcal{L}}{\longrightarrow}}}
+\newcommand{\plim}{\ensuremath{\stackrel{\mathrm{P}}{\longrightarrow}}}
+\newcommand{\PP}{\ensuremath{\mathbb{P}}}
+\newcommand{\p}{\ensuremath{\mathbb{P}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\pa}[1]{\left(#1\right)}
+\newcommand{\un}{\mathsf{1}}
+\theoremstyle{definition}
+\newtheorem{exercice}{Exercice}
+\newcommand{\coint}[1]{\left[#1\right)}
+\newcommand{\ocint}[1]{\left(#1\right]}
+\newcommand{\ooint}[1]{\left(#1\right)}
+\newcommand{\ccint}[1]{\left[#1\right]}
+\newcommand{\Rset}{\ensuremath{\mathbb{R}}}
+
+% Style
+\pagestyle{fancyplain}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\renewcommand{\subsectionmark}[1]{}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\footnotesize {\sf
+MAP433 Statistique, \thisyear, PC3}}}
+\rhead[\fancyplain{}{\footnotesize {\sf MAP433 Statistique,
+\thisyear / \rightmark}}]{\fancyplain{}{\thepage}}
+\cfoot[\fancyplain{}{}]{\fancyplain{}{}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+
+%-- Si cette ligne est lue, le corrigé ne s'affiche pas :
+%%\newcommand{\Corrige}[1]{}
+%-- Si la ligne suivante est lue, le corrigé s'affiche :
+\newcommand{\Corrige}[1]{\noindent {\small {\bf Corrigé :}\\ #1} }
+
+
+
+
+% Titre
+\title{{\bf MAP433 Statistique}\\
+{\bf PC3: maximum de vraisemblance}}
+
+\date{11 septembre 2015}
+
+\begin{document}
+
+\maketitle
+
+\begin{exercice}[Dur\'ees de connection]
+On peut mod\'eliser la dur\'ee d'une connection sur le site {\tt www.Cpascher.com} par une loi gamma$(a,b)$ ($a > 0$, $b> 0$) de densit\'e
+$$  p_{a,b}(x) = \frac{b^a}{\Gamma(a)} x^{a-1} \rme^{- b x } \1_{\coint{0,+\infty}}(x).$$
+On note $\theta= (a,b)$.
+Pour fixer vos tarifs publicitaires, vous voulez estimer le param\`etre $\theta$ \`a partir
+ d'un \'echantillon $X_1,\ldots,X_n$  de $n$ dur\'ees de connexion. 
+\begin{enumerate}
+\item  Proposez un estimateur par la m\'ethode des moments. 
+\item  Ecrire les équations de vraisemblance. Déterminer pour une valeur de $a$ fixée, le maximum $\hat{b}_n(a)$ de la fonction de vraisemblance.
+\item  Montrer que l'estimateur du maximum de vraisemblance est $\hat{\theta}_n= (\hat{a}_n, \hat{b}(\hat{a}_n)$ où $\hat{a}_n$ est le maximum de la fonction $a \mapsto L_n(a)$
+$$
+L_n(a)= n a \ln(a) - n a \ln(\bar{X}_n) -n \ln(\Gamma(a))+ n(a-1)\overline{\ln(X)}_n - n a 
+$$
+où $\overline{\ln(X)}_n= n^{-1} \sum_{i=1}^n \ln(X_i)$. 
+\item Proposez une méthode numérique pour déterminer l'estimateur du maximum de vraisemblance.  
+\item Question bonus: vous trouverez sur moodle un fichier de données (format texte). Implémentez la méthode pour calculer l'estimateur du maximum de vraisemblance. Vous proposerez aussi une méthode pour calculer des régions de confiance par bootstrap (voir la méthode du bootstrap sur moodle).
+\end{enumerate}
+\end{exercice}
+
+
+\Corrige{
+  \begin{enumerate}
+  \item  On définit
+\[
+ \bar X_n=  \frac{1}{n} \sum_{k=1}^n X_k \qquad  \qquad \hat{\sigma}_n^2 = \frac{1}{n} \sum_{k=1}^n \left( X_k - \bar X_n \right)^2.
+\]
+Estimateur proposé:
+\[
+\hat{\theta}_n = \frac{\bar X_n}{\hat{\sigma}^2_n} \times \begin{bmatrix}
+  \bar X_n  \\
+  1
+\end{bmatrix}
+\]
+\item La vraisemblance est donnée par (on note $Z_n = (X_1, \cdots, X_n)$)
+\[
+\theta \mapsto L_n(Z_n, \theta) = \prod_{k=1}^n p_\theta(X_k) =
+\left(\frac{b^a}{\Gamma(a)} \right)^n \left(\prod_{k=1}^n X_k \right)^{a-1}
+\exp(-b \sum_{k=1}^n X_n) \prod_{k=1}^n \un_{\Rset^+}(X_k).
+\]
+Dont on déduit les équations de vraisemblance ($\psi$ désigne la fonction Digamma)
+\begin{align*}
+  \ln b - \psi(a) + \frac{1}{n} \sum_{k=1}^n \ln X_k = 0, \qquad \frac{a}{b} -
+  \bar X_n = 0.
+\end{align*}
+puis $\hat b_n (a) = \frac{a}{\bar X_n}$.
+\item $L_n(a)$ correspond à ce que l'on note $L_n(Z_n, (a, \hat{b}_n(a)))$. Par
+  définition de $\hat{b}_n(a)$ et  $\hat{a}_n$ on a pour tout $a,b>0$,
+\[
+L_n(Z_n,(a,b)) \leq L_n(Z_n, (a, \hat{b}_n(a))  \qquad L_n(Z_n, (a, \hat{b}_n(a)) \leq L_n(Z_n, (\hat{a}_n, \hat{b}_n(\hat{a}_n))
+\]
+dont on déduit que $(\hat{a}_n, \hat{b}_n(\hat{a}_n))$ est estimateur MV.
+\item On fait successivement
+\begin{enumerate}[(i)]
+  \item une méthode numérique (par exemple, un algorithme  de gradient)  pour calculer $\hat{a}_n^{MV}$.
+  \item puis poser $\hat b_n^{MV} = \hat{b}_n(\hat{a}_n^{MV})$.
+  \end{enumerate}
+  \end{enumerate}
+}
+
+\begin{exercice}[Mod\`ele exponentiel]
+Consid\'erons une famille de fonctions de r\'epartition $\{F_{\theta},\ \theta\in\Theta\}$ ayant une
+densit\'e par rapport \`a la mesure de Lebesgue sur $\R$
+de la forme
+$$p_{\theta}(x)=c(\theta)\exp\pa{\theta f(x)+h(x)}.$$
+On suppose que $\Theta$ est un intervalle ouvert de $\R$, et $c(\cdot)\in C^2$,
+$c(\theta)>0$ pour tout $\theta\in \Theta$. On note
+$\varphi(\theta):=\E_{\theta}\pa{f(X)}=-{d\over
+d\theta}\log(c(\theta))$.
+%\begin{enumerate}
+%\item
+
+Soit $X_{1},\ldots,X_{n}$ un \'echantillon i.i.d.\;de densit\'e $p_{\theta}$, avec $\theta$ inconnu.
+ Calculez l'estimateur du maximum de vraisemblance $\hat \theta_n$ de $\theta$ (s'il existe).
+%\end{enumerate}
+\end{exercice}
+
+\Corrige{
+L'estimateur REV  et MV coïncident et sont donnés comme la solution de l'équation en $\theta$
+\[
+\PE_\theta\left[f(X) \right] = \frac{1}{n} \sum_{k=1}^n f(X_k)
+\]
+}
+
+
+\begin{exercice}[Mod\`ele d'autor\'egression]
+  On consid\`ere les observations $X_1,\dots,X_n$, o\`u les $X_i$ sont issus du
+  {\it mod\`ele d'autor\'egression}:
+$$
+X_i=\theta X_{i-1} + \xi_i, \quad i=1,\dots,n, \quad\quad X_0=0,
+$$
+avec $\xi_i$ i.i.d. de loi normale ${\mathcal N}(0,\sigma^2)$ et
+$\theta\in \R$.
+%\begin{enumerate}
+%\item Explicitez la densit\'e de la loi jointe de $(X_{1},\ldots,X_{n})$ par rapport \`a la mesure de Lebesgue sur ${\bf R}^n$.
+%\item
+Calculez l'estimateur du maximum de vraisemblance  $(\hat \theta_n,\hat \sigma_{n}^2)$ de $(\theta,\sigma^2)$.
+%\end{enumerate}
+
+
+\Corrige{ On a établi en PC2 que la densité de $(X_1, \cdots, X_n)$ est donnée
+  par
+\[
+(x_1, \cdots, x_n) \mapsto (2\pi\sigma^2)^{-n/2} \exp\left(-
+  \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \theta x_{i-1})^2 \right)
+\]
+avec la convention $x_0 =0$. On en déduit les estimateurs MV
+\[
+\hat{\theta}_n = \frac{C_n}{S_{n-1}} \qquad \qquad \hat{\sigma}^2_n = \frac{S_n
+  S_{n-1} - C_n^2}{S_{n-1}}
+\]
+en ayant posé
+\[
+S_n = \frac{1}{n}\sum_{k=1}^n X_k^2 \qquad C_n = \frac{1}{n} \sum_{k=1}^n X_k X_{k-1} = \frac{1}{n}\sum_{k=2}^n
+X_k X_{k-1}.
+\]
+}
+
+
+%\begin{figure}
+%\includegraphics[width=13cm]{../images/AR.pdf}
+%\caption{Figure 1. Trajectoires simul\'ees d'un AR(1) pour $\theta\in\{0,0.8,1\}$}
+%\end{figure}
+\end{exercice}
+
+\begin{exercice}
+Soient $\{(Y_i,Z_i)\}_{i=1}^n$ $n$ vecteurs aléatoires i.i.d. ; On suppose que $Y_1$ et $Z_1$ sont indépendants et distribués suivant des lois exponentielles de paramètres $\lambda > 0$ and $\mu > 0$.
+\begin{enumerate}
+\item On  observe $\{(Y_i,Z_i) \}_{i=1}^n$. Donnez le modèle statistique et déterminez l'estimateur du MV de $\lambda$ et $\mu$.
+\item Déterminer la distribution limite de cet estimateur.
+\item On observe $\{(X_i,\Delta_i)\}_{i=1}^n$ où $X_i= \min(Y_i,Z_i)$ et $\Delta_i= 1$ si $Y_i = X_i$ $\Delta_i=0$ autrement. Donnez le modèle statistique et l'estimateur de vraisemblance de $\lambda$ et $\mu$ dans ce modèle.
+\item Déterminer la distribution limite de cet estimateur.
+\end{enumerate}
+\end{exercice}
+
+\Corrige{
+  \begin{enumerate}
+  \item On munit $(\Rset^+ \times \Rset^+)^n$ de sa tribu borélienne; et cet
+    espace mesurable de la famille de lois
+\[
+\PP_\theta(dy_1, dz_1, \cdots, dy_n, dz_n) = \lambda^n \mu^n \exp(-\lambda
+\sum_{k=1}^n y_k) \exp(-\mu \sum_{k=1}^n z_k) \prod_{k=1}^n \un_{\Rset^+ \times
+  \Rset^+}(y_k, z_k) \ dy_1 dz_1 \cdots dy_n dz_n,
+\]
+où $\theta = (\lambda, \mu)$. L'estimateur MV $(\hat{\lambda}_n, \hat{\mu}_n)$
+est donné par
+\[
+\hat \lambda_n = \frac{1}{\bar Y_n} \qquad \hat \mu_n = \frac{1}{\bar Z_n} 
+\]
+en ayant posé $ \bar Y_n = \frac{1}{n} \sum_{k=1}^n Y_k \qquad \bar Z_n =
+\frac{1}{n} \sum_{k=1}^n Z_k $.
+\item On commence par écrire le TCL pour le couple $(\bar Y_n, \bar Z_n)$. Puis
+  on applique la méthode delta avec $g(x,y) = (1/x, 1/y)$ et on obtient
+\[
+\sqrt{n} \left(\begin{bmatrix}
+    1/\bar Y_n \\
+    1/\bar Z_n
+\end{bmatrix} - 
+\begin{bmatrix}
+  \lambda \\
+  \mu
+\end{bmatrix} \right) \dlim \mathcal{N}_2\left(0; 
+\begin{bmatrix}
+\lambda^{2} & 0 \\
+0 & \mu^{2}
+\end{bmatrix}
+\right).
+\]
+\item On a établi en PC2 exercice 5 que pour tout $t >0$ et $u \in
+  \{0,1\}$,
+\[
+\PP_\theta\left( X_i > t, \Delta_i = u \right) = \exp(-(\lambda+\mu)t)\frac{\lambda^u \mu^{1-u}}{\lambda+\mu}  = \PP(X_i>t) \PP(\Delta_i =u).
+\]
+On pose $\theta = (\lambda, \mu)$ et $\Theta = \Rset^+_\star \times
+\Rset^+_\star$. Et le modèle statistique sur $(\Rset^+_\star \times \{0,1
+\})^n$,
+\begin{align*}
+  \PP_\theta( A_1 \times \{b_1\} \times \cdots \times A_n \times \{b_n \}) & =
+  \prod_{i=1}^n \left\{ \frac{\lambda^{b_i} \mu^{1-b_i}}{\lambda+\mu}
+    \ \int_{A_i} (\lambda + \mu) \exp(-(\lambda+\mu) x_i) dx_i \right\} \\
+  & = \prod_{i=1}^n \left\{ \lambda^{b_i} \mu^{1-b_i} \ \int_{A_i}
+    \exp(-(\lambda+\mu) x_i) dx_i \right\}
+\end{align*}
+L'estimateur MV est donné par
+\[
+\hat \lambda_n = \frac{\bar \Delta_n}{\bar X_n} \qquad \hat \mu_n =
+\frac{1-\bar \Delta_n}{\bar X_n}
+\]
+en ayant posé $\bar X_n = n^{-1} \sum_{k=1}^n X_k$ et $\bar \Delta_n = n^{-1}
+\sum_{k=1}^n \Delta_k$.
+\item On commence par écrire le TCL pour le couple $(\bar X_n, \bar \Delta_n)$.
+  Puis on applique la méthode delta avec $g(x,y) = (x/y, (1-x)/y)$ et on obtient
+\[
+\sqrt{n} \left( 
+  \begin{bmatrix}
+  \bar \Delta_n / \bar X_n \\
+(1-\bar \Delta_n) / \bar X_n 
+  \end{bmatrix} - 
+  \begin{bmatrix}
+   \lambda  \\
+\mu
+  \end{bmatrix}
+\right) \dlim \mathcal{N}\left(0; (\lambda + \mu) \begin{bmatrix}
+    \lambda  & 0 \\
+    0 & \mu
+  \end{bmatrix} \right)
+\]
+  \end{enumerate}}
+
+\begin{exercice}[R\'epartition de g\'enotypes dans une population]
+  Quand les fr\'equences de g\`enes sont en \'equilibre, les g\'enotypes AA, Aa
+  et aa se manifestent dans une population avec probabilit\'es $(1-\theta)^2$,
+  $2\theta(1-\theta)$ et $\theta^2$ respectivement, o\`u $\theta$ est un
+  param\`etre inconnu. Plato {\it et al.} (1964) ont publi\'e les donn\'ees
+  suivantes sur le type de haptoglobine dans un \'echantillon de 190 personnes:
+$$
+%\\
+%\hline
+\begin{array}{ccc}
+&\text{Type \ de \ haptoglobine:}&\\\hspace{6mm}
+&\text{------------------------------ }&\\
+ Hp-AA& Hp-Aa & Hp-aa \\
+ 10&68&112
+\end{array}
+$$
+\begin{enumerate}
+\item Comment interpr\'eter le param\`etre $\theta$? Proposez un mod\`ele statistique pour ce probl\`eme.
+\item  Calculez l'estimateur du maximum de vraisemblance $\hat \theta_n$ de $\theta$.
+\item  Donnez la loi asymptotique de $\sqrt{n}(\hat \theta_n -
+\theta)$.
+%\item Proposez un intervalle de confiance de niveau asymptotique 95\% pour
+%$\theta$.
+\end{enumerate}
+\end{exercice}
+
+
+\Corrige{
+  \begin{enumerate}
+  \item On peut modéliser les observations comme une réalisation $(X_1, \cdots, X_n)$ où $X_i \in \{1, 2, 3 \}$ et $(X_k)_k$ sont indépendants et de même loi
+\[
+\PP_\theta(\{1\}) = (1 - \theta)^2 \qquad \PP_\theta(\{2\}) = 2 \theta (1-\theta)
+\]
+de sorte que le modèle statistique est
+\begin{itemize}
+\item un espace probabilisable: $\{1,2,3\}^n$ muni de la tribu de ses parties.
+\item une famille de lois $\{\PP_\theta, \theta \in ]0,1[ \}$ définies comme
+  ci-dessus.
+\end{itemize}
+ \item La log-vraisemblance normalisée est donnée par
+ \[
+ \theta \mapsto \frac{2 N_1}{n} \ln(1-\theta) + \frac{N_2}{n} \ln(2
+ \theta(1-\theta)) + \frac{2 N_3}{n} \ln \theta \qquad N_j = \sum_{k=1}^n
+ \un_{X_k =j}
+ \]
+ dont on déduit l'estimateur MV
+ \[
+ \hat{\theta}_n  = \frac{N_3}{n} + \frac{N_2}{2 n}
+ \]
+\item Par le TCL pour des v.a. i.i.d. on a 
+ \[
+ \sqrt{n}(\hat{\theta}_n - \theta) = \sqrt{n} \left( \frac{1}{n} \sum_{k=1}^n
+   (\un_{X_k=3} + \frac{1}{2} \un_{X_k=2}) -\theta\right)\dlim \mathcal{N}(0,
+ \upsilon^2)
+ \]
+ avec 
+ \[
+ \upsilon^2 = \mathrm{Var}\left( \un_{X_k=3} + \frac{1}{2} \un_{X_k=2}\right) =
+ \frac{\theta-\theta^2}{2} = \frac{\theta(1-\theta)}{2}.
+ \]
+  \end{enumerate}
+}
+
+%\section{Analyse d'un canal de communication}
+%Une variable al\'eatoire r\'eelle $X$ suit une loi de
+%Pareto$(\alpha,\theta)$ avec $\alpha>1$ et $\theta>0$, si elle a
+%pour densit\'e par rapport \`a la mesure de Lebesgue
+%$$f_{X}(x)={\alpha-1\over \theta}\pa{\theta\over x}^{\alpha}{\bf
+%1}_\coint{\theta,\infty}}(x).$$ Les paquets d'information arrivent
+%al\'eatoirement dans un canal de communication et le temps entre
+%deux paquets est mod\'elis\'e par une loi de Pareto. On dispose
+%d'un \'echantillon $X_{1},\ldots,X_{n}$ de temps d'attente,
+%suppos\'es ind\'ependants.
+%\begin{enumerate}
+%\item Comment interpr\'eter $\alpha$ et $\theta$? V\'erifier que pour $\alpha>3$
+%$$\E(X)={\alpha-1\over \alpha-2}\theta \quad \textrm{et}\quad
+%\textrm{Var}(X)={\alpha-1\over (\alpha-3)(\alpha-2)^2}\theta^2.$$
+%\item On suppose $\alpha>3$ connu. Calculez l'estimateur $\hat \theta$ du maximum de
+%vraisemblance de $\theta$.
+%\item Calculez $P(\hat \theta>x).$ Quelle est la loi de $\hat \theta$? sa moyenne? sa variance?
+%\item Que dire du comportement de $\hat \theta$ lorsque $n\to\infty$?
+%\item Maintenant, on suppose $\theta$ connu, mais pas $\alpha$. Quel est
+%l'estimateur $\hat \alpha$ du maximum de vraisemblance de
+%$\alpha$?
+%\item Quelle est la loi de $\log(X_{i}/ \theta)$? de $\sum_{i=1}^n\log(X_{i}/ \theta)$?
+%\item Calculez le biais $\E(\hat \alpha)-\alpha$ de $\hat \alpha$? Proposez un
+%estimateur non biais\'e de $\alpha$.
+%\item Quelle est la variance de ce dernier estimateur? Quel est son comportement
+%lorsque $n\to \infty$?
+%\end{enumerate}
+
+%\subsection*{5. Param\`etre vectoriel - vitesses de convergence diff\'erentes}
+%Soient $X_1, \ldots,X_n$ des variables al\'eatoires i.i.d. de loi
+%exponentielle translat\'ee dont le densit\'e est de la forme:
+%$$f(x,\theta,\alpha)=\frac{1}{\theta}\text{exp}\left[-
+%\frac{(x-\alpha)}{\theta}\right]I_{[\alpha,+\infty[}(x),$$ o\`u
+%$\theta>0$ et $\alpha\in \R$ sont deux param\`etres inconnus.
+%\begin{enumerate}
+%\item Donner les estimateurs du maximum de vraisemblance $\hat{\alpha}_n$ et
+%$\hat{\theta}_n$ de $\alpha$ et $\theta$.
+%\item Quelle est la loi de $X_{i}-\alpha$? Calculer la loi (exacte) de $n(\hat{\alpha}_n-\alpha)$.
+%\item D\'eterminer la loi limite de $\sqrt{n}(\hat{\theta}_n-\theta)$.
+%%\item  Chercher la loi
+%%du $n$-uplet
+%%$$\big(nX_{(1)},(n-1)(X_{(2)}-X_{(1)}),\ldots,2(X_{(n-1)}-X_{(n-2)}),X_{(n)}-X_{(n-1)}\big).$$
+%%En d\'eduire que $\hat{\alpha}_n$ et $\hat{\theta}_n$ sont
+%%ind\'ependants pour tout $n$.
+%\end{enumerate}
+%
+%\subsection*{6. La statistique d'ordre}
+%
+%Soient $X_1, \ldots,X_n$ des variables al\'eatoires i.i.d. de
+%fonction de r\'epartition $F$. On suppose que $F$ admet une
+%densit\'e $f$ par rapport \`a la mesure de Lebesgue. On note $X_{(1)}\leq X_{(2)}\leq\ldots\leq X_{(n)}$ les variables al\'eatoires $X_1, \ldots,X_n$ r\'eordonn\'ees par ordre croissant.
+%\begin{enumerate}
+%\item
+%Donner l'expression de la loi de la statistique d'ordre
+%$(X_{(1)},\ldots,X_{(n)})$ en fonction de $f$.
+%\item D\'eterminer la fonction de r\'epartition $F_{k}(x)$ puis la densit\'e $f_k(x) $ de $X_{(k)}$.
+%%Calculer la fonction de r\'epartition, not\'ee $G_k(x)$, de
+%%$X_{(k)}$.
+%\item Sans utiliser les r\'esultats des questions pr\'ec\'edentes,
+%calculer les fonctions de r\'epartition de $X_{(1)}$, $X_{(n)}$,
+%du couple $(X_{(1)}, X_{(n)})$ et la loi de la statistique $W=
+%X_{(n)}- X_{(1)}$ (on appelle $W$ {\it \'etendue}). Les
+%variables $X_{(1)}$ et $X_{(n)}$ sont--elles ind\'ependantes?
+%\end{enumerate}
+%
+
+\end{document}
