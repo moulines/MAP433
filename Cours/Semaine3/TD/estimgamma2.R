@@ -1,5 +1,8 @@
 # Pour un jeu de données, comparaison de la loi de l'EMV estimée 
 # par différentes méthodes: TCL, Monte Carlo, Bootstrap
+#
+# Attention à utiliser avec : source('estimgamma2.R', encoding="latin1") si
+# votre locale n'est pas latin-1.
 
 a <- 3
 b <- 2
