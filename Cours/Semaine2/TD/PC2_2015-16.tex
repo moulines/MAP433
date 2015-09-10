@@ -285,7 +285,42 @@ A = \left[
 Pour obtenir l'expression de la loi $\PP_\psi$, on peut remarquer que $X_k$ est
 une combinaison linéaire des v.a. $\xi_1, \cdots, \xi_k$; et écrire le vecteur
 $Z$ comme une transformation affine du vecteur gaussien $(\xi_1, \cdots,
-\xi_n)$. }
+\xi_n)$. 
+\\
+{\bf Autre expression} L'expression de $\PP_\psi(A)$ est équivalente à 
+\[
+\PP_\psi(A) = \int_A \frac{1}{(\sqrt{2 \pi} \sigma)^n} \exp \left( -
+  \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \theta x_{i-1})^2 \right) d
+\underline{x}
+\]
+que l'on obtient par exemple de la façon suivante. Soit $f$ la
+densité de probabilité du vecteur $(\xi_1, \xi_1, \ldots, \xi_n)$:
+$$
+f(z_1, z_1, \ldots, z_n ; \sigma^2) = (2\pi\sigma^2)^{-n/2} \exp\left(-
+  \frac{1}{2\sigma^2}\sum_{i=1}^n z_i^2 \right)
+$$
+Soit $\phi$ l'application de $\R^n$ dans $\R^n$ définie par
+$$\phi(x_1, x_2, \ldots, x_n) = (z_1, z_1, \ldots, z_n)$$
+Le Jacobien de $\phi$
+est la matrice
+$$ J_\phi = \left(
+  \begin{matrix}
+    1 & -\theta &  0 & 0 & 0 & \cdots & 0  \\
+    0 & 1 & -\theta & 0 & 0 & \cdots & 0  \\
+    0 & 0 & 1 & -\theta &  0 & \cdots &  0 \\
+ \cdots &  \cdots & \cdots & \cdots & \cdots & \cdots & \cdots \\
+   0&0&0&0&0&1 & -\theta  \\
+   0&0&0&0&0&0&1   \\
+  \end{matrix} \right)
+$$
+On vérifie facilement que son déterminant vaut 1. Le déterminant du Jacobien de $\phi^{-1}$ vaut donc également 1.
+On en déduit l'expression de la densité $g$ de $(X_1, \ldots , X_n)$ :
+\begin{align*}
+  g(x_1, x_2, \ldots,x_n ; \theta,\sigma_2) &= f(\phi(x_1, x_2, \ldots,x_n ; \sigma^2)) \\
+  & = (2\pi\sigma^2)^{-n/2} \exp\left(- \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i -
+    \theta x_{i-1})^2 \right)
+\end{align*}
+}
 
 \section{Survie}
 On étudie un syst\`eme qui fonctionne si deux machines de types
