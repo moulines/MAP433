@@ -90,7 +90,8 @@ où $\overline{\ln(X)}_n= n^{-1} \sum_{i=1}^n \ln(X_i)$.
 
 \Corrige{
   \begin{enumerate}
-  \item  On définit
+  \item On rappelle que l'espérance et la variance d'une loi Gamma de
+    paramètres $(a,b)$ sont resp. donnés par $a/b$ et $a/b^2$. On définit
 \[
  \bar X_n=  \frac{1}{n} \sum_{k=1}^n X_k \qquad  \qquad \hat{\sigma}_n^2 = \frac{1}{n} \sum_{k=1}^n \left( X_k - \bar X_n \right)^2.
 \]
@@ -144,8 +145,7 @@ Soit $X_{1},\ldots,X_{n}$ un \'echantillon i.i.d.\;de densit\'e $p_{\theta}$, av
 %\end{enumerate}
 \end{exercice}
 
-\Corrige{
-L'estimateur REV  et MV coïncident et sont donnés comme la solution de l'équation en $\theta$
+\Corrige{ L'estimateur MV est donné comme la solution de l'équation en $\theta$
 \[
 \PE_\theta\left[f(X) \right] = \frac{1}{n} \sum_{k=1}^n f(X_k)
 \]
