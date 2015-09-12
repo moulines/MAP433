@@ -17,8 +17,8 @@ if (read.data==FALSE){
 #   X <- rnorm(n,4,0.5)
 #   write.table(round(X,3),"gamma500_data.txt",quote=FALSE,row.names=FALSE,col.names=FALSE)
 }else{
-#       X <- read.table("gamma20_data.txt")
-       X <- read.table("gamma500_data.txt")
+       X <- read.table("gamma20_data.txt")
+#       X <- read.table("gamma500_data.txt")
   X <- X[,1]
   n <- length(X)
 }
@@ -141,5 +141,5 @@ pla <- ggplot(da, aes(a,densité)) + geom_line(aes(colour = methode))
 plb <- ggplot(db, aes(b,densité)) + geom_line(aes(colour = methode))
 
 require(gridExtra)
-grid.arrange(pla,plb,main=textGrob(paste0("n = ",n),gp=gpar(fontsize=20)))
+grid.arrange(pla,plb,main=stextGrob(paste0("n = ",n),gp=gpar(fontsize=20)))
 
