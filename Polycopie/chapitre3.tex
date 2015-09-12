@@ -1,0 +1,1079 @@
+Le traitement du signal discret a pris son essor dans les ann\'ees
+70 gr\^ace \`a
+l'apparition des microprocesseurs et \`a l'utilisation de
+la transform\'ee de Fourier rapide.
+Il remplace progressivement le
+traitement du signal analogique dans la majorit\'e des applications
+telles que l'enregistrement num\'erique, la diffusion de la t\'el\'evision, le
+traitement de la parole et de l'image.
+Le calcul nuym\'erique permet la mise en
+place d'algorithmes
+nettement plus sophistiqu\'es  que le
+calcul analogique dont la fiabilit\'e est limit\'ee par
+les bruits de circuits et les erreurs
+de calibration des composants \'electroniques.
+
+\section{Filtrage discret homog\`ene}
+
+Les op\'erateurs analogiques de filtrage lin\'eaire homog\`ene
+s'\'etendent aux signaux discrets en rempla\c{c}ant les
+int\'egrales par des sommes discr\`etes.
+La transform\'ee de Fourier est alors remplac\'ee par les
+s\'eries de Fourier. Les propri\'et\'es des filtres discrets
+s'analysent souvent plus facilement
+avec la transform\'ee en $z$ qui \'etend les
+s\'eries de Fourier \`a tout le plan complexe.
+Pour simplifier les notations, nous supposons que l'intervalle d'\'echantillonnage
+est $T=1$ et les \'echantillons d'un signal discret sont not\'es
+$\sequence{f}[k][\zset]$.
+
+\subsection{Convolutions discr\`etes}
+\label{sec-conv}
+Dans le cas discret, l'homog\'en\'eit\'e temporelle se limite
+\`a des translations sur la grille d'\'echantillonnage.
+Un op\'erateur lin\'eaire discret $L$ est homog\`ene dans le
+temps si et seulement si pour tout $\sequence{x}[t][\nset]$ et tout
+d\'ecalage $ = f[n-p]$ avec $p \in \Z$
+
+
+La lin\'earit\'e et l'invariance temporelle impliquent
+\[
+Lf[n] = \sum_{p=-\infty}^{+\infty} f[p] h [n-p] = f \star h [n].
+\]
+Un op\'erateur lin\'eaire homog\`ene est donc un produit de
+convolution discret.
+\\
+\\
+{\bf Stabilit\'e et causalit\'e}
+Un filtre discret $L$
+est
+{\it causal} si et seulement si $Lf[p]$ ne
+d\'epend que des valeurs de $f[n]$ pour $n \leq p$. Cela
+implique donc que $h_n = 0$ si $n < 0$.
+La r\'eponse impulsionnelle $h_n$ est causale.
+On repr\'esente souvent un signal causal gr\^ace \`a la fonction
+de Heavyside discr\`ete
+\begin{equation}
+\gamma [n] =
+   \left \{ \begin{array}{ll}
+            1 & \mbox{si $n \geq 0$}\\
+            0 & \mbox{si $n < 0$}
+            \end{array}
+   \right.
+\end{equation}
+car $h_n = h_n \gamma [n]$.
+
+
+Pour qu'un signal
+d'entr\'ee born\'e produise un signal de sortie born\'e il suffit que
+\begin{equation}
+\sum_{n=- \infty}^{+ \infty} |h [ n  ]| < + \infty ,
+\end{equation}
+car
+\[
+|Lf[n]| \leq \sup_{n \in \Z} |f[n]|
+\sum_{k=- \infty}^{+ \infty} |h [ k  ]| .
+\]
+On peut v\'erifier (exercice) que cette condition suffisante
+est aussi n\'ecessaire.
+On dit alors que le filtre et la r\'eponse impulsionnelle
+sont {\it stables}.
+
+
+\subsection{Fonction de transfert}
+Comme dans le cas continu, les vecteurs propres de ces
+op\'erateurs de convolutions sont des exponentielles complexes
+$e_\om[k] = \rme^{i\om k}$,
+\begin{equation}
+L e_\om [n] = \sum_{k=- \infty}^{+ \infty}
+\rme^{i\om (n-k)} h _{k} =
+\rme^{i \om n} \sum_{k=- \infty}^{+ \infty} h_k \rme^{-i \om k} .
+\end{equation}
+Les valeurs propres correspondantes sont donc obtenues
+par la s\'erie de Fourier
+\begin{equation}
+\hat h ( \rme^{\rmi \lambda} ) = \sum_{k=- \infty}^{+ \infty} h_k \rme^{-i\lambda k} ,
+\end{equation}
+que l'on appelle fonction de transfert du filtre.
+
+\subsection{S\'eries de Fourier et transform\'e de Fourier \`a temps discret}
+La transform\'ee de Fourier d'un signal discret $\sequence{x}[t][\nset]$
+est d\'efinie par
+\begin{equation}
+\label{serie-Fourier}
+\hat f (\rme^{\rmi \lambda} ) = \sum_{k=- \infty}^{+ \infty}  x_t \rme^{-\rmi \lambda t} \eqsp.
+\end{equation}
+Toutes les propri\'et\'es de la transform\'ee de Fourier
+(\ref{symm}-\ref{impaire}) restent  valables
+
+Rappelons que la famille $\sequence{e}[k][\zset]$, où $e_k(\lambda)= \rme^{\rmi k \lambda}$ est une
+base orthogonale de $\ltwo(\tore)$ muni du produit scalaire
+\[
+\pscal{a}{b} =
+\frac 1 {2 \pi} \int_{- \pi}^{\pi} a(\lambda) b^*(\lambda) d \lambda \eqsp.
+\]
+Si $\sequence{f}[k][\zset] \in \ltwo(\zset)$,
+la s\'erie (\ref{serie-Fourier}) peut
+alors s'interpr\'eter
+comme la d\'ecomposition de la fonction $\lambda \mapsto \hat{f}({\rme^{\rmi \lambda}}) \in \ltwo(\tore)$
+dans cette base orthoponale. Les coefficients de d\'ecomposition
+sont obtenus par produit scalaire
+\begin{equation}
+\label{recons_discret}
+f_n = \pscal{\hat{f}}{e_n} = \frac 1 {2 \pi}
+\int_{- \pi}^{\pi} \hat \hat{f}(\rme^{\rmi \lambda}) \rme^{\rmi \lambda n} \rmd \lambda \eqsp.
+\end{equation}
+et
+\begin{equation}
+\sum_{n=-\infty}^{+\infty} |f_n|^2 =
+\frac 1 {2 \pi} \int_{- \pi}^{\pi} |\hat f(\rme^{\rmi \lambda })|^2 \rmd \lambda \eqsp.
+\end{equation}
+
+\subsection{Filtrage discret}
+Les exponentielles complexes \'etant les vecteurs propres des
+op\'erateurs de convolution discr\`ete, il en r\'esulte
+le th\'eor\`eme suivant.
+
+\begin{theorem} [Convolution discr\`ete]
+Soient $\sequence{f}[n][\zset]$ et $\sequence{h}[n][\zset]$ deux signaux dans $\pltwo$.
+La transform\'ee de Fourier de $g_n = (f \star h)_n$ est
+\begin{equation}
+\hat{g}(\rme^{\rmi \lambda}) = \hat{f}(\rme^{\rmi \lambda}) \hat h(\rme^{\rmi \lambda}) .
+\end{equation}
+\end{theorem}
+La d\'emonstration est
+formellement identique \`a la d\'emonstration du th\'eor\`eme
+\ref{th_convol} si on
+remplace les int\'egrales par des sommes discr\`etes
+et que l'on suppose que $\sequence{f}[n][\zset]$ et $\sequence{h}[n][\zset]$ sont dans $\plone$.
+Le m\^eme r\'esultat dans $\pltwo$ s'obtient par un argument de densit\'e.
+
+La formule de reconstruction (\ref{recons_discret})
+montre qu'un signal filtr\'e s'\'ecrit
+\begin{equation}
+f \star h_n = \frac 1 {2 \pi}
+\int_{- \pi}^{\pi} \hat h({\rme^{\rmi \lambda}}) \hat f(\rme^{\rmi \lambda }) \rme ^{\rmi \lambda n} \rmd \lambda \eqsp.
+\end{equation}
+La fonction de transfert $\hat{h}({\rme^{\rmi \lambda}})$ amplifie ou att\'enue
+les composantes fr\'equentielles $\hat f({\rme^{\rmi \lambda}})$ du signal $\sequence{f}[n][\zset]$
+dans l'intervalle de fr\'equence $\tore$.
+
+On v\'erifie de m\^eme qu'une multiplication temporelle est
+\'equivalente \`a une convolution dans le domaine fr\'equentiel.
+Si $g_n = f_n w_n$ alors
+\[
+\hat{g}({\rme^{\rmi \lambda}}) = \frac 1 {2 \pi} \int_{-\pi}^{\pi}
+\hat f(\rme^{\rmi \xi }) \hat{w} (\rme^{\rmi(\lambda -\xi)}) \rmd \xi \eqsp.
+\]
+\begin{example}
+La moyenne discr\`ete uniforme d\'efinie par
+\[
+Lf[n] = \frac 1 {2N+1} \sum_{p=-N}^{+N} f_{n-p} ,
+\]
+est un filtre dont la r\'eponse impulsionnelle est
+\begin{equation}
+h_n =
+   \left \{ \begin{array}{ll}
+            \frac 1 {2N+1}& \mbox{si $-N \leq  n \leq N$}\\
+            0 & \mbox{si $|n| > N$}
+            \end{array}
+   \right.
+\end{equation}
+La fonction de transfert est la s\'erie de Fourier
+\[
+\hat h({\rme^{\rmi \lambda}}) = \frac 1 {2N+1}
+\sum_{n=-N}^{+N} \rme^{-\rmi n\lambda} = \frac 1 {2N+1}
+\frac {\sin (N+\half)\lambda} {\sin\lambda/2} .
+\]
+Ce filtre att\'enue surtout les fr\'equences
+au-del\`a de $ {2\pi}/ (2N+1)$.
+\end{example}
+\begin{example}[S\'election fr\'equentielle id\'eale]
+La fonction de transfert d'un
+filtre discret \'etant $2\pi$ p\'eriodique,
+elle est sp\'ecifi\'ee sur l'intervalle $[-\pi,\pi]$.
+La fonction de transfert
+du filtre discret passe-bas id\'eal est d\'efinie pour
+$\lambda \in [-\pi,\pi]$ par
+\begin{equation}
+\label{passe-bas-discret}
+\hat h_0 ( \rme^{\rmi \lambda}  ) =
+   \left \{ \begin{array}{ll}
+            1 & \mbox{si $| \lambda | \leq \lambda_c$}\\
+            0 & \mbox{si $| \lambda | > \lambda_c$}
+            \end{array}
+   \right.
+\end{equation}
+Sa r\'eponse impulsionnelle calcul\'ee gr\^ace
+\`a l'int\'egrale (\ref{recons_discret}) est
+\begin{equation}
+h_0 [n] = \frac{\sin \lambda_c n} { \pi n} .
+\end{equation}
+C'est l'\'echantillonnage uniforme de la fonction de transfert
+d'un filtre analogique passe-bas id\'eal.
+
+La fonction transfert d'un filtre passe-bande discret id\'eal
+est
+\begin{equation}
+\hat h_1 ( {\rme^{\rmi \lambda}}  ) =
+   \left\{ \begin{array}{ll}
+1 & \mbox{si $|\lambda| \in [\lambda_0 - \lambda_c , \lambda_0 + \lambda_c ]$}\\
+0 & \mbox{ailleurs}
+\end{array}
+   \right.
+\end{equation}
+Comme $\hat h_1({\rme^{\rmi \lambda}}) = \hat h_0 (\rme^{\rmi(\lambda-\lambda_0) }) +
+\hat h_0 (\rme^{\rmi(\lambda+\lambda_0) }) $, on peut en d\'eduire que
+sa r\'eponse impulsionnelle est
+\[
+h_1 [n] =
+2 \cos (\lambda_0 n)~ h_0[n].
+\]
+
+La convolution discr\`ete d'un signal $\sequence{f}[n][\zset]$ avec un filtre
+passe-bas ou passe-bande id\'eal ne peut se calculer exactement
+avec un nombre fini d'op\'erations. Il est donc n\'ecessaire
+d'approximer ces filtres par des op\'erateurs de convolutions
+qui se calculent en temps fini.
+\end{example}
+
+
+\section{Transform\'ee en z}
+
+Pour \'etudier plus facilement les propri\'et\'es des fonctions
+de transfert des filtres discrets, et en particulier des
+filtres r\'ecursifs,
+on introduit la transform\'ee en $z$
+qui \'etend la s\'erie de Fourier
+\begin{equation}
+\hat{h} ({\rme^{\rmi \lambda}}) = \sum_{n=-\infty}^{+\infty} h_n {\rme^{-\rmi \lambda}}
+\end{equation}
+\`a tout le plan complexe $z \in \cset$, avec la s\'erie de Laurent
+\begin{equation}
+\hat h(z) = \sum_{n=-\infty}^{+\infty} h_n z^{-n} .
+\end{equation}
+\\
+\\
+\subsection{Anneau de convergence}
+On dit que la s\'erie de Laurent $\hat h(z)$ est convergente si
+\[
+\sum_{n=-\infty}^{+\infty} |h_n|\, |z|^{-n} < + \infty .
+\]
+Le domaine de convergence ne d\'epend que de $|z|$ et est donc
+isotrope. La proposition suivante
+montre
+que le domaine de convergence est un anneau dans le plan complexe.
+
+\begin{proposition}
+\label{conv-z}
+Il existe $\rho_1$
+et $\rho_2$ tels que $\hat h(z)$ est convergente
+pour $\rho_1 < |z| < \rho_2$ et divergente
+pour $|z| < \rho_1$ ou $|z| > \rho_2$.
+On note $A(\hat h)$ l'intervale de $|z|$ sur lequel $\hat h(z)$
+est convergente.
+\end{proposition}
+
+La d\'emonstration est laiss\'ee en exercice.
+Dans le cas o\`u la transform\'ee en z est convergente pour
+$|z| = 1$, la transform\'ee de Fourier est \'egale \`a
+la restriction
+de la transform\'ee en z au cercle unit\'e du plan complexe.
+\\
+\\
+{\bf Stabilit\'e et causalit\'e} Le domaine de convergence (absolu)
+de la transform\'ee en $z$ d\'epend des
+propri\'et\'es de causalit\'e et de stabilit\'e du filtre.
+Le filtre est causal si
+$h_n = 0$ pour $n < 0$ d'o\`u l'on d\'eduit que si
+$\hat h (z)$ converge pour $|z| = \rho$ alors il converge pour
+$|z| \geq \rho$. L'anneau de convergence s'\'etend donc \`a l'infini
+($\rho_2 = +\infty$).
+
+Le filtre est stable si et seulement si
+\[
+\sum_{n=0}^{+\infty} |h_n| < +\infty .
+\]
+Cela signifie que l'anneau de convergence contient $|z| = 1$.
+Si le filtre est causal et stable, on d\'eduit donc que
+$\hat h(z)$ est convergente pour $|z| \geq 1$.
+\begin{example}
+\label{exam:exponential-1}
+Consid\'erons le signal $f_n= a^n$ pour $n \geq 0$. Nous avons donc
+\[
+\hat{f}(z) = \sum_{n=0}^\infty a^n z^{-n} = \sum_{n=0}^{\infty} (a z^{-1})^n \eqsp,
+\]
+qui est convergente si
+\[
+\sum_{n=0}^{\infty} |a z^{-1}|^n < \infty \eqsp.
+\]
+Le domaine de converge est donc la couronne $\ensemble{z \in \cset}{|z| > |a|}$. A l'int\'erieur du domaine de convergence la série est sommable:
+\[
+\hat{f}(z)= \sum_{n=0}^\infty (a z^{-1})^n = \frac{1}{1 - a z^{-1}} \eqsp.
+\]
+Remarquons que si $|a| > 1$, le signal diverge exponentiellement, et la s\'erie de Fourier n'est pas d\'efinie.
+\end{example}
+\begin{example}
+\label{exam:exponential-2}
+Consid\'erons maintenant le signal $\sequence{f}[n][\nset]$ donn\'e par $f_n = - a^n$ pour $n \leq -1$. La transform\'e en $z$ de ce signal est donn\'e par
+\begin{align*}
+\hat{f}(z)
+&= - \sum_{n=-\infty}^{-1} a^n z^{-n} \\
+&= - \sum_{n=1}^\infty a^{-n} z^n = 1 - \sum_{n=0}^\infty (a^{-1} z)^n \eqsp.
+\end{align*}
+Le domaine de convergence est le disque $\ensemble{z \in \cset}{|z| < |a|}$ et sur ce domaine
+\[
+\hat{f}(z)= 1 - \frac{1}{1-a^{-1} z}= \frac{1}{1-a z^{-1}}= \frac{z}{z-a} \eqsp.
+\]
+Remarquons que si $|a| < 1$, le signal diverge exponentiellement et la transform\'e de Fourier n'est pas d\'efinie.
+\end{example}
+Remarquons que les transformées en $z$ pour \Cref{exam:exponential-1} et \Cref{exam:exponential-2} co\"incident alors que les signaux associ\'es sont diff\'erents ! Il est tr\`es important quand on utilise la transfor\'ee en $z$ de sp\'ecifier le domaine sur lequel la transform\'ee est d\'efinie.
+
+\subsection{Inversion de la transformée en $z$}
+%La transform\'ee en z s'inverse par une int\'egrale de
+%Cauchy sp\'ecifi\'ee par le th\'eor\`eme suivant.
+%
+%\begin{theorem} [Int\'egrale de Cauchy]
+%\label{cauchy}
+%Soit $C$ un contour qui entoure l'origine dans
+%le plan complexe $\C$ et qui est inclus le domaine de
+%convergence de
+%\[
+%\hat h(z) = \sum_{n=-\infty}^{+\infty} h_n z^{-n} .
+%\]
+%Alors
+%\begin{equation}
+%\label{residu}
+%h_k = \frac 1 {2 \pi i} \oint_C \hat h(z) z^{k-1} dz  ,
+%\end{equation}
+%avec une int\'egration orient\'ee dans le sens trigonom\'etrique
+%direct.
+%\end{theorem}
+%
+%\noindent{\bf D\'emonstration}
+%Ce r\'esultat est une cons\'equence de la
+%propri\'et\'e suivante de l'int\'egrale
+%de Cauchy \cite{bony}.
+%Soit $C$ un contour qui entoure l'origine dans $\C$
+%\begin{equation}
+%\frac 1 {2 \pi i} \oint_C z^{-k} dz =
+%\left\{
+%\begin{array}{ll}
+%1 & \mbox{ si $k=1$}\\
+%0 & \mbox{ si $k\neq1$}
+%\end{array} .
+%\right.
+%\end{equation}
+%L'int\'egration est calcul\'ee dans le sens direct.
+%
+%Supposons que $C$ soit inclus dans le domaine de
+%convergence de $\hat h(z)$.
+%\[
+%\frac 1 {2 \pi i} \oint_C \hat h(z) z^{k-1} dz =
+%\frac 1 {2 \pi i} \oint_C
+%\sum_{n=-\infty}^{+\infty} h_n z^{-n+k-1} dz .
+%\]
+%A l'int\'erieur du domaine de convergence, on peut inverser
+%ces deux int\'egrales et le th\'eor\`eme de Cauchy implique
+%\[
+%\frac 1 {2 \pi i} \oint_C \hat h(z) z^{k-1} dz =
+%\sum_{n=-\infty}^{+\infty} h_n
+%\frac 1 {2 \pi i} \oint_C
+%z^{-n+k-1} dz = h_k .
+%\]
+%$\Box$.\\
+%
+%L'int\'egrale de Cauchy (\ref{residu}) g\'en\'eralise
+%la formule d'inversion des s\'eries de
+%Fourier (\ref{recons_discret}).
+%En effet, si le cercle unit\'e est inclus dans la r\'egion de
+%convergence, l'int\'egration le long du cercle unit\'e
+%est obtenue
+%avec $z = \rme^{\rmi \lambda}$ et (\ref{residu}) devient
+%\[
+%h_k = \frac 1 {2 \pi} \int_{-\pi}^{\pi}
+%\hat h ({\rme^{\rmi \lambda}}) e^{i k \lambda} d\lambda .
+%\]
+%
+La transform\'ee en $z$ peut s'inverser mais le calcul de
+$h_k$ \`a partir de $\hat h (z)$ d\'epend du domain de
+convergence choisi. La formule g\'en\'erale d'inversion se
+fait par une int\'egrale de Cauchy qui calcule $h_k$
+en integrant $\hat h (z)$ le long d'un contour inclu
+dans l'anneau de convergence.
+Dans le cas o\`u l'anneau de convergence
+inclu le cercle unit\'e, cette int\'egrale peut se faire le
+long du cercle unit\'e, auquel cas on obtient la transform\'ee
+de Fourier inverse
+\[
+h_k = \frac 1 {2 \pi} \int_{-\pi}^{\pi}
+\hat h ({\rme^{\rmi \lambda}}) e^{i k \lambda} d\lambda .
+\]
+
+Pour montrer que
+$h_k$ ne d\'epend pas seulement de
+$\hat h(z)$ mais aussi du domaine de convergence choisi,
+prenons par exemple
+\[
+\hat h(z) = \frac 1 {1 - a z^{-1}} .
+\]
+La r\'eponse impulsionnelle correspondant \`a la r\'egion de
+convergence \`a l'ext\'erieur du cercle
+$|z| = a$ est causale et se calcule par un d\'evelopement
+en s\'erie de $\frac 1 {1 - x}$
+\[
+\hat h(z) = \sum_{n=0}^{+\infty} a^n z^{-n} ,
+\]
+d'o\`u $h_n = a^n \gamma[n]$.
+Pour que la r\'egion de convergence soit $|z| < a$ on
+r\'e\'ecrit
+\[
+\hat h(z) = \frac {-a^{-1} z} {1 - a^{-1}z} .
+\]
+En utilisant la d\'ecomposition en s\'erie de $\frac 1 {1-x}$
+on obtient une r\'eponse impulsionnelle anticausale
+\[
+h_n = \left\{
+\begin{array}{ll}
+-a^n & \mbox{si $n \leq -1$}\\
+0 & \mbox{si $n \geq 0$}\\
+\end{array}
+\right.
+\]
+\\
+\\
+\begin{example}
+On utilise g\'en\'eralement un filtre causal, ce qui
+impose que l'anneau de convergence s'\'etende \`a l'infini.\\
+$\bullet$ Si $h_n = \delta _{n-k}$ alors
+\begin{equation}
+\label{transl-z}
+\hat h(z) = z^{-k}
+\end{equation}
+et $A(\hat h) = ]0 , +\infty [$.\\
+$\bullet$ Si $h_n = a^n \gamma [n]$ alors
+\begin{equation}
+\label{un-pole2}
+\hat h(z) = \frac 1 {1 - a z^{-1}}
+\end{equation}
+$A(\hat h) = ]|a| , +\infty [$.\\
+$\bullet$ Si $h_n = n a^n \gamma [n]$ alors
+\[
+\hat h(z) = \frac {a z^{-1}} {1 - a z^{-1}}
+\]
+$A(\hat h) = ]|a| , +\infty [$.
+\end{example}
+
+\subsection{Convolution}
+Toutes les propri\'et\'es de la transform\'ee
+de Fourier s'\'etendent directement
+\`a la transform\'ee en $z$.
+En particulier, si $g_n = (f \star h)_n$ alors la transform\'ee
+en $z$ de $g_n$ est le produit
+\[
+\hat g(z) = \hat f(z) \hat h(z)
+\]
+et son anneau de convergence est
+\[
+A(\hat g) = A(\hat f ) \bigcap A(\hat h ) .
+\]
+
+
+\section{Synth\`ese de filtres discrets}
+
+Lors de la synth\`ese de filtres discrets, tout comme dans le
+cas analogique, on impose des conditions
+d'att\'enuation sur le gain du filtre $|\hat h ({\rme^{\rmi \lambda}})|$.
+Le probl\`eme est d'obtenir des filtres tels
+que $|\hat h ({\rme^{\rmi \lambda}})|$ satisfasse aux conditions d'att\'enuation et
+dont la structure permette de calculer les convolutions discr\`etes
+avec le moins d'op\'erations possibles.
+
+\subsection{Filtres r\'ecursifs}
+\label{recursifs}
+Pour effectuer des calculs num\'eriques, on utilise
+une classe de filtres pour lesquels la convolution discr\`ete
+se calcule avec un nombre fini d'op\'erations par
+\'echantillon.
+La sortie $\sequence{g}[n][\zset]$ est reliée à l'entrée $\sequence{f}[n][\nset]$
+par une \'equation de diff\'erences
+\begin{equation}
+\label{recurr}
+\sum_{k=0}^N a_k g_{n-k} = \sum_{k=0}^M b_k f_{n-k} ,
+\end{equation}
+o\`u $a_k$ et $b_k$ sont des r\'eels et $a_0 \neq 0$.
+Donc
+\[
+g[n] = \frac 1 {a_0} \left(
+\sum_{k=0}^M b_k f_{n-k} - \sum_{k=1}^N a_k g_{n-k} \right)
+\]
+se calcule \`a partir de son pass\'e et de $\sequence{f}[n][\zset]$ \`a l'aide de
+$N+M$ multiplications et additions.
+
+Etant donn\'e un signal causal $\sequence{f}[n][\zset]$ (avec $f_k=0$ pour $k \leq -1$),
+le calcul de $g_n$ pour $n \geq 0$ n\'ecessite la connaissance de ``conditions initiales'',
+par exemple $N$ valeurs cons\'ecutives de $g_n$.
+Si l'on impose que $g_n = 0$ pour $-N \leq n < 0$, alors
+$g_n$ est enti\`erement caract\'eris\'e pour tout $n \in \zset$.
+L'op\'erateur $L$ est alors un filtre lin\'eaire homog\`ene causal.
+
+Si $N = 0$ alors le fitre a une r\'eponse impulsionnelle $\sequence{h}[n][\nset]$ finie
+de longueur $M$
+\[
+g_n =
+\sum_{k=0}^M \frac {b_k} {a_0} f_{n-k} = (h \star f)_n \eqsp.
+\]
+Si $M = 0$, on dit que le filtre est autor\'egressif
+\[
+g_n = \frac {b_0} {a_0} f_n - \sum_{k=1}^N \frac{a_k} {a_p} g_{n-k} \eqsp.
+\]
+\subsection{Fonction de transfert}
+Pour caract\'eriser la classe des op\'erateurs de convolutions $L$
+qui satisfont (\ref{recurr}),
+nous \'evaluons la condition impos\'ee
+sur la fonction de transfert en calculant
+la transform\'ee de Fourier de chaque c\^ot\'e de l'\'egalit\'e
+(\ref{recurr}).
+Si $\hat f({\rme^{\rmi \lambda}})$ est la transform\'ee de Fourier de $f[n]$
+alors la transform\'ee de Fourier
+de $f_{n-k}$ est $e^{-i k \lambda} \hat f({\rme^{\rmi \lambda}})$. La transform\'ee
+de Fourier de (\ref{recurr}) est donc
+\[
+\sum_{k=0}^N a_k \,\rme^{-ik \lambda} \hat g({\rme^{\rmi \lambda}})
+=
+\sum_{k=0}^M b_k \,\rme^{-ik\lambda} \hat f({\rme^{\rmi \lambda}}) ,
+\]
+d'o\`u l'on d\'eduit que
+\begin{equation}
+\label{RecruTrasfFunc}
+\hat h({\rme^{\rmi \lambda}}) = \frac {\hat g({\rme^{\rmi \lambda}})} {\hat f({\rme^{\rmi \lambda}})} =
+\frac {\sum_{k=0}^M b_k \,\rme^{-ik\lambda}} {\sum_{k=0}^N a_k \,
+\rme^{-ik\lambda} }.
+\end{equation}
+La fonction de transfert d'un filtre r\'ecursif est donc un rapport
+de polyn\^{o}mes en $\rme^{-i\lambda}$.
+
+Les propri\'et\'es du module
+et de la phase s'analysent plus facilement en calulant les
+p\^oles $d_k$ et les z\'eros $c_k$ de la fonction rationnelle
+(\ref{RecruTrasfFunc})
+\[
+\hat h({\rme^{\rmi \lambda}}) = \frac {b_0} {a_0} \frac
+{\prod_{k=1}^M (1 - c_k \rme^{-\rmi \lambda})} {\prod_{k=1}^N (1 - d_k \rme^{-\rmi \lambda})} .
+\]
+Le module de la transform\'ee de Fourier est donc
+\[
+|\hat h({\rme^{\rmi \lambda}})| = \frac {|b_0|} {|a_0|} \frac
+{\prod_{k=1}^M |1 - c_k {\rme^{-\rmi \lambda}}|} {\prod_{k=1}^N |1 - d_k {\rme^{-\rmi \lambda}}|} .
+\]
+L'amplitude de la fonction de transfert
+est le plus souvent calcul\'ee en d\'ecibels (db) qui mesurent
+\[
+20 \log_{10} |\hat h({\rme^{\rmi \lambda}})| =
+10 \log_{10} \frac {|b_0|^2} {|a_0|^2} +
+\sum _{k=1}^M 10 \log_{10} |1 - c_k {\rme^{-\rmi \lambda}}|^2
+- \sum_{k=1}^N 10 \log_{10} |1 - d_k {\rme^{-\rmi \lambda}}|^2 .
+\]
+Les p\^oles et les z\'eros ne se distinguent donc que par un changement
+de signe. La phase complexe de $\hat h({\rme^{\rmi \lambda}})$ se mesure de m\^eme par
+\[
+\arg \hat h({\rme^{\rmi \lambda}}) = \arg \frac {b_0} {a_0} +
+\sum _{k=1}^M \arg (1 - c_k {\rme^{'\rmi \lambda}})
+- \sum_{k=1}^N \arg (1 - d_k {\rme^{'\rmi \lambda}}) .
+\]
+\begin{example}
+Prenons le cas d'un p\^ole ou d'un z\'ero situ\'e en $re^{i\theta}$
+et \'etudions le module et la phase de $(1-r \rme^{i \theta} {\rme^{'\rmi \lambda}})$.
+\[
+10 \log_{10} |1-r \rme^{i \theta} {\rme^{'\rmi \lambda}}|^2 =
+10 \log_{10} [ 1 + r^2 - 2r\cos(\lambda - \theta) ] .
+\]
+Le module est donc minimum pour $\lambda = \theta$ o\`u il vaut
+$20 \log_{10} |1-r|$ et
+maximum en $\lambda = \theta + \pi$ o\`u il vaut
+$20 \log_{10} |1+r|$.
+Suivant que ce facteur est un p\^ole ou un z\'ero, il produit
+une att\'enuation ou une
+amplification au voisinage de $\lambda = \theta$.
+La phase complexe est
+\[
+\arg\hat h({\rme^{\rmi \lambda}}) = \arctan \left[
+\frac {r \sin(\lambda - \theta)} {1 -r \cos(\lambda - \theta)} \right] .
+\]
+\end{example}
+\subsection{Filtres r\'ecursifs}
+Nous avons vu en (\ref{RecruTrasfFunc}) que la fonction de
+transfert d'un filtre r\'ecursif
+est une fonction rationnelle. Sa tranform\'ee en $z$ peut
+donc s'\'ecrire
+\[
+\hat h(z) =
+\frac {\sum_{k=0}^M b_k z^{-k}} {\sum_{k=0}^N a_k z^{-k} }.
+\]
+La r\'eponse impulsionnelle causale $h_n$ se calcule
+facilement en d\'ecomposant $\hat h (z)$ en \'el\'ements simples.
+Si $\hat h (z)$ a des p\^oles simples situ\'es
+en $d_k$, on peut montrer par identification des coefficients
+(exercice) qu'il peut s'\'ecrire sous la forme
+\[
+\hat h (z) = \sum_{r=0}^{M-N} B_r z^{-r} +
+\sum_{k=0}^{N} \frac {A_k} {1 - d_k z^{-1}} .
+\]
+Le filtre causal correspondant \`a une r\'eponse impulsionelle
+qui se calcule avec (\ref{transl-z}) et (\ref{un-pole2})
+\[
+h_n =
+\sum_{r=0}^{M-N} B_r \delta[n-r] +
+\sum_{k=0}^{N} {A_k} (d_k)^n \gamma[n] .
+\]
+Dans le cas de p\^oles multiples, la d\'ecomposition fractionnelle
+s'\'etend avec des puissances aux d\'enominateurs des fractions.
+On distingue les filtres \`a r\'eponse impulsionnelle finie
+dont la transform\'ee en $z$ est un polyn\^{o}me en $z^{-1}$ (N=0)
+et les filtres \`a r\'eponse impulsionnelle infinie pour lesquels
+$N > 0$.
+
+On observe que la r\'eponse impulsionelle $h_n$ est
+causale et stable si et seulement si pour tout $k$, $|d_k| < 1$.
+Cela signifie donc que tous les p\^oles de $\hat h (z)$ ont
+un module plus petit que 1.
+
+\subsection{Approximation de filtres s\'electifs en fr\'equence}
+
+Tout comme pour la synth\`ese de filtres analogiques, on
+approxime un filtre passe-bas id\'eal (\ref{passe-bas-discret})
+par un filtre r\'ecursif dont la fonction de transfert satisfait
+les conditions impos\'es par un
+gabarit qui limite les oscillations dans
+la bande passante et la bande d'att\'enuation
+(voir figure \ref{gabarit}).
+La technique de synth\`ese la plus courante
+est de transformer un filtre passe-bas analogique rationnel
+\[
+\hat h_a (\lambda) = \frac {N(i\lambda)} {D(i \lambda)}
+\]
+en un filtre discret r\'ecursif par un changement de variable
+\[
+i\lambda = F({\rme^{\rmi \lambda}}) ,
+\]
+o\`u F est une fonction rationnelle de ${\rme^{\rmi \lambda}}$ qui envoie
+$]-\pi,\pi[$ sur
+$]-\infty,+\infty[$.
+La fonction de transfert
+\[
+\hat h_d ({\rme^{\rmi \lambda}}) = \frac {N(F({\rme^{\rmi \lambda}}))} {D(F({\rme^{\rmi \lambda}}))}
+\]
+est une fonction rationnelle de ${\rme^{\rmi \lambda}}$
+et donc la fonction de transfert
+d'un filtre discret r\'ecursif.
+Le changement de variable $F({\rme^{\rmi \lambda}})$ qui associe
+$]-\pi,\pi[$ \`a l'axe r\'eel $\R$ doit \^etre aussi ``r\'egulier''
+que possible pour ne pas trop modifier les propri\'et\'es
+de la fonction de transfert $\hat h(\lambda)$.
+On utilise souvent l'application
+\[
+F({\rme^{\rmi \lambda}}) = \frac 2 T \tan (\frac {\lambda} 2 ) =
+\frac {2} T \frac{1 - e^{-i\lambda}}{1 + \rme^{-i\lambda}} .
+\]
+Le facteur $T$ est un param\`etre de dilatation qui peut \^etre
+ajust\'e arbitrairement.
+
+Par exemple,
+on peut construire un filtre passe-bas dont la fr\'equence
+de coupure est en $\lambda_c$ \`a partir d'un filtre analogique de
+Butterworth (\ref{butterworth}).
+On obtient
+\[
+|\hat h({\rme^{\rmi \lambda}})|^2 = \frac 1 {1 + \left(
+\frac {\tan (\lambda/2)} {\tan (\lambda_c /2)}\right)^{2N}} .
+\]
+L'ordre $N$ du filtre doit \^etre adapt\'e aux conditions
+impos\'ees
+par le gabarit du filtre passe-bas.
+
+\subsection{Factorisation spectrale}
+
+Lors de la synth\`ese d'un filtre r\'ecursif,
+une fois que l'on a calcul\'e
+$|\hat h({\rme^{\rmi \lambda}})|^2$ pour satisfaire les conditions d'amplification
+ou d'att\'enuation, il reste \`a
+adapter la phase pour que $\hat h ({\rme^{\rmi \lambda}})$ soit un filtre
+causal et stable. Le module est donn\'e par
+\[
+|\hat h({\rme^{\rmi \lambda}})|^2 = \hat h({\rme^{\rmi \lambda}}) \hat h^* ({\rme^{\rmi \lambda}}) = \hat h(z)
+\hat h^* (1 / z^* ) ,
+\]
+avec $z = {\rme^{\rmi \lambda}}$.
+Pour un filtre r\'ecursif,
+\[
+\hat h(z) = \frac {b_0} {a_0} \frac
+{\prod_{k=1}^M (1 - c_k z^{-1})} {\prod_{k=1}^N (1 - d_k z^{-1})} .
+\]
+et
+\[
+C(z) = \hat h(z) \hat h^* (1 / z^* ) =
+\frac {|b_0|^2} {|a_0|^2} \frac
+{\prod_{k=1}^M (1 - c_k z^{-1})(1 -  c^*_k  z)
+} {\prod_{k=1}^N (1 - d_k z^{-1})(1 - d^*_k z)} .
+\]
+La donn\'ee de $|\hat h({\rme^{\rmi \lambda}})|^2$ impose la position des z\'eros et
+des p\^oles de $C(z)$. Les z\'eros et les p\^oles de $C(z)$
+vont par paires $(c_k, 1/{ c^*_k})$ et
+$(d_k, 1/{d^*_k})$. Pour chaque paire, il y a un \'el\'ement
+dans le cercle unit\'e et l'autre \`a l'ext\'erieur, \`a moins qu'ils
+ne soient confondus sur le cercle unit\'e.
+On peut construire $\hat h(z)$ en choisissant
+arbitrairement un p\^ole et un z\'ero dans
+chaque paire.
+Pour que $\hat h(z)$ soit la transform\'ee en z d'un syst\`eme
+stable
+et causal, nous avons vu que tous les p\^oles doivent \^etre
+strictement dans le
+cercle unit\'e. Cela laisse libre le choix des z\'eros.
+Un choix particulier des z\'eros est de les prendre tous
+dans le cercle unit\'e. Un filtre dont les z\'eros et les p\^oles
+sont dans le cercle unit\'e est appel\'e filtre \`a phase minimale.
+\\
+\\
+{\bf Filtre inverse}
+Le filtre inverse d'un filtre $h$ est
+le filtre $h_i$ tel que
+pour tout $f[n]$
+\[
+f \star h \star h_i [n] = f[n] .
+\]
+Cela signifie que les zones de convergence
+de $\hat h (z)$ et de $\hat h_i (z)$ s'intersectent et que
+sur ce domaine
+\[
+\hat h(z) \hat h_i (z) = 1.
+\]
+Le filtre inverse d'un filtre \`a phase minimale
+est stable et causal.
+En effet,
+les p\^oles de $\hat h_i (z)$ sont les z\'eros
+de $\hat h(z)$ et inversement.
+Or, pour que $\hat h_i (z)$ soit stable et causal, il faut et
+il suffit que ses
+p\^oles soient dans le cercle unit\'e et donc que les z\'eros de
+$\hat h(z)$ soient dans le cercle unit\'e.
+
+\section{Signaux finis}
+\label{finite-sig}
+Nous avons suppos\'e jusqu'\`a pr\'esent que nos signaux discrets
+$f[n]$ sont d\'efinis pour tout $n \in \Z$. Le plus souvent,
+$f[n]$ est connu sur un domaine fini, disons $0 \leq n < N$.
+Il faut donc adapter les calculs de convolutions en tenant
+compte des effets de bord en $n=0$ et $n= N-1$.
+Par ailleurs, pour utiliser la transform\'ee de Fourier comme outil
+de calcul num\'erique, il faut pouvoir la red\'efinir sur des
+signaux discrets finis.
+Ces deux probl\`emes sont r\'esolus en p\'eriodisant les
+signaux finis. L'algorithme de transform\'ee de Fourier
+rapide est d\'ecrit avec une application au calcul rapide
+des convolutions.
+
+
+\subsection{Convolutions circulaires}
+
+Soient $\tilde f[n]$ et $\tilde h_n$ des signaux de $N$
+\'echantillons.
+Pour calculer la convolution
+\[
+\tilde f \star \tilde h [n] = \sum_{p=-\infty}^{+\infty}
+\tilde f[p] \tilde h[n-p]
+\]
+pour $0 \leq n < N$, il nous faut conna\^{\i}tre
+$\tilde f[n]$ et $\tilde h_n$ au-del\`a de $0 \leq n < N$.
+Une approche possible est d'\'etendre
+$\tilde f[n]$ et $\tilde h_n$ avec une p\'eriodisation
+sur $N$ \'echantillons
+\[
+f[n] =  \tilde f[n ~\mbox{modulo}~ N]
+~~,~~
+h_n =  \tilde h[n ~\mbox{modulo}~ N] .
+\]
+La convolution circulaire de ces deux signaux de p\'eriode $N$
+est r\'eduite \`a une somme sur leur p\'eriode
+\[
+f \cistar h [n]
+= \sum_{p=0}^{N-1}
+f[p] h[n-p] .
+\]
+
+Les vecteurs propres d'un op\'erateur de convolution circulaire
+\[
+Lf[n] = f \cistar h_n
+\]
+sont les exponentielles discr\`etes
+$e_k[n] = \rme^{ \frac {i2 \pi k} N n  }$.
+En effet,
+\[
+L e_k [n] = \rme^{ \frac {i2 \pi k} N n  }
+\sum_{p=0}^{N-1}
+h[p]  \rme^{ \frac {-i2 \pi k} N p  },
+\]
+et les valeurs propres sont donn\'ees par la
+transform\'ee de Fourier discr\`ete de $h_n$
+\[
+\hat h_k = \sum_{p=0}^{N-1}
+h[p]  \rme^{ \frac {-i2 \pi k} N p  } .
+\]
+
+\subsection{Transform\'ee de Fourier discr\`ete}
+\label{transf-four-discr}
+
+L'espace des signaux discrets
+de p\'eriode $N$ est de dimension $N$ et l'on note le produit
+scalaire
+\begin{equation}
+\label{inn-prod}
+<f,g> = \sum_{n=0} ^{N-1} f[n]  g^*[n] .
+\end{equation}
+Le th\'eor\`eme suivant d\'emontre que tout signal
+de p\'eriode $N$ peut s'\'ecrire comme une transform\'ee de
+Fourier discr\`ete.
+
+\begin{theorem}
+La famille d'exponentielles discr\`etes
+$(e_k[n])_\ZkNU$
+\begin{equation}
+e_k[n] = \rme^{ \frac {i2 \pi k} N n  },
+\end{equation}
+est une base orthogonale de l'espace des signaux
+de p\'eriode $N$.
+\end{theorem}
+
+Pour prouver ce th\'eor\`eme, il suffit de montrer que
+cette famille de $N$ vecteurs est orthogonale (exercice).
+Comme l'espace est
+de dimension $N$, c'est donc une base de l'espace.
+Tout signal $\sequence{f}[n][\zset]$ de p\'eriode $N$ peut se d\'ecomposer
+dans cette base
+\begin{equation}
+f_n = \sum_{k=0} ^{N-1} \frac {\pscal{f}{e_k}} {\|e_k \|^2}
+e_{k,n} .
+\end{equation}
+La transform\'ee de Fourier discr\`ete de $f[n]$ est
+\begin{equation}
+\label{fourier-discret}
+\hat{f}_k  = \pscal{f}{e_k}
+\sum_{n=0}^{N-1} f_n W_N^{kn}    \eqsp, W_N = \rme^{\frac {-\rmi 2 \pi }{N} } .
+\end{equation}
+Comme $\sum_{n=0}^{N-1} |W_N^{kn}|^2 = N$,
+\begin{equation}
+\label{fourier-discret-inverse}
+f_n = \frac 1 N \sum_{k=0}^{N-1} \hat f_k W_N^{-kn} .
+\end{equation}
+L'orthogonalit\'e implique une formule de Plancherel
+\begin{equation}
+\label{planch-discret}
+\sum_{n=0} ^{N-1} |f_n|^2 = \frac{1}{N} \sum_{k=0} ^{N-1} |\hat{f}_k|^2 .
+\end{equation}
+\subsection{Effets de bord}
+La transform\'ee de Fourier discr\`ete
+d'un signal de p\'eriode $N$ se calcule \`a partir des
+valeurs de $f[n]$ pour $0 \leq n < N$. Pourquoi se soucier
+du fait que ce soit un signal de p\'eriode $N$ plut\^ot qu'un signal
+de $N$ \'echantillons ?
+La somme de Fourier (\ref{fourier-discret})
+d\'efinit un signal de p\'eriode $N$ pour lequel l'\'echantillon
+$f[0]$ \'etant le m\^eme que $f[N]$ se retrouve
+plac\'e \`a c\^ot\'e de $f[N-1]$.
+Si $f[0]$ et $f[N-1]$ sont tr\`es diff\'erents, cela induit une
+transition brutale dans le signal p\'eriodis\'e qui se traduit
+par l'apparition de coefficients de Fourier de relativement
+grande amplitude aux hautes fr\'equences.
+Par exemple, le signal apparemment r\'egulier
+$f[n] = n$ pour $0 \leq n < N$
+a une transition brutale en $n=pN$ pour $p \in \Z$,
+une fois p\'eriodis\'e. Cette transition appara\^{\i}t
+dans sa s\'erie de Fourier.
+\\
+\\
+{\bf Filtrage fini}
+Comme $\rme^{ \frac {i2 \pi k} N n  }$ sont les
+vecteurs propres des op\'erateurs de convolution
+circulaire, on d\'eduit un th\'eor\`eme de convolution.
+
+\begin{theorem} [Convolution Circulaire]
+\label{circulaire}
+La convolution circulaire
+$g_n = f \cistar h [n]$ est un signal de p\'eriode $N$ dont la
+transform\'ee de Fourier discr\`ete est
+\begin{equation}
+\hat g[k] = \hat f[k] \hat h_k
+\end{equation}
+\end{theorem}
+
+La d\'emonstration de ce th\'eor\`eme est identique \`a la
+d\'emonstration des deux th\'eor\`emes de convolution pr\'ec\'edents
+et laiss\'ee en exercice.
+Ce th\'eor\`eme montre que la convolution circulaire est
+un filtrage fr\'equentiel. Il ouvre aussi la porte au
+calcul rapide de convolutions en utilisant la
+transform\'ee de Fourier rapide.
+
+\subsection{Transform\'ee de Fourier rapide}
+
+Pour un signal $f[n]$ de $N$ points, le calcul direct
+de la transform\'ee de Fourier discr\`ete
+\begin{equation}
+{\hat f[k]}  = \sum_{n=0} ^{N-1} f[n] e^*{ \frac {-i2 \pi k} N n  } ,
+\end{equation}
+pour $0 \leq k < N$,
+demande $O(N^2)$ multiplications et additions.
+Il est cependant possible de
+r\'eduire le nombre d'op\'erations \`a $O(N \log_2 N)$
+en r\'eorganisant les calculs.
+Lorsque $k$ est pair, on regroupe les termes
+$n$ et $n+\frac N 2$
+\begin{equation}
+\label{four-paire}
+{\hat f [2k]}  = \sum_{n=0} ^{{\frac N 2}-1} (f[n]+f[n+ N/ 2 ])
+\rme^{ \frac {-i2 \pi k} {{\frac N 2}}n} .
+\end{equation}
+Lorsque $k$ est impair, le m\^eme regroupement devient
+\begin{equation}
+\label{four-impaire}
+{\hat f [2k+1]}  =
+\sum_{n=0} ^{{\frac N 2}-1} \rme^{ \frac {-i2 \pi} N n}
+(f[n]-f[n+{\frac N 2}])
+\rme^{ \frac {-i2 \pi k} {{\frac N 2}} n} .
+\end{equation}
+L'\'equation (\ref{four-paire})
+montre que les fr\'equences paires sont obtenues
+en calculant la transform\'ee de Fourier discr\`ete du signal
+de p\'eriode ${\frac N 2}$
+\[
+f_p [n] = f[n] + f[n+{\frac N 2}],
+\]
+tandis que (\ref{four-impaire})
+permet de calculer les fr\'equences impaires par la
+transform\'ee de Fourier discr\`ete du signal de p\'eriode ${\frac N 2}$
+\[
+f_i [n] = \rme^{ \frac {-i2 \pi} N n}  (f[n] - f[n+{\frac N 2}] ).
+\]
+\\
+\\
+{\bf Complexit\'e}
+Une transform\'ee de Fourier d'un signal de taille $N$ s'obtient
+donc en calculant deux transform\'ees de Fourier de signaux de
+taille ${\frac N 2}$.
+Le signal $f[n]$ \'etant complexe, le calcul
+des signaux $f_p [n]$ et $f_i[n]$
+demande
+$N$ additions complexes et ${\frac N 2}$ multiplications complexes,
+ce qui fait $3N$ additions et $2N$ multiplications r\'eelles.
+Soit $C(N)$ le nombre d'op\'erations d'une transform\'ee de Fourier
+rapide d'un signal de p\'eriode $N$. On a donc
+\begin{equation}
+\label{recurrence}
+C(N) = 2 C({\frac N 2}) + K N ,
+\end{equation}
+avec $K = 5$.
+La transform\'ee de Fourier d'un signal d'un seul point \'etant
+\'egale \`a lui-m\^eme, $C(1) = 0$.
+Avec le changement de variable $l = \log_2 N$ et de fonction
+$T(l) = C(N)/N$, on d\'eduit de (\ref{recurrence}) que
+\[
+T(l) = T(l-1) + K .
+\]
+Comme $T(0) = 0$, $T(l) = Kl$ et donc
+\[
+C(N) = K N \log_2 (N) .
+\]
+
+Il existe diff\'erents algorithmes de transform\'ee de Fourier
+rapide qui d\'ecomposent une transform\'ee de Fourier
+de taille $N$ en deux transform\'ees de Fourier de taille ${\frac N 2}$
+plus $O(N)$ op\'erations. L'algorithme le plus performant \`a ce
+jour est un peu plus compliqu\'e que celui que nous venons de
+d\'ecrire, mais ne demande que $N \log_2 N$ multiplications
+et $3N \log_2 N$ additions.
+
+La transform\'ee de Fourier inverse se calcule \`a partir
+de l'algorithme rapide en observant que
+\begin{equation}
+f^*[n] = \frac 1 N \sum_ {k=0}^ {N-1}  \hat f^*[k]
+\rme^{\frac {-i 2 \pi kn} N} .
+\end{equation}
+La tranform\'ee de Fourier discr\`ete inverse est donc obtenue en
+calculant la transform\'ee de Fourier directe du complexe conjugu\'e
+du signal, et en calculant le complexe conjugu\'e du r\'esultat.
+
+
+\subsection{Convolution rapide}
+\label{convol-rap-sec}
+
+L'algorithme rapide de la transform\'ee de Fourier
+discr\`ete permet d'utiliser le th\'eor\`eme \ref{circulaire} pour
+calculer efficacement les convolutions discr\`etes de
+deux signaux \`a support fini.
+Soient $f[n]$ et $h_n$ deux signaux ayant
+des \'echantillons non nuls pour $0 \leq n < M$.
+Le signal causal
+\begin{equation}
+\label{somme}
+g_n = f \star h [n] = \sum_{k=- \infty}^{+ \infty} f[k] h _{n-k} ,
+\end{equation}
+n'a de valeurs non-nulles que pour $0 \leq n < 2M$.
+Le calcul direct de ce produit
+de convolution, en \'evaluant la somme (\ref{somme}), demande
+$O(M^2)$ additions et multiplications.
+Le th\'eor\`eme de convolution circulaire \ref{circulaire}
+sugg\`ere un proc\'ed\'e plus rapide
+bas\'e sur des convolutions circulaires.
+
+Pour r\'eduire le calcul de
+la convolution non-circulaire (\ref{somme})
+\`a une convolution circulaire, on d\'efinit deux signaux
+de p\'eriode $2M$
+\begin{equation}
+a [ n  ] =
+   \left \{ \begin{array}{ll}
+            f[n]   & \mbox{si $0 \leq n < M$}\\
+            0  & \mbox{si $ M \leq n < 2M$}
+            \end{array}
+   \right.
+\end{equation}
+\begin{equation}
+b [ n  ] =
+   \left \{ \begin{array}{ll}
+            h_n &  \mbox{si $ 0 \leq n < M$}\\
+            0  & \mbox{si $M \leq n < 2M$}
+            \end{array}
+   \right.
+\end{equation}
+Il est maintenant facile de v\'erifier que la convolution circulaire
+\[
+c[n] = a \cistar b [n]
+\]
+satisfait
+\begin{equation}
+c [ n  ] =  g_n   \mbox{~~~pour } 0 \leq n < 2M .
+\end{equation}
+On peut donc calculer les valeurs non-nulles de
+$g_n$ en calculant les transform\'ees de Fourier discr\`etes
+de $a[n]$ et $b[n]$, en les multipliant et
+en calculant la transform\'ee de Fourier inverse du r\'esultat.
+En utilisant l'algorithme de transform\'ee de Fourier rapide,
+ce calcul demande un total de $O(M \log_2 M)$ additions
+et multiplications, au lieu de $O(M^2)$.
+
+Cet algorithme rapide de calcul de convolutions est utilis\'e
+pour la convolution de signaux par des filtres de r\'eponse
+impulsionnelle finie. Si le signal $f[n]$ a $N$ points
+non-nuls et le filtre $h_n$ a $L$ \'echantillons non-nuls,
+l'algorithme de convolution peut \^etre
+modifi\'e pour calculer la convolution $h \cistar f[n]$
+en $O(N log_2 L )$ op\'erations (exercice).
+%\end{document}
+
+
+
+
+
+
+
+

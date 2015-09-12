@@ -1,0 +1,1235 @@
+\chapter{Traitement du signal analogique}
+\label{analogique-chap}
+
+
+Le traitement du signal analogique repose essentiellement sur 
+l'utilisation d'op\'erateurs lin\'eaires qui modifient les 
+propri\'et\'es d'un signal de fa\c{c}on homog\`ene dans le
+temps. La transform\'ees de Fourier 
+diagonalise ces op\'erateurs et appara\^{\i}t donc comme
+le principal outil d'analyse math\'ematique.
+Nous \'etudions la synth\`ese de filtres homog\`enes et une
+application \`a la transmission par modulation d'amplitude.
+
+\section{Filtrage lin\'eaire homog\`ene}
+
+Un signal analogique mono-dimensionnel
+est une fonction $f(t)$
+d'une variable continue $t \in \R$, 
+que nous supposerons \^etre le temps. 
+De nombreux algorithmes de traitement du signal tels
+que la transmission par modulation d'amplitude, le d\'ebruitage
+de signaux stationnaires ou le codage par pr\'ediction,
+s'impl\'ementent avec des op\'erateurs lin\'eaires homog\`enes dans le
+temps. 
+
+L'homog\'en\'eit\'e temporelle d'un op\'erateur $L$ signifie que
+si l'entr\'ee $f_\tau (t) = f(t-\tau)$ est retard\'ee
+par $\tau \in \R$ alors la sortie $L[f_\tau (t)]$
+est aussi retard\'ee par $\tau$
+\begin{equation}
+\label{invariant}
+L[f(t)] = g(t) 
+\Rightarrow L [ f_\tau (t) ]= g(t-\tau) . 
+\end{equation}
+Pour garantir une stabilit\'e num\'erique, nous supposons aussi
+que $L$ a une continuit\'e faible.
+Pour tout $t$, la sortie
+$L[f] (t)$ est peu perturb\'ee si
+$f(t)$ est un signal r\'egulier qui est l\'eg\`erement modifi\'e.
+Cette continuit\'e peut \^etre formalis\'ee dans le cadre de la th\'eorie
+des distributions \cite{bony2}.
+
+\subsection{Dirac}
+
+Un Dirac est une masse ponctuelle qui est souvent utilis\'ee pour
+simplifier les calculs. C'est une ``distribution'' $\delta (t)$
+dont le support est r\'eduit au point $t = 0$ et d'int\'egrale unit\'e,
+si bien que pour toute fonction continue $f(t)$
+\[
+\int_{-\infty}^{+\infty} f (u) \delta (u) du = f(0).
+\]
+La th\'eorie des distributions \cite{bony2} d\'efinie formellement
+cette int\'egrale
+comme une forme lin\'eaire qui associe a toute 
+fonction sa valeur en $t = 0$.
+Nous nous contentons ici
+d'une d\'efinition plus intuitive d'un Dirac
+comme limite de ``bosses'' qui sont contract\'ees ind\'efiniment.
+
+Soit $\phi (t)$ une fonction continue \`a support dans $[-1,1]$ et
+de masse unit\'e
+\begin{equation}
+\label{Dirac0}
+\int_{-\infty}^{+\infty} \phi (u) du = 1 .
+\end{equation}
+La fonction $\phi_s (t) = \frac 1 s \phi ( \frac t s )$ a un
+support dans $[-s,s]$. Avec le changement de variable
+$t' = \frac t s$ on montre que
+\[
+\int_{-\infty}^{+\infty} \phi_s (u) du =
+\int_{-\infty}^{+\infty} \frac 1 s \phi ( \frac u s ) du = 1 .
+\]
+
+Soit $f(t)$ une fonction continue, on v\'erifie facilement que
+\[
+\lim_{s \rightarrow 0} 
+\int_{-\infty}^{+\infty} f(u) \phi_s (u) du = f(0) .
+\]
+Un Dirac se d\'efinit par
+\[
+\delta (t) = \lim_{s \rightarrow 0} \phi_s (t),
+\]
+o\`u la limite doit \^etre formellement prise au sens o\`u
+pour toute fonction continue $f(t)$
+\begin{equation}
+\lim_{s \rightarrow 0} 
+\int_{-\infty}^{+\infty} f(u) \phi_s (u) du = 
+\int_{-\infty}^{+\infty} f (u) \delta (u) du = f(0).
+\end{equation}
+
+Un Dirac $\delta (t)$ n'est pas une fonction mais la th\'eorie
+des distributions montre que cela se manipule
+comme une fonction dans les calculs. On oubliera donc son 
+statut de distribution par la suite.
+Ainsi, on peut d\'efinir un Dirac translat\'e en $\tau$ par
+\[
+\delta (t-\tau) = \lim_{s \rightarrow 0} \phi_s (t-\tau),
+\]
+et on montre que pour toute fonction continue $f(t)$
+\begin{equation}
+\label{dirac-trans}
+\int_{-\infty}^{+\infty} f (u) \delta (u-\tau) du = f(\tau).
+\end{equation}
+On peut cependant \'eviter d'utiliser une limite
+et d\'eduire simplement ce resultat de (\ref{Dirac0}) par un
+changement de variable $u' = u + \tau$.\\
+
+Un Dirac est sym\'etrique $\delta (t) = \delta (-t)$ car
+\[
+\int_{-\infty}^{+\infty} f (u) \delta (-u) du = 
+\int_{-\infty}^{+\infty} f (-u) \delta (u) du = f(0).
+\]
+On peut donc r\'e\'ecrire (\ref{dirac-trans}) 
+comme une d\'ecomposition de $f(t)$ en une somme de Diracs
+translat\'es en diff\'erents points
+\[
+f(t) = \int_{-\infty}^{+\infty} f(u) \delta (t-u) du .
+\]
+
+\subsection{R\'eponse impulsionnelle}
+
+En d\'ecomposant un signal comme une somme de Diracs translat\'es, nous
+montrons que tout op\'erateur homog\`ene peut s'\'ecrire comme un
+produit de convolution.
+On a vu que
+\[
+f(t) = \int_{-\infty}^{+\infty} f(u) \delta (t-u) du .
+\]
+La continuit\'e et la lin\'earit\'e de $L$ montrent que
+\[
+L[f (t)] = \int_{-\infty}^{+\infty} f(u) L[\delta(t-u)] du .
+\]
+Soit $h(t)$ la r\'eponse de $L$ pour une impulsion $\delta (t)$
+\[
+h(t) = L[\delta (t)] .
+\]
+L'homog\'en\'eit\'e temporelle implique 
+$L[\delta (t-u)] = h(t-u)$ et donc
+\[
+L[f (t)] = \int_{-\infty}^{+\infty} f(u) h (t-u)  du 
+= \int_{-\infty}^{+\infty} h (u) f(t-u) du .
+\]
+On note le produit de convolution de $h$ avec $f$
+\[
+L[f (t)] = 
+h \star f (t) = \int_{-\infty}^{+\infty} h (u) f(t-u) du .
+\]
+Un op\'erateur lin\'eaire homog\`ene se calcule donc par un produit
+de convolution avec la r\'eponse impulsionnelle.
+
+On rappelle quelques propri\'et\'es importantes du produit de convolution :
+\begin{itemize}
+\item Commutativit\'e
+\begin{equation}
+f \star h (t) = h \star f (t) .
+\end{equation}
+\item La convolution de $f(t)$ avec un Dirac translat\'e
+$\delta_\tau (t) = \delta (t-\tau)$ translate
+$f(t)$ par $\tau$
+\begin{equation}
+f \star \delta_\tau (t) = 
+\int_{-\infty}^{+\infty} f (t-u) \delta_\tau (u) du  = f(t-\tau).
+\end{equation}
+\end{itemize}
+
+{\bf Stabilit\'e et causalit\'e}
+Un filtre est {\it causal} si et seulement si
+$L[f(t)]$ ne d\'epend que des valeurs $f(u)$ pour $u < t$.
+Comme
+\[
+L[f(t)]  = \int_{-\infty}^{+\infty} h (u) f(t-u) du ,
+\]
+cela signifie que $h(u) = 0$ pour $u < 0$. On dit alors que
+$h(t)$ est une fonction {\it causale}. On exprime souvent les
+fonctions causale comme un produit avec une 
+fonction \'echelon
+\[
+h(t) = h(t) \gamma (t)
+\]
+avec
+\begin{equation}
+\label{Heavyside}
+\gamma (t) = \left\{
+\begin{array}{ll}
+0 & \mbox{si $t < 0$}\\
+1 & \mbox{si $t \geq 0$}
+\end{array}
+\right.
+\end{equation}
+
+Lorsque $f(t)$ est born\'ee on
+veut garantir que $L[f(t)]$ est aussi born\'ee.
+On dit alors que le filtre $L$ et $h(t)$ sont {\it stables}.
+Comme
+\begin{equation}
+\label{stab-cond}
+|L[f(t)]| \leq \sup_{u \in \R} |f(u)| 
+\int_{-\infty}^{+\infty} |h (u)| du ,
+\end{equation}
+il suffit que $h \in \LU$
+\[
+\int_{-\infty}^{+\infty} |h (u)| du < + \infty .
+\]
+On v\'erifie (exercice) que si $h(t)$ est une fonction definie
+pour presque tout $t \in \R$
+la condition $h \in \LU$ est aussi n\'ecessaire.\\
+\\
+\noindent{\bf Exemples}\\
+
+$\bullet$ Un syst\`eme 
+{\it d'amplification} par $\lambda$ et de {\it d\'elai}
+par $\tau$ est d\'efini par
+\[
+L[f(t)] = \lambda f(t - \tau) .
+\]
+La r\'eponse impulsionnelle de ce filtre est 
+\[
+h(t) = \lambda \delta(t - \tau) .
+\]
+
+$\bullet$ La {\it moyenne uniforme} de $f(t)$ dans un voisinage de 
+taille $T$ est 
+\[
+L[f(t)] = \frac 1 T \int_{t-\frac T 2}^{t+\frac T 2} f( u ) d u .
+\]
+Cette int\'egrale peut \^etre r\'e\'ecrite comme un produit de 
+convolution avec 
+\[
+h(t) = \left\{ 
+\begin{array}{ll}
+ \frac 1 T & \mbox{si $t \in [-\frac T 2 , \frac T 2 ]$} \\
+ 0 & \mbox{si $|t| > \frac T 2$}
+\end{array}
+\right.
+\]
+
+$\bullet$ 
+Une {\it moyenne pond\'er\'ee} correspond \`a une
+r\'eponse impulsionnelle $h(t)$ telle que
+\[
+\int_{- \infty} ^{+ \infty} h(u) ~d u = 1 .
+\]
+L'int\'egrale
+\[
+L[f(t)] = \int_{-\infty}^{+\infty} h (u) f(t-u) du 
+\]
+peut \^etre interpr\'et\'ee comme une moyenne pond\'er\'ee par $h(u)$
+de $f(u)$ au voisinage de $t$. Si
+$f(t) = c$ alors on v\'erifie que $L[f(t)] = c$. On verra
+comment optimiser
+le choix de $h(u)$ pour enlever au mieux les fluctuations 
+irr\'eguli\`eres de $f(t)$ dues \`a un bruit de mesure.
+
+\subsection{Fonction de transfert}
+
+Les exponentielles complexes $e^{i \om t}$
+sont les vecteurs propres des op\'erateurs de convolution.
+En effet
+\[
+L[e^{i \om t}] = 
+\int_{- \infty} ^ {+ \infty}  h ( u ) e^{i (t-u) \om}~d u ,
+\]
+ce qui nous donne
+\[
+L[e^{i \om t}] = 
+e ^ {i t \om} \int_{- \infty} ^ {+ \infty}  h ( u ) 
+e^{-i \om u}d u = 
+e ^ {i t \om} \hat h ( \om ),
+\]
+avec pour valeur propre
+\[
+\hat h ( \om ) = \int_{- \infty} ^ {+ \infty}  h ( u ) 
+e^{-i \om u }~d u .
+\]
+La fonction $\hat h(\om)$ est la transform\'ee de Fourier
+de $h(t)$ et est appel\'ee fonction de transfert
+du filtre.
+Les exponentielles \'etant les vecteurs propres d'un syst\`eme
+lin\'eaire homog\`ene, il est tentant d'essayer d'exprimer le
+signal $f(t)$ comme somme d'exponentielles complexes,
+de fa\c{c}on \`a facilement calculer la r\'eponse du filtre.
+L'analyse de Fourier prouve qu'une telle d\'ecomposition est
+possible, en imposant des conditions tr\`es faibles sur $f(t)$.
+
+\section{Analyse de Fourier}
+
+
+\subsection{Transform\'ee de Fourier dans $\LU$}
+
+Pour s'assurer que l'int\'egrale de Fourier
+\begin{equation}
+\label{fourier}
+\hat f ( \om ) = \int_{- \infty}^{+ \infty} 
+f(t ) e^{-i \om t} dt
+\end{equation}
+existe, on suppose que $f(t)$ est int\'egrable
+$f(t) \in \LU$. Cela nous permet d'\'etudier ses propri\'et\'es
+principales avant de l'\'etendre \`a d'autres classes de fonctions.
+
+Lorsque $f(t) \in \LU$, 
+\begin{equation}
+|\hat f(\om)| \leq \int_{- \infty}^{+ \infty} |f(t )| dt .
+\end{equation}
+La transform\'ee de Fourier est alors born\'ee et l'on peut
+v\'erifier que $\hat f (\om)$ est continue (exercice).
+Si $\hat f (\om) \in \LU$, on peut
+prouver \cite{bony} que l'op\'erateur de Fourier s'inverse et que
+\begin{equation}
+\label{inverse}
+f ( t ) = \frac 1 {2 \pi} \int_{- \infty}^{+ \infty} 
+\hat f(\om ) e^{i \om t} d \om .
+\end{equation}
+La transform\'ee de Fourier $\hat f(\om)$ peut donc \^etre 
+interpr\'et\'ee
+comme l'amplitude de la composante sinuso\"{\i}dale $e^{i \om t}$
+de fr\'equence $\om$ dans $f(t)$.
+Au lieu de d\'ecrire $f(t)$ par ses valeurs \`a chaque instant,
+la transform\'ee de Fourier donne une description de $f(t)$
+en somme de sinuso\"{\i}des
+totalement d\'elocalis\'ees dans le temps.\\
+
+{\bf Regularit\'e}
+Les composantes irr\'eguli\`eres de $f(t)$ sont reconstruites
+par les sinuso\"{\i}des $e^{i \om t}$ qui oscillent rapidement 
+et donc de hautes fr\'equences
+$\om$. Si la transform\'ee de Fourier $\hat f(\om)$ d\'ecro\^{\i}t
+rapidement, cela signifie donc que $f(t)$ est une fonction
+r\'eguli\`ere. Cette propri\'et\'e se formalise en montrant 
+que si
+\[
+\int_{-\infty}^{+\infty}|\hat f(\om)| (|\om|^p + 1 ) < +\infty ,
+\]
+alors $f(t)$ est $p$ fois contin\^ument d\'erivable. Pour d\'emontrer
+ce r\'esultat, on prouve d'abord que la transform\'ee de Fourier
+de $\frac {d^p f(t)} {dt^p}\in \LU$ est 
+$(i \om)^p \hat f(\om)$ (exercice). On utilise ensuite le fait
+que si $\hat g (\om) \in \LU$ alors $g(t)$ est born\'ee et
+continue, ce qui se montre en utilisant (\ref{inverse}).
+L'\'equivalence entre r\'egularit\'e temporelle et d\'ecroissance 
+du module de la transform\'ee de Fourier est particuli\`erement
+importante pour analyser les propri\'et\'es d'un signal $f(t)$.
+
+Pour les applications au traitement du signal, 
+le r\'esultat le plus important est 
+le th\'eor\`eme de convolution.
+
+\begin{theorem} [Convolution]
+\label{th_convol}
+Soit $f(t) \in \LU$ et $h(t) \in \LU$. La
+fonction $g(t) = h \star f (t) \in \LU$ et sa transform\'ee de
+Fourier est 
+\begin{equation}
+\label{convolution}
+\hat g (\om) = \hat h(\om) \hat f(\om) .
+\end{equation}
+\end{theorem}
+
+\noindent{\bf D\'emonstration} \\
+\[
+\hat g (\om) = \int_{-\infty}^{+\infty} e ^{-it\om}
+\left \{ \int_{-\infty}^{+\infty} f(t-u) h(u) du \right\} dt .
+\]
+Comme $|f(t-u)| |h(u)|$ est sommable dans $\R^2$, on peut
+appliquer le th\'eor\`eme de Fubini et le changement de
+variable $(t,u) \rightarrow (v=t-u,u)$ nous donne
+\begin{eqnarray*}
+\hat g (\om) & = & \int_{-\infty}^{+\infty} 
+\int_{-\infty}^{+\infty} e ^{-i(u+v)\om} f(v) h(u) du dv \\
+& = &
+\left\{\int_{-\infty}^{+\infty} e ^{-iv\om} f(v) dv \right\}
+\left\{\int_{-\infty}^{+\infty} e ^{-iu\om} h(u) du \right\} ,
+\end{eqnarray*}
+ce qui v\'erifie (\ref{convolution}). $\Box$
+\\
+\\
+{\bf Filtrage}
+Le th\'eor\`eme de convolution prouve que
+la transform\'ee de Fourier d'un filtrage
+$L[f] (t) = f \star h (t)$ est $\hat f(\om) \hat h(\om)$.
+La formule 
+de reconstruction 
+\begin{equation}
+f ( t ) = \frac 1 {2 \pi} \int_{- \infty}^{+ \infty} 
+\hat f(\om ) e^{i \om t} d \om .
+\end{equation}
+appliqu\'ee \`a $L[f](t)$ implique donc
+\begin{equation}
+L[f] ( t ) = \frac 1 {2 \pi} \int_{- \infty}^{+ \infty} 
+\hat h(\om) \hat f(\om ) e^{i \om t} d \om .
+\end{equation}
+Chaque composante fr\'equentielle $e^{i \om t}$ de $f(t)$ 
+d'amplitude $\hat f(\om)$ est
+donc amplifi\'ee ou att\'enu\'ee par $\hat h(\om)$. Ceci n'est pas
+surprenant puisque nous avons d\'ej\`a prouv\'e que 
+les exponentielles $e^{i \om t}$ sont des
+vecteurs propres d'une convolution.
+Si $\hat h(\om) = 0$ pour $\om \in [\om_1,\om_2]$, les 
+composantes fr\'equentielles de $f(t)$
+pour $\om \in [\om_1,\om_2]$ sont annul\'ees par l'op\'erateur
+$L$, d'o\`u l'appellation ``filtre''.
+
+\newpage
+
+\noindent {\bf Propri\'et\'es g\'en\'erales}
+Le tableau qui suit r\'esume certaines propri\'et\'es importantes
+de la tranform\'ee de Fourier. Les d\'emonstrations se font
+le plus souvent par un simple changement de variable dans
+l'int\'egrale de Fourier.
+
+\begin{eqnarray}
+\mbox{\bf Propri\'et\'e} & \mbox{\bf Fonction} & 
+\mbox{\bf Transform\'ee de Fourier} \nonumber \\ 
+&  f(t) & \hat f(\om) \nonumber \\
+\label{symm}
+\mbox{Inverse} & \hat f(t) & 2 \pi f(-\om) \\
+\label{convol}
+\mbox{Convolution} & f_1 \star f_2 & \hat f_1 (\om) \hat f_2 (\om) \\
+\label{mult}
+\mbox{Multiplication} & f_1(t) f_2(t) & \frac 1 {2\pi}\hat f_1 \star \hat f_2 (\om) \\
+\label{trans}
+\mbox{Translation} & f(t-t_0) & e ^{-i t_0 \om} \hat f(\om) \\
+\label{modul}
+\mbox{Modulation} & e ^{i \om_0 t} f(t) & \hat f(\om - \om_0) \\
+\label{dilate}
+\mbox{Dilatation} & f(a t) & \frac 1 {|a|} \hat f (\frac \om a ) \\
+\label{diffentiation}
+\mbox{Diff\'erentiation} & \frac {d^p f(t)} {dt^p} & (i \om)^p \hat f(\om) \\
+\label{polynome}
+\mbox{Multiplication Polyn\^omiale } & (- i t)^p f(t)  & \frac {d^p \hat
+f(\om)} {d \om^p} \\
+\label{conjugue}
+{\rm Complexe~ Conjugu\acute e} & f^*(t) & \hat f^* (-\om) \\
+\label{symmHerm}
+{\rm Sym\acute etrie~ Hermitienne} & f(t) = \Reel f(t) & 
+\hat f (-\om) = \hat f ^* (\om) \\
+\label{reelle}
+{\rm Composante ~R \acute{e}elle} & \Reel f(t) & \frac {\hat f(\om) + 
+\hat f^*(-\om)} 2 \\
+\label{imaginaire}
+\mbox{Composante Imaginaire} & \Ima f(t) & \frac {\hat f(\om) - \hat f^* (-\om)} {2i} \\
+\label{paire}
+\mbox{Composante Paire} & \frac {f(t)+f^*(-t)} 2 & \Reel \hat f(\om) \\
+\label{impaire}
+\mbox{Composante Impaire} & \frac {f(t)-f^*(-t)} 2 & \Ima \hat f(\om) 
+\end{eqnarray}
+
+
+\subsection{Transform\'ee de Fourier dans $\LD$ et Diracs}
+
+Plut\^ot que de travailler dans $\LU$, il est souvent plus facile
+de consid\'erer les signaux comme des \'el\'ements de 
+l'espace de Hilbert $\LD$ car on a alors acc\`es \`a toutes les
+facilit\'es donn\'ees par l'existence d'un produit scalaire.
+Le produit scalaire de $f(t) \in \LD$ et $g(t) \in \LD$
+est d\'efini par
+\[
+<f,g> = \int_{- \infty}^ {+ \infty} f(t)  g^* (t) dt  ,
+\]
+et la norme
+\[
+\|f\|^2 = <f,f> = \int_{- \infty}^ {+ \infty} |f(t)|^2 dt  .
+\]
+Pour facilement travailler dans cette structure Hilbertienne,
+il nous faut y d\'efinir la transform\'ee de Fourier.
+Cela pose un probl\`eme car l'int\'egrale
+de Fourier (\ref{fourier}) d'une fonction de carr\'e int\'egrable n'est pas
+toujours convergente. 
+\\
+\\
+{\bf Conservation d'\'energie}
+La transform\'ee de Fourier s'\'etend
+\`a partir de $\LU$ par un argument de densit\'e qui utilise
+le fait qu'\`a une constante pr\`es,
+la norme et les angles dans $\LD$ ne
+sont pas modifi\'es par transform\'ee de Fourier.
+
+\begin{theorem}
+Soient $f(t)$ et $h(t)$ dans $\LU \cap \LD$,
+\begin{equation}
+\label{parseval}
+<f,h> = \int_{- \infty}^ {+ \infty} f(t) h^* (t) dt = 
+\frac 1 {2 \pi} 
+\int_{- \infty}^{+ \infty} \hat f( \om ) \hat h ^*(\om) d\om = 
+\frac 1 {2 \pi} < \hat f , \hat h >.
+\end{equation}
+Pour $h=f$ on obtient la formule de Plancherel
+\begin{equation}
+\label{plancherel}
+|| f ||^2 = 
+\int_{- \infty}^ {+ \infty} |f(t)|^2 dt = 
+\frac 1 {2 \pi} 
+\int_{- \infty}^{+ \infty} |\hat f( \om )|^2 d\om = 
+\frac 1 {2 \pi} || \hat f ||^2 .
+\end{equation}
+\end{theorem}
+
+\noindent{\bf D\'emonstration de (\ref{parseval})}\\
+Prenons $g(t) = f \star \tilde h (t)$ avec 
+$\tilde h (t) = h^*(-t)$. 
+Le th\'eor\`eme de convolution en (\ref{convolution}) et 
+(\ref{conjugue}) montre que
+$\hat g (\om) = \hat f(\om) \hat h^*(\om)$. 
+La formule de reconstruction (\ref{inverse}) appliqu\'ee
+\`a $g(0)$ nous donne
+\begin{equation}
+\int_{- \infty}^ {+ \infty} f(t) h^* (t) dt = 
+g(0) = 
+\frac 1 {2 \pi} \int_{-\infty}^{+ \infty} \hat g (\om) d \om =
+\frac 1 {2 \pi} 
+\int_{- \infty}^{+ \infty} \hat f( \om ) \hat h ^*(\om) d\om . 
+\end{equation}
+$\Box$
+\\
+\\
+\noindent{\bf Extension dans $\LD$}
+Pour d\'efinir la transform\'ee de Fourier de
+$f(t) \in \LD$, on construit
+une famille $\{f_n\}_\nZ$ de fonctions dans 
+$\LU \cap \LD$ qui convergent vers $f$
+\[
+\lim_{n \rightarrow + \infty} \|f - f_n \| = 0.
+\]
+Ceci est possible car
+$\LU \cap \LD$ est dense dans $\LD$.
+La famille $\{f_n (t)\}_\nZ$ est une suite de Cauchy, 
+et donc
+$\| f_n - f_p \|$ est arbitrairement petit
+pour $n$ et $p$ suffisamment grands.
+Comme $f_n (t) \in \LD$, la formule de Plancherel montre que
+$\hat f_n (\om) \in \LD$.
+De plus, $\{\hat f_n (\om)\}_\nZ$ est aussi une suite de Cauchy car
+\[
+\| \hat f_n - \hat f_p \| = \sqrt{2 \pi}  \| f_n - f_p \| 
+\]
+est arbitrairement petit pour $n$ et $p$ suffisamment grands.
+Comme toute suite de Cauchy converge dans
+$\LD$, il existe $\hat f(\om) \in \LD$ tel que
+\[
+\lim_{n \rightarrow + \infty} \|\hat f - \hat f_n \| = 0.
+\]
+Par d\'efinition, $\hat f(\om)$ est la tranform\'ee de
+Fourier de $f(t)$.
+On peut alors v\'erifier que 
+le th\'eor\`eme de convolution, la formule
+de Parseval et les propri\'et\'es
+(\ref{symm}-\ref{impaire}) restent valables dans $\LD$.
+\\
+\\
+\noindent{\bf Dirac}
+La transform\'ee de Fourier d'un Dirac peut simplement se
+calculer en se souvenant que pour toute fonction continue
+$f(t)$
+\[
+\int^{+\infty}_{-\infty} f (t) \delta (t) dt = f(0).
+\]
+La transformee de Fourier de $\delta (t)$ est donc
+\[
+\int^{+\infty}_{-\infty} e^{-i\om t} \delta (t) dt  = 1 .
+\]
+C'est la fonction constante \'egale \`a $1$.
+La th\'eorie des distributions \cite{bony2} montre que l'on
+peut definir la transform\'ee de Fourier pour toute distribution
+temp\'er\'ee.
+
+\subsection{Exemples de transform\'ee de Fourier}
+
+$\bullet$ Une 
+{\it Gaussienne} $f(t) = e^{- t^2}$ \'etant une fonction
+de la classe de Schwartz, sa transform\'ee de Fourier est
+aussi une fonction $\bC^\infty$ \`a d\'ecroissance rapide.
+Pour calculer sa transform\'ee de Fourier,
+on montre par une int\'egration par partie (exercice)
+que sa transform\'ee de Fourier
+\[
+\hat f(\om) = \int_{-\infty}^{+\infty} e^{-t^2} e^{-i \om t} dt 
+\]
+satisfait l'\'equation diff\'erentielle
+\[
+2 \hat f '(\om) + \om \hat f (\om) = 0.
+\]
+La solution est une gaussienne
+\[
+\hat f(\om) = K e^{-\om^2/4} ,
+\]
+et comme
+\[
+\hat f(0) = \int_{-\infty}^{+\infty} e^{-t^2} dt = \sqrt \pi ,
+\]
+\begin{equation}
+\label{gaussian-fourier}
+\hat f(\om) = \sqrt \pi e^{-\om^2/4} .
+\end{equation}
+
+$\bullet$ La 
+{\it fonction indicatrice}
+$f(t) = 1_{[-T,T]} (t)$ est discontinue et donc a une
+transform\'ee de Fourier qui n'est pas dans $\LU$ mais qui
+est dans $\LD$
+\begin{equation}
+\label{indicator}
+\hat f (\om) =  \int_{-T}^{T} e^{-i \om t} dt = \frac {2 \sin (T \om)} { \om} .
+\end{equation}
+
+$\bullet$ 
+Le 
+{\it sinus cardinal} $f(t) = \frac{ \sin \pi t} {\pi t}$ est dans $\LD$ mais pas
+dans $\LU$. Sa transform\'ee de Fourier se 
+d\'eduit de (\ref{indicator}) gr\^ace \`a la propri\'et\'e de sym\'etrie 
+(\ref{symm})
+\begin{equation}
+\label{fourier-sinc}
+\hat f(\om) = 1_{[-\pi,\pi]}(\om) .
+\end{equation}
+
+$\bullet$ Un {\it Dirac} translat\'e
+$\delta_\tau (t) = \delta (t-\tau)$ a une
+transform\'ee de Fourier qui se calcul directement
+\begin{equation}
+\label{dirac_transl}
+\hat \delta_\tau (\om) = 
+\int_{-\infty}^{+\infty} \delta_\tau (t) e^{-i\om t} dt = 
+e^{-i\om \tau} .
+\end{equation}
+
+$\bullet$ La {\it valeur principale} $f(t) = \vp \frac 1 {\pi t}$
+d\'efinit par convolution la transform\'ee de Hilbert 
+\begin{equation} 
+{\cal H}[ g] (t) = g \star \vp \frac 1 {\pi t } = 
+\frac 1 \pi \int_{- \infty}^{+ \infty} 
+{g( u )} \vp \frac 1 {t - u} d u .
+\end{equation} 
+On calcule la transform\'ee de 
+Fourier de $\vp \frac 1 {\pi t}$
+en observant que
+\[
+t f(t) = \frac 1 \pi ,
+\]
+ce qui se traduit en Fourier gr\^ace \`a
+(\ref{polynome}) par
+\[
+\frac {d \hat f (\om)} {d \om} = -2i \delta (\om) .
+\]
+Donc 
+\begin{equation}
+\label{hilbert_fourier}
+\hat f (\om) = -i ~ \sign (\om) + c
+\end{equation}
+avec
+\[
+\sign(\om) = 
+\left\{
+\begin{array} {ll}
+1 & \mbox{ si $\om > 0$}\\
+0 & \mbox{ si $\om = 0$}\\
+-1 & \mbox{ si $\om < 0$}
+\end{array}
+\right.
+\]
+Comme $f(t)$ est r\'eelle antisym\'etrique, sa transform\'ee
+de Fourier est imaginaire pure antisym\'etrique ce qui
+prouve que $c = 0$.
+
+$\bullet$ Le {\it peigne de Dirac}
+\begin{equation}
+\label{peigne}
+c(t) = \sum_{n=-\infty}^{+ \infty} \delta (t -nT)
+\end{equation}
+est une distribution 
+dont la transform\'ee de Fourier se d\'eduit de (\ref{dirac_transl})
+\begin{equation}
+\hat c( \om) = \sum_{n=-\infty}^{+ \infty} e^{-inT \om}.
+\end{equation}
+La formule de Poisson prouve que $\hat c (\om)$ est
+aussi \'egal \`a un peigne de Dirac dont l'espacement est
+$\frac{2 \pi} T$.
+
+\begin{theorem}[Formule de Poisson]
+\label{poisson-lemma}
+\begin{equation}
+\label{poisson}
+\sum_{n=-\infty}^{+ \infty} e^{-inT \om} =
+\frac {2 \pi} T \sum_{k=-\infty}^{+\infty}
+\delta(\om - \frac {2\pi k} T) .
+\end{equation}
+\end{theorem}
+
+
+\noindent {\bf D\'emonstration} 
+Comme $C(\om) = \sum_{n=-\infty}^{+ \infty} e^{-inT \om}$ est
+${2 \pi} / T$ p\'eriodique, il suffit de prouver que sa
+restriction \`a $[-\pi/T,\pi/T]$ est \'egale \`a
+${2 \pi}/ T \delta (\om)$.
+Pour tout
+$\phi (\om) \in \bC^\infty_0$ dont le support est inclus dans
+$[-\pi/T,\pi/T]$, on veut montrer que
+\begin{equation}
+\label{converge}
+<C , \phi> = 
+\lim_{N \rightarrow + \infty} \int_{-\infty}^{+\infty}
+\sum_{n=-N}^{+ N} e^{-inT \om}
+\phi(\om) d\om = 
+\frac {2\pi} T \phi(0) .
+\end{equation}
+La somme de cette s\'erie g\'eom\'etrique est
+\begin{equation}
+\label{geom-sum}
+\sum_{n=-N}^{+N} e^{-inT\om} = 
+\frac {\sin [(N+1/2)T\om]} {\sin[T\om/2]} .
+\end{equation}
+Donc
+\begin{equation}
+<C , \phi> = \lim_{N \rightarrow + \infty} 
+\frac {2 \pi} T 
+\int_{-\pi/T}^{+\pi/T} \frac {\sin [(N+1/2)T\om]} {\pi \om} 
+\frac {T\om/2} {\sin[T\om/2]} \phi(\om) d\om .
+\end{equation}
+Pour $|\om| < \pi/T$, on d\'efinit
+\[
+\hat \psi (\om) = {\phi(\om)}  \frac {T\om/2} {\sin[T\om/2]} 
+\]
+tandis que $\hat \psi (\om) = 0$ si $|\om| > \pi /T$.
+Cette fonction est la transform\'ee de Fourier de
+$\psi (t) \in \LD$.
+Comme ${2 \sin (a \om)}/{\om}$ est la transform\'ee de Fourier de
+$1_{[-a,a]}(t)$, la formule de Parseval 
+(\ref{parseval}) implique
+\begin{equation}
+<C , \phi> = 
+\frac {2 \pi} T 
+\int_{-\infty}^{+\infty} \frac {\sin [(N+1/2)T \om]}{\pi \om} 
+\hat \psi (\om) d\om = \frac {2 \pi} T 
+\int_{-(N+1/2)T}^{(N+1/2)T} \psi(t) dt .
+\end{equation}
+Lorsque $N$ tend vers $+ \infty$ l'int\'egral converge vers
+$\hat \psi(0) = \phi(0)$. $\Box$\\
+
+
+\section{Synth\`ese de filtres}
+
+\subsection{Filtres passe-bandes}
+
+La transform\'ee
+de Fourier d'un signal filtr\'e $g(t) = f \star h (t)$ est
+\[
+\hat g (\om) = \hat f (\om) \hat h (\om) .
+\]
+De nombreuses applications n\'ecessitent
+d'isoler les composantes du signal
+dans diff\'erentes bandes de fr\'equences.
+
+Un filtre
+passe-bas id\'eal a une fonction de transfert d\'efinie par
+\begin{equation} 
+\label{passe-bas}
+\hat h_0 ( \om  ) = 
+   \left\{ \begin{array}{ll} 
+1 & \mbox{si $|\om| \leq \om_c$}\\
+0 & \mbox{si $|\om| > \om_c$}
+\end{array}
+   \right.  
+\end{equation}
+Il \'elimine donc toutes les fr\'equences de $\hat f (\om)$
+au del\`a de $\om_c$.
+On d\'eduit de (\ref{fourier-sinc}) que la r\'eponse impulsionnelle 
+de ce filtre est 
+\[
+h_0(t) = \frac{\sin (\om_c t)} {\pi t} .
+\]
+Ce filtre passe-bas id\'eal est ni causal
+ni stable. Le paragraphe suivant
+explique comme l'approximer avec
+un syst\`eme physiquement r\'ealisable.
+
+Un filtre passe-bande r\'eel 
+a une fonction de transfert qui supprime
+toute composante fr\'equentielle en dehors de deux intervalles
+sym\'etriques par rapport \`a $\om = 0$
+\begin{equation} 
+\hat h_1 ( \om  ) = 
+   \left\{ \begin{array}{ll} 
+1 & \mbox{si $|\om| \in [\om_0 - \om_c , \om_0 + \om_c ]$}\\
+0 & \mbox{ailleurs} 
+\end{array}
+   \right.  
+\end{equation}
+Un tel filtre peut se d\'eduire d'un filtre passe-bas. Comme 
+\[
+\hat h_1(\om) = \hat h_0 (\om-\om_0)+ \hat h_0 (\om+\om_0) .
+\]
+Comme la transform\'ee de Fourier de
+$h_0 (t) e^{i\om_0 t}$ est $\hat h_0 (\om-\om_0)$ on d\'eduit que
+\[
+h_1(t) = 2 \cos (\om_0 t)~ h_0 (t) = 2 \cos (\om_0 t)~  
+\frac{\sin \om_c t} {\pi t} .
+\]
+Ce filtre est g\'en\'eralement approxim\'e par un filtre
+causal et stable, en rempla\c{c}ant
+$h_0 (t)$ par une approximation stable et causale.
+
+\subsection{Filtrage par circuits \'electroniques}
+\label{circuits}
+
+Un filtrage lin\'eaire analogique est le plus
+souvent impl\'ement\'e avec un
+circuit \'electronique. Le signal $f(t)$ est
+repr\'esent\'e par une diff\'erence de potentiel $u (t) = f(t)$
+appliqu\'ee \`a l'entr\'ee du circuit. 
+Pour certaines r\'eponses impulsionnelles $h(t)$, nous allons montrer
+que l'on peut configurer le circuit de fa\c con \`a ce que
+la diff\'erence de potentiel
+$v (t)$ \`a la sortie soit \'egale au produit de convolution
+$v (t) = u \star h (t)$ (voire figure \ref{circuit-fig}).
+
+Les circuits VLSI analogiques sont 
+essentiellement compos\'es de r\'esistances, de capaci\'t\'es, et
+d'amplificateurs op\'erationnels, construits avec  
+des transistors. Les inductances ne sont pas utilis\'ees 
+car elles demandent trop de place sur le silicium,
+mais elles sont remplac\'ees par 
+des circuits \'equivalents.
+Ce type de circuit relie les diff\'erences de
+potentiels \`a l'entr\'ee et \`a la sortie par une \'equation 
+diff\'erentielle
+\`a coefficients constants
+\begin{equation}
+\label{equa-diff}
+a_N \frac {d^N v (t)}{dt^N} + 
+... + a_{1} \frac {d v (t)}{dt} + a_0 v (t) = 
+b_M \frac {d^M u (t)}{dt^M} + 
+... + b_{1} \frac {d u (t)}{dt} + b_0 u (t) .
+\end{equation}
+
+On suppose que $u (t)$ est un signal causal, $u (t) = 0$ pour
+$t < 0$, et l'on veut calculer la solution $v (t)$ de 
+cette \'equation diff\'erentielle. 
+Cette solution d\'epend des conditions initiales
+\`a la sortie du circuit sp\'ecifi\'ees par 
+$ \{ \frac {d^k v (0)} {dt^k} \}_{0 \leq k < N}$.
+Nous supposerons que le circuit est initialement au repos ce qui
+signifie que toutes ces d\'eriv\'ees sont nulles. 
+La sortie $v(t)$ est alors reli\'ee a $u(t)$ par un op\'erateur
+lin\'eaire homog\`ene dont nous calculons la fonction de transfert.
+\\
+\\
+{\bf Fonction de transfert}
+La propri\'et\'e de diff\'erentiation 
+(\ref{diffentiation}) permet de calculer
+la transform\'ee de Fourier de chaque c\^ot\'e de 
+l'\'egalit\'e (\ref{equa-diff})
+\begin{eqnarray*}
+{a_N (i\om)^N \hat v (\om) + ... + a_{1} (i \om) \hat v (\om) 
++ a_0} \hat v (\om) & = &\\
+{b_M (i\om)^M \hat u (\om) + ... + b_{1} (i \om) \hat u (\om)
++ b_0} \hat u (\om). & &
+\end{eqnarray*}
+La fonction de transfert est donc
+\begin{equation}
+\label{electr-transf}
+\hat h (\om) = \frac {\hat v (\om)}{\hat u (\om)} =
+\frac {b_M (i\om)^M + ... + b_{1} (i \om) + b_0} 
+{a_N (i\om)^N + ... + a_{1} (i \om) + a_0} .
+\end{equation}
+Cette fonction de transfert est aussi appel\'ee
+l'imp\'edance du circuit. 
+
+Dans le cas d'un circuit \'electronique, on a 
+$N \geq M$, car $|\hat h(\om)|$ ne peut pas tendre ver $+\infty$ \`a
+haute fr\'equences.
+La sortie du circuit initialement au repos peut s'\'ecrire
+\[
+v (t) = \int_{-\infty}^{+\infty} h(\tau) u(t-\tau) d\tau =
+\int_{0}^{+\infty} h(\tau) u(t-\tau) d\tau ,
+\]
+car la r\'eponse impulsionnelle $h(t)$ est causale.
+\\
+\\
+{\bf Exemple}
+Le circuit RC avec amplification 
+de la figure \ref{circuit-fig} est un exemple particuli\`erement
+simple qui relie l'entr\'ee et la sortie par l'\'equation
+\[
+RC \frac {d v (t)}{dt} + v (t) = (1 + \frac {R_2} {R_1})u (t).
+\]
+L'imp\'edance est donc
+\[
+\hat h(\om) = \frac {1 + \frac {R_2} {R_1}} {1 + RC i \om} .
+\]
+One peut v\'erifier (exercice) que la r\'eponse impulsionnelle 
+du filtrage homog\`ene est causale et s'exprime \`a partir
+de la fonction \'echelon (\ref{Heavyside}) par
+\[
+h(t) = \frac 1 {RC} \,(1 + \frac {R_2} {R_1})\, 
+e^{-\frac {t}{RC}} \, \gamma (t) .
+\]
+
+\begin{figure}[bhtp]
+\centerline{
+	\leavevmode\epsfbox{/home/mallat/X/TREX/figures/SigFig/MALLATFIG2.1-EPS}}
+%\vspace{6cm}
+\caption{Circuit RC avec un amplificateur op\'erationnel}
+\label{circuit-fig}
+\end{figure}
+
+
+\subsection{Approximations par filtres rationnels}
+
+Nous avons vu qu'un circuit \'electronique
+impl\'emente 
+un filtre dont la fonction de transfert
+est une fonction rationnelle de $i \om$
+\begin{equation}
+\label{rationnel}
+\hat h(\om) = \frac {N(i\om)} {D(i\om)} ,
+\end{equation}
+o\`u $N(u)$ et $D(u)$ sont des polyn\^omes \`a coefficients
+r\'eels. 
+On peut d\'emontrer (exercice) que le filtre est causal et
+stable si et seulement si $D(s)$ est un polyn\^ome dont les
+racines ont des parties r\'eelles strictement n\'egatives. 
+Par ailleurs on montre aussi que si 
+$P(\om)$ est une fonction
+rationnelle de $i \om$ avec $P(\om) \geq 0$ pour tout $\om \in \R$,
+alors il existe une fonction de transfert rationelle, 
+correspondant \`a un filtre causal et
+stable, qui satisfait
+\[
+|\hat h (\om)|^2 = P(\om).
+\]
+
+Un filtre 
+passe-bas id\'eal 
+\[
+\hat h_0 (\om) = 1_{[-\om_c,\om_c]} (\om)
+\] 
+n'est pas r\'ealisable
+par un circuit \'electrique car sa fonction de transfert
+n'est pas rationnelle. 
+Le nombre d'\'el\'ements (r\'esistances, capacit\'es,
+amplificateurs) n\'ecessaires pour impl\'ementer 
+une fonction de transfert rationnelle $\hat h(\om)$ est
+proportionnel au degr\'e du d\'enominateur.
+Pour limiter la complexit\'e
+du circuit, on veut donc
+approximer $|\hat h_0 (\om)|^2$ par une
+fonction rationnelle de faible degr\'e, tout en minimisant l'erreur
+d'approximation. 
+L'erreur
+d'approximation est d\'efinie par un gabarit illustr\'e
+par la figure \ref{gabarit}, qui sp\'ecifie 
+l'amplitude maximum des oscillations de
+$|\hat h(\om)|^2$ dans les bandes de passage et d'att\'enuation
+ainsi que la largeur de la bande de transition.
+Le probl\`eme est donc de trouver des fonctions rationnelles
+de degr\'e le plus faible possible, qui satisfont les
+contraintes de gabarit impos\'ees par une application.
+Les polyn\^omes de Butterworth ou de Chebyshev ont des
+propri\'et\'es particuli\`erement bien adapt\'ees \`a ce type 
+d'approximation.
+
+\begin{figure}[bhtp]
+\centerline{
+	\leavevmode\epsfbox{/home/mallat/X/TREX/figures/SigFig/MALLATFIG2.2-EPS}}
+\caption{Le gabarit d'un filtre sp\'ecifie
+l'amplitude maximum des oscillations $\epsilon_p $ et $\epsilon_a $
+dans les bandes de passage et d'att\'enuation du filtre, ainsi que
+la largeur $\Delta \omega$ de la bande de transition}
+\label{gabarit}
+\end{figure}
+
+\noindent {\bf Filtres de Butterworth}
+Un filtre de Butterworth d'ordre $n$ est d\'efini par
+\begin{equation}
+\label{butterworth}
+|\hat h_n^b(\om)|^2 = \frac 1 {1 + (\om / \om_c)^{2n}} .
+\end{equation}
+Plus $n$ augmente plus le 
+filtre est plat au voisinage de 
+$\om = 0$ car
+les $2n-1$ premi\`eres d\'eriv\'ees de $|\hat h(\om)|^2$ sont nulles
+en $\om = 0$. A la fr\'equence de coupure $\om_c$, 
+$|\hat h^b_n(\om_c)|^2 = \half$.
+Ces filtres convergent vers le filtre passe-bas id\'eal
+(\ref{passe-bas}), au sens \`ou
+pour tout $\om \in \R -\{ \om_c\}$
+\[
+\lim_{n \rightarrow + \infty} |\hat h_n^b (\om)|^2 = 
+|\hat h_0 (\om)|^2 .
+\]
+\\
+\\
+{\bf Filtres de Chebyshev}
+Les filtres de Chebyshev ne sont pas plats au
+voisinage de $\om = 0$ mais ils ont des oscillations de
+tailles constantes dans la bande de passage. A
+degr\'e \'egal, ils ont
+une bande de transition plus faible que les filtres
+de Butterworth. Ils sont d\'efinis par
+\[
+|\hat h_n^c (\om)|^2 = \frac 1 {1 + \eps^2 C_n^2 (\om / \om_c)} ,
+\]
+o\`u $C_n (\om)$ est un polyn\^ome de Chebyshev de degr\'e $n$
+qui peut s'\'ecrire
+\begin{equation}
+C_n(\om) = 
+   \left\{ \begin{array}{ll} 
+\cos (n \cos^{-1} \om )  & \mbox{si $0 \leq |\om| \leq 1$}\\
+\cosh (n \cosh^{-1} \om ) &\mbox{si $|\om| \geq 1$}
+\end{array}
+   \right.  
+\end{equation}
+Ces polyn\^omes peuvent aussi \^etre caract\'eris\'es par r\'ecurrence
+\[
+C_0 (\om) = 1 ~~~,~~~C_1 (\om) = \om ,
+\]
+\[
+C_{n+1} (\om) = 2 \om C_n (\om) - C_{n-1} (\om) .
+\]
+Pour $|\om| < 1$,
+$|C_n(\om)|^2$ oscille r\'eguli\`erement
+entre $0$ et $1$ tandis que lorsque
+$|\om| > 1$, le
+cosinus hyperbolique augmente
+de fa\c{c}on monotone.
+En cons\'equence $|\hat h_n^c (\om)|^2$ 
+oscille entre 1 et
+$\frac 1 {1 + \eps^2}$ lorsque $0 \leq |\om| /\om_c \leq 1$.
+Lorsque $|\om| /\om_c \geq 1$ alors 
+$|\hat h_n^c (\om)|^2$ a une d\'ecroissance
+monotone vers $0$.
+
+Il existe d'autres familles de fonctions rationnelles utilis\'ees
+pour l'approximation du filtre passe-bas id\'eal et le choix
+d'une approximation pour une application est un art
+qui d\'epend du type de distortions que l'on peut admettre.
+
+
+\section{Modulation d'amplitude}
+\label{modulation}
+
+A travers un canal unique de transmission il est souvent n\'ecessaire
+de transmettre plusieurs signaux simultan\'ement, comme par exemple
+des \'emissions de radio ou des conversations t\'el\'ephoniques.
+Lorsque ces signaux peuvent \^etre bien approxim\'es par des fonctions
+dont la transform\'ee de Fourier est \`a support compact, la
+modulation d'amplitude permet de multiplexer ces signaux
+pour les transmettre en m\^eme temps.
+L'audition n'\'etant essentiellement sensible qu'\`a des
+sons entre 300Hz et 3300Hz, on peut limiter les sons 
+par filtrage passe-bas \`a l'intervalle de fr\'equence 
+$[-3300, 3300]$,
+lors de leur transmission t\'el\'ephonique ou radio.
+
+On suppose que 
+les signaux $\{ f_n \}_{\ZnN}$ que l'on veut multiplexer ont tous
+une transform\'ee de Fourier dont le support est inclu
+dans $[-b, b]$. 
+La modulation d'amplitude permet de multiplexer ces $N$ signaux
+en un seul signal dont la bande de
+fr\'equence est $N$ fois plus grande.
+Pour cela on 
+transforme chaque
+signal $f_n(t)$ en un signal modul\'e
+$f^m_n (t)$ dont la transform\'ee
+de Fourier a un support \'egal \`a 
+$[-\om_n-b,-\om_n] \cup [\om_n,b+\om_n]$. 
+En choisissant $\om_n = n b$,
+le support de $f_n^m (\om)$ n'intersecte pas
+le support de $f_p^m (\om)$ si $n \neq p$. 
+A partir du signal multiplex\'e
+\begin{equation}
+\label{sig-mult}
+M(t) = \sum_{n=0}^{N-1}  f^m_n (t) 
+\end{equation}
+on peut r\'ecup\'erer chaque signal $f^m_n$ par filtrage
+passe-bande, puis on reconstruit
+$f_n (t)$ par d\'emodulation. 
+Les paragraphes suivants expliquent le calcul
+de ces diff\'erentes \'etapes.
+
+\subsection{Signal analytique et transform\'ee de Hilbert}
+
+Les signaux r\'eels ayant une transform\'ee de Fourier
+\`a sym\'etrie hermitienne, leur
+support est sym\'etrique par rapport \`a $\om = 0$.
+On veut donc 
+transposer les fr\'equences
+de $f_n (t)$ de l'intervalle
+$[-b,b]$ \`a un double intervalle sym\'etrique
+$[-\om_n-b, -\om_n] \cup [\om_n, \om_n+b]$.
+Pour cela nous consid\'erons s\'epar\'ement les fr\'equences 
+positives et n\'egatives de $f_n(t)$, comme l'illustre la
+figure \ref{Multi-fig}.
+
+
+Comme $\hat f_n(\om) = \hat f_n^*(-\om)$, $\hat f_n(\om)$ est
+enti\`erement caract\'eris\'e par sa restriction \`a $\om > 0$
+donn\'ee par
+\begin{equation} 
+\hat f_n^z ( \om ) = 
+   \left \{ \begin{array}{ll} 
+            2 \hat f_n ( \om ) & \mbox{si $\om > 0$}\\
+            \hat f_n ( 0 ) & \mbox{si $\om = 0$}\\
+            0 & \mbox{si $ \om < 0$}
+            \end{array}
+   \right.  
+\end{equation}
+La fonction
+$f_n^z (t)$ est appel\'ee partie analytique de $f_n(t)$
+car on peut d\'emontrer
+qu'elle admet une extension analytique dans la partie sup\'erieure
+du plan complexe que l'on construit gr\^ace \`a la transform\'ee
+de Laplace [Bony]. 
+Les propri\'et\'es $(\ref{reelle},\ref{imaginaire})$ de
+la transform\'ee de Fourier montrent que 
+la transform\'ee de Fourier de la partie r\'eelle de
+$f^z_n (t)$ est
+\[
+\frac {\hat f_n^z ( \om ) + \hat f_n^{z*} ( - \om )} 2 = \hat f_n(\om) ,
+\]
+et donc que $\Reel  f_n^z (t) = f_n(t)$. De m\^eme
+la transform\'ee de Fourier de sa partie imaginaire est
+\begin{equation} 
+\frac {\hat f_n^z ( \om ) - \hat f_n^{z*} ( - \om )} {2 i} 
+= -i ~\mbox{sign} ( \om ) \hat f_n ( \om ).
+\end{equation} 
+Nous avons vu en (\ref{hilbert_fourier}) que 
+$-i ~\sign ( \om )$ est la fonction de transfert du
+filtre de Hilbert.
+La partie imaginaire de $f_n^z (t)$ est donc la transform\'ee
+de Hilbert de $f(t)$
+\begin{equation} 
+\Ima f_n^z (t) = {\cal H}[ f_n] (t) = 
+f_n \star \vp \frac 1 {\pi t } = 
+\frac 1 \pi \int_{- \infty}^{+ \infty} 
+{f_n( u )} ~\vp \frac 1 {t - u} d u .
+\end{equation} 
+\\
+\\
+{\bf Modulation d'amplitude}
+Pour transposer en fr\'equence $\hat f_n (\om)$ 
+et obtenir une fonction
+$ \hat f_n^m ( \om)$ dont le support est 
+$[-b-\om_n,-\om_n] \cup [\om_n,\om_n+b]$, on
+d\'ecale de $\om_n$ les
+fr\'equences positives $\hat f_n^z (\om)$ et de $-\om_n$
+les fr\'equences n\'egatives $\hat f_n^z(-\om)$ (figure \ref{Multi-fig})
+\begin{equation} 
+\hat f^m_n (\om ) = \frac {\hat f^z_n( \om - \om_n ) + 
+\hat f^{z *}_n( - \om - \om_n )} 2 .
+\end{equation} 
+On calcule avec (\ref{reelle}) et (\ref{modul}) la
+transform\'ee de Fourier inverse du c\^ot\'e droit
+de cette \'equation, ce qui nous donne
+\begin{equation} 
+f^m_n (t) = \Reel [ f_n^z (t) e^{i \om_n t} ] .
+\end{equation} 
+Comme $f_n^z (t) = f_n(t) + i {\cal H}[f_n](t)$, 
+la modulation d'amplitude s'exprime \`a partir de la
+transform\'ee de Hilbert par
+\begin{equation} 
+\label{modulation-amplitude}
+f^m_n(t) = f_n(t) cos (\om_n t) - {\cal H} [f_n] (t) sin (\om_n t) .
+\end{equation} 
+
+
+
+%\begin{figure}[bhtp]
+%\centerline{
+%	\leavevmode\epsfbox{/home/mallat/X/TREX/figures/SigFig/FIG2.3.EPS.txt}}
+%\caption{Multiplexage par modulation d'amplitude}
+%\label{Multi-fig}
+%\end{figure}
+
+\begin{figure}[bhtp]
+\vspace{13cm}
+\caption{Multiplexage par modulation d'amplitude}
+\label{Multi-fig}
+\end{figure}
+
+\subsection{D\'emodulation et d\'etection synchrone}
+
+Le signal multiplex\'e $M(t)$ (\ref {sig-mult}) est la
+somme de signaux modules $f^m_n(t)$ 
+dont les supports fr\'equentiels
+ne s'intersectent pas.
+On d\'efinit un filtre passe-bande dont le support est
+le m\^eme que celui de $\hat f_n^m (\om)$
+\begin{equation} 
+\hat h_n ( \om ) = 
+   \left \{ \begin{array}{ll} 
+            1 & \mbox{si~~ $|\om| \in  [ \om_n ,  \om_n + b ]$}\\
+            0 & \mbox{ailleurs } 
+            \end{array}
+   \right.  
+\end{equation}
+On a alors 
+\[
+f_n^m (t) = M \star h_n (t) .
+\]
+
+Le signal $f_n(t)$ se reconstruit \`a partir de $f_n^m (t)$ 
+en supprimant la modulation d'amplitude.
+L'\'equation (\ref{modulation-amplitude}) montre que
+\begin{equation} 
+g_n (t) = 2 f_n^m (t) cos(\om_n t ) = f_n (t) + 
+f_n (t) cos (2 \om_n t) - 
+{\cal H} [f_n] (t) sin (2 \om_n t) ,
+\end{equation} 
+ce qui s'\'ecrit en Fourier
+\begin{eqnarray}
+\label{demodulation}
+\hat g_n (\om)
+= \hat f_n (\om)& + &
+\frac {\hat f_n (\om-2\om_n) + \hat f_n (\om+2\om_n)} 2 \\
+&+ &
+\frac {\hat {{\cal H}[f_n]}(\om-2\om_n) - 
+\hat {{\cal H}[f_n]}(\om+2\om_n)} {2i}. \nonumber 
+\end{eqnarray}
+Comme le support de $\hat f_n (\om)$ et 
+de $\hat {{\cal H}[f_n]}(\om )$ est $[-b,b]$ et que
+$\om_n > b$, on s\'epare $\hat f(\om)$ des autres composantes
+fr\'equentielles avec la fonction de transfert
+\begin{equation} 
+\hat h_0 ( \om ) = 
+   \left \{ \begin{array}{ll} 
+            1 &\mbox{si $|\om | \leq b$}\\
+            0 & \mbox{ailleurs}
+            \end{array} .
+   \right.  
+\end{equation}
+On d\'eduit de (\ref{demodulation}) que
+\[
+f_n (t) = g_n \star h_0  (t) = (2 f_n^m (u) cos(\om_n u ) 
+\star h_0 (u))(t) .
+\]

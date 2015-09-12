@@ -1,0 +1,938 @@
+\chapter{Traitement de la Parole}
+\label{parole-chap}
+
+Le traitement de la parole n\'ecessite une analyse
+physiologique des m\'ecanismes
+de production, ce qui permet de comprendre les propri\'et\'es
+particuli\`eres de ce type de signal.
+Cela motive notament l'utilisation de mod\`eles autor\'egressifs.
+L'identification des param\`etres de ces mod\`eles se fait
+par r\'egression lin\'eaire. On peut ainsi
+effectuer un codage compacte des signaux de parole pour
+la t\'el\'ephonie cellulaire.
+
+
+\section{Mod\'elisation du signal de parole}
+\label{modelisation-paro}
+
+\subsection{Production}
+
+
+La production de la parole se fait en trois \'etapes.
+Les poumons compressent de l'air qui est envoy\'e
+\`a travers la trach\'ee. Cet air passe par le larynx qui est
+compos\'e d'un syst\`eme de cartilages et de muscles incluant les
+cordes vocales. Le larynx produit alors un signal d'excitation qui
+se propage \`a travers le conduit vocal. C'est la
+d\'eformation du conduit vocal qui produit l'articulation de la
+parole. Les \'el\'ements principaux de cette articulation sont la
+langue, les l\`evres et la machoire inf\'erieure. La figure
+\ref{parole-physio} illustre l'appareil phonatoire.
+\begin{figure}
+%(voire Genat/Karar p. 10)
+\vspace{7cm}
+\caption{Syst\`eme phonatoire \protect \cite{karar}.}
+\label{parole-physio}
+\end{figure}
+\\
+\\
+{\bf Excitation}
+Le larynx peut produire des signaux d'excitation diff\'erents.
+Les sons vois\'es tels que les voyelles sont produits par
+vibration des cordes vocales. L'air est forc\'e \` a travers les
+cordes vocales qui vibrent comme les l\`evres d'un trompettiste. Cela
+produit un train de quasi-impulsions, illustr\'e en
+figure \ref{quasi-impulsions},
+qui est envoy\'e dans le conduit vocal.
+La fr\'equence des r\'ep\'etitions, appel\'ee
+``pitch'', est essentiellement contr\^ol\'ee par la tension des cordes
+vocales. Elle correspond \`a la fr\'equence fondamentale (hauteur) du son.
+Dans le cas de la voix parl\'ee, le pitch est typiquement
+entre 100Hz et 300Hz. Une soprano peut cependant augmenter cette
+fr\'equence jusqu'\`a 3600Hz.
+
+\begin{figure}
+%(voire fig. 3-6 p. 65, Parson)
+\vspace{2cm}
+\caption{Train de quasi-impulsions \'emises par les cordes
+vocales}.
+\label{quasi-impulsions}
+\end{figure}
+
+Pour un chuchotement, les cordes vocales ne vibrent pas
+mais laissent un passage
+\'etroit entre les cartilage du larynx, qui envoie un
+air turbulent dans le conduit vocal.
+Cet air turbulent peut \^etre mod\'elis\'e par un bruit Gaussien, dont
+la puissance spectrale a un large support fr\'equentiel.
+\\
+\\
+{\bf Articulation}
+Le conduit vocal donne l'articulation au son qui caract\'erise chaque
+phon\`eme. Nous avons vu que
+pour un son vois\'e, le larynx \'emet un train d'onde
+riche en harmoniques qui est filtr\'e par le conduit
+vocal. Ce conduit vocal a des r\'esonances appel\'ees ``formants''.
+La d\'eformation du conduit vocal d\'eplace les fr\'equences de
+r\'esonance, ce qui permet de former
+toutes les voyelles et certaines consonnes.
+Pour des sons non-vois\'es, le conduit vocal peut aussi effectuer
+des constrictions qui produit des fricatives ou des sons
+chuint\'es telles que le
+[s] et le [ch].
+Les sons plosifs sont produits par une fermeture du conduit
+vocal ce qui cr\'ee une occlusion. Le rel\^achement brutal de
+cette occlusion produit alors une plosive telle que [p] ou [t].
+L'articulation du son est aussi affect\'ee par
+l'ouverture de la cavit\'e nasale.
+Des cat\'egorisations tr\`es d\'etaill\'ees des
+diff\'erents sons de parole ont \'et\'e faites
+par les phon\'eticiens.
+
+
+\subsection{Conduit vocal}
+\label{conduit-sec}
+Le conduit vocal peut se mod\'eliser comme la juxtaposition
+de plusieurs cylindres de m\^eme longueur \'egale \`a
+$\Delta$ mais de diam\`etres variables,
+comme l'illustre la figure \ref{conduit-voc}.
+Chaque cylindre est un syst\`eme lin\'eaire avec en entr\'ee
+une onde directe $f_{n-1} (t)$ mesurant le d\'ebit du flot d'air
+qui passe \`a l'entr\'ee du cylindre par unit\'e de temps,
+et une onde inverse
+$b_{n-1} (t)$. En sortie, on a onde directe $f_n (t)$
+et une onde inverse $b_n (t)$ qui est reli\'ee \`a l'entr\'ee
+par une matrice $T_n$ qui d\'epend de l'imp\'edance acoustique
+des cylindres $n-1$ et $n$
+\[
+\left(
+\begin{array} {l}
+f_n (t)\\
+b_n (t)
+\end{array}
+\right) = T_n
+\left(
+\begin{array} {l}
+f_{n-1} (t)\\
+b_{n-1} (t)
+\end{array}
+\right)
+\]
+Si l'on cascade la r\'eponse de chaque cylindre, on obtient
+\[
+\left(
+\begin{array} {l}
+f_p (t)\\
+b_p (t)
+\end{array}
+\right) = T
+\left(
+\begin{array} {l}
+f_{0} (t)\\
+b_{0} (t)
+\end{array}
+\right)
+\]
+avec
+\[
+T = \prod_{n=1}^{p} T_n .
+\]
+
+
+\begin{figure}
+% (voire p. 109 Parson)
+\vspace{3.5cm}
+\caption{Le conduit vocal peut se mod\'eliser comme une
+succession de cylindres de m\^eme longueur $\Delta$
+ayant des diam\`etres
+diff\'erents.}
+\label{conduit-voc}
+\end{figure}
+
+On discr\'etise ce syst\`eme avec un pas d'\'echantillonnage de
+$\frac \Delta c$ qui est le temps de propagation de l'onde
+acoustique dans chaque
+cylindre. Le signal d'entr\'ee est le signal discret
+\[
+f_0 [n] = f_0 (\frac {n \Delta} c ) - b_0 (\frac {n \Delta} c ) ,
+\]
+tandis que le signal de sortie est
+\[
+f_p [n] = f_p (\frac {n \Delta} c ) - b_p (\frac {n \Delta} c ) .
+\]
+En \'ecrivant les \'equations de propagation des ondes et
+les conservations de d\'ebit et de pression au travers des
+jonctions des cylindres, on peut calculer la fonction de
+transfert qui relie la transform\'ee en z de $f_0 [n]$ et de
+$f_p [n]$ \`a partir des diam\`etres de chacun des cylindres
+\[
+\frac {\hat f_p (z)} {\hat f_0 (z)} = \hat h(z) .
+\]
+En l'absence de perte le long du syst\`eme, on peut montrer que
+$\hat h(z)$ a $p$ p\^oles mais n'a pas de z\'eros.
+C'est donc un filtre autor\'egressif qui peut s'\'ecrire
+\[
+\hat h (z) = \frac 1 {a[0] + a[1] z^{-1}+ ... + a[p] z^{-p}} .
+\]
+Cette condition reste valable tant que le conduit vocal peut
+\^etre repr\'esent\'e par un seul tube sans embranchement. On n\'eglige
+donc l'influence introduite par le conduit nasal ainsi que
+les pertes d'\'energie dues aux vibrations
+des parois du conduit vocal et aux frictions.
+\\
+\\
+{\bf Formants}
+Ce mod\`ele simplifi\'e montre que le conduit vocal peut \^etre repr\'esent\'e
+par un filtre autor\'egressif dont les param\`etres $a[k]$ d\'ependent
+de la configuration du conduit vocal.
+Ce filtre \' etant causal et stable, nous savons que les p\^oles de
+$\hat h (z)$ sont tous de module plus petit que 1.
+Les p\^oles de $\hat h(z)$ qui sont proches du cercle unit\'e
+produisent un pic dans le module de la r\'eponse fr\'equentielle
+$|\hat h (\eom)|$.
+Ces pics de fr\'equence sont appel\'es formants. Ils ont une
+importance particuli\`ere pour la reconnaissance des sons produits.
+Plus le z\'ero est proche du cercle unit\'e, plus le formant est
+prononc\'e. Les formants de plus grande amplitude
+sont g\'en\'eralement les
+2 premiers, apparaissant aux plus basses fr\'equences.
+La figure \ref{autoreg}
+donne un exemple de filtre autor\'egressif ayant 8 p\^oles dont
+la position est indiqu\'ee dans
+le plan complexe. La r\'eponse fr\'equentielle
+$|\hat h (\eom)|_\db$ est donn\'ee \`a droite.
+
+\begin{figure}
+% voire p.23-25 genat/karar
+\vspace{8cm}
+\caption{La figure de gauche donne la position des 8 p\^oles
+d'un filtre autor\'egressif tandis que la figure de droite
+donne le module $|\hat h (\eom)|_\db$.}
+\label{autoreg}
+\end{figure}
+
+
+\subsection {Excitation}
+
+{\bf Sons vois\'es}
+En mode vibratoire, les cordes vocales \'emettent un train
+d'onde qui peut s'\'ecrire
+\[
+f(t) = \sum_{n=-\infty}^{+\infty} g(t - n T) =
+g(t) \star \sum_{n=-\infty}^{+\infty} \delta (t - n T) .
+\]
+o\`u $g(t)$ est une onde \'el\'ementaire dont le support est
+petit devant $T$ (voire figure \ref{quasi-impulsions}).
+On peut supposer que cette
+onde est ind\'ependante de la forme du conduit vocal.
+En appliquant la formule de Poisson (\ref{poisson}), on calcule
+la transform\'ee de Fourier de $f(t)$
+\[
+\hat f (\om) = \hat g(\om)
+\frac {2 \pi} T \sum_{n=-\infty}^{+\infty}
+\delta (\om - \frac {2 n \pi} T ) =
+\frac {2 \pi} T \sum_{n=-\infty}^{+\infty}
+\hat g(\frac {2 n \pi} T ) \delta (\om - \frac {2 n \pi} T ) .
+\]
+C'est une succession d'harmoniques dont l'enveloppe est \'egale
+a $\hat g (\om)$.
+
+On a vu que le conduit vocal est \'equivalent \`a un filtre lin\'eaire
+de fonction de transfert $\hat h (\om)$. La transform\'ee
+de Fourier du son \'emis est donc
+\[
+\hat f(\om) \hat h (\om ) =
+\hat h (\om ) \hat g(\om)
+\frac {2 \pi} T \sum_{n=-\infty}^{+\infty}\delta (\om - \frac {2 n \pi} T ) .
+\]
+Cette r\'eponse peut \^etre mod\'elis\'ee comme un train d'impulsions
+de Diracs qui passe \`a travers un filtre dont la fonction
+de transfert est sp\'ecifi\'ee par l'enveloppe totale
+$\hat h (\om) \hat g (\om)$.
+
+On sait que la discr\'etisation de l'onde se propageant dans le
+conduit vocal peut se mod\'eliser par un filtrage autor\'egressif.
+La discr\'etisation de $g(t)$
+peut de m\^eme \^etre approxim\'ee par un filtre autor\'egressif.
+Un signal de parole vois\'e discr\'etis\'e se mod\'elise donc par
+un train d'impulsion de Diracs discrets
+$\sum_{k=-\infty}^{+\infty} \delta [n-kT]$ filtr\'e par
+un filtre autor\'egressif qui d\'epend \`a la fois du conduit
+vocal et de la forme de l'impulsion $g(t)$ produite par
+les cordes vocales.
+\\
+\\
+{\bf Sons non vois\'es}
+Les sons non vois\'es sont produits par un signal turbulent
+\'emis par le larynx qui est ensuite modifi\'e par le conduit vocal.
+La discr\'etisation de ce signal turbulent
+peut \^etre mod\'elis\'ee par un processus Gaussien
+stationnaire $Y[n]$ dont la puissance spectrale
+$\hat R_{Y} (\eom)$
+\`a une \'energie qui est r\'epartie sur
+une large bande de fr\'equence. Un tel processus peut
+aussi s'ecrire comme
+un bruit blanc Gaussien $W[n]$ filtr\'e par un filtre $g[n]$
+\[
+Y[n] = W \star g [n].
+\]
+Le th\'eor\`eme \ref{cov_conv_th}  prouve que la puissance spectrale
+de $Y[n]$ est reli\'ee a $\hat g (\eom)$ par
+\[
+\hat R_{Y} (\eom) = |\hat g (\eom)|^2 .
+\]
+
+Nous avons vu que le conduit vocal se comporte
+comme un filtre AR de r\'eponse impulsionelle $h [n]$.
+Le son produit est alors mod\'elis\'e par le processus
+\[
+Y \star h [n] = W \star g \star h [n] .
+\]
+Un tel signal discr\'etis\'e se mod\'elise donc par un bruit blanc discret
+$W[n]$ filtr\'e par $g \star h [n]$ dont la fonction de transfert
+est $\hat g (z) \hat h (z)$.
+En g\'en\'eral, $\hat g (z)$
+peut avoir des z\'eros. Ces z\'eros sont neglig\'es car leur importance
+perceptuelle est secondaire \`a c\^ote des p\^oles. On mod\'elise donc
+$\hat g (z) \hat h (z)$ par un seul filtre autor\'egressif.
+\\
+\\
+{\bf Mod\`ele synth\'etique}
+Suivant que le son est vois\'e ou non, le signal de parole peut
+se mod\'eliser comme un train d'impulsion ou
+comme la r\'ealisation d'un bruit
+blanc filtr\'e par un filtre autor\'egressif
+dont les caract\'eristiques d\'ependent
+du son prononc\'e. Dans le cas d'un son vois\'e, la p\'eriode des
+impulsions (pitch) est un param\`etre qui doit \^etre d\'etermin\'e.
+Ce mod\`ele est illustr\'e par la
+figure \ref{modele-parole}.
+
+
+\begin{figure}[bhtp]
+%(p.55 Genat/Kara)
+\centerline{
+	\leavevmode\epsfbox{/home/mallat/X/TREX/figures/TrexFig/MALLATFIG7.7-eps}}
+\caption{Mod\'elisation d'un son de parole par une excitation
+p\'eriodique ou al\'eatoire, filtr\'ee par un filtre autor\'egressif.}
+\label{modele-parole}
+\end{figure}
+\\
+\\
+\noindent
+{\bf Stationnarit\'e}
+Le conduit vocal ne se comporte comme un filtre lin\'eaire
+homog\`ene que sur des intervalles de temps relativement petits.
+Sur une dur\'ee plus longue,
+un signal de parole est non stationnaire
+puisque les sons changent au cours du temps. La taille des  intervalles
+sur lesquels le son peut \^etre approxim\'e par une excitation
+modul\'ee par un filtre homog\`ene d\'epend de la nature du son.
+Pour une voyelle, cette approximation est valable sur environ
+$10^{-2}$ seconde alors que beaucoup de sons de
+consonnes telles que les plosives
+ne restent pas stationnaires sur cette dur\'ee.
+La variation de ces intervalles de stationnarit\'e est l'une des
+difficult\'es du traitement de la parole.
+
+\section{Estimation d'un mod\`ele de parole}
+\label{est-par-sec}
+
+Nous avons expliqu\'e qu'un signal de parole peut localement
+\^etre approxim\'e par une excitation $e[n]$
+filtr\'ee par un filtre AR dont
+les param\`etres d\'ependent du son prononc\'e. Pour des applications
+de reconnaissance et de codage, on veut identifier l'excitation
+ainsi que les param\`etres du filtre.
+On isole une portion d'un signal de parole $f[n]$
+en le multipliant avec une fen\^etre $w[n]$ de taille $P$
+centr\'ee en un instant $pP$
+\[
+x[n] = f[n] w[n-pP] ,
+\]
+comme le montre la figure \ref{fenetrage}.
+On prend $P$
+suffisamment petit pour que le son isol\'e puisse \^etre consid\'er\'e
+comme stationnaire. Par exemple, la fen\^etre de
+Hamming est d\'efinie par
+\[
+w[n] =
+\left\{
+\begin{array}{ll}
+0.54 + 0.46 \cos (\frac {2\pi n} P ) &
+\mbox{si $|n| < \frac P 2$}\\
+0 & \mbox{sinon}
+\end{array}
+\right.
+\]
+Le signal r\'esultant $x[n]$ poss\`ede
+au plus $P$ coefficients non-nuls.
+Dans un mod\`ele de parole,
+$x[n]$ est produit par une excitation
+$e[n]$ filtr\'ee par un filtre AR dont la fonction de transfert
+est renormalis\'ee pour s'\'ecrire
+\[
+\hat h (z) = \frac 1 {1 - a[1] z^{-1} - ... - a[N] z^{-N}} .
+\]
+
+\begin{figure}
+% (p. 55 Genat/Karar)
+\vspace{4cm}
+\caption{Des portions du signal de parole sont isol\'ees par
+des fen\^etres, qui couvrent des intervalles de temps o\`u
+le signal peut \^etre consid\'er\'e comme stationnaire.}
+\label{fenetrage}
+\end{figure}
+\\
+\\
+\noindent
+{\bf Calcul de l'excitation} De nombreuses techniques
+ont \'et\'e d\'evelopp\'ees
+pour d\'eterminer le voisement et le pitch d'un son.
+Une approche particuli\`erement simple est bas\'ee sur
+la somme des diff\'erences du signal \`a intervalles $k$ variables
+\begin{equation}
+\label{AMDF}
+D[k] = \frac 1 P \sum_{n} |x[n] - x[n-k]| .
+\end{equation}
+Si le signal est vois\'e et que la fr\'equence des impulsions est
+$T$ alors $D[k]$ a un minimum a $k = T$. Lorsque le minimum
+de $D[k]$ n'est pas suffisamment bas,
+on en d\'eduit que le son est non vois\'e.
+Cet algorithme a l'avantage de ne n\'ecessiter aucune multiplication
+et donc de s'impl\'ementer tr\`es rapidement.
+
+
+\subsection{R\'egression lin\'eaire}
+
+Pour identifier tous les param\`etres d'un son, il nous faut
+estimer les param\`etres $a[k]$ du filtre AR qui sp\'ecifient
+les propri\'et\'es du conduit vocal.
+Le signal $x[n]$ satisfait l'\'equation r\'ecurrente
+\[
+x[n] - \sum_{k=1}^N a[k] x[n-k] = e[n] .
+\]
+On peut interpr\'eter
+\begin{equation}
+\label{estim-dex}
+\tilde x [n] =  \sum_{k=1}^N a[k] x[n-k]
+\end{equation}
+comme une estimation de $x[n]$ \`a partir de $N$ valeurs pass\'ees,
+auquel cas l'erreur d'estimation n'est autre que l'excitation
+\[
+x [n] - \tilde x[n] = e[n] .
+\]
+Si $e[n]$ est la r\'ealisation d'un bruit blanc, donc non corr\'el\'ee
+d'un \'echantillon \`a l'autre, chaque $e[n]$ peut \^etre consid\'er\'e
+comme l'innovation apport\'ee par l'excitation relativement \`a la
+pr\'ediction de $x[n]$ par son pass\'e. Ce point de vue permet de poser
+l'identification des param\`etres  $a[k]$
+du filtre AR comme un probl\`eme
+de pr\'ediction lin\'eaire.
+Etant donn\'e un signal $x[n]$, on veut calculer les
+coefficients de r\'egression tels que l'estimation (\ref{estim-dex})
+g\'en\`ere une erreur
+\begin{equation}
+\label{err-prod}
+\sum_{n=-\infty}^{+\infty} |x[n] - \tilde x[n]|^2 =
+\sum_{n=-\infty}^{+\infty} |e[n]|^2
+\end{equation}
+qui est minimum.
+Pour effectuer ce calcul on introduit
+l'autocorr\'elation empirique du signal $x[n]$
+\begin{equation}
+\label{autocro-x}
+r_x[k] = \sum_{n=-\infty}^{+\infty}  x[n-k] x[n] .
+\end{equation}
+Cette somme s'\'etend seulement sur $P$ valeurs car $x[n]$ a au plus
+$P$ valeurs cons\'ecutives non nulles.
+Le th\'eor\`eme suivant caract\'erise les coefficients de r\'egression
+de $\tilde x[n]$.
+
+\begin{theorem} [Pr\'ediction lin\'eaire]
+Les coefficients de r\'egression $\{a[k]\}_\UkN$ du
+signal $\tilde x [n] =  \sum_{k=1}^N a[k] x[n-k]$ qui
+minimise
+\[
+\epsilon_N = \sum_{n=-\infty}^{+\infty} |x[n] - \tilde x[n]|^2
+\]
+sont solutions du syst\`eme
+\begin{equation}
+\label{yule-walker2}
+\left( \begin{array}{cccc}
+r_x[0] &r_x[1] & ...&r_x[N] \\
+r_x[-1]&r_x[0]& ...&r_x[N-1]\\
+. &. &...&.  \\
+.&.&...&.\\
+.&.&...&.\\
+r_x[-N]&r_x[-N+1]&...&r_x[0]\\
+\end{array}
+\right)
+\left( \begin{array}{c}
+a[1]\\
+a[2]\\
+.\\
+.\\
+.\\
+a[N]\\
+\end{array}
+\right)
+=
+\left( \begin{array}{c}
+r_x[1]\\
+r_x[2]\\
+.\\
+.\\
+.\\
+r_x[N]\\
+\end{array}
+\right) .
+\end{equation}
+L'erreur r\'esultante est
+\begin{equation}
+\label{erro-regre}
+\epsilon_N = r_x [0] - \sum_{p=1}^N a[p] r_x[p] .
+\end{equation}
+\end{theorem}
+
+{\bf D\'emonstration} La d\'emonstration se fait par une
+interpr\'etation g\'eom\'etrique du probl\`eme de minimisation
+Le signal $x[n]$ a une \'energie finie et donc appartient
+\`a l'espace $\lD$ muni de la
+norme
+\[
+\| x[n] \|^2 = \sum_{n=-\infty}^{+\infty} |x[n]|^2
+\]
+et du produit scalaire
+\[
+<x[n],y[n]> = \sum_{n=-\infty}^{+\infty} x[n] y[n] .
+\]
+Le vecteur $\tilde x[n]$ est une combinaison lin\'eaire des
+vecteurs $\{x_k [n] = x[n-k]\}_{1 \leq k \leq N}$
+et appartient donc \`a l'espace $\V$
+g\'en\'er\'e par ces $N$ vecteurs.
+Minimiser l'erreur de pr\'ediction (\ref{err-prod}) revient
+donc \`a trouver un vecteur $\tilde x[n]$ de $\V$ qui minimise
+$\|x - \tilde x \|^2$.
+Le th\'eor\`eme de projection prouve que ce vecteur
+est la projection orthogonale de $\tilde x$ dans $\V$.
+C'est donc un vecteur tel que $x - \tilde x$ est orthogonal \`a
+tous les vecteurs de $\V$ et en particulier aux vecteurs
+$\{ x[n-k] \}_\UkN$
+\[
+<x[n] - \tilde x [n] , x[n-k]> =
+\sum_{n=-\infty}^{+\infty} (x[n] - \tilde x [n])  x[n-k] =  0 .
+\]
+En ins\'erant (\ref{estim-dex})
+ces \'equations se r\'e\'ecrivent
+\begin{equation}
+\label{proj-equai}
+\sum_{n=-\infty}^{+\infty} x[n] x[n-k] -
+\sum_{1=0}^N a[p] \sum_{n=-\infty}^{+\infty} x[n-p] x[n-k] = 0 .
+\end{equation}
+En ins\'erant (\ref{autocro-x}) on obtient
+\[
+\sum_{p=1}^N a[p] r_x[k-p] = r_x [k]~~,~~\mbox{pour $1 \leq k \leq N$} ,
+\]
+qui correspond au syst\`eme de $N$ \'equations
+\`a $N$ inconnues (\ref{yule-walker2}).
+
+Comme $x[n] - \tilde x[n]$ est orthogonal
+\`a tout vecteur dans
+$\V$ et donc \`a $\tilde x[n]$, l'\'energie de l'erreur
+peut s'\'ecrire
+\[
+\epsilon_N =  <x[n] - \tilde x[n] , x[n] - \tilde x[n]> =
+<x[n] - \tilde x[n] , x[n]>.
+\]
+En rempla\c{c}ant $\tilde x[n]$
+par son expression (\ref{estim-dex}), on obtient
+\[
+\epsilon_N = \sum_{n=-\infty}^{+\infty}  x[n] x[n] -
+\sum_{p=1}^N a[p] \sum_{n=-\infty}^{+\infty}  x[n-p] x[n]
+\]
+et donc (\ref{erro-regre})
+$\Box$
+\\
+\\
+{\bf Filtre AR pour sons non-vois\'es}
+Un son non-vois\'e est modelis\'e par bruit blanc traversant
+un filtre AR.
+Le paragraphe \ref{proc-autoregre-se} montre qu'un
+filtre AR excit\'e par un bruit blanc $W[n]$ produit
+un processus autor\'egressif $X[n]$ dont l'autocorr\'elation
+$R_X [k]$ satisfait les \'equations de
+Yule-Walker (\ref{yule-walker}).
+En comparant le syst\`eme de Yule-Walker
+(\ref{yule-walker}) et le syst\`eme (\ref{yule-walker2}),
+on s'aper\c{c}oit que ces \'equations sont identiques lorsque l'on
+remplace l'autocorr\'elation $R_X [k]$ du processus
+$X[n]$ par l'autocorr\'elation empirique
+$r_x [k]$ du signal $x[n]$.
+Si $e[n]$ est une r\'ealisation du bruit blanc $W[n]$ alors $x[n]$
+est une r\'ealisation du processus autor\'egressif $X[n]$.
+L'autocorr\'elation empirique
+$r_x [k]$ peut donc s'interpr\'eter
+comme une estimation de la v\'eritable
+autocorr\'elation $R_X [k]$ du processus.
+Les \'equations de pr\'edictions lin\'eaires
+(\ref{yule-walker2}) sont donc une
+approximation des \'equations de Yule-Walker (\ref{yule-walker}),
+qui permettent d'estimer les coefficients $a[k]$ du filtre AR.
+La r\'esolution du syst\'eme (\ref{yule-walker2}) peut
+se faire en utilisant l'algorithme rapide
+de Levinson-Durbin qui n\'ecessite $O(N^2)$ op\'erations.
+\\
+\\
+{\bf Filtre AR pour son vois\'e}
+Lorsque le son est vois\'e, l'algorithme de r\'egression lin\'eaire
+donne aussi une bonne estimation du filtre AR. La justification
+est cependant plus compliqu\'ee et nous n'en donnons qu'une explication
+superficielle.
+Le signal de parole $f[n]$ est construit en filtrant
+un train d'impulsion
+\[
+e[n] = \sum_{k=-\infty}^{+\infty} \delta [n -k T]
+\]
+avec un filtre AR $h[n]$ et $x[n]$ est obtenu
+en multipliant $f[n]$ par la fen\^etre $w[n - p P]$
+\[
+x[n] = w[n-pP] \times  (e \star h)[n] .
+\]
+On peut en d\'eduire que le spectre $\hat x (\eom)$ est la
+somme de composantes harmoniques situ\'ees autour des fr\'equences
+$\om = \frac {2 k \pi} T$ dont l'amplitude est proportionnelle
+a $\hat h (e ^{\frac {2 k \pi} T})$.
+Pour v\'erifier que le filtre obtenu par r\'egression lin\'eaire
+est proche du filtre $h[n]$ on montre que l'optimisation des
+coefficients $a[k]$ de la r\'egression lin\'eaire calcule un filtre
+autor\'egressif qui interpole approximativement
+les valeurs $\hat h (e ^{\frac {2 k \pi} T})$.
+Comme le filtre $\hat h (\eom)$ est lui-m\^eme autor\'egressif,
+on en d\'eduit que
+la r\'egression lin\'eaire optimale calcule une approximation
+de ce filtre.
+%
+%La transform\'ee de Fourier de $e \star h[n]$ est
+%\[\
+%hat e (\eom) \hat h(\eom)
+%= \sum_{k=-\infty}^{+\infty} H(e^{i \frac{2 k \pi} T})
+%\delta (\om - \frac{2 k \pi} T) ,
+%\]
+%d'o\`u
+%\begin{eqnarray*}
+%\hat x(\eom) &=& \hat e (\eom) \hat h(\eom) \star \hat w (\eom)
+%e^{-i pT \om} \\
+%&=&
+%\frac 1 {2 \pi} e^{-i pT \om}
+%\sum_{k=-\infty}^{+\infty} \hat h(e^{i \frac{2 k \pi} T})
+%\hat w (e^I{\om - \frac{2 k \pi} T}) .
+%\end{eqnarray*}
+%C'est un train d'ondes \'el\'ementaires qui ressemblent \`a des
+%impulsions, qui sont les transform\'ees de Fourier translat\'ees de
+%la fen\^etre $w[n]$. Comme ces impulsions ont des supports qui ne
+%se recouvrent pratiquement pas,
+%\[
+%|X(\eom)|^2 \approx
+%\frac 1 {4 \pi^2}
+%\sum_{k=-\infty}^{+\infty} |H(e^{i \frac{2 k \pi} T}) |^2
+%|W(e^{i(\om - \frac{2 k \pi} T)})|^2 .
+%\]
+%La valeur de $|X(\eom)|^2$ est non n\'egligeable qu'aux voisinage
+%des frequences $\frac{2 k \pi} T$ et l'on a
+%\[
+%|X(e^{i\frac{2 k \pi} T})|^2 \approx |W(e^0)|^2
+%|H(e^{i \frac{2 k \pi} T}) |^2 .
+%\]
+%La fonction de transfert du filtre AR de
+%coefficients $a[k]$ est
+%\[
+%H(\eom) = \frac 1 {\sum_{k=0}^P a[k] e^{-i k\om}} .
+%\]
+%Puisque $x [n] = h \star \epsilon [n]$, leur transform\'ee de Fourier
+%satisfait
+%\[
+%E(\eom) = \frac 1 {H(\eom)} X(\eom) .
+%\]
+%En appliquant la formule de Parseval (?) on peut calculer
+%l'\'energie de cette excitation
+%\begin{eqnarray*}
+%E &=& \|e[n]\|^2 = \frac 1 {2 \pi} \int_{-\pi}^{\pi}
+%|E(\eom)|^2 d\om \\
+%&=& \frac 1 {2 \pi} \int_{-\pi}^{\pi} \frac {|X(\eom)|^2}
+%{|H(\eom)|^2} d\om .
+%\end{eqnarray*}
+%Le filtre $H(\eom)$ est le filtre AR qui minimise cette expression.
+%Notons que l'on a la contrainte suivante
+%\[
+%\int_{-\pi}^{\pi} \frac 1 {H(\eom)} d\om = a[0] = 1.
+%\]
+%Lorsque $|X(\eom)|^2$ la valeur de $|H(\eom)|^2$ influence tr\`es
+%peu l'erreur E. Cette valeur n'est importante que lorsque
+%$|X(\eom)|$ est grand. Nous calculons donc \`a pr\'esent la valeur
+%du spectre de $x[n]$.
+%
+%
+%Pour minimiser l'erreur $E$ on verifie alors que le filtre fait
+%une interpolation des valeurs $H(e^{i \frac{2 k \pi} T})$
+%\[
+%H(e^{i \frac{2 k \pi} T}) \approx \lambda
+%H(e^{i \frac{2 k \pi} T}) .
+%\]
+%
+%Si l'on excite ce filtre avec le m\^eme train d'impulsion
+%$e[n]$ et que l'on multiplie le signal r\'esultant par la m\^eme
+%fen\^etre $w[n]$, on obtient alors un signal $x_1 [n]$ dont
+%la transform\'ee de Fourier est
+%\[
+%|X_1 (\eom)|^2 =
+%\frac 1 {4 \pi^2}
+%\sum_{k=-\infty}^{+\infty} |H(e^{i \frac{2 k \pi} T}) |^2
+%|W(e^{i(\om - \frac{2 k \pi} T)})|^2 .
+%\]
+%On obtient donc un signal dont l'\'energie en Fourier est similaire
+%\`a celle du signal original. La phase de ce signal est par contre
+%modifi\'ee mais cela est peut perceptible d'un point de vue auditif.
+
+
+%\subsection{Filtrage en Treillis}
+%
+%Le syst\'eme de pr\'ediction lin\'eaire d\'eterministe
+%(\ref{yule-walker2}) est identique au syst\'eme de pr\'ediction
+%lin\'eaire de Wiener-Hopf (\ref{WH_pred}) si l'on remplace
+%l'autocorr\'elation $R_X [k]$ du processus $X[n]$ par
+%l'autocorr\'elation empirique $r_x [k]$ de $x[n]$.
+%La r\'esolution du syst\'eme (\ref{yule-walker2}) peut donc
+%se faire en utilisant le m\^eme algorithme rapide
+%de Levinson-Durbin qui n\'ecessite $O(N^2)$ op\'erations.
+%\\
+%\\
+%\noindent {\bf Algorithme de Levinson-Durbin}\\
+%{\it Initialisation:}  $\epsilon_{0} = r_x[0] $.\\
+%{\it Boucle:} Pour $m$ allant de $1$ \`a $N$\\
+%Calcul de $K_m$\\
+%\indent Si $\epsilon_{m-1} > 0$\\
+%\begin{equation}
+%K_m = \frac {r_X [m] - \sum_{k=1}^{m-1} a_{m-1} [k] r_x[m-k]}
+%{\epsilon_{m-1} }
+%\end{equation}
+%\indent Sinon
+%\[
+%K_m = 0 .
+%\]
+%Calcul de $a_m$\\
+%\[
+%\left\{ \begin{array}{l}
+%a_m[k] =  a_{m-1} [k] - K_m a_{m-1} [m-k] ~~,~~
+%1 \leq k \leq m-1 \\
+%a_m[m] =  K_m
+%\end{array}
+%\right.
+%\]
+%Calcul de $\epsilon_m$\\
+%\[
+%\epsilon_m = \epsilon_{m-1} (1 - K_m^2 ) .
+%\]
+%\\
+%\\
+%{\bf Impl\'ementation en treillis}
+%L'algorithme de Levinson-Durbin est bas\'e sur le calcul
+%d'erreurs de pr\'ediction progressives et r\'etrogrades,
+%d\'efinis par des formules identiques \`a
+%(\ref{error_formula}) et (\ref{error-retro})
+%\begin{equation}
+%\label{error_formula-det}
+%w^p_m [n+1] = x[n] - \sum_{k=1}^m a_m [k] x[n-k] ,
+%\end{equation}
+%\begin{equation}
+%\label{error-retro-det}
+%w_m^r [n] = x[n] - \sum_{k=1}^m a_m[k] x[n+k] ,
+%\end{equation}
+%avec
+%\[
+%w_N^p [n] = e[n]
+%\]
+%et
+%\[
+%a_N [k] = a[k] .
+%\]
+%Cet algorithme
+%revient \`a effectuer une
+%orthogonalization de Gram-Schmidt rapide gr\^ace aux \'equations
+%r\'ecurrentes d\'emontr\'ees par le
+%Th\'eore\`eme \ref{levinson}
+%\begin{equation}
+%\label{erreur-rec-det}
+%\left\{ \begin{array}{l}
+%w_m^p [n] = w_{m-1}^p [n] -
+%K_m ~w^r_{m-1} [n-N] \\
+%w_m^r [n-N] = w_{m-1}^r [n-N] -
+%K_m ~w^p_{m-1} [n]
+%\end{array}
+%\right.
+%\end{equation}
+%Ces \'equations
+%s'impl\'ementent pas le filtrage en treillis
+%illustr\'e en figure \ref{treilli-directe}.
+%Ce filtre en treillis a une fonction de
+%transfert \'egale \`a $1 - \sum_{k=1}^N a [k] z^{-k}$.
+%Il est \'equivalent au filtre en
+%\'echelle illustr\'e par la figure \ref{filtre-echelle}.
+%\begin{figure}[bhtp]
+%%\centerline{
+%%	\leavevmode\epsfbox{/home/mallat/X/TREX/figures/SigFig/FIG6.1.EPS.txt}}
+%\vspace{6cm}
+%\caption{Impl\'ementation en \'echelle d'un filtre dont la fonction de
+%transfert est $1 - \sum_{k=1}^N a [k] z^{-k}$.}
+%\label{filtre-echelle}
+%\end{figure}
+%
+%
+%\begin{figure}[bhtp]
+%%\centerline{
+%%
+%%\leavevmode\epsfbox{/home/mallat/X/TREX/figures/SigFig/FIG6.3.EPS.txt}}
+%\vspace{5cm}
+%\caption{Impl\'ementation en treillis d'un filtre dont la fonction de
+%transfert est $1 - \sum_{k=1}^N a [k] z^{-k}$.}
+%\label{treilli-directe}
+%\end{figure}
+%\\
+%\\
+%{\bf Filtre pr\'edicteur inverse}
+%Pour synth\'etiser $x[n]$ \`a partir de l'excitation $e[n]$
+%on utilise le filtre inverse
+%\[
+%H(z) = \frac {1} {1 - \sum_{k=1}^N a [k] z^{-k}}.
+%\]
+%Ce filtre peut s'impl\'ementer avec la r\'ealization classique
+%en \'echelle illustr\'ee par la figure \ref{AR-echele}
+%ou en inversant le
+%filtre en treillis comme l'illustre la figure \ref{treilli-inv}
+%L'inversion de ce filtre en treillis est bas\'e sur le
+%syst\`eme d'\'equations d\'eduit de (\ref{erreur-rec-det})
+%\begin{equation}
+%\label{erreur-rec-det-inv}
+%\left\{ \begin{array}{l}
+%w_{m-1}^p [n] = w_m^p [n] + K_m ~w^r_{m-1} [n-N] \\
+%w_m^r [n-N] = w_{m-1}^r [n-N] -
+%K_m ~w^p_{m-1} [n]
+%\end{array}
+%\right.
+%\end{equation}
+%
+%Le filtrage en treillis de la figure \ref{treilli-inv}
+%peut \^etre reli\'e aux \'equations
+%de propagation dans une succession de cylindres
+%de m\^eme taille $\Delta$, qui
+%mod\'elisent le conduit vocal, comme nous l'avons vu
+%dans le paragraphe \ref{conduit-sec}, et illustr\'e par la
+%figure \ref{conduit-voc}.
+%Les constantes $K_m$
+%s'interpr\`etent comme des constantes
+%de r\'eflexion pour les ondes directes et inverses,
+%\`a l'interface de deux cylindres d'imp\'edence diff\'erentes.
+%\begin{figure}[bhtp]
+%%\centerline{
+%%	\leavevmode\epsfbox{/home/mallat/X/TREX/figures/SigFig/FIG6.2.EPS.txt}}
+%\vspace{5cm}
+%\caption{Impl\'ementation en \'echelle d'un filtre autor\'egressif.}
+%\label{AR-echele}
+%\end{figure}
+%
+%
+%\begin{figure}[bhtp]
+%%\centerline{
+%%	\leavevmode\epsfbox{/home/mallat/X/TREX/figures/SigFig/FIG6.4.EPS.txt}}
+%\vspace{5cm}
+%\caption{Impl\'ementation en treillis d'un filtre autor\'egressif.}
+%\label{treilli-inv}
+%\end{figure}
+%\\
+%\\
+%{\bf Stabilit\'e}
+%Lors de la synth\`ese d'un son par filtrage AR, il faut
+%s'assurer que le filtre est stable, ce qui revient
+%\`a montrer que les p\^oles de $H(z)$ ont tous un module
+%strictement plus petit que $1$.
+%Pour une application de compression, les
+%coefficients du filtre $a[k]$ doivent \^etre quantifi\'es afin
+%de pouvoir les stocker avec un nombre r\'eduit de bits.
+%De petites modifications de ces coefficients peut bouger
+%de fa\c{c}on importante les racines du polyn\^ome
+%${1 - \sum_{k=1}^N a [k] z^{-k}}$ et introduire des racines
+%\`a l'ext\'erieur du cercle unit\'e.
+%
+%La r\'ealization par filtrage en treillis permet de s'assurer
+%simplement que le filtre reste stable.
+%Nous avons vu lors du calcul des constantes $K_m$ par
+%l'agorithme de Levinson-Durbin que n\'ecessairement
+%$K_m \leq 1$. On peut d\'emontrer que
+%le filtre AR impl\'ement\'e par le
+%treillis inverse de la figure \ref{treilli-inv}
+%est strictement stable si
+%et seulement si $K_m < 1$ pour $1 \leq m \leq N$.
+
+
+\subsection{Compression par pr\'ediction lin\'eaire}
+\label{compre-LPC}
+
+Pour la t\'el\'ephonie et en particulier les t\'el\'ephones cellulaires,
+le d\'ebit d'information est limit\'e par la gamme de fr\'equences
+utilisable pour la transmission. Au contraire, la demande augmente
+constamment, ce qui n\'ecessite de transmettre toujours plus
+de conversations. Une solution est de comprimer le signal de parole
+pour augmenter le nombre de conversations sous contrainte
+d'un d\'ebit fixe.
+La qualit\'e du signal de parole peut \^etre
+d\'egrad\'ee mais le codage doit maintenir une bonne intelligibilit\'e
+des sons prononc\'es.
+Pour des forts taux de compression,
+le codage par pr\'ediction lin\'eaire est actuellement la
+technique la plus efficace.
+
+Le standard LPC-10 demande 2400bits/s pour coder un
+signal de parole \'echantillonn\'e \`a 8kHz. Le signal de parole est
+divis\'e sur des fen\^etres de $P = 180$ \'echantillons.
+Un filtre AR d'ordre $N=10$ est calcul\'e pour chaque fen\^etre, \`a partir de l'autocorr\'elation du signal, par r\'egression
+lin\'eaire. Le voisement et le
+pitch sont d\'etermin\'es en
+testant l'amplitude des diff\'erences (\ref{AMDF}) \`a intervalles
+variables.
+Pour les signaux vois\'es, on code aussi l'intervalle $T$ du
+pitch, en quantifiant uniform\'ement $\log T$.
+Les algorithmes de quantification sont pr\'esent\'es
+dans le paragraphe \ref{scalar-quant-sec}.
+
+La quantificaton des coefficients $a[k]$ va d\'eplacer
+les p\^oles du filtre AR, qui risquent de sortir du cercle
+unit\'e. Le filtre r\'esultant est alors instable.
+Pour guarantir la stabilit\'e du filtre AR, on quantifie
+plut\^ot les coefficients de r\'eflexion
+$\{K_m\}_{1 \leq m \leq N}$,
+calcul\'es par l'algorithme de Levinson-Durbin.
+Ces coefficients charact\'erisent les valeurs des $a[k]$
+pour $1 \leq k \leq N$ et on peut v\'erifier que le
+filtre AR est stable si et seulement si $|K_m| < 1$
+pour ${1 \leq m \leq N}$. Il suffit donc de s'assurer que les
+valeurs quantifi\'ees des $K_m$ restent plus petites que $1$
+pour obtenir un filter AR stable.
+
+A la r\'eception, on restaure un signal
+dans chaque fen\^etre de 180 \'echantillons en utilisant les param\`etres
+du code. Si l'excitation est cod\'ee comme \'etant un bruit blanc,
+elle est reproduite avec un
+g\'en\'erateur de nombres al\'eatoires. Sinon, on g\'en\`ere
+un train d'impulsions
+s\'epar\'ees par un intervalle $T$ dont la valeur a \'et\'e cod\'ee.
+Cette excitation est ensuite filtr\'ee par le filtre AR
+dont les coefficients de r\'eflection ont \'et\'e transmis.
+
+La qualit\'e de ce code peut \^etre am\'elior\'ee en reproduisant
+plus fid\`element l'excitation $e[n]$. Au lieu de coder cette
+excitation comme un bruit blanc ou un train d'impulsions,
+des techniques de quantifications vectorielles
+permettent de restaurer des propri\'et\'es importantes de cette
+excitation de fa\c{c}on a synth\'etiser des voix de meilleure  qualit\'e.
+Ces codes sont appel\'es ``Coded Excited Linear Predictive Filters''
+(CELP).

@@ -1,0 +1,1210 @@
+Ce chapitre n'est pas un cours d'analyse Hilbertienne, mais
+rassemble les notions essentielles que nous aurons \`{a} manipuler dans ce
+cours. La plupart des r\'{e}sultats sont \'{e}l\'{e}mentaires et sont d\'{e}montr\'{e}s.
+%====================================================================
+%================================================
+%================================================
+\section{D\'{e}finitions}
+\begin{definition}[Espace pr\'{e}-hilbertien]
+\label{def:prod_inter} Soit $\mathcal{H}$ un espace vectoriel sur
+l'ensemble des nombres complexes $\Cset$. L'espace $\mathcal{H}$
+est appel\'{e} \emph{pr\'{e}-hilbertien} si $\mathcal{H}$ est muni d'un
+produit scalaire\,:
+$$
+ \pscal{\cdot}{\cdot}\, : x,y\in \mathcal{H} \times \mathcal{H}
+ \mapsto \pscal{x}{y}\in \Cset
+$$
+qui v\'{e}rifie les propri\'{e}t\'{e}s suivantes\,:
+\begin{enumerate}[label=\emph{\alph*})]
+   %===
+\item pour tout $(x,y) \in \mathcal{H} \times \mathcal{H}$,
+  $\pscal{x}{y}=\overline{\pscal{y}{x}}$
+   %===
+   \item pour tout $(x,y) \in \mathcal{H} \times \mathcal{H}$ et tout $(\alpha,\beta) \in \Cset \times \Cset$,
+$\pscal{\alpha x+ \beta y}{z}= \alpha \pscal{x}{z}+ \beta \pscal{y}{z}$
+   %===
+   \item pour tout $x \in \mathcal{H}$, $\pscal{x}{x}\geq 0$, et $\pscal{x}{x}=0$ si et seulement si $x=0$.
+\end{enumerate}
+L'application\,:
+\[
+\| \centerdot \|\, : x\in\mathcal{H}
+  \mapsto \sqrt{\pscal{x}{x}} \geq 0
+\]
+d\'{e}finit alors une norme sur $\mathcal{H}$.
+\end{definition}
+\begin{example}[Espace $\Cset^n$]
+L'ensemble des vecteurs colonnes
+$x=[\begin{matrix}x_1&\cdots&x_n\end{matrix}]^T$, o\`{u} $x_k\in
+\Cset$, est un espace vectoriel dans lequel la relation\,:
+% \footnote{Dans cet ouvrage, l'exposant $^H$ indique l'op\'{e}rateur de transposition
+%     et conjugaison des matrices.}
+$$
+\pscal{x}{y}=y^Hx=\sum_{k=1}^n x_k\overline{y_k}
+$$
+d\'{e}finit un produit scalaire.
+\end{example}
+\begin{example}[Espace $\pltwo$]
+L'ensemble des suites num\'{e}riques complexes $\{ x_k \}_{k \in
+\nset}$ v\'{e}rifiant $\sum_{k = 0}^\infty |x_k|^2 < \infty$
+est un espace vectoriel sur $\Cset$. On d\'{e}finit pour tout $x$ et $y$ de cet
+espace\,:
+\[
+\pscal{x}{y} = \sum_{k=0}^\infty {x}_k\overline{y_k}
+   \;.
+\]
+Cette somme est bien d\'{e}finie puisque $|{x}_k\overline{y_k}|\leq(|x_k|^2+|y_k|^2)/2$.
+De plus, on v\'{e}rifie ais\'{e}ment les propri\'{e}t\'{e}s (i-iii) de la d\'{e}finition
+\ref{def:prod_inter}. L'espace ainsi d\'{e}fini est donc un espace
+pr\'{e}-Hilbertien, que l'on note $\pltwo$.
+\end{example}
+\begin{example}[Fonctions de carr\'{e} int\'{e}grable]
+\label{exemple:L2}
+  L'ensemble $\cL^2(T)$ des fonctions bor\'{e}liennes d\'{e}finies sur un intervalle
+  $T$ de $\Rset$, \`{a} valeurs complexes et de module de carr\'{e} int\'{e}grable par
+  rapport \`{a} la mesure de Lebesgue ($\int_T |f(t)|^2 dt < \infty$) est un espace
+  vectoriel.  Consid\'{e}rons alors le produit int\'{e}rieur\,:
+\[
+   (f,g) \in \cL^2(T) \times \cL^2(T)
+    \mapsto \pscal{f}{g}=\int_T f(t) \overline{g(t)} \rmd t
+\]
+Cette int\'{e}grale est bien d\'{e}finie puisque
+$|{f(t)} \overline{g(t)}|\leq(|f(t)|^2+|g(t)|^2)/2$
+et l'on montre ais\'{e}ment que les propri\'{e}t\'{e}s
+(i) et (ii) de la d\'{e}finition \ref{def:prod_inter}. Par contre la
+propri\'{e}t\'{e} (iii) n'est pas v\'{e}rifi\'{e}e puisque\,:
+\[
+ \pscal{f}{f}=0 \not\Rightarrow \forall t\in T\ f(t)=0
+\]
+En effet une fonction $f$ qui est nulle sauf sur un ensemble de
+mesure nulle pour la mesure de Lebesgue, v\'{e}rifie $\pscal{f}{f}=0$.
+L'espace $\cH$ muni du produit $(f,g)$ n'est donc pas un espace
+pr\'{e}-Hilbertienne.
+C'est pourquoi on d\'{e}finit l'ensemble $\ltwo(T)$ des classes d'\'{e}quivalence
+de  $\cL^2(T)$ pour la \emph{relation d'\'{e}quivalence} d\'{e}finie par
+l'\'{e}galit\'{e} presque partout entre deux fonctions. Par construction,
+ $L^2(T)$ est alors un espace pr\'{e}-Hilbertien.
+\end{example}
+\begin{example}[Variables al\'{e}atoires de variance finie]
+\label{exemple:L2Omega}
+De fa\c{c}on similaire \`{a} l'exemple~\ref{exemple:L2}, pour tout espace de
+probabilit\'{e} $(\Omega,\cF,\PP)$, on d\'{e}finit $\cH=\cL^2(\Omega,\cF,\PP)$
+(not\'{e} $\cL^2(\Omega)$ s'il n'y a pas de confusion possible) comme l'ensemble
+des v.a. $X$ d\'{e}finies sur  $(\Omega,\cF,\PP)$ \`{a} valeurs complexes telles que
+$$
+\PE{|X|^2}<\infty\;.
+$$
+Sur cet ensemble, on d\'{e}finit
+$$
+   (X,Y) \in \cL^2(\Omega)\times \cL^2(\Omega)
+    \mapsto \pscal{X}{Y}=\PE{ X \overline{Y}}\;.
+$$
+Pour les m\^{e}mes raisons que dans l'exemple~\ref{exemple:L2}, on d\'{e}finit l'espace
+pr\'{e}-Hilbertien $L^2(\Omega,\cF,\PP)$ (ou $L^2(\Omega)$) comme l'ensemble des
+classes d'\'{e}quivalences de $\cL^2(\Omega)$ pour la relation d'\'{e}quivalence
+d\'{e}finie par l'\'{e}galit\'{e} presque s\^{u}re entre deux v.a.
+Cet exemple et l'exemple~\ref{exemple:L2} se g\'{e}n\'{e}ralisent en fait \`{a} tout espace
+mesur\'{e} $(\Omega,\cF,\mu)$ en posant
+$$
+(f,g) \in \cL^2(\Omega,\cF,\mu)\times \cL^2(\Omega,\cF,\mu)
+    \mapsto \pscal{f}{g}=\int f\, \overline{g} \;\rmd\mu \;.
+$$
+\end{example}
+
+On montre ais\'{e}ment les propri\'{e}t\'{e}s suivantes\,:
+\begin{theorem}
+
+\label{theo:cauchyandco}
+ Pour tout $x,y \in \mathcal{H}\times
+\mathcal{H}$, nous avons\,:
+\begin{enumerate}[label=\emph{\alph*})]
+   %===
+   \item In\'{e}galit\'{e} de Cauchy-Schwarz\index{Cauchy-Schwarz (In\'{e}galit\'{e} de)}:
+     $|\pscal{x}{y}| \leq \|x\| \|y\|$,
+   %===
+   \item In\'{e}galit\'{e} triangulaire:
+ $\left | \|x\|-\|y\| \right |\leq \| x - y \| \leq \| x \| + \| y\|$,
+   %===
+   \item Identit\'{e} du parall\'{e}logramme:
+\[
+\| x + y \|^2 + \| x-y\|^2 = 2 \|x\|^2 + 2 \|y\|^2
+\]
+\end{enumerate}
+\end{theorem}
+%%%%%%%%
+\begin{definition}[Convergence forte dans $\calH$]
+Soit $(x_n)$ une suite de vecteurs  et $x$ un vecteur d'un espace
+pr\'{e}hilbertien $\calH$. On dit que $(x_n)$ tend fortement
+vers $x$ si et seulement si $\|x_n-x\| \rightarrow 0$ quand
+$n\rightarrow +\infty$. On note $x_n \rightarrow x$.
+\end{definition}
+\begin{proposition}
+\label{prop:cvgceforte-implique-borne}
+Si dans un espace de Hilbert la suite $x_n\rightarrow x$, alors
+$(x_n)$ est born\'{e}e.
+\end{proposition}
+\begin{proof}\smartqed
+D'apr\`{e}s l'in\'{e}galit\'{e} triangulaire, on a~:
+$$
+ \|x_n\|=\|(x_n-x)+x\|\leq \|x_n-x\|+\|x\|
+$$
+
+\end{proof}
+
+\begin{definition}[Convergence faible dans $\calH$]
+Soit $(x_n)$ une suite de vecteurs  et $x$ un vecteur d'un espace
+pr\'{e}hilbertien $\calH$. On dit que $(x_n)$ tend faiblement
+vers $x$ si et seulement si, pour tout $y \in \calH$, $\pscal{x_n}{y} \to \pscal{x}{y}$ quand $n \to \infty$.
+On note $x_n \rightsquigarrow x$.
+\end{definition}
+\begin{theorem}
+\label{theo:cvgcefaible-implique-forte}
+Une suite $(x_n)$ fortement convergente converge aussi faiblement vers la m\^{e}me limite.
+\end{theorem}
+\begin{proof}\smartqed
+Supposons que $(x_n)$ converge fortement vers $x$, $\lim_{n \to \infty} \| x_n-x\|=0$. Alors,
+pour tout $y \in \calH$,
+\[
+\left| \pscal{x_n-x}{y} \right| \leq \| x_n - x \| \| y \| \to 0 \eqsp, \quad \text{quand} \quad n \to \infty \eqsp.
+\]
+
+\end{proof}
+En g\'{e}n\'{e}ral, la convergence faible n'entra\^{i}ne pas la convergence forte.
+Pour tout $y \in \calH$, l'application $\pscal{\cdot}{y}: \calH \to \cset$, $x \mapsto \pscal{x}{y}$ est une forme
+lin\'{e}aire. Le th\'{e}or\`{e}me~\ref{theo:cvgcefaible-implique-forte} montre que cette forme lin\'{e}aire est continue.
+\begin{theorem}[Continuit\'{e} du produit scalaire]
+\label{theo:cont_prod_int} Soit $x_n \rightarrow x$ et $y_n
+\rightarrow y$ deux suites convergentes de vecteurs d'un espace
+pr\'{e}-hilbertien $\mathcal{H}$. Alors quand $n\rightarrow
++\infty$\,: $\pscal{x_n}{y_n} \rightarrow \pscal{x}{y}$. En particulier, si $x_n
+\rightarrow x$, $\| x_n \| \rightarrow \|x\|$.
+\end{theorem}
+\begin{proof}\smartqed
+D'apr\`{e}s l'in\'{e}galit\'{e} triangulaire puis l'in\'{e}galit\'{e} de Cauchy-Schwarz,
+nous avons\,:
+\begin{align*}
+\pscal{x}{y}-\pscal{x_n}{y_n}
+ &= \pscal{(x - x_n) + x_n}{ (y - y_n) + y_n} - \pscal{x_n}{y_n} \\
+ &= \pscal{x-x_n}{y-y_n} + \pscal{x-x_n}{y_n}+ \pscal{x_n}{y-y_n} \\
+ &\leq \|x_n-x\|\|y_n-y\|+\|x_n-x\|\|y_n\|+\|y_n-x\|\|x_n\|
+\end{align*}
+On conclut en utilisant la proposition~\ref{prop:cvgceforte-implique-borne} qui montre que
+les suites $(x_n)$ et $(y_n)$ sont born\'{e}es.
+
+\end{proof}
+
+
+\begin{definition}[Suite de Cauchy]
+  Soit $(x_n)$ une suite de vecteurs d'un espace vectoriel norm\'{e}
+  $(\mathcal{H},\|\cdot\|)$. On dit que $(x_n)$ est une suite de Cauchy si et
+  seulement si\,:
+$$
+\| x_n - x_m\| \rightarrow 0
+$$
+quand $n,m \rightarrow +\infty$.
+\end{definition}
+Notons qu'en vertu de l'in\'{e}galit\'{e} triangulaire toute suite
+convergente est une suite de Cauchy. La r\'{e}ciproque est fausse\,:
+une suite de Cauchy peut ne pas \^{e}tre convergente. Un
+contre-exemple est donn\'{e} par l'exemple~\ref{exe:C2pi}.
+\begin{definition}[Espace complet, espace de Hilbert]
+  On dit qu'un espace vectoriel norm\'{e} $(\mathcal{H},\|\cdot\|)$ est
+  \emph{complet} si toute suite de Cauchy d'\'{e}l\'{e}ments de cet espace converge
+  dans cet espace. On dit $\mathcal{H}$ est un \emph{espace de Hilbert} si
+  $\mathcal{H}$ est pr\'{e}-hilbertien et complet.
+\end{definition}
+\begin{proposition}[Suites normalement convergentes]
+Un espace vectoriel norm\'{e} $(\mathcal{H},\|\cdot\|)$ est complet si et seulement
+si toute s\'{e}rie normalement convergente est convergente.
+\end{proposition}
+Ce r\'{e}sultat classique, voir  \cite[proposition~5 du chapitre~6,
+page~124]{royden:1988}, est utile pour montrer que les espaces $L^p$ sont complets.
+\begin{example}[Espace de  suite]
+L'espace $\pltwo$ est un espace de Hilbert. Soit $(a_n)$ une suite de Cauchy dans $\pltwo$. Si nous notons
+\[
+a_n= (a_{n,1}, a_{n,2}, \dots ) \eqsp,
+\]
+alors, pour tout $\epsilon > 0$, il existe $N$ tel que, pour tout $n,m \geq N$,
+\begin{equation}
+\label{eq:keyidentite}
+\sum_{k=1}^\infty |a_{m,k}- a_{n,k}| \leq \epsilon^2 \eqsp,
+\end{equation}
+pour tout $n,m \geq N$. Fixons tout d'abord $k$. La relation pr\'{e}c\'{e}dente montre
+que la suite $(a_{n,k})$ est une suite de Cauchy dans $\cset$.  Cette suite
+converge donc vers $\alpha_k$. Nous notons $a = (\alpha_k)$. Nous allons
+montrer que $a \in \pltwo$ et que $\lim_{n \to \infty}\|a_n -a \|= 0$. Comme
+l'espace $\pltwo$ est stable par diff\'{e}rence, nous allons montrer que pour tout
+$n$, $a_n -a \in \pltwo$.  Comme $a = a_n - (a_n-a)$ et $a_n \in \pltwo$, cette
+propri\'{e}t\'{e} implique donc que $a \in \pltwo$.
+
+En utilisant \eqref{eq:keyidentite}, nous avons pour tout $p \in \nset$, et tout $m,n \geq N$,
+\[
+\sum_{k=1}^p |a_{m,k} - a_{n,k} |^2 \leq \sum_{k=1}^\infty |a_{m,k} - a_{n,k}|^2 \leq \epsilon^2.
+\]
+Par cons\'{e}quent, pour tout $p \in \nset$ et tout $n \geq N$,  $\lim_{m \to \infty} \sum_{k=1}^p |a_{m,k} - a_{n,k} |^2 =
+\sum_{k=1}^p |a_k - a_{n,k}|^2 \leq \epsilon^2$. En prenant, la limite en $p$, nous obtenons donc, pour tout $n \geq N$,
+\[
+\|a - a_n\|^2 = \sum_{k=1}^\infty |a_k - a_{n,k}|^2 \leq \epsilon^2,
+\]
+ce qui montre que $(a - a_n) \in \pltwo$. Comme $\epsilon$ est arbitraire, nous avons aussi $\lim_{n \to \infty} \|a - a_n\|= 0$.
+\end{example}
+\begin{proposition}[Espaces $L^2$]
+  Pour tout espace mesurable $(\Omega,\cF,\mu)$, L'espace
+  $L^2(\Omega,\cF,\mu)$(voir l'exemple~\ref{exemple:L2Omega}) des fonctions de
+  carr\'{e} int\'{e}grable pour la mesure $\mu$ est un espace de Hilbert.
+\end{proposition}
+Un r\'{e}sultat plus g\'{e}n\'{e}ral sur les espaces $L^p$ est fourni par
+\cite[proposition~6 du chapitre~6, page~126]{royden:1988}.
+% \begin{definition}[Sous espace vectoriel]
+% Un sous-espace $\mathcal{E}$ d'un espace vectoriel $\mathcal{H}$
+% est un sous-ensemble de $\mathcal{H}$ tel que, pour tout $x,y \in
+% \mathcal{E}$ et tout scalaire $\alpha,\beta$, $\alpha x+ \beta y
+% \in \mathcal{E}$. Un sous-espace vectoriel est dit \emph{propre}
+% si $\mathcal{E} \ne \mathcal{H}$.
+% \end{definition}
+\begin{definition}[Sous-espace ferm\'{e}]
+Soit $\cal E$ un sous-espace d'un espace de Hilbert $\cal H$. On
+dit que $\cal E$ est ferm\'{e}, si toute suite $(x_n)$ de $\cal E$,
+qui converge, converge dans $\cal E$.
+\end{definition}
+\begin{example}[Sous-espace non--ferm\'{e}, espace non-complet]
+ \label{exe:C2pi}
+Soit $\mathcal{C}([-\pi,\pi])$ l'espace des fonctions continues
+sur $[-\pi,\pi]$. Cet espace est un sous-espace de
+l'espace de Hilbert $L^2([-\pi,\pi])$. Consid\'{e}rons la suite de fonctions\,:
+\[
+ f_n(x)= \sum_{k=1}^n \frac{1}{k} \cos(kx)
+\]
+Les fonctions $f_n(x)$, qui sont ind\'{e}finiment contin\^{u}ment
+diff\'{e}rentiables,  appartiennent \`{a} $\mathcal{C}(-\pi,\pi)$.
+Montrons que cette suite est une suite de Cauchy. En effet, pour
+$m > n$, on a\,:
+\[
+  \| f_n - f_m \|^2 =
+    \pi \sum_{k=n+1}^m \frac{1}{k^2} \longrightarrow 0
+    \quad \mbox{quand} \quad (n,m) \rightarrow \infty
+\]
+D'autre part on montre ais\'{e}ment que la limite de cette suite
+$f_\infty(x) = \sum_{k=1}^\infty k^{-1} \cos(kx)= \log
+|\sin(x/2)|$ n'est pas continue et n'appartient donc pas \`{a}
+$\mathcal{C}([-\pi,\pi])$.
+Le sous-espace  $\mathcal{C}([-\pi,\pi])$ est donc un sous-espace vectoriel de
+$L^2([-\pi,\pi])$ mais n'est pas ferm\'{e}. C'est donc aussi un espace
+pr\'{e}-hilbertien qui n'est pas complet.
+\end{example}
+\begin{definition}[Sous espace engendr\'{e} par un sous-ensemble]
+\label{def:espace-engendre}
+Soit $\mathcal{X}$ un sous-ensemble de $\mathcal{H}$. Nous notons
+$\lspan{\mathcal{X}}$ le sous-espace vectoriel des combinaisons lin\'{e}aires
+finies d'\'{e}l\'{e}ments de $\mathcal{X}$ et $\cspan{\mathcal{X}}$ \emph{l'adh\'{e}rence}
+de $\lspan{\mathcal{X}}$ dans $\mathcal{H}$, c'est-\`{a}-dire le plus petit
+sous-ensemble ferm\'{e} de $\mathcal{H}$ contenant $\lspan{\mathcal{X}}$, ou encore
+l'espace obtenu par l'ensemble $\lspan{\mathcal{X}}$ compl\'{e}t\'{e} de toute les
+limites de suite d'\'{e}l\'{e}ments de $\lspan{\mathcal{X}}$.
+\end{definition}
+\begin{definition}[Orthogonalit\'{e}]
+Deux vecteurs $x,y \in \mathcal{H}$ sont dit \emph{orthogonaux},
+si $\pscal{x}{y}= 0$, ce que nous notons $x \perp y$. Si $\mathcal{S}$
+est un sous-ensemble de $\mathcal{H}$, la notation $x \perp
+\mathcal{S}$, signifie que $x \perp s$ pour tout $s \in
+\mathcal{S}$. Nous notons $\mathcal{S}\perp\mathcal{T}$ si tout
+\'{e}l\'{e}ment de $\mathcal{S}$ est orthogonal \`{a} tout \'{e}l\'{e}ment de
+$\mathcal{T}$.
+\end{definition}
+Supposons qu'il existe deux sous-espaces $\mathcal{A}$ et
+$\mathcal{B}$ tels que $\mathcal{H} = \mathcal{A} \oplus \mathcal{B}$,
+dans le sens o\`{u}, pour tout vecteur $h \in \mathcal{H}$, il
+existe $a \in \cA$ et $b \in \cB$, tel que $h= a + b$. Si en plus
+$\cA \perp \cB$ nous dirons que $\cH$ est la \emph{somme
+directe} de $\cA$ et $\cB$, ce que nous notons $\cH= \cA \oplusperp
+\cB$.
+\begin{definition}[Compl\'{e}ment orthogonal]
+Soit ${\cal E}$ un sous-ensemble d'un espace de Hilbert $\cal H$.
+On appelle ensemble orthogonal de ${\cal E}$, l'ensemble d\'{e}fini
+par\,:
+$$
+ {\cal E}^{\perp}=\{x\in {\cal H}:
+    \forall y\in {\cal E} \hspace{5pt} \pscal{x}{y}=0\}
+$$
+\end{definition}
+\section{Famille orthogonale et orthonormal}
+\begin{definition}[Famille orthogonale, orthonormale]
+Soit $E$ un sous ensemble de $\calH$. On dit que $E$
+est une famille orthogonale si et seulement si pour tout $(x,y) \in E \times E$,
+$x \ne y$, $\pscal{x}{y}= 0$. Si de plus   $\|x\|=1$ pour tout $x \in E$, on
+dira que $E$ est une famille orthonormale.
+\end{definition}
+Une famille orthogonale a la propri\'{e}t\'{e} remarquable que dans le d\'{e}veloppement de
+la norme quadratique des combinaisons lin\'{e}aires finies, les termes de doubles
+produits sont nuls. Soit $E$ une famille orthogonale, $(x_1,\dots,x_n) \in E^n$
+et $(\alpha_1,\dots,\alpha_n) \in \cset^n$. Alors
+\begin{equation}
+  \label{eq:norme_comb_lin_ortho}
+\left\|\sum_{k=1}^n\alpha_k x_k\right\|^2= \sum_{k=1}^n |\alpha_k|^2
+\|x_k\|^2\;.
+\end{equation}
+Il s'en suit donc le th\'{e}or\`{e}me \'{e}l\'{e}mentaire suivant.
+\begin{theorem}
+  Toute famille orthogonale d'\'{e}l\'{e}ments non-nuls est libre.
+\end{theorem}
+La relation~(\ref{eq:norme_comb_lin_ortho}) est bien connue en g\'{e}om\'{e}trie
+euclidienne. L'avantage du cadre hilbertien est qu'il permet d'obtenir des
+r\'{e}sultats pour une somme infinie.
+\begin{theorem}
+\label{theo:convergence-series-fourier}
+Soit $(e_i)_{i\geq1}$ une suite orthonormale d'un espace de Hilbert $\calH$ et
+soit $(\alpha_i)_{i\geq1}$ une suite de nombre complexes. La s\'{e}rie
+\begin{equation}
+  \label{eq:serie_suite_ortho}
+  \sum_{i=1}^\infty  \alpha_i e_i
+\end{equation}
+converge dans $\calH$ si et seulement si $\sum_{i} |\alpha_i|^2 <
+\infty$ auquel cas
+\begin{equation}
+  \label{eq:norm_serie_suite_ortho}
+\left\| \sum_{i=1}^\infty \alpha_i e_i \right\|^2 =
+\sum_{i=1}^\infty |\alpha_i|^2 \eqsp.
+\end{equation}
+\end{theorem}
+\begin{proof}\smartqed
+Pour tout $m > k > 0$, de m\^{e}me que pour
+l'\'{e}quation~(\ref{eq:norme_comb_lin_ortho}), nous avons
+\[
+\left\| \sum_{i=k}^m \alpha_i e_i \right\|^2 = \sum_{i=k}^m |\alpha_i|^2 \eqsp.
+\]
+Comme $\sum_{i=1}^\infty |\alpha_i|^2 < \infty$, la suite $s_m= \sum_{i=1}^m
+\alpha_i e_i$ est une suite de Cauchy dans $\calH$. Comme $\calH$ est complet,
+cette suite de Cauchy converge. L'identit\'{e}~(\ref{eq:norm_serie_suite_ortho})
+est obtenue par passage \`{a} la limite.
+
+R\'{e}ciproquement, si la s\'{e}rie $\sum_{i=1}^\infty \alpha_i e_i$ converge, ce
+passage \`{a} la limite reste valide
+et~(\ref{eq:norm_serie_suite_ortho}) montre que la s\'{e}rie de terme
+$(|\alpha_i|^2)_{i\geq1}$ est convergente.
+
+\end{proof}
+La question se pose aussi de savoir comment approcher un \'{e}l\'{e}ment $x$ de $\calH$
+par une d\'{e}composition en s\'{e}rie de la forme~(\ref{eq:serie_suite_ortho}).
+Pour cela le r\'{e}sultat suivant pour une famille finie sera utile.
+\begin{proposition}
+\label{prop:bessel}
+Si $x$ est un vecteur d'un espace de Hilbert $\calH$ et si
+$E=\{e_1,\cdots,e_n\}$ est une famille orthonormale finie, alors\,:
+\begin{equation}
+  \label{eq:famille_orthonorm_finie}
+\left\| x-\sum_{k=1}^n \pscal{x}{e_k} e_k \right\|^2= \|x\|^2 - \sum_{k=1}^n |\pscal{x}{e_k}|^2\;.
+\end{equation}
+De plus
+$\sum_{k=1}^n \pscal{x}{e_k} e_k$ est l'\'{e}l\'{e}ment de
+$\lspan{e_1,\dots,e_n}$ le plus proche de $x$: la
+quantit\'{e}~(\ref{eq:famille_orthonorm_finie}) est aussi \'{e}gale \`{a}
+$$
+\inf\left\{\|x-y\|^2 \;:\;y \in\lspan{e_1,\dots,e_n}\right\}\;.
+$$
+\end{proposition}
+\begin{proof}\smartqed
+On remarque que pour tout $j=1,\dots,n$,
+$$
+\pscal{x-\sum_{k=1}^n \pscal{x}{e_k} e_k}{e_j}=\pscal{x}{e_j}-\pscal{x}{e_j}=0\;.
+$$
+Il s'en suit que la d\'{e}composition
+$$
+x=\left(x-\sum_{k=1}^n \pscal{x}{e_k} e_k\right)+\sum_{i=1}^n \pscal{x}{e_k} e_k
+$$
+est une d\'{e}composition en la somme de deux termes orthogonaux. L'identit\'{e} de
+Pythagore et l'\'{e}galit\'{e}~(\ref{eq:norme_comb_lin_ortho}) avec $x_k=e_k$ et
+$\alpha_k=\pscal{x}{e_k}$
+
+On montre de m\^{e}me que, pour tout  $(\alpha_1,\dots,\alpha_n) \in \cset^n$,
+$$
+\left\| x - \sum_{k=1}^n \alpha_k e_k \right\|^2=
+\left\| x - \sum_{k=1}^n \pscal{x}{e_k} e_k \right\|^2 +
+\sum_{k=1}^n |\pscal{x}{e_k}-\alpha_k|^2\;,
+$$
+et donc que $\sum_{k=1}^n \pscal{x}{e_k} e_k$ est la meilleure approximation de
+$x$ par une combinaison lin\'{e}aire des vecteurs $e_1,\dots,e_n$.
+
+\end{proof}
+Cette propri\'{e}t\'{e}
+d'approximation des familles orthonormales joue un r\^{o}le essentiel.
+\begin{example}[Proc\'{e}d\'{e} de Gram-Schmidt]
+\label{exple:gram-schmidt}
+Soit $(y_i)_{i\geq1}$ une famille d'\'{e}l\'{e}ments d'un espace de Hilbert $\calH$.
+Le proc\'{e}d\'{e} de Gram-Schmidt est un proc\'{e}d\'{e} par r\'{e}currence qui permet alors de
+construire une famille orthogonale
+ qui v\'{e}rifie la propri\'{e}t\'{e}
+$\lspan{e_1,\dots,e_n}=\lspan{y_1,\dots,y_n}$ pour tout $n\geq1$.
+Nous donnons ici la construction de la suite $(e_i)_{i\geq1}$. La preuve de ses
+propri\'{e}t\'{e}s est laiss\'{e}e \`{a} titre d'exercice.
+\end{example}
+
+En partant d'une suite orthonormale $(e_i)$ et en appliquant la
+proposition~\ref{prop:bessel} pour toute sous-suite finie, on obtient aussi le
+r\'{e}sultat suivant.
+\begin{corollary}[In\'{e}galit\'{e} de Bessel]
+Soit $(e_i)_{i\geq1}$ une suite orthonormale d'un espace de Hilbert $\calH$. Alors
+$$
+\sum_{i=1}^\infty|\pscal{x}{e_i}|^2\leq \|x\|^2 \;.
+$$
+\end{corollary}
+
+L'in\'{e}galit\'{e} de Bessel implique que pour tout $x \in \calH$, $\lim_{n \to
+  \infty} \pscal{x}{e_n}= 0$ (la suite de vecteurs $(e_n)$ converge
+\emph{faiblement} vers 0) mais aussi que la suite $(\pscal{x}{e_i})_{i\geq1}$ est un
+\'{e}l\'{e}ment de l'espace $\pltwo$ des suites de carr\'{e}s sommables.
+En appliquant le th\'{e}or\`{e}me~\ref{theo:convergence-series-fourier}, on obtient que
+le d\'{e}veloppement en s\'{e}rie
+\begin{equation}
+\label{eq:developpement-Fourier}
+\sum_{i=1}^\infty \pscal{x}{e_i} e_i
+\end{equation}
+est toujours convergent. On l'appelle le \emph{d\'{e}veloppement de Fourier
+  g\'{e}n\'{e}ralis\'{e}} de $x$; les coefficients $\pscal{x}{e_i}$ sont appel\'{e}s
+\emph{coefficients de Fourier g\'{e}n\'{e}ralis\'{e}s} par rapport \`{a} la suite orthonormale
+$(e_i)$.  Il faut prendre garde toutefois au fait que si la s\'{e}rie
+$\sum_{i=1}^\infty \pscal{x}{e_i} e_i$ converge, sa limite n'est pas
+n\'{e}cessairement \'{e}gale \`{a} $x$.
+\begin{example}
+Consid\'{e}rons $\calH= \ltwo(\tore)$ et soit $e_n(t)= \pi^{-1/2} \sin(n t)$ pour $n=1,2,\cdots$. La suite $(e_n)$ est orthonormale dans $\calH$, mais pour $x(t)= \cos(t)$, nous avons
+\begin{multline*}
+\sum_{n=1}^\infty \pscal{x}{e_n} e_n(t)= \sum_{n=1}^\infty \left[ \pi^{-1/2}  \int_\tore \cos(t) \sin(nt) \rmd t \right] \pi^{-1/2} \sin(nt) \\
+= \sum_{n=}^\infty 0 \cdot \sin(nt) = 0 \ne \cos t \eqsp.
+\end{multline*}
+\end{example}
+En fait, pour obtenir $x$, il faut une propri\'{e}t\'{e} suppl\'{e}mentaire.
+\begin{definition}[Famille compl\`{e}te, base hilbertienne]
+Une famille $E$ d'\'{e}l\'{e}ments d'un espace de Hilbert $\calH$ est dite
+\emph{compl\`{e}te} si $\cspan{E}=\calH$. Une \emph{suite orthonormale compl\`{e}te}
+s'appelle une \emph{base hilbertienne}.
+\end{definition}
+La compl\'{e}tude signifie donc n'importe quel \'{e}l\'{e}ment de $\calH$ s'\'{e}crit comme la
+limite d'une suite de combinaisons lin\'{e}aires finies de la famille
+consid\'{e}r\'{e}es. Pour les bases hilbertiennes, cette suite se construit ais\'{e}ment
+sous la forme de la s\'{e}rie~(\ref{eq:developpement-Fourier}), comme l'indique le
+r\'{e}sultat suivant.
+\begin{theorem}
+  \label{thm:base-hilbertienne-decomp}
+Soit  $(e_i)_{i\geq1}$ une base hilbertienne de l'espace  de Hilbert
+$\calH$. Alors pour tout $x\in\calH$,
+\begin{equation}\label{eq:base-hilbertienne-decomp}
+  x=\sum_{i=1}^\infty \pscal{x}{e_i} e_i\;.
+\end{equation}
+\end{theorem}
+\begin{proof}\smartqed
+  Nous savons que la s\'{e}rie~(\ref{eq:developpement-Fourier}) converge.
+  D'autre part la suite \'{e}tant compl\`{e}te, il existe un tableau
+  $(\alpha_{p,n})_{1\leq i\leq n}$ tel que
+$$
+\lim_{n\to\infty} \sum_{i=1}^n \alpha_{i,n} e_i = x\;.
+$$
+Or d'apr\`{e}s la proposition~\ref{prop:bessel}, on a
+$$
+\left\|x-\sum_{i=1}^n \sum_{i=1}^n \pscal{x}{e_i} e_i\right\|
+\leq \left\|x-\sum_{i=1}^n \sum_{i=1}^n \alpha_{i,n} e_i\right\|\;.
+$$
+On a donc aussi convergence du d\'{e}veloppement de Fourier g\'{e}n\'{e}ralis\'{e} de $x$ vers
+$x$.
+
+\end{proof}
+Le th\'{e}or\`{e}me~\ref{thm:base-hilbertienne-decomp} montre en particulier
+qu'une famille orthonormale est une base hilbertienne si et seulement si
+l'identit\'{e}~(\ref{eq:base-hilbertienne-decomp}) entre un \'{e}l\'{e}ment et son
+d\'{e}veloppement de Fourier est v\'{e}rifi\'{e} pour tout \'{e}l\'{e}ment.
+Ceci implique ais\'{e}ment
+le r\'{e}sultat suivant dont la preuve est laiss\'{e}e \`{a} titre d'exercice.
+\begin{theorem}
+\label{theo:caracterisation-base-complete}
+Soit $(e_i)_{i\geq1}$ une suite orthonormale  d'un espace de Hilbert $\calH$.
+Les trois proposition suivantes sont \'{e}quivalentes.
+\begin{enumerate}[label=\emph{\alph*})]
+\item $(e_i)_{i\geq1}$ est une base hilbertienne.
+\item L'\'{e}l\'{e}ment nul est l'unique \'{e}l\'{e}ment qui satisfait
+$$
+\pscal{x}{e_i}=0\quad\text{pour tout}\quad i\geq1\;.
+$$
+\item Pour tout $x \in \calH$,
+\begin{equation}
+\label{eq:parseval}
+\|x\|^2 = \sum_{i=1}^\infty |\pscal{x}{e_i}|^2 \eqsp.
+\end{equation}
+\end{enumerate}
+\end{theorem}
+\begin{example}[Base de Fourier]
+Le syst\`{e}me de fonctions
+\[
+e_n(x)= (2 \pi)^{-1/2} \rme^{\rmi n x} \eqsp, n \in \zset
+\]
+est une suite orthonormale compl\`{e}te de $\ltwo(\tore)$. La preuve de
+l'orthogonalit\'{e} est \'{e}l\'{e}mentaire, mais la preuve de la compl\'{e}tude est plus
+d\'{e}licate. Nous l'\'{e}tablirons dans le paragraphe~\ref{sec:serie-fourier}.
+\end{example}
+
+
+\begin{definition}[Espace de Hilbert s\'{e}parable]
+  On dit qu'un espace de Hilbert est s\'{e}parable s'il contient un sous-ensemble
+  d\'{e}nombrable dense.
+\end{definition}
+
+L'int\'{e}r\^{e}t d'un espace de Hilbert s\'{e}parable est qu'il existe une base
+hilbertienne. C'est d'ailleurs une condition suffisante.
+
+\begin{theorem}
+Un espace de Hilbert $\calH$ est s\'{e}parable si et seulement si il existe une
+base hilbertienne.
+\end{theorem}
+\begin{proof}\smartqed
+Soit $(e_i)$ une base hilbertienne de $\calH$.
+L'ensemble $S= \bigcup_{n=1}^\infty S_n$ avec, pour $n \in \nset$,
+\[
+S_n \eqdef \left\{ \sum_{l=1}^n (\alpha_k + \rmi \beta_k) e_k \eqsp, (\alpha_k,\beta_k) \in \qset \times \qset, k=1,\dots,n  \right\}
+\]
+est d\'{e}nombrable (comme union d\'{e}nombrable d'ensembles d\'{e}nombrables).
+Comme, pour $x \in \calH$,
+\[
+\lim_{n \to \infty} \left\| \sum_{k=1}^n \pscal{x}{e_k} e_k - x \right\| = 0 \eqsp,
+\]
+l'ensemble $S$ est dense dans $\calH$.
+
+Si $\calH$ est s\'{e}parable alors il existe une suite $(y_i)_{i\geq1}$ dense et
+donc aussi compl\`{e}te. Le proc\'{e}d\'{e} de Gram-Schmidt d\'{e}crit \`{a}
+l'exemple~\ref{exple:gram-schmidt} permet alors de construire une famille
+orthogonale $(e_i)_{i\geq1}$ telle que
+$\lspan{e_1,\dots,e_n}=\lspan{y_1,\dots,y_n}$ pour tout $n$. En rettirant les
+\'{e}l\'{e}ments nuls de cette suite et en renormalisant ses termes non-nuls pour
+qu'ils soient de norme 1, on obtient alors une base hilbertienne.
+
+\end{proof}
+%Montrer que
+%toute famille orthogonale d'un espace de Hilbert s\'{e}parable est d\'{e}nombrable.}
+
+\section{S\'{e}ries de Fourier}
+\label{sec:serie-fourier}
+
+Dans cette partie, nous allons \'{e}tablir que
+\begin{equation}
+  \label{eq:expo_complex}
+\phi_n(x)= (2 \pi)^{-1/2} \rme^{\rmi n x},\quad n \in \zset\;,
+\end{equation}
+est une famille
+compl\`{e}te de $\ltwo(\tore,\cB(\tore),\mu)$ quelque soit la mesure
+finie $\mu$ sur les bor\'{e}liens du tore $\tore$.
+En particulier si $\mu$ est proportionnelle \`{a} la mesure de Lebesgue, on obtient
+que cette suite forme une famille
+orthogonale compl\`{e}te.
+
+Notons  $\lone(\tore)$ l'ensemble des fonctions $2\pi$-p\'{e}riodiques
+localement int\'{e}grables par rapport \`{a} la mesure de Lebesgue $\rset$. Pour $f \in
+\lone(\tore)$, posons
+\[
+f_n= \sum_{k=-n}^n \pscal{g}{\phi_k} \phi_k \eqsp, \quad n=0,1,2,\dots
+\]
+Nous avons
+\[
+f_n(x) = \sum_{k=-n}^n \frac{1}{2\pi} \int_\tore f(t) \rme^{-\rmi k t} \rmd t = \sum_{k=-n}^n \frac{1}{2 \pi} \int_\tore f(t) \rme^{\rmi k(x-t)} \rmd t \eqsp.
+\]
+Nous allons \'{e}tablir que, pour tout $f \in \lone(\tore)$,
+\[
+\frac{1}{n+1} \sum_{k=0}^n f_k\;,
+\]
+qui est dans $\lspan{\phi_n,\,n\in\zset}$ est une \emph{bonne approximation} de
+$f$, en pr\'{e}cisant la notion d'approximation utilis\'{e}e, suivant les hypoth\`{e}ses
+suppl\'{e}mentaires sur $f$. Remarquons que pour tout $x\in\Rset$,
+\begin{align*}
+\frac{1}{n+1} \sum_{k=0}^{n} f_k(x)&= \sum_{k=-n}^n \left( 1 - \frac{|k|}{n+1}\right) \pscal{f}{\phi_k} \phi_k(x) \\
+&= \frac{1}{2 \pi} \int_\tore f(t) \left[ \sum_{k=-n}^n \left( 1 - \frac{|k|}{n+1}\right) \rme^{\rmi k (x-t)} \right] \rmd t \eqsp.
+\end{align*}
+On note la fonction entre crochets $K_n(x-t)$, d'o\`{u} finalement, pour tout
+$x\in\Rset$,
+\begin{equation}
+  \label{eq:convol_fejer}
+  \frac{1}{n+1} \sum_{k=0}^{n} f_k(x) =
+\frac{1}{2 \pi} \int_\tore f(t) K_n(x-t)\;  \rmd t \eqsp.
+\end{equation}
+Un calcul \'{e}l\'{e}mentaire donne
+\begin{equation}
+\label{eq:fejer}
+K_n(u) %= \sum_{k=-n}^n \left( 1 - \frac{|k|}{n+1} \right) \rme^{\rmi k x}
+= \frac{1}{n+1} \frac{\sin^2 \frac{(n+1)u}{2}}{\sin^2 \frac{u}{2}} \eqsp.
+\end{equation}
+
+
+\begin{definition}[Noyau de sommabilit\'{e}]
+  Nous dirons qu'une suite de fonctions $(\kappa_n)$ de fonctions
+  $2\pi$-p\'{e}riodique continue est un \emph{noyau de sommabilit\'{e}} si, pour tout
+  $n \in \nset$
+\begin{align}
+\label{eq:kernel:normalisation}
+& \int_\tore \kappa_n(t) \rmd t = 2 \pi \\
+\label{eq:kernel:norme-L1}
+& \int_\tore | \kappa_n(t) | \rmd t \leq M \eqsp, \quad \text{o\`{u} $M$ est une constante} \\
+\label{eq:kernel:negligeable}
+& \lim_{n \to \infty} \int_{\delta}^{2 \pi - \delta} |\kappa_n(t)| \rmd t = 0 \eqsp, \quad \text{pour tout $\delta \in \ccint{0,\pi}$} \eqsp.
+\end{align}
+\end{definition}
+\begin{lemma}
+\label{lem:fejer}
+La fonction $x \to K_n(x)$ donn\'{e}e par \eqref{eq:fejer} est un noyau de sommabilit\'{e}, appel\'{e} \emph{noyau de Fejer}.
+\end{lemma}
+\begin{proof}\smartqed
+Comme $\int_\tore \rme^{\rmi k t} \rmd t= 0$ si $k \ne 0$, nous avons $\int_\tore K_n(t) \rmd t= 2 \pi$.
+Comme $K_n(t) \geq 0$ pour tout $t \in \tore$, nous avons de m\^{e}me $\int_\tore |K_n(t)| \rmd t = 2 \pi$.
+Finalement, soit $\delta \in \ooint{0,\pi} $. Pour tout $t \in \ooint{\delta,2\pi - \delta}$, $\sin t/2 \geq \sin \delta/2$,
+ce qui implique
+\[
+K_n(t) \leq \frac{1}{(n+1) \sin^2 \delta/2} \eqsp.
+\]
+Par cons\'{e}quent
+\[
+\int_{\delta}^{2 \pi - \delta} K_n(t) \rmd t \leq \frac{2 \pi}{(n+1) \sin^2 \delta/2} \to_{n \to \infty} 0 \eqsp.
+\]
+
+\end{proof}
+Le r\'{e}sultat suivant montre que la convolution avec un noyau de sommabilit\'{e}
+fournit une approximation uniforme d'une fonction continue. On appelle ce
+proc\'{e}d\'{e} d'approximation une \emph{r\'{e}gularisation}.
+\begin{lemma}
+\label{lem:approxLinfini-convol-noyau}
+Soient $f: \rset \to \Cset$ une fonction $2\pi$-p\'{e}riodique continue sur $\Rset$
+et  $(\kappa_n)$ un noyau de sommabilit\'{e}. Alors
+$$
+\sup_{x\in\Rset}
+\left|\frac{1}{2 \pi} \int_\tore f(t) \kappa_n(x-t)\;  \rmd t - f(x)\right| \to 0
+\quad\text{quand}\quad n\to\infty\;.
+$$
+\end{lemma}
+\begin{proof}\smartqed
+  En utilisant~(\ref{eq:kernel:normalisation}), on a, pour tout $x$,
+$$
+\left|\frac{1}{2 \pi} \int_\tore f(t) \kappa_n(x-t)\;  \rmd t - f(x)\right|
+=\left|\frac{1}{2 \pi} \int_\tore \left[f(t) - f(x)\right] \;\kappa_n(x-t)\;  \rmd
+  t\right| \;.
+$$
+Il suffit donc de montrer que
+\begin{equation}
+\label{eq:convol-reg-proof}
+\sup_{x\in\Rset}\left|\int_{-\pi}^{\pi}
+\left[f(x-u) - f(x)\right] \;\kappa_n(u)\;  \rmd u\right|\to0\;.
+\end{equation}
+Comme $f$ est continue sur $\Rset$ et p\'{e}riodique, $f$ est uniform\'{e}ment
+continue. Soit $\epsilon>0$. Il existe alors $\delta\in(0,\pi)$ tel que
+$|f(x)-f(t)|\leq \epsilon$ pour $|x-t|\leq\delta$. Il s'en suit donc en
+s\'{e}parant l'int\'{e}grale en 2 parties suivant que $|u|\leq\delta$ ou l'inverse:
+$$
+\left|\int_{-\pi}^{\pi}
+\left[f(x-u) - f(x)\right] \;\kappa_n(u)\;  \rmd u\right|
+\leq \int_{\delta<|u|<\pi} |\kappa_n(u)|\;  \rmd u
++ \epsilon\int_{-\delta}^\delta |\kappa_n(u)|\;  \rmd u \;.
+$$
+On remarque alors que cette majoration ne d\'{e}pend pas de $x$, que son premier
+terme tend vers 0 quand $n\to\infty$ en vertu de~(\ref{eq:kernel:negligeable})
+et que son deuxi\`{e}me terme est born\'{e} par $M\epsilon$ en
+utilisant~(\ref{eq:kernel:norme-L1}). Comme $\epsilon$ peut \^{e}tre pris
+arbitrairement petit, on en conclut~(\ref{eq:convol-reg-proof}).
+
+\end{proof}
+\begin{corollary}
+Soit $\mu$ une mesure finie sur les bor\'{e}liens du tore.
+La suite $(\phi_n)_{n\in\Zset}$ d\'{e}finie par~(\ref{eq:expo_complex}) g\'{e}n\`{e}re
+l'espace de Hilbert $\ltwo(\tore,\cB(\tore),\mu)$, ce qu'on \'{e}crit
+$\cspan{\phi_n,\,n\in\Zset}=\ltwo(\tore,\cB(\tore),\mu)$.
+\end{corollary}
+\begin{proof}\smartqed
+  D'apr\`{e}s \cite[proposition~8 du chapitre~6, page~128]{royden:1988}, pour tout
+  $\epsilon>0$ et toute $f\in\ltwo(\tore,\cB(\tore),\mu)$, il existe une
+  fonction $f_\epsilon$ continue sur $[0,2\pi]$ telle que
+$$
+\int_{[0,2\pi)}|f-f_\epsilon|^2\;\rmd\mu \leq \epsilon^2 \;.
+$$
+Soit $\epsilon'>0$ arbitrairement petit. On note $g_{\epsilon'}$ la fonction
+continue et $2\pi$-p\'{e}riodique qui co\"{i}ncide avec $f_\epsilon$ sur
+$[\epsilon',2\pi-\epsilon']$ et qui est lin\'{e}aire sur
+$[-\epsilon',\epsilon']$. Alors
+$$
+\int_{[0,2\pi)}|f_\epsilon-g_{\epsilon'}|^2\;\rmd\mu \leq
+2 \mu([-\epsilon',\epsilon']) \sup_{t\in[0,2\pi]}|f_\epsilon(t)|^2 \;.
+$$
+On remarque que ce majorant tend vers 0 quand $\epsilon'\to0$, en particulier,
+il existe $\epsilon'>0$ tel que ce majorant est inf\'{e}rieur \`{a} $\epsilon^2$ et
+donc tel que
+$$
+\left(\int_{\tore}|f-g_{\epsilon'}|^2\;\rmd\mu\right)^{1/2} \leq 2\epsilon \;.
+$$
+Autrement dit les fonctions $2\pi$-p\'{e}riodiques continues sur $\Rset$ approchent
+n'importe quelle fonction de $\ltwo(\tore,\cB(\tore),\mu)$.
+D'apr\`{e}s~(\ref{eq:convol_fejer}) les lemmes~\ref{lem:approxLinfini-convol-noyau}
+et~\ref{lem:fejer}, on a d'autre part que toute fonction continue sur le tore
+peut \^{e}tre arbitrairement approch\'{e}e par une fonction de
+$\lspan{\phi_n,\,n\in\Zset}$ en norme sup, et donc aussi en norme
+$\ltwo(\tore,\cB(\tore),\mu)$, ce qui conclut la preuve.
+
+\end{proof}
+
+
+Dans le cas o\`{u} $\mu$ est la mesure de Lebesgue sur le tore, on obtient le
+r\'{e}sultat suivant.
+\begin{corollary}
+\label{cor:completude-base-l2}
+La suite $(\phi_n)_{n\in\Zset}$ d\'{e}finie par~(\ref{eq:expo_complex})
+forme une famille orthogonale compl\`{e}te de $\ltwo(\tore)$.
+\end{corollary}
+
+% \begin{lemma}
+% \label{lem:translation}
+% Soit $f: \rset \to \rset$ une fonction $2\pi$-p\'{e}riodique localement int\'{e}grable par rapport \`{a} la mesure de Lebesgue. Alors,
+% $\lim_{t \to 0} \int_\tore | f(x-t) - f(x) | \rmd x = 0$.
+% \end{lemma}
+% \begin{proof}\smartqed
+% Pour $M > 0$, on note $f_M(x)= f(x) \1 \{ |f(x)| \leq M \} $. On a
+% \begin{align*}
+% &\int_{\tore} |f(x-t) - f(x)| \rmd x \\
+% &\leq \int_\tore |f(x-t) - f_M(x-t)| \rmd x + \int_\tore |f_M(x-t) - f(x)| \rmd x + \int_\tore |f_M(x) - f(x)| \rmd x \\
+% &\leq 2 \int_\tore |f(x) - f_M(x)| \rmd x + \int_\tore |f_M(x-t) - f_M(x)| \rmd x \eqsp.
+% \end{align*}
+% Pour tout $\epsilon > 0$, on peut choisir $M$ tel que $\int_\tore |f(x) - f_M(x)| \rmd x \leq \epsilon$. En appliquant le th\'{e}or\`{e}me de
+% la convergence domin\'{e}e montre que $\lim_{t\to 0} \int_\tore |f_M(x-t) - f_M(x)| \rmd x= 0$.
+%
+%\end{proof}
+
+% \begin{theorem}
+% \label{theo:approxL1-somme-fourier}
+% Si $(\kappa_n)$ est un noyau de sommabilit\'{e}, et si $f \in \lone(\tore)$ alors
+% \[
+% \lim_{n \to \infty} \int_\tore \left| \frac{1}{2\pi} \int_{-\pi}^\pi \kappa_n(t) f(x-t) \rmd t - f(x) \right| \rmd x = 0 \eqsp.
+% \]
+% \end{theorem}
+% \begin{proof}\smartqed
+% L'\'{e}quation \eqref{eq:kernel:normalisation} implique
+% \[
+% \frac{1}{2\pi} \int_\tore \kappa_n(t) f(x-t) \rmd t - f(x)= \frac{1}{2\pi} \int_\tore \kappa_n(t) \left( f(x-t) - f(x) \right) \rmd t \eqsp.
+% \]
+% Par cons\'{e}quent
+% \begin{align*}
+% & \int_\tore \left| \frac{1}{2\pi} \int_\tore \kappa_n(t) f(x-t) \rmd t - f(x) \right| \rmd x \\
+% & \leq \int_\tore \frac{1}{2 \pi} \left| \int_\tore \kappa_n(t) \left\{ f(x-t) - f(x) \right\} \rmd t \right|  \rmd x \\
+% & \leq \int_\tore \frac{1}{2 \pi}  \int_{-\delta}^\delta \left| \kappa_n(t) \left\{ f(x-t) - f(x) \right\} \right| \rmd t   \rmd x \\
+% &+ \qquad \int_\tore \frac{1}{2 \pi}  \int_{\delta}^{2 \pi -\delta} \left| \kappa_n(t) \left\{ f(x-t) - f(x) \right\} \right| \rmd t   \rmd x \eqsp.
+% \end{align*}
+% En utilisant $\int_{-\delta}^\delta |\kappa_n(t)| \rmd t \leq \int_\tore |\kappa_n(t)| \rmd t = 2 \pi$, nous avons
+% \begin{multline*}
+% \int_\tore  \frac{1}{2\pi}  \int_{-\delta}^\delta \left| \kappa_n(t) \left\{ f(x-t) - f(x) \right\} \right| \rmd t   \rmd x \\
+% \leq \left(\max_{|t|\leq \delta} \int_\tore | f(x-t) - f(x)| \rmd x\right) \frac{1}{2\pi} \int_\tore \kappa_n(t) \rmd t \eqsp.
+% \end{multline*}
+% Le Lemme~\ref{lem:translation} et la condition~\ref{eq:kernel:norme-L1} montre que, pour tout $\epsilon > 0$, il existe $\delta > 0$ tel que,
+% pour tout $n \in \nset$,
+% \[
+% \int_\tore  \frac{1}{2\pi}  \int_{-\delta}^\delta \left| \kappa_n(t) \left\{ f(x-t) - f(x) \right\} \right| \rmd t   \rmd x \leq \epsilon \eqsp.
+% \]
+% Nous avons d'autre part
+% \begin{align*}
+% & \int_\tore \int_{\delta}^{2\pi-\delta} \left| \kappa_n(t) \left\{ f(x-t) - f(x) \right\} \right| \rmd t \rmd x \\
+% & \leq \left( \max_{|t| \leq \pi} \int_\tore \left| f(x-t) - f(x) \right| \rmd x \right) \int_\delta^{2\pi-\delta} |\kappa_n(t) | \rmd t \\
+% & \leq 2 \int_\tore |f(x)| \rmd x \int_{\delta}^{2\pi-\delta} |\kappa_n(t)| \rmd t \to 0 \quad \text{quand $n \to \infty$} \eqsp.
+% \end{align*}
+%
+%\end{proof}
+% \begin{theorem}
+% \label{theo:coefficient-fourier-nul-implique-f-nul}
+% Si $f \in \lone(\tore)$ et si $\pscal{f}{\phi_n}=0$ pour tout $n \in \nset$, alors $f=0$ presque-partout.
+% \end{theorem}
+% \begin{proof}\smartqed
+% La condition $\pscal{f}{\phi_n}=0$ pour tout $n \in \nset$ implique que
+% \[
+% f_n(x)= \sum_{k=-n}^n \pscal{f}{\phi_k} \phi_k(x)= \sum_{k=-n}^n \frac{1}{2 \pi} \int f(t) \rme^{\rmi k (x-t)} \rmd t = 0 \eqsp,
+% \]
+% et par cons\'{e}quent
+% \[
+% \frac{1}{n+1} \sum_{k=0}^n f_k(x)= \frac{1}{2 \pi} \int_\tore f(t) K_n(x-t) \rmd t = 0 \eqsp,
+% \]
+% o\`{u} $K_n$ est le noyau de Fejer. Le  Lemme~\ref{lem:fejer} montre que $K_n$ est un noyau de sommabilit\'{e} et le Th\'{e}or\`{e}me~\ref{theo:approxL1-somme-fourier} montre que
+% \[
+% \int_\tore \left| \frac{1}{n+1} \sum_{k=0}^n f_k(x) - f(x) \right| \rmd x  \to_{n \to \infty} 0 \eqsp.
+% \]
+% Par cons\'{e}quent, $\int_\tore |f(x)| \rmd x= 0$, ce qui montre que $f=0$ presque-partout.
+%
+%\end{proof}
+% \begin{theorem}
+% \label{theo:completude-base-l2}
+% La suite $(\phi_n)_{n \in \zset}$, $\phi_n(x)= (2 \pi)^{-1/2} \rme^{\rmi n x}$ est compl\`{e}te.
+% \end{theorem}
+% \begin{proof}\smartqed
+% Si $f \in \ltwo(\tore)$, alors $f \in \lone(\tore)$. Le Th\'{e}or\`{e}me~\ref{theo:coefficient-fourier-nul-implique-f-nul} montre que
+% si $\pscal{f}{\phi_n}= 0$ pour tout $n \in \nset$, alors $f=0$ dans $\ltwo(\tore)$. Le Th\'{e}or\`{e}me~\ref{theo:caracterisation-base-complete}
+% montre que la suite $(\phi_n)$ est compl\`{e}te.
+%
+%\end{proof}
+Le corollaire~\ref{cor:completude-base-l2} montre que pour tout $f \in
+\ltwo(\tore)$,
+\[
+f= \sum_{k=-\infty}^\infty \alpha_k \phi_k  \quad \text{avec}\quad
+\alpha_k= (2 \pi)^{-1/2} \int_\tore f(x) \rme^{-\rmi k x} \rmd x \eqsp,
+\]
+o\`{u} la somme infinie converge au sens $\ltwo(\tore)$. En g\'{e}n\'{e}ral, cette
+condition n'implique pas la convergence ponctuelle. Les coefficients $(\alpha_k)$ sont appel\'{e}s les coefficients
+de Fourier de $f$.  L'identit\'{e} de Parseval s'\'{e}crit dans ce cas
+\[
+\int_\tore |f(x)|^2 \rmd x
+= \sum_{k=-\infty}^\infty |\alpha_k|^2 \eqsp.
+\]
+
+
+%=====================================================================
+\section{Projection et principe d'orthogonalit\'{e}}
+Le th\'{e}or\`{e}me suivant, appel\'{e} \emph{th\'{e}or\`{e}me de projection},
+joue un r\^{o}le central en analyse Hilbertienne.
+\begin{theorem} \label{theo:projection}
+Soit $\cal E$ est un sous-ensemble convexe ferm\'{e} d'un espace de Hilbert
+$\cal H$ et soit $x$ un \'{e}l\'{e}ment quelconque de ${\cal H}$, alors\,:
+\begin{enumerate}[label=\emph{\alph*})]
+   %===
+   \item
+   il existe un unique \'{e}l\'{e}ment not\'{e} $\proj{x}{\cE}\in {\cal E}$ tel que\,:
+\begin{eqnarray*}
+ \|x-\proj{x}{\cE}\| = \inf_{w \in \cE} \| x - w \|
+\end{eqnarray*}
+   %===
+   \item
+   \label{it:ppceortho}
+   Si de plus $\cal E$ est un espace vectoriel, $\proj{x}{\cE}$ est
+   l'unique \'{e}l\'{e}ment $\hat x\in\cE$ tel que $x-\hat x\in \cE^\perp$.
+\end{enumerate}
+On appelle $\proj{x}{\cE}$ la projection orthogonale de $x$ sur $\cE$.
+\end{theorem}
+\begin{proof}\smartqed
+\begin{enumerate}[label=\emph{\alph*})]
+   %===
+   \item
+Soit $x\in\cH$. On note $h=\inf_{w \in \cE} \| x - w \| \geq 0$.
+Alors il existe une suite $w_1, w_2, \cdots, $ de vecteurs de
+$\cE$ tels que\,:
+\begin{equation}
+ \label{eq:limwmeh}
+  \lim_{m\rightarrow +\infty} \| x - w_m \|^2 =h^2 \geq 0
+\end{equation}
+L'identit\'{e} du parall\'{e}logramme,
+$\|a-b\|^2+\|a+b\|^2=2\|a\|^2+2\|b\|^2$ avec $a=w_m-x$ et
+$b=w_n-x$, montre que\,:
+\[
+  \| w_m - w_n \|^2 + \| w_m + w_n -2x\|^2
+    = 2 \| w_m - x \|^2 + 2 \| w_n - x \|^2
+\]
+Comme $(w_m+w_n)/2 \in \cE$, nous avons $ \| w_m + w_n -2x \|^2 =
+4 \| (w_m+w_n)/2 - x \|^2 \geq 4 h^2$. D'apr\`{e}s
+\ref{eq:limwmeh}, pour tout $\epsilon> 0$,il existe $N$ tel que et
+$\forall m,n>N$\,:
+\[
+  \| w_m - w_n \|^2 \leq 2 (h^2+\epsilon) + 2(h^2+\epsilon) - 4h^2
+  = 4 \epsilon.
+\]
+qui montre que $\{w_n, n \in \Nset\}$ est une suite de Cauchy et donc que la suite $\{w_n, n \in \Nset\}$
+tend vers une limite dans $\cE$, puisque l'espace $\cE$ est ferm\'{e}.
+On note $y$ cette limite. On en d\'{e}duit, par continuit\'{e} de la
+norme, que $\| y - x \| = h$. Montrons que cet \'{e}l\'{e}ment est unique.
+Supposons qu'il existe un autre \'{e}l\'{e}ment $z\in\cE$ tel que
+$\|x-z\|^2=\|x-y\|^2=h^2$. Alors l'identit\'{e} du parall\'{e}logramme
+donne\,:
+\begin{multline*}
+ 0\leq \|y-z\|^2=-4\|(y+z)/2-x\|^2+2\|x-y\|^2+2\|x-z\|^2
+ \\\leq -4h^2+2h^2+2h^2=0
+\end{multline*}
+o\`{u} nous avons utilis\'{e} que $(y+z)/2\in\cE$ par hypoth\`{e}se de convexit\'{e} et donc
+$\|(y+z)/2-x\|^2\geq h^2$. Il s'en suit que $y=z$, d'o\`{u} l'unicit\'{e}.
+   %===
+   \item
+ Soit $\hat x$ la projection orthogonale de $x$ sur $\cE$.
+Alors, si il existe $u\in\cE$ tel que $x-u\perp \cE$, on peut
+\'{e}crire\,:
+\begin{align*}
+ \|x-\hat x\|^2
+ &=\pscal{x-u+u-\hat x}{x-u+u-\hat x}\\
+ &=\|x-u\|^2+\|u-\hat x\|^2+2\pscal{u-\hat x}{x-u} \\
+ &=\|x-u\|^2+\|u-\hat x\|^2+0 \geq \|x-u\|^2
+\end{align*}
+et donc $u=\hat x$.
+R\'{e}ciproquement supposons que $u\in\cE$ et $x-u\not \perp \cE$.
+Alors choisissons $y\in\cE$ tel que $\|y\|=1$ et tel que
+$c=\pscal{x-u}{y}\neq 0$ et notons $\tilde x=u + cy\in\cE$. On a\,:
+\begin{align*}
+\|x-\tilde x\|^2
+&=\pscal{x-u+u-\tilde x}{x-u+u-\tilde x} \\
+&=\|x-u\|^2+\|u-\tilde x\|^2 +2\pscal{u-\tilde x}{x-u} \\
+& =\|x-u\|^2+c^2 -2c \pscal{y}{x-u}=\|x-u\|^2-c^2<\|x-u\|^2
+\end{align*}
+Par cons\'{e}quent $\tilde x\in\cE$ est strictement plus proche de $x$
+que ne l'est $u$.
+ \end{enumerate}
+
+\end{proof}
+Le point~(\ref{it:ppceortho}) est particuli\`{e}rement important pour calculer la
+projection puisqu'il permet de remplacer un probl\`{e}me de minimisation par la
+r\'{e}solution d'une \'{e}quation lin\'{e}aire.
+\begin{example} [Projection sur un vecteur]
+ \label{exe:proj1vecteur}
+ Soit $\cal H$ un espace de Hilbert, $\cC=\lspan{v}$
+le sous-espace engendr\'{e} par un vecteur $v\in\cH$ et $x$ un vecteur
+quelconque de $\cal H$. On a alors $\proj{x}{\cC}=\alpha v$ avec
+$\alpha=\pscal{x}{v}/\|v\|^2$. Si on note $\epsilon=x-\proj{x}{\cC}$, on a\,:
+$$
+ \|\epsilon\|^2= \|x\|^2\left( 1 - \|\rho\|^2 \right)
+ \quad\mbox{o\`{u}}\quad
+ \rho=\frac{\pscal{x}{v}}{\|x\| \|v\|}
+ \quad\mbox{avec}\quad |\rho|\leq 1
+$$
+\end{example}
+La projection d\'{e}finie par la proposition~\ref{prop:projecteur} satisfait les
+propri\'{e}t\'{e}s int\'{e}ressantes suivantes.
+\begin{proposition}
+\label{prop:projecteur} Soit $\cal H$ un espace de Hilbert et $\proj{\cdot}{\cE}$ la projection orthogonale sur le sous-espace
+ferm\'{e} $\cE$. On a\,:
+\begin{enumerate}
+   %===
+   \item l'application $x \in \cH \mapsto \proj{x}{\cE} \in \cE$ est
+lin\'{e}aire\,:
+\[
+ \forall (\alpha, \beta) \in \Cset \times \Cset,
+ \quad
+ \proj{\alpha x + \beta y}{\cE}= \alpha \proj{x}{\cE} + \beta \proj{y}{\cE} \eqsp.
+\]
+   %===
+   \item
+$\|x\|^2= \| \proj{x}{\cE} \|^2+\| x - \proj{x}{\cE} \|^2$ (Pythagore),
+   %===
+   \item La fonction $\proj{\cdot}{\cE}: \cH \rightarrow \cH$ est
+continue,
+   %===
+   \item $x\in \cE$ si et seulement si  $\proj{x}{\cE} = x$,
+   %===
+   \item $x\in \cE^{\perp}$ si et seulement si $\proj{x}{\cE} =0$,
+   %===
+   \item Soient $\cE_1$ et $\cE_2$ deux sous espaces vectoriels ferm\'{e}s
+de $\cH$, tels que $\cE_1 \subset \cE_2$. Alors\,:
+\[
+  \forall x \in \cH, \hspace{1cm}
+     \proj{ \proj{x}{\cE_2}}{\cE_1} = \proj{x}{\cE_1} \eqsp.
+\]
+   %===
+   \item\label{it:ortho_proj_sum} Soient $\cE_1$ et $\cE_2$ deux sous-espaces vectoriels ferm\'{e}s
+de $\cH$, tels que $\cE_1 \perp \cE_2$. Alors\,:
+\[
+ \forall x \in \cH, \hspace{1cm}
+     \proj{x}{\cE_1 \oplusperp \cE_2} = \proj{x}{\cE_1} + \proj{x}{\cE_2} \eqsp.
+\]
+\end{enumerate}
+\end{proposition}
+%================================================
+\begin{theorem}\label{thm:ortho_is_closed}
+Si $\cal E$ est un sous-ensemble d'un espace de Hilbert $\cal H$,
+alors ${\cal E}^{\perp}$ est un sous-espace ferm\'{e}.
+\end{theorem}
+\begin{proof}\smartqed
+Soit $(x_n)_{n \geq 0}$ une suite convergente d'\'{e}l\'{e}ments de
+${\cal E}^{\perp}$. Notons $x$ la limite de cette suite. Par
+continuit\'{e} du produit scalaire nous avons, pour tout $y\in \cE$,
+\[
+\pscal{x}{y} = \limn \pscal{x_n}{y} = 0
+\]
+et donc $x \in \cE^\perp$.
+
+\end{proof}
+
+\begin{theorem}
+Soit $(\cM_n)_{n\in\Zset}$ une suite croissante
+de sous-espaces vectoriels (s.e.v.) ferm\'{e}s d'un espace de
+Hilbert $\cH$.
+\begin{enumerate}[label=\emph{\alph*})]
+   \item \label{it:intersection_hilbert}
+Soit $\cM_{-\infty} = \bigcap_n \cM_n$. Alors,
+pour tout $h \in \cH$, nous avons
+\[
+\proj{h}{\cM_{-\infty}}= \lim_{n \rightarrow - \infty} \proj{h}{\cM_n}
+\]
+   \item \label{it:union_fermee_hilbert}
+Soit $\cM_\infty = \overline{\bigcup_{n \in \Zset} \cM_n}$.
+Alors, pour tout $h \in \cH$,
+\[
+\proj{h}{\cM_\infty}= \limn \proj{h}{\cM_n} \eqsp.
+\]
+\end{enumerate}
+\end{theorem}
+\begin{proof}\smartqed
+Remarquons tout d'abord~(\ref{it:union_fermee_hilbert}) se d\'{e}duit ais\'{e}ment en
+appliquant~(\ref{it:intersection_hilbert}) et en remarquant que
+$$
+\cM_\infty^\perp= \bigcap_n \cM_n^\perp\;,
+$$
+et donc, comme $\cM_\infty$ et les $\cM_n$ sont ferm\'{e}s, on a d'apr\`{e}s la
+propri\'{e}t\'{e}~\ref{it:ortho_proj_sum} de la proposition~\ref{prop:projecteur}:
+$\proj{h}{\cM_{-\infty}}=h-\proj{h}{\cM_\infty^\perp}$
+et de m\^{e}me pour  $\cM_n$. De plus comme les $\cM_n^\perp$ sont ferm\'{e}s d'apr\`{e}s
+le th\'{e}or\`{e}me~\ref{thm:ortho_is_closed}, on peut bien
+appliquer~(\ref{it:intersection_hilbert}).
+
+Il reste donc \`{a} montrer~(\ref{it:intersection_hilbert}).
+Comme $\cM_n$ est un s.e.v. ferm\'{e} de $\cH$, $\cM_{-\infty}$ est un s.e.v. ferm\'{e}
+de $\cH$. Le th\'{e}or\`{e}me de projection \ref{theo:projection} prouve que
+$\proj{h}{\cM_{- \infty}}$ existe. Pour $m < n$, d\'{e}finissons $\cM_n \ominusperp
+\cM_m$ le compl\'{e}ment orthogonal de $\cM_m$ dans $\cM_n$, c'est \`{a} dire
+$\cM_m^\perp\cap\cM_n$. Cet ensemble est un s.e.v ferm\'{e} de $\cH$ d'apr\`{e}s le
+th\'{e}or\`{e}me~\ref{thm:ortho_is_closed}.  Notons que d'apr\`{e}s la
+propri\'{e}t\'{e}~\ref{it:ortho_proj_sum} de la proposition~\ref{prop:projecteur},
+\[
+\proj{h}{\cM_n \ominusperp \cM_m} = \proj{h}{\cM_n} - \proj{h}{\cM_m} \eqsp.
+\]
+Il s'en suit que, pour tout $m \geq 1$,
+\[
+\sum_{n= -m+1}^0 \| \proj{h}{ \cM_n \ominusperp \cM_{n-1}} \|^2 = \| \proj{h}{\cM_0
+  \ominusperp \cM_{-m}} \|^2 \leq \|h\|^2 < \infty\;.
+\]
+On obtient que la s\'{e}rie de termes positifs  $(\| \proj{h}{ \cM_n \ominusperp
+  \cM_{n-1}} \|^2)_{n\leq0}$ est convergente et comme pour tout $m\leq p\leq 0$,
+$$
+\|\proj{h}{\cM_p}-\proj{h}{\cM_n}\|^2=
+\sum_{n= -m+1}^p \| \proj{h}{ \cM_n \ominusperp \cM_{n-1}} \|^2\;,
+$$
+on voit que la suite $\{ \proj{h}{\cM_n}, n=0,-1,-2, \dots \}$ est une suite
+de Cauchy.  Comme $\cH$ est complet, $\proj{h}{\cM_n}$ converge dans
+$\cH$. Notons $z$ sa limite. Il
+reste \`{a} prouver que $z = \proj{h}{\cM_{- \infty}}$. En appliquant le
+th\'{e}or\`{e}me de projection \ref{theo:projection}, nous devons
+donc d\'{e}montrer que $z \in \cM_{- \infty}$ et $h-z \perp
+\cM_{- \infty}$. Comme $\proj{h}{\cM_n} \in \cM_p$ pour tout $n \leq p$, nous
+avons donc $z \in \cM_p$ pour
+tout $p$ et donc $z \in \cM_{-\infty}$. Prenons maintenant $p \in \cM_{-
+  \infty}$. Alors $p \in
+\cM_{n}$ pour tout $n \in \Zset$, et donc, pour tout $n \in \Zset$,
+$\pscal{h - \proj{h}{\cM_n}}{p}= 0$ et $\pscal{h - z}{p}=0$ en passant \`{a} la
+limite, ce qui conclut la preuve.
+
+\end{proof}
+
+\begin{corollary}
+  Soit $\{ e_k, k \in \Nset \}$ une famille orthonormale d'un espace de
+Hilbert $\cH$. On note $\cE_\infty=\cspan{e_k, k \in \Nset}$. Alors
+\[
+\proj{h}{\cE_\infty} = \sum_{k=0}^\infty \pscal{h}{e_k} e_k \eqsp.
+\]
+\end{corollary}
+
+% %%% pure fain\'{e}antise !!!
+% Nous prouvons finalement le point [(c)]. En appliquant [(b)], nous
+% avons
+% \[
+% \proj{h}{\cE_\infty}= \limn \proj{h}{\cE_n}.
+% \]
+% On v\'{e}rifie ais\'{e}ment que
+% \[
+% \proj{h}{\cE_n} = \sum_{k=1}^n \pscal{h}{e_k} e_k \eqsp.
+% \]
+% Notons en effet que $\proj{h}{\cE_n} \in \cE_n$ et, pour tout $k \in \{1,
+% \cdots, n\}$,
+% \[
+% \pscal{h - \proj{h}{\cE_n}}{e_k} = \pscal{h}{e_k} - \pscal{h}{e_k} = 0.
+% \]
+% On conclut la preuve en combinant les deux r\'{e}sultats
+% pr\'{e}c\'{e}dents.
+%
+%\end{proof}
+
+
+\section{Isom\'{e}tries et isomorphismes d'espaces de Hilbert}
+\begin{definition}[Isom\'{e}trie]
+\label{def:isometrie}
+Soient $\calH$ et $\calI$ deux espaces de Hilbert complexes et $\calG$ un
+sous-espace vectoriel de $\calH$.  Une \emph{isom\'{e}trie} $S$ de $\calG$ dans
+$\calI$ est une application lin\'{e}aire $S: \calG \to \calI$ telle que
+$\pscal{Sv}{Sw}_{\calI}= \pscal{v}{w}_\calH$ pour tout $(v,w) \in \calG$.
+\end{definition}
+On peut montrer qu'une isom\'{e}trie entre deux espaces de Hilbert est
+n\'{e}cessairement lin\'{e}aire.
+On remarque aussi qu'une isom\'{e}trie est toujours une application continue.
+
+\begin{definition}[isomorphisme d'espaces de Hilbert]
+Un espace de Hilbert $\calH$ est \emph{isomorphe} \`{a} un espace de Hilbert
+$\calI$ s'il existe une isom\'{e}trie bijective $T$ de $\calH$ dans $\calI$.
+\end{definition}
+
+\begin{theorem}
+Soit $\calH$ un espace de Hilbert s\'{e}parable.
+\begin{enumerate}[label=\emph{\alph*})]
+\item Si $\calH$ est infini dimensionnel, alors il est isomorphe \`{a} $\pltwo$.
+\item Si $\calH$ est de dimension fini, alors in est isomorphe \`{a} $\cset^n$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}\smartqed
+  Soit $(e_i)$ une suite orthonormale compl\`{e}te de $\calH$. Si $\calH$ est
+  infini-dimensionnel, alors $(e_i)$ est une suite infinie. Soit $x \in
+  \calH$. Pour $x \in \calH$, d\'{e}finissons $Tx= (\alpha_i)$, o\`{u} $\alpha_i =
+  \pscal{x}{e_i}$. Le th\'{e}or\`{e}me~\ref{theo:convergence-series-fourier} montre que
+  $T$ est une isom\'{e}trie de $\calH$ dans $\pltwo$.
+
+\end{proof}
+Comme tous les espaces de Hilbert infini-dimensionnels sont isomorphes \`{a}
+l'espace des suites $\pltwo$, deux espaces de Hilbert infini-dimensionnels
+s\'{e}parables quelconques sont isomorphes.
+
+Le r\'{e}sultat suivant permet de construire facilement des isom\'{e}tries.
+\begin{theorem}
+\label{theo:prolongement-isometrie}
+Soit $(\calH,\pscal{}{}_{\calH})$ et $(\calI, \pscal{}{}_\calI)$ deux espaces de Hilbert complexes. Soit $\calG$ un sous-espace vectoriel de $\calH$.
+\begin{enumerate}[label=\emph{\alph*})]
+\item \label{item:prolongement-isometrie:adherence}
+soit $S: \calG \to \calI$ une isom\'{e}trie de $\calG$ dans $\calI$. Alors, $S$ se prolonge de fa\c{c}on unique en une isom\'{e}trie $\bar{S}: \overline{\calG} \to \calI$ et $\bar{S}(\overline{\calG})$ est l'adh\'{e}rence de $S(\calG)$ dans $\calI$.
+\item \label{item:prolongement-isometrie:famillevecteurs}
+Soit $(v_t, t \in \Tset)$ et $(w_t, t \in \Tset)$ deux familles de vecteurs de $\calH$ et $\calI$ index\'{e}es par un ensemble d'indices $\Tset$ quelconque. Supposons que pour tout $(s,t) \in \Tset \times \Tset$, $\pscal{v_t}{v_s}_{\calH}= \pscal{w_t}{w_s}_{\calI}$.
+Alors, il existe une unique isom\'{e}trie $S: \cspan{v_t, t \in \Tset} \to \cspan{w_t, t \in \Tset}$ telle que pour tout $t \in \Tset$,
+$S v_t= w_t$. De plus, on a $S\left( \cspan{v_t, t \in \Tset} \right) = \cspan{w_t, t \in \Tset}$.
+\end{enumerate}
+Dans la suite, nous  utiliserons la m\^{e}me notation pour $S$ et son prologement $\bar{S}$.
+\end{theorem}
+\begin{proof}\smartqed
+  Soit $v \in \bar{\calG}$. Pour toute suite $(v_n) \in \calG$ convergeant vers
+  $v$, la suite $(Sv_n)$ est une suite de Cauchy dans $\calI$ (car $(v_n)$ est
+  une suite de Cauchy dans $\calG$ et $S$ est isom\'{e}trique). Il existe donc $w
+  \in \calI$ telle que $w = \lim_{n \to \infty} Sv_n$. Si $(v'_n)$ est une
+  autre suite convergeant vers $v$, nous avons $\|v'_n - v'_n\|_\calH \to 0$
+  et, comme $S$ est isom\'{e}trique, $\|Sv_n - Sv'_n\|_\calI \to 0$, ce qui montre
+  que la limite $w$ ne d\'{e}pend pas du choix de la suite. Posons $\bar{S}v=
+  w$. Les propri\'{e}t\'{e}s de lin\'{e}arit\'{e} et de conservation du produit scalaire sont
+  conserv\'{e}es par passage \`{a} la limite et $\bar{S}: \bar{\calG} \to \calI$ est
+  une isom\'{e}trie prolongeant $S$.
+
+Par construction $\bar{S}(\bar{\calG})$ est inclus dans l'adh\'{e}rence de $S(\calG)$. Inversement, soit $w \in \overline{S(\calG)}$.
+Il existe une suite $(v_n) \in \calG$ telle que $w= \lim_{n \to \infty} Sv_n$. La suite $(Sv_n)$ est de Cauchy et comme $S$ est une isom\'{e}trie, la suite $(v_n)$ est aussi de Cauchy dans $\calG$. Soit $v \in \bar{\calG}$ sa limite. Nous avons $\bar{S}v= \lim_{n \to \infty} S v_n$ et donc $\bar{S}v= w$, ce qui montre $\overline{S(\calG)} \subseteq \bar{S}(\bar{\calG})$. Ceci \'{e}tablit le point \eqref{item:prolongement-isometrie:adherence} de la proposition.
+
+Pour toute partie finie $J$ de
+$\Tset$ et pour tous coefficients complexes $(a_t)_{t \in J}$ et $(b_t)_{t \in
+  J}$, nous avons
+$$
+\sum_{t \in J} a_t v_t=\sum_{t \in J} b_t v_t \Rightarrow
+\sum_{t \in J} a_t w_t=\sum_{t \in J} b_t w_t
+$$
+puisqu'en posant $c_t=a_t-b_t$,
+\begin{equation*}
+%\label{eq:keyrelation}
+\left\| \sum_{t \in J} c_t v_t \right\|_{\calH}^2 =
+\sum_{t \in J} \sum_{t' \in J} c_{t} \overline{c_{t'}}
+\pscal{v_t}{v_t'}_{\calH}=
+ \sum_{t \in J} \sum_{t' \in J} c_{t} \overline{c_{t'}}
+ \pscal{w_t}{w_t'}_{\calI}
+=\left\| \sum_{t \in I} c_t w_t \right\|_{\calI} \eqsp,
+\end{equation*}
+par lin\'{e}arit\'{e} et conservation du produit scalaire.  Ceci permet de d\'{e}finir $Sf=
+\sum_{t \in I} a_t w_t$ pour tout $f$ tel que $f = \sum_{t \in I} a_t
+v_t$ avec $I$ partie finie de $\Tset$. Nous avons donc d\'{e}fini $S$ sur
+$\calG=\lspan{v_t, t \in \Tset}$ et c'est une isom\'{e}trie. Cette isom\'{e}trie, en
+vertu de (\ref{item:prolongement-isometrie:adherence}) se prolonge de fa\c{c}on
+unique en une isom\'{e}trie $\bar{S}: \bar{\calG} \to \calI$ telle que
+$\bar{S}(\bar{\calG})= \overline{S(\calG)}$.  Par construction, $\bar{\calG}=
+\cspan{v_t, t \in \Tset}$ et $S(\calG) = \lspan{w_t, t \in \Tset}$.
+
+\end{proof}
+
+
+%================================================
+%================================================
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% ispell-local-dictionary: "francais"
+%%% TeX-master: "../monographie-serietemporelle"
+%%% End:
