@@ -141,5 +141,11 @@ pla <- ggplot(da, aes(a,densité)) + geom_line(aes(colour = methode))
 plb <- ggplot(db, aes(b,densité)) + geom_line(aes(colour = methode))
 
 require(gridExtra)
+<<<<<<< HEAD
 grid.arrange(pla,plb,main=stextGrob(paste0("n = ",n),gp=gpar(fontsize=20)))
+=======
+# Several people have been having trouble texGrob
+# grid.arrange(pla,plb,main=textGrob(paste0("n = ",n),gp=gpar(fontsize=20)))
+grid.arrange(pla,plb)
+>>>>>>> a85e84cb0e955ab848a633eb8720ce38a8f265a0
 
