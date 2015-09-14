@@ -1,0 +1,244 @@
+\input{defslide}
+\input{notations-hilbertfourier}
+\title{MAP 455 : Fourier transform}
+\begin{document}
+\date{11 Septembre 2015}
+\maketitle
+
+
+
+\begin{frame}
+\frametitle{Today}
+\tableofcontents
+\end{frame}
+\section{Main definitions and properties}
+\begin{frame}
+\frametitle{Definition}
+\begin{definition}
+Given $f\in \lone(\rset)$ we write
+\begin{align*}
+&\TF f(\xi)=\hat{f}(\xi)=\int_{\rset} \rme^{-2\rmi\pi\xi x}f(x)\ \rmd x, \\
+&\TFC f(\xi)=\int_{\mathbb{R}}\rme^{2\rmi\pi\xi x}f(x) \rmd x. \\
+\end{align*}
+By definition, the function $\TF f$ is the Fourier transform of $f$, and $\TFC f$ is the conjugate Fourier transform of $f$.
+\end{definition}
+\end{frame}
+
+\begin{frame}
+\frametitle{Rieman-Lebesgue theorem}
+\begin{theorem}[Riemann-Lebesgue]  If $f\in \lone(\rset)$ , then $\hat{f}$ satisfies the following conditions:
+\begin{enumerate}[label=(\roman*)]
+\item $\TF f$ is continuous  and bounded on $\rset$.
+\item $\TF$  is a  continuous linear operator from $\lone(\rset)$  to $L^{\infty}(\rset)$, and
+$$
+\Vert\hat{f}\Vert_{\infty}\leq\Vert f\Vert_{1}.
+$$
+\item $\lim_{|\xi|\rightarrow+\infty} |\hat{f}(\xi)|=0$.
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Derivation}
+
+\begin{theorem}
+\begin{enumerate}[label=(\roman*)]
+\item If $x^{k}f(x)$ is in $\lone(\rset)$ , $k=0,1,2,\ \ldots,\ n$,  then $\hat{f}$ is n   times differentiable, and
+$$
+\hat{f}^{(k)}(\xi)=\widehat{(-2\rmi\pi x)^{k}f}(\xi) \quad  \text{for} \ k=1,2,\ \ldots,\ n,
+$$
+where $\widehat{(-2 \rmi \pi x)^{k}f}(\xi)$  denotes $\TFA{x \to (-2\rmi\pi x)^{k}f(x)}(\xi)$ .
+\item If $f\in C^{n}(\rset)\cap \lone(\rset)$ and if all the derivatives $f^{(k)},\ k=1,2,\ \ldots,\ n$, are  in $\lone(\rset)$, then
+$$
+\widehat{f^{(k)}}(\xi)=(2\rmi \pi\xi)^{k}\hat{f}(\xi)\ \quad \text{for}\ k=1,2,\ \ldots,\ n.
+$$
+\item If $f\in \lone(\rset)$  has bounded support, then $\hat{f}\in C^{\infty}(\rset)$.
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\frametitle{An application}
+\begin{itemize}
+\item Consider the linear differential equation with constant coefficients,
+\[
+\sum_{k=0}^q b_k g^{(k)} = \sum_{\ell=0}^p a_{\ell} f^{(\ell)} \eqsp,
+\]
+where $f$ is the \alert{input} and $g$ is the \alert{output}.
+\item Taking the Fourier transform of both sides of this inequality,
+\[
+\sum_{k=0}^q  b_k (2 \rmi \pi \xi)^k \hat{g}(\xi) = \sum_{\ell=0}^p a_{\ell} (2 \rmi \pi \xi)^\ell \, \hat{f}(\xi) \eqsp.
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{An application}
+\begin{itemize}
+\item Consider the two polynomials $A(X)= \sum_{\ell=0}^p a_{\ell} X^{\ell}$ and $B(X)= \sum_{k=0}^q b_k X^k$. If $A(X)/B(X)$ has no pole on the imaginary axis, then
+\[
+\hat{g}(\xi)= \frac{A(2 \rmi \pi \xi)}{B(2 \rmi \pi \xi)} \hat{f}(\xi) \eqsp.
+\]
+\item The function $A(2 \rmi \pi \xi)/B(2 \rmi \pi \xi)$ is the \alert{transfer function} of the system.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Translations, symmetries}
+\begin{enumerate}[label=(\roman*)]
+\item If $f$ has values in $\cset$, then $\overline{f}(x)=\overline{f(x)}$, the complex conjugate of $f(x)$ .
+\item $f_{\sigma}$ denotes the reflection of $f$ defined by $f_{\sigma}(x)=f(-x)$ .
+\item The translate $\tau_{a}f$ of $f$ is defined by $\tau_{a}f(x)=f(x-a)$ .
+\end{enumerate}
+\begin{theorem}[conjugation and parity]
+For $f\in \lone(\rset)$ we have the following relations:
+\begin{enumerate}[label=(\roman*)]
+\item $\overline{\TFA{f}}=\overline{\TF}(\overline{f})$ .
+\item $(\TFA f)_{\sigma}=\overline{\TF}(f)=\TF (f_{\sigma})$ .
+\item $f$ even (odd) $\Rightarrow$  $\hat{f}$ even (odd).
+\item $f$ real and even (real and odd) $\Rightarrow$ $\hat{f}$ real  and even (imaginary and odd).
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\frametitle{Fourier transform of the Gaussian kernel}
+\begin{lemma}\label{lem:gaussenneTF}
+If $g_a(x)= \rme^{-a x^2}$, then $\hat{g}_a(\xi)= \sqrt{\frac{\pi}{a}}\rme^{- \pi^2 \xi^2/a}$.
+\end{lemma}
+Taking $a= \pi$, $\TFA{g_\pi}= g_\pi$, $g_\pi$ is a fixed point of the Fourier transform.
+\end{frame}
+
+%\section{Useful formulas}
+%\begin{frame}
+%\frametitle{Summary of useful formulas}
+%\label{sec:formulaire}
+%\begin{enumerate}[label=(\roman*)]
+%\item $\hat{f}^{(k)}(\xi)= \widehat{(-2\rmi\pi x)^{k}f}(\xi)$
+%$\widehat{f^{(k)}}(\xi)=(2\rmi \pi\xi)^{k}\hat{f}(\xi)$
+%\item $f(x-a) \TFyield \rme^{-2\rmi \pi a\xi}\hat{f}(\xi)$,
+%$\rme^{2 \rmi \pi ax}f(x)\TFyield \hat{f}(\xi-a)$
+%\item $a\neq 0$, $ f(ax)\TFyield \frac{1}{|\xi|}\hat{f}(\frac{\xi}{a})$
+%\item  $a\in \cset$, ${\rm Re}(a)>0, k=0,1,2\ldots.$
+%\begin{align*}
+%\frac{x^{k}}{k!}\rme^{-ax}u(x) &\TFyield \frac{1}{(a+2i\pi\xi)^{k+1}} \\
+%\frac{x^{k}}{k!}\rme^{ax}u(-x) &\TFyield \frac{-1}{(-a+2i\pi\xi)^{k+1}} \\
+%\rme^{-a|x|} &\TFyield \frac{2a}{a^{2}+4\pi^{2}\xi^{2}} \\
+%\mathrm{sign}(x)\rme^{-a|x|} &\TFyield \frac{-4i\pi\xi}{a^{2}+4\pi^{2}\xi^{2}} \\
+%\end{align*}
+%\item  $a\in \rset$, $a>0$.
+%\begin{align*}
+%\rme^{-ax^{2}}  &\TFyield \sqrt{\frac{\pi}{a}}\rme^{-\frac{\pi^{2}}{a}\xi^{2}} \\
+%\1_{\ccint{-a,+a}}(x) &\TFyield \frac{\sin 2a\pi\xi}{\pi\xi}
+%\end{align*}
+%\end{enumerate}
+%
+%\end{frame}
+\section{The inverse Fourier transform}
+\section{The inverse Fourier transform}
+\begin{frame}
+\frametitle{The exchange formula}
+\begin{theorem}
+ Let $f$ and $g$  be two functions in $\lone(\rset)$ . Then $f\hat{g}$
+and $\hat{f}g$ both belong to $\lone(\rset)$ and
+$$
+\int f(t)\hat{g}(t)\rmd t=\int\hat{f}(x)g(x)\ \rmd x.
+$$
+\end{theorem}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{A key result}
+\begin{theorem}\label{prop:inversionFourierL1}
+Let $f\in \lone(\rset)$. Assume that $\hat{f} \in \lone(\rset)$. Then, for any $x \in \rset$ where $f$ is continuous, we get
+\begin{equation*}
+[\bar{\TF} \hat{f}](x) = f(x).
+\end{equation*}
+\end{theorem}
+\end{frame}
+
+\section{The space $\mcs(\rset)$}
+\begin{frame}
+\begin{definition}[Rapidly decreasing function]
+A function  $f : \rset \to \cset$ is \alert{rapidly decreasing} if, for all $p \in \nset$,
+$$
+\lim_{|x| \to \infty} |x|^p |f (x)| = 0 \eqsp.
+$$
+\end{definition}
+\begin{theorem}
+\label{prop:1913}
+\begin{enumerate}[label=(\roman*)]
+\item Let  $f \in \lone(\rset)$ be a rapidly decreasing function. Then $\hat{f}$ is indefinitely differentiable.
+\item Let $f \in C_\infty(\rset)$. If for all $k \in \nset$, $f^{(k)} \in \lone(\rset)$ then $\hat{f}$ is rapidly decreasing.
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\index{The Schwartz space $\mcs(\rset)$}
+\begin{definition}[Schwartz space] $\mcs(\rset)$ or simply $\mcs$ denotes the vector space of functions that have the following two properties
+\begin{enumerate}[label=(\roman*)]
+\item $f$ is infinitely differentiable on $\rset$;
+\item $f$ and all of its derivatives decay rapidly.
+\end{enumerate}
+\end{definition}
+We call $\mcs(\rset)$ the \alert{Schwartz space} (named after the french mathematician Laurent Schwartz). It plays a foundational role in the theory of \alert{distributions}.
+\end{frame}
+
+\begin{frame}
+\frametitle{Properties of the Schwartz space}
+\begin{lemma}
+The space $\mcs$ has the following properties :
+\begin{enumerate}[label=(\roman*)]
+\item $\mcs$ is invariant under multiplication by a polynomial..
+\item $\mcs$  is invariant under derivation; that is, ($f \in \mcs \Rightarrow f' \in  \mcs$).
+\item $\mcs \subset  \lone(\rset)$.
+\end{enumerate}
+\end{lemma}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Invariance}
+\begin{theorem}
+The space $\mcs$ is invariant by Fourier transform; that is, if $f \in \mcs$, then $\hat{f} \in \mcs$.
+\end{theorem}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{The inverse Fourier transform on $\mcs$}
+\begin{theorem}\label{thm:Schwartz}
+The Fourier transform $\TF$ is a linear $1$-to-$1$ mapping from $\mcs$ to $\mcs$.
+The inverse transform is $\TF^{-1} = \TFC$. In other words, the relations
+\begin{align*}
+\hat{f}(\xi) &= \int_{\rset} \rme^{-2 \rmi \pi \xi x} f(x) \rmd x \eqsp, \\
+f(x) &= \int_{\rset} \rme^{+ 2 \rmi \pi x \xi} \hat{f}(\xi) \rmd \xi \eqsp.
+\end{align*}
+\end{theorem}
+The function $g(x) = \rme^{- \pi x^2}$ is a fixed point of this mapping.
+\end{frame}
+
+\begin{frame}
+\frametitle{The Plancherel-Parseval inequality}
+\begin{theorem}
+For $f, g \in \mcs$, 
+\begin{align*}
+\int \hat{f}(\xi) \bar{\hat{g}}(\xi) \rmd \xi &= \int f(x) \bar{g}(x) \rmd x \\
+\int |\hat{f}(\xi)|^2 \rmd \xi &= \int |f(x)|^2 \rmd x \eqsp.
+\end{align*}
+\end{theorem}
+%\begin{proof}
+%Let $h(\xi) = \bar{\hat{g}}(\xi)= \TFC{\bar{g}}(\xi)$ The exchange formula proves that
+%\[
+%\int \hat{f}(\xi) h(\xi) \rmd \xi = \int f(x) \hat{h}(x) \rmd x
+%\]
+%But $\hat{h}= \TFA{h}= \bar{g}$.
+%\end{proof}
+\end{frame}
+
+
+\end{document} 

@@ -1,0 +1,45 @@
+\documentclass[a4paper,11pt,fleqn]{article}
+
+\usepackage[francais]{babel}
+%\usepackage[latin1]{inputenc}
+%\usepackage[applemac]{inputenc}
+\usepackage{a4wide,amsmath,amssymb,amsthm,bbm,fancyhdr,graphicx,bbm,enumitem,xargs}
+\theoremstyle{definition}
+\newtheorem{exercice}{Exercice}
+
+\RequirePackage[OT1]{fontenc}
+
+\usepackage[utf8]{inputenc}
+% THE variable
+\newcommand{\thisyear}{Ann\'ee 2015-2016}
+
+\input{notations-hilbertfourier}
+\begin{document}
+
+\begin{exercice}
+Given $f$ and $g$ in $\ltwo(\rset)$ , show that
+\begin{enumerate}[label=(\roman*)]
+\item $f*g(t)=\TFAC{\hat{f}\cdot\hat{g}}(t)$  for all $t$ in $\rset$. 
+\item $\widehat{f\cdot g}=\hat{f}*\hat{g}$ for all $t$  in $\rset$.
+\item Compute $f * f$ when $f(t)= \sin(2 \pi \lambda t)/ \pi t$.
+\item Compute $g * g$ when $g(x)= \rme^{-\pi x^2}$.
+\end{enumerate}
+\end{exercice}
+
+
+We establish the result using the density of $\mcs(\rset)$ in $\ltwo(\rset)$. Thus let $f_{n}$ and $g_{n}$ be two sequences in $\mcs(\rset)$ such that
+$$
+\lim_{n\rightarrow\infty}\Vert f-f_{n}\Vert_{2}=0 \quad \text{and} \quad \lim_{n\rightarrow\infty}\Vert g -g_{n}\Vert_{2}=0 .
+$$
+We see that $f_{n}*g_{n}=\TFAC{\hat{f}_{n}\cdot\hat{g}_{n}}$ by taking the inverse Fourier transform of both sides. On the other hand,
+\begin{align*}
+\Vert\hat{f}\cdot\hat{g}-\hat{f_{n}}\cdot\hat{g}_{n}\Vert_{1}
+&\leq\Vert\hat{f}-\hat{f_{n}}\Vert_{2}\Vert\hat{g}\Vert_{2}+\Vert\hat{f_{n}}\Vert_{2}\Vert\hat{g}-\hat{g}_{n}\Vert_{2} \\
+&=\Vert f-h\Vert_{2}\Vert g\Vert_{2}+\Vert f_{n}\Vert_{2}\Vert g-g_{n}\Vert_{2}
+\end{align*}
+and hence $\lim_{n\rightarrow\infty}\Vert\hat{f}\cdot\hat{g}-\hat{f_{n}}\cdot\hat{g}_{n}\Vert_{1}=0$. By applying the Riemann-Lebesgue theorem to the inverse Fourier transform, we see that $\TFAC{\hat{f_{n}}\cdot\hat{g}_{n}}$ tends to $\TFAC{\hat{f}\cdot\hat{g}}$ uniformly on $\rset$. The last step is to determine the limit of $f_{n}*g_{n}$. We have
+$$
+\Vert f*g-f_{n}*g_{n}\Vert_{\infty}\leq\Vert f-f_{n}\Vert_{2}\Vert g\Vert_{2}+\Vert f_{n}\Vert_{2}\Vert g-g_{n}\Vert_{2};
+$$
+thus $f_{n}*g_{n}$ converges uniformly to $f*g$, which is continuous. 
+\end{document}

@@ -1,0 +1,275 @@
+\input{defslide}
+\input{notations-hilbertfourier}
+\title{MAP 555 : Convolution, Regularization, Fourier-Plancherel...}
+\begin{document}
+\date{18 Septembre 2015}
+\maketitle
+
+
+
+\begin{frame}
+\frametitle{Today}
+\tableofcontents
+\end{frame}
+
+\section{Convolution: a bit of mathematics}
+\subsection{Existence and Continuity}
+\begin{frame}
+\frametitle{Convolution}
+\begin{definition}
+The convolution of two functions $f$ and $g$ from $\rset$ to $\cset$ is the function $f*g$, if it exists, defined by
+$$
+f*g(x)=\int_{\rset}f(x-t)g(t) \rmd t=\int_{\rset}f(u)g(x-u)\ \rmd u \eqsp.
+$$
+\end{definition}
+If no assumptions are made about $f$ and $g$, the convolution is clearly not defined. Take, for example, $f=g \equiv 1$ !
+\end{frame}
+
+\begin{frame}
+\frametitle{Convolution in $\lone(\rset)$}
+\begin{theorem}
+If $f$ and $g$ are in $\lone(\rset)$,  then the following hold
+\begin{enumerate}[label=(\roman*)]
+\item $f*g$ is  defined almost everywhere and $f*g$  belongs to $\lone(\rset)$ .
+\item The convolution is a  continuous bilinear operator from $\lone(\rset) \times \lone(\rset)$  to $\lone(\rset)$  with
+$$
+\Vert f*g\Vert_{1}\leq\Vert f\Vert_{1}\Vert g\Vert_{1}.
+$$
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\frametitle{Convolution in $\loneloc(\rset)$}
+\begin{theorem}
+Assume that $f\in \loneloc(\rset)$ and that $ g\in \lone(\rset)$ .
+\begin{enumerate}[label=(\roman*)]
+\item If $\mathrm{supp}(g)$ is bounded,  then $f*g(x)$ exists a.e. and belongs to $\loneloc(\rset)$ .
+\item If $f$  is bounded,  then $f*g(x)$ exists for all $x$ and  $\linfty(\rset)$ .
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\frametitle{Convolution in $\lp{p}$}
+\begin{theorem}
+Assume that $f\in \lp{p}$ an $g\in \lp{q}$ where $p$ and $q$ are conjugates ($p^{-1} + q^{-1}=1$).
+Then the following hold:
+\begin{enumerate}[label=(\roman*)]
+\item $f*g$  is defined everywhere, is continuous  and  bounded on $\rset$.
+\item $\Vert f*g\Vert_{\infty}\leq\Vert f\Vert_{p}\Vert g\Vert_{q}$.
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\begin{theorem}
+If $f\in \lone(\rset)$ and $g\in \ltwo(\rset)$, then the following hold:
+\begin{enumerate}[label=(\roman*)]
+\item $f*g(x)$ exists almost everywhere.
+\item $f*g$ belongs to  $\ltwo(\rset)$ and
+$$
+\Vert f*g\Vert_{2}\leq\Vert f\Vert_{1}\Vert g\Vert_{2} .
+$$
+\end{enumerate}
+\end{theorem}
+\alert{remark:}  can be generalized to the convolution $\lp{p}(\rset)*\lp{q}(\rset)$ with $p^{-1}+q^{-1}-1=r^{-1}$, where $p,\ q,\ r$ are $\geq 1$. For $f\in \lp{p}(\rset)$ and $ g\in \lq{\rset}$ , $f*g$ is in $\lp{r}(\rset)$.
+\end{frame}
+
+\subsection{Convolution, Derivation and regularization}
+
+\begin{frame}
+\frametitle{Derivation}
+\begin{theorem}
+Let $f$ be in $\lone(\rset)$ and let $g$ be in $C^{p}(\rset)$ .  Assume that $g^{(k)}$ is bounded for $k=0,1,\ \ldots,\ p$. Then,
+\begin{enumerate}[label=(\roman*)]
+\item $ f*g\in C^{p}(\rset)$,
+\item  $(f*g)^{(k)}=f*g^{(k)}$  for $k=1,2,\ p$.
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regularization}
+\begin{definition}[Regularizing sequence (mollifier)]
+A sequence of functions $\rho_{n}$ in $\mathcal{D}(\rset)$  is called a regularizing sequence if it satisfies the following conditions:
+\begin{enumerate}[label=(\roman*)]
+\item $\rho_{n}(x)\geq 0$ for all $ x\in \rset$,
+\item $\int_{\rset}\rho_{n}(x) \rmd x=1$,
+\item The support of $\rho_{n}$ is included in $[-\epsilon_{n},\epsilon_{n}]$ for some $\epsilon_{n}>0$, and $\lim_{n\rightarrow\infty}\epsilon_{n}=0$.
+\end{enumerate}
+\end{definition}
+\begin{definition}
+If $ f\in \lone(\rset)$ , the functions $f*\rho_{n}$ are called \alert{regularizations} of $f$.
+\end{definition}
+\alert{Key property:} $f*p_{n}$ is in $C^{\infty}(\rset)$
+\end{frame}
+
+\begin{frame}
+\frametitle{An example}
+$$\rho(x)=
+\begin{cases}
+c^{-1} \rme^{-1/(1-x)} &  \text{if $|x|\leq 1$},\\
+0 & \text{if $|x|\leq 1$}
+\end{cases}
+$$
+with $c\ =\int_{-1}^{1} \rme^{-1/(1-x)} \rmd x$
+
+Set $\rho_{n}(x)=n\rho(nx)$ . In practice, regularizing sequences are used without defining them explicitly.
+\end{frame}
+
+\begin{frame}
+\frametitle{Density of $\mathcal{D}(\rset)$ in $L^{1}(\rset)$}
+\begin{theorem}[Density of $\mathcal{D}(\rset)$ in $L^{1}(\rset)$]
+Let $f$ be a function in $\lone(\rset)$. For $\epsilon>0$ there exists $g_\epsilon$ in $\mathcal{D}(\rset)$ such that $\Vert f-g_{\epsilon}\Vert_{1}\leq\epsilon$.
+\end{theorem}
+\begin{itemize}
+\item The proof shows that if $f$ is continuous, the sequence $f*\rho_{n}$ tends to $f$ uniformly on all compact sets.
+\item In the same way that $\mathcal{D}(\rset)$ is dense in $\lp{p}(\rset)$ , $ 1<p<\infty$. Then, since $\mathcal{D}(\rset) \subset \mcs(\rset)$ , $\mcs(\rset)$ is dense in $\lp{p}(\rset)$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{}
+\begin{theorem}
+If $f\in \lone(\rset)$ and $\rho_{n}$ is a regularizing sequence, then $\displaystyle \lim_{n\rightarrow\infty}\Vert f-f*\rho_{n}\Vert_{1}=0$.
+\end{theorem}
+A similar argument can be used to show that the regularizations $f*\rho_{n}$ of a function $f\in \lp{p}(\rset)$ , $ 1<p<\infty$, tend to $f$ in $\lp{p}(\rset)$ .
+\end{frame}
+
+\begin{frame}
+\frametitle{The convolution $\mcs(\rset) * \mcs(\rset)$}
+\begin{theorem}
+Assume that $f$  and $g$ are in  $\mcs(\rset)$. Then the following hold:
+\begin{enumerate}[label=(\roman*)]
+\item $f*g$ is in $\mcs(\rset)$ .
+\item The convolution is a continuous operator from $\mcs(\rset) \times \mcs(\rset)$  to $\mcs(\rset)$.
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+\section{The Fourier transform on $\ltwo(\rset)$}
+\begin{frame}
+\frametitle{density of $\mcs(\rset)$ in $\ltwo(\rset)$}
+\begin{theorem}
+$\mcs(\rset)$ is a dense linear subspace of $\ltwo(\rset)$.
+\end{theorem}
+\begin{proof}
+\begin{itemize}
+\item $\mcs(\rset) \subset \ltwo(\rset)$ = trivial
+\item $\mathcal{D}(\rset) \subset \mcs(\rset)$ is dense in $\ltwo(\rset)$.
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Plancherel-Parseval inequality}
+\begin{theorem}
+For $f, g \in \mcs$,
+\begin{align*}
+\int \hat{f}(\xi) \bar{\hat{g}}(\xi) \rmd \xi &= \int f(x) \bar{g}(x) \rmd x \\
+\int |\hat{f}(\xi)|^2 \rmd \xi &= \int |f(x)|^2 \rmd x \eqsp.
+\end{align*}
+\end{theorem}
+%\begin{proof}
+%Let $h(\xi) = \bar{\hat{g}}(\xi)= \TFC{\bar{g}}(\xi)$ The exchange formula proves that
+%\[
+%\int \hat{f}(\xi) h(\xi) \rmd \xi = \int f(x) \hat{h}(x) \rmd x
+%\]
+%But $\hat{h}= \TFA{h}= \bar{g}$.
+%\end{proof}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Hahn-Banach theorem (elementary version)}
+\begin{theorem}
+ Let $E$  and $F$ be two normed vector spaces. Assume that $F$ is complete and that $G$ is a dense linear subspace of $E$. 
+ If $A$ is a continuous linear operator from $G$ to $F$, then there exists has a unique continuous linear extension of $A$,  denoted by $\tilde{A}$, from $E$  to $F$. Furthermore, the norm of $\overline{A}$ is equal to the norm of $A$.
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Fourier transform in $\ltwo(\rset)$}
+\begin{theorem}
+The Fourier transform $\TF$ and its inverse $\TFC$ extend uniquely to isometries on $\ltwo(\rset)$. Using the same notation for these extensions, we have the following results: for all $f$  and $g$ in $\ltwo(\rset)$ :
+\begin{enumerate}[label=(\roman*)]
+\item $\TF \circ \TFC f= \TFC \TF f = f$ a.e
+\item $\int_{\rset}f(x)\overline{g}(x) \rmd x=\int_{\rset} \TFA{f}(\xi) \TFAC{g}(\xi)  \rmd \xi$. 
+\item  $\Vert f\Vert_{2}=\Vert \TFA{f} \Vert_{2}$.
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\frametitle{The exchange formula}
+\begin{theorem}
+If $f$ and $g$  are in $\ltwo(\rset)$ , $\TFA{f} \cdot g$ and $f\cdot \TFA{g}$ are in $\lone(\rset)$, and
+$$
+\int_{\rset} \TFA{f}(t)g(t) \rmd t=\int_{\rset} f(u) \TFA{g}(u) \rmd u.
+$$
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\frametitle{Extension}
+\begin{theorem}
+The Fourier transform defined on $\lone(\rset)$  and the one obtained by extension to $\ltwo(\rset)$  coincide on $\lone(\rset)\cap L^{2}(\rset)$. If $ f\in \ltwo(\rset)$,  then $\TFA{f}$  is the limit in $\ltwo(\rset)$  of the sequence $\hat{f}_{n}$ defined by
+$$
+\hat{f}_{n}(\xi)=\int_{-n}^{n} \rme^{-2\rmi \pi\xi x}f(x)\ \rmd x.
+$$
+\end{theorem}
+We will continue to denote the Fourier transform by $\hat{f}$ or $\TFA{f}$. The meaning of these notations is now clear, depending on whether $ f\in \lone(\rset)$ or $ f\in \ltwo(\rset)$.
+\end{frame}
+
+\begin{frame}
+\frametitle{Examples}
+\begin{itemize}
+\item If $f \in \ltwo(\rset)$ then $\TF \circ \TF f= f_\sigma$, a.e.
+\begin{itemize}
+\item  For $a \in \cset$, $\mathrm{Re}(a) > 0$,
+\[
+\frac{1}{a+ \rmi 2 \pi x} \mapsto \rme^{a \xi} u(-\xi)
+\]
+\end{itemize}
+\item If $f \in \lone(\rset) \cap \ltwo(\rset)$ then $\TFA{\hat{f}}= f_\sigma$, a.e. 
+\begin{itemize}
+\item  the cardinal sine function
+\[
+\frac{\sin(x)}{x} \mapsto \pi \1_{\ccint{-(2\pi)^{-1},(2\pi)^{-1}}}(\xi) \eqsp.
+\]
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Inverse Fourier transform in $\lone(\rset)$}
+First we are going to complete a result about the Fourier transform. We saw  that $\TFC \hat{f}(t)=f(t)$ at every point $t$ where $f$ is continuous when $f$ and $\hat{f}$  are both in $\lone(\rset)$. In particular, if $ f\in \mcs(\rset)$ , then $\TFC \hat{f}(t)=f(t)$ for all $ t\in \rset$. 
+
+\begin{theorem}
+If $f$ and $\hat{f}$ are $\lone(\rset)$, then $\TFC \hat{f}=f$ a.e.
+\end{theorem}
+\end{frame}
+
+\section{Convolution and the Fourier transform}
+\begin{frame}
+\frametitle{Convolution and Fourier transform in $\lone(\rset)$}
+\begin{theorem}
+Given $f$ and $g$ in $\lone(\rset)$ , we have 
+\begin{enumerate}[label=(\roman*)]
+\item $\widehat{f*g}(\xi)=\hat{f}(\xi)\cdot\hat{g}(\xi)$  for all $\xi \in \rset$.
+\item If in addition $\hat{f}$ and $\hat{g}$ are in $\lone(\rset)$, then
+$\widehat{f\cdot g}(\xi)=\hat{f}*\hat{g}(\xi)$ for all $\xi\in \rset$.
+\end{enumerate}
+\end{theorem}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Convolution and Fourier transform in $\lone(\rset) * \ltwo(\rset)$}
+\begin{theorem}
+If $ f\in \ltwo(\rset)$ and $g\in \lone(\rset)$ , then $\hat{f}\cdot\hat{g}$  is in $\ltwo(\rset)$  and $f*g=\TFAC{\hat{f}\cdot\hat{g}}$ , with  equality in $\ltwo(\rset)$.
+\end{theorem}
+\end{frame}
+
+
+\end{document} 
