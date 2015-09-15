@@ -1,5 +1,5 @@
-\input{defslide}
-\input{notations-hilbertfourier}
+\input{../../Def/defslide}
+\input{../../Def/notations-hilbertfourier}
 \title{MAP 555 : Convolution, Regularization, Fourier-Plancherel...}
 \begin{document}
 \date{18 Septembre 2015}
@@ -51,7 +51,7 @@ Assume that $f\in \loneloc(\rset)$ and that $ g\in \lone(\rset)$ .
 \end{frame}
 
 \begin{frame}
-\frametitle{Convolution in $\lp{p}$}
+\frametitle{Convolution in $\lp{p}(\rset)$}
 \begin{theorem}
 Assume that $f\in \lp{p}$ an $g\in \lp{q}$ where $p$ and $q$ are conjugates ($p^{-1} + q^{-1}=1$).
 Then the following hold:
@@ -183,7 +183,7 @@ For $f, g \in \mcs$,
 \begin{frame}
 \frametitle{The Hahn-Banach theorem (elementary version)}
 \begin{theorem}
- Let $E$  and $F$ be two normed vector spaces. Assume that $F$ is complete and that $G$ is a dense linear subspace of $E$. 
+ Let $E$  and $F$ be two normed vector spaces. Assume that $F$ is complete and that $G$ is a dense linear subspace of $E$.
  If $A$ is a continuous linear operator from $G$ to $F$, then there exists has a unique continuous linear extension of $A$,  denoted by $\tilde{A}$, from $E$  to $F$. Furthermore, the norm of $\overline{A}$ is equal to the norm of $A$.
 \end{theorem}
 \end{frame}
@@ -194,7 +194,7 @@ For $f, g \in \mcs$,
 The Fourier transform $\TF$ and its inverse $\TFC$ extend uniquely to isometries on $\ltwo(\rset)$. Using the same notation for these extensions, we have the following results: for all $f$  and $g$ in $\ltwo(\rset)$ :
 \begin{enumerate}[label=(\roman*)]
 \item $\TF \circ \TFC f= \TFC \TF f = f$ a.e
-\item $\int_{\rset}f(x)\overline{g}(x) \rmd x=\int_{\rset} \TFA{f}(\xi) \TFAC{g}(\xi)  \rmd \xi$. 
+\item $\int_{\rset}f(x)\overline{g}(x) \rmd x=\int_{\rset} \TFA{f}(\xi) \TFAC{g}(\xi)  \rmd \xi$.
 \item  $\Vert f\Vert_{2}=\Vert \TFA{f} \Vert_{2}$.
 \end{enumerate}
 \end{theorem}
@@ -231,7 +231,7 @@ We will continue to denote the Fourier transform by $\hat{f}$ or $\TFA{f}$. The 
 \frac{1}{a+ \rmi 2 \pi x} \mapsto \rme^{a \xi} u(-\xi)
 \]
 \end{itemize}
-\item If $f \in \lone(\rset) \cap \ltwo(\rset)$ then $\TFA{\hat{f}}= f_\sigma$, a.e. 
+\item If $f \in \lone(\rset) \cap \ltwo(\rset)$ then $\TFA{\hat{f}}= f_\sigma$, a.e.
 \begin{itemize}
 \item  the cardinal sine function
 \[
@@ -243,7 +243,7 @@ We will continue to denote the Fourier transform by $\hat{f}$ or $\TFA{f}$. The 
 
 \begin{frame}
 \frametitle{Inverse Fourier transform in $\lone(\rset)$}
-First we are going to complete a result about the Fourier transform. We saw  that $\TFC \hat{f}(t)=f(t)$ at every point $t$ where $f$ is continuous when $f$ and $\hat{f}$  are both in $\lone(\rset)$. In particular, if $ f\in \mcs(\rset)$ , then $\TFC \hat{f}(t)=f(t)$ for all $ t\in \rset$. 
+First we are going to complete a result about the Fourier transform. We saw  that $\TFC \hat{f}(t)=f(t)$ at every point $t$ where $f$ is continuous when $f$ and $\hat{f}$  are both in $\lone(\rset)$. In particular, if $ f\in \mcs(\rset)$ , then $\TFC \hat{f}(t)=f(t)$ for all $ t\in \rset$.
 
 \begin{theorem}
 If $f$ and $\hat{f}$ are $\lone(\rset)$, then $\TFC \hat{f}=f$ a.e.
@@ -254,7 +254,7 @@ If $f$ and $\hat{f}$ are $\lone(\rset)$, then $\TFC \hat{f}=f$ a.e.
 \begin{frame}
 \frametitle{Convolution and Fourier transform in $\lone(\rset)$}
 \begin{theorem}
-Given $f$ and $g$ in $\lone(\rset)$ , we have 
+Given $f$ and $g$ in $\lone(\rset)$ , we have
 \begin{enumerate}[label=(\roman*)]
 \item $\widehat{f*g}(\xi)=\hat{f}(\xi)\cdot\hat{g}(\xi)$  for all $\xi \in \rset$.
 \item If in addition $\hat{f}$ and $\hat{g}$ are in $\lone(\rset)$, then
@@ -271,5 +271,124 @@ If $ f\in \ltwo(\rset)$ and $g\in \lone(\rset)$ , then $\hat{f}\cdot\hat{g}$  is
 \end{theorem}
 \end{frame}
 
+\section{Analog filters}
+\begin{frame}
+\frametitle{Analog filters}
+\begin{itemize}
+\item The tools we have just developed (convolution and the Fourier transform for functions) are going to be used to study analog filters that are governed by a linear differential equation with constant coefficients,
+$$
+\sum_{k=0}^{q}b_{k}g^{(k)}=\sum_{j=0}^{p}a_{j}f^{(j)},\ a_{p}\cdot b_{q}\neq 0,
+$$
+where $f$ is the input and $g=A(f)$ is the output. 
+\item  The case where the input and output are in $\mcs(\rset)$ This case is very special. The input has no reason to be so regular, but we will see that this is a step toward more general cases.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{input and output are in $\mcs(\rset)$}
+\begin{itemize}
+\item We assume that $f\in \mcs(\rset)$ and look for a solution $g$ in $\mcs(\rset)$. If such a $g$ exists, we can take the Fourier transform of both sides of 
+$$
+\sum_{k=0}^{q}b_{k}g^{(k)}=\sum_{j=0}^{p}a_{j}f^{(j)},\ a_{p}\cdot b_{q}\neq 0, (S)
+$$
+showing that    
+$$
+\sum_{k=0}^{q}b_{k}(2\rmi\pi\xi)^{k}\hat{g}(\xi)=\sum_{j=0}^{p}a_{j}(2\rmi\pi\xi)^{j}\hat{f}(\xi) \quad (F)
+$$
+\item Consider the two polynomials $P(x)= \sum_{j=0}^{p}a_{j}x^{j}$ and $Q(x)=\sum_{k=0}^{q}b_{k}x^{k}$
+and assume that the rational function $P(x)/Q(x)$ has no poles on the imaginary axis. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{input and output are in $\mcs(\rset)$}
+\begin{itemize}
+\item Then $P(2 \rmi\pi\xi)/Q(2 \rmi \pi\xi)$ has no poles for real $\xi$, and  (S) is equivalent to
+$$
+\hat{g}(\xi)=\frac{P(2 \rmi \pi\xi)}{Q(2\rmi \pi\xi)}\hat{f}(\xi)
+$$
+\item This equality completely determines $g$ in $\mcs(\rset)$, if it exists, and thus proves the uniqueness of a solution of (S) in $\mcs(\rset)$
+\item The existence of a solution also follows from , since the function
+$$
+G(\xi)=\frac{P(2\rmi \pi\xi)}{Q(2 \rmi \pi\xi)}\hat{f}(\xi) \quad (F)
+$$
+is in $\mcs(\rset)$ whenever $f$ is in $\mcs(\rset)$. 
+\item We see that $g=\TFAC{G}$ is a solution of (S) in $\mcs(\rset)$.
+{\tiny The differential equation has a unique solution without initial conditions being specified. This is because we require the solution $g$ to be in $\mathcal{S}$, which means that $g$ and all of its derivatives vanish at infinity.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Generalized solutions}
+\begin{itemize}
+\item If we assume that $\deg P<\deg Q$, then the transfer function
+$$
+H(\xi)=\frac{P(2 \rmi \pi\xi)}{Q(2 \rmi \pi\xi)} 
+$$
+is in $\ltwo(\rset) \cap \linfty(\rset)$ . 
+\item By decomposing this rational function into partial fractions, the inverse Fourier transform $h=\TFAC{H}$  is bounded, rapidly decreasing, continuous except perhaps at the origin, and satisfies (F),
+$$
+\hat{g}=\hat{h}\cdot\hat{f}.
+$$
+\item Since $f$ and $g \in \ltwo(\rset)$, we have $f * g(t)= \TFAC{\hat{f} \hat{g}}$ implies that
+$$
+g=h*f
+$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Generalized solutions}
+The formula $g=h*f$, obtained when $f$ is in $\mathcal{S}$, makes sense in the following more general cases.
+\begin{enumerate}[label=(\roman*)]
+\item If $f$ is in $\lone(\rset)$ , then $g$ is in $\lone(\rset)\cap\ltwo(\rset)\cap \linfty(\rset)$  and
+\begin{align*}
+\Vert g\Vert_{1}\ &\leq\Vert h\Vert_{1}\Vert f\Vert_{1}, \\
+\Vert g\Vert_{2}\ &\leq\Vert h\Vert_{2}\Vert f\Vert_{1}, \\
+\Vert g\Vert_{\infty} &\leq\Vert h\Vert_{\infty}\Vert f\Vert_{1}.
+\end{align*}
+\item If $f$ is in $\ltwo(\rset)$ , then $g$ is in $\ltwo(\rset)$ , it is bounded and continuous, it tends to $0$ at infinity, and
+\begin{align*}
+\Vert g\Vert_{2}\ &\leq\Vert h\Vert_{1}\Vert f\Vert_{2}, \\
+\Vert g\Vert_{\infty}& \leq \Vert h\Vert_{2}\Vert f\Vert_{2}.
+\end{align*}
+\item If $f$ is in $\linfty(\rset)$ , then $g$ is also bounded and 
+$$
+\Vert g\Vert_{\infty}\leq\Vert h\Vert_{1}\Vert f\Vert_{\infty}.
+$$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Impulse response when $\deg P<\deg Q$}
+\begin{itemize}
+\item The impulse response $h=\TFAC{H}$ is computed by decomposing $H$ into partial fractions. 
+\item The poles of $P/Q$ are assumed to lie off the imaginary axis. There are two cases to consider: $P/Q$ has only simple poles or $P/Q$ has multiple poles.
+\item Assume first that $P(x)/Q(x)$ has only simple poles. In this case, $H$ can be decomposed in the form
+$$
+H(\xi)=\sum_{k=0}^{q}\frac{\beta_{k}}{2i\pi\xi-z_{k}}
+$$
+where $z_{1},\ \ldots,\ z_{q}$ are the poles. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Impulse response when $\deg P<\deg Q$}
+\begin{itemize}
+\item For $a \in \cset$, $\mathrm{Re}(a) > 0$, $\epsilon= \pm 1$,
+\[
+\rme^{-\epsilon a x} u(\epsilon x) \TFyield \frac{\epsilon}{(\epsilon a + 2 \rmi \pi \xi)}
+\]
+\item We conclude that
+$$
+h(t)=(\sum_{k\in K-}\beta_{k}e^{z_{k}t})u(t)-(\sum_{k\in K_{+}}\beta_{k}e^{z_{k}t})u(-t) \eqsp.
+$$
+where we have defined
+\begin{align*}
+K_{-} &=\{k\in\{1,2,\ldots,q\}|{\rm Re}(z_{k})<0\}, \\
+K_{+} &=\{k\in\{1,2,\ldots,q\}|{\rm Re}(z_{k})>0\}.
+\end{align*}
+\end{itemize}
+\end{frame}
 
 \end{document} 
