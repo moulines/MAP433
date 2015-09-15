@@ -360,7 +360,7 @@ $$
 \end{frame}
 
 \begin{frame}
-\frametitle{Impulse response when $\deg P<\deg Q$}
+\frametitle{Simple poles}
 \begin{itemize}
 \item The impulse response $h=\TFAC{H}$ is computed by decomposing $H$ into partial fractions. 
 \item The poles of $P/Q$ are assumed to lie off the imaginary axis. There are two cases to consider: $P/Q$ has only simple poles or $P/Q$ has multiple poles.
@@ -373,7 +373,7 @@ where $z_{1},\ \ldots,\ z_{q}$ are the poles.
 \end{frame}
 
 \begin{frame}
-\frametitle{Impulse response when $\deg P<\deg Q$}
+\frametitle{Simple poles}
 \begin{itemize}
 \item For $a \in \cset$, $\mathrm{Re}(a) > 0$, $\epsilon= \pm 1$,
 \[
@@ -381,7 +381,7 @@ where $z_{1},\ \ldots,\ z_{q}$ are the poles.
 \]
 \item We conclude that
 $$
-h(t)=(\sum_{k\in K-}\beta_{k}e^{z_{k}t})u(t)-(\sum_{k\in K_{+}}\beta_{k}e^{z_{k}t})u(-t) \eqsp.
+h(t)=\left(\sum_{k\in K-}\beta_{k} \rme^{z_{k}t} \right)u(t)- \left(\sum_{k\in K_{+}}\beta_{k} \rme^{z_{k}t} \right)u(-t) \eqsp.
 $$
 where we have defined
 \begin{align*}
@@ -390,5 +390,38 @@ K_{+} &=\{k\in\{1,2,\ldots,q\}|{\rm Re}(z_{k})>0\}.
 \end{align*}
 \end{itemize}
 \end{frame}
+
+\begin{frame}
+\frametitle{Multiple poles}
+\begin{itemize}
+\item Let $z_{1},\ z_{2},\ \ldots,\ z_{l}$ the poles and let $m_{1},\ m_{2},\ \ldots,\ m_{l}$ be their multiplicities. 
+\item Then we can write $H$ as
+$$
+H(\lambda)=\sum_{k=1m}^{l}\sum_{=1}^{m_{k}}\frac{\beta_{k,m}}{(2i\pi\lambda-z_{k})^{m}}.
+$$
+\item The impulse response is given by 
+$$
+h(t)=(\displaystyle \sum_{k\in K-}P_{k}(t) \rme^{z_{k}t})u(t)-(\sum_{k\in K_{+}}P_{k}(t) \rme^{z_{k}t})u(-t)
+$$
+where
+$$
+P_{k}(t)=\sum_{m=1}^{m_{k}}\beta_{k,m^{\frac{t^{m-1}}{(m-1)!}}}.
+$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Purely imaginary poles}
+\begin{itemize}
+\item What we have done so far does not allow us to treat an equation like
+$$
+g''+\omega^{2}g=f,
+$$
+where $P(x)/Q(x)=1/(x^{2}+\omega^{2})$ has two poles are on the imaginary axis. 
+\item In this case $h$ is a sinusoid and the Fourier transform of $H$ (when $H$ is considered to be a function) is no longer defined. 
+\item This problem required the use of the theory of  distributions (but this degree of sophistication is not needed for our purpose)
+\end{itemize}
+\end{frame}
+
 
 \end{document} 
