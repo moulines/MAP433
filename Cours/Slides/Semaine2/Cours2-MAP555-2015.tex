@@ -1,6 +1,6 @@
 \input{../../Def/defslide}
 \input{../../Def/notations-hilbertfourier}
-\title{MAP 555 : Convolution, Regularization, Fourier-Plancherel...}
+\title{MAP 555 : Convolution, Fourier-Plancherel, Filters...}
 \begin{document}
 \date{18 Septembre 2015}
 \maketitle
@@ -405,7 +405,7 @@ h(t)=(\displaystyle \sum_{k\in K-}P_{k}(t) \rme^{z_{k}t})u(t)-(\sum_{k\in K_{+}}
 $$
 where
 $$
-P_{k}(t)=\sum_{m=1}^{m_{k}}\beta_{k,m^{\frac{t^{m-1}}{(m-1)!}}}.
+P_{k}(t)=\sum_{m=1}^{m_{k}}\beta_{k,m} \frac{t^{m-1}}{(m-1)!}.
 $$
 \end{itemize}
 \end{frame}
@@ -419,8 +419,84 @@ g''+\omega^{2}g=f,
 $$
 where $P(x)/Q(x)=1/(x^{2}+\omega^{2})$ has two poles are on the imaginary axis. 
 \item In this case $h$ is a sinusoid and the Fourier transform of $H$ (when $H$ is considered to be a function) is no longer defined. 
-\item This problem required the use of the theory of  distributions (but this degree of sophistication is not needed for our purpose)
+\item This problem required the use of the \alert{theory of  distributions} but this degree of sophistication goes far beyond this course.
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{What happens in $\deg P= \deg Q$}
+Take for example the equation
+$$
+g''-\omega^{2}g=f''.
+$$
+Again, what we have done so far does not apply. Nevertheless, we can still manage to solve the equation. 
+Changing the unknown function to $g_0 =g-f$ lowers the order of the right-hand side:
+$$
+g_{0}''-\omega^{2}g_{0}=\omega^{2}f.
+$$
+Then we have $g_{0}=h_{0}*f$ and $g=f+h_{0}*f$. 
+This is \alert{no longer a convolution}  but it will serve the same purpose.
+\end{frame}
+
+\section{Linear systems}
+\begin{frame}
+Denote by $\Xset$ the set of \alert{input signals} and $\Yset$ the set of \alert{output signals} which are assumed to be vector 
+spaces (over $\kset=\cset$ or $\kset=\rset$).
+\begin{definition}[Linearity]
+The system $A: \Xset \to \Yset$ is said to be \alert{linear} if for all $x_1,x_2 \in \Xset$ and $\lambda_1,\lambda_2 \in \kset$
+$$
+A(\lambda_1 x_1 + \lambda_2 x_2)= \lambda_1 A(x_1) + \lambda_2 A(x_2) \eqsp.
+$$
+\end{definition}
+A system $A$ defined by a convolution $A(f) = h * f$ is linear.  
+\end{frame}
+
+\begin{frame}
+\frametitle{Stability}
+\begin{definition}
+A system $A: \Xset \to \Yset$ is said to be \alert{stable} if there exists an $M>0$ such that $\Vert Af\Vert_{\infty}\leq M\Vert f\Vert_{\infty}$ for all $f\in \linfty(\rset)\cap \Xset$.
+\end{definition}
+\begin{enumerate}[label=(\roman*)]
+\item The generalized filter $A$ is stable when $\deg P<\deg Q$.
+\item It is still stable if $\deg P = \deg Q$... 
+ \end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Causality}
+\begin{definition}
+A system $A: \Xset \to \Yset$ is \alert{causal} if the equality of any two input signals up to time $t=t_0$ implies the equality of the two output signals at least to time $t_0$,
+$$
+\text{$x_1(t)= x_2(t)$ for $t \leq t_0$} \Rightarrow \text{$A x_1(t)= A x_2(t)$ for $t < t_0$}  
+$$
+\end{definition}
+This property is completely natural for a physical system in which the
+variable is time. It says that the response at time $t$ depends only on what
+has happened before $t$. 
+\end{frame}
+
+\begin{frame}
+\frametitle{Invariance}
+Define by $\tau_a$ the \alert{delay operator}: $\tau_a x(t)= x(t-a)$ for all $t \in \rset$. 
+\begin{definition}
+A system $A$ is \alert{invariant} if a translation of time in the input leads to the same translation in the output, or equivalently 
+if $A$ and $\tau_a$ commute for all $a \in \rset$:
+\[
+A \circ \tau_a = \tau_a \circ A 
+\]
+\end{definition}
+\end{frame}
+
+\begin{frame}
+\frametitle{Causality}
+\begin{enumerate}[label=(\roman*)]
+\item When $A$ is  linear and invariant, the causality condition becomes the following: 
+For all $t_{0}\in \rset$, 
+$$
+\text{$f(t)=0$ for $t<t_{0}\Rightarrow Af(t)=0$ for $t<t_{0}$.}
+$$
+\item Assume that $\deg P\leq\deg Q$. The generalized filter $A: A(f)= h * f$ is \alert{causal} if $\supp(h) \subset \coint{0,\infty}$ or equivalently if the poles of $P/Q$ are located to the \alert{left of the imaginary axis}.
+\end{enumerate}
 \end{frame}
 
 
