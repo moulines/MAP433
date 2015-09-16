@@ -1,6 +1,6 @@
 \documentclass{beamer}
 \usepackage{graphicx}
-\usepackage{amsmath,amssymb,amstext,amsthm}
+\usepackage{amsmath,amssymb,amstext,amsthm,xargs}
 \usepackage{amsfonts}
 \usepackage{bbm}
 \usepackage{beamerthemesplit}
@@ -36,7 +36,7 @@
 \def\rset{\mathbb{R}}
 \def\nset{\mathbb{N}}
 \def\dlim{\stackrel{d}{\rightarrow}}
-\def\plim{\stackrel{\PP}{\longrightarrow}}
+\newcommandx{\plim}[1][1=]{\stackrel{\PP_{#1}}{\longrightarrow}}
 \def\iid{i.i.d.}
 \def\1{\mathbbm{1}}
 \newenvironment{dem}{\textbf{Proof}}{\flushright$\blacksquare$\\}
@@ -109,4 +109,6 @@
 
 \def\gauss{\mathcal{N}}
 \def\truetheta{\theta}
-\def\curtheta{\vartheta}
+\def\curtheta{\alpha} 
+\def\argmin{\mathrm{argmin}}
+\def\ie{\emph{i.e.}}
