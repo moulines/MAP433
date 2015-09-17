@@ -349,7 +349,7 @@ $$\alert{\est}= \alert{
 \item On pose $\psi(\curtheta,x)= (\curtheta-x)^2$ et donc
 \begin{align*}
 M_n(\curtheta)&= n^{-1} \sum_{i=1}^n (X_i - \curtheta)^2 = n^{-1} \sum_{i=1}^n (X_i - \bar{X}_n)^2 + (\bar{X}_n - \curtheta)^2 \\
-M(\curtheta,\truetheta) &= (\theta-\alpha)^2 + \sigma^2   
+M(\curtheta,\truetheta) &= (\theta-\alpha)^2 + \sigma^2
 \end{align*}
 \end{itemize}
 \end{frame}
@@ -388,7 +388,7 @@ $$
 \begin{itemize}
 \item Comme $M(\truetheta,\truetheta) \geq M(\curtheta,\truetheta)$ et $M_n(\est) \geq M_n(\curtheta)$,
 \begin{align*}
-0 \leq M(\truetheta,\truetheta) - M(\est,\truetheta) 
+0 \leq M(\truetheta,\truetheta) - M(\est,\truetheta)
 &\leq M(\truetheta,\truetheta) - M_n(\truetheta) + M_n(\est) - M(\est,\truetheta) \\
 &\leq 2 \sup_{\curtheta \in \Theta} |M_n(\curtheta)- M(\curtheta,\truetheta)| \plim[\truetheta] 0
 \end{align*}
@@ -532,7 +532,7 @@ $$\alert{0 < \mathbb{I}(\truetheta)< +\infty.}$$
 \end{frame}
 
 \begin{frame}
-\frametitle{Le cas multidimensionnel} 
+\frametitle{Le cas multidimensionnel}
 Si $\Theta \subset \R^d$ avec $ d >1$, tous les résultats s'étendent en remplaçant dérivation par rapport à $\curtheta$ par différentiabilité dans $\R^d$. L'information de Fisher devient la \alert{matrice d'information de Fisher}.
 \begin{definition} La matrice d'information de Fisher $\mathbb{I}(\truetheta) = \big(\mathbb{I}(\truetheta)_{\ell,\ell'}\big)_{1 \leq \ell,\ell' \leq d}$ associée à la famille de densités $\{f(\truetheta),\,\truetheta \in \Theta\}$ avec $\truetheta \in \Theta \subset \R^d$ est définie au point $\truetheta$ par
 $$\mathbb{I}(\truetheta)_{\ell,\ell'} = \E_\truetheta\big[\partial_{\truetheta_\ell}\log f(\truetheta, X) \partial_{\truetheta_{\ell'}} \log f(\truetheta, X)\big],\;\;\;1 \leq \ell,\ell' \leq d,$$
@@ -685,7 +685,7 @@ $$\boxed{\frac{\E_\truetheta\big[\phi(\truetheta,X)^2\big]}{\big(\E_\truetheta\b
 \begin{frame}
 \frametitle{Preuve de l'inégalité}
 \begin{itemize}
-\item Comme pour tout $\theta \in \Theta$, $\PE_\theta[\phi(\theta,X)]=0$, 
+\item Comme pour tout $\theta \in \Theta$, $\PE_\theta[\phi(\theta,X)]=0$,
 $$
 \partial_\truetheta \E_\truetheta\big[\phi(\truetheta,X)\big]=0.
 $$
@@ -716,9 +716,9 @@ $$\boxed{v_\phi(\truetheta)^{-1} = \frac{\big(\E_\truetheta\big[\dot \phi(\truet
 \begin{prop}
 \begin{itemize}
 \item Si l'expérience engendrée par l'observation $X_1,\ldots, X_n\sim_{\text{i.i.d.}}\PP_\truetheta$ est associée à une famille de probabilités $\{\PP_\truetheta, \truetheta \in \Theta\}$,  $\Theta \subset \R^d$ \alert{ régulière}, alors
-$$\sqrt{n}\big(\estMV-\truetheta\big) \stackrel{d}{\longrightarrow} {\mathcal N}\Big(0,\frac{1}{\mathbb{I}(\truetheta)}\Big).$$
-\item Si $\est$ est un $Z$-estimateur \alert{régulier} asymptotiquement normal de variance $v(\truetheta)$, alors
-$$\forall \truetheta \in \Theta,\;\;v(\truetheta) \geq \frac{1}{\mathbb{I}(\truetheta)}.$$
+$$\sqrt{n}\big(\estMV-\truetheta\big) \stackrel{d}{\longrightarrow} {\mathcal N}\Big(0,\mathbb{I}^{-1}(\truetheta)\Big).$$
+\item Si $\est$ est un $Z$-estimateur \alert{régulier} asymptotiquement normal de \alert{matrice de covariance} $V(\truetheta)$, alors pour tout $\truetheta \in \Theta$,
+$$V(\truetheta) \succeq \mathbb{I}^{-1}(\truetheta).$$
 \end{itemize}
 \end{prop}
 \end{frame}
