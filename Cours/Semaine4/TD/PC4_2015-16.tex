@@ -1,0 +1,346 @@
+\documentclass[a4paper,11pt,fleqn]{article}
+
+\usepackage[francais]{babel}
+%\usepackage[latin1]{inputenc}
+%\usepackage[applemac]{inputenc}
+\usepackage{a4wide,amsmath,amssymb,bbm,fancyhdr}
+
+\RequirePackage[OT1]{fontenc}
+
+\usepackage[latin1]{inputenc}
+% THE variable
+\newcommand{\thisyear}{Ann\'ee 2015-2016}
+
+% Definitions (pas trop!)
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\rset}{\ensuremath{\mathbb{R}}}
+\renewcommand{\P}{\ensuremath{\operatorname{P}}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\PE}{\ensuremath{\mathbb{E}}}
+\newcommand{\V}{\ensuremath{\mathbb{V}}}
+\newcommand{\gaus}{\ensuremath{\mathcal{N}}}
+\newcommand{\1}{\ensuremath{\mathbbm{1}}}
+\newcommand{\dlim}{\ensuremath{\stackrel{\mathcal{L}}{\longrightarrow}}}
+\newcommand{\plim}{\ensuremath{\stackrel{\mathrm{P}}{\longrightarrow}}}
+\newcommand{\PP}{\ensuremath{\mathbb{P}}}
+\newcommand{\p}{\ensuremath{\mathbb{P}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\pa}[1]{\left(#1\right)}
+\newcommand{\cro}[1]{\left[#1\right]}
+\newcommand{\ac}[1]{\left\{#1\right\}}
+
+
+% Style
+%\pagestyle{fancyplain}
+%\renewcommand{\sectionmark}[1]{\markright{#1}}
+%\renewcommand{\subsectionmark}[1]{}
+%\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\footnotesize {\sf
+%MAP433 Statistique, \thisyear / \rightmark}}}
+%\rhead[\fancyplain{}{\footnotesize {\sf MAP433 Statistique,
+%\thisyear / \rightmark}}]{\fancyplain{}{\thepage}}
+%\cfoot[\fancyplain{}{}]{\fancyplain{}{}}
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+
+
+%-- Si cette ligne est lue, le corrigé ne s'affiche pas :
+%%\newcommand{\Corrige}[1]{}
+%-- Si la ligne suivante est lue, le corrigé s'affiche :
+\newcommand{\Corrige}[1]{\noindent {\small {\bf Corrigé :}\\ #1} }
+
+
+
+
+\pagestyle{fancyplain}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\renewcommand{\subsectionmark}[1]{}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\footnotesize {\sf
+MAP433 Statistique, \thisyear /PC4}}}
+\rhead[\fancyplain{}{\footnotesize {\sf MAP433 Statistique,
+\thisyear / \rightmark}}]{\fancyplain{}{\thepage}}
+\cfoot[\fancyplain{}{}]{\fancyplain{}{}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\parindent=0mm
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\title{{\bf MAP433 Statistique}\\
+{\bf PC4: m\'ethodes d'estimation}}
+
+\date{18 septembre 2015}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{1. Param\`etre vectoriel - vitesses de convergence diff\'erentes}
+Soient $X_1, \ldots,X_n$ des variables al\'eatoires i.i.d. de loi
+exponentielle translat\'ee dont le densit\'e est de la forme:
+$$f(x,\theta,\alpha)=\frac{1}{\theta}\text{exp}\left[-
+\frac{(x-\alpha)}{\theta}\right]I(x\geq\alpha),$$ o\`u
+$\theta>0$ et $\alpha\in \R$ sont deux param\`etres inconnus.
+\begin{enumerate}
+\item Donner les estimateurs du maximum de vraisemblance $\hat{\alpha}_n$ et
+$\hat{\theta}_n$ de $\alpha$ et $\theta$.
+\item Quelle est la loi de $X_{i}-\alpha$? Calculer la loi (exacte) de $n(\hat{\alpha}_n-\alpha)$.
+\item D\'eterminer la loi limite de $\sqrt{n}(\hat{\theta}_n-\theta)$.
+%\item  Chercher la loi
+%du $n$-uplet
+%$$\big(nX_{(1)},(n-1)(X_{(2)}-X_{(1)}),\ldots,2(X_{(n-1)}-X_{(n-2)}),X_{(n)}-X_{(n-1)}\big).$$
+%En d\'eduire que $\hat{\alpha}_n$ et $\hat{\theta}_n$ sont
+%ind\'ependants pour tout $n$.
+\end{enumerate}
+%
+
+\Corrige{
+  \begin{enumerate}
+  \item  La fonction de vraisemblance est donnée par
+\[
+\theta \mapsto \left\{
+  \begin{array}{ll}
+ \theta^{-n} \exp\left( - \sum_{k=1}^n (X_k -\alpha)
+  /\theta\right) & \ \text{si $\alpha \leq  \inf_k X_k = X_{(1)}$} \\
+0 & \ \text{sinon}
+  \end{array}
+\right.
+\]
+On en déduit que l'estimateur du maximum de vraisemblance de $\psi=(\alpha, \theta)$ est unique et est égal à
+\[
+\widehat{\psi}_n = 
+\begin{bmatrix}
+  X_{(1)}  \\
+\bar X_n - X_{(1)}
+\end{bmatrix}
+\]
+où $X_{(1)} = \min_{1 \leq k \leq n} X_k$.
+\item $X_i - \alpha \sim \mathcal{E}(1/\theta)$. De plus, $\hat{\alpha}_n -
+  \alpha = \min_{1 \leq k \leq n} (X_k-\alpha)$ dont on déduit que
+  $\hat{\alpha}_n - \alpha \sim \mathcal{E}(n/\theta)$. Par suite, pour toute
+  fonction $f$ continue bornée, on a
+\begin{align*}
+  \PE\left[f(n (\hat{\alpha}_n- \alpha)) \right] &= \int_0^{\infty} f(n y)
+  \frac{n}{\theta} \ \exp(- n y /\theta) \ dy = \int_0^{\infty} f(x) \frac{1}{\theta} \ \exp(- x /\theta) \ dx
+\end{align*}
+dont on déduit que 
+\[
+n\left( \hat{\alpha}_n - \alpha\right) \sim \mathcal{E}(1 /\theta).
+\]
+\item On écrit
+\[
+ \hat{\theta}_n - \theta = \bar{X}_n - \hat{\alpha}_n -\theta = \bar{X}_n -
+  (\theta + \alpha) + (\alpha - \hat{\alpha}_n).
+\]
+On a 
+\[
+\sqrt{n} \left( \bar{X}_n - (\theta + \alpha) \right) \dlim \mathcal{N}\left(0,
+  \theta^2 \right) \qquad \sqrt{n}\left(\hat{\alpha}_n - \alpha \right) \plim 0
+\]
+dont on déduit par Slutsky que $ \sqrt{n} \left(\hat{\theta}_n - \theta \right)
+\dlim \mathcal{N}(0, \theta^2)$.
+  \end{enumerate}
+}
+
+\subsection*{2. Information de Fisher: entra\^{\i}nement!}
+
+Dans les mod\`eles suivants, calculer  l'information de Fisher associ\'ee aux $n$ observations (si elle est bien d\'efinie), l'estimateur du maximum de vraisemblance et sa loi asymptotique :
+
+\begin{enumerate}
+\item $X_1,\ldots,X_{n}\stackrel{i.i.d}{\sim} \mathcal{B}(\theta)$.
+\item $X_1,\ldots,X_{n}\stackrel{i.i.d}{\sim} \mathcal{N}(m,v)$.
+\item $X_1,\ldots,X_{n}\stackrel{i.i.d}{\sim}\mathcal{U}[0,\theta]$.
+\end{enumerate}
+
+\Corrige{
+  \begin{enumerate}
+  \item L'information de Fisher est $I_n(\theta) = n \theta^{-1} (1-\theta)^{-1}$. L'estimateur de MV est  $\bar X_n$ et on a 
+\[
+\sqrt{n} \left( \bar X_n - \theta \right) \dlim \mathcal{N}(0, \theta(1-\theta))
+\]
+\item L'information de Fisher est 
+\[
+I_n(\theta) =  \frac{n}{v^4}  
+\begin{bmatrix}
+  v^2 & 0 \\
+0 & 1/2
+\end{bmatrix}
+\]
+L'estimateur MV est unique et vaut
+\[
+\hat{\theta}_n^{MV} =
+\begin{bmatrix}
+  \bar X_n \\
+\frac{1}{n} \sum_{k=1}^n \left(X_k - \bar X_n \right)^2
+\end{bmatrix}
+\]
+On établit un TCl pour le couple $(\bar X_n, n^{-1} \sum_{k=1}^n (X_k - m)^2)$;
+puis on applique la méthode delta avec $g(x,y) = (x; y - (x-m)^2)$. On obtient
+\[
+\sqrt{n} \left( 
+  \begin{bmatrix}
+  \bar X_n \\
+\frac{1}{n} \sum_{k=1}^n (X_k -\bar X_n)^2
+  \end{bmatrix} -  
+  \begin{bmatrix}
+    m \\
+v^2 
+  \end{bmatrix}
+\right) \dlim \mathcal{N}\left(
+  \begin{bmatrix}
+  0 \\
+0
+  \end{bmatrix}; 
+  \begin{bmatrix}
+    v^2 & 0 \\
+0 & 2 v^4
+  \end{bmatrix}
+\right)
+\]
+\item Ce n'est pas un modèle statistique régulier. L'estimateur MV est donné par
+\[
+\hat{\theta}_n^{MV} = \max_{1 \leq k \leq n} X_k = X_{(n)}
+\]
+On a établi (voir PC1) que la loi de $X_{(n)}$ admettait $F(t)^n$ comme
+fonction de répartition, en notant $F$ la fonction de répartition de $X_1$. On
+en déduit la densité de $X_{(n)}$ puis celle de $n(X_{(n)} - \theta)$; et par
+le lemme de Scheffé, on montre que
+\[
+n \left( \hat{\theta}_n^{MV} - \theta \right) \dlim \frac{1}{\theta} 
+\exp(x/\theta) \1_{x \leq 0}
+\]
+  \end{enumerate}}
+
+\subsection*{3. Borne de Cramer-Rao}
+On consid\`ere un vecteur al\'eatoire $(X_{1},\ldots,X_{n})\in\R^n$ de loi appartenant \`a une famille $\ac{\p_{\theta},\ \theta\in\Theta}$ de lois sur $\R^n$, avec $\Theta$ intervalle ouvert de $\R$. On suppose que $d\p_{\theta}(x)=p(\theta,x)\,d\mu(x)$ avec $\mu$ mesure $\sigma$-finie sur $\R^n$ et on note $l_{X}(\theta)=\log(p(\theta,X))$. On suppose que la famille de lois $\ac{\p_{\theta},\ \theta\in\Theta}$ est r\'eguli\`ere;   l'information de Fisher $I_{n}(\theta)$ est donc bien d\'efinie et on pourra intervertir int\'egrales et d\'erivations \`a notre de guise. 
+
+Pour un estimateur $\hat \theta$ donn\'e, on note $R_{\theta}(\hat\theta):=\E_{\theta}\cro{(\hat\theta-\theta)^2}$ son risque quadratique et $b(\theta):=\E_{\theta}[\hat\theta]-\theta$ son biais (qu'on suppose d\'erivable).
+\begin{enumerate}
+\item \label{PC4:exo3:qu1} Montrez que $R_{\theta}(\hat\theta)=b(\theta)^2+\textrm{Var}_{\theta}(\hat\theta)$.
+\item  \label{PC4:exo3:qu2} Montrez que $\E_{\theta}\cro{l'_{X}(\theta)}=0$.
+\item \label{PC4:exo3:qu3} Montrez que $b'(\theta)=\E_{\theta}\cro{\hat\theta
+    l'_{X}(\theta)}-1$.
+\item \label{PC4:exo3:qu4} D\'eduire des deux questions pr\'ec\'edentes
+  l'\'egalit\'e
+  $1+b'(\theta)=\E_{\theta}\cro{\big(\hat\theta-\E_{\theta}(\hat\theta)\big)l'_{X}(\theta)}$.
+\item En d\'eduire la borne de Cramer-Rao:
+$$\boxed{R_{\theta}(\hat\theta)\geq {(1+b'(\theta))^2\over I_{n}(\theta)}+b(\theta)^2.}$$
+\item Quel est le risque quadratique minimal d'un estimateur sans biais?
+\end{enumerate}
+
+\Corrige{
+  \begin{enumerate}
+  \item On écrit $\hat{\theta} - \theta = \hat{\theta} - \PE\left[\hat{\theta}
+    \right] + \PE\left[\hat{\theta} \right] - \theta$ puis on développe le
+    carré et on applique l'espérance.
+  \item Conséquence de la permutation dérivée/intégrale et de la propriété
+    $\int p(x;\theta) \mu(dx) = 1$.
+  \item Conséquence de la permutation dérivée/intégrale et du fait que
+    $\partial_\theta p(x;\theta) = p(x;\theta) \ \partial_\theta \ln
+    p(x;\theta)$.
+  \item Conséquence des questions \ref{PC4:exo3:qu2} et \ref{PC4:exo3:qu3}.
+  \item En utilisant la question \ref{PC4:exo3:qu1}, il suffit de minorer la
+    variance. Ce que l'on fait en utilisant l'inégalité de Hölder et la
+    question \ref{PC4:exo3:qu4}.
+  \end{enumerate}
+}
+
+\subsection*{4. Ph\'enom\`ene de Stein}
+On consid\`ere le mod\`ele
+$$Y_j=\theta_j+\xi_j,~j=1,\ldots,d,$$
+avec les $\xi_j$ iid gaussiennes centr\'ees de variance 1. On pose
+$Y=(Y_1,\ldots,Y_d)$ et $\theta=(\theta_1,\ldots,\theta_d)$. On
+s'int\'eresse \`a l'estimation de $\theta$ et on suppose $d\geq 3$.\\
+
+\noindent{\it Definition :} Un estimateur $\theta^{*}$ de $\theta$
+est dit admissible sur $\Theta\subset\mathbb{R}^d$ par rapport
+au risque quadratique s'il n'existe pas d'estimateur
+$\hat{\theta}$ tel que pour tout $\theta\in\Theta$
+$$\E_{\theta}[\|\hat{\theta}-\theta\|^2]\leq\E_{\theta}[\|\theta^*-\theta\|^2]\,,$$
+avec in\'egalit\'e stricte en au moins un $\theta_{0}\in\Theta$.
+
+\noindent{\it Lemme (admis)} Soit $d\geq 3$. Pour tout
+$\theta\in\mathbb{R}^d$, on a
+$0<\E_{\theta}[{\|Y\|^{-2}}]<\infty.$
+
+\begin{enumerate}
+\item Donner l'estimateur intuitif de $\theta$. Calculer son risque quadratique.
+\item Soit $\xi=(\xi_1,\ldots,\xi_d)$. Soit
+$f:\mathbb{R}^d\rightarrow\mathbb{R}$ telle que
+\begin{list}{}{}
+\item - pour presque tout $(x_{2},\ldots,x_{d})$, la fonction $x_{1}\to f(x_1,\ldots,x_d)$ est d\'erivable et\\* $\lim_{|x_{1}|\to\infty}f(x_{1},\ldots,x_{d})e^{-x_{1}^2/2}=0$,
+\item - $\E[|\frac{\partial f}{\partial x_1}(\xi)|]<+\infty$,
+  $\E[|\xi_1f(\xi)|]<+\infty.$
+\end{list}
+Montrer que
+\[
+\E\left[\frac{\partial f}{\partial x_1}(\xi)\right]=\E[\xi_1 \ f(\xi)].
+\]
+\item Montrer que si $\tilde{f}:\mathbb{R}^d\rightarrow\mathbb{R}$ v\'erifie
+  \begin{list}{}{}
+  \item - $\tilde{f}(y_1,\ldots,y_d)$ admet des d\'eriv\'ees
+partielles par rapport \`a chaque composante pour presque toutes
+les valeurs
+des autres composantes.
+\item - $\lim_{|y_{i}|\to\infty}\tilde f(y_{1},\ldots,y_{d})e^{-(y_{i}-\theta_{i})^2/2}=0$ pour presque tout $(y_{1},\ldots,y_{i-1},y_{i+1},\ldots,y_{n})$, et tout $i=1,\dots,d$,
+\item - $\E_\theta[|\frac{\partial \tilde{f}}{\partial
+    y_i}(Y)|]<+\infty,~\E_\theta[|(Y_{i}-\theta_i) \ \tilde{f}(Y)|]<+\infty,~i=1,\ldots,d$,
+  \end{list}
+  alors
+\[
+\E_\theta \left[(Y_{i}-\theta_i)\tilde{f}(Y) \right]=\E_\theta
+\left[\frac{\partial \tilde{f}}{\partial y_i}(Y) \right],~i=1,\ldots,d
+\]
+\item Soit $g:\R^d\to \R$ telle que les conditions de la question
+  pr\'ec\'edente sont v\'erifi\'ees par les $\tilde
+  f_i(y)=(1-g(y))y_i,~i=1,\ldots,d$.  On consid\`ere un estimateur de la forme
+  $\hat{\theta}=g(Y)Y$ (i.e.  $\hat{\theta}_j=g(Y)Y_j$). Montrer que
+  $$\E_\theta[\|\hat{\theta}-\theta\|^2]=d+\E_\theta[W(Y)],$$
+  avec
+  $$W(Y)=-2d(1-g(Y))+2\sum_{i=1}^dY_i \frac{\partial g}{\partial y_i}(Y)+
+  \|Y\|^2(1-g(Y))^2.$$
+\item Soit $g(y)$ de la forme $1-\frac{c}{\|y\|^2}$. Dans ce cas les $\tilde
+  f_i(y)=(1-g(y))y_i$ v\'erifient les hypoth\`eses de la question 4. Trouver
+  $c$ tel que $\E_\theta[W(Y)]<0$.
+\item L'estimateur intuitif est-il admissible?
+\end{enumerate}
+
+\Corrige{
+  \begin{enumerate}
+  \item Estimateur intuitif : $\hat{\theta}^\star = Y$. Risque quadratique:
+    $R_\theta(\hat{\theta}^\star) =d$.
+  \item Sous les hypothèses, on peut appliquer Fubini pour montrer que
+    \begin{align*}
+      & \E\left[\xi_1 \ f(\xi) \right] = \frac{1}{\sqrt{2 \pi}^d}
+      \int_{\rset^{d-1}} \left( \int_{\rset} z_1 f(z_1, z_{2:d}) \exp(-z_1^2/2)
+        dz_1 \right) \ 
+      \exp(-\sum_{k=2}^d z_k^2 /2) \ dz_{2:d} \\
+      & \PE\left[\partial_{1} f(\xi) \right] = \frac{1}{\sqrt{2\pi}^{d-1}}
+      \int_{\rset^{d-1}} \PE\left[\partial_{1} f(\xi_1, z_2, \cdots, z_d)
+      \right] \ \prod_{k=2}^d \exp(-z_k^2/2) dz_k.
+    \end{align*}
+    Par une intégration par parties, on montre
+\[
+\PE\left[\partial_{1} f(\xi_1, z_2, \cdots, z_d)
+      \right] = \int_{\rset} z_1 f(z_1, z_{2:d}) \exp(-z_1^2/2)
+        dz_1
+\]
+ce qui conclut la démonstration.
+\item On applique la question précédente avec $f = \tilde f(\cdot + \theta)$ et
+  on utilise le fait que sous $\PP_\theta$, $Y_i$ a même loi que $\theta_i +
+  \xi_i$.
+\item On écrit $\| \hat{\theta} - \theta \|^2 = \left\| \left( g(Y) \, Y - Y
+    \right) + \left( Y - \theta \right) \right\|^2$; on développe le carré puis
+  prend l'espérance. On obtient le résultat en utilisant la question précédente
+  et en notant que $\PE_\theta \left[ \|Y - \theta \|^2 \right] =d$.
+\item Avec ce choix de $g$, on a 
+\[
+\PE_\theta \left[W(Y) \right] = \PE_\theta \left[- \frac{2 d c}{\|Y\|^2} +
+  \frac{4 c }{\|Y\|^2} + \frac{c^2}{\|Y\|^2} \right] = \left( c^2 + 4 c - 2 dc
+\right) \PE_\theta \left[ \|Y\|^{-2} \right].
+\]
+Cette quantité est minimale (atteignant une valeur négative) pour $c = d-2$.
+\item Non.
+  \end{enumerate}
+}
+
+\end{document}
