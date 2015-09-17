@@ -22,7 +22,7 @@ $$
 f*g(x)=\int_{\rset}f(x-t)g(t) \rmd t=\int_{\rset}f(u)g(x-u)\ \rmd u \eqsp.
 $$
 \end{definition}
-If no assumptions are made about $f$ and $g$, the convolution is clearly not defined. Take, for example, $f=g \equiv 1$ !
+If no assumption is made about $f$ and $g$, the convolution is clearly not defined. Take, for example, $f=g \equiv 1$ !
 \end{frame}
 
 \begin{frame}
@@ -39,16 +39,18 @@ $$
 \end{theorem}
 \end{frame}
 
-\begin{frame}
-\frametitle{Convolution in $\loneloc(\rset)$}
-\begin{theorem}
-Assume that $f\in \loneloc(\rset)$ and that $ g\in \lone(\rset)$ .
-\begin{enumerate}[label=(\roman*)]
-\item If $\mathrm{supp}(g)$ is bounded,  then $f*g(x)$ exists a.e. and belongs to $\loneloc(\rset)$ .
-\item If $f$  is bounded,  then $f*g(x)$ exists for all $x$ and  $\linfty(\rset)$ .
-\end{enumerate}
-\end{theorem}
-\end{frame}
+\frame[plain]{\includegraphics[width=\textwidth]{convolution-L1}}
+
+%\begin{frame}
+%\frametitle{Convolution in $\loneloc(\rset)$}
+%\begin{theorem}
+%Assume that $f\in \loneloc(\rset)$ and that $ g\in \lone(\rset)$ .
+%\begin{enumerate}[label=(\roman*)]
+%\item If $\mathrm{supp}(g)$ is bounded,  then $f*g(x)$ exists a.e. and belongs to $\loneloc(\rset)$ .
+%\item If $f$  is bounded,  then $f*g(x)$ exists for all $x$ and  $\linfty(\rset)$ .
+%\end{enumerate}
+%\end{theorem}
+%\end{frame}
 
 \begin{frame}
 \frametitle{Convolution in $\lp{p}(\rset)$}
@@ -61,6 +63,9 @@ Then the following hold:
 \end{enumerate}
 \end{theorem}
 \end{frame}
+
+\frame[plain]{\includegraphics[width=\textwidth]{convolution-Lp}}
+
 
 \begin{frame}
 \begin{theorem}
@@ -76,6 +81,9 @@ $$
 \alert{remark:}  can be generalized to the convolution $\lp{p}(\rset)*\lp{q}(\rset)$ with $p^{-1}+q^{-1}-1=r^{-1}$, where $p,\ q,\ r$ are $\geq 1$. For $f\in \lp{p}(\rset)$ and $ g\in \lq{\rset}$ , $f*g$ is in $\lp{r}(\rset)$.
 \end{frame}
 
+\frame[plain]{\includegraphics[width=\textwidth]{convolution-L1-L2}}
+
+
 \subsection{Convolution, Derivation and regularization}
 
 \begin{frame}
@@ -88,6 +96,9 @@ Let $f$ be in $\lone(\rset)$ and let $g$ be in $C^{p}(\rset)$ .  Assume that $g^
 \end{enumerate}
 \end{theorem}
 \end{frame}
+
+\frame[plain]{\includegraphics[width=\textwidth]{derivation}}
+
 
 \begin{frame}
 \frametitle{Regularization}
@@ -102,11 +113,13 @@ A sequence of functions $\rho_{n}$ in $\mathcal{D}(\rset)$  is called a regulari
 \begin{definition}
 If $ f\in \lone(\rset)$ , the functions $f*\rho_{n}$ are called \alert{regularizations} of $f$.
 \end{definition}
-\alert{Key property:} $f*p_{n}$ is in $C^{\infty}(\rset)$
+\alert{Key property:} $f*\rho_{n}$ is in $C^{\infty}(\rset)$
 \end{frame}
 
 \begin{frame}
 \frametitle{An example}
+\begin{itemize}
+\item Set 
 $$\rho(x)=
 \begin{cases}
 c^{-1} \rme^{-1/(1-x)} &  \text{if $|x|\leq 1$},\\
@@ -114,28 +127,28 @@ c^{-1} \rme^{-1/(1-x)} &  \text{if $|x|\leq 1$},\\
 \end{cases}
 $$
 with $c\ =\int_{-1}^{1} \rme^{-1/(1-x)} \rmd x$
-
-Set $\rho_{n}(x)=n\rho(nx)$ . In practice, regularizing sequences are used without defining them explicitly.
+\item The sequence $\rho_{n}(x)=n\rho(nx)$ is a \alert{regularizing sequence}. 
+\item In practice, regularizing sequences are used without defining them explicitly.
+\end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Density of $\mathcal{D}(\rset)$ in $L^{1}(\rset)$}
 \begin{theorem}[Density of $\mathcal{D}(\rset)$ in $L^{1}(\rset)$]
-Let $f$ be a function in $\lone(\rset)$. For $\epsilon>0$ there exists $g_\epsilon$ in $\mathcal{D}(\rset)$ such that $\Vert f-g_{\epsilon}\Vert_{1}\leq\epsilon$.
+Let $f$ be a function in $\lp{p}(\rset)$, $1 \leq p < \infty$. For $\epsilon>0$ there exists $g_\epsilon$ in $\mathcal{D}(\rset)$ such that $\Vert f-g_{\epsilon}\Vert_{p}\leq\epsilon$.
 \end{theorem}
-\begin{itemize}
-\item The proof shows that if $f$ is continuous, the sequence $f*\rho_{n}$ tends to $f$ uniformly on all compact sets.
-\item In the same way that $\mathcal{D}(\rset)$ is dense in $\lp{p}(\rset)$ , $ 1<p<\infty$. Then, since $\mathcal{D}(\rset) \subset \mcs(\rset)$ , $\mcs(\rset)$ is dense in $\lp{p}(\rset)$.
-\end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{}
-\begin{theorem}
-If $f\in \lone(\rset)$ and $\rho_{n}$ is a regularizing sequence, then $\displaystyle \lim_{n\rightarrow\infty}\Vert f-f*\rho_{n}\Vert_{1}=0$.
-\end{theorem}
-A similar argument can be used to show that the regularizations $f*\rho_{n}$ of a function $f\in \lp{p}(\rset)$ , $ 1<p<\infty$, tend to $f$ in $\lp{p}(\rset)$ .
-\end{frame}
+\frame[plain]{\includegraphics[width=\textwidth]{density}}
+
+
+%\begin{frame}
+%\frametitle{}
+%\begin{theorem}
+%If $f\in \lone(\rset)$ and $(\rho_{n} )_{n \geq 0}$ is a regularizing sequence, then $\displaystyle \lim_{n\rightarrow\infty}\Vert f-f*\rho_{n}\Vert_{1}=0$.
+%\end{theorem}
+%A similar argument can be used to show that the regularizations $f*\rho_{n}$ of a function $f\in \lp{p}(\rset)$ , $ 1<p<\infty$, tend to $f$ in $\lp{p}(\rset)$ .
+%\end{frame}
 
 \begin{frame}
 \frametitle{The convolution $\mcs(\rset) * \mcs(\rset)$}
@@ -147,6 +160,9 @@ Assume that $f$  and $g$ are in  $\mcs(\rset)$. Then the following hold:
 \end{enumerate}
 \end{theorem}
 \end{frame}
+
+\frame[plain]{\includegraphics[width=\textwidth]{density}}
+
 
 \section{The Fourier transform on $\ltwo(\rset)$}
 \begin{frame}
@@ -199,6 +215,7 @@ The Fourier transform $\TF$ and its inverse $\TFC$ extend uniquely to isometries
 \end{enumerate}
 \end{theorem}
 \end{frame}
+\frame[plain]{\includegraphics[width=\textwidth]{inverse}}
 
 \begin{frame}
 \frametitle{The exchange formula}
@@ -209,6 +226,9 @@ $$
 $$
 \end{theorem}
 \end{frame}
+
+\frame[plain]{\includegraphics[width=\textwidth]{exchange}}
+
 
 \begin{frame}
 \frametitle{Extension}
@@ -243,7 +263,7 @@ We will continue to denote the Fourier transform by $\hat{f}$ or $\TFA{f}$. The 
 
 \begin{frame}
 \frametitle{Inverse Fourier transform in $\lone(\rset)$}
-First we are going to complete a result about the Fourier transform. We saw  that $\TFC \hat{f}(t)=f(t)$ at every point $t$ where $f$ is continuous when $f$ and $\hat{f}$  are both in $\lone(\rset)$. In particular, if $ f\in \mcs(\rset)$ , then $\TFC \hat{f}(t)=f(t)$ for all $ t\in \rset$.
+We saw  that $\TFC \hat{f}(t)=f(t)$ at every point $t$ where $f$ is continuous when $f$ and $\hat{f}$  are both in $\lone(\rset)$. In particular, if $ f\in \mcs(\rset)$ , then $\TFC \hat{f}(t)=f(t)$ for all $ t\in \rset$.
 
 \begin{theorem}
 If $f$ and $\hat{f}$ are $\lone(\rset)$, then $\TFC \hat{f}=f$ a.e.
@@ -264,6 +284,9 @@ $\widehat{f\cdot g}(\xi)=\hat{f}*\hat{g}(\xi)$ for all $\xi\in \rset$.
 
 \end{frame}
 
+\frame[plain]{\includegraphics[width=\textwidth]{convolution-product}}
+
+
 \begin{frame}
 \frametitle{Convolution and Fourier transform in $\lone(\rset) * \ltwo(\rset)$}
 \begin{theorem}
@@ -279,58 +302,119 @@ If $ f\in \ltwo(\rset)$ and $g\in \lone(\rset)$ , then $\hat{f}\cdot\hat{g}$  is
 $$
 \sum_{k=0}^{q}b_{k}g^{(k)}=\sum_{j=0}^{p}a_{j}f^{(j)},\ a_{p}\cdot b_{q}\neq 0,
 $$
-where $f$ is the input and $g=A(f)$ is the output. 
-\item  The case where the input and output are in $\mcs(\rset)$ This case is very special. The input has no reason to be so regular, but we will see that this is a step toward more general cases.
+where $f$ is the input and $g=A(f)$ is the output.
+\item  \alert{Assumption}  $f \in \mcs(\rset)$. This case is very special. The input has no reason to be so regular, but we will see that this is a step toward more general cases.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{input and output are in $\mcs(\rset)$}
 \begin{itemize}
-\item We assume that $f\in \mcs(\rset)$ and look for a solution $g$ in $\mcs(\rset)$. If such a $g$ exists, we can take the Fourier transform of both sides of 
+\item Assume that $f\in \mcs(\rset)$ and look for a solution $g \in \mcs(\rset)$. If such a $g$ exists, we can take the Fourier transform of both sides of
 $$
-\sum_{k=0}^{q}b_{k}g^{(k)}=\sum_{j=0}^{p}a_{j}f^{(j)},\ a_{p}\cdot b_{q}\neq 0, (S)
+\sum_{k=0}^{q}b_{k}g^{(k)}=\sum_{j=0}^{p}a_{j}f^{(j)},\ a_{p}\cdot b_{q}\neq 0,  \quad \alert{\textbf{(S)}}
 $$
-showing that    
+showing that
 $$
-\sum_{k=0}^{q}b_{k}(2\rmi\pi\xi)^{k}\hat{g}(\xi)=\sum_{j=0}^{p}a_{j}(2\rmi\pi\xi)^{j}\hat{f}(\xi) \quad (F)
+\sum_{k=0}^{q}b_{k}(2\rmi\pi\xi)^{k}\hat{g}(\xi)=\sum_{j=0}^{p}a_{j}(2\rmi\pi\xi)^{j}\hat{f}(\xi) \quad \alert{\textbf{(F)}}
 $$
 \item Consider the two polynomials $P(x)= \sum_{j=0}^{p}a_{j}x^{j}$ and $Q(x)=\sum_{k=0}^{q}b_{k}x^{k}$
-and assume that the rational function $P(x)/Q(x)$ has no poles on the imaginary axis. 
+and assume that the rational function $P(x)/Q(x)$ has no poles on the imaginary axis.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{input and output are in $\mcs(\rset)$}
 \begin{itemize}
-\item Then $P(2 \rmi\pi\xi)/Q(2 \rmi \pi\xi)$ has no poles for real $\xi$, and  (S) is equivalent to
+\item Then $P(2 \rmi\pi\xi)/Q(2 \rmi \pi\xi)$ has no poles for real $\xi$, and  \alert{\textbf{(S)}} is equivalent to
 $$
-\hat{g}(\xi)=\frac{P(2 \rmi \pi\xi)}{Q(2\rmi \pi\xi)}\hat{f}(\xi)
+\hat{g}(\xi)= G(\xi) \quad \text{where} \quad G(\xi)= \frac{P(2 \rmi \pi\xi)}{Q(2\rmi \pi\xi)}\hat{f}(\xi)
 $$
-\item This equality completely determines $g$ in $\mcs(\rset)$, if it exists, and thus proves the uniqueness of a solution of (S) in $\mcs(\rset)$
-\item The existence of a solution also follows from , since the function
-$$
-G(\xi)=\frac{P(2\rmi \pi\xi)}{Q(2 \rmi \pi\xi)}\hat{f}(\xi) \quad (F)
-$$
-is in $\mcs(\rset)$ whenever $f$ is in $\mcs(\rset)$. 
-\item We see that $g=\TFAC{G}$ is a solution of (S) in $\mcs(\rset)$.
+Note that \alert{$G \in \mcs(\rset)$}.
+\item This equality completely determines $g$ in $\mcs(\rset)$, if it exists, and thus proves the uniqueness of a solution of \alert{\textbf{(S)}} in $\mcs(\rset)$.
+\item $g=\TFAC{G}$ is a solution of \alert{\textbf{(S)}} in $\mcs(\rset)$.
 {\tiny The differential equation has a unique solution without initial conditions being specified. This is because we require the solution $g$ to be in $\mathcal{S}$, which means that $g$ and all of its derivatives vanish at infinity.}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Generalized solutions}
+\frametitle{Convolution}
 \begin{itemize}
-\item If we assume that $\deg P<\deg Q$, then the transfer function
+\item \alert{Idea:} express the solution as a convolution.
+\item \alert{Assumption:} $\deg P<\deg Q$. Define the \alert{transfer function}
 $$
-H(\xi)=\frac{P(2 \rmi \pi\xi)}{Q(2 \rmi \pi\xi)} 
+H(\xi)=\frac{P(2 \rmi \pi\xi)}{Q(2 \rmi \pi\xi)}
 $$
-is in $\ltwo(\rset) \cap \linfty(\rset)$ . 
-\item By decomposing this rational function into partial fractions, the inverse Fourier transform $h=\TFAC{H}$  is bounded, rapidly decreasing, continuous except perhaps at the origin, and satisfies (F),
+is in $\ltwo(\rset) \cap \linfty(\rset)$ .
+\item By decomposing this rational function into partial fractions, the \alert{impulse response}, defined as the inverse Fourier transform of the \alert{transfer function}
+$$ 
+h=\TFAC{H} 
+$$
+is bounded, rapidly decreasing, continuous except perhaps at the origin.
+\end{itemize}
+\end{frame}    
+
+\begin{frame}
+\frametitle{Simple poles}
+\begin{itemize}
+\item The poles of $P/Q$ are assumed to lie off the imaginary axis. There are two cases to consider: $P/Q$ has only simple poles or $P/Q$ has multiple poles.
+\item Assume first that $P(x)/Q(x)$ has only simple poles. In this case, $H$ can be decomposed in the form
+$$
+H(\xi)=\sum_{k=0}^{q}\frac{\beta_{k}}{2i\pi\xi-z_{k}}
+$$
+where $z_{1},\ \ldots,\ z_{q}$ are the poles.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Simple poles}
+\begin{itemize}
+\item For $a \in \cset$, $\mathrm{Re}(a) > 0$, $\epsilon= \pm 1$,
+\[
+\rme^{-\epsilon a x} u(\epsilon x) \TFyield \frac{\epsilon}{(\epsilon a + 2 \rmi \pi \xi)}
+\]
+\item We conclude that
+$$
+h(t)=\left(\sum_{k\in K-}\beta_{k} \rme^{z_{k}t} \right)u(t)- \left(\sum_{k\in K_{+}}\beta_{k} \rme^{z_{k}t} \right)u(-t) \eqsp.
+$$
+where $t \mapsto u(t)$ is the Heaviside function and
+\begin{align*}
+K_{-} &=\{k\in\{1,2,\ldots,q\}|{\rm Re}(z_{k})<0\}, \\
+K_{+} &=\{k\in\{1,2,\ldots,q\}|{\rm Re}(z_{k})>0\}.
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Multiple poles}
+\begin{itemize}
+\item Let $z_{1},\ z_{2},\ \ldots,\ z_{l}$ the poles and let $m_{1},\ m_{2},\ \ldots,\ m_{l}$ be their multiplicities.
+\item Then we can write $H$ as
+$$
+H(\xi)=\sum_{k=1m}^{l}\sum_{=1}^{m_{k}}\frac{\beta_{k,m}}{(2i\pi\xi-z_{k})^{m}}.
+$$
+\item The impulse response is given by
+$$
+h(t)=\left(\displaystyle \sum_{k\in K-}P_{k}(t) \rme^{z_{k}t}\right)u(t)-\left(\sum_{k\in K_{+}}P_{k}(t) \rme^{z_{k}t}\right)u(-t)
+$$
+where
+$$
+P_{k}(t)=\sum_{m=1}^{m_{k}}\beta_{k,m} \frac{t^{m-1}}{(m-1)!}.
+$$
+\end{itemize}
+\end{frame}
+  
+  
+\begin{frame}    
+\frametitle{Convolution}
+\begin{itemize}
+\item Since $h=\TFAC{H}$ is bounded, rapidly decreasing, continuous except perhaps at the origin
+\alert{\textbf{(F)}} may be rewritten as
 $$
 \hat{g}=\hat{h}\cdot\hat{f}.
 $$
-\item Since $f$ and $g \in \ltwo(\rset)$, we have $f * g(t)= \TFAC{\hat{f} \hat{g}}$ implies that
+\item Since $\hat{h} \in \ltwo(\rset)$ and $\hat{f} \in \mcs(\rset) \subset \lone(\rset)$, 
+we have $h * f(t)= \TFAC{\hat{h} \hat{f}}$ implies that
 $$
 g=h*f
 $$
@@ -352,63 +436,13 @@ The formula $g=h*f$, obtained when $f$ is in $\mathcal{S}$, makes sense in the f
 \Vert g\Vert_{2}\ &\leq\Vert h\Vert_{1}\Vert f\Vert_{2}, \\
 \Vert g\Vert_{\infty}& \leq \Vert h\Vert_{2}\Vert f\Vert_{2}.
 \end{align*}
-\item If $f$ is in $\linfty(\rset)$ , then $g$ is also bounded and 
+\item If $f$ is in $\linfty(\rset)$ , then $g$ is also bounded and
 $$
 \Vert g\Vert_{\infty}\leq\Vert h\Vert_{1}\Vert f\Vert_{\infty}.
 $$
 \end{enumerate}
 \end{frame}
 
-\begin{frame}
-\frametitle{Simple poles}
-\begin{itemize}
-\item The impulse response $h=\TFAC{H}$ is computed by decomposing $H$ into partial fractions. 
-\item The poles of $P/Q$ are assumed to lie off the imaginary axis. There are two cases to consider: $P/Q$ has only simple poles or $P/Q$ has multiple poles.
-\item Assume first that $P(x)/Q(x)$ has only simple poles. In this case, $H$ can be decomposed in the form
-$$
-H(\xi)=\sum_{k=0}^{q}\frac{\beta_{k}}{2i\pi\xi-z_{k}}
-$$
-where $z_{1},\ \ldots,\ z_{q}$ are the poles. 
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Simple poles}
-\begin{itemize}
-\item For $a \in \cset$, $\mathrm{Re}(a) > 0$, $\epsilon= \pm 1$,
-\[
-\rme^{-\epsilon a x} u(\epsilon x) \TFyield \frac{\epsilon}{(\epsilon a + 2 \rmi \pi \xi)}
-\]
-\item We conclude that
-$$
-h(t)=\left(\sum_{k\in K-}\beta_{k} \rme^{z_{k}t} \right)u(t)- \left(\sum_{k\in K_{+}}\beta_{k} \rme^{z_{k}t} \right)u(-t) \eqsp.
-$$
-where we have defined
-\begin{align*}
-K_{-} &=\{k\in\{1,2,\ldots,q\}|{\rm Re}(z_{k})<0\}, \\
-K_{+} &=\{k\in\{1,2,\ldots,q\}|{\rm Re}(z_{k})>0\}.
-\end{align*}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Multiple poles}
-\begin{itemize}
-\item Let $z_{1},\ z_{2},\ \ldots,\ z_{l}$ the poles and let $m_{1},\ m_{2},\ \ldots,\ m_{l}$ be their multiplicities. 
-\item Then we can write $H$ as
-$$
-H(\lambda)=\sum_{k=1m}^{l}\sum_{=1}^{m_{k}}\frac{\beta_{k,m}}{(2i\pi\lambda-z_{k})^{m}}.
-$$
-\item The impulse response is given by 
-$$
-h(t)=(\displaystyle \sum_{k\in K-}P_{k}(t) \rme^{z_{k}t})u(t)-(\sum_{k\in K_{+}}P_{k}(t) \rme^{z_{k}t})u(-t)
-$$
-where
-$$
-P_{k}(t)=\sum_{m=1}^{m_{k}}\beta_{k,m} \frac{t^{m-1}}{(m-1)!}.
-$$
-\end{itemize}
-\end{frame}
 
 \begin{frame}
 \frametitle{Purely imaginary poles}
@@ -417,8 +451,8 @@ $$
 $$
 g''+\omega^{2}g=f,
 $$
-where $P(x)/Q(x)=1/(x^{2}+\omega^{2})$ has two poles are on the imaginary axis. 
-\item In this case $h$ is a sinusoid and the Fourier transform of $H$ (when $H$ is considered to be a function) is no longer defined. 
+where $P(x)/Q(x)=1/(x^{2}+\omega^{2})$ has two poles are on the imaginary axis.
+\item In this case $h$ is a sinusoid and the Fourier transform of $H$ (when $H$ is considered to be a function) is no longer defined.
 \item This problem required the use of the \alert{theory of  distributions} but this degree of sophistication goes far beyond this course.
 \end{itemize}
 \end{frame}
@@ -429,18 +463,18 @@ Take for example the equation
 $$
 g''-\omega^{2}g=f''.
 $$
-Again, what we have done so far does not apply. Nevertheless, we can still manage to solve the equation. 
+Again, what we have done so far does not apply. Nevertheless, we can still manage to solve the equation.
 Changing the unknown function to $g_0 =g-f$ lowers the order of the right-hand side:
 $$
 g_{0}''-\omega^{2}g_{0}=\omega^{2}f.
 $$
-Then we have $g_{0}=h_{0}*f$ and $g=f+h_{0}*f$. 
+Then we have $g_{0}=h_{0}*f$ and $g=f+h_{0}*f$.
 This is \alert{no longer a convolution}  but it will serve the same purpose.
 \end{frame}
 
 \section{Linear systems}
 \begin{frame}
-Denote by $\Xset$ the set of \alert{input signals} and $\Yset$ the set of \alert{output signals} which are assumed to be vector 
+Denote by $\Xset$ the set of \alert{input signals} and $\Yset$ the set of \alert{output signals} which are assumed to be vector
 spaces (over $\kset=\cset$ or $\kset=\rset$).
 \begin{definition}[Linearity]
 The system $A: \Xset \to \Yset$ is said to be \alert{linear} if for all $x_1,x_2 \in \Xset$ and $\lambda_1,\lambda_2 \in \kset$
@@ -448,7 +482,7 @@ $$
 A(\lambda_1 x_1 + \lambda_2 x_2)= \lambda_1 A(x_1) + \lambda_2 A(x_2) \eqsp.
 $$
 \end{definition}
-A system $A$ defined by a convolution $A(f) = h * f$ is linear.  
+A system $A$ defined by a convolution $A(f) = h * f$ is linear.
 \end{frame}
 
 \begin{frame}
@@ -458,7 +492,7 @@ A system $A: \Xset \to \Yset$ is said to be \alert{stable} if there exists an $M
 \end{definition}
 \begin{enumerate}[label=(\roman*)]
 \item The generalized filter $A$ is stable when $\deg P<\deg Q$.
-\item It is still stable if $\deg P = \deg Q$... 
+\item It is still stable if $\deg P = \deg Q$...
  \end{enumerate}
 \end{frame}
 
@@ -467,22 +501,22 @@ A system $A: \Xset \to \Yset$ is said to be \alert{stable} if there exists an $M
 \begin{definition}
 A system $A: \Xset \to \Yset$ is \alert{causal} if the equality of any two input signals up to time $t=t_0$ implies the equality of the two output signals at least to time $t_0$,
 $$
-\text{$x_1(t)= x_2(t)$ for $t \leq t_0$} \Rightarrow \text{$A x_1(t)= A x_2(t)$ for $t < t_0$}  
+\text{$x_1(t)= x_2(t)$ for $t \leq t_0$} \Rightarrow \text{$A x_1(t)= A x_2(t)$ for $t < t_0$}
 $$
 \end{definition}
 This property is completely natural for a physical system in which the
 variable is time. It says that the response at time $t$ depends only on what
-has happened before $t$. 
+has happened before $t$.
 \end{frame}
 
 \begin{frame}
 \frametitle{Invariance}
-Define by $\tau_a$ the \alert{delay operator}: $\tau_a x(t)= x(t-a)$ for all $t \in \rset$. 
+Define by $\tau_a$ the \alert{delay operator}: $\tau_a x(t)= x(t-a)$ for all $t \in \rset$.
 \begin{definition}
-A system $A$ is \alert{invariant} if a translation of time in the input leads to the same translation in the output, or equivalently 
+A system $A$ is \alert{invariant} if a translation of time in the input leads to the same translation in the output, or equivalently
 if $A$ and $\tau_a$ commute for all $a \in \rset$:
 \[
-A \circ \tau_a = \tau_a \circ A 
+A \circ \tau_a = \tau_a \circ A
 \]
 \end{definition}
 \end{frame}
@@ -490,8 +524,8 @@ A \circ \tau_a = \tau_a \circ A
 \begin{frame}
 \frametitle{Causality}
 \begin{enumerate}[label=(\roman*)]
-\item When $A$ is  linear and invariant, the causality condition becomes the following: 
-For all $t_{0}\in \rset$, 
+\item When $A$ is  linear and invariant, the causality condition becomes the following:
+For all $t_{0}\in \rset$,
 $$
 \text{$f(t)=0$ for $t<t_{0}\Rightarrow Af(t)=0$ for $t<t_{0}$.}
 $$
