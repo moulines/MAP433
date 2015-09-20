@@ -288,10 +288,10 @@ $$\boxed{Y_i = \bx_i^T \truebeta+ \sigma \xi_i,\;\;i=1,\ldots, n}$$
 où $\truetheta \in \Theta = \R^k,\;\;\bx_i \in \R^k$.
 \item \alert{Matriciellement}
 $$\boxed{\bY = \regressmat\truebeta + \sigma \bnoise}$$
-avec 
+avec
 \begin{itemize}
-\item \alert<1>{$\bY = (Y_1 \cdots Y_n)^T$}, 
-\item \alert<2>{$\bnoise = (\xi_1 \cdots \xi_n)^T$} 
+\item \alert<1>{$\bY = (Y_1 \cdots Y_n)^T$},
+\item \alert<2>{$\bnoise = (\xi_1 \cdots \xi_n)^T$}
 \item \alert<3>{$\regressmat$ la matrice $(n\times k)$
 dont la $i$-ème ligne est $\regressmat_{i,\cdot}= \bx_i^T$.}
 \end{itemize}
@@ -310,7 +310,7 @@ dont la $i$-ème ligne est $\regressmat_{i,\cdot}= \bx_i^T$.}
 %\alert{avec}
 %$$\boxed{\E_\truetheta\big[\varepsilon_i\big]=0,\;\E_\truetheta\big[\varepsilon_i^2\big]=1}$$
 %\item \underline{Estimateur naturel} de $\sigma^2$ :
-%$$\widehat \sigma_n^2 = \frac{1}{n}\sum_{i = 1}^n\big(Y_i-r(\estMC, x_i)\big)^2$$
+%$$\widehat \sigma_n^2 = \frac{1}{n}\sum_{i = 1}^n\big(Y_i-r(\estregress, x_i)\big)^2$$
 %\item Somme de variables aléatoires \alert{non indépendantes}.
 %\item Difficile de progresser \alert{sans hypothèse supplémentaire}. Si les $\varepsilon_i$ sont i.i.d. ${\mathcal N}(0,1)$, alors \alert{on sait} \og résoudre \fg{} le problème... plus loin.
 %\end{itemize}
@@ -326,12 +326,12 @@ dont la $i$-ème ligne est $\regressmat_{i,\cdot}= \bx_i^T$.}
 \frametitle{EMC en régression linéaire multiple}
 \begin{itemize}
 \item Estimateur des \alert{moindres carrés} en régression
-linéaire multiple : tout estimateur $\estMC$ satisfaisant
+linéaire multiple : tout estimateur $\estregress$ satisfaisant
 $$\sum_{i = 1}^n
 \big(Y_i- \bx_i^T \estregress \big)^2 = \min_{\bcurbeta \in \R^k}\sum_{i =
 1}^n \big(Y_i- \bx_i^T \bcurbeta\big)^2.$$
 \item En notation matricielle :
-\begin{align*} 
+\begin{align*}
 \|\boldsymbol{Y}-\regressmat\estregress\|^2 &=   \min_{\bcurbeta \in \R^k}\|\bY -\regressmat\truebeta\|^2\\
 &= \min_{v \in V}\|\boldsymbol{Y}-v\|^2
 \end{align*}
@@ -364,25 +364,23 @@ $$\boxed{\regressmat^T\regressmat {\estregress} =
 \begin{frame} \frametitle{Géométrie de l'EMC}
 \begin{prop}
 Si $\regressmat^T\regressmat$ (matrice $k \times k$) inversible, alors
-$\estMC$ \alert{est unique} et
-$$\boxed{\estMC = \big(\regressmat^T\regressmat\big)^{-1}\regressmat^T \boldsymbol{Y}}$$
+$\estregress$ \alert{est unique} et
+$$\boxed{\estregress = \big(\regressmat^T\regressmat\big)^{-1}\regressmat^T \boldsymbol{Y}}= \regressmat^{\#} \bY$$
 \end{prop}
-\begin{itemize}
-\item Contient le cas précédent de la droite de régression simple.
-\item Résultat géometrique, \alert{non stochastique}.
-\item $\regressmat^T\regressmat\ge0$; \ \ $\regressmat^T\regressmat$
+\only<1>{Contient le cas précédent de la droite de régression simple.}
+\only<2>{Résultat géometrique, \alert{non stochastique}.
+$\regressmat^T\regressmat\ge0$; \ \ $\regressmat^T\regressmat$
 inversible $\Longleftrightarrow$ $\regressmat^T\regressmat>0$;
 $$\regressmat^T\regressmat>0 \ \Longleftrightarrow \ {\rm rang}(\regressmat)=k
 \ \Longleftrightarrow \ {\rm dim}(V)=k.$$
-$$\regressmat^T\regressmat>0 \quad \Longrightarrow \quad \alert{ n \geq k}.$$
-\end{itemize}
+$$\regressmat^T\regressmat>0 \quad \Longrightarrow \quad \alert{ n \geq k}.$$}
 \end{frame}
 
 
 \begin{frame} \frametitle{Géométrie de l'EMC}
-Soit $\regressmat^T\regressmat>0$. Alors, la matrice $n\times n$
+Supposons $\regressmat^T\regressmat>0$. Alors, la matrice $n\times n$
 $$
-\projX = \regressmat\big(\regressmat^T\regressmat\big)^{-1}\regressmat^T
+\projX = \regressmat\big(\regressmat^T\regressmat\big)^{-1}\regressmat^T = \regressmat \regressmat^{\#}
 $$
 est dite \alert{matrice chapeau} (\texttt{hat matrix}).
 %
@@ -399,11 +397,20 @@ ${\rm rang}(P_V)={\rm dim}(V)=k$.
 \only<2>
 {\alert{Chapeau}, car $\projX$ génère la prévision de
 $\regressmat\truetheta$ notée $\widehat{\boldsymbol{Y}}$ :
-$$\widehat{\boldsymbol{Y}}= \regressmat\estMC= \projX\boldsymbol{Y}.$$
+$$\widehat{\boldsymbol{Y}}= \regressmat\estregress= \projX\boldsymbol{Y}.$$
 }
 \end{frame}
 
-
+\begin{frame}
+\frametitle{Pseudo-inverse de Moore-Penrose}
+Soit $\regressmat$ une matrice $n \times p$ avec $ p \leq n$. On suppose que $\regressmat$ est de rang $p$.
+\begin{itemize}
+\item $\regressmat^{\#}= (\regressmat^T \regressmat)^{-1} \regressmat^T$ est la \alert{pseudo-inverse} de Moore-Penrose. 
+\item $\regressmat^{\#} \regressmat= Id_{p \times p}$: $\regressmat$ est un inverse à gauche de la matrice $\regressmat$.
+\item  $\regressmat \regressmat^{\#} = \regressmat (\regressmat^T \regressmat)^{-1} \regressmat^T$ est le projecteur sur l'espace image (l'espace vectoriel engendré par les colonnes de $\regressmat$).
+\item Méthode de calcul: décomposition QR ou décomposition en valeurs singulières.
+\end{itemize}
+\end{frame}
 
 \subsection{Propriétés de l'estimateur des Moindres Carrés}
 
@@ -415,28 +422,32 @@ $$\widehat{\boldsymbol{Y}}= \regressmat\estMC= \projX\boldsymbol{Y}.$$
 \begin{enumerate}
 \item \alert<1>{$\regressmat$ est de rang complet.}
 \item \alert<2>{$\PE_\truetheta[\bnoise]= 0$ pour tout $\truetheta \in \Theta$  (les erreurs sont centrées)}
-\item \alert<3>{La variance des erreurs est constante et les erreurs sont décorrélées $\PE_{\truetheta}[\bnoise \bnoise^T] = \sigma^2 I$ (homoscédasticité)}
-\item \alert<4>{(optionnel) les erreurs sont gaussiennes.}
+\item \alert<3>{La variance des erreurs est constante et les erreurs sont décorrélées $\PE_{\truetheta}[\bnoise \bnoise^T] = I$ (homoscédasticité)}
 \end{enumerate}
 \end{frame}
 
 \begin{frame}
 \frametitle{Estimateur sans biais}
 \begin{theo}
-L'estimateur $\estregress$ est sans biais, \ie\ pour tout $\truetheta \in \Theta$, $\PE_{\truetheta}[\estregress]= \truetheta$. De plus,
-$\PCov_{\truetheta}(\estregress)= \sigma^2 (\regressmat^T \regressmat)^{-1}$.
+L'estimateur $\estregress$ est sans biais, \ie\ pour tout $\truetheta \in \Theta$, 
+\begin{itemize}
+\item \PE_{\truetheta}[\estregress]= \truetheta 
+\item $\PCov_{\truetheta}(\estregress)= \sigma^2 (\regressmat^T \regressmat)^{-1}$.
+\end{itemize}
 \end{theo}
-\pause
-\begin{proof}
-$\estregress = \truetheta + \big(\regressmat^T\regressmat\big)^{-1}\regressmat^T
-\bnoise$.
-
-On vérifie: $\ \ \E_{\truetheta}[\estregress]=\truetheta$,
+\alert{$\estregress = \regressmat^{\#} \bY= \truebeta + \regressmat^{\#} \bnoise$.}
+\only<1>{
 \begin{align*}
-&\E_{\truetheta}\big[ \big(\regressmat^T\regressmat\big)^{-1}\regressmat^T \bnoise \big(\big(\regressmat^T\regressmat\big)^{-1}\regressmat^T \bnoise\big)^T\big] \\
-=\; &\sigma^2\big(\regressmat^T\regressmat\big)^{-1}.
+\E_{\truetheta}[\estregress]&=\truebeta + \regressmat^{\#} \PE_{\truetheta}[\bnoise] \\
+&= \truebeta
 \end{align*}
-\end{proof}
+}
+\only<2>{$\estregress- \truebeta= \regressmat^{\#} \bnoise$ ce qui implique
+\begin{align*}
+\PCov_{\truetheta}(\estregress) &= \E_{\truetheta}\big[ \{\regressmat^{\#} \bnoise \} \{\regressmat^{\#} \bnoise \}^T \big] \\
+&= \sigma^2 \{ \regressmat^{\#} \} \{\regressmat^{\#} \}^T = \sigma^2 \big(\regressmat^T\regressmat\big)^{-1}.
+\end{align*}
+}
 \end{frame}
 
 \begin{frame}
@@ -501,60 +512,46 @@ On a $\predY - \PE_{\truetheta}[\predY]= \sigma \projX \bnoise$ et donc
 
 
 \begin{frame}
-\frametitle{Estimateur sans bians de la variance de l'erreur de prédiction}
+\frametitle{Estimateur sans biais de la variance de l'erreur de prédiction}
 \begin{theo}
 $\hat{\sigma}_n^2= (n-p)^{-1} \| \errpred \|^2$ est un estimateur sans biais de la variance de l'erreur.
 \end{theo}
 \begin{proof}
 Comme $(I-\projX)^2= (I-\projX)$, nous avons
 \begin{align*}
-\PE_\theta[\hat{\sigma}_n^2] &= (n-p)^{-1} \PE_{\theta}[ \bnoise^T (I-\projX) \bnoise] \\
-                             &= (n-p)^{-1} \PE_{\btheta}[ \mathrm{Tr}( (I-\projX) \bnoise \bnoise) ] \\
+\PE_{\truetheta}[\hat{\sigma}_n^2] &= (n-p)^{-1} \PE_{\truetheta}[ \bnoise^T (I-\projX) \bnoise] \\
+                             &= (n-p)^{-1} \PE_{\truetheta}[ \mathrm{Tr}( (I-\projX) \bnoise \bnoise) ] \\
                              &= \sigma^2 (n-p)^{-1} \mathrm{Tr}(I-\projX)= \sigma^2 \eqsp.
 \end{align*}
 \end{proof}
 \end{frame}
 
 \begin{frame}
-\frametitle{Prevision}
+\frametitle{Coefficient de détermination}
 \begin{itemize}
-\item Un des buts de la régression est de proposer des prédictions pour la réponse lorsque nous avons de 
-nouvelles valeurs des variables explicatives.
-\item Un prédicteur naturel de la réponse est \alert{$\hat{Y}_n(\bx)= \bx^T \estregress$} 
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Moyenne et variance de la prévision}
-\begin{theorem}
-\begin{itemize}
-\item $\PE_{\truetheta}[\hat{Y}_n(\bx)]= \bx^T \truebeta$ 
-\item $\Var_{\truetheta}(\hat{Y}_n(\bx))= \sigma^2 \bx^T (\regressmat^T \regressmat)^{-1} \bx$ 
-\item $\PE_{\truetheta}[ (Y(\bx) - \hat{Y}_n(\bx))^2]= \sigma^2 (1 + \bx' (\resgressmat^T \regressmat)^{-1} \bx)$
-\end{itemize}
-\end{theorem}
-\only<1>{$\hat{Y}_n(\bx)= \bx^T \estregress$ et $\PE_{\truetheta}[\estregress]= \truebeta$}
-\only<2>{
+\item \alert{Pythagore} 
 \begin{align*}
-\hat{Y}_n(\bx)- \bx^T \truebeta 
-&= \bx^T (\regressmat^T \regressmat)^{-1} \regressmat^T \bY - \bx^T \truebeta \\
-&= \bx^T (\regressmat^T \regressmat)^{-1} \regressmat^T (\regressmat \truebeta + \sigma \bnoise) - \bx^T \truebeta \\
-&= \sigma \bx^T (\regressmat^T \regressmat)^{-1} \regressmat^T \bnoise
-\end{align*}}
-\only<3>{
-\begin{align*}
-\PE_{\truetheta}[ (Y(\bx) - \hat{Y}_n(\bx))^2] 
-&= \PE_{\truebeta}[ (Y(\bx) - \PE_{\truebeta}[\hat{Y}_n(\bx)])^2] + \Var_{\truetheta}(\hat{Y}_n(\bx)) \\
-&= \PE_{\truebeta}[ (Y(\bx) - \bx^T \truebeta)^2] +  \sigma^2 \bx^T (\resgressmat^T \regressmat)^{-1} \bx 
+\| \bY \|^2 &= \| \projX \bY \|^2 + \| (I - \projX) \bY \|^2 \\
+            &= \| \predY \|^2 + \| \errpred \|^2
 \end{align*}
-}
+\item \alert{Coefficient de détermination}
+\begin{align*}
+R^2 &= \frac{\|\bY\|^2}{\|\bY\|^2} 
+    &= 1 - \frac{\| \errpred \|^2}{\|\bY\|^2} = 1 - \frac{\mathrm{SCR}}{\mathrm{SCT}}
+\end{align*}
+où \alert{SCR} est la somme des carrés résiduels (RSS: residual sum of squares) et \alert{SCT} est la somme des carrés totaux.
+\end{itemize}
 \end{frame}
-
 
 \begin{frame}
 \frametitle{Coefficient de détermination}
-
+Lorsque le vecteur constant est incluse dans la matrice de régression, on retranche aux observations leurs moyennes. 
+\begin{itemize}
+\end{itemize}
 \end{frame}
+
+
+
 
 \begin{frame}
 \frametitle{Diagnostic de régression}
@@ -589,10 +586,6 @@ nouvelles valeurs des variables explicatives.
 
 
 
-\subsection{Le cas gaussien}
-
-
-
 
 
 
@@ -602,19 +595,17 @@ nouvelles valeurs des variables explicatives.
 
 \begin{frame}
 \frametitle{Régression gaussienne} \alert{Régression gaussienne} : on
-suppose $\bnoise \sim {\mathcal
-N}(0,\sigma^2\mathrm{Id}_n)$. Alors on a plusieurs proriétés
+suppose $\bnoise \sim {\mathcal N}(0,\mathrm{Id}_n)$. Alors on a plusieurs proriétés
 remarquables:
 \begin{itemize}
-\item Estimateur des moindres carrés $\estMC$ et
-
-estimateur du maximum de vraisemblance
-\alert{coïncident}.\\\vspace{1mm} {\it Preuve} : écriture de
-la fonction de vraisemblance.
 \item  On sait expliciter la loi \alert{ exacte} (non-asymptotique!)
-de~$\estMC$.\\\vspace{1mm} {\it Ingrédient} : \alert{loi des
-vecteurs gaussiens sont caractérisés par leur moyenne et matrice de
-variance-covariance}.
+de~$(\estregress,\hat{\sigma}^2)$.\\\vspace{1mm} 
+\item \alert{Ingrédient} : 
+\begin{itemize}
+\item loi des vecteurs gaussiens sont caractérisés par leur moyenne et matrice de
+variance-covariance.
+\item pour des vecteurs gaussiens, la décorrélation implique l'indépendance.
+\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -622,49 +613,65 @@ variance-covariance}.
 
 \begin{frame}
 \frametitle{Cadre gaussien : loi des estimateurs}
-\begin{itemize}
-\item \underline{Hyp. 1} : $\bnoise \sim {\mathcal N}(0,\sigma^2\mathrm{Id}_n)$.
-\item \underline{Hyp. 2} : $\regressmat^T \regressmat>0$.
-\end{itemize}
 \begin{prop}
-\begin{itemize}
-\item[(i)] $\estMC \sim {\mathcal N}\big(\truetheta, \sigma^2 \big(\regressmat^T\regressmat\big)^{-1}\big)$
-\item[(ii)] $\|\boldsymbol{Y}-\regressmat \estMC\|^2 \sim
+\begin{enumerate}
+\item  $\estregress \sim {\mathcal N}\big(\truebeta, \sigma^2 \big(\regressmat^T\regressmat\big)^{-1}\big)$
+\item  $\|(I - \projX) \bY \|^2 \sim
 \sigma^2\chi^2(n-k)$ \alert{ loi du Chi 2 à $n-k$ degrés de liberté}
-\item[(iii)] $\estMC$ et $\boldsymbol{Y}-\regressmat \estMC$ sont indépendants.
-\end{itemize}
+\item  $\estregress$ et $(I - \projX) \bY$ sont indépendants.
+\end{enumerate}
 \end{prop}
-\begin{itemize}
-\item \underline{Preuve} : \alert{Thm. de Cochran} (Poly, page 18). Si
-$\bnoise\sim {\mathcal N}(0,\mathrm{Id}_n)$ et $A_j$
-matrices $n \times n$ projecteurs t.q. $A_jA_i=0$ pour $i\neq j$,
-alors : $A_j\,\bnoise \sim {\mathcal N}\big(0,A_j\big)$,
-\alert{indépendants}, $\|A_j\bnoise\|^2\sim
-\chi^2(\mathrm{Rang}(A_j))$.
-\end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Preuve de la proposition}
+\frametitle{Théorème de Cochran}
+\begin{theo}
+Soit $\bY \sim N(\mu,\sigma^2 I_n)$, $\mathcal{M}$ un sous espace de $\R^n$ de dimension $k$, $\Pi$ la matrice de projection orthogonale 
+sur $\mathcal{M}$ et $\Pi_{\perp}= I_n - \Pi$ la matrice de projection orthogonale sur $\mathcal{M}^\perp$. Nous avons
+\begin{enumerate}
+\item \alert<1> $\Pi \bY \sim N(\Pi \mu, \sigma^2 \Pi)$, $\Pi_\perp \bY \sim N(\Pi_\perp \mu, \sigma \Pi_\perp)$
+\item \alert<2> les vecteurs $\Pi \bY$ et $\Pi_\perp \bY$ sont indépendants
+\item \alert<3> $\| \Pi(\bY - \mu) \|^2 / \sigma^2 \sim \chi^2_k$ et $\Pi_\perp(\bY-\mu) \|^2/\sigma^2 \sim \chi^2_{n-k}$.
+\end{enumerate}
+\end{theo}
+\end{frame}
+
+\begin{frame}
+\frametitle{Cadre gaussien : loi des estimateurs}
+\begin{prop}
+\begin{enumerate}
+\item  \alert<1>{$\estregress \sim {\mathcal N}\big(\truebeta, \sigma^2 \big(\regressmat^T\regressmat\big)^{-1}\big)$}
+\item  \alert<2>{$\|(I - \projX) \bY \|^2 \sim
+\sigma^2\chi^2(n-k)$ loi du Chi 2 à $n-k$ degrés de liberté}
+\item  \alert<3>{$\estregress$ et $(I - \projX) \bY$ sont indépendants}.
+\end{enumerate}
+\end{prop}
+\only<1>{
 \begin{itemize}
-\item (ii)
-\begin{align*}
-\boldsymbol{Y}-\regressmat \estMC & = \regressmat\big(\truetheta - \estMC\big)+\bnoise \\
-& = -\regressmat\big(\regressmat^T\regressmat\big)^{-1}\regressmat^T\bnoise+\bnoise \\
-& =
-\sigma(\text{Id}_n-A)\bnoise',\;\bnoise'\sim{\mathcal
-N}(0,\mathrm{Id}_n).
-\end{align*}
-\item (iii) le vecteur $(\estMC,\boldsymbol{Y}-\regressmat \estMC)$ est gaussien. On calcule explicitement sa matrice de variance-covariance.
+\item Définition: $\estregress= \regressmat^{\#} \bY$ et $\bY \sim N(\regressmat \truebeta, \sigma^2 I_n)$. 
+\item   $\estregress \sim N(\regressmat^{\#} \regressmat \truebeta, \sigma^2 \{ \regressmat^{\#} \} \{ \regressmat^{\#} \}^T)$ 
+\item On conclut en remarquant $\regressmat^{\#} \regressmat= I_k$ et
+$\{ \regressmat^{\#} \} \{ \regressmat^{\#} \}^T = (\regressmat^T \regressmat)^{-1}$
+\end{itemize}}
+\only<2>{Application directe de Cochran en remarquant que 
+$$
+(I-\projX) \PE_{\truetheta}[\bY] = (I - \projX) \bX \true \beta = 0.
+$$
+}
+\only<3>{
+\begin{itemize}
+\item Le théorème de Cochran montre que $\projX \bY$ et $(I-\projX) \bY$ sont indépendants. 
+\item On conclut en remarquant que $\estregress= \regressmat^{\#} \bY = \regressmat^{\#} \projX \bY$. 
 \end{itemize}
+}
 \end{frame}
 
 
-\begin{frame}
-\frametitle{Propriétés de l'EMC: cadre gaussien}
 
-Estimateur de la variance $\sigma^2$:
-$$\boxed{\widehat \sigma_n^2 = \frac{\|\boldsymbol{Y}-\regressmat \estMC\|^2}{n-\alert{k}} = \frac{1}{n-\alert{k}}\sum_{i = 1}^n\big(Y_i-(\estMC)^T\bx_i\big)^2}$$
+
+\begin{frame}
+\frametitle{Estimateur de la variance $\sigma^2$: cadre gaussien}
+$$\boxed{\widehat \sigma_n^2 = \frac{\| (I-\projX) \bY \|^2}{n-\alert{k}} = \frac{1}{n-\alert{k}}\sum_{i = 1}^n\big(Y_i-\bx_i^T \estregress \big)^2}$$
 D'après la dernière Proposition :
 \begin{itemize}
 \item $\widehat
@@ -673,19 +680,19 @@ $n-k$ degrés de liberté}
 \item C'est un estimateur \alert{sans biais}: $$\E_\truetheta\big[\widehat
 \sigma_n^2\big]=\sigma^2.$$
 \item $\widehat
-\sigma_n^2$ est \alert{indépendant} de $\estMC$.
+\sigma_n^2$ est \alert{indépendant} de $\estregress$.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Propriétés de l'EMC: cadre gaussien}
+\frametitle{Lois des coordonnées de $\estregress$: cadre gaussien}
 \begin{itemize}
-\item Lois des coordonnées de $\estMC$:
+\item :
 $$
-(\estMC)_j -\truetheta_j \sim {\mathcal N}\big(0, \sigma^2 b_j)
+(\estregress)_j -\truetheta_j \sim {\mathcal N}\big(0, \sigma^2 b_j)
 $$
 o\`u $b_j$ est le $j$ème élément diagonal de $\big(\regressmat^T
-\regressmat\big)^{-1}$. $$ \frac{(\estMC)_j -\truetheta_j}{\widehat
+\regressmat\big)^{-1}$. $$ \frac{(\estregress)_j -\truetheta_j}{\widehat
 \sigma_n \sqrt{b_j}} \sim t_{n-k}$$ \alert{loi de Student \`a
 $n-k$ degrés de liberté}.
 $$ t_q = \frac{\xi}{\sqrt{\eta/q}}$$
@@ -754,214 +761,6 @@ $\boxed{{\rm RSS}= \|\alert{Y}-\regressmat\est\|^2.}$
 \end{itemize}
 \end{frame}
 
-\subsection{Sélection rétrograde²}
-
-\begin{frame}
-\frametitle{Sélection rétrograde}
-\begin{itemize}
-\item On se donne un critère d'élimination de variables
-\alert{(plusieurs choix de critère possibles...)}.
-\item On élimine une
-variable, la moins significative du point de vue du critère
-choisi.
-\item On calcule l'EMC $\widehat\truetheta_{n,k-1}^{\rm mc}$ dans le nouveau modèle, avec seulement
-les $k-1$ paramétres restants, ainsi que le RSS:\vspace{1mm}
-\centerline{${\rm RSS}_{k-1}=\|{\bf
-Y}-\regressmat\widehat\truetheta_{n,k-1}^{\rm mc}\|^2$.}\vspace{1mm}
-\item On continue \`a éliminer des variables, une par une,
-jusqu'\`a la \alert{stabilisation de RSS}: ${\rm
-RSS}_{m}\approx {\rm RSS}_{m-1}$.
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Données de diabète : sélection rétrograde}
-
-\begin{itemize}
-\item \alert{Sélection "na\"{\i}ve"} : \
-\{\texttt{sex,bmi,map,ltg}\}
-\item \alert{Sélection par Backward Regression}:\\
- \alert{Critère
-d'élimination: plus grande valeur de} Pr($>|t|$).
-\end{itemize}
-%\vspace{2mm}
-
-
-{\small
-\begin{tabular}{|c||c|c|c|c|}
-\hline &Estimate&Std. Error&t value&Pr($>|t|$)\\\hline
-(Intercept) &$152.133$&$2.576$&$59.061$&$< 2e-16***$\\
-\alert{age}&$-10.012$&$59.749$&$
--0.168$&$\alert{0.867000}$\\\hline
-sex &$-239.819$&$61.222$&$-3.917$&$0.000104***$\\
-bmi&$519.840$&$66.534$&$7.813$&$4.30e-14***$\\\hline
-map&$324.390$&$65.422$&$4.958$&$1.02e-06***$\\
-tc&$-792.184$&$416.684$&$-1.901$&$0.057947$\\\hline
-ldl&$476.746$&$339.035$&$1.406$&$0.160389$\\
-hdl&$101.045$&$212.533 $&$0.475$&$0.634721$\\\hline
-tch&$177.064$&$161.476$&$ 1.097$&$0.273456$\\
-ltg&$751.279$&$ 171.902$&$4.370$&$ 1.56e-05***$\\\hline
-glu&$67.625$&$ 65.984$&$1.025$&$0.305998$\\\hline
-\end{tabular}
-}
-\end{frame}
-
-\begin{frame}
-\frametitle{Données de diabète : Backward Regression}
-
-\centerline\alert{Backward Regression: Itération 2.}
-
-%\vspace{3mm}
-
-\begin{center}
-
-\alert{Critère d'élimination: plus grande valeur de}
-Pr($>|t|$).
-
-\vspace{4mm}
-
-{\small
-\begin{tabular}{|c||c|c|c|c|}
-\hline &Estimate&Std. Error&t value&Pr($>|t|$)\\\hline (Intercept)
-&$152.133$&$2.573$&$59.128$&$< 2e-16$
-\\\hline
-sex &$-240.835$&$60.853$&$-3.958$&$0.000104$\\
-bmi&$519.905$&$64.156$&$5.024$&$8.85e-05$\\\hline
-map&$322.306$&$65.422$&$4.958$&$7.43e-07$\\
-tc&$-790.896$&$416.144$&$-1.901$&$0.058$\\\hline
-ldl&$474.377$&$338.358$&$1.402$&$0.162$\\
-\alert{ hdl}&$99.718$&$212.146 $&$0.470$&$\alert{
-0.639}$\\\hline
-tch&$177.458$&$161.277$&$ 1.100$&$0.272$\\
-ltg&$749.506$&$ 171.383$&$4.373$&$ 1.54e-05$\\\hline glu&$67.170$&$
-65.336$&$1.013$&$0.312$\\\hline
-\end{tabular}
-}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Données de diabète : Backward Regression}
-
-\centerline\alert{Backward Regression: Itération 5 (dernière).}
-
-%\vspace{3mm}
-
-\begin{center}
-
-Variables sélectionnées:\\\vspace{2mm}
-\{\texttt{sex,bmi,map,\alert{tc,ldl},ltg}\}
-
-
-\vspace{4mm}
-
-{\small
-\begin{tabular}{|c||c|c|c|c|}
-\hline &Estimate&Std. Error&t value&Pr($>|t|$)\\\hline (Intercept)
-&$152.133$&$2.572$&$59.159$&$< 2e-16$
-\\\hline
-sex &$-226.511$&$59.857$&$-3.784$&$0.000176$\\
-bmi&$529.873$&$65.620$&$8.075$&$6.69e-15$\\\hline
-map&$327.220$&$62.693$&$5.219$&$2.79e-07$\\
-tc&$-757.938$&$160.435$&$-4.724$&$3.12e-06$\\\hline
-ldl&$538.586$&$146.738$&$3.670$&$0.000272$\\
-ltg&$804.192$&$80.173$&$10.031$&$< 2e-16$\\\hline
-\end{tabular}
-}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Sélection de variables : Backward Regression}
-
-Discussion de \texttt{Backward Regression}:
-
-\begin{itemize}
-\item Méthode de sélection purement empirique, pas de justification
-théorique.
-\item Application d'autres critères d'élimination en
-\texttt{Backward Regression} peut amener aux résultats différents.\\
-\underline{Exemple.} \alert{Critère $C_p$} de Mallows--Akaike
-: on élimine la variable $j$ qui réalise
-$$
-\min_j \Big({\rm RSS}_{m, (-j)} + 2\widehat\sigma^2_n m\Big).
-$$
-\end{itemize}
-\end{frame}
-
-\subsection{LASSO}
-
-\begin{frame}
-\frametitle{Sélection de variables : LASSO}
-
-LASSO = Least Absolute Shrinkage and Selection Operator
-
-\begin{itemize}
-\item \alert{Estimateur LASSO}: tout estimateur $\widehat\truetheta^{L}_n$
-vérifiant
-$$\widehat\truetheta^{L}_n \in \arg \min_{\truetheta \in \R^k}\left(\sum_{i = 1}^n
-\big(Y_i-\truetheta^T\bx_i\big)^2 + \lambda \sum_{j =
-1}^k|\truetheta_j|\right) \ \ \text{avec} \ \lambda>0.
-$$
-\item Si $\regressmat^T\regressmat>0$, l'estimateur LASSO $\widehat\truetheta^{L}_n$ est unique.
-\item Estimateur des moindres carrés \alert{pénalisé}.
-Pénalisation par $\sum_{j = 1}^k|\truetheta_j|$, la norme $\ell_1$
-de $\truetheta$.
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Sélection de variables : LASSO}
-\begin{itemize}
-\item Deux utilisations de
-LASSO:
-\begin{itemize}
-\item \alert{Estimation de $\truetheta$}: alternative \`a
-$\estMC$ si $k>n$.
-\item \alert{Sélection de variables}: on ne retient que les
-variables qui correspondent aux coordonnées non-nulles du vecteur
-$\widehat\truetheta^{L}_n$.
-\end{itemize}
-\item LASSO admet une \alert{justification théorique}: sous certaines hypothèses sur la
-matrice $\regressmat$,
-$$
-\lim_{n\to\infty} \PP\{ \widehat N_n = N \} =1,
-$$
-o\`u $N= \{j: \truetheta_{j}\ne 0\}$ et $\widehat N_n= \{j:
-\widehat\truetheta^{L}_{n,j}\ne 0\}$.
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Application de LASSO: "regularization path"}
-\begin{center}
-\vspace{-1cm}
-\includegraphics[height=1.35\textheight,angle=-90]{cours4_sacha_graphe.eps}\hspace{3cm}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Données de diabète : LASSO}
-
-Application aux données de diabète.
-
-\begin{itemize}
-\item  L'ensemble de variables sélectionné par LASSO:
-$$
-\{\texttt{sex,bmi,map,tc,hdl,ltg,glu}\}
-$$
-\item \texttt{Backward Regression}:
-$$
-\{\texttt{sex,bmi,map,tc,ldl,ltg}\}
-$$
-\item Sélection na\"{\i}ve:
-$$
-\{\texttt{sex,bmi,map,tc}\}
-$$
-\end{itemize}
-\end{frame}
-
 
 %\section{Prévision}
 
@@ -988,27 +787,62 @@ basé sur $\widehat Y$?
 \end{itemize}
 \end{frame}
 
+
+\section{Prévision}
+\begin{frame}
+\frametitle{Prévision}
+\begin{itemize}
+\item Un des buts de la régression est de proposer des prédictions pour la réponse lorsque nous avons de
+nouvelles valeurs des variables explicatives.
+\item Un prédicteur naturel de la réponse est \alert{$\hat{Y}_n(\bx)= \bx^T \estregress$}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Moyenne et variance de la prévision}
+\begin{theorem}
+\begin{itemize}
+\item $\PE_{\truetheta}[\hat{Y}_n(\bx)]= \bx^T \truebeta$
+\item $\Var_{\truetheta}(\hat{Y}_n(\bx))= \sigma^2 \bx^T (\regressmat^T \regressmat)^{-1} \bx$
+\item $\PE_{\truetheta}[ (Y(\bx) - \hat{Y}_n(\bx))^2]= \sigma^2 (1 + \bx' (\regressmat^T \regressmat)^{-1} \bx)$
+\end{itemize}
+\end{theorem}
+\only<1>{$\hat{Y}_n(\bx)= \bx^T \estregress$ et $\PE_{\truetheta}[\estregress]= \truebeta$}
+\only<2>{
+\begin{align*}
+\hat{Y}_n(\bx)- \bx^T \truebeta
+&= \bx^T (\regressmat^T \regressmat)^{-1} \regressmat^T \bY - \bx^T \truebeta \\
+&= \bx^T (\regressmat^T \regressmat)^{-1} \regressmat^T (\regressmat \truebeta + \sigma \bnoise) - \bx^T \truebeta \\
+&= \sigma \bx^T (\regressmat^T \regressmat)^{-1} \regressmat^T \bnoise
+\end{align*}}
+\only<3>{
+\begin{align*}
+\PE_{\truetheta}[ (Y(\bx) - \hat{Y}_n(\bx))^2]
+&= \PE_{\truebeta}[ (Y(\bx) - \PE_{\truebeta}[\hat{Y}_n(\bx)])^2] + \Var_{\truetheta}(\hat{Y}_n(\bx)) \\
+&= \PE_{\truebeta}[ (Y(\bx) - \bx^T \truebeta)^2] +  \sigma^2 \bx^T (\regressmat^T \regressmat)^{-1} \bx
+\end{align*}
+}
+\end{frame}
+
+
 \begin{frame}
 \frametitle{Prévision: modèle linéaire gaussienne}
 \begin{itemize}
 \item Traitement sur l'exemple: $r(\truetheta, \alert{x})=\truetheta^T{\bf
-x}$, régression \alert{linéaire gaussienne} et
-$\est=\estMC$. $\Longrightarrow$ $\boxed{\widehat Y = {\bf
-x}_0^T\estMC}$
+x}$, régression \alert{linéaire gaussienne} et $\boxed{\widehat Y = {\bf
+x}_0^T\estregress}$
 \item \underline{Hyp. 1} : $\bnoise \sim {\mathcal N}(0,\sigma^2\mathrm{Id}_n)$.
 \item \underline{Hyp. 2} : $\regressmat^T \regressmat>0$.
 \end{itemize}
 \begin{prop}
 \begin{itemize}
-\item[(i)] $\widehat Y \sim {\mathcal N}\big({\bf
-x}_0^T\truetheta, \sigma^2 {\bf
+\item[(i)] $\widehat Y \sim {\mathcal N}\big({\bx_0^T\truebeta, \sigma^2 {\bf
 x}_0^T\big(\regressmat^T\regressmat\big)^{-1}\alert{x}_0\big)$
-\item[(ii)] $\widehat Y-{\bf
-x}_0^T\truetheta$ et $\boldsymbol{Y}-\regressmat \estMC$ sont
+\item[(ii)] $\widehat Y- \bx_0^T\truebeta$ et $\bY-\regressmat \estregress$ sont
 indépendants.
 \end{itemize}
 \end{prop}
-Rappel: $\|\boldsymbol{Y}-\regressmat \estMC\|^2 \sim
+Rappel: $\|\boldsymbol{Y}-\regressmat \estregress\|^2 \sim
 \sigma^2\chi^2(n-k)$ \alert{ loi du Chi 2 à $n-k$ degrés de
 liberté}.
 \end{frame}
@@ -1018,17 +852,16 @@ liberté}.
 \begin{itemize}
 \item D'après la Proposition,
 $$
-\eta:=\frac{\widehat Y -\alert{x}_0^T\truetheta} {\sqrt{\sigma^2 {\bf
-x}_0^T\big(\regressmat^T\regressmat\big)^{-1}\alert{x}_0}}\sim {\mathcal
+\eta:=\frac{\widehat Y -\alert{x}_0^T\truebeta} {\sqrt{\sigma^2 {\bx_0^T\big(\regressmat^T\regressmat\big)^{-1}\alert{\bx}_0}}\sim {\mathcal
 N}(0,1).
 $$
 \item On replace $\sigma^2$ inconnu par $\widehat \sigma_n^2 =
-{\|\boldsymbol{Y}-\regressmat \estMC\|^2}/({n-k}).$
+{\|(I-\projX) \bY \|^2}/({n-k}).$
 \item \alert{$t$-statistique:}
 $$
-t:= \frac{\widehat Y -\alert{x}_0^T\truetheta} {\sqrt{\widehat
-\sigma_n^2 \alert{x}_0^T\big(\regressmat^T\regressmat\big)^{-1}{\bf
-x}_0}}=\frac{\eta}{\sqrt{\chi/(n-k)}}\sim t_{n-k},
+t:= \frac{\widehat Y -\alert{\bx}_0^T\truebeta} {\sqrt{\widehat
+\sigma_n^2 \alert{\bx}_0^T\big(\regressmat^T\regressmat\big)^{-1}{
+\bx_0}}=\frac{\eta}{\sqrt{\chi/(n-k)}}\sim t_{n-k},
 $$
 \alert{loi de Student à $n-k$ degrés de liberté}, car $\eta\sim
 {\mathcal N}(0,1)$, $\chi:=\|\boldsymbol{Y}-\regressmat
@@ -1222,49 +1055,6 @@ $$F(t) = \frac{1}{1+e^{-t}},\;t \in \R.$$
 \end{itemize}
 \end{frame}
 
-\section{Bilan provisoire : modèles paramétriques dominés}
-
-\begin{frame}
-\frametitle{Bilan provisoire : modèles paramétriques dominés}
-%, construction d'estimateurs dans les situations suivantes :
-\begin{itemize}
-\item \underline{\alert{Modèle de densité :}} on observe
-$$X_1,\ldots,X_n \sim_{\text{i.i.d?}} \PP_\truetheta,\;\;\truetheta \in \Theta \subset \R^d.$$
-{\color{blue}Estimateurs :} moments, $Z$- et $M$-estimateurs, \alert{EMV}.
-\item\underline{\alert{Modèle de régression :}} on observe
-$$Y_i = r(\truetheta, \bx_i)+\xi_i,\;\;i=1,\ldots, n,\;\;\xi_i\;\text{i.i.d.},\;\truetheta \in \Theta \subset \R^d.$$
-{\color{blue} Estimateurs :}
-\begin{itemize}
-\item Si $r(\truetheta, \bx) =  \truetheta^T\bx$, EMC (coïncide avec l'\alert{EMV} si les $\xi_i$ gaussiens)
-\item Sinon, $M$-estimateurs, \alert{EMV}...
-\item Autres méthodes selon des \alert{hypothèses} sur le \og design \fg{}...
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Bilan provisoire (cont.) : précision d'estimation}
-$\est$ estimateur de $\truetheta$ : \alert{précision, qualité} de  $\est$ ?
-Approche par \alert{région-intervalle de confiance}
-\begin{itemize}
-\item Pour $\alpha \in (0,1)$, on construit ${\mathcal C}_{n,\alpha}(\est)$ \alert{ ne dépendant pas de $\truetheta$} (observable)
-tel que
-$$\PP_\truetheta \big[\truetheta \in {\mathcal C}_{n,\alpha}(\est)\big] \geq 1-\alpha$$
-asymptotiquement lorsque $n\rightarrow \infty$, uniformément en $\truetheta$...
-La \alert{précision} de l'estimateur est le \alert{ diamètre} (moyen) de ${\mathcal C}_{n,\alpha}(\est)$.
-\item Par exemple : ${\mathcal C}_{n,\alpha}(\est) =$ boule de centre $\est$ et de rayon \alert{à déterminer}.
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-En pratique, une information \alert{ non-asymptotique} de type
-$$\E\big[\|\est-\truetheta\|^2\big] \leq c_n(\truetheta)^2,$$
-ou bien \alert{ asymptotique} de type
-$$v_n(\est-\truetheta) \stackrel{d}{\longrightarrow} Z_\truetheta,\;\;n\rightarrow \infty$$
-(avec $v_n\rightarrow \infty$) permet \og souvent\fg{} de construire
-un(e) région-intervalle de confiance.
-\end{frame}
 
 
 
