@@ -431,7 +431,7 @@ Soit $\regressmat$ une matrice $n \times p$ avec $ p \leq n$. On suppose que $\r
 \begin{theo}
 L'estimateur $\estregress$ est sans biais, \ie\ pour tout $\truetheta \in \Theta$, 
 \begin{itemize}
-\item \PE_{\truetheta}[\estregress]= \truetheta 
+\item $\PE_{\truetheta}[\estregress]= \truetheta$ 
 \item $\PCov_{\truetheta}(\estregress)= \sigma^2 (\regressmat^T \regressmat)^{-1}$.
 \end{itemize}
 \end{theo}
@@ -543,12 +543,6 @@ où \alert{SCR} est la somme des carrés résiduels (RSS: residual sum of square
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Coefficient de détermination}
-Lorsque le vecteur constant est incluse dans la matrice de régression, on retranche aux observations leurs moyennes. 
-\begin{itemize}
-\end{itemize}
-\end{frame}
 
 
 
@@ -629,7 +623,7 @@ variance-covariance.
 Soit $\bY \sim N(\mu,\sigma^2 I_n)$, $\mathcal{M}$ un sous espace de $\R^n$ de dimension $k$, $\Pi$ la matrice de projection orthogonale 
 sur $\mathcal{M}$ et $\Pi_{\perp}= I_n - \Pi$ la matrice de projection orthogonale sur $\mathcal{M}^\perp$. Nous avons
 \begin{enumerate}
-\item \alert<1> $\Pi \bY \sim N(\Pi \mu, \sigma^2 \Pi)$, $\Pi_\perp \bY \sim N(\Pi_\perp \mu, \sigma \Pi_\perp)$
+\item \alert<1> $\Pi \bY \sim \mathcal{N}(\Pi \mu, \sigma^2 \Pi)$, $\Pi_\perp \bY \sim \mathcal{N}(\Pi_\perp \mu, \sigma^2 \Pi_\perp)$
 \item \alert<2> les vecteurs $\Pi \bY$ et $\Pi_\perp \bY$ sont indépendants
 \item \alert<3> $\| \Pi(\bY - \mu) \|^2 / \sigma^2 \sim \chi^2_k$ et $\Pi_\perp(\bY-\mu) \|^2/\sigma^2 \sim \chi^2_{n-k}$.
 \end{enumerate}
@@ -671,7 +665,9 @@ $$
 
 \begin{frame}
 \frametitle{Estimateur de la variance $\sigma^2$: cadre gaussien}
-$$\boxed{\widehat \sigma_n^2 = \frac{\| (I-\projX) \bY \|^2}{n-\alert{k}} = \frac{1}{n-\alert{k}}\sum_{i = 1}^n\big(Y_i-\bx_i^T \estregress \big)^2}$$
+$$
+\widehat \sigma_n^2 = \frac{\| (I-\projX) \bY \|^2}{n-\alert{k}} = \frac{1}{n-\alert{k}}\sum_{i = 1}^n\big(Y_i-\bx_i^T \estregress \big)^2
+$$
 D'après la dernière Proposition :
 \begin{itemize}
 \item $\widehat
@@ -679,26 +675,24 @@ D'après la dernière Proposition :
 $n-k$ degrés de liberté}
 \item C'est un estimateur \alert{sans biais}: $$\E_\truetheta\big[\widehat
 \sigma_n^2\big]=\sigma^2.$$
-\item $\widehat
-\sigma_n^2$ est \alert{indépendant} de $\estregress$.
+\item $\widehat \sigma_n^2$ est \alert{indépendant} de $\estregress$.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Lois des coordonnées de $\estregress$: cadre gaussien}
-\begin{itemize}
-\item :
 $$
-(\estregress)_j -\truetheta_j \sim {\mathcal N}\big(0, \sigma^2 b_j)
+\estregress_j -\truebeta_j \sim {\mathcal N}\big(0, \sigma^2 b_j)
 $$
 o\`u $b_j$ est le $j$ème élément diagonal de $\big(\regressmat^T
-\regressmat\big)^{-1}$. $$ \frac{(\estregress)_j -\truetheta_j}{\widehat
-\sigma_n \sqrt{b_j}} \sim t_{n-k}$$ \alert{loi de Student \`a
-$n-k$ degrés de liberté}.
+\regressmat\big)^{-1}$. 
+
+$$ \frac{\estregress_j -\truebeta_j}{\widehat \sigma_n \sqrt{b_j}} \sim t_{n-k}$$ 
+\alert{loi de Student \`a $n-k$ degrés de liberté}.
+
 $$ t_q = \frac{\xi}{\sqrt{\eta/q}}$$
 o\`u $q\ge 1$ un entier, $\xi\sim {\mathcal N}\big(0,1)$, $\eta\sim
 \chi^2(q)$ et\\ $\xi$ \alert{indépendant} de $\eta$.
-\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -768,35 +762,27 @@ $\boxed{{\rm RSS}= \|\alert{Y}-\regressmat\est\|^2.}$
 \frametitle{Prévision}
 
 Modèle de régression \vspace{2mm} \centerline{$ Y_i=
-r(\truetheta, \alert{x}_i)+\xi_i, \quad i=1,\dots,n.$} Régression
-\alert{linéaire}: $r(\truetheta, \alert{x}_i)=\truetheta^T{\bf
-x}_i$. Exemple: $\alert{x}_i$ vecteur de 10 variables explicatives
+r(\truevbeta, \alert{\bx}_i)+ \sigma \xi_i, \quad i=1,\dots,n.$} 
+Régression
+\alert{linéaire}: $r(\truebeta, \alert{\bx}_i)=\truebeta^T 
+\bx_i$. 
+Exemple: $\alert{\bx}_i$ vecteur de 10 variables explicatives
 (\texttt{age,sex,bmi,...}) pour patient $i$.
 \begin{itemize}
 \item \alert{Problème de prévision}:
-Un nouveau patient arrive avec son vecteur des 10 variables ${\bf
-x}_0\in \R^{10}$. Donner la prévison de la valeur de fonction de
-régression $r(\truetheta, \alert{x}_0)=\truetheta^T\alert{x}_0$\\
+Un nouveau patient arrive avec son vecteur des 10 variables $
+\bx \in \R^{k}$. Donner la prévison de la valeur de fonction de
+régression $r(\truebeta,  \bx)=\truebeta^T\alert{x}_0$\\
 (=état du patient dans 1 an).
-\item Soit $\est$ un estimateur de $\truetheta$. \alert{Prévision par
+\item Soit $\estregress$ un estimateur de $\truebeta$. \alert{Prévision par
 substitution:}
- \centerline{$\boxed{ \widehat Y = r(\est, \alert{x}_0).}$}
+ \centerline{$\boxed{ \widehat Y(\bx) = r(\estregress, \alert{\bx}).}$}
 \item \underline{Question statistique}: quelle est la qualité de la prévision?
-\alert{Intervalle de confiance} pour $r(\truetheta, \alert{x}_0)$
-basé sur $\widehat Y$?
+\alert{Intervalle de confiance} pour $r(\estregress, \alert{\bx})$ ?
 \end{itemize}
 \end{frame}
 
 
-\section{Prévision}
-\begin{frame}
-\frametitle{Prévision}
-\begin{itemize}
-\item Un des buts de la régression est de proposer des prédictions pour la réponse lorsque nous avons de
-nouvelles valeurs des variables explicatives.
-\item Un prédicteur naturel de la réponse est \alert{$\hat{Y}_n(\bx)= \bx^T \estregress$}
-\end{itemize}
-\end{frame}
 
 \begin{frame}
 \frametitle{Moyenne et variance de la prévision}
@@ -836,7 +822,7 @@ x}_0^T\estregress}$
 \end{itemize}
 \begin{prop}
 \begin{itemize}
-\item[(i)] $\widehat Y \sim {\mathcal N}\big({\bx_0^T\truebeta, \sigma^2 {\bf
+\item[(i)] $\widehat Y \sim {\mathcal N}\big(\bx_0^T\truebeta, \sigma^2 {\bf
 x}_0^T\big(\regressmat^T\regressmat\big)^{-1}\alert{x}_0\big)$
 \item[(ii)] $\widehat Y- \bx_0^T\truebeta$ et $\bY-\regressmat \estregress$ sont
 indépendants.
@@ -852,20 +838,20 @@ liberté}.
 \begin{itemize}
 \item D'après la Proposition,
 $$
-\eta:=\frac{\widehat Y -\alert{x}_0^T\truebeta} {\sqrt{\sigma^2 {\bx_0^T\big(\regressmat^T\regressmat\big)^{-1}\alert{\bx}_0}}\sim {\mathcal
-N}(0,1).
+\eta:=\frac{\widehat Y - \bx_0^T\truebeta}{\sqrt{\sigma^2 {\bx_0^T\big(\regressmat^T\regressmat\big)^{-1}\alert{\bx}_0}}} 
+\sim {\mathcal N}(0,1).
 $$
 \item On replace $\sigma^2$ inconnu par $\widehat \sigma_n^2 =
 {\|(I-\projX) \bY \|^2}/({n-k}).$
 \item \alert{$t$-statistique:}
 $$
-t:= \frac{\widehat Y -\alert{\bx}_0^T\truebeta} {\sqrt{\widehat
+t:= \frac{\widehat Y -\alert{\bx}_0^T\truebeta}{\sqrt{\widehat
 \sigma_n^2 \alert{\bx}_0^T\big(\regressmat^T\regressmat\big)^{-1}{
-\bx_0}}=\frac{\eta}{\sqrt{\chi/(n-k)}}\sim t_{n-k},
+\bx_0}}}=\frac{\eta}{\sqrt{\chi/(n-k)}}\sim t_{n-k},
 $$
 \alert{loi de Student à $n-k$ degrés de liberté}, car $\eta\sim
 {\mathcal N}(0,1)$, $\chi:=\|\boldsymbol{Y}-\regressmat
-\estMC\|^2/\sigma^2\sim \chi^2(n-k)$ et $\eta\ind\chi$.
+\estregress\|^2/\sigma^2\sim \chi^2(n-k)$ et $\eta\ind\chi$.
 \end{itemize}
 \end{frame}
 
@@ -927,14 +913,14 @@ régression linéaire \vspace{3mm} \centerline{$ Y_i= \truetheta^T
 \begin{prop}[Normalité asymptotique de l'EMC]
 $$
 \sigma^{-1}\big(\regressmat^T
-\regressmat\big)^{1/2}(\estMC-\truetheta)\stackrel{d}{\longrightarrow}
+\regressmat\big)^{1/2}(\estregress-\truebeta)\stackrel{d}{\longrightarrow}
 {\mathcal N}\big(0, \mathrm{Id}_k), \quad n\to\infty.
 $$
 \end{prop}
 \begin{itemize}
 \item A comparer avec le cadre gaussien:\vspace{2mm}
 \centerline{$\sigma^{-1}\big(\regressmat^T
-\regressmat\big)^{1/2}(\estMC-\truetheta)\sim {\mathcal N}\big(0,
+\regressmat\big)^{1/2}(\estregress-\truetheta)\sim {\mathcal N}\big(0,
 \mathrm{Id}_k)$ \text{pour tout $n$.}}
 \end{itemize}
 \end{frame}
