@@ -86,49 +86,38 @@ l'observation
 $$(\bX_1,Y_1),\ldots, (\bX_n,Y_n)$$
 avec $(Y_i,\bX_i)\in \R\times \R^k$ \alert{i.i.d.},
 et\\\vspace{3mm} \centerline{$Y_i =
-r(\alert{\truetheta},\bX_i)+\xi_i,\;\;
+r(\alert{\truebeta},\bX_i)+ \sigma \xi_i,\;\;
 \E\big[\xi_i|\bX_i\big]=0,\;\;\alert{
 \truetheta \in \Theta \subset \R^d}.$}
 \begin{itemize}
-\item $\bx \leadsto r(\alert{\truetheta},\bx)$ fonction de \alert{ régression}, connue au paramètre
-$\truetheta$ près.
+\item $\bx \leadsto r(\alert{\truebeta},\bx)$ fonction de \alert{ régression}, connue au paramètre
+$\truebeta$ près.
 \item $\bX_i$ = variables explicatives, co-variables, prédicteurs;
 $(\bX_1,\ldots,\bX_n)$ = \alert{design}.
 \end{itemize}
 \end{df}
 \end{frame}
 
-%\begin{frame}
-%\frametitle{Remarques}
-%\begin{itemize}
-%\item Si $(X_i,Y_i )\in \R \times \R$ \alert{estimer} $\truetheta$ revient à \alert{ rechercher} la fonction dans la famille $\{r(\truetheta,\cdot),\truetheta \in \Theta\}$ qui approche le mieux les points $(X_i,Y_i)$ pour un certain \alert{critère à définir}\vspace{2mm}.
-%(Pb d'approximation, \alert{pas} d'interpolation).
-%\item Si $Y_i \in \{0,1\}$ modèle à \alert{ réponse binaire}.
-%
-%\underline{Exemple} : $Y_i$ = présence/absence d'une maladie chez l'individu $i$, et $\bX_i$ = vecteur de marqueurs biologiques.
-%\item Dans cette acceptation du modèle, \alert{ le statisticien ne choisit pas la valeur des covariables}.
-%\end{itemize}
-%\end{frame}
 
 \subsection{Régression à design déterministe}
 
 
-\begin{frame}
-\frametitle{Modèle alternatif : signal+bruit}
-\begin{itemize}
-\item \underline{Principe} : \alert{sur un exemple}. On observe
-$$Y_i = r(\truetheta, i/n)+\xi_i,\;\;i=1,\ldots,n$$
-où $r(\alert{\truetheta},\cdot):[0,1]\rightarrow \R$ est une
-fonction connue au paramètre $\alert{\truetheta \in \Theta
-\subset \R^d}$ près, et les $\xi_i$ sont i.i.d.,
-$\E\big[\xi_i\big]=0$.
-\item \alert{ But} : reconstruire $r(\alert{\truetheta},\cdot)$ c'est-à-dire \alert{ estimer $\truetheta$}.
-\item Plus généralement, on observe
-$$Y_i = r(\truetheta, \bx_i)+\xi_i,\;i=1,\ldots, n$$
-où $\bx_1,\ldots, \bx_n$ sont des points de $\R^k$ \alert{
-déterministes}.
-\end{itemize}
-\end{frame}
+%\begin{frame}
+%\frametitle{Modèle alternatif : signal+bruit}
+%\begin{itemize}
+%\item \underline{Principe} : \alert{sur un exemple}. On observe
+%$$Y_i = r(\truetheta, i/n)+\xi_i,\;\;i=1,\ldots,n$$
+%où $r(\alert{\truetheta},\cdot):[0,1]\rightarrow \R$ est une
+%fonction connue au paramètre $\alert{\truetheta \in \Theta
+%\subset \R^d}$ près, et les $\xi_i$ sont i.i.d.,
+%$\E\big[\xi_i\big]=0$.
+%\item \alert{ But} : reconstruire $r(\alert{\truetheta},\cdot)$ c'est-à-dire \alert{ estimer $\truetheta$}.
+%\item Plus généralement, on observe
+%$$Y_i = r(\truetheta, \bx_i)+\xi_i,\;i=1,\ldots, n$$
+%où $\bx_1,\ldots, \bx_n$ sont des points de $\R^k$ \alert{
+%déterministes}.
+%\end{itemize}
+%\end{frame}
 
 \begin{frame}
 \frametitle{Modèle de régression à design déterministe}
@@ -138,18 +127,19 @@ l'observation
 $$(\bx_1,Y_1),\ldots, (\bx_n,Y_n)$$
 avec $Y_i \in \R, \bx_i\in \R^k$, et \\\vspace{3mm} \centerline{$Y_i
 =
-r(\alert{\truetheta},\bx_i)+\xi_i,\;\;\E\big[\xi_i\big]=0,\;\;\alert{
-\truetheta \in \Theta \subset \R^d}.$}
+r(\alert{\truebeta},\bx_i)+ \sigma \xi_i,\;\;\E_{\truetheta}\big[\xi_i\big]=0,\;\;\alert{
+\truetheta \in \Theta \subset \R^d \times \R_+}.$}
 \begin{itemize}
 %\item $\bx \leadsto r(\alert{\truetheta},\bx)$ fonction de \alert{ régression}, connue au paramètre
 %$\truetheta$ près.
 \item $\bx_i$ déterministes, donnés (ou choisis) : plan d'expérience, points du \og design\fg{}.
-\item Hypothèses sur les $\xi_i$ : à débattre. \alert{Pour simplifier}, les $\xi_i$ sont i.i.d. \alert{ (hypothèse restrictive)}.
+\item Hypothèses sur les $\xi_i$ : à débattre. \alert{Pour simplifier}, les variables $\xi_i$ sont centrées, $\PE_{\truetheta}[\xi_i]=0$,
+décorrélées, $\PE_{\truetheta}[\xi_i \xi_j]= 0$ si $i \ne j$ et de variance unité $\PE[\xi_i^2]= 1$ \alert{ (homoscédasticité)}.
 \item \alert{ Attention !} Les $Y_i$ ne sont \alert{pas identiquement distribuées}.
 \end{itemize}
 \end{df}
 
- \underline{Question}: Comment estimer $\truetheta$ dans ce modèle?
+ \underline{Question}: Comment estimer $\truetheta=(\truebeta,\sigma)$ dans ce modèle?
 
 \end{frame}
 
@@ -160,8 +150,8 @@ r(\alert{\truetheta},\bx_i)+\xi_i,\;\;\E\big[\xi_i\big]=0,\;\;\alert{
 \begin{itemize}
 \item  Modèle de régression à design déterministe :
 $$Y_i =
-r({\truetheta},\bx_i)+\xi_i,\;\;\truetheta \in \Theta\subset  \R^d.$$
-\item  Supposons: $\xi_i \sim {\mathcal N}(0,\sigma^2)$, i.i.d.
+r({\truebeta},\bx_i)+\ \sigma xi_i,\;\;\truetheta \in \Theta\subset  \R^d \times \rset_+.$$
+\item  Supposons: $\xi_i \sim {\mathcal N}(0,1)$, i.i.d.
 \item On a alors le modèle de \alert{régression gaussienne}.
 Comment estimer $\truetheta$?  \alert{On sait expliciter la loi
 de l'observation} $Z=(Y_1,\dots,Y_n)$ $\Longrightarrow$ appliquer le
@@ -170,7 +160,7 @@ principe du maximum de vraisemblance.
 \item La loi de $Y_i$:
 \begin{align*}
 \PP^{Y_i}(dy) & = \frac{1}{\sqrt{2\pi \sigma^2}}\exp\big
-(-\frac{1}{2\sigma^2}(y-r({\truetheta},\bx_i))^2\big)dy \\
+(-\frac{1}{2\sigma^2}(y-r({\truebeta},\bx_i))^2\big)dy \\
 & \ll dy.
 \end{align*}
 
@@ -188,35 +178,33 @@ $\mu^n(dy_1\ldots dy_n) = dy_1\ldots dy_n.$
 \begin{align*}
  \frac{d\PP_\truetheta^n}{d\mu^n}(y_1,\ldots, y_n)
   =\; &\prod_{i=1}^n \tfrac{1}{\sqrt{2\pi \sigma^2}}\exp
-  \big(-\tfrac{1}{2\sigma^2}(y_i-r({\truetheta},\bx_i))^2\big) \\
+  \big(-\tfrac{1}{2\sigma^2}(y_i-r({\truebeta},\bx_i))^2\big) \\
 \;= & \tfrac{1}{(\sqrt{2\pi \sigma^2})^{n}}
 \exp\big(-\tfrac{1}{2\sigma^2}\sum_{i =
-1}^n\big(y_i-r({\truetheta},\bx_i)\big)^2\big).
+1}^n\big(y_i-r({\truebeta},\bx_i)\big)^2\big).
 \end{align*}
 \item La fonction de vraisemblance
 $$\boxed{{\mathcal L}_n(\truetheta, Y_1,\ldots, Y_n)
 \propto \exp\Big(-\frac{1}{2\sigma^2}\sum_{i = 1}^n\big(Y_i-
-r({\truetheta},\bx_i)\big)^2\Big)}$$
+r({\truebeta},\bx_i)\big)^2\Big)}$$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Estimateur des moindres carrés} Maximiser la
 \alert{ vraisemblance} en régression gaussienne = minimiser
-la somme des carrés: $$ \sum_{i = 1}^n
-\big(Y_i-r({\truetheta},\bx_i)\big)^2 \to \min_{\truetheta \in\Theta}.
+la somme des carrés: $$ \sum_{i = 1}^ne
+\big(Y_i-r({\truebeta},\bx_i)\big)^2 \to \min_{\truetheta \in\Theta}.
 $$
 \begin{df}
 Estimateur des \alert{moindres carrés} : tout estimateur
-$\estMC$ t.q. \centerline{$\estMC \in \arg \min_{\truetheta \in
-\Theta}\sum_{i = 1}^n \big(Y_i-r({\truetheta},\bx_i)\big)^2.$}
+$\estregress$ t.q. \centerline{$\estregress \in \arg \min_{\truebeta \in
+\Theta}\sum_{i = 1}^n \big(Y_i-r({\truebeta},\bx_i)\big)^2.$}
 \end{df}
 \begin{itemize}
 \item  L'EMC est un M-estimateur. Pour le
 modèle de régression gaussienne: $\boxed{\rm EMV = EMC}$.
 \item \alert{ Existence, unicité.}
-\item Propriétés remarquables si la régression est linéaire:
-$r({\truetheta},\bx_i) = \truetheta^T\bx_i$.
 \end{itemize}
 \end{frame}
 
@@ -226,14 +214,14 @@ $r({\truetheta},\bx_i) = \truetheta^T\bx_i$.
 \frametitle{Droite de régression}
 \begin{itemize}
 \item \underline{Modèle le plus simple}
-$\boxed{r(\truetheta,x)= \truetheta_0 + \truetheta_1 x}$
-$$\boxed{Y_i = \truetheta_0 + \truetheta_1 x_i+\xi_i,\;\;i=1,\ldots,n}$$
-avec $\alert{\truetheta = (\truetheta_0,\truetheta_1)^T \in \Theta = \R^2}$ et les
-$(x_1,\ldots, x_n)$ donnés.
+$\boxed{r(\truebeta,x)= \truebeta_0 + \truebeta_1 x}$
+$$\boxed{Y_i = \truebeta_0 + \truebeta_1 x_i+\xi_i,\;\;i=1,\ldots,n}$$
+avec $\alert{\truebeta = (\truebeta_0,\truebeta_1)^T \in \R^2}$ et les
+$(x_1,\ldots, x_n)$ données.
 %\item Erreurs centrées: $\E\big[\xi_i\big]=0$, de variances $\E\big[\xi_i^2\big]$ finies.
 \item L'estimateur des moindres carrés:
-$$\alert{\estMC}=(\hat{\truetheta}_0, \hat{\truetheta}_1) =
-\arg \min_{(\curtheta_0,\curtheta_1)\in \R^2}\sum_{i = 1}^n \big(Y_i- \curtheta_0 - \curtheta_1 x_i\big)^2.
+$$\alert{\estregress}=(\hat{\truebeta}_0, \hat{\truebeta}_1) =
+\arg \min_{(\curbeta_0,\curbeta_1)\in \R^2}\sum_{i = 1}^n \big(Y_i- \curbeta_0 - \curbeta_1 x_i\big)^2.
 $$
 \item \alert{Solution explicite}
 \end{itemize}
@@ -245,8 +233,8 @@ $$
 \item  Le minimum est caractérisé par les équations
 \[
 \begin{cases}
-\curtheta_0 + \curtheta_1 n^{-1} \sum_{i=1}^n x_i &= n^{-1} \sum_{i=1}^n Y_i \\
-\curtheta_0 n^{-1} \sum_{i=1}^n x_i + \alpha_1 n^{-1} \sum_{i=1}^n x_i^2 &= n^{-1} \sum_{i=1}^n x_i Y_i \eqsp.
+\curbeta_0 + \curbeta_1 n^{-1} \sum_{i=1}^n x_i &= n^{-1} \sum_{i=1}^n Y_i \\
+\curbeta_0 n^{-1} \sum_{i=1}^n x_i + \curbeta_1 n^{-1} \sum_{i=1}^n x_i^2 &= n^{-1} \sum_{i=1}^n x_i Y_i \eqsp.
 \end{cases}
 \]
 \item Notons $\bar{x}_n = n^{-1} \sum_{i=1}^n x_i$. Si le déterminant $\Delta_n \ne 0$ où
@@ -261,8 +249,8 @@ $$
 alors ce système d'équations a une solution unique:
 \[
 \begin{cases}
-\hat{\truetheta}_0 &= \bar{Y}_n - \hat{\truetheta}_1 \hat{\theta}_1 \bar{x}_n  \\
-\hat{\truetheta}_1 &= \frac{S_{xY}}{S_{xx}} \eqsp, \quad S_{xY}= n^{-1} \sum_{i=1}^n (x_i - \bar{X}_n) (Y_i - \bar{x}_n) \eqsp.
+\estregress_0 &= \bar{Y}_n - \estregress_1 \bar{x}_n  \\
+\estregress_1 &= \frac{S_{xY}}{S_{xx}} \eqsp, \quad S_{xY}= n^{-1} \sum_{i=1}^n (x_i - \bar{X}_n) (Y_i - \bar{x}_n) \eqsp.
 \end{cases}
 \]
 \end{itemize}
@@ -292,44 +280,23 @@ alors ce système d'équations a une solution unique:
 \begin{frame}
 \frametitle{Régression linéaire multiple (=Modèle linéaire)}
 \begin{itemize}
-\item La fonction de régression est $r(\truetheta,\bx_i) = \bx_i^T \truetheta^T$.
+\item La fonction de régression est $r(\truebeta,\bx_i) = \bx_i^T \truebeta$.
 On observe
 $$(\bx_1,Y_1),\ldots, (\bx_n,Y_n)$$
 avec
-$$\boxed{Y_i = \bx_i^T \truetheta+ \sigma \xi_i,\;\;i=1,\ldots, n}$$
+$$\boxed{Y_i = \bx_i^T \truebeta+ \sigma \xi_i,\;\;i=1,\ldots, n}$$
 où $\truetheta \in \Theta = \R^k,\;\;\bx_i \in \R^k$.
 \item \alert{Matriciellement}
-$$\boxed{\boldsymbol{Y} = \regressmat\truetheta + \sigma \bnoise}$$
-avec $\boldsymbol{Y} = (Y_1 \cdots Y_n)^T$, $\bnoise =
-(\xi_1 \cdots \xi_n)^T$ et $\regressmat$ la matrice $(n\times k)$
-dont la $i$-ème ligne est $\regressmat_{i,\cdot}= \bx_i^T$.
+$$\boxed{\bY = \regressmat\truebeta + \sigma \bnoise}$$
+avec 
+\begin{itemize}
+\item \alert<1>{$\bY = (Y_1 \cdots Y_n)^T$}, 
+\item \alert<2>{$\bnoise = (\xi_1 \cdots \xi_n)^T$} 
+\item \alert<3>{$\regressmat$ la matrice $(n\times k)$
+dont la $i$-ème ligne est $\regressmat_{i,\cdot}= \bx_i^T$.}
+\end{itemize}
 \end{itemize}
 \end{frame}
-
-%\begin{frame}
-%\frametitle{Réduction \og design\fg{} aléatoire $\longrightarrow$ déterministe}
-%\begin{itemize}
-%\item Les modèles de régression à \og design\fg{} déterministe ou aléatoire se traitent  \alert{ essentiellement de la même manière} :
-%\end{itemize}
-%\begin{hypothese}[Ancillarité des covariables]
-%On suppose que la loi $\PP^{\bX}$ des $\bX_i$ ne dépend pas du paramètre inconnu $\alert{\truetheta}$.
-%\end{hypothese}
-%\begin{itemize}
-%\item Sous l'hypothèse d'ancillarité, le caractère aléatoire des $\bX_i$ -- observés -- ne joue aucun r™le : on peut faire l'étude mathématique du modèle \alert{conditionnellement aux $\bX_i$}.
-%\item \alert{ Désormais} : on se place  dans le modèle de régression à \og design \fg{} \alert{déterministe}.
-%\end{itemize}
-%\end{frame}
-%
-%\begin{frame}
-%\frametitle{\og design\fg{} aléatoire vs. déterministe}
-%\begin{remarque}
-%{\it A posteriori} pourquoi considérer le modèle de régression à \og design \fg{} aléatoire et ne pas se placer d'emblée en signal + bruit ?
-%\begin{itemize}
-%\item \alert{Le design aléatoire} fournit une interprétation en terme de fonction de régression obtenue via l'espérance conditionnelle.
-%\item \alert{Essentiel} pour le traitement des \alert{modèles à réponse binaire} (ou multiple), voir plus loin.
-%\end{itemize}
-%\end{remarque}
-%\end{frame}
 
 
 
@@ -361,18 +328,17 @@ dont la $i$-ème ligne est $\regressmat_{i,\cdot}= \bx_i^T$.
 \item Estimateur des \alert{moindres carrés} en régression
 linéaire multiple : tout estimateur $\estMC$ satisfaisant
 $$\sum_{i = 1}^n
-\big(Y_i-(\estMC)^T\bx_i\big)^2 = \min_{\truetheta \in \R^k}\sum_{i =
-1}^n \big(Y_i-{\truetheta}^T\bx_i\big)^2.$$
+\big(Y_i- \bx_i^T \estregress \big)^2 = \min_{\bcurbeta \in \R^k}\sum_{i =
+1}^n \big(Y_i- \bx_i^T \bcurbeta\big)^2.$$
 \item En notation matricielle :
-\begin{eqnarray*} \|\boldsymbol{Y}-\regressmat\estMC\|^2 &=& \min_{\truetheta \in
-\R^k}\|\boldsymbol{Y}-\regressmat\truetheta\|^2\\
-&=& \min_{v \in V}\|\boldsymbol{Y}-v\|^2
-\end{eqnarray*}
-o\`u $V=\text{Im}(\regressmat) = \{v\in \R^n: v=\regressmat\truetheta, \
-\truetheta\in \R^k\}$.
- Projection orthogonale sur $V$.
- \end{itemize}
- \end{frame}
+\begin{align*} 
+\|\boldsymbol{Y}-\regressmat\estregress\|^2 &=   \min_{\bcurbeta \in \R^k}\|\bY -\regressmat\truebeta\|^2\\
+&= \min_{v \in V}\|\boldsymbol{Y}-v\|^2
+\end{align*}
+o\`u $V=\text{Im}(\regressmat) = \{v\in \R^n: v=\regressmat \bcurbeta, \
+\bcurbeta \in \R^k\}$. \alert{Projection orthogonale sur $V$}.
+\end{itemize}
+\end{frame}
 
 % \subsection{Géometrie de l'EMC}
 
@@ -380,17 +346,17 @@ o\`u $V=\text{Im}(\regressmat) = \{v\in \R^n: v=\regressmat\truetheta, \
 \frametitle{Géométrie de l'EMC}
  \begin{itemize}
  \item L'EMC vérifie
-$$\boxed{\regressmat {\estMC} = P_V \boldsymbol{Y}}$$
+$$\boxed{\regressmat \estregress = P_V \boldsymbol{Y}}$$
 o\`u $P_V$ est le projecteur orthogonal sur $V$.
 \item Comme $ \bY - P_V \bY \perp V$, on en déduit \alert{les équations normales des
 moindres carrés}:
-$$\boxed{\regressmat^T\regressmat {\estMC} =
+$$\boxed{\regressmat^T\regressmat {\estregress} =
 \regressmat^T\boldsymbol{Y}.}$$
 \item \underline{Remarques.}
   \begin{itemize}
   \item L'EMC est un $Z$-estimateur.
-  \item \alert{unicité} de $\estMC$ si la matrice de Gram
-  $\regressmat^T\regressmat$ n'est pas inversible (la matrice $\regressmat$ est de rang complet).
+  \item \alert{unicité} de $\estregress$ si la matrice de Gram
+  $\regressmat^T\regressmat$ est inversible (la matrice $\regressmat$ est de rang complet).
   \end{itemize}
 \end{itemize}
 \end{frame}
@@ -416,22 +382,25 @@ $$\regressmat^T\regressmat>0 \quad \Longrightarrow \quad \alert{ n \geq k}.$$
 \begin{frame} \frametitle{Géométrie de l'EMC}
 Soit $\regressmat^T\regressmat>0$. Alors, la matrice $n\times n$
 $$
-A = \regressmat\big(\regressmat^T\regressmat\big)^{-1}\regressmat^T
+\projX = \regressmat\big(\regressmat^T\regressmat\big)^{-1}\regressmat^T
 $$
 est dite \alert{matrice chapeau} (\texttt{hat matrix}).
 %
 \begin{prop}
-Si $\regressmat^T\regressmat>0$, alors $A$ est le projecteur sur
-$V$:\\\vspace{2mm} \centerline{$A=P_V$} et ${\rm rang}(A)=k$.
+Si $\regressmat^T\regressmat>0$, alors $\projX$ est le projecteur sur
+$V$: \alert{$\projX=P_V$} et \alert{${\rm rang}(\projX)=k$}.
 \end{prop}
-%\begin{proof}
-%  $A=A^T$, $A=A^2$, donc $A$ est un
-%projecteur. ${\rm Im}(A) = V$, donc $A=P_V$; \
-%${\rm rang}(P_V)={\rm dim}(V)=k$.
-%\end{proof}
-\alert{\og Chapeau \fg{}}, car $A$ génère la prévision de
+\only<1>
+{\begin{proof}
+  $\projX=\projX^T$, $\projX=\projX^2$, donc $\projX$ est un
+projecteur. ${\rm Im}(\projX) = V$, donc $\projX=P_V$; \
+${\rm rang}(P_V)={\rm dim}(V)=k$.
+\end{proof}}
+\only<2>
+{\alert{Chapeau}, car $\projX$ génère la prévision de
 $\regressmat\truetheta$ notée $\widehat{\boldsymbol{Y}}$ :
-$$\widehat{\boldsymbol{Y}}= \regressmat\estMC= A\boldsymbol{Y}.$$
+$$\widehat{\boldsymbol{Y}}= \regressmat\estMC= \projX\boldsymbol{Y}.$$
+}
 \end{frame}
 
 
@@ -441,29 +410,28 @@ $$\widehat{\boldsymbol{Y}}= \regressmat\estMC= A\boldsymbol{Y}.$$
 \begin{frame}
 \frametitle{Hypothèses}
 \[
-\bY= \regressmat \truetheta + \bnoise
+\bY= \regressmat \truebeta + \sigma \bnoise
 \]
 \begin{enumerate}
-\item $\regressmat$ est de rang complet.
-\item $\PE_\truemat[\bnoise]= 0$ pour tout $\truetheta \in \Theta$  (les erreurs sont centrées)
-\item La variance des erreurs est constante et les erreurs sont décorrélées $\PE_{\truetheta}[\bnoise \bnoise^T] = \sigma^2 I$ (homoscédasticité)
-\item (optionnel) les erreurs sont gaussiennes.
+\item \alert<1>{$\regressmat$ est de rang complet.}
+\item \alert<2>{$\PE_\truetheta[\bnoise]= 0$ pour tout $\truetheta \in \Theta$  (les erreurs sont centrées)}
+\item \alert<3>{La variance des erreurs est constante et les erreurs sont décorrélées $\PE_{\truetheta}[\bnoise \bnoise^T] = \sigma^2 I$ (homoscédasticité)}
+\item \alert<4>{(optionnel) les erreurs sont gaussiennes.}
 \end{enumerate}
 \end{frame}
 
 \begin{frame}
 \frametitle{Estimateur sans biais}
 \begin{theo}
-Supposons que $\regressmat$ est de rang complet.
-L'estimateur $\estMC$ est sans biais, \ie\ pour tout $\truetheta \in \Theta$, $\PE_{\truetheta}[\estMC]= \truetheta$. De plus,
-$\PCov_{\truetheta}(\estMC)= \sigma^2 (\regressmat^T \regressmat)^{-1}$. 
+L'estimateur $\estregress$ est sans biais, \ie\ pour tout $\truetheta \in \Theta$, $\PE_{\truetheta}[\estregress]= \truetheta$. De plus,
+$\PCov_{\truetheta}(\estregress)= \sigma^2 (\regressmat^T \regressmat)^{-1}$.
 \end{theo}
 \pause
 \begin{proof}
-$\estMC = \truetheta + \big(\regressmat^T\regressmat\big)^{-1}\regressmat^T
+$\estregress = \truetheta + \big(\regressmat^T\regressmat\big)^{-1}\regressmat^T
 \bnoise$.
 
-On vérifie: $\ \ \E_{\truetheta}[\estMC]=\truetheta$,
+On vérifie: $\ \ \E_{\truetheta}[\estregress]=\truetheta$,
 \begin{align*}
 &\E_{\truetheta}\big[ \big(\regressmat^T\regressmat\big)^{-1}\regressmat^T \bnoise \big(\big(\regressmat^T\regressmat\big)^{-1}\regressmat^T \bnoise\big)^T\big] \\
 =\; &\sigma^2\big(\regressmat^T\regressmat\big)^{-1}.
@@ -474,36 +442,119 @@ On vérifie: $\ \ \E_{\truetheta}[\estMC]=\truetheta$,
 \begin{frame}
 \frametitle{Erreur de prédiction}
 \begin{itemize}
-\item \alert{Erreur de prédiction}: 
+\item \alert{Erreur de prédiction}:
 \begin{align*}
-\errpred 
-&= \bY - \regressmat \estMC= \bY - \regressmat (\regressmat^T \regressmat)^{-1} \regressmat \bY \\
-&= (I - A) \bY
+\errpred
+&= \bY - \regressmat \estregress= \bY - \regressmat (\regressmat^T \regressmat)^{-1} \regressmat \bY \\
+&= (I - \projX) \bY
 \end{align*}
-\item Sous $\PP_\truetheta$, $\bY= \regressmat \truetheta + \bnoise$. Donc,
+\item Sous $\PP_\truetheta$, $\bY= \regressmat \truebeta +  \sigma \bnoise$. Donc,
 \begin{align*}
-\errpred &= (I-A) \regressmat \truetheta + (I-A) \bnoise \\
-         &= (I-A) \bnoise 
+\errpred &= (I-\projX) \regressmat \truebeta + \sigma (I-\projX)  \bnoise \\
+         &= \sigma (I-\projX) \bnoise
 \end{align*}
-car $A \regressmat= \regressmat$ ($A$ is the orthogonal projector on the image of $\regressmat$).
+car $\projX \regressmat= \regressmat$ ($\projX$ is the orthogonal projector on the image of $\regressmat$).
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Erreur de prédiction}
+\frametitle{Résidus et variance résiduelle}
+\begin{theorem}
+Pour tout $\truetheta \in \Theta$
+\begin{enumerate}
+\item  \alert<1>{$\PE_{\truetheta}[\errpred] = 0$}.
+\item  \alert<2>{$\PCov_{\truetheta}(\errpred)= \sigma^2 (I - \projX)$}.
+\item  \alert<3>{$\PE_{\truetheta}[\predY]= \regressmat \truebeta$}.
+\item  \alert<4>{$\PCov_{\truetheta}(\errpred,\predY)= 0$}.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\only<1> {
+\begin{align*}
+\PE_{\truetheta}[\errpred] &= \sigma \PE_{\truetheta}[ (I-\projX) \bnoise] \\
+&= \sigma (I-\projX) \PE_{\truetheta}[\bnoise] \eqsp.
+\end{align*}
+}
+\only<2> {
+\begin{align*}
+\PCov_{\truetheta}(\errpred)&= \sigma^2 (I-\projX) \PE_{\truetheta}[\bnoise \bnoise'] (I- \projX) \\
+&= \sigma^2 (I-\projX).
+\end{align*}
+}
+\only<3> {
+\begin{align*}
+\PE_{\truetheta}[\predY] &= \PE_{\truetheta}[ \projX (\regressmat \truebeta + \sigma \bnoise)] \\
+&=  \projX \regressmat \truebeta + \sigma \PE_{\truetheta}[ \bnoise] \\
+&= \regressmat \truebeta.
+\end{align*}
+}
+\only<4>{
+On a $\predY - \PE_{\truetheta}[\predY]= \sigma \projX \bnoise$ et donc
+\begin{align*}
+\PCov_{\truetheta}(\errpred,\predY) &= \sigma^2 \PE_{\truetheta}[ (I-\projX) \bnoise \bnoise' \projX] \\
+&= \sigma^2 (I- \projX) \projX= 0.
+\end{align*}
+}
+\end{proof}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Estimateur sans bians de la variance de l'erreur de prédiction}
 \begin{theo}
 $\hat{\sigma}_n^2= (n-p)^{-1} \| \errpred \|^2$ est un estimateur sans biais de la variance de l'erreur.
 \end{theo}
 \begin{proof}
-Comme $(I-A)^2= (I-A)$, nous avons
+Comme $(I-\projX)^2= (I-\projX)$, nous avons
 \begin{align*}
-\PE_\theta[\hat{\sigma}_n^2] &= (n-p)^{-1} \PE_{\theta}[ \bnoise^T (I-A) \bnoise] \\
-                             &= (n-p)^{-1} \PE_{\btheta}[ \mathrm{Tr}( (I-A) \bnoise \bnoise ] \\
-                             &= \sigma^2 (n-p)^{-1} \mathrm{Tr}(I-A)= \sigma^2 \eqsp. 
+\PE_\theta[\hat{\sigma}_n^2] &= (n-p)^{-1} \PE_{\theta}[ \bnoise^T (I-\projX) \bnoise] \\
+                             &= (n-p)^{-1} \PE_{\btheta}[ \mathrm{Tr}( (I-\projX) \bnoise \bnoise) ] \\
+                             &= \sigma^2 (n-p)^{-1} \mathrm{Tr}(I-\projX)= \sigma^2 \eqsp.
 \end{align*}
 \end{proof}
 \end{frame}
 
+\begin{frame}
+\frametitle{Prevision}
+\begin{itemize}
+\item Un des buts de la régression est de proposer des prédictions pour la réponse lorsque nous avons de 
+nouvelles valeurs des variables explicatives.
+\item Un prédicteur naturel de la réponse est \alert{$\hat{Y}_n(\bx)= \bx^T \estregress$} 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Moyenne et variance de la prévision}
+\begin{theorem}
+\begin{itemize}
+\item $\PE_{\truetheta}[\hat{Y}_n(\bx)]= \bx^T \truebeta$ 
+\item $\Var_{\truetheta}(\hat{Y}_n(\bx))= \sigma^2 \bx^T (\regressmat^T \regressmat)^{-1} \bx$ 
+\item $\PE_{\truetheta}[ (Y(\bx) - \hat{Y}_n(\bx))^2]= \sigma^2 (1 + \bx' (\resgressmat^T \regressmat)^{-1} \bx)$
+\end{itemize}
+\end{theorem}
+\only<1>{$\hat{Y}_n(\bx)= \bx^T \estregress$ et $\PE_{\truetheta}[\estregress]= \truebeta$}
+\only<2>{
+\begin{align*}
+\hat{Y}_n(\bx)- \bx^T \truebeta 
+&= \bx^T (\regressmat^T \regressmat)^{-1} \regressmat^T \bY - \bx^T \truebeta \\
+&= \bx^T (\regressmat^T \regressmat)^{-1} \regressmat^T (\regressmat \truebeta + \sigma \bnoise) - \bx^T \truebeta \\
+&= \sigma \bx^T (\regressmat^T \regressmat)^{-1} \regressmat^T \bnoise
+\end{align*}}
+\only<3>{
+\begin{align*}
+\PE_{\truetheta}[ (Y(\bx) - \hat{Y}_n(\bx))^2] 
+&= \PE_{\truebeta}[ (Y(\bx) - \PE_{\truebeta}[\hat{Y}_n(\bx)])^2] + \Var_{\truetheta}(\hat{Y}_n(\bx)) \\
+&= \PE_{\truebeta}[ (Y(\bx) - \bx^T \truebeta)^2] +  \sigma^2 \bx^T (\resgressmat^T \regressmat)^{-1} \bx 
+\end{align*}
+}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Coefficient de détermination}
+
+\end{frame}
 
 \begin{frame}
 \frametitle{Diagnostic de régression}

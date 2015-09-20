@@ -107,7 +107,7 @@ $\hat{\theta}_n$ de $\alpha$ et $\theta$.
 \]
 On en déduit que l'estimateur du maximum de vraisemblance de $\psi=(\alpha, \theta)$ est unique et est égal à
 \[
-\widehat{\psi}_n = 
+\widehat{\psi}_n =
 \begin{bmatrix}
   X_{(1)}  \\
 \bar X_n - X_{(1)}
@@ -122,7 +122,7 @@ où $X_{(1)} = \min_{1 \leq k \leq n} X_k$.
   \PE\left[f(n (\hat{\alpha}_n- \alpha)) \right] &= \int_0^{\infty} f(n y)
   \frac{n}{\theta} \ \exp(- n y /\theta) \ dy = \int_0^{\infty} f(x) \frac{1}{\theta} \ \exp(- x /\theta) \ dx
 \end{align*}
-dont on déduit que 
+dont on déduit que
 \[
 n\left( \hat{\alpha}_n - \alpha\right) \sim \mathcal{E}(1 /\theta).
 \]
@@ -131,7 +131,7 @@ n\left( \hat{\alpha}_n - \alpha\right) \sim \mathcal{E}(1 /\theta).
  \hat{\theta}_n - \theta = \bar{X}_n - \hat{\alpha}_n -\theta = \bar{X}_n -
   (\theta + \alpha) + (\alpha - \hat{\alpha}_n).
 \]
-On a 
+On a
 \[
 \sqrt{n} \left( \bar{X}_n - (\theta + \alpha) \right) \dlim \mathcal{N}\left(0,
   \theta^2 \right) \qquad \sqrt{n}\left(\hat{\alpha}_n - \alpha \right) \plim 0
@@ -153,13 +153,13 @@ Dans les mod\`eles suivants, calculer  l'information de Fisher associ\'ee aux $n
 
 \Corrige{
   \begin{enumerate}
-  \item L'information de Fisher est $I_n(\theta) = n \theta^{-1} (1-\theta)^{-1}$. L'estimateur de MV est  $\bar X_n$ et on a 
+  \item L'information de Fisher est $I_n(\theta) = n \theta^{-1} (1-\theta)^{-1}$. L'estimateur de MV est  $\bar X_n$ et on a
 \[
 \sqrt{n} \left( \bar X_n - \theta \right) \dlim \mathcal{N}(0, \theta(1-\theta))
 \]
-\item L'information de Fisher est 
+\item L'information de Fisher est
 \[
-I_n(\theta) =  \frac{n}{v^4}  
+I_n(\theta) =  \frac{n}{v^4}
 \begin{bmatrix}
   v^2 & 0 \\
 0 & 1/2
@@ -173,23 +173,22 @@ L'estimateur MV est unique et vaut
 \frac{1}{n} \sum_{k=1}^n \left(X_k - \bar X_n \right)^2
 \end{bmatrix}
 \]
-On établit un TCl pour le couple $(\bar X_n, n^{-1} \sum_{k=1}^n (X_k - m)^2)$;
-puis on applique la méthode delta avec $g(x,y) = (x; y - (x-m)^2)$. On obtient
+C'est un modèle statistique régulier. Il suffit de calculer la matrice d'information de Fisher. On obtient
 \[
-\sqrt{n} \left( 
+\sqrt{n} \left(
   \begin{bmatrix}
   \bar X_n \\
 \frac{1}{n} \sum_{k=1}^n (X_k -\bar X_n)^2
-  \end{bmatrix} -  
+  \end{bmatrix} -
   \begin{bmatrix}
     m \\
-v^2 
+v^2
   \end{bmatrix}
 \right) \dlim \mathcal{N}\left(
   \begin{bmatrix}
   0 \\
 0
-  \end{bmatrix}; 
+  \end{bmatrix};
   \begin{bmatrix}
     v^2 & 0 \\
 0 & 2 v^4
@@ -205,13 +204,13 @@ fonction de répartition, en notant $F$ la fonction de répartition de $X_1$. On
 en déduit la densité de $X_{(n)}$ puis celle de $n(X_{(n)} - \theta)$; et par
 le lemme de Scheffé, on montre que
 \[
-n \left( \hat{\theta}_n^{MV} - \theta \right) \dlim \frac{1}{\theta} 
+n \left( \hat{\theta}_n^{MV} - \theta \right) \dlim \frac{1}{\theta}
 \exp(x/\theta) \1_{x \leq 0}
 \]
   \end{enumerate}}
 
 \subsection*{3. Borne de Cramer-Rao}
-On consid\`ere un vecteur al\'eatoire $(X_{1},\ldots,X_{n})\in\R^n$ de loi appartenant \`a une famille $\ac{\p_{\theta},\ \theta\in\Theta}$ de lois sur $\R^n$, avec $\Theta$ intervalle ouvert de $\R$. On suppose que $d\p_{\theta}(x)=p(\theta,x)\,d\mu(x)$ avec $\mu$ mesure $\sigma$-finie sur $\R^n$ et on note $l_{X}(\theta)=\log(p(\theta,X))$. On suppose que la famille de lois $\ac{\p_{\theta},\ \theta\in\Theta}$ est r\'eguli\`ere;   l'information de Fisher $I_{n}(\theta)$ est donc bien d\'efinie et on pourra intervertir int\'egrales et d\'erivations \`a notre de guise. 
+On consid\`ere un vecteur al\'eatoire $(X_{1},\ldots,X_{n})\in\R^n$ de loi appartenant \`a une famille $\ac{\p_{\theta},\ \theta\in\Theta}$ de lois sur $\R^n$, avec $\Theta$ intervalle ouvert de $\R$. On suppose que $d\p_{\theta}(x)=p(\theta,x)\,d\mu(x)$ avec $\mu$ mesure $\sigma$-finie sur $\R^n$ et on note $l_{X}(\theta)=\log(p(\theta,X))$. On suppose que la famille de lois $\ac{\p_{\theta},\ \theta\in\Theta}$ est r\'eguli\`ere;   l'information de Fisher $I_{n}(\theta)$ est donc bien d\'efinie et on pourra intervertir int\'egrales et d\'erivations \`a notre de guise.
 
 Pour un estimateur $\hat \theta$ donn\'e, on note $R_{\theta}(\hat\theta):=\E_{\theta}\cro{(\hat\theta-\theta)^2}$ son risque quadratique et $b(\theta):=\E_{\theta}[\hat\theta]-\theta$ son biais (qu'on suppose d\'erivable).
 \begin{enumerate}
@@ -312,7 +311,7 @@ des autres composantes.
     \begin{align*}
       & \E\left[\xi_1 \ f(\xi) \right] = \frac{1}{\sqrt{2 \pi}^d}
       \int_{\rset^{d-1}} \left( \int_{\rset} z_1 f(z_1, z_{2:d}) \exp(-z_1^2/2)
-        dz_1 \right) \ 
+        dz_1 \right) \
       \exp(-\sum_{k=2}^d z_k^2 /2) \ dz_{2:d} \\
       & \PE\left[\partial_{1} f(\xi) \right] = \frac{1}{\sqrt{2\pi}^{d-1}}
       \int_{\rset^{d-1}} \PE\left[\partial_{1} f(\xi_1, z_2, \cdots, z_d)
@@ -332,7 +331,7 @@ ce qui conclut la démonstration.
     \right) + \left( Y - \theta \right) \right\|^2$; on développe le carré puis
   prend l'espérance. On obtient le résultat en utilisant la question précédente
   et en notant que $\PE_\theta \left[ \|Y - \theta \|^2 \right] =d$.
-\item Avec ce choix de $g$, on a 
+\item Avec ce choix de $g$, on a
 \[
 \PE_\theta \left[W(Y) \right] = \PE_\theta \left[- \frac{2 d c}{\|Y\|^2} +
   \frac{4 c }{\|Y\|^2} + \frac{c^2}{\|Y\|^2} \right] = \left( c^2 + 4 c - 2 dc
@@ -343,4 +342,4 @@ Cette quantité est minimale (atteignant une valeur négative) pour $c = d-2$.
   \end{enumerate}
 }
 
-\end{document}
+\end{document} 
