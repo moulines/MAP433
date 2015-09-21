@@ -1,0 +1,602 @@
+\documentclass{beamer}
+
+\usetheme{Boadilla}
+\usefonttheme[onlysmall]{structurebold}
+
+
+%%%%%%%%%%%%% numero de pages
+%\addtobeamertemplate{footline}{\hfill\insertframenumber/\inserttotalframenumber\  \ }
+
+
+
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{amssymb,wasysym}
+\usepackage{hyperref}
+
+
+\setbeamercovered{transparent}
+
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\h}{\mathcal{H}}
+\newcommand{\pa}[1]{\left(#1\right)}
+\newcommand{\cro}[1]{\left[#1\right]}
+\newcommand{\ac}[1]{\left\{#1\right\}}
+\newcommand{\hmu}{\hat \mu}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Z}{\mathcal Z}
+\newcommand{\D}{\mathcal D}
+\newcommand{\s}{\mathcal S}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\p}{\mathbb{P}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\x}{{\tt x}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\thetah}{\hat \theta}
+\newcommand{\pen}{{\rm pen}}
+\newcommand{\htheta}{\widehat{\theta}}
+\def\Pr{{\rm Proj}}
+%\newcommand{\deg}{{\rm deg}}
+\def\EH{{\mathrm{\sf EDkhi}}}
+\def\thetah{\hat\theta}
+\newcommand{\argmin}{\mathop{\mathrm{argmin}}}
+\def\g{\mathrm{\bf g}}
+\def\eps{\varepsilon}
+
+
+
+
+\begin{document}
+\title[R\'egression Lin\'eaire]{\bf R\'egression Lin\'eaire}
+\author[MAP433]{MAP 433}
+%\institute{Universit\'e Paris Sud et Ecole Polytechnique}
+
+\date{PC6}
+\frame{
+\includegraphics[width=3cm]{images/logo_x.jpg}%\hfill \includegraphics[width=1.5cm]{images/UPsud.jpg}
+\maketitle
+}
+
+\frame{%{\bf Quels m\'etiers en M\'etier en Maths Applis?}
+\centerline{\includegraphics[width=6cm]{images/MetiersMathsShort.pdf}}
+\vfill
+\begin{small}
+\textcolor{blue}{\url{http://www.cmap.polytechnique.fr/~giraud/MetiersMaths.html}}
+\end{small}
+}
+
+
+
+\frame{
+\begin{beamercolorbox}[rounded=true]{title}
+\begin{center}
+{\LARGE {\bf La r\'egression lin\'eaire:}\\ \medskip {\bf Th\'eorie}}
+\end{center}
+\end{beamercolorbox}
+}
+
+
+
+\frame{\frametitle{\bf Le mod\`ele de r\'egression}
+\begin{block}{\bf Observations}
+\begin{itemize}
+\item {\bf R\'eponse:} $y_{1},\ldots,y_{n}\in\R$,
+\item {\bf Covariables:} $x_{1},\ldots,x_{n}\in\R^k$. 
+\end{itemize}
+\end{block}
+\vfill
+
+\begin{block}{\bf Mod\`ele de r\'egression}
+$$y_{i}=r(x_{i})+\xi_{i}\quad\textrm{o\`u}\   \E(\xi_{i})=0.$$
+%Terminologie: $r=$ fonction de r\'egression.
+\end{block}
+\vfill
+
+\begin{block}{\bf R\'egression Lin\'eaire}
+$$y_{i}=x_{i}^T\theta+\xi_{i}\quad\textrm{o\`u}\ \theta\in\R^k.$$
+\end{block}
+}
+
+%\frame{\frametitle{Francis Galton (1822--1911)}
+%\begin{minipage}{4.8cm}
+%\begin{itemize}
+%\item Cousin de Darwin
+%\item Math\'ematise la th\'eorie de l'Evolution
+%\item Pr\'ecurseur en statistiques
+%\end{itemize}
+%mais.... fondateur du courant eug\'eniste  \textcolor{blue}{\large $\frownie$}
+%
+%\end{minipage}
+%\hfill\begin{minipage}{4.5cm}
+%\includegraphics[width=4.5cm]{images/Galton.jpg}
+%\end{minipage}
+%}
+
+
+
+
+
+\frame{\frametitle{\bf Estimateur des moindres carr\'es}
+\begin{block}{\bf Mod\`ele lin\'eaire}
+Mod\`ele: $r(x)=x^T\theta$ donc
+$$Y=X\theta+\xi \quad\textrm{o\`u}\ Y=\left[\begin{array}{c} y_{1}\\ \vdots\\  y_{n}\end{array}\right],\quad X=\left[\begin{array}{c} x^T_{1}\\ \vdots\\  x^T_{n}\end{array}\right]\quad \textrm{et}\ \xi=\left[\begin{array}{c} \xi_{1}\\ \vdots\\  \xi_{n}\end{array}\right].$$
+\end{block}
+\vfill
+
+\begin{block}{\bf Estimateur des moindres carr\'es}
+$$\hat \theta_{{\rm MC}}=\argmin_{\theta \in \R^k}\|Y-X\theta\|^2$$
+{\bf Formules:}
+$$X\hat \theta_{{\rm MC}}= \textrm{Proj}_{\textrm{Im}(X)}(Y)\quad\textrm{et}\quad 
+\hat \theta_{{\rm MC}}=(X^TX)^{-1}X^TY.$$
+\end{block}
+}
+
+\frame{\frametitle{\bf Cas Gaussien}
+\begin{block}{\bf Cas gaussien et design fixe}
+Si $\xi_{i}\sim\mathcal{N}(0,\sigma^2)$, $x_{i}$ d\'eterministes et $\hat \theta$ estimateur des MC on a:
+$$\hat \sigma^2={1\over n-k}\|Y-X\hat\theta\|^2\quad\textrm{v\'erifie}\quad \E(\hat\sigma^2)=\sigma^2$$
+et 
+$${\hat\theta_{j}-\theta_{j}\over \sqrt{\hat \sigma^2[(X^TX)^{{-1}}]_{jj}}}\sim \textrm{Student}(n-k):={\mathcal{N}(0,1)\over \sqrt{\chi^2(n-k)\over n-k}}.$$
+\end{block}
+\vfill
+
+{\bf Cas non gaussien:} approximativement vrai pour $n$ grand.\vfill
+
+{\bf $t$-value:} $\hat T_{j}={\hat\theta_{j}\big/ \sqrt{\hat \sigma^2[(X^TX)^{-1}]_{jj}}}$
+\vfill
+
+%\uncover<2>{\textcolor{blue}{\bf Student?}}
+}
+
+%\frame{
+%\begin{block}{William Gosset (1876--1937)}
+%\begin{minipage}{6.8cm}
+%\begin{itemize}
+%\item ing\'enieur agronome chez Guinness
+%\item invente les $t-values$
+%\item signe sous le nom de ``Student"
+%\end{itemize}
+%\end{minipage}
+%\hfill
+%\begin{minipage}{2.5cm}
+%\includegraphics[width=2.5cm]{images/Gosset.jpg}
+%\end{minipage}
+%\end{block}
+%\vfill
+%
+%\begin{block}{Ronald Fisher (1890--1962)}
+%\begin{minipage}{6.8cm}
+%\begin{itemize}
+%\item fondateur des statistiques classiques
+%\item contributions majeurs en g\'en\'etique des populations
+%\item Livre majeur  (1925) : \emph{Statistical Methods for Research Workers}
+%\end{itemize}
+%\end{minipage}
+%\hfill
+%\begin{minipage}{2.5cm}
+%\includegraphics[width=2.5cm]{images/Fisher.jpg}
+%\end{minipage}
+%\end{block}
+%}
+
+
+\frame{
+\begin{beamercolorbox}[rounded=true]{title}
+\begin{center}
+{\LARGE {\bf La r\'egression lin\'eaire:}\\ \medskip {\bf un exemple}}
+\end{center}
+\end{beamercolorbox}
+}
+
+
+
+\frame{
+\begin{block}{\bf Logiciel d'analyse}
+Analyses r\'ealis\'ees avec  {\tt R} : c'est le logiciel standard en statistiques:
+\begin{itemize}
+\item  \textcolor{blue}{gratuit!}  \url{http://cran.r-project.org/}
+\item partage de \textcolor{blue}{packages} par toute la communaut\'e stat : 
+\begin{itemize}
+\item principales analyses pr\^etes \`a l'emploi
+\item acc\`es aux proc\'edures "\'etat de l'art" 
+\end{itemize}
+\item d\'efaut principal : aide en ligne peu performante. Pour apprendre : {\scriptsize \url{http://cran.r-project.org/doc/manuals/R-intro.pdf}}
+\end{itemize}
+\end{block}
+\vfill 
+
+\begin{block}{\bf R\'ef\'erences}
+\begin{itemize}
+\item Code {\tt R} des analyses  t\'el\'echargeable sur ma page web
+\item Livre: \emph{R\'egression avec R} de Cornillon \& Matzner-Lober
+\end{itemize}
+\end{block}
+}
+
+\begin{frame}[fragile]
+\frametitle{\bf Data}
+\begin{block}{\bf Donn\'ees "ozone"}
+Relev\'es d'ozone (O3) et de covariables (Temperature, N\'ebulosit\'e, Vent, etc) par l'association "Air Breizh".
+\end{block}
+\vfill
+
+\begin{small}
+\begin{verbatim}
+> load("ozone.Rdata")
+> dim(ozone)
+50 10
+> head(ozone)
+\end{verbatim}
+\begin{tabular}{rrrrrrrrrr}
+  O3 & T12 & T15 & Ne12 & N12 & S12 & E12 & W12 & Vx & O3v \\ \hline
+ 63.60 & 13.40 & 15.00 &   7 &   0 &   0 &   3 &   0 & 9.35 & 95.60 \\ 
+   89.60 & 15.00 & 15.70 &   4 &   3 &   0 &   0 &   0 & 5.40 & 100.20 \\ 
+   79.00 & 7.90 & 10.10 &   8 &   0 &   0 &   7 &   0 & 19.30 & 105.60 \\ 
+   81.20 & 13.10 & 11.70 &   7 &   7 &   0 &   0 &   0 & 12.60 & 95.20 \\ 
+   88.00 & 14.10 & 16.00 &   6 &   0 &   0 &   0 &   6 & -20.30 & 82.80 \\ 
+   68.40 & 16.70 & 18.10 &   7 &   0 &   3 &   0 &   0 & -3.69 & 71.40 
+\end{tabular}
+\end{small}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\bf R\'egression lin\'eaire}
+\begin{small}
+\begin{verbatim}
+> reg1 <- lm(O3~.,data=ozone)
+> names(reg1)
+"coefficients" "residuals" "effects" "rank" "fitted.values"
+"assign" "qr" "df.residual" "xlevels" "call" "terms" "model"  
+> reg1$coefficients       
+\end{verbatim}
+\begin{tabular}{r|r}
+variable & Estimator \\ 
+  \hline
+(Intercept) & 54.7278  \\ 
+  T12 & -0.3518  \\ 
+  T15 & 1.4972  \\ 
+  Ne12 & -4.1922  \\ 
+  N12 & 1.2755  \\ 
+  S12 & 3.1711  \\ 
+  E12 & 0.5277  \\ 
+  W12 & 2.4749  \\ 
+  Vx & 0.6077 \\ 
+  O3v & 0.2454  
+\end{tabular}
+\end{small}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\bf Inspection des r\'esidus (1/4)}
+\begin{minipage}{5cm}
+{\bf Distribution des r\'esidus?}\bigskip
+
+Les r\'esidus $\hat \xi=Y-X\hat\theta$ sont donn\'es par 
+\begin{verbatim}> reg1$residuals\end{verbatim}
+\medskip
+
+On peut tracer un histogramme des r\'esidus
+\begin{verbatim}> hist(reg1$residuals)\end{verbatim}
+\end{minipage}\hfill
+\begin{minipage}{5.5cm}
+\begin{center}
+\includegraphics[width=5.5cm]{images/hist1.pdf}
+
+Histogramme des r\'esidus
+\end{center}
+\end{minipage}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{\bf Inspection des r\'esidus (2/4)}
+\begin{block}{\bf Quantiles}
+Le $q$-quantile de la loi de $X$ est $x_{q}$ tel que
+$$x_{q}=\min\{x : \mathbb{P}(X\leq x)\geq q\}$$
+\end{block}
+
+\begin{minipage}{4.9cm}
+{\bf Normalit\'e des r\'esidus?}\medskip
+
+Le Q-Q Plot permet de comparer les quantiles des r\'esidus avec les quantiles d'une loi gaussienne
+\begin{verbatim}> qqnorm(reg1$residuals)\end{verbatim}
+\medskip
+
+
+
+\end{minipage}\hfill
+\begin{minipage}{5.6cm}
+\begin{center}
+\includegraphics[width=5.6cm]{images/QQplot1.pdf}
+%Q-Q Plot des r\'esidus
+\end{center}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\bf Inspection des r\'esidus (2bis/4)}
+\begin{block}{\bf Renormalisation}
+On a $\hat\xi=(I-P)\xi$ avec $P$ est la matrice de projection sur l'image de $X$.\medskip
+
+Donc si  $\xi_{1},\ldots,\xi_{n}$ i.i.d.\ de loi $\mathcal{N}(0,\sigma^2)$, les r\'esidus $\hat \xi_{j}$
+ ont pour loi $\mathcal{N}(0,(1-P_{jj})\sigma^2)$.
+\end{block}
+
+\begin{minipage}{4.9cm}
+{\bf Normalit\'e du bruit?}\medskip
+
+Il faut regarder le Q-Q Plot des r\'esidus renormalis\'es $$\tilde \xi_{j}=(1-P_{jj})^{-1/2}\hat\xi_{j}$$
+qui ont pour loi $\mathcal{N}(0,\sigma^2)$.
+
+
+
+\end{minipage}\hfill
+\begin{minipage}{5cm}
+\begin{center}
+\includegraphics[width=5cm]{images/QQplot1bis.pdf}
+%Q-Q Plot des r\'esidus
+\end{center}
+\end{minipage}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{\bf Inspection des r\'esidus (3/4)}
+{\bf La variance d\'epend-elle du signal?}
+\begin{small}
+\begin{verbatim}
+> plot(reg1$fitted.values,abs(reg1$residuals), col=2)
+> lines(lowess(reg1$fitted.values,abs(reg1$residual),f=0.7))
+\end{verbatim}
+\end{small}
+
+\vspace{-0.8cm}
+\begin{center}
+\includegraphics[width=6.2cm]{images/homo1.pdf}
+
+Homosc\'edasticit\'e des r\'esidus
+\end{center}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{\bf Inspection des r\'esidus (4/4)}
+{\bf Structuration temporelle des r\'esidus?}
+\begin{small}
+\begin{verbatim}
+> plot(reg1$residual,col=2)
+> lines(lowess(reg1$residual,f=0.7),lty=2)
+\end{verbatim}
+\end{small}
+
+\vspace{-0.8cm}
+\begin{center}
+\includegraphics[width=6.2cm]{images/temp1.pdf}
+
+Petite autocorr\'elation des r\'esidus
+\end{center}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{\bf  R\'esultats complets}
+\begin{small}
+\begin{verbatim}
+> summary(reg1)
+\end{verbatim}
+\begin{tabular}{r|rrrrc}
+ & Estimate & Std. Error & t-value & Pr($>$$|$t$|$) & \\ 
+  \hline
+(Intercept) & 54.7278 & 17.2789 & 3.17 & 0.0029 & ** \\ 
+  T12 & -0.3518 & 1.5731 & -0.22 & 0.8242 & \\ 
+  T15 & 1.4972 & 1.5377 & 0.97 & 0.3361 & \\ 
+  Ne12 & -4.1922 & 1.0638 & -3.94 & 0.0003 & ***\\ 
+  N12 & 1.2755 & 1.3632 & 0.94 & 0.3551 & \\ 
+  S12 & 3.1711 & 1.9108 & 1.66 & 0.1048 & \\ 
+  E12 & 0.5277 & 1.9427 & 0.27 & 0.7873 & \\ 
+  W12 & 2.4749 & 2.0720 & 1.19 & 0.2393 & \\ 
+  Vx & 0.6077 & 0.4858 & 1.25 & 0.2182 & \\ 
+  O3v & 0.2454 & 0.0965 & 2.54 & 0.0150 &*
+\end{tabular}
+\begin{verbatim}
+Signif. codes: 0 *** 0.001 ** 0.01 * 0.05 . 0.1  1 
+\end{verbatim}
+
+\textcolor{blue}{Seules les variables Ne12 et O3v semblent pertinentes !}
+\end{small}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{\bf  R\'egression mod\`ele r\'eduit}
+{\bf Mod\`ele r\'eduit:}\\* r\'egression de O3 par rapport aux variables Ne12 et O3v
+\medskip
+
+\begin{small}
+\begin{verbatim}
+> reg2 <- lm(O3~Ne12+O3v,data=ozone)
+> summary(reg2)
+\end{verbatim}
+\begin{tabular}{r|rrrrc}
+ & Estimate & Std. Error & t-value & Pr($>$$|$t$|$) & \\ 
+  \hline
+(Intercept) & 85.0203 & 11.0943 & 7.66 & 0.0000 &***\\ 
+  Ne12 & -5.4801 & 0.9102 & -6.02 & 0.0000 &***\\ 
+  O3v & 0.3416 & 0.0925 & 3.69 & 0.0006 & ***\\ 
+\end{tabular}
+\end{small}
+\end{frame}
+
+\frame{\frametitle{\bf Inspection des r\'esidus du mod\`ele r\'eduit}
+\centerline{\includegraphics[width=8.5cm]{images/residuals2.pdf}}
+}
+
+
+\begin{frame}[fragile]
+\frametitle{\bf  Et quid d'un mod\`ele interm\'edaire?}
+{\bf Mod\`ele interm\'ediaire:}
+\begin{small}
+\begin{verbatim}
+> reg3 <- lm(O3~T15+Ne12+Vx+O3v,data=ozone)
+> summary(reg3)
+\end{verbatim}
+\begin{tabular}{r|rrrrc}
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$)& \\ 
+  \hline
+(Intercept) & 61.8252 & 14.8972 & 4.15 & 0.0001& ***\\ 
+  T15 & 1.0577 & 0.4522 & 2.34 & 0.0239& *\\ 
+  Ne12 & -3.9935 & 1.0072 & -3.97 & 0.0003& ***\\ 
+  Vx & 0.3146 & 0.1608 & 1.96 & 0.0566& .\\ 
+  O3v & 0.2629 & 0.0922 & 2.85 & 0.0065& **
+\end{tabular}
+\end{small}
+\vfill
+
+\textcolor{blue}{Certaines variables d\'eclar\'ees non-importantes dans le mod\`ele complet, sont d\'eclar\'ees importantes dans le mod\`ele interm\'ediaire...}
+\vfill
+
+\centerline{\boxed{\textbf{Quel mod\`ele choisir?}}} 
+\end{frame}
+
+\begin{frame}
+\frametitle{\bf S\'election de mod\`ele}
+\begin{block}{\bf Notations}
+On associe \`a chaque sous-ensemble $m$ de variables
+\begin{itemize}
+\item $\widehat \theta_{m}$ obtenu par la r\'egression de O3 par rapport aux variables dans $m$. 
+\item $\mathcal{L}(m)=$ la log-vraisemblance de $\widehat \theta_{m}$.
+\end{itemize}
+\end{block}
+\vfill
+
+\begin{block}{\bf Crit\`eres classiques}
+Choix de $\widehat m$ v\'erifiant
+$$\widehat m \in\mathop{\textsf{argmin}}_{m} \ac{-2 \mathcal{L}(m)+\lambda\, \textsf{Card}(m)}\quad \textsf{avec}$$
+
+{\bf crit\`ere AIC\,:} $\lambda_{\textsf{AIC}}=2$
+
+{\bf crit\`ere BIC\,:}  $\lambda_{\textsf{BIC}}=\log(n)$
+\end{block}
+\end{frame}
+
+
+
+\frame{\frametitle{\bf S\'election de mod\`ele\,: cadre gaussien}
+{\bf Cadre gaussien : }
+$-2\mathcal{L}(m) = n \log(\|Y-X\widehat \theta_{m}\|^2)+\ldots$
+\vfill
+
+\begin{block}{\bf Crit\`ere AIC et BIC\,: cadre gaussien}
+ $$\widehat m \in\mathop{\textsf{argmin}}_{m} \ac{n \log(\|Y-X\widehat \theta_{m}\|^2)+\lambda\, \textsf{Card}(m)}\quad \textsf{avec}$$
+
+{\bf AIC\,:} \ $\lambda_{\textsf{AIC}}=2$
+
+{\bf BIC\,:}  \ $\lambda_{\textsf{BIC}}=\log(n)$
+\end{block}
+\vfill
+
+\begin{block}{\bf Attention!}
+AIC et BIC sont tr\`es utilis\'es, mais leur justification est \textcolor{blue}{asymptotique}: valables uniquement dans le cas $n\gg k$\\*
+o\`u $n=$ taille d'\'echantillon et $k=$ nombre de variables \bigskip
+
+Une analyse \textcolor{blue}{non-asymptotique} donne le choix:
+$\lambda\approx 1+2\log(k)$
+\end{block}
+}
+
+
+\begin{frame}[fragile]
+\frametitle{\bf  S\'election de mod\`ele avec BIC}
+\begin{small}
+\begin{verbatim}
+> library(leaps)
+> sel<-regsubsets(O3~.,method="exhaustive",data=ozone)
+> par(mfrow=c(1,2))
+> plot(summary(sel)$bic,xlab="dimension",col=2)
+> plot(sel)
+\end{verbatim}
+\end{small}
+\vspace{-0.5cm}
+
+\includegraphics[width=\textwidth]{images/BIC.pdf}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\bf R\'egression partielle (1/3)}
+
+{\bf Questions}
+\begin{itemize}
+\item le mod\`ele lin\'eaire par rapport \`a la variable $j$ est-il raisonnable?
+\item quelle est l'influence de la variable $j$?
+\end{itemize}
+\vfill
+
+\begin{block}{\bf R\'egression partielle par rapport \`a la variable $j$}
+Si \ $Y=\sum_{k}\theta_{k}X_{k}+\xi$ \ alors\bigskip
+
+\begin{small}
+lm($Y\sim -j$)\$residuals = $\theta_{j}$ lm($j \sim -j$)\$residuals + lm($\xi \sim -j$)\$residuals 
+\end{small}
+\end{block}
+\vfill
+
+Cette relation permet d'inspecter graphiquement la relation de lin\'earit\'e entre $Y$ et $X_{j}$
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{\bf  R\'egression partielle (2/3)}
+{\bf R\'egression partielle par rapport \`a Ne12:}
+\begin{small}
+\begin{verbatim}
+> PartialRes <- lm(O3~T15+Vx+O3v,data=ozone)$residuals
+> PartialNe12 <- lm(Ne12~T15+Vx+O3v,data=ozone)$residuals
+> plot(PartialNe12,PartialRes, col=2)
+> lines(lowess(PartialNe12,PartialRes,f=0.7), lty=2)
+\end{verbatim}
+\end{small}
+\vspace{-0.6cm}
+
+\centerline{\includegraphics[width=8cm]{images/PartialNe12.pdf}}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{\bf  R\'egression partielle (3/3)}
+{\bf R\'egression partielle par rapport \`a T15:}
+\begin{small}
+\begin{verbatim}
+> PartialRes <- lm(O3~Ne12+Vx+O3v,data=ozone)$residuals
+> PartialT15 <- lm(T15~Ne12+Vx+O3v,data=ozone)$residuals
+> plot(PartialT15,PartialRes, col=2)
+> lines(lowess(PartialT15,PartialRes,f=0.7), lty=2)
+> plot(O3~T15,data=ozone,col=2)
+> lines(lowess(ozone[c("T15","O3")],f=0.7), lty=2)
+\end{verbatim}
+\end{small}\vspace{-0.8cm}
+
+
+\centerline{\includegraphics[width=\textwidth]{images/PartialT15.pdf}}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
