@@ -1,0 +1,97 @@
+\documentclass{article}
+
+\usepackage{a4wide}
+\newcommand{\mois}{\textrm{\scriptsize mois}}
+\newcommand{\mai}{\textrm{\scriptsize mai}}
+\newcommand{\juin}{\textrm{\scriptsize juin}}
+\parindent=0mm
+
+\title{\bf Estimation bootstrap de l'efficacit\'e relative de deux s\'erums}
+\date{}
+%\author{Christophe Giraud}
+\author{Projet MAP 433}
+
+\begin{document}
+\maketitle
+%{\bf Mots clefs:} r\'egression logistique, test de parall\'elisme, estimation bootstrap.
+
+\bigskip
+Notre objectif est de comparer les niveaux d'anticorps anticoronavirus dans deux \'echantillons de s\'erum pr\'elev\'es en mai et en juin sur une m\^eme vache. Les donn\'ees sont disponibles \`a l'adresse suivante:\\* {\tt http://www.cmap.polytechnique.fr/$\sim$giraud/MAP433/data.Rdata} \\* 
+Ce sont des mesures de densit\'e optique $Y$ pour diff\'erents niveaux de dilution $d$. Pour chaque date et chaque dilution on dispose de deux mesures de densit\'e optique du s\'erum. 
+
+%\medskip
+%{\bf Travail \`a rendre} par courriel  \`a christophe.giraud@polytechnique.edu \\*
+%Vous me rendrez  un rapport au format pdf comprenant \smallskip
+%
+%\quad - les codes que vous avez utilis\'e (en int\'egralit\'e), \smallskip
+%
+%\quad - les sorties de votre code (r\'esultats num\'eriques, graphiques, etc), \smallskip
+%
+%\quad - les r\'eponses (concises mais compl\`etes) aux questions pos\'ees.
+\bigskip
+
+{\bf Mod\`ele statistique:} on mod\'elise la densit\'e $Y^{(\mois)}_{i,j}$ pour le mois "\textsf{mois}", la log-dilution $x_{i}=\log_{10}(1/d_i)$ (o\`u $d_{i}$ est la dilution du s\'erum),  et la mesure $j$ par
+$$Y_{i,j}^{(\mois)}=f(x_{i},\theta^{(\mois)})+\varepsilon_{i,j}^{(\mois)}, \quad i=1,\ldots,k,\ \ j=1,\ldots,r,\ \textrm{et } \mois=\mai,\juin$$
+avec 
+$$f(x,\theta)=\theta_{1}+{\theta_{2}-\theta_{1}\over 1+\exp(\theta_{3}(x-\theta_{4}))}$$
+et les $\varepsilon_{i,j}^{(\mois)}$ i.i.d. centr\'ees et de variance $\sigma^2$ inconnue. 
+
+Le but de l'analyse est d'estimer l'efficacit\'e relative $\rho$ du s\'erum de juin par rapport au s\'erum de mai. Le s\'erum de juin a une efficacit\'e relative $\rho$ par rapport au s\'erum de mai s'il se comporte comme une dilution $\rho$ du s\'erum de mai. Autrement dit, $\rho$ est tel que 
+\begin{equation}\label{hypo}
+f(x,\theta^{(\mai)})=f(x+\log_{10}\rho,\theta^{(\juin)}),\quad \textrm{pour tout }x\in[0,1].
+\end{equation}
+On estime $\theta^{(\mois)}$ par $\hat\theta^{(\mois)}$ minimisant 
+$$M^{(\mois)}(\theta)={1\over kr}\sum_{i=1}^k\sum_{j=1}^r(Y_{i,j}^{(\mois)}-f(x_{i},\theta))^{2},$$
+et on note $n=kr$, $\theta=(\theta^{(\mai)},\theta^{(\juin)})^{T}$ et $\hat\theta_{n}=(\hat\theta^{(\mai)},\hat\theta^{(\juin)})^{T}$.
+\section{Etude th\'eorique pr\'eliminaire}
+Le nombre $r$ de r\'ep\'etitions  \'etant suppos\'e fixe, on va \'etudier le comportement de $\hat \theta_{n}$ lorsque $n=kr\to \infty$.
+On note $\nabla_{\theta} f$ le gradient de $f$ par rapport \`a $\theta$ et on  suppose que
+$$ {1\over k}\sum_{i=1}^k(\nabla_{\theta} f)(\nabla_{\theta} f)^{T}(x_{i},\theta)= \underbrace{\int_{0}^1(\nabla_{\theta} f)(\nabla_{\theta} f)^{T}(x,\theta)\,dx}_{=H(\theta)}+O(1/k)$$ 
+\begin{enumerate}
+\item Montrez que $\sqrt{n}(\hat\theta_{n}-\theta)$ converge en loi lorsque $n\to \infty$ et identifiez la loi limite en fonction de $\sigma^2$ et des $H(\theta^{(\mois)})$. \smallskip
+
+\begin{small}
+\underline{Indications:} comme $\hat \theta^{(\mai)}$ et $\hat \theta^{(\juin)}$ sont ind\'ependants, \'etudiez les s\'epar\'ement. Et toute ressemblance avec le paragraphe 5.4.2 du poly n'est pas fortuite....
+\end{small}  \smallskip
+
+\item Pour estimer $\rho$, il faut commencer par v\'erifier que la relation (\ref{hypo}) est en accord avec les donn\'ees. Nous allons donc tester 
+$${\bf H0}:\ \theta_{i}^{(\mai)}=\theta_{i}^{(\juin)}\ i=1,2,3\quad \textrm{contre} \ {\bf H1}: \exists i\in\{1,2,3\} \ \textrm{tel que}\  \theta_{i}^{(\mai)}\neq\theta_{i}^{(\juin)}.$$
+Remarquez que {\bf H0} s'\'ecrit $A\theta=0$ pour une certaine matrice A de taille $3\times 8$ et de rang 3. Si $A\theta=0$, montrez que $\sqrt{n}A\hat\theta_{n}$ converge en loi vers une variable gaussienne $\mathcal{N}(0,\sigma^2V(\theta))$.
+\item Proposez un estimateur consistant $\hat \sigma^2_{n}$ de $\sigma^2$. On pose 
+$$T_{n}={n\over \hat\sigma^2_{n}} (A\hat\theta_{n})^{T}\widehat V(\hat\theta_{n})^{-1}A\hat\theta_{n},$$
+avec $\widehat V(\theta)$ la version empirique de $V(\theta)$.
+Quel est le comportement asymptotique de $T_{n}$ lorsque $A\theta\neq 0$? Montrez que si $A\theta=0$, la variable $T_{n}$ converge en loi vers un $\chi^2(3)$.
+\item Proposez un test de niveau asymptotique 5\% de {\bf H0} contre {\bf H1}.
+\end{enumerate}
+
+\section{Estimation des param\`etres et analyse du parall\'elisme}
+\begin{enumerate}
+\item Calculez $\hat\theta_{n}$ et $T_{n}$. L'hypoth\`ese {\bf H0} est-elle rejet\'ee?
+\item On note $\tilde\theta_{n}$ le minimiseur de $M^{(\mai)}(\theta^{(\mai)})+M^{(\juin)}(\theta^{(\juin)})$ sous la contrainte $A\theta=0$. On estime $\rho$ par $\hat\rho=10^{(\tilde\theta_{4}^{(\juin)}-\tilde\theta_{4}^{(\mai)})}$. calculez $\hat \rho$.
+\end{enumerate}
+
+\section{Intervalle de confiance par r\'e-\'echantillonage}
+En adaptant les calculs de la premi\`ere partie, on peut d\'eduire la loi limite de $\sqrt{n}(\hat \rho-\rho)$ et batir des intervalles de confiance asymptotique pour $\rho$. Lorsque la taille $n$ de l'\'echantillon est faible, cette approximation n'est cependant pas valide. Dans ce cas, une alternative int\'eressante est de construire un intervalle de confiance par bootstrap. Le principe du bootstrap est le suivant. Supposons qu'on puisse r\'ep\'eter $B$ fois l'exp\'erience biologique de fa\c{c}on ind\'ependantes. Pour l'exp\'erience $b$ on obtiendrait un estimateur $\hat\rho_{b}$ et on aurait donc un \'echantillon de $B$ estimateurs i.i.d. distribu\'es comme $\hat \rho$. Pour $B$ grand on pourrait donc estimer la distribution de $\hat \rho$ (et ainsi contruire un intervalle de confiance pour $\rho$). 
+
+Les m\'ethodes de r\'e-\'echantillonage sont une mani\`ere de mimer la r\'ep\'etition d'une exp\'erience. Les estimateurs $\hat\rho_{b}$ sont calcul\'es \`a partir d'un \'echantillon bootstrap
+$$Y_{i,j}^{(\mois),b}=f(x_{i},\tilde\theta_{n}^{(\mois)})+\varepsilon_{i,j}^{(\mois),b}$$
+o\`u les $\varepsilon^{b}$ sont obtenus de la fa\c{c}on suivante.  On note $\hat\varepsilon_{i,j}^{(\mois)}=Y_{i,j}^{(\mois)}-f(x_{i},\tilde\theta_{n}^{(\mois)})$ et $\tilde\varepsilon_{i,j}$ les $\hat\varepsilon_{i,j}$ recentr\'es (en retranchant la moyenne empirique). Pour chaque $b$, chaque variable $\varepsilon_{i,j}^{(\mois), b}$ est obtenue par un tirage al\'eatoire (avec remise) parmi les $\{\tilde \varepsilon_{i,j}^{(\mois)},\ i=1,\ldots,k, j=1,\ldots,r, \mois=\mai,\juin\}$. 
+
+Enfin, l'intervalle de confiance bootstrap de $\rho$ de niveau $\alpha$ est donn\'e par 
+$$I_{B}(\alpha)=[F^{*}_{B}(\alpha/2),F^{*}_{B}(1-\alpha/2)]\quad \textrm{o\`u} \ \ F^*_{B}(\alpha)=\inf\left\{x\in{\bf R}: \ {1\over B}\sum_{b=1}^{B}{\bf 1}_{\{\hat\rho_{b}\leq x\}}\geq \alpha\right\}.$$
+\begin{enumerate}
+\item Calculer l'intervalle $I_{B}(\alpha)$ pour $B=1000$ et $\alpha=5\%$.
+(Il est possible de montrer que $I_{B}(\alpha)$ est un intervalle de confiance de niveau asymptotique $\alpha$ lorsque $B,n\to\infty$.
+La preuve de ce r\'esultat est difficile.)
+\item %{\bf *Question facultative*} 
+L'approche pr\'ec\'edente est le bootstrap naif. On peut montrer qu'il vaut mieux chercher \`a estimer la loi de $\hat Z=\sqrt{n\over \hat s^2}(\hat \rho-\rho)$ par bootstrap pour obtenir un intervalle de confiance plus pr\'ecis. \\*
+{\bf a.} Quelle est la loi asymptotique de $\sqrt{n}(\hat \rho-\rho)$? en d\'eduire un estimateur $\hat s^2$ de sa variance asymptotique $s^2$. \\*
+{\bf b.} Pour chaque \'echantillon bootstrap on peut calculer la variance $\hat s_{b}^2$ et $\hat Z_{b}=\sqrt{n\over \hat s^2_{b}}(\hat \rho_{b}-\hat\rho)$. Les $\hat Z_{b}$ fournissent un \'echantillon bootstrap de $\hat Z$. On peut donc estimer pour $x\in {\bf R}$ la probabilit\'e ${\bf P}(\hat Z \leq x)$ par ${1\over B}\sum_{b=1}^{B}{\bf 1}_{\{\hat Z_{b}\leq x\}}$. 
+En d\'eduire un intervalle de confiance $I'_{B}(\alpha)$ de $\rho$ en fonction de $G^*(\alpha/2)$ et $G^*(1-\alpha/2)$ o\`u 
+$$G^*_{B}(\alpha)=\inf\left\{x\in{\bf R}: \ {1\over B}\sum_{b=1}^{B}{\bf 1}_{\{\hat Z_{b}\leq x\}}\geq \alpha\right\}.$$
+Il est possible de montrer que cet intervalle est de meilleure qualit\'e que $I_{B}(\alpha)$.
+\end{enumerate}
+
+
+\end{document}
+
