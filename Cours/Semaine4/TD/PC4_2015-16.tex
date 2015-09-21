@@ -3,7 +3,7 @@
 \usepackage[francais]{babel}
 %\usepackage[latin1]{inputenc}
 %\usepackage[applemac]{inputenc}
-\usepackage{a4wide,amsmath,amssymb,bbm,fancyhdr}
+\usepackage{a4wide,amsmath,amssymb,bbm,fancyhdr,xcolor}
 
 \RequirePackage[OT1]{fontenc}
 
@@ -157,12 +157,13 @@ Dans les mod\`eles suivants, calculer  l'information de Fisher associ\'ee aux $n
 \[
 \sqrt{n} \left( \bar X_n - \theta \right) \dlim \mathcal{N}(0, \theta(1-\theta))
 \]
-\item L'information de Fisher est 
+\item \textcolor{blue}{Attention, dans ce corrigé, $v$ désigne l'écart-type et
+    $v^2$ la variance.} L'information de Fisher est
 \[
 I_n(\theta) =  \frac{n}{v^4}  
 \begin{bmatrix}
   v^2 & 0 \\
-0 & 1/2
+  0 & 1/2
 \end{bmatrix}
 \]
 L'estimateur MV est unique et vaut
