@@ -405,7 +405,7 @@ $$\widehat{\boldsymbol{Y}}= \regressmat\estregress= \projX\boldsymbol{Y}.$$
 \frametitle{Pseudo-inverse de Moore-Penrose}
 Soit $\regressmat$ une matrice $n \times p$ avec $ p \leq n$. On suppose que $\regressmat$ est de rang $p$.
 \begin{itemize}
-\item $\regressmat^{\#}= (\regressmat^T \regressmat)^{-1} \regressmat^T$ est la \alert{pseudo-inverse} de Moore-Penrose. 
+\item $\regressmat^{\#}= (\regressmat^T \regressmat)^{-1} \regressmat^T$ est la \alert{pseudo-inverse} de Moore-Penrose.
 \item $\regressmat^{\#} \regressmat= Id_{p \times p}$: $\regressmat$ est un inverse à gauche de la matrice $\regressmat$.
 \item  $\regressmat \regressmat^{\#} = \regressmat (\regressmat^T \regressmat)^{-1} \regressmat^T$ est le projecteur sur l'espace image (l'espace vectoriel engendré par les colonnes de $\regressmat$).
 \item Méthode de calcul: décomposition QR ou décomposition en valeurs singulières.
@@ -429,9 +429,9 @@ Soit $\regressmat$ une matrice $n \times p$ avec $ p \leq n$. On suppose que $\r
 \begin{frame}
 \frametitle{Estimateur sans biais}
 \begin{theo}
-L'estimateur $\estregress$ est sans biais, \ie\ pour tout $\truetheta \in \Theta$, 
+L'estimateur $\estregress$ est sans biais, \ie\ pour tout $\truetheta \in \Theta$,
 \begin{itemize}
-\item $\PE_{\truetheta}[\estregress]= \truetheta$ 
+\item $\PE_{\truetheta}[\estregress]= \truetheta$
 \item $\PCov_{\truetheta}(\estregress)= \sigma^2 (\regressmat^T \regressmat)^{-1}$.
 \end{itemize}
 \end{theo}
@@ -529,14 +529,14 @@ Comme $(I-\projX)^2= (I-\projX)$, nous avons
 \begin{frame}
 \frametitle{Coefficient de détermination}
 \begin{itemize}
-\item \alert{Pythagore} 
+\item \alert{Pythagore}
 \begin{align*}
 \| \bY \|^2 &= \| \projX \bY \|^2 + \| (I - \projX) \bY \|^2 \\
             &= \| \predY \|^2 + \| \errpred \|^2
 \end{align*}
 \item \alert{Coefficient de détermination}
 \begin{align*}
-R^2 &= \frac{\|\bY\|^2}{\|\bY\|^2} 
+R^2 &= \frac{\|\bY\|^2}{\|\bY\|^2}
     &= 1 - \frac{\| \errpred \|^2}{\|\bY\|^2} = 1 - \frac{\mathrm{SCR}}{\mathrm{SCT}}
 \end{align*}
 où \alert{SCR} est la somme des carrés résiduels (RSS: residual sum of squares) et \alert{SCT} est la somme des carrés totaux.
@@ -593,8 +593,8 @@ suppose $\bnoise \sim {\mathcal N}(0,\mathrm{Id}_n)$. Alors on a plusieurs prori
 remarquables:
 \begin{itemize}
 \item  On sait expliciter la loi \alert{ exacte} (non-asymptotique!)
-de~$(\estregress,\hat{\sigma}^2)$.\\\vspace{1mm} 
-\item \alert{Ingrédient} : 
+de~$(\estregress,\hat{\sigma}^2)$.\\\vspace{1mm}
+\item \alert{Ingrédient} :
 \begin{itemize}
 \item loi des vecteurs gaussiens sont caractérisés par leur moyenne et matrice de
 variance-covariance.
@@ -620,12 +620,12 @@ variance-covariance.
 \begin{frame}
 \frametitle{Théorème de Cochran}
 \begin{theo}
-Soit $\bY \sim N(\mu,\sigma^2 I_n)$, $\mathcal{M}$ un sous espace de $\R^n$ de dimension $k$, $\Pi$ la matrice de projection orthogonale 
+Soit $\bY \sim N(\mu,\sigma^2 I_n)$, $\mathcal{M}$ un sous espace de $\R^n$ de dimension $k$, $\Pi$ la matrice de projection orthogonale
 sur $\mathcal{M}$ et $\Pi_{\perp}= I_n - \Pi$ la matrice de projection orthogonale sur $\mathcal{M}^\perp$. Nous avons
 \begin{enumerate}
-\item \alert<1> $\Pi \bY \sim \mathcal{N}(\Pi \mu, \sigma^2 \Pi)$, $\Pi_\perp \bY \sim \mathcal{N}(\Pi_\perp \mu, \sigma^2 \Pi_\perp)$
-\item \alert<2> les vecteurs $\Pi \bY$ et $\Pi_\perp \bY$ sont indépendants
-\item \alert<3> $\| \Pi(\bY - \mu) \|^2 / \sigma^2 \sim \chi^2_k$ et $\Pi_\perp(\bY-\mu) \|^2/\sigma^2 \sim \chi^2_{n-k}$.
+\item \alert<1>{$\Pi \bY \sim \mathcal{N}(\Pi \mu, \sigma^2 \Pi)$, $\Pi_\perp \bY \sim \mathcal{N}(\Pi_{\perp} \mu, \sigma^2 \Pi_{\perp})$}
+\item \alert<2>{les vecteurs $\Pi \bY$ et $\Pi_\perp \bY$ sont indépendants}
+\item \alert<3>{$\| \Pi(\bY - \mu) \|^2 / \sigma^2 \sim \chi^2_k$ et $\Pi_\perp(\bY-\mu) \|^2/\sigma^2 \sim \chi^2_{n-k}$}.
 \end{enumerate}
 \end{theo}
 \end{frame}
@@ -642,20 +642,20 @@ sur $\mathcal{M}$ et $\Pi_{\perp}= I_n - \Pi$ la matrice de projection orthogona
 \end{prop}
 \only<1>{
 \begin{itemize}
-\item Définition: $\estregress= \regressmat^{\#} \bY$ et $\bY \sim N(\regressmat \truebeta, \sigma^2 I_n)$. 
-\item   $\estregress \sim N(\regressmat^{\#} \regressmat \truebeta, \sigma^2 \{ \regressmat^{\#} \} \{ \regressmat^{\#} \}^T)$ 
+\item Définition: $\estregress= \regressmat^{\#} \bY$ et $\bY \sim N(\regressmat \truebeta, \sigma^2 I_n)$.
+\item   $\estregress \sim N(\regressmat^{\#} \regressmat \truebeta, \sigma^2 \{ \regressmat^{\#} \} \{ \regressmat^{\#} \}^T)$
 \item On conclut en remarquant $\regressmat^{\#} \regressmat= I_k$ et
 $\{ \regressmat^{\#} \} \{ \regressmat^{\#} \}^T = (\regressmat^T \regressmat)^{-1}$
 \end{itemize}}
-\only<2>{Application directe de Cochran en remarquant que 
+\only<2>{Application directe de Cochran en remarquant que
 $$
-(I-\projX) \PE_{\truetheta}[\bY] = (I - \projX) \bX \true \beta = 0.
+(I-\projX) \PE_{\truetheta}[\bY] = (I - \projX) \bX \truebeta = 0.
 $$
 }
 \only<3>{
 \begin{itemize}
-\item Le théorème de Cochran montre que $\projX \bY$ et $(I-\projX) \bY$ sont indépendants. 
-\item On conclut en remarquant que $\estregress= \regressmat^{\#} \bY = \regressmat^{\#} \projX \bY$. 
+\item Le théorème de Cochran montre que $\projX \bY$ et $(I-\projX) \bY$ sont indépendants.
+\item On conclut en remarquant que $\estregress= \regressmat^{\#} \bY = \regressmat^{\#} \projX \bY$.
 \end{itemize}
 }
 \end{frame}
@@ -685,9 +685,9 @@ $$
 \estregress_j -\truebeta_j \sim {\mathcal N}\big(0, \sigma^2 b_j)
 $$
 o\`u $b_j$ est le $j$ème élément diagonal de $\big(\regressmat^T
-\regressmat\big)^{-1}$. 
+\regressmat\big)^{-1}$.
 
-$$ \frac{\estregress_j -\truebeta_j}{\widehat \sigma_n \sqrt{b_j}} \sim t_{n-k}$$ 
+$$ \frac{\estregress_j -\truebeta_j}{\widehat \sigma_n \sqrt{b_j}} \sim t_{n-k}$$
 \alert{loi de Student \`a $n-k$ degrés de liberté}.
 
 $$ t_q = \frac{\xi}{\sqrt{\eta/q}}$$
@@ -734,46 +734,25 @@ réponse $Y$ =état du patient dans 1 an.
 \end{itemize}
 \end{frame}
 
-\section{Sélection de variables}
-
-\begin{frame}
-\frametitle{RSS (Residual Sum of Squares)} Modèle de
-régression\vspace{2mm} \centerline{$ Y_i= r(\truetheta, {\bf
-x}_i)+\xi_i, \quad i=1,\dots,n.$}
-\begin{itemize}
-\item \alert{Résidu:} si $\est$ est un estimateur de
-$\truetheta$,
-$$\widehat \xi_i = Y_i - r(\est, \alert{x}_i)
-\;\;\text{\alert{résidu} au point}\;i.$$
-\item \alert{RSS:} \alert{ Residual Sum of Squares}, somme
-résiduelle des carrés. Caractérise la qualité
-d'approximation.
-$${\rm RSS}(={\rm RSS}_{\est})=\|\widehat \xi\|^2
-= \sum_{i = 1}^n\big(Y_i - r(\est,\alert{x}_i)\big)^2.$$
-\item En régression \alert{linéaire}:
-$\boxed{{\rm RSS}= \|\alert{Y}-\regressmat\est\|^2.}$
-\end{itemize}
-\end{frame}
 
 
-%\section{Prévision}
+\section{Prévision}
 
 \begin{frame}
 \frametitle{Prévision}
 
 Modèle de régression \vspace{2mm} \centerline{$ Y_i=
-r(\truevbeta, \alert{\bx}_i)+ \sigma \xi_i, \quad i=1,\dots,n.$} 
+r(\truebeta, \alert{\bx}_i)+ \sigma \xi_i, \quad i=1,\dots,n.$}
 Régression
-\alert{linéaire}: $r(\truebeta, \alert{\bx}_i)=\truebeta^T 
-\bx_i$. 
+\alert{linéaire}: $r(\truebeta, \alert{\bx}_i)=\truebeta^T
+\bx_i$.
 Exemple: $\alert{\bx}_i$ vecteur de 10 variables explicatives
 (\texttt{age,sex,bmi,...}) pour patient $i$.
 \begin{itemize}
 \item \alert{Problème de prévision}:
 Un nouveau patient arrive avec son vecteur des 10 variables $
 \bx \in \R^{k}$. Donner la prévison de la valeur de fonction de
-régression $r(\truebeta,  \bx)=\truebeta^T\alert{x}_0$\\
-(=état du patient dans 1 an).
+régression $r(\truebeta,  \bx)=\truebeta^T \bx$\\
 \item Soit $\estregress$ un estimateur de $\truebeta$. \alert{Prévision par
 substitution:}
  \centerline{$\boxed{ \widehat Y(\bx) = r(\estregress, \alert{\bx}).}$}
@@ -788,24 +767,26 @@ substitution:}
 \frametitle{Moyenne et variance de la prévision}
 \begin{theorem}
 \begin{itemize}
-\item $\PE_{\truetheta}[\hat{Y}_n(\bx)]= \bx^T \truebeta$
-\item $\Var_{\truetheta}(\hat{Y}_n(\bx))= \sigma^2 \bx^T (\regressmat^T \regressmat)^{-1} \bx$
-\item $\PE_{\truetheta}[ (Y(\bx) - \hat{Y}_n(\bx))^2]= \sigma^2 (1 + \bx' (\regressmat^T \regressmat)^{-1} \bx)$
+\item \alert<1>{$\PE_{\truetheta}[\hat{Y}_n(\bx)]= \bx^T \truebeta$}
+\item \alert<2>{$\Var_{\truetheta}(\hat{Y}_n(\bx))= \sigma^2 \bx^T (\regressmat^T \regressmat)^{-1} \bx$}
+\item \alert<3>{$\PE_{\truetheta}[ (Y(\bx) - \hat{Y}_n(\bx))^2]= \sigma^2 (1 + \bx' (\regressmat^T \regressmat)^{-1} \bx)$}
 \end{itemize}
 \end{theorem}
 \only<1>{$\hat{Y}_n(\bx)= \bx^T \estregress$ et $\PE_{\truetheta}[\estregress]= \truebeta$}
 \only<2>{
 \begin{align*}
-\hat{Y}_n(\bx)- \bx^T \truebeta
-&= \bx^T (\regressmat^T \regressmat)^{-1} \regressmat^T \bY - \bx^T \truebeta \\
-&= \bx^T (\regressmat^T \regressmat)^{-1} \regressmat^T (\regressmat \truebeta + \sigma \bnoise) - \bx^T \truebeta \\
-&= \sigma \bx^T (\regressmat^T \regressmat)^{-1} \regressmat^T \bnoise
-\end{align*}}
+\hat{Y}_n(\bx)- \bx^T \truebeta&= \bx^T \regressmat^{\#} \bY - \bx^T \truebeta \\
+&= \bx^T \regressmat^{\#} (\regressmat \truebeta + \sigma \bnoise) - \bx^T \truebeta = \sigma \bx^T \regressmat^{\#} \bnoise
+\end{align*}
+car $\regressmat^{\#} \regressmat= I$. Par conséquent, comme $\bX^{\#} \{ \bX^{\#} \}^T= (\bX^T \bX)^{-1}$, 
+$$
+\Var_{\truetheta}(\hat{Y}_n(\bx))= \sigma^2 \bx^T \regressmat^{\#} \PE_{\truetheta}[\bnoise \bnoise^T] \{ \regressmat^{\#} \}^T \bx
+$$}
 \only<3>{
 \begin{align*}
 \PE_{\truetheta}[ (Y(\bx) - \hat{Y}_n(\bx))^2]
-&= \PE_{\truebeta}[ (Y(\bx) - \PE_{\truebeta}[\hat{Y}_n(\bx)])^2] + \Var_{\truetheta}(\hat{Y}_n(\bx)) \\
-&= \PE_{\truebeta}[ (Y(\bx) - \bx^T \truebeta)^2] +  \sigma^2 \bx^T (\regressmat^T \regressmat)^{-1} \bx
+&= \PE_{\truetheta}[ (Y(\bx) - \PE_{\truetheta}[\hat{Y}_n(\bx)])^2] + \Var_{\truetheta}(\hat{Y}_n(\bx)) \\
+&= \PE_{\truetheta}[ (Y(\bx) - \bx^T \truebeta)^2] +  \sigma^2 \bx^T (\regressmat^T \regressmat)^{-1} \bx
 \end{align*}
 }
 \end{frame}
@@ -813,24 +794,14 @@ substitution:}
 
 \begin{frame}
 \frametitle{Prévision: modèle linéaire gaussienne}
-\begin{itemize}
-\item Traitement sur l'exemple: $r(\truetheta, \alert{x})=\truetheta^T{\bf
-x}$, régression \alert{linéaire gaussienne} et $\boxed{\widehat Y = {\bf
-x}_0^T\estregress}$
-\item \underline{Hyp. 1} : $\bnoise \sim {\mathcal N}(0,\sigma^2\mathrm{Id}_n)$.
-\item \underline{Hyp. 2} : $\regressmat^T \regressmat>0$.
-\end{itemize}
 \begin{prop}
-\begin{itemize}
-\item[(i)] $\widehat Y \sim {\mathcal N}\big(\bx_0^T\truebeta, \sigma^2 {\bf
-x}_0^T\big(\regressmat^T\regressmat\big)^{-1}\alert{x}_0\big)$
-\item[(ii)] $\widehat Y- \bx_0^T\truebeta$ et $\bY-\regressmat \estregress$ sont
+Supposons que $\bnoise \sim {\mathcal N}(0,\sigma^2\mathrm{Id}_n)$.
+\begin{enumerate}
+\item $\widehat{Y}(\bx) \sim {\mathcal N}\big(\bx ^T\truebeta, \sigma^2 \bx^T \big(\regressmat^T\regressmat\big)^{-1} \bx \big)$
+\item $\widehat{Y}(\bx)$ et $(I - \projX) \bY$ sont
 indépendants.
-\end{itemize}
+\end{enumerate}
 \end{prop}
-Rappel: $\|\boldsymbol{Y}-\regressmat \estregress\|^2 \sim
-\sigma^2\chi^2(n-k)$ \alert{ loi du Chi 2 à $n-k$ degrés de
-liberté}.
 \end{frame}
 
 \begin{frame}
@@ -838,20 +809,20 @@ liberté}.
 \begin{itemize}
 \item D'après la Proposition,
 $$
-\eta:=\frac{\widehat Y - \bx_0^T\truebeta}{\sqrt{\sigma^2 {\bx_0^T\big(\regressmat^T\regressmat\big)^{-1}\alert{\bx}_0}}} 
+\eta:=\frac{\widehat{Y}(\bx) - \bx^T\truebeta}{\sqrt{\sigma^2 {\bx^T\big(\regressmat^T\regressmat\big)^{-1}\alert{\bx}}}}
 \sim {\mathcal N}(0,1).
 $$
 \item On replace $\sigma^2$ inconnu par $\widehat \sigma_n^2 =
 {\|(I-\projX) \bY \|^2}/({n-k}).$
 \item \alert{$t$-statistique:}
 $$
-t:= \frac{\widehat Y -\alert{\bx}_0^T\truebeta}{\sqrt{\widehat
-\sigma_n^2 \alert{\bx}_0^T\big(\regressmat^T\regressmat\big)^{-1}{
-\bx_0}}}=\frac{\eta}{\sqrt{\chi/(n-k)}}\sim t_{n-k},
+t:= \frac{\widehat{Y}(\bx) -\alert{\bx}^T\truebeta}{\sqrt{\widehat
+\sigma_n^2 \alert{\bx}^T\big(\regressmat^T\regressmat\big)^{-1}{
+\bx}}}=\frac{\eta}{\sqrt{\chi/(n-k)}}\sim t_{n-k},
 $$
 \alert{loi de Student à $n-k$ degrés de liberté}, car $\eta\sim
 {\mathcal N}(0,1)$, $\chi:=\|\boldsymbol{Y}-\regressmat
-\estregress\|^2/\sigma^2\sim \chi^2(n-k)$ et $\eta\ind\chi$.
+\estregress\|^2/\sigma^2\sim \chi^2(n-k)$ et $\eta \indep \chi$.
 \end{itemize}
 \end{frame}
 
@@ -859,23 +830,21 @@ $$
 \frametitle{Prévision: intervalle de confiance}
 \begin{eqnarray*}
 &&\PP \Big(-q_{1-\frac{\alpha}{2}}(t_{n-k}) \le \frac{\widehat Y
--\alert{x}_0^T\truetheta} {\sqrt{\widehat \sigma_n^2 {\bf
-x}_0^T\big(\regressmat^T\regressmat\big)^{-1}\alert{x}_0}}\le
+- \bx^T\truebeta} {\sqrt{\widehat \sigma_n^2  \bx^T\big(\regressmat^T\regressmat\big)^{-1} \bx }}\le
 q_{1-\frac{\alpha}{2}}(t_{n-k})\Big) \\\hspace{4mm} &&= \PP(-
 q_{1-\frac{\alpha}{2}}(t_{n-k}) \le t\le
 q_{1-\frac{\alpha}{2}}(t_{n-k})) = 1-\alpha.
 \end{eqnarray*}
 $\Longrightarrow$ \alert{intervalle de confiance} de niveau
-$1-\alpha$ pour $r(\truetheta,\alert{x}_0)=\alert{x}_0^T\truetheta$ est
+$1-\alpha$ pour $r(\truebeta,\bx)=\bx^T\truebeta$ est
 \alert{$[r_L, r_U]$}, o\`u:
-\begin{eqnarray*}
-\alert{r_L}&=&\widehat Y -
+\begin{align*}
+\alert{r_L}&=\widehat Y -
 q_{1-\frac{\alpha}{2}}(t_{n-k})\sqrt{\widehat \sigma_n^2
-\alert{x}_0^T\big(\regressmat^T\regressmat\big)^{-1}\alert{x}_0},\\
-\alert{r_U}&=& \widehat Y +
-q_{1-\frac{\alpha}{2}}(t_{n-k})\sqrt{\widehat \sigma_n^2 {\bf
-x}_0^T\big(\regressmat^T\regressmat\big)^{-1}\alert{x}_0}.
-\end{eqnarray*}
+\bx^T\big(\regressmat^T\regressmat\big)^{-1}\bx},\\
+\alert{r_U}&= \widehat Y +
+q_{1-\frac{\alpha}{2}}(t_{n-k})\sqrt{\widehat \sigma_n^2 \bx^T\big(\regressmat^T\regressmat\big)^{-1} \bx}.
+\end{align*}
 \end{frame}
 
 
@@ -960,27 +929,31 @@ $$
 
 \begin{frame}
 \frametitle{Régression non-linéaire}
-\begin{itemize}
-\item On observe
-$$(\bx_1,Y_1),\ldots, (\bx_n,Y_n),$$
+On observe $$(\bx_1,Y_1),\ldots, (\bx_n,Y_n),$$
 où
-$$\boxed{Y_i = r(\alert{\truetheta},\bx_i)+\xi_i,\;\;i=1,\ldots,n}$$
-avec
-$$\bx_i\in \R^k,\;\;\text{et}\;\; \alert{\truetheta \in \Theta \subset \R^d}.$$
-\item Si $\xi_i \sim_{\text{i.i.d.}} {\mathcal N}(0,\sigma^2)$,
-$${\mathcal L}_n(\truetheta, Y_1,\ldots, Y_n) \propto \exp\Big(-\frac{1}{2\sigma^2}\sum_{i = 1}^n\big(Y_i-r(\truetheta,\bx_i)\big)^2\Big)$$
-et l'estimateur du \alert{maximum de vraisemblance} est obtenu en minimisant la fonction
-$$\truetheta \leadsto \sum_{i = 1}^n\big(Y_i-r(\truetheta,\bx_i)\big)^2.$$
-\end{itemize}
+$$\boxed{Y_i = r(\alert{\truebeta},\bx_i)+ \sigma \xi_i,\;\;i=1,\ldots,n}$$
+avec $\bx_i\in \R^k$, et $\truebeta \in \Theta \subset \R^d$, $\sigma \in \rset^+$.\\
+\only<1>
+{Si $\xi_i \sim_{\text{i.i.d.}} {\mathcal N}(0,1)$, la fonction de vraisemblance est donnée par
+$${\mathcal L}_n(\truetheta, Y_1,\ldots, Y_n) \propto \exp\Big(-\frac{1}{2\sigma^2}\sum_{i = 1}^n\big(Y_i-r(\truebeta,\bx_i)\big)^2\Big)$$
+}
+\only<2>{
+L'estimateur du \alert{maximum de vraisemblance} $\estregress$ de $\truebeta$ est obtenu en minimisant la fonction
+$$\curbeta \leadsto \sum_{i = 1}^n\big(Y_i-r(\curbeta,\bx_i)\big)^2.$$
+L'estimateur du maximum de vraisemblance de $\sigma^2$ est donné par
+$$
+\hat{\sigma}_n^2 = n^{-1} \sum_{i=1}^n \big(Y_i-r(\estregress,\bx_i)\big)^2.
+$$
+}
 \end{frame}
 
 \begin{frame}
 \frametitle{Moindre carrés non-linéaires}
 \begin{df}
 \begin{itemize}
-\item $M$-estimateur associé à la \alert{fonction de contraste} $\psi:\Theta \times \alert{\R^k}\times \R\rightarrow \R$ : tout estimateur $\est$ satisfaisant
-$$\sum_{i = 1}^n \psi(\est, \bx_i, Y_i) = \max_{a \in \Theta} \sum_{i = 1}^n \psi(a,\bx_i,Y_i).$$
-\item Estimateur des \alert{moindres carrés non-linéaires} : associé au contraste $\psi(a,\bx,y) = -\big(y-r(a,\bx)\big)^2$.
+\item $M$-estimateur associé à la \alert{fonction de contraste} $\psi:\Theta \times \alert{\R^k}\times \R\rightarrow \R$ : tout estimateur $\estregress$ satisfaisant
+$$\sum_{i = 1}^n \psi(\estregress, \bx_i, Y_i) = \max_{\curbeta \in \Theta} \sum_{i = 1}^n \psi(\curbeta,\bx_i,Y_i).$$
+\item Estimateur des \alert{moindres carrés non-linéaires} : associé au contraste $\psi(\curbeta,\bx,y) = \big(y-r(\curbeta,\bx)\big)^2$.
 \end{itemize}
 \end{df}
 \begin{itemize}
