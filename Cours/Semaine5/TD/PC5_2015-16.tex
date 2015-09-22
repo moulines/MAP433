@@ -1,0 +1,189 @@
+\documentclass[a4paper,11pt,fleqn]{article}
+
+\usepackage[francais]{babel}
+%\usepackage[latin1]{inputenc}
+%\usepackage[applemac]{inputenc}
+\usepackage{a4wide,amsmath,amssymb,bbm,fancyhdr,hyperref, graphicx}
+
+\RequirePackage[OT1]{fontenc}
+
+\usepackage[latin1]{inputenc}
+% THE variable
+\newcommand{\thisyear}{Ann\'ee 2015-2016}
+
+% Definitions (pas trop!)
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\rset}{\ensuremath{\mathbb{R}}}
+\renewcommand{\P}{\ensuremath{\operatorname{P}}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\V}{\ensuremath{\mathbb{V}}}
+\newcommand{\gaus}{\ensuremath{\mathcal{N}}}
+\newcommand{\1}{\ensuremath{\mathbbm{1}}}
+\newcommand{\dlim}{\ensuremath{\stackrel{\mathcal{L}}{\longrightarrow}}}
+\newcommand{\plim}{\ensuremath{\stackrel{\mathrm{P}}{\longrightarrow}}}
+\newcommand{\PP}{\ensuremath{\mathbb{P}}}
+\newcommand{\p}{\ensuremath{\mathbb{P}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\pa}[1]{\left(#1\right)}
+\newcommand{\ac}[1]{\left\{#1\right\}}
+
+
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\hatbY}{\widehat{\bY}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\bxi}{\mathbf{\xi}}
+\newcommand{\G}{\mathbf{G}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\bL}{\mathbf{L}}
+
+
+% Style
+\pagestyle{fancyplain}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\renewcommand{\subsectionmark}[1]{}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\footnotesize {\sf
+MAP433 Statistique, \thisyear / PC5}}}
+\rhead[\fancyplain{}{\footnotesize {\sf MAP433 Statistique,
+\thisyear / \rightmark}}]{\fancyplain{}{\thepage}}
+\cfoot[\fancyplain{}{}]{\fancyplain{}{}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\parindent=0mm
+
+% Titre
+%\title{{\bf MAP433 Statistique}}
+\title{\includegraphics[width=3.5cm]{logo_x.jpg}\hfill {\bf MAP433 Statistique}\hfill \quad\quad\quad\quad\quad\quad \ }
+\author{{\bf PC 5: R\'egression}}
+\date{25 septembre 2015}
+
+\begin{document}
+
+\maketitle
+
+
+
+
+\section{Mod\`ele de r\'egression multiple}
+On consid\`ere le mod\`ele de regression multiple
+\[
+\bY = \beta_{0} \be + \X \beta+ \sigma \bxi, \quad\textrm{o\`u}\ \ 
+\E[\bxi]=0,~\E[\bxi \bxi^T]= I_n,\ \be=(1,1,\ldots,1)^T
+\] avec $\X$ une
+matrice $n\times k$ de rang $k$ et $\bY$, $\bxi$ des vecteurs de
+$\mathbb{R}^n$.  Les param\`etres $\beta_{0}\in\R$ et $\beta\in\R^k$ sont
+inconnus. On note $\hat \beta_{0}$ et $\hat \beta$ les estimateurs des moindres
+carr\'es de $\beta_{0}$ et $\beta$.
+\begin{enumerate}
+\item On note \quad $\hatbY = \hat \beta_{0} \be+ \X \hat \beta$ \qquad
+  $\overline Y= n^{-1} \be^T \bY$ et $\quad \overline{\hatbY} = n^{-1} \be^T
+  \hatbY$. Montrer que $\overline{\hatbY} =\overline Y$.  En d\'eduire que
+  $\overline Y = \hat\beta_{0}+ \left(n^{-1} \be^T \X \right) \hat \beta$.
+\item Montrer l'\'equation d'analyse de la variance:
+  $$\|\bY- \overline Y \be\|^2=\|\bY-\hatbY\|^2+\|\hatbY-\overline Y \be\|^2.$$
+  En
+  d\'eduire que le {\it coefficient de d\'etermination}
+  $$R^2=\frac{\sum_{i=1}^n(\hat Y_i-\bar Y)^2}{\sum_{i=1}^n(Y_i-\bar Y)^2}
+  \qquad \text{o\`u} \ \ \bY = 
+  \begin{bmatrix}
+    Y_1 \\
+    \cdots \\
+    Y_n
+  \end{bmatrix} \qquad \qquad \hatbY = 
+  \begin{bmatrix}
+    \hat Y_1 \\
+    \cdots \\
+    \hat Y_n
+  \end{bmatrix}
+  $$
+  est toujours inf\'erieur \`a 1.
+\item Supposons que $\bZ=[\be,\X]$ est de rang $k+1$.  Calculez en fonction de
+  $\bZ$ la matrice de covariance de $(\hat \beta_{0},\hat\beta)$. Comment
+  acc\`ede-t-on \`a Var$(\hat\beta_{j})$, pour $j=0,\ldots,k$?
+\item Proposer un estimateur sans biais de $\sigma^2$ puis de la matrice de
+  covariance de $(\hat \beta_{0},\hat \beta)$.
+\item On suppose dor\'enavant que $\beta_{0}=0$ et donc \quad $\bY=\X \beta+
+  \sigma \bxi$ \quad avec $\E[\bxi]=0$ et $\E[\bxi\bxi^T]=I_n$.  L'estimateur
+  des moindres carr\'es $\tilde \beta$ dans ce mod\`ele est-il \'egal \`a $\hat
+  \beta$?
+\item A-t-on la relation $\overline{\hatbY} =\overline Y$? Que dire du $R^2$
+  dans ce mod\`ele?
+\end{enumerate}
+
+\section{Le mod\`ele ANOVA}
+On dispose d'observations de variables al\'eatoires
+$$
+Y_{ij}= m_i + \xi_{ij}, \quad i=1,\dots, k, \quad j=1,\dots, l,
+$$
+o\`u $\m=(m_1,\dots,m_k)^T\in \R^k$ et les $\xi_{ij}$ sont des variables
+al\'eatoires i.i.d. de loi ${\cal N}(0,\sigma^2)$.
+\begin{enumerate}
+\item Montrer qu'il s'agit d'un mod\`ele de r\'egression lin\'eaire
+avec la matrice ${\bf X}$ que l'on pr\'ecisera. Que vaut $B={\bf X}^T{\bf X}$?
+\item Montrer que la condition $m_1=m_2=\dots=m_k$  s'\'ecrit sous la forme $\G \m =0$ avec une
+matrice $\G$ que l'on pr\'ecisera.
+\item On estime $\m$ par l'estimateur des moindre carr\'es $\widehat \m$.
+  Quelle est la covariance de $\widehat \m$?
+\item Proposer un estimateur de $\G \m$. Quel est son biais? sa covariance?
+\item Proposer un estimateur $\hat \sigma^2$ de $\sigma^2$. Quelle est sa distribution?
+\end{enumerate}
+
+
+
+
+
+\section{Th\'eor\`eme de Gauss-Markov}
+On consid\`ere le mod\`ele de r\'egression \quad
+$\underset{(n,1)}{\bY}=\underset{(n,k)}{\X}\underset{(k,1)}{\beta} +\sigma
+\underset{(n,1)}{\bxi}.$ On suppose que $\X$ est une matrice d\'eterministe,
+$\E[\bxi]=0$, $\E[\bxi\bxi^T]= I_n$, Rang$(\X)=k$. On note $\hat{\beta}$
+l'estimateur des MC de $\beta$.
+\begin{enumerate}
+\item Montrer que $\hat{\beta}$ est sans biais et expliciter
+sa matrice de covariance.
+\item Soit $\tilde\beta$ un estimateur de $\beta$ lin\'eaire en $\bY$, i.e.,
+  $\tilde\beta = \bL \bY$ pour une matrice $\bL \in\R^{k\times n}$ d\'eterministe.
+  Donner une condition n\'ecessaire et suffisante sur $\bL$ pour que $\tilde\beta$
+  soit sans biais. On supposera maintenant cette hypoth\`ese v\'erifi\'ee.
+\item Calculer la matrice de covariance de $\tilde\beta$.
+En posant $\Delta=\bL-(\X^T \, \X)^{-1} \X^T$ montrer que $\Delta \X=0$ et cov$(\tilde \beta)=\ $cov$(\hat\beta)+\sigma^2\Delta\Delta^T$.
+En d\'eduire que
+$$
+\E[(\tilde\beta - \beta)(\tilde\beta - \beta)^T]\ge \E[(\hat{\beta} -
+\beta)(\hat{\beta} - \beta)^T] \quad\textrm{(in\'egalit\'e au sens matriciel).}
+$$
+\item En passant aux risques quadratiques $\E\big[\|\tilde\beta -
+  \beta\|^2\big]$ et $\E\big[\|\hat{\beta} - \beta\|^2\big]$, en d\'eduire que
+  l'estimateur des MC est optimal dans la classe de tous les estimateurs
+  lin\'eaires sans biais.
+\end{enumerate}
+
+
+\section{R\'egression Ridge}
+On consid\`ere le mod\`ele de r\'egression \qquad
+$\underset{(n,1)}{\bY}=\underset{(n,k)}{\X}\underset{(k,1)}{\beta}+ \sigma
+\underset{(n,1)}{\bxi}$. \quad On suppose que $\X$ est une matrice
+d\'eterministe, $\E[\bxi]=0$, $\E[\bxi\bxi^T]=I_n$.
+\begin{enumerate}
+\item On suppose que $k> n$. Que dire de l'estimation par moindres carr\'es?
+\item On appelle estimateur \texttt{Ridge regression} de param\`etre de
+  r\'egularisation $\lambda>0$ l'estimateur
+  $$
+  \hat \beta_{\lambda}= \arg \min_{\beta\in\R^k}\left\{ \|\bY-
+    \X\beta\|^2+\lambda \|\beta\|^2\right\}.
+  $$
+  Exprimez $\hat \beta_{\lambda}$ en fonction de $\X$, $\bY$ et $\lambda$.
+  Cet estimateur est-il d\'efini pour $k>n$?
+\item Calculez la moyenne et la matrice de covariance de
+l'estimateur Ridge. Est-il sans biais?
+\item On suppose maintenant que $k=1$, ce qui correspond au mod\`ele de
+  r\'egression simple.  Montrer qu'il existe une valeur de $\lambda$ telle que,
+  pour certaines valeurs de $\beta$, le risque $\E\big[(\hat\beta_\lambda -
+  \beta)^2\big]$ de l'estimateur Ridge de param\`etre $\lambda$ est inf\'erieur
+  au risque $\E\big[(\hat\beta_0 - \beta)^2\big]$ de l'estimateur des MC.
+\end{enumerate}
+
+
+
+\end{document}
