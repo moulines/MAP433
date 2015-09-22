@@ -81,25 +81,20 @@ avec comme \alert{paramètre la fonction $r(\cdot)$}+ un \alert{jeu d'hypothèse
 \begin{frame}
 \frametitle{régresseurs aléatoires}
 \begin{df}
-Modèle de régression \alert{à design aléatoire} = donnée de
-l'observation
-$$(\bX_1,Y_1),\ldots, (\bX_n,Y_n)$$
-avec $(Y_i,\bX_i)\in \R\times \R^k$ \alert{i.i.d.},
-et\\\vspace{3mm} \centerline{$Y_i =
-r(\alert{\truebeta},\bX_i)+ \sigma \xi_i,\;\;
-\E\big[\xi_i|\bX_i\big]=0,\;\;\alert{
-\truetheta \in \Theta \subset \R^d}.$}
+Données: $(\bX_1,Y_1),\ldots, (\bX_n,Y_n)$ avec $(Y_i,\bX_i)\in \R\times \R^k$ \alert{i.i.d.},
+et
+$$Y_i = r(\alert{\truebeta},\bX_i)+ \sigma \xi_i,\;\;
+\E_{\truetheta}\big[\xi_i|\bX_i\big]=0
+$$
 \begin{itemize}
-\item $\bx \leadsto r(\alert{\truebeta},\bx)$ fonction de \alert{ régression}, connue au paramètre
-$\truebeta$ près.
-\item $\bX_i$ = variables explicatives, co-variables, prédicteurs;
-$(\bX_1,\ldots,\bX_n)$ = \alert{design}.
+\item \alert<1>{$\bx \leadsto r(\alert{\truebeta},\bx)$ fonction de \alert{ régression}, connue au paramètre
+$\truebeta$ près;}
+\item \alert<2>{$\bX_i$ = variables explicatives, co-variables, prédicteurs;}
+\item \alert<3>{$\truetheta= (\truebeta,\sigma^2) \in \rset^d \times \rset_+^*$ paramètres.}
 \end{itemize}
 \end{df}
 \end{frame}
 
-
-\subsection{Régression à design déterministe}
 
 
 %\begin{frame}
@@ -122,24 +117,22 @@ $(\bX_1,\ldots,\bX_n)$ = \alert{design}.
 \begin{frame}
 \frametitle{Modèle de régression à design déterministe}
 \begin{df}
-Modèle de régression \alert{à design déterministe} = donnée de
-l'observation
-$$(\bx_1,Y_1),\ldots, (\bx_n,Y_n)$$
-avec $Y_i \in \R, \bx_i\in \R^k$, et \\\vspace{3mm} \centerline{$Y_i
-=
-r(\alert{\truebeta},\bx_i)+ \sigma \xi_i,\;\;\E_{\truetheta}\big[\xi_i\big]=0,\;\;\alert{
-\truetheta \in \Theta \subset \R^d \times \R_+}.$}
+Données: $(\bx_1,Y_1),\ldots, (\bx_n,Y_n)$ avec $Y_i \in \R, \bx_i\in \R^k$, et 
+$$Y_i =
+r(\alert{\truebeta},\bx_i)+ \sigma \xi_i,\;\;\E_{\truetheta}\big[\xi_i\big]=0,
+$$
 \begin{itemize}
 %\item $\bx \leadsto r(\alert{\truetheta},\bx)$ fonction de \alert{ régression}, connue au paramètre
 %$\truetheta$ près.
-\item $\bx_i$ déterministes, donnés (ou choisis) : plan d'expérience, points du \og design\fg{}.
-\item Hypothèses sur les $\xi_i$ : à débattre. \alert{Pour simplifier}, les variables $\xi_i$ sont centrées, $\PE_{\truetheta}[\xi_i]=0$,
-décorrélées, $\PE_{\truetheta}[\xi_i \xi_j]= 0$ si $i \ne j$ et de variance unité $\PE[\xi_i^2]= 1$ \alert{ (homoscédasticité)}.
-\item \alert{ Attention !} Les $Y_i$ ne sont \alert{pas identiquement distribuées}.
+\item \alert<1>{$\bx_i$ déterministes, donnés (ou choisis) : plan d'expérience.}
+\item \alert<2>{Hypothèses sur les $\xi_i$ : à débattre. \alert{Pour simplifier}, les variables $\xi_i$ sont centrées, $\PE_{\truetheta}[\xi_i]=0$,
+décorrélées, $\PE_{\truetheta}[\xi_i \xi_j]= 0$ si $i \ne j$ et de variance unité $\PE[\xi_i^2]= 1$ \alert{ (homoscédasticité)}.}
+\item \alert<3>{ Attention ! Les $Y_i$ ne sont pas identiquement distribuées.}
+\item \alert<4>{$\truetheta= (\truebeta,\sigma^2) \in  \R^d \times \R_+.$}
 \end{itemize}
 \end{df}
 
- \underline{Question}: Comment estimer $\truetheta=(\truebeta,\sigma)$ dans ce modèle?
+\underline{Question}: Comment estimer $\truetheta=(\truebeta,\sigma)$ dans ce modèle?
 
 \end{frame}
 
@@ -150,7 +143,7 @@ décorrélées, $\PE_{\truetheta}[\xi_i \xi_j]= 0$ si $i \ne j$ et de variance u
 \begin{itemize}
 \item  Modèle de régression à design déterministe :
 $$Y_i =
-r({\truebeta},\bx_i)+\ \sigma xi_i,\;\;\truetheta \in \Theta\subset  \R^d \times \rset_+.$$
+r({\truebeta},\bx_i)+\ \sigma \xi_i,\;\;\truetheta \in \Theta\subset  \R^d \times \rset_+.$$
 \item  Supposons: $\xi_i \sim {\mathcal N}(0,1)$, i.i.d.
 \item On a alors le modèle de \alert{régression gaussienne}.
 Comment estimer $\truetheta$?  \alert{On sait expliciter la loi
@@ -172,38 +165,39 @@ principe du maximum de vraisemblance.
 \begin{frame}
 \frametitle{EMV pour régression gaussienne}
 \begin{itemize}
-\item  Le modèle $\{\PP_\truetheta^n \alert{ = \text{loi de }\;(Y_1,\ldots, Y_n)},\truetheta \in \R^k\}$ est \alert{dominé} par
+\item  Le modèle $\{\PP_\truetheta^n \alert{ = \text{loi de }\;(Y_1,\ldots, Y_n)},\truetheta = (\truebeta,\sigma^2) \in \R^k \times \rset_+^* \}$ est \alert{dominé} par
 $\mu^n(dy_1\ldots dy_n) = dy_1\ldots dy_n.$
 \item D'où
-\begin{align*}
+\[
  \frac{d\PP_\truetheta^n}{d\mu^n}(y_1,\ldots, y_n)
-  =\; &\prod_{i=1}^n \tfrac{1}{\sqrt{2\pi \sigma^2}}\exp
-  \big(-\tfrac{1}{2\sigma^2}(y_i-r({\truebeta},\bx_i))^2\big) \\
-\;= & \tfrac{1}{(\sqrt{2\pi \sigma^2})^{n}}
-\exp\big(-\tfrac{1}{2\sigma^2}\sum_{i =
-1}^n\big(y_i-r({\truebeta},\bx_i)\big)^2\big).
-\end{align*}
+  =\; \prod_{i=1}^n \tfrac{1}{\sqrt{2\pi \sigma^2}}\exp
+  \big(-\tfrac{1}{2\sigma^2}(y_i-r({\truebeta},\bx_i))^2\big) 
+%\;= & \tfrac{1}{(\sqrt{2\pi \sigma^2})^{n}}
+%\exp\big(-\tfrac{1}{2\sigma^2}\sum_{i =
+%1}^n\big(y_i-r({\truebeta},\bx_i)\big)^2\big).
+\]
 \item La fonction de vraisemblance
 $$\boxed{{\mathcal L}_n(\truetheta, Y_1,\ldots, Y_n)
-\propto \exp\Big(-\frac{1}{2\sigma^2}\sum_{i = 1}^n\big(Y_i-
+= \tfrac{1}{(\sqrt{2\pi \sigma^2})^{n}} \exp\Big(-\frac{1}{2\sigma^2}\sum_{i = 1}^n\big(Y_i-
 r({\truebeta},\bx_i)\big)^2\Big)}$$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Estimateur des moindres carrés} Maximiser la
-\alert{ vraisemblance} en régression gaussienne = minimiser
-la somme des carrés: $$ \sum_{i = 1}^ne
-\big(Y_i-r({\truebeta},\bx_i)\big)^2 \to \min_{\truetheta \in\Theta}.
-$$
-\begin{df}
-Estimateur des \alert{moindres carrés} : tout estimateur
-$\estregress$ t.q. \centerline{$\estregress \in \arg \min_{\truebeta \in
-\Theta}\sum_{i = 1}^n \big(Y_i-r({\truebeta},\bx_i)\big)^2.$}
-\end{df}
+\frametitle{Estimateur des moindres carrés} 
+Maximiser la
+\alert{ vraisemblance} en régression gaussienne 
+\begin{align*}
+\estregress &\in \argmin_{\curbeta \in \rset^k} \sum_{i = 1}^n \big(Y_i-r(\curbeta,\bx_i)\big)^2 \\
+\hat{\sigma}_n^2 &= n^{-1} \sum_{i=1}^n (Y_i - r(\estregress,\bx_i))^2
+\end{align*}
+%\begin{df}
+%Estimateur des \alert{moindres carrés} : tout estimateur
+%$\estregress$ t.q. \centerline{$\estregress \in \arg \min_{\truebeta \in
+%\Theta}\sum_{i = 1}^n \big(Y_i-r({\truebeta},\bx_i)\big)^2.$}
+%\end{df}
 \begin{itemize}
-\item  L'EMC est un M-estimateur. Pour le
-modèle de régression gaussienne: $\boxed{\rm EMV = EMC}$.
+\item  L'estimateur $\estregress$ est appelé l'\alert{estimateur des moindres carrés}. Il peut être appliqué même dans un cas non gaussien.
 \item \alert{ Existence, unicité.}
 \end{itemize}
 \end{frame}
@@ -403,10 +397,10 @@ $$\widehat{\boldsymbol{Y}}= \regressmat\estregress= \projX\boldsymbol{Y}.$$
 
 \begin{frame}
 \frametitle{Pseudo-inverse de Moore-Penrose}
-Soit $\regressmat$ une matrice $n \times p$ avec $ p \leq n$. On suppose que $\regressmat$ est de rang $p$.
+Soit $\regressmat$ une matrice $n \times k$ avec $ k \leq n$. On suppose que $\regressmat$ est de rang $k$.
 \begin{itemize}
 \item $\regressmat^{\#}= (\regressmat^T \regressmat)^{-1} \regressmat^T$ est la \alert{pseudo-inverse} de Moore-Penrose.
-\item $\regressmat^{\#} \regressmat= Id_{p \times p}$: $\regressmat$ est un inverse à gauche de la matrice $\regressmat$.
+\item $\regressmat^{\#} \regressmat= \Id{k} $: $\regressmat$ est un inverse à gauche de la matrice $\regressmat$.
 \item  $\regressmat \regressmat^{\#} = \regressmat (\regressmat^T \regressmat)^{-1} \regressmat^T$ est le projecteur sur l'espace image (l'espace vectoriel engendré par les colonnes de $\regressmat$).
 \item Méthode de calcul: décomposition QR ou décomposition en valeurs singulières.
 \end{itemize}
@@ -422,7 +416,7 @@ Soit $\regressmat$ une matrice $n \times p$ avec $ p \leq n$. On suppose que $\r
 \begin{enumerate}
 \item \alert<1>{$\regressmat$ est de rang complet.}
 \item \alert<2>{$\PE_\truetheta[\bnoise]= 0$ pour tout $\truetheta \in \Theta$  (les erreurs sont centrées)}
-\item \alert<3>{La variance des erreurs est constante et les erreurs sont décorrélées $\PE_{\truetheta}[\bnoise \bnoise^T] = I$ (homoscédasticité)}
+\item \alert<3>{La variance des erreurs est constante et les erreurs sont décorrélées $\PE_{\truetheta}[\bnoise \bnoise^T] = \Id{n}$ (homoscédasticité)}
 \end{enumerate}
 \end{frame}
 
@@ -435,16 +429,16 @@ L'estimateur $\estregress$ est sans biais, \ie\ pour tout $\truetheta \in \Theta
 \item $\PCov_{\truetheta}(\estregress)= \sigma^2 (\regressmat^T \regressmat)^{-1}$.
 \end{itemize}
 \end{theo}
-\alert{$\estregress = \regressmat^{\#} \bY= \truebeta + \regressmat^{\#} \bnoise$.}
+\centerline{\alert{$\estregress = \regressmat^{\#} \bY= \truebeta + \sigma \regressmat^{\#} \bnoise$.}}
 \only<1>{
 \begin{align*}
-\E_{\truetheta}[\estregress]&=\truebeta + \regressmat^{\#} \PE_{\truetheta}[\bnoise] \\
+\E_{\truetheta}[\estregress]&=\truebeta + \sigma \regressmat^{\#} \PE_{\truetheta}[\bnoise] \\
 &= \truebeta
 \end{align*}
 }
-\only<2>{$\estregress- \truebeta= \regressmat^{\#} \bnoise$ ce qui implique
+\only<2>{$\estregress- \truebeta= \sigma \regressmat^{\#} \bnoise$ ce qui implique
 \begin{align*}
-\PCov_{\truetheta}(\estregress) &= \E_{\truetheta}\big[ \{\regressmat^{\#} \bnoise \} \{\regressmat^{\#} \bnoise \}^T \big] \\
+\PCov_{\truetheta}(\estregress) &= \sigma^2 \E_{\truetheta}\big[ \{\regressmat^{\#} \bnoise \} \{\regressmat^{\#} \bnoise \}^T \big] \\
 &= \sigma^2 \{ \regressmat^{\#} \} \{\regressmat^{\#} \}^T = \sigma^2 \big(\regressmat^T\regressmat\big)^{-1}.
 \end{align*}
 }
@@ -456,13 +450,13 @@ L'estimateur $\estregress$ est sans biais, \ie\ pour tout $\truetheta \in \Theta
 \item \alert{Erreur de prédiction}:
 \begin{align*}
 \errpred
-&= \bY - \regressmat \estregress= \bY - \regressmat (\regressmat^T \regressmat)^{-1} \regressmat \bY \\
-&= (I - \projX) \bY
+&= \bY - \regressmat \estregress= \bY - \regressmat \regressmat^{\#} \bY \\
+&= (\Id{n} - \projX) \bY \quad \text{car $A = \regressmat \regressmat^{\#}= \regressmat (\regressmat^T \regressmat)^{-1} \regressmat^T$} 
 \end{align*}
 \item Sous $\PP_\truetheta$, $\bY= \regressmat \truebeta +  \sigma \bnoise$. Donc,
 \begin{align*}
-\errpred &= (I-\projX) \regressmat \truebeta + \sigma (I-\projX)  \bnoise \\
-         &= \sigma (I-\projX) \bnoise
+\errpred &= (\Id{n}-\projX) \regressmat \truebeta + \sigma (\Id{n}-\projX)  \bnoise \\
+         &= \sigma (\Id{n}-\projX) \bnoise
 \end{align*}
 car $\projX \regressmat= \regressmat$ ($\projX$ is the orthogonal projector on the image of $\regressmat$).
 \end{itemize}
@@ -474,7 +468,7 @@ car $\projX \regressmat= \regressmat$ ($\projX$ is the orthogonal projector on t
 Pour tout $\truetheta \in \Theta$
 \begin{enumerate}
 \item  \alert<1>{$\PE_{\truetheta}[\errpred] = 0$}.
-\item  \alert<2>{$\PCov_{\truetheta}(\errpred)= \sigma^2 (I - \projX)$}.
+\item  \alert<2>{$\PCov_{\truetheta}(\errpred)= \sigma^2 (\Id{n} - \projX)$}.
 \item  \alert<3>{$\PE_{\truetheta}[\predY]= \regressmat \truebeta$}.
 \item  \alert<4>{$\PCov_{\truetheta}(\errpred,\predY)= 0$}.
 \end{enumerate}
@@ -482,14 +476,14 @@ Pour tout $\truetheta \in \Theta$
 \begin{proof}
 \only<1> {
 \begin{align*}
-\PE_{\truetheta}[\errpred] &= \sigma \PE_{\truetheta}[ (I-\projX) \bnoise] \\
-&= \sigma (I-\projX) \PE_{\truetheta}[\bnoise] \eqsp.
+\PE_{\truetheta}[\errpred] &= \sigma \PE_{\truetheta}[ (\Id{n}-\projX) \bnoise] \\
+&= \sigma (\Id{n}-\projX) \PE_{\truetheta}[\bnoise] \eqsp.
 \end{align*}
 }
 \only<2> {
 \begin{align*}
-\PCov_{\truetheta}(\errpred)&= \sigma^2 (I-\projX) \PE_{\truetheta}[\bnoise \bnoise'] (I- \projX) \\
-&= \sigma^2 (I-\projX).
+\PCov_{\truetheta}(\errpred)&= \sigma^2 (\Id{n}-\projX) \PE_{\truetheta}[\bnoise \bnoise^T] (\Id{n}- \projX) \\
+&= \sigma^2 (\Id{n}-\projX).
 \end{align*}
 }
 \only<3> {
@@ -502,8 +496,8 @@ Pour tout $\truetheta \in \Theta$
 \only<4>{
 On a $\predY - \PE_{\truetheta}[\predY]= \sigma \projX \bnoise$ et donc
 \begin{align*}
-\PCov_{\truetheta}(\errpred,\predY) &= \sigma^2 \PE_{\truetheta}[ (I-\projX) \bnoise \bnoise' \projX] \\
-&= \sigma^2 (I- \projX) \projX= 0.
+\PCov_{\truetheta}(\errpred,\predY) &= \sigma^2 \PE_{\truetheta}[ (\Id{n}-\projX) \bnoise \bnoise^T \projX] \\
+&= \sigma^2 (\Id{n}- \projX) \projX= 0.
 \end{align*}
 }
 \end{proof}
@@ -517,11 +511,11 @@ On a $\predY - \PE_{\truetheta}[\predY]= \sigma \projX \bnoise$ et donc
 $\hat{\sigma}_n^2= (n-p)^{-1} \| \errpred \|^2$ est un estimateur sans biais de la variance de l'erreur.
 \end{theo}
 \begin{proof}
-Comme $(I-\projX)^2= (I-\projX)$, nous avons
+\alert{$\errpred= (\Id{n} - A) \bY= \sigma (\Id{n} - A) \bnoise$}. Comme $(\Id{n}-\projX)^2= (\Id{n}-\projX)$, nous avons
 \begin{align*}
-\PE_{\truetheta}[\hat{\sigma}_n^2] &= (n-p)^{-1} \PE_{\truetheta}[ \bnoise^T (I-\projX) \bnoise] \\
-                             &= (n-p)^{-1} \PE_{\truetheta}[ \mathrm{Tr}( (I-\projX) \bnoise \bnoise) ] \\
-                             &= \sigma^2 (n-p)^{-1} \mathrm{Tr}(I-\projX)= \sigma^2 \eqsp.
+\PE_{\truetheta}[\hat{\sigma}_n^2] &= \sigma^2 (n-p)^{-1} \PE_{\truetheta}[ \bnoise^T (\Id{n}-\projX) \bnoise] \\
+                             &= \sigma^2 (n-p)^{-1} \PE_{\truetheta}[ \mathrm{Tr}( (\Id{n}-\projX) \bnoise \bnoise^T) ]  \quad \text{car $\mathbf{u}^T \mathbf{v}= \mathrm{Tr}(\mathbf{v} \mathbf{u}^T)$}\\
+                             &= \sigma^2 (n-p)^{-1} \mathrm{Tr}(\Id{n}-\projX)= \sigma^2 \eqsp.
 \end{align*}
 \end{proof}
 \end{frame}
@@ -531,7 +525,7 @@ Comme $(I-\projX)^2= (I-\projX)$, nous avons
 \begin{itemize}
 \item \alert{Pythagore}
 \begin{align*}
-\| \bY \|^2 &= \| \projX \bY \|^2 + \| (I - \projX) \bY \|^2 \\
+\| \bY \|^2 &= \| \projX \bY \|^2 + \| (\Id{n} - \projX) \bY \|^2 \\
             &= \| \predY \|^2 + \| \errpred \|^2
 \end{align*}
 \item \alert{Coefficient de détermination}
@@ -589,7 +583,7 @@ où \alert{SCR} est la somme des carrés résiduels (RSS: residual sum of square
 
 \begin{frame}
 \frametitle{Régression gaussienne} \alert{Régression gaussienne} : on
-suppose $\bnoise \sim {\mathcal N}(0,\mathrm{Id}_n)$. Alors on a plusieurs proriétés
+suppose $\bnoise \sim {\mathcal N}(0,\Id{n})$. Alors on a plusieurs proriétés
 remarquables:
 \begin{itemize}
 \item  On sait expliciter la loi \alert{ exacte} (non-asymptotique!)
@@ -610,9 +604,9 @@ variance-covariance.
 \begin{prop}
 \begin{enumerate}
 \item  $\estregress \sim {\mathcal N}\big(\truebeta, \sigma^2 \big(\regressmat^T\regressmat\big)^{-1}\big)$
-\item  $\|(I - \projX) \bY \|^2 \sim
+\item  $\|(\Id{n} - \projX) \bY \|^2 \sim
 \sigma^2\chi^2(n-k)$ \alert{ loi du Chi 2 à $n-k$ degrés de liberté}
-\item  $\estregress$ et $(I - \projX) \bY$ sont indépendants.
+\item  $\estregress$ et $(\Id{n} - \projX) \bY$ sont indépendants.
 \end{enumerate}
 \end{prop}
 \end{frame}
@@ -620,8 +614,8 @@ variance-covariance.
 \begin{frame}
 \frametitle{Théorème de Cochran}
 \begin{theo}
-Soit $\bY \sim N(\mu,\sigma^2 I_n)$, $\mathcal{M}$ un sous espace de $\R^n$ de dimension $k$, $\Pi$ la matrice de projection orthogonale
-sur $\mathcal{M}$ et $\Pi_{\perp}= I_n - \Pi$ la matrice de projection orthogonale sur $\mathcal{M}^\perp$. Nous avons
+Soit $\bY \sim N(\mu,\sigma^2 \Id{n})$, $\mathcal{M}$ un sous espace de $\R^n$ de dimension $k$, $\Pi$ la matrice de projection orthogonale
+sur $\mathcal{M}$ et $\Pi_{\perp}= \Id{n} - \Pi$ la matrice de projection orthogonale sur $\mathcal{M}^\perp$. Nous avons
 \begin{enumerate}
 \item \alert<1>{$\Pi \bY \sim \mathcal{N}(\Pi \mu, \sigma^2 \Pi)$, $\Pi_\perp \bY \sim \mathcal{N}(\Pi_{\perp} \mu, \sigma^2 \Pi_{\perp})$}
 \item \alert<2>{les vecteurs $\Pi \bY$ et $\Pi_\perp \bY$ sont indépendants}
@@ -635,26 +629,26 @@ sur $\mathcal{M}$ et $\Pi_{\perp}= I_n - \Pi$ la matrice de projection orthogona
 \begin{prop}
 \begin{enumerate}
 \item  \alert<1>{$\estregress \sim {\mathcal N}\big(\truebeta, \sigma^2 \big(\regressmat^T\regressmat\big)^{-1}\big)$}
-\item  \alert<2>{$\|(I - \projX) \bY \|^2 \sim
+\item  \alert<2>{$\|(\Id{n} - \projX) \bY \|^2 \sim
 \sigma^2\chi^2(n-k)$ loi du Chi 2 à $n-k$ degrés de liberté}
-\item  \alert<3>{$\estregress$ et $(I - \projX) \bY$ sont indépendants}.
+\item  \alert<3>{$\estregress$ et $(\Id{n} - \projX) \bY$ sont indépendants}.
 \end{enumerate}
 \end{prop}
 \only<1>{
 \begin{itemize}
-\item Définition: $\estregress= \regressmat^{\#} \bY$ et $\bY \sim N(\regressmat \truebeta, \sigma^2 I_n)$.
+\item Définition: $\estregress= \regressmat^{\#} \bY$ et $\bY \sim N(\regressmat \truebeta, \sigma^2 \Id{n})$.
 \item   $\estregress \sim N(\regressmat^{\#} \regressmat \truebeta, \sigma^2 \{ \regressmat^{\#} \} \{ \regressmat^{\#} \}^T)$
-\item On conclut en remarquant $\regressmat^{\#} \regressmat= I_k$ et
+\item On conclut en remarquant $\regressmat^{\#} \regressmat= \Id{k}$ et
 $\{ \regressmat^{\#} \} \{ \regressmat^{\#} \}^T = (\regressmat^T \regressmat)^{-1}$
 \end{itemize}}
 \only<2>{Application directe de Cochran en remarquant que
 $$
-(I-\projX) \PE_{\truetheta}[\bY] = (I - \projX) \bX \truebeta = 0.
+(\Id{n}-\projX) \PE_{\truetheta}[\bY] = (\Id{n} - \projX) \bX \truebeta = 0.
 $$
 }
 \only<3>{
 \begin{itemize}
-\item Le théorème de Cochran montre que $\projX \bY$ et $(I-\projX) \bY$ sont indépendants.
+\item Le théorème de Cochran montre que $\projX \bY$ et $(\Id{n}-\projX) \bY$ sont indépendants.
 \item On conclut en remarquant que $\estregress= \regressmat^{\#} \bY = \regressmat^{\#} \projX \bY$.
 \end{itemize}
 }
@@ -666,7 +660,7 @@ $$
 \begin{frame}
 \frametitle{Estimateur de la variance $\sigma^2$: cadre gaussien}
 $$
-\widehat \sigma_n^2 = \frac{\| (I-\projX) \bY \|^2}{n-\alert{k}} = \frac{1}{n-\alert{k}}\sum_{i = 1}^n\big(Y_i-\bx_i^T \estregress \big)^2
+\widehat \sigma_n^2 = \frac{\| (\Id{n}-\projX) \bY \|^2}{n-\alert{k}} = \frac{1}{n-\alert{k}}\sum_{i = 1}^n\big(Y_i-\bx_i^T \estregress \big)^2
 $$
 D'après la dernière Proposition :
 \begin{itemize}
@@ -778,7 +772,7 @@ substitution:}
 \hat{Y}_n(\bx)- \bx^T \truebeta&= \bx^T \regressmat^{\#} \bY - \bx^T \truebeta \\
 &= \bx^T \regressmat^{\#} (\regressmat \truebeta + \sigma \bnoise) - \bx^T \truebeta = \sigma \bx^T \regressmat^{\#} \bnoise
 \end{align*}
-car $\regressmat^{\#} \regressmat= I$. Par conséquent, comme $\bX^{\#} \{ \bX^{\#} \}^T= (\bX^T \bX)^{-1}$, 
+car $\regressmat^{\#} \regressmat= I$. Par conséquent, comme $\bX^{\#} \{ \bX^{\#} \}^T= (\bX^T \bX)^{-1}$,
 $$
 \Var_{\truetheta}(\hat{Y}_n(\bx))= \sigma^2 \bx^T \regressmat^{\#} \PE_{\truetheta}[\bnoise \bnoise^T] \{ \regressmat^{\#} \}^T \bx
 $$}
@@ -798,7 +792,7 @@ $$}
 Supposons que $\bnoise \sim {\mathcal N}(0,\sigma^2\mathrm{Id}_n)$.
 \begin{enumerate}
 \item $\widehat{Y}(\bx) \sim {\mathcal N}\big(\bx ^T\truebeta, \sigma^2 \bx^T \big(\regressmat^T\regressmat\big)^{-1} \bx \big)$
-\item $\widehat{Y}(\bx)$ et $(I - \projX) \bY$ sont
+\item $\widehat{Y}(\bx)$ et $(\Id{n} - \projX) \bY$ sont
 indépendants.
 \end{enumerate}
 \end{prop}
@@ -813,7 +807,7 @@ $$
 \sim {\mathcal N}(0,1).
 $$
 \item On replace $\sigma^2$ inconnu par $\widehat \sigma_n^2 =
-{\|(I-\projX) \bY \|^2}/({n-k}).$
+{\|(\Id{n}-\projX) \bY \|^2}/({n-k}).$
 \item \alert{$t$-statistique:}
 $$
 t:= \frac{\widehat{Y}(\bx) -\alert{\bx}^T\truebeta}{\sqrt{\widehat
