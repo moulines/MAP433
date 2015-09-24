@@ -381,17 +381,29 @@ $$\boxed{c_\alpha = \exp\big(n\frac{(\truetheta_1-\truetheta_0)^2}{2}+\sqrt{n}(\
 
 \begin{frame}
 \frametitle{p-valeur}
-\only<1-2>{Supposons que sous $\PP_0$, la distribution du rapport de vraisemblance $p_1(Z)/p_0(Z)$ est continue. Le test U.P.P. 
+\begin{itemize}
+\item Supposons que sous $\PP_0$, la distribution du rapport de vraisemblance $p_1(Z)/p_0(Z)$ est continue. Le test U.P.P. 
 de niveau $\alpha$ est non-randomisé et rejette l'hypothèse nulle si $p_1(Z)/p_0(Z) > k$, où $k$ est choisi de façon à ce que 
 \[
 \PP_0 ( p_1(Z)/ p_0(Z) \geq k) = \alpha.
-\]}
-\only<2-3>{Lorsque l'on fait fait varier le niveau $\alpha$, on obtient ainsi une famille de régions de réjections, $\{\zreject_\alpha\}_{\alpha \in \ccint{0,1}$, qui sont dans de nombreux cas d'intérêt emboitées
+\]
+\item Lorsque l'on fait fait varier le niveau $\alpha$, on obtient ainsi une famille de régions de réjections, $\{\zreject_\alpha\}_{\alpha \in \ccint{0,1}}$, qui sont dans de nombreux cas d'intérêt emboitées
     $$
     \zreject_\alpha \subset \zreject_{\alpha'} \quad \text{si $\alpha < \alpha'$}.
     $$
-Lorsque cette condition est satisfaite, il est intéressant de déterminer non seulement si le test est accepté ou rejeté à un niveau de signification donné, mais aussi de déterminer \alert{le plus petit niveau de signification} auquel l'hypothèse serait rejetée.
-}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{p-valeur}
+\begin{itemize}
+\item Lorsque l'on fait fait varier le niveau $\alpha$, on obtient ainsi une famille de régions de réjections, $\{\zreject_\alpha\}_{\alpha \in \ccint{0,1}}$, qui sont dans de nombreux cas d'intérêt emboitées
+    $$
+    \zreject_\alpha \subset \zreject_{\alpha'} \quad \text{si $\alpha < \alpha'$}.
+    $$
+\item Lorsque cette condition est satisfaite, il est intéressant de déterminer non seulement si le test est accepté ou rejeté à un niveau de signification donné, mais aussi de déterminer \alert{le plus petit niveau de signification} auquel l'hypothèse serait rejetée.
+\end{itemize}
 \end{frame}
 
 \begin{frame}
