@@ -1,4 +1,4 @@
-endur= read.table("STATS1.EX.04.txt",header=T)
+endur= read.csv("fake.txt",header=T,sep=",")
 plot(endur$endurance~endur$age,main="Scatterplot",ylab="Endurance",xlab="Age")
 abline(lm(endur$endurance~endur$age),col="blue")
 plot(endur$endurance~endur$activeyears,main="Scatterplot",ylab="Endurance",xlab="Active Years")

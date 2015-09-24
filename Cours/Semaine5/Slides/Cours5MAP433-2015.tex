@@ -117,7 +117,7 @@ $\truebeta$ près;}
 \begin{frame}
 \frametitle{Modèle de régression à design déterministe}
 \begin{df}
-Données: $(\bx_1,Y_1),\ldots, (\bx_n,Y_n)$ avec $Y_i \in \R, \bx_i\in \R^k$, et 
+Données: $(\bx_1,Y_1),\ldots, (\bx_n,Y_n)$ avec $Y_i \in \R, \bx_i\in \R^k$, et
 $$Y_i =
 r(\alert{\truebeta},\bx_i)+ \sigma \xi_i,\;\;\E_{\truetheta}\big[\xi_i\big]=0,
 $$
@@ -171,7 +171,7 @@ $\mu^n(dy_1\ldots dy_n) = dy_1\ldots dy_n.$
 \[
  \frac{d\PP_\truetheta^n}{d\mu^n}(y_1,\ldots, y_n)
   =\; \prod_{i=1}^n \tfrac{1}{\sqrt{2\pi \sigma^2}}\exp
-  \big(-\tfrac{1}{2\sigma^2}(y_i-r({\truebeta},\bx_i))^2\big) 
+  \big(-\tfrac{1}{2\sigma^2}(y_i-r({\truebeta},\bx_i))^2\big)
 %\;= & \tfrac{1}{(\sqrt{2\pi \sigma^2})^{n}}
 %\exp\big(-\tfrac{1}{2\sigma^2}\sum_{i =
 %1}^n\big(y_i-r({\truebeta},\bx_i)\big)^2\big).
@@ -184,9 +184,9 @@ r({\truebeta},\bx_i)\big)^2\Big)}$$
 \end{frame}
 
 \begin{frame}
-\frametitle{Estimateur des moindres carrés} 
+\frametitle{Estimateur des moindres carrés}
 Maximiser la
-\alert{ vraisemblance} en régression gaussienne 
+\alert{ vraisemblance} en régression gaussienne
 \begin{align*}
 \estregress &\in \argmin_{\curbeta \in \rset^k} \sum_{i = 1}^n \big(Y_i-r(\curbeta,\bx_i)\big)^2 \\
 \hat{\sigma}_n^2 &= n^{-1} \sum_{i=1}^n (Y_i - r(\estregress,\bx_i))^2
@@ -451,7 +451,7 @@ L'estimateur $\estregress$ est sans biais, \ie\ pour tout $\truetheta \in \Theta
 \begin{align*}
 \errpred
 &= \bY - \regressmat \estregress= \bY - \regressmat \regressmat^{\#} \bY \\
-&= (\Id{n} - \projX) \bY \quad \text{car $A = \regressmat \regressmat^{\#}= \regressmat (\regressmat^T \regressmat)^{-1} \regressmat^T$} 
+&= (\Id{n} - \projX) \bY \quad \text{car $A = \regressmat \regressmat^{\#}= \regressmat (\regressmat^T \regressmat)^{-1} \regressmat^T$}
 \end{align*}
 \item Sous $\PP_\truetheta$, $\bY= \regressmat \truebeta +  \sigma \bnoise$. Donc,
 \begin{align*}
@@ -530,13 +530,35 @@ $\hat{\sigma}_n^2= (n-p)^{-1} \| \errpred \|^2$ est un estimateur sans biais de 
 \end{align*}
 \item \alert{Coefficient de détermination}
 \begin{align*}
-R^2 &= \frac{\|\bY\|^2}{\|\bY\|^2}
+R^2 &= \frac{\|\predY\|^2}{\|\bY\|^2} \\
     &= 1 - \frac{\| \errpred \|^2}{\|\bY\|^2} = 1 - \frac{\mathrm{SCR}}{\mathrm{SCT}}
 \end{align*}
 où \alert{SCR} est la somme des carrés résiduels (RSS: residual sum of squares) et \alert{SCT} est la somme des carrés totaux.
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Diagnostic de régression}
+
+Residuals:
+\begin{tabular}{ccccc}
+    Min   &   1Q     & Median  &    3Q  &   Max \\
+-5.2585   &  -1.3536 & -0.0403 & 1.4752 &  5.3874 \\
+\end{tabular}
+
+Coefficients:
+\begin{tabular}{ccccc}
+                 & Estimate &Std. Error &t value& Pr($>|t|$) \\
+(Intercept)      & 30.14524 &   0.45829 &  65.78&   $<2e-16 ***$ \\
+age              &-0.16728  &  0.01369  &-12.22 &   $<2e-16 ***$ \\
+activeyears      &0.43177   & 0.01823   &23.69  &   $<2e-16 ***$  \\
+\end{tabular}
+
+Residual standard error: 1.977 on 247 degrees of freedom
+
+Multiple R-squared:  0.7041,	Adjusted R-squared:  0.7017
+
+\end{frame}
 
 
 
@@ -546,8 +568,7 @@ où \alert{SCR} est la somme des carrés résiduels (RSS: residual sum of square
 \begin{figure}
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=0.6\textwidth]{summarymodel1}\\
-  \caption{Régression à un facteur: endurance / âge}
+  \includegraphics[width=0.8\textwidth]{ResidualvsFitted}\\
 \end{figure}
 \end{frame}
 
@@ -557,20 +578,12 @@ où \alert{SCR} est la somme des carrés résiduels (RSS: residual sum of square
 \begin{figure}
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=0.6\textwidth]{summarymodel2}\\
-  \caption{Régression à un facteur: endurance / nombre d'années de pratique}
+  \includegraphics[width=0.8\textwidth]{Standardized-Residuals}\\
 \end{figure}
 \end{frame}
 
-\begin{frame}
-\frametitle{Diagnostic de régression}
-\begin{figure}
-  \centering
-  % Requires \usepackage{graphicx}
-  \includegraphics[width=0.6\textwidth]{summarymodel3}\\
-  \caption{Régression à un deux facteurs: endurance / âge + nombre d'années de pratique}
-\end{figure}
-\end{frame}
+
+
 
 
 
@@ -689,45 +702,6 @@ o\`u $q\ge 1$ un entier, $\xi\sim {\mathcal N}\big(0,1)$, $\eta\sim
 \chi^2(q)$ et\\ $\xi$ \alert{indépendant} de $\eta$.
 \end{frame}
 
-\begin{frame}
-    \frametitle{Exemple de données de régression}
-\begin{figure}
-\includegraphics[height=2\textheight]{cours4_data1}
-\end{figure}
-\end{frame}
-
-\begin{frame}
-\frametitle{Résultats de traitement statistique initial}
-\begin{tabular}{|c||c|c|c|c|}
-\hline &Estimate&Std. Error&t value&Pr($>|t|$)\\\hline
-(Intercept) &$152.133$&$2.576$&$59.061$&$< 2e-16***$\\
-age&$-10.012$&$59.749$&$ -0.168$&$0.867000$\\\hline
-sex &$-239.819$&$61.222$&$-3.917$&$0.000104***$\\
-bmi&$519.840$&$66.534$&$7.813$&$4.30e-14***$\\\hline
-map&$324.390$&$65.422$&$4.958$&$1.02e-06***$\\
-tc&$-792.184$&$416.684$&$-1.901$&$0.057947$\\\hline
-ldl&$476.746$&$339.035$&$1.406$&$0.160389$\\
-hdl&$101.045$&$212.533 $&$0.475$&$0.634721$\\\hline
-tch&$177.064$&$161.476$&$ 1.097$&$0.273456$\\
-ltg&$751.279$&$ 171.902$&$4.370$&$ 1.56e-05***$\\\hline
-glu&$67.625$&$ 65.984$&$1.025$&$0.305998$\\\hline
-\end{tabular}
-\end{frame}
-
-\begin{frame}
-\frametitle{Questions statistiques}
-\begin{itemize}
-\item \alert{Sélection de variables.} Lesquelles parmi les 10
-variables:\\\vspace{3mm}
-\centerline{\texttt{age,sex,bmi,map,tc,ldl,hdl,tch,ltg,glu}}\vspace{3mm}
-sont significatives? Formalisation mathématique: trouver (estimer)
-l'ensemble $N= \{j: \truetheta_{j}\ne 0\}$.
-\item \alert{Prévison.} Un nouveau patient arrive avec son vecteur
-des 10 variables $\alert{x}_0\in \R^{10}$. Donner la prévison de la
-réponse $Y$ =état du patient dans 1 an.
-\end{itemize}
-\end{frame}
-
 
 
 \section{Prévision}
@@ -740,12 +714,9 @@ r(\truebeta, \alert{\bx}_i)+ \sigma \xi_i, \quad i=1,\dots,n.$}
 Régression
 \alert{linéaire}: $r(\truebeta, \alert{\bx}_i)=\truebeta^T
 \bx_i$.
-Exemple: $\alert{\bx}_i$ vecteur de 10 variables explicatives
-(\texttt{age,sex,bmi,...}) pour patient $i$.
 \begin{itemize}
 \item \alert{Problème de prévision}:
-Un nouveau patient arrive avec son vecteur des 10 variables $
-\bx \in \R^{k}$. Donner la prévison de la valeur de fonction de
+Donner la prévison de la valeur de fonction de
 régression $r(\truebeta,  \bx)=\truebeta^T \bx$\\
 \item Soit $\estregress$ un estimateur de $\truebeta$. \alert{Prévision par
 substitution:}
