@@ -1,8 +1,6 @@
-
-
 \input{../../def/defslide}
 
-\title{MAP 433 : Introduction aux méthodes statistiques. Cours 7}
+\title{MAP 433 : Introduction aux méthodes statistiques. Cours 6}
 %\author{M. Hoffmann}
 %\institute{Université Paris Dauphine}
 
@@ -97,9 +95,9 @@ où $t_0$ est un seuil à choisir... \alert{Comment ?}
 \begin{itemize}
 \item
 Lorsque l'on prend la décision $\varphi(Z)$, on peut se \alert{tromper de deux manières} :
-$$\text{\alert{Rejeter}}\; H_0\;\;(\varphi=1)\;\;\text{\alert{alors que}}\;\;\truetheta = \frac{1}{2}$$
+$$\text{\alert{Rejeter}}\; H_0\;\;(\varphi(Z)=1)\;\;\text{\alert{alors que}}\;\;\truetheta = \frac{1}{2}$$
 ou encore
-$$\text{\alert{Accepter}}\;H_0\;\;(\varphi=0)\;\;\text{\alert{alors que}}\;\;\truetheta  \neq \frac{1}{2}.$$
+$$\text{\alert{Accepter}}\;H_0\;\;(\varphi(Z)=0)\;\;\text{\alert{alors que}}\;\;\truetheta  \neq \frac{1}{2}.$$
 \item \underline{Erreur de première espèce}  \alert{(=rejeter à tort)}
 $$\PP_{\tfrac{1}{2}}^{10}\big[\varphi(Z)=1\big]$$
 \item \underline{Erreur de seconde espèce}  \alert{(=accepter à tort)}
@@ -108,21 +106,98 @@ $$\big(\PP_\truetheta^{10}\big[\varphi(Z)=0\big],\;\;\truetheta \neq \frac{1}{2}
 \end{frame}
 
 
+\begin{frame}
+\frametitle{Retour à l'exemple}
+\begin{itemize}
+\item Sous $\PP_\theta$, $n \hat{\theta}(Z)= \sum_{i=1}^n Z_i$ suit une loi binomiale de paramètre de succès $\truetheta$. 
+En notant $\binom_{n,\truetheta}$ la fonction
+de répartition de la loi binomiale,
+\begin{multline*}
+\PP_\truetheta( |\hat{\theta}(Z) - 1/2| > t_0 ) \\
+= 1 - \{\binom_{n,\truetheta}(n(1+t_0)/2) - \binom_{n,\truetheta}(n(1-t_0)/2)  \} \eqsp.
+\end{multline*}
+\item \alert{Erreur de première espèce}:
+\begin{multline*}
+\PP_{1/2}(|\hat{\theta}(Z) - 1/2| > t_0) \\= 1 - \{ \binom_{n,1/2}(n(1+t_0)/2) - \binom_{n,1/2}(n(1-t_0)/2)  \}
+\end{multline*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Erreur de première espèce}
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.7\textwidth]{ErreurPremiereEspece}\\
+  \caption{Erreur de Première Espèce en fonction de la valeur critique: fonction décroissante de $t_0$ !}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Retour à l'exemple}
+\begin{itemize}
+\item Sous $\PP_\theta$, $n \hat{\theta}(Z)= \sum_{i=1}^n Z_i$ suit une loi binomiale de paramètre de succès $\truetheta$.
+En notant $\binom_{n,\truetheta}$ la fonction
+de répartition de la loi binomiale,
+\begin{multline*}
+\PP_\truetheta( |\hat{\theta}(Z) - 1/2| \leq t_0 ) \\
+= \{\binom_{n,\truetheta}(n(1+t_0)/2) - \binom_{n,\truetheta}(n(1-t_0)/2)  \eqsp.
+\end{multline*}
+\item \alert{Erreur de seconde espèce}: pour une valeur critique fixée:
+\begin{multline*}
+\truetheta \mapsto \PP_{\truetheta}(|\hat{\theta}(Z) - 1/2| \leq t_0) \\=
+\binom_{n,1/2}(n(1+t_0)/2) - \binom_{n,1/2}(n(1-t_0)/2)  \}
+\end{multline*}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Erreur de seconde espèce}
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.6\textwidth]{Erreur2ndEspece}\\
+  \caption{Erreur de deuxième Espèce en fonction du paramètre $\truetheta \in \Theta_1= \ccint{0,1}\setminus \{1/2\}$
+  pour deux valeurs du seuil critique: $t_0=0.3$, Erreur 1ere espèce  0.0654 et $t_0= 0.2$, Erreur 1ère espèce 0.22 }
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Puissance du test}
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.6\textwidth]{Puissance}\\
+  \caption{Puisance du test en fonction du paramètre $\truetheta \in \Theta_1= \ccint{0,1}\setminus \{1/2\}$
+  pour deux valeurs du seuil critique: $t_0=0.3$. Erreur 1ere espèce: 0.0654 et $t_0= 0.2$, Erreur 1ère espèce: 0.22 }
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Erreur 1ère espèce / Puissance}
+
+
+\end{frame}
 
 \begin{frame}
 \frametitle{Conclusion provisoire}
 \begin{itemize}
 \item Un  bon test  $\varphi$ devrait garantir \alert{ simultanément} des erreurs de première et seconde espèce \alert{petites}.
-\item \alert{Un test optimal existe-t-il ?}
-\item Si \alert{non}, comment aborder la notion d'optimalité et comment construire une procédure de test satisfaisante ?
+\item Mais il faut réaliser un compromis entre erreur de 1ère espèce et erreur de 2nde espèce (ou de façon équivalente entre erreur de 1ère espèce et puissance).
+\item \alert{Question:} comment aborder la notion d'optimalité et comment construire une procédure de test satisfaisante ?
 \end{itemize}
 \end{frame}
+
+
 
 \begin{frame}
 \frametitle{Définition formelle}
 \begin{itemize}
 \item \underline{Situation} : ${\mathcal E} = \big({\mathcal Z}, \mathfrak{Z}, \{\PP_\truetheta, \truetheta \in \Theta\}\big)$ engendrée par l'observation $Z$.
-\item \alert{Hypothèse nulle et alternative} : $\Theta_0 \subset \Theta$ et $\Theta_1 = \Theta \setminus \Theta_0$   
+\item \alert{Hypothèse nulle et alternative} : $\Theta_0 \subset \Theta$ et $\Theta_1 = \Theta \setminus \Theta_0$
 \end{itemize}
 \begin{df}[Test simple] Un test (simple) de l'hypothèse nulle $H_0: \truetheta \in \Theta_0$ contre l'alternative $H_1:\truetheta \in \Theta_1$ est une statistique $\varphi  = \varphi(Z) \in \{0,1\}$.
  (Fonction d') \alert{erreur de première espèce} :
@@ -151,24 +226,6 @@ $$\sup_{\truetheta \in \Theta_0}\PP_\truetheta\big[\varphi_\alpha = 1\big] \leq 
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Retour à l'exemple binomial}
-\begin{itemize}
-\item Pour $\truetheta \in [0,1]$, 
-$$
-\PP_\truetheta[ |\hat{\theta}(Z) - 1/2| \geq t_0 ] = \PP_{\truetheta}(\sum_{i=1}^n Z_i \not \in \ccint{(n-t_0)/2,(n+t_0)/2})
-$$
-\item Sous $\PP_\theta$, $\sum_{i=1}^n Z_i$ suit une loi binomiale de paramètre de succès $\truetheta$. En notant $B_\theta$ la fonction
-de répartition de la loi binomiale,
-$$
-\PP_\truetheta[ |\hat{\theta}(Z) - 1/2| \geq t_0 ] = B_\theta((n+t_0)/2) - B_\theta((n-t_0)/2) \eqsp.
-$$
-\item Si on fixe un niveau $\alpha$ on doit donc chercher la plus grande valeur $t_0$ vérifiant 
-$$
-\PP_\truetheta[ |\hat{\theta}(Z) - 1/2| \geq t_0 ] = B_\theta((n+t_0)/2) - B_\theta((n-t_0)/2) \leq \alpha \eqsp.
-$$
-\end{itemize}
-\end{frame}
 
 \begin{frame}
 \frametitle{Principe de Neyman (cont.)}
@@ -189,7 +246,7 @@ Un test de niveau $\alpha$ est dit \alert{Uniformément Plus Puissant} (UPP) si 
 \frametitle{Règle de décision randomisée}
 \begin{itemize}
 \item Pour toute valeur de l'observation $z$, la règle de décision choisit alternative avec une probabilité $\varphi(z)$ et l'hypothèse nulle avec la probabilité $1 - \varphi(z)$.
-\item Une procédure de test randomisée est \alert{entièrement spécifiée} par la donnée de la \alert{fonction critique} du test $\varphi: z \to \varphi(z) \in [0,1]$. Si $\varphi$ prend simplement les valeurs $0$ et $1$, on obtient un test non randomisé. 
+\item Une procédure de test randomisée est \alert{entièrement spécifiée} par la donnée de la \alert{fonction critique} du test $\varphi: z \to \varphi(z) \in [0,1]$. Si $\varphi$ prend simplement les valeurs $0$ et $1$, on obtient un test non randomisé.
 \item La \alert{probabilité de rejet} est donnée, pour tout $\theta \in \Theta$, par $\PE_\theta[\varphi(Z)]$.
 \end{itemize}
 \end{frame}
@@ -202,7 +259,7 @@ Le problème revient donc à maximiser la \alert{puissance du test}
 \]
 sous la contrainte que le niveau du test soit inférieure à $\alpha$
 \[
-\PE_\theta[\varphi(Z)] \leq \alpha 
+\PE_\theta[\varphi(Z)] \leq \alpha
 \]
 \end{frame}
 
@@ -219,9 +276,9 @@ sous la contrainte que le niveau du test soit inférieure à $\alpha$
 $$
 \PE_{\theta_0}[\phi(Z)]= \alpha
 $$
-et 
+et
 \[
-\varphi(z)= 
+\varphi(z)=
 \begin{cases}
 1 & \text{quand $p_1(z) > c_\alpha p_0(z)$} \\
 0 & \text{quand $p_0(z) < c_\alpha p_1(z)$}
@@ -269,7 +326,7 @@ La seconde ligne a un sens seulement si $\alpha(c_\alpha^-)  > \alpha(c_\alpha)$
 \begin{frame}
 \frametitle{Test le plus puissant}
 \begin{theorem}
-Un test $\varphi$ vérifiant 
+Un test $\varphi$ vérifiant
 $$
 \PE_{\theta_0}[\phi(Z)]= \alpha
 $$
@@ -287,7 +344,7 @@ est \alert{uniformément le plus puissant} pour tester l'hypothèse nulle $H_0: 
 
 \begin{frame}
 \frametitle{Preuve}
-\only<1>{Soit $\varphi$ un test satisfaisant les conditions 
+\only<1>{Soit $\varphi$ un test satisfaisant les conditions
 $$
 \PE_{\theta_0}[\phi(Z)]= \alpha
 $$
@@ -307,12 +364,12 @@ et $\varphi^*$ un test de niveau $\PE_0[\varphi^*(Z)] \leq \alpha$}
 \item Pour $z \in S^-$, $\phi(z) < 1$ et donc $p_1(z) \leq c_\alpha p_0(z)$.
 \item Par conséquent:
 $$
-\int (\varphi - \varphi^*) (p_1 - c_\alpha p_0) \rmd \mu \geq 0 
+\int (\varphi - \varphi^*) (p_1 - c_\alpha p_0) \rmd \mu \geq 0
 $$
 \end{itemize}
 }
 \only<3>
-{Comme 
+{Comme
 $$
 \int (\varphi - \varphi^*) (p_1 - c_\alpha p_0) \rmd \mu \geq 0
 $$
@@ -329,7 +386,7 @@ $$
 Notons $\puissance$ la puissance du test U.P.P de niveau $\alpha$ du test $H_0= \{\theta = \theta_0\}$ contre l'alternative $H_1= \{\theta=\theta_1\}$. Alors $\alpha \leq \beta$ avec égalité si $\PP_{\theta_0}= \PP_{\theta_1}$.
 \end{lemma}
 \begin{proof}
-Comme le test $\varphi(z) \equiv \alpha$ a un niveau $\alpha$, nous avons $\alpha \leq \beta$.  
+Comme le test $\varphi(z) \equiv \alpha$ a un niveau $\alpha$, nous avons $\alpha \leq \beta$.
 \end{proof}
 \end{frame}
 
@@ -382,8 +439,8 @@ $$\boxed{c_\alpha = \exp\big(n\frac{(\truetheta_1-\truetheta_0)^2}{2}+\sqrt{n}(\
 \begin{frame}
 \frametitle{p-valeur}
 \begin{itemize}
-\item Supposons que sous $\PP_0$, la distribution du rapport de vraisemblance $p_1(Z)/p_0(Z)$ est continue. Le test U.P.P. 
-de niveau $\alpha$ est non-randomisé et rejette l'hypothèse nulle si $p_1(Z)/p_0(Z) > k$, où $k$ est choisi de façon à ce que 
+\item Supposons que sous $\PP_0$, la distribution du rapport de vraisemblance $p_1(Z)/p_0(Z)$ est continue. Le test U.P.P.
+de niveau $\alpha$ est non-randomisé et rejette l'hypothèse nulle si $p_1(Z)/p_0(Z) > k$, où $k$ est choisi de façon à ce que
 \[
 \PP_0 ( p_1(Z)/ p_0(Z) \geq k) = \alpha.
 \]
@@ -409,13 +466,13 @@ de niveau $\alpha$ est non-randomisé et rejette l'hypothèse nulle si $p_1(Z)/p
 \begin{frame}
 \frametitle{p-valeur}
 \begin{definition}[p-valeur]
-La $p$-valeur d'un test pour une observation $Z$ donnée est le plus petit niveau de signification auquel le test serait rejeté 
+La $p$-valeur d'un test pour une observation $Z$ donnée est le plus petit niveau de signification auquel le test serait rejeté
 $$
 \hat{p}(Z)= \inf\{ \alpha: Z \in S_\alpha\}.
 $$
 \end{definition}
 \begin{itemize}
-\item Une petite $p$-valeur suggère que l'observation contredit l'hypothèse. 
+\item Une petite $p$-valeur suggère que l'observation contredit l'hypothèse.
 \item Une grande $p$-valeur s'interprète en faveur de ne pas vouloir rejeter l'hypothèse de base.
 \end{itemize}
 \end{frame}
