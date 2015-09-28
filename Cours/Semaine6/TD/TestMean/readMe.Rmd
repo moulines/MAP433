@@ -1,0 +1,108 @@
+</br> 
+
+<p style="font-size:12px">
+<em>Marc Lavielle, </br>July 16, 2015</em>
+</p>
+
+</br>
+
+<h3>Preliminary definitions</h3>
+
+<h4>One-sided test</h4>
+
+
+Let $X_1$, $X_2$, \ldots, $X_n$, $n$ random variables independent and identically distributed, with unknown mean $m$.
+
+Assuming that the $X_i$'s are normally distributed, we want to test the hypothesis
+$H_0$:  "$m=0$"  v.s. $H_1$:  "$m>0$"
+
+The statistic is $T = \bar{X}_n$ and the *rejection region*, that leads to rejection of $H_0$, has the form $\{T > S\}$, where $S$ is the *critical value* of the test. 
+
+By definition, the level $\alpha$ and the power $\eta$ of the test are, respectively, defined by
+
+$$\alpha = P_{m=0}(T >S)$$
+$$\eta(\mu) = P_{m=\mu}(T >S)$$
+
+
+**Known variance**
+
+Let us assume first that the variance of $X_i$ is known:  $\sigma^2$ represents the variance of $X_i$. 
+
+Then, 
+$$\frac{\sqrt{n}(T-m)}{\sigma}   \sim {\cal N}(0,1)$$
+and
+
+\[
+\begin{aligned}
+\alpha &= P_{m=0}( \frac{\sqrt{n}}{\sigma} \, T >\frac{\sqrt{n}}{\sigma} \, S) \\\
+& =  1 - \Phi(\frac{\sqrt{n}}{\sigma} \, S) \\\
+\eta(\mu) &=  P_{m=\mu}(\frac{\sqrt{n}}{\sigma} (T-\mu)  >\frac{\sqrt{n}}{\sigma}(S-\mu)) \\\
+&= 1 - \Phi(\frac{\sqrt{n}}{\sigma} (S-\mu))
+\end{aligned}
+\]
+where $\Phi$ is the cumulative distribution function of a ${\cal N}(0,1)$ random variable.
+
+
+**Unknown variance**
+
+The variance of $X_i$ is  unknown: $\sigma^2$ represents now the empirical estimate of the variance of $X_i$.
+
+Then, 
+$$\frac{\sqrt{n}(T-m)}{\sigma}  \sim t_{n-1}$$
+where $t_\nu$ is the $t$-distribution with $\nu$ degrees of freedom. Then,
+
+\[
+\begin{aligned}
+\alpha & = 1 - \Phi_{n-1}(\frac{\sqrt{n}}{\sigma} \, S) \\\
+\eta(\mu) &=  1 - \Phi_{n-1}(\frac{\sqrt{n}}{\sigma} (S-\mu))
+\end{aligned}
+\]
+where $\Phi_\nu$ is the cdf of a $t$-distribution with $\nu$ degrees of freedom.
+
+
+<h4>Two-sided test</h4>
+
+We now want to test the hypothesis
+$H_0$:  "$m=0$"  v.s. $H_1$:  "$m \neq 0$"
+
+The statistic is still $T = \bar{X}_n$ but the rejection region has now the form $\{|T| > S\}$ where $S\geq 0$.
+
+\[
+\begin{aligned}
+\alpha &= P_{m=0}(|T| >S) \\\
+\eta(\mu) &= P_{m=\mu}(|T| >S)\end{aligned}
+\]
+
+**Known variance**
+
+Here, $\alpha = P_{m=0}( \frac{\sqrt{n}}{\sigma} \, |T| >\frac{\sqrt{n}}{\sigma} \, S)$. Then,
+
+$$\frac{\alpha}{2} = P_{m=0}( \frac{\sqrt{n}}{\sigma} \, T >\frac{\sqrt{n}}{\sigma} \, S)$$
+and
+$$\alpha = 2(1 - \Phi(\frac{\sqrt{n}}{\sigma} \, S))$$
+
+On the other hand,
+\[
+\begin{aligned}
+\eta(\mu) &= P_{m=\mu}(T>S) + P_{m=\mu}(T<-S) \\\
+&= P_{m=\mu}( \frac{\sqrt{n}}{\sigma} (T-\mu) >\frac{\sqrt{n}}{\sigma} (S-\mu)) + P_{m=\mu}( \frac{\sqrt{n}}{\sigma} (T-\mu) <\frac{\sqrt{n}}{\sigma} (-S-\mu)) \\\
+&= 1 - \Phi(\frac{\sqrt{n}}{\sigma} (S-\mu)) + \Phi(\frac{\sqrt{n}}{\sigma} (-S-\mu)) 
+\end{aligned}
+\]
+
+**Unknown variance**
+
+\[
+\begin{aligned}
+\alpha &= 2(1 - \Phi_{n-1}(\frac{\sqrt{n}}{\sigma} S)) \\\
+\eta(\mu) &= 1 - \Phi_{n-1}(\frac{\sqrt{n}}{\sigma}(S-\mu)) + \Phi_{n-1}(\frac{\sqrt{n}}{\sigma}(-S-\mu)) 
+\end{aligned}
+\]
+
+<h3>Some tasks</h3>
+
+* Display the power $\eta$ as a function of $\mu$, $n$, $\sigma$
+* Compare the power when $\sigma$ is known or estimated. What happens when $n$ incerases?
+* Display the power $\eta$ as a function of the level $\alpha$. Change the values of $n$, $\mu$ and $\sigma$. What are the optimal experimental conditions for such test?
+* Display the sample size $n$ as a function of the power of the test. Comment on this graph. Assume that $\sigma=2$. Given a significance level $\alpha=0.05$, what is the required sample size to yield a power $\eta=0.75$ for detecting a mean $m>1$ ? $m>0.5$ ? What happens when the level increases?
+* Display the sample size $n$ as a function of $\mum. Comment on this graph.
