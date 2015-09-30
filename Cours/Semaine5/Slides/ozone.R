@@ -23,4 +23,12 @@ boxplot(log(ozone[,c(1,11)]))
 ozone=data.frame(ozone,LmaxO3=log(ozone$maxO3),
                  LmaxO3v=log(ozone$maxO3v))
 summary(ozone)
+# estimation
+res2.reg=lm(LmaxO3 ~ LmaxO3v+T9+T12+T15+Ne9+Ne12+
+              Ne15+Vx9+Vx12+Vx15, data = ozone)
+# diagnostics
+plot(res2.reg)
+# résultats
+summary(res2.reg)
+
 

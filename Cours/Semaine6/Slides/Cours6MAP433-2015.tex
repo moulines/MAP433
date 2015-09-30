@@ -109,7 +109,7 @@ $$\big(\PP_\truetheta^{10}\big[\varphi(Z)=0\big],\;\;\truetheta \neq \frac{1}{2}
 \begin{frame}
 \frametitle{Retour à l'exemple}
 \begin{itemize}
-\item Sous $\PP_\theta$, $n \hat{\theta}(Z)= \sum_{i=1}^n Z_i$ suit une loi binomiale de paramètre de succès $\truetheta$. 
+\item Sous $\PP_\theta$, $n \hat{\theta}(Z)= \sum_{i=1}^n Z_i$ suit une loi binomiale de paramètre de succès $\truetheta$.
 En notant $\binom_{n,\truetheta}$ la fonction
 de répartition de la loi binomiale,
 \begin{multline*}
@@ -285,7 +285,7 @@ et
 \varphi(z)=
 \begin{cases}
 1 & \text{quand $p_1(z) > c_\alpha p_0(z)$} \\
-0 & \text{quand $p_0(z) < c_\alpha p_1(z)$}
+0 & \text{quand $p_1(z) < c_\alpha p_0(z)$}
 \end{cases}
 \]
 \end{theorem}
@@ -339,7 +339,7 @@ et
 \varphi(z)=
 \begin{cases}
 1 & \text{quand $p_1(z) > c_\alpha p_0(z)$} \\
-0 & \text{quand $p_0(z) < c_\alpha p_1(z)$}
+0 & \text{quand $p_1(z) < c_\alpha p_0(z)$}
 \end{cases}
 \]
 est \alert{uniformément le plus puissant} pour tester l'hypothèse nulle $H_0: \{\theta = \theta_0\}$ contre l'alternative $H_1: \{\theta = \theta_1\}$.
@@ -357,7 +357,7 @@ et
 \varphi(z)=
 \begin{cases}
 1 & \text{quand $p_1(z) > c_\alpha p_0(z)$} \\
-0 & \text{quand $p_0(z) < c_\alpha p_1(z)$}
+0 & \text{quand $p_1(z) < c_\alpha p_0(z)$}
 \end{cases}
 \]
 et $\varphi^*$ un test de niveau $\PE_0[\varphi^*(Z)] \leq \alpha$}
@@ -387,10 +387,10 @@ $$
 \begin{frame}
 \frametitle{Puissance d'un test U.P.P}
 \begin{lemma}
-Notons $\puissance$ la puissance du test U.P.P de niveau $\alpha$ du test $H_0= \{\theta = \theta_0\}$ contre l'alternative $H_1= \{\theta=\theta_1\}$. Alors $\alpha \leq \beta$ avec égalité si $\PP_{\theta_0}= \PP_{\theta_1}$.
+Notons $\puissance$ la puissance du test U.P.P de niveau $\alpha$ du test $H_0= \{\theta = \theta_0\}$ contre l'alternative $H_1= \{\theta=\theta_1\}$. Alors $\alpha \leq \puissance$ avec égalité si $\PP_{\theta_0}= \PP_{\theta_1}$.
 \end{lemma}
 \begin{proof}
-Comme le test $\varphi(z) \equiv \alpha$ a un niveau $\alpha$, nous avons $\alpha \leq \beta$.
+Comme le test $\varphi(z) \equiv \alpha$ a un niveau $\alpha$, nous avons $\alpha \leq \puissance$.
 \end{proof}
 \end{frame}
 
@@ -414,13 +414,13 @@ $$\frac{f(\truetheta_1,Z)}{f(\truetheta_0,Z)} = \exp\big(n(\truetheta_1-\truethe
 \begin{align*}
 & \big\{f(\truetheta_1,Z) >  cf(\truetheta_0,Z)\big\}\\
   =& \big\{n(\truetheta_1-\truetheta_0)\overline{X}_n-\frac{n}{2}(\truetheta_1^2-\truetheta_0^2) > \log c\big\} \\
- =& \big\{\overline{X}_n > \frac{\truetheta_0+\truetheta_1}{2}+\tfrac{\log c}{n(\truetheta_0-\truetheta_1)}\big\}.
+ =& \big\{\overline{X}_n > \frac{\truetheta_0+\truetheta_1}{2}+\tfrac{\log c}{n(\truetheta_1-\truetheta_0)}\big\}.
 \end{align*}
 \item \alert{Choix de $c$}. On résout
-$$\PP_{\truetheta_0}\big[\overline{X}_n > \tfrac{1}{2}(\truetheta_0+\truetheta_1)+\tfrac{\log c}{n(\truetheta_0-\truetheta_1)}\big]=\alpha.$$
+$$\PP_{\truetheta_0}\big[\overline{X}_n > \tfrac{1}{2}(\truetheta_0+\truetheta_1)+\tfrac{\log c}{n(\truetheta_1-\truetheta_0)}\big]=\alpha.$$
 \item \alert{Approche standard} : on raisonne sous $\PP_{\truetheta_0}$. On a
-$$\overline{X}_n = \truetheta_0 + \frac{1}{\sqrt{n}}\xi^{n,\truetheta_0},$$
-où $\xi^{n,\truetheta_0}$ est une gaussienne standard ${\mathcal N}(0,1)$ sous $\PP_{\truetheta_0}$ \alert{mais pas sous une autre probabilité $\PP_\truetheta$ si $\truetheta \neq \truetheta_0$!}
+$$\overline{X}_n = \truetheta_0 + \frac{1}{\sqrt{n}}\xi^{n,\truetheta_0}, \quad \xi^{n,\truetheta_0} \sim {\mathcal N}(0,1)$$
+sous $\PP_{\truetheta_0}$ \alert{mais pas sous une autre probabilité $\PP_\truetheta$ si $\truetheta \neq \truetheta_0$!}
 \end{itemize}
 \end{frame}
 
@@ -428,14 +428,14 @@ où $\xi^{n,\truetheta_0}$ est une gaussienne standard ${\mathcal N}(0,1)$ sous 
 \frametitle{Exemple (fin)}
 \begin{itemize}
 \item \alert{Résolution de}
-$$\PP_{\truetheta_0}\big[\truetheta_0 + \frac{1}{\sqrt{n}}\xi^{n,\truetheta_0} > \frac{1}{2}(\truetheta_0+\truetheta_1)+\frac{\log c}{n(\truetheta_0-\truetheta_1)}\big]=\alpha.$$
+$$\PP_{\truetheta_0}\big[\truetheta_0 + \frac{1}{\sqrt{n}}\xi^{n,\truetheta_0} > \frac{1}{2}(\truetheta_0+\truetheta_1)+\frac{\log c}{n(\truetheta_1-\truetheta_0)}\big]=\alpha.$$
 \item \alert{Equivalent à}
-$\PP_{\truetheta_0}\big[\xi^{n\truetheta_0} > \frac{\sqrt{n}}{2}(\truetheta_1-\truetheta_0)+\frac{1}{\sqrt{n}}\frac{\log c}{\truetheta_0-\truetheta_1}\big]=\alpha,$
+$\PP_{\truetheta_0}\big[\xi^{n\truetheta_0} > \frac{\sqrt{n}}{2}(\truetheta_1-\truetheta_0)+\frac{1}{\sqrt{n}}\frac{\log c}{\truetheta_1-\truetheta_0}\big]=\alpha,$
 soit
-$$\frac{\sqrt{n}}{2}(\truetheta_1-\truetheta_0)+\frac{1}{\sqrt{n}}\frac{\log c}{\truetheta_0-\truetheta_1}=\Phi^{-1}(1-\alpha),$$
+$$\frac{\sqrt{n}}{2}(\truetheta_1-\truetheta_0)+\frac{1}{\sqrt{n}}\frac{\log c}{\truetheta_1-\truetheta_0}=\Phi^{-1}(1-\alpha),$$
 où $\Phi(x) = \int_{-\infty}^x \rme^{-u^2/2}\tfrac{du}{\sqrt{2\pi}}$.
-\item \alert{Conclusion}
-$$\boxed{c_\alpha = \exp\big(n\frac{(\truetheta_1-\truetheta_0)^2}{2}+\sqrt{n}(\truetheta_0-\truetheta_1)\Phi^{-1}(1-\alpha)\big)}$$
+%\item \alert{Conclusion}
+%$$\boxed{c_\alpha = \exp\big(n\frac{(\truetheta_1-\truetheta_0)^2}{2}+\sqrt{n}(\truetheta_1-\truetheta_0)\Phi^{-1}(1-\alpha)\big)}$$
 \end{itemize}
 \end{frame}
 

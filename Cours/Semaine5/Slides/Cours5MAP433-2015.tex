@@ -25,10 +25,10 @@
 \begin{itemize}
 \item \underline{Principe} : on part de \alert{l'observation} d'un $n$-échantillon
 $$Y_1,\ldots, Y_n\;\;\;(Y_i \in \R)$$
-\item A chaque observation $Y_i$ est associée une \alert{observation auxiliaire} $\bX_i \alert{ \in \R^k}$.
-\item On \alert{suspecte} l'échantillon
+\item A chaque observation $Y_i$ est associée une \alert{observation auxiliaire} $\bX_i \alert{ \in \R^k}$, les \alert{variables explicatives} ou \alert{régresseurs}.
+\item On suspecte les variables explicatives
 $$\bX_1,\ldots, \bX_n\;\;\;\alert{ (\bX_i \in \R^k)}$$
-de contenir la \og majeure partie de la variabilité des $Y_i$ \fg{}.
+d'expliquer une part significative de la variabilité des observations $Y_i$.
 \end{itemize}
 \end{frame}
 
@@ -45,39 +45,39 @@ $\xi_i$ erreur aléatoire centrée (pour des raisons d'identifiabilité).
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Motivation: meilleure approximation $L^2$}
-\begin{itemize}
-\item \underline{Meilleure approximation $L^2$}. Si
-$\E\big[Y^2\big]<+\infty$, la meilleure approximation de $Y$ par une
-variable aléatoire $\bX$-mesurable est donnée par
-\alert{l'espérance conditionnelle} $\E\big[Y|\bX\big]$ :
-$$\E\big[\big(Y-r(\bX)\big)^2\big] = \min_h \E\big[\big(Y-h(\bX)\big)^2\big]$$
-\item o\`u
-$$r(\bx) = \E\big[Y|\bX=\bx\big],\;\;\bx \in \R^k.$$
-\item On appelle $r(\cdot)$ \alert{fonction de régression de $Y$ sur
-$\bX$}.
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Régression}
-\begin{itemize}
-\item On définit:
-$$\xi = Y-\E\big[Y|\bX \big]\;\;\Longrightarrow\; \E\big[\xi\big]=0.$$
-\item On a alors naturellement la représentation désirée
-$$Y=r(\bX)+\xi, \quad \E\big[\xi\big]=0$$
-si l'on pose
-$$\boxed{r(\bx) = \E\big[Y|\bX=\bx\big],\;\;\bx \in \R^k}$$
-
-\item On observe alors un $n$-échantillon
-$$(\bX_1,Y_1),\ldots, (\bX_n,Y_n)$$
-où
-$$Y_i = r(\bX_i)+\xi_i,\;\;\E\big[\xi_i\big]=0$$
-avec comme \alert{paramètre la fonction $r(\cdot)$}+ un \alert{jeu d'hypothèses} sur la loi des $\xi_i$.
-\end{itemize}
-\end{frame}
-
+%\begin{frame}
+%\frametitle{Motivation: meilleure approximation $L^2$}
+%\begin{itemize}
+%\item \underline{Meilleure approximation $L^2$}. Si
+%$\E\big[Y^2\big]<+\infty$, la meilleure approximation de $Y$ par une
+%variable aléatoire $\bX$-mesurable est donnée par
+%\alert{l'espérance conditionnelle} $\E\big[Y|\bX\big]$ :
+%$$\E\big[\big(Y-r(\bX)\big)^2\big] = \min_h \E\big[\big(Y-h(\bX)\big)^2\big]$$
+%\item o\`u
+%$$r(\bx) = \E\big[Y|\bX=\bx\big],\;\;\bx \in \R^k.$$
+%\item On appelle $r(\cdot)$ \alert{fonction de régression de $Y$ sur
+%$\bX$}.
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Régression}
+%\begin{itemize}
+%\item On définit:
+%$$\xi = Y-\E\big[Y|\bX \big]\;\;\Longrightarrow\; \E\big[\xi\big]=0.$$
+%\item On a alors naturellement la représentation désirée
+%$$Y=r(\bX)+\xi, \quad \E\big[\xi\big]=0$$
+%si l'on pose
+%$$\boxed{r(\bx) = \E\big[Y|\bX=\bx\big],\;\;\bx \in \R^k}$$
+%
+%\item On observe alors un $n$-échantillon
+%$$(\bX_1,Y_1),\ldots, (\bX_n,Y_n)$$
+%où
+%$$Y_i = r(\bX_i)+\xi_i,\;\;\E\big[\xi_i\big]=0$$
+%avec comme \alert{paramètre la fonction $r(\cdot)$}+ un \alert{jeu d'hypothèses} sur la loi des $\xi_i$.
+%\end{itemize}
+%\end{frame}
+%
 \begin{frame}
 \frametitle{régresseurs aléatoires}
 \begin{df}
