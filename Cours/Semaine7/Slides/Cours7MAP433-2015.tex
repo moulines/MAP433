@@ -1,0 +1,519 @@
+
+\input{../../def/defslide}
+
+
+\title{MAP 433 : Introduction aux méthodes statistiques. Cours 7}
+%\author{Marc Hoffmann}
+%\institute{Université Paris-Dauphine}
+\begin{document}
+\date{9 Octobre 2015}
+\maketitle
+
+
+
+\begin{frame}
+\frametitle{Aujourd'hui (et la semaine prochaine...)}
+\tableofcontents
+\end{frame}
+
+
+
+
+
+
+\section{Construction d'un test : hypothèses générales}
+
+
+%\frametitle
+
+\begin{frame}
+\frametitle{Situation}
+\begin{itemize}
+\item \underline{Situation} : on part d'une expérience statistique $\big(\mathfrak{Z}, {\mathcal Z},\{\PP_\truetheta, \truetheta \in \Theta\}\big)$ engendrée par l'observation $Z$.
+\item On souhaite tester :
+$$H_0:\;\truetheta \in \Theta_0 \subset \Theta\;\;\;\text{\alert{contre}}\;\;\;H_1:\truetheta \in \Theta_1$$
+avec $\alert{\Theta_0 \cap \Theta_1 = \emptyset}$.
+\item Si $\Theta_0 = \{\truetheta_0\}$ et $\Theta_1 = \{\truetheta_1\}$, on a Neyman-Pearson. \alert{ Et sinon ?}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Principe de construction}
+\begin{itemize}
+\item  Trouver  une \alert{statistique libre sous l'hypothèse} : toute quantité $\phi(Z)$ \alert{observable} dont on connait la loi sous l'hypothèse, c'est-à-dire la loi de $\phi(Z)$ sous $\PP_\truetheta$ avec $\truetheta \in \Theta_0$.
+\item On  regarde  si le comportement de $\phi(Z)$ est \alert{typique} d'un comportement sous l'hypothèse.
+\item Si oui, on \alert{accepte} $H_0$, si non on \alert{rejette} $H_0$.
+\item On quantifie  oui/non  par le niveau $\alpha$ du test.
+\end{itemize}
+\end{frame}
+
+\subsection{Retour sur un exemple}
+\begin{frame}
+\frametitle{Exemple : test sur la variance}
+\begin{itemize}
+\item On observe $Z=(Y_1,\ldots, Y_n)$,
+$$Y_1,\ldots, Y_n \sim_{\text{i.i.d.}}{\mathcal N}(\mu,\sigma^2)$$
+avec $\truetheta =(\mu,\sigma^2) \in \Theta = \R \times (0,+\infty)$.
+\item \alert{Premier cas} : on teste
+$$ \alert{ H_0:\sigma^2 = \sigma_0^2\;\;\;\text{ contre}\;\;\; H_1:\sigma^2 > \sigma_0^2.}$$
+\item Sous l'hypothèse (c'est-à-dire sous $\PP_\truetheta$ avec $\truetheta = (\mu,\sigma_0)$ et $\mu \in \R$ quelconque), on a
+$$\boxed{(n-1)\frac{s_n^2}{\sigma_0^2} \sim \chi^2(n-1)}$$
+avec $s_n^2:=\frac{1}{n-1}\sum_{i = 1}^n (Y_i-\overline{Y}_n)^2$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test sur la variance (cont.)}
+\begin{itemize}
+\item Donc, \alert{sous l'hypothèse}, le comportement  typique de
+$$\phi(Z) = (n-1)\frac{s_n^2}{\sigma_0^2} $$
+est celui d'une variable aléatoire de loi du $\chi^2$ à $n-1$ degrés de liberté.
+\item Soit $q_{1-\alpha,n-1}^{\chi^2}>0$ tel que si $U \sim {\chi^2}(n-1)$, alors
+$$\PP\big[U > q_{1-\alpha,n-1}^{\chi^2}\big] = \alpha.$$
+\item \alert{Sous l'hypothèse} $\phi(Z)\stackrel{d}{=} U$ et donc la probabilité pour que $\phi(Z)$ dépasse $q_{1-\alpha,n-1}^{\chi^2}$ est inférieure (égale) à $\alpha$ (comportement atypique si $\alpha$ petit).
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test sur la variance (cont.)}
+\begin{itemize}
+\item \alert{Règle de décision :} On accepte l'hypothèse si
+$$\phi(Z) \leq  q_{1-\alpha,n-1}^{\chi^2}.$$
+On la rejette sinon.
+\item Par construction, on a un \alert{test de niveau $\alpha$}.
+\item On ne \alert{sait rien dire sur l'erreur de seconde espèce}, mis à part qu'elle est minimale parmi les tests de zone de rejet de la forme de $\{\phi(Z) > c\}$, $c>0$...
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test sur la variance (fin)}
+\begin{itemize}
+\item \alert{Deuxième cas :} On teste
+$$H_0: \alert{ \sigma^2 \leq \sigma_0^2}\;\;\;\text{ contre}\;\;\; H_1:\sigma^2 > \sigma_0^2.$$
+\item \alert{Pas de statistique libre évidente...} Mais, pour $\sigma^2 \leq \sigma_0^2$, on a
+\begin{align*}
+\PP_{\sigma}\big[(n-1)\tfrac{s_n^2}{\sigma_0^2} > q_{1-\alpha,n-1}^{\chi^2}\big]
+= & \PP_{\sigma}\big[(n-1)\tfrac{s_n^2}{\sigma^2} > \alert{\tfrac{\sigma_0^2}{\sigma^2} } q_{1-\alpha,n-1}^{\chi^2}\big] \\
+\leq &  \PP_{\sigma}\big[(n-1)\tfrac{s_n^2}{\sigma^2} > q_{1-\alpha,n-1}^{\chi^2}\big] \\
+= & \alpha.
+\end{align*}
+\item La même statistique de test convient pour contrôler l'erreur de première espèce que pour l'hypohèse nulle simple. On choisit \alert{ ici} la \alert{même} règle de décision.
+\end{itemize}
+\end{frame}
+
+\subsection{Principe de construction}
+
+\begin{frame}
+\frametitle{Conclusion provisoire}
+\begin{itemize}
+\item Pour contruire un test de l'hypothèse $H_0:\truetheta \in \Theta_0$ contre $H_1:\truetheta \in \Theta_1$, on cherche \alert{une statistique libre} sous l'hypothèse et on rejette pour un seuil qui dépend de la loi de la statistique sous $H_0$, de sorte de fournir une zone de rejet \alert{ maximale}.
+%étudie séparément l'erreur de seconde espèce
+ \item Le plus souvent, la statistique est obtenue via un estimateur. Sauf exception (comme la cas gaussien) une telle statistique est difficile à trouver en général.
+ \item \alert{Simplification} cadre asymptotique (où la gaussianité réappara”t le plus souvent...).
+\end{itemize}
+
+\end{frame}
+
+\section{Tests asymptotiques}
+
+\begin{frame}
+\frametitle{Le test de Wald : hypothèse nulle simple}
+\begin{itemize}
+\item \underline{Situation} la suite d'expériences $\big(\mathfrak{Z}^n, {\mathcal Z}^n,\{\PP_\truetheta^n,\truetheta \in \Theta\}\big)$ est engendrée par l'observation $Z^n$, $\truetheta \in \Theta \subset \R$
+\item \alert{Objectif} : Tester
+$$H_0:\truetheta = \truetheta_0\;\;\;\text{contre}\;\;H_1 \;\truetheta\neq \truetheta_0.$$
+\item \alert{Hypothèse} : on dispose d'un estimateur $\est$ \alert{asymptotiquement normal}
+$$\boxed{\sqrt{n}(\est-\truetheta)\stackrel{d}{\rightarrow}{\mathcal N}\big(0,v(\truetheta)\big)}$$
+en loi sous $\PP_{\truetheta}^n$, $\forall \truetheta \in \Theta$, où $\truetheta \leadsto v(\truetheta) >0$ est continue.
+\item Sous l'hypothèse (ici sous $\PP_{\truetheta_0}^n$) on a \alert{la convergence}
+$$\sqrt{n}\frac{\est-\truetheta_0}{\sqrt{v(\est)}}\stackrel{d}{\longrightarrow} {\mathcal N}(0,1)$$
+\alert{en loi sous $\PP_{\truetheta_0}^n$}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test de Wald (cont.)}
+\begin{itemize}
+\item \underline{Remarque} $\sqrt{v(\est)} \leftrightarrow \sqrt{v(\truetheta_0)}$ ou d'autres choix encore...
+\item On a aussi
+$$T_n = n\frac{(\est-\truetheta_0)^2}{v(\est)} \stackrel{d}{\longrightarrow} \chi^2(1)$$
+sous $\PP_{\truetheta_0}^n$.
+\item Soit $q_{1-\alpha,1}^{\chi^2} >0$ tel que si $U \sim \chi^2(1)$, on a $\PP\big[U > q_{1-\alpha,1}^{\chi^2}\big]=\alpha$. On \alert{choisit la zone de rejet}
+$${\mathcal R}_{n,\alpha} = \big\{T_n\geq q_{1-\alpha,1}^{\chi^2}\big\}.$$
+\item Le test de zone de rejet ${\mathcal R}_{n,\alpha}$ s'appelle \alert{Test de Wald de l'hypothèse simple $\truetheta=\truetheta_0$ contre l'alternative $\truetheta \neq \truetheta_0$ basé sur $\est$.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Propriétés du test de Wald}
+\begin{prop}
+Le test Wald de l'hypothèse simple $\truetheta=\truetheta_0$ contre l'alternative $\truetheta \neq \truetheta_0$ basé sur $\est$ est
+\begin{itemize}
+\item \alert{asymptotiquement} de niveau $\alpha$ :
+$$\PP_{\truetheta_0}^n\big[T_n \in {\mathcal R}_{n,\alpha}\big]\rightarrow \alpha.$$
+\item \alert{convergent ou (consistant)}. Pour tout point $\truetheta \neq \truetheta_0$
+$$\PP_\truetheta^n\big[T_n \notin {\mathcal R}_{n,\alpha}\big] \rightarrow 0.$$
+\end{itemize}
+\end{prop}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preuve}
+\begin{itemize}
+\item Test asymptotiquement de niveau $\alpha$ \alert{par construction}.
+\item \underline{Contrôle de l'erreur de seconde espèce :}
+Soit $\truetheta \neq \truetheta_0$. On a
+\begin{align*}
+T_n & = \Big(\sqrt{n}\frac{\est-\truetheta}{\sqrt{v(\est)}}+\sqrt{n}\frac{\truetheta-\truetheta_0}{\sqrt{v(\est)}}\Big)^2 \\
+& =: T_{n,1}+T_{n,2}.
+\end{align*}
+On a $T_{n,1} \stackrel{d}{\longrightarrow} {\mathcal N}(0,1)$ sous $\PP_{\truetheta}^n$ et
+$$T_{n,2} \stackrel{\PP_{\truetheta}^n}{\longrightarrow} \pm \infty\;\;\alert{\text{car}\;\;\truetheta \neq \truetheta_0}$$
+Donc $T_{n}\stackrel{\PP_{\truetheta}^n}{\longrightarrow}+\infty$, d'où le résultat.
+\item \alert{Remarque} : si $\truetheta \neq \truetheta_0$ mais $|\truetheta - \truetheta_0| \lesssim 1/\sqrt{n}$, le raisonnement ne s'applique pas. Résultat \alert{non uniforme en le paramètre}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test de Wald : cas vectoriel}
+\begin{itemize}
+\item \alert{ Même contexte:} $\Theta \subset \R^d$ et \alert{on dispose} d'un estimateur $\est$ asymptotiquement normal :
+$$\sqrt{n}\big(\est-\truetheta\big)\stackrel{d}{\longrightarrow} {\mathcal N}\big(0, V(\truetheta)\big)$$
+où la matrice $V(\truetheta)$ est \alert{définie positive} et continue en $\truetheta$.
+\item On cheche à tester $H_0: \truetheta= \truetheta_0$ contre $H_1: \truetheta \ne \truetheta_1$. 
+\item Sous $\PP_\truetheta$, la convergence $n^{1/2} (\est - \truetheta) \dlim \gauss(0,V(\truetheta))$ implique que
+$$
+V^{-1/2}(\truetheta) n^{1/2} (\est - \theta) \dlim \gauss(0,\Id{d}) 
+$$
+et donc que
+$$
+n (\est - \truetheta)^{T} V^{-1}(\truetheta) (\est - \truetheta) \dlim \chi^2_d  \eqsp.
+$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemple: loi exponentielle}
+\begin{itemize}
+\item \alert{Hypothèse}: $\{X_i\}_{i=1}^n$, \iid\ de loi exponentielle de paramètre $\theta \in \Theta= \rset_+^*$.
+\item \alert{log-vraisemblance}
+\[
+\ell_n(\truetheta)= n^{-1} \sum_{i=1}^n \log f(\truetheta,X_i)= \log(\truetheta) - \theta \bar{X}_n
+\]
+où $\bar{X}_n= n^{-1} \sum_{i=1}^n X_i$ est la moyenne empirique. 
+\item Estimateur du MV: $\hat{\theta}_n = \bar{X}_n^{-1}$.
+\item \alert{Modèle régulier}
+\[
+\sqrt{n} (\est - \truetheta) \dlim_{\PP_{\truetheta}} \gauss(0,I^{-1}(\truetheta))
+\]
+où $I(\truetheta)= \theta^{-2}$ est l'\alert{information de Fisher}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemple: test loi exponentielle}
+\begin{itemize}
+\item \alert{Test de Wald} de l'hypothèse $H_0: \truetheta = \truetheta_0$ contre l'hypothèse $H_1: \truetheta \ne \truetheta_0$.
+\begin{align*}
+n (\est - \truetheta_0)^2/I(\est)= n (1 - \truetheta_0 \est)^2 \dlim_{\PP_{\truetheta_0}} \geq q^{\chi2}_{1,1-\alpha}
+\end{align*}
+\item \alert{Application numérique} $n=100$, $\truetheta_0=0.5$,  
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Test de Wald: cas vectoriel}
+\begin{itemize}
+\item Le test de Wald de l'hypothèse $H_0= \truetheta= \truetheta_0$ contre $H_1= \truetheta \ne \truetheta_0$ 
+rejette $H_0$ si 
+\[
+n (\est - \truetheta_0)^T V^{-1}(\est) (\est - \truetheta_0) > q^{\chi^2}_{d,1-\alpha} \eqsp
+\]
+\item On peut remplacer la matrice de covariance $V(\est)$ par $V(\truetheta_0)$ ou tout estimateur consistant de $V(\truetheta_0)$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test de Wald : hypothèse nulle composite}
+\begin{itemize}
+\item \alert{ Même contexte:} $\Theta \subset \R^d$ et \alert{on dispose} d'un estimateur $\est$ asymptotiquement normal :
+$$\sqrt{n}\big(\est-\truetheta\big)\stackrel{d}{\longrightarrow} {\mathcal N}\big(0, V(\truetheta)\big)$$
+où la matrice $V(\truetheta)$ est \alert{définie positive} et continue en $\truetheta$.
+\item \alert{But} Tester $H_0: \truetheta \in \Theta_0$ contre $H_1:\truetheta \notin \Theta_0$, où
+$$\boxed{\Theta_0 = \big\{\truetheta \in \Theta,\;\;g(\truetheta) = 0\big\}}$$
+et
+$$g:\R^d \rightarrow \R^m$$
+($m \leq d$) est régulière.
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Test de Wald cont.}
+\begin{itemize}
+\item \alert{Hypothèse : } la différentielle (de matrice $J_g(\truetheta)$) de $g$ est de rang maximal $m$ en tout point de (l'intérieur) de $\Theta_0$.
+\end{itemize}
+\begin{prop}
+En tout point $\truetheta$ de l'intérieur de $\Theta_0$ (i.e. \alert{sous l'hypothèse}), on a, en loi sous $\PP_\truetheta^n$ :
+\begin{itemize}
+\item $$\sqrt{n}g(\est) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0, J_g(\truetheta)V(\truetheta)J_g(\truetheta)^T\big),$$
+\item $$\alert{T_n=ng(\est)^T\Sigma_g(\est)^{-1}g(\est)} \stackrel{d}{\longrightarrow} \chi^2(m)$$
+%en loi sous $\PP_\truetheta^n$,
+où $\Sigma_g(\truetheta) =J_g(\truetheta) V(\truetheta) J_g(\truetheta)^T$.
+\end{itemize}
+\end{prop}
+\begin{itemize}
+\item Preuve : méthode  delta  multidimensionnelle.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test de Wald (fin)}
+\begin{prop}
+Sous les hypothèses précédentes, le test de zone de rejet
+$${\mathcal R}_\alpha  = \big\{T_n \geq q_{1-\alpha, m}^{\chi^2}\big\}$$
+avec $\PP\big[U > q_{1-\alpha, m}^{\chi^2}\big]=\alpha$ si $U \sim \chi^2(m)$ est
+\begin{itemize}
+\item \alert{Asymptotiquement de niveau $\alpha$} en tout point $\truetheta$ de (l'intérieur) de $\Theta_0$ :
+$$\PP_\truetheta^n\big[T_n \in {\mathcal R}_{n,\alpha}\big]\rightarrow \alpha.$$
+\item \alert{Convergent} : pour tout $\truetheta \notin \Theta_0$ on a
+$$\PP_\truetheta^n\big[T_n \notin {\mathcal R}_{n,\alpha}\big]\rightarrow 0.$$
+\end{itemize}
+\end{prop}
+\begin{itemize}
+\item C'est la  même preuve qu'en dimension 1.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Modèle régulier}
+\begin{df} La famille de densités $\{f(\truetheta,\cdot),\truetheta \in \Theta\}$,  par rapport à la mesure dominante $\mu$, $\Theta \subset \R$, est \alert{régulière} si
+\begin{itemize}
+\item $\Theta$ ouvert et $\{f(\truetheta, \cdot)>0\}=\{f(\truetheta', \cdot)>0\}$, $\forall \truetheta, \truetheta' \in \Theta$.
+\item $\mu$-p.p. $\truetheta \leadsto f(\truetheta,\cdot)$, $\truetheta \leadsto \log f(\truetheta,\cdot)$ sont ${\mathcal C}^2$.
+ \item $\forall \truetheta \in \Theta, \exists {\mathcal V}_\truetheta \subset \Theta$ t.q. pour $\tilde{\truetheta} \in {\mathcal V}_\truetheta$
+$$|\nabla_\truetheta^{2}\log f(\tilde{\truetheta},x)|+|\nabla_\truetheta \log f(\tilde{\truetheta},x)|+\big(\nabla_\truetheta\log f(\tilde{\truetheta},x)\big)^2\leq g(x)$$
+où
+$$\int_{\mathbb{R}}g(x)\sup_{a \in {\mathcal V}(\truetheta)}f(\tilde{\truetheta},x)\mu(dx)<+\infty.$$
+\item L'information de Fisher est non-dégénérée :
+$$\forall \truetheta \in \Theta,\;\;\mathbb{I}(\truetheta) >0.$$
+\end{itemize}
+\end{df}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Test du score (Rao)}
+\begin{itemize}
+\item Soit $\{X_i\}_{i=1}^n$ un $n$-échantillon \iid\ associé à un modèle statistique $(\PP_\truetheta, \truetheta \in \Theta)$  \alert{régulier}
+\item Pour $\truetheta \in \Theta^$, le \alert{score de Fisher} est donné par
+\[
+\eta_{\truetheta}(x)= \nabla_{\truetheta} \log f(\truetheta,x)
+\]
+\item \alert{Propriétés}
+\begin{itemize}
+\item Le score de Fisher est centré sous $\PP_{\truetheta}$,
+$$
+\PE_{\truetheta}[\eta_{\truetheta}(X)]= 0 \eqsp, \quad \truetheta \in \Theta \eqsp.
+$$
+\item La covariance du score de Fisher est égale à la \alert{matrice d'Information de Fisher}
+$$
+I(\truetheta)= \PE_{\truetheta} \left[ \eta_{\truetheta}(X) \eta_{\truetheta}(X)^T \right]
+$$
+\end{itemize}
+\item \alert{Conclusion} Pour tout $\truetheta \in \Theta$,
+$$
+Z_n(\truetheta) = n^{-1/2} \sum_{i=1}^n \eta_\truetheta(X_i) \dlim_{\PP_{\truetheta_0}} \gauss(0, I(\truetheta)) \eqsp. 
+$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test de Rao}
+\begin{itemize}
+\item Pour tester $H_0: \truetheta= \truetheta_0$ contre $H_1: \truetheta \ne \truetheta_0$, nous considérons la statistique de test
+\[
+Z_n(\truetheta_0)^T I^{-1} (\truetheta_0) Z_n(\truetheta_0)
+\]
+\item Sous l'hypothèse nulle,
+$$
+Z_n(\truetheta_0)^T I^{-1} (\truetheta_0) Z_n(\truetheta_0) \dlim_{\PP_{\truetheta_0}} \chi^2_d
+$$
+et donc le test de Rao de rejet 
+$$
+Z_n(\truetheta_0)^T I^{-1} (\truetheta_0) Z_n(\truetheta_0) \geq q_{d,1-\alpha}^{\chi^2}
+$$
+est asymptotiquement de niveau $\alpha$.
+\end{itemize}
+\end{frame}
+
+\section{Tests d'adéquation}
+
+\begin{frame}
+\frametitle{Tests d'adéquation}
+\begin{itemize}
+\item \underline{Situation} On observe (pour simplifier) un $n$-échantillon de loi $F$ inconnu
+$$X_1,\ldots, X_n\sim_{\text{i.i.d.}}F$$
+\item \alert{Objectif} Tester
+$$H_0:F=F_0\;\;\text{contre}\;\;F\neq F_0$$
+où
+$F_0$ distribution donnée. Par exemple : $F_0$ \alert{gaussienne centrée réduite}.
+\item Il est \alert{très facile de construire un test asymptotiquement de niveau $\alpha$.}
+Il suffit de trouver une statistique $\phi(X_1,\ldots, X_n)$ de loi connue sous l'hypothèse.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test d'adéquation : situation}
+\begin{itemize}
+\item \alert{Exemples : sous l'hypothèse}
+$$\phi_1(X_1\ldots, X_n) = \sqrt{n}\overline{X}_n \sim {\mathcal N}(0,1)$$
+$$\phi_2(X_1,\ldots, X_n) = \sqrt{n}\frac{\overline{X}_n}{s_n} \sim \text{Student}(n-1)$$
+$$\phi_3(X_1,\ldots, X_n) = (n-1)s_n^2 \sim \chi^2(n-1).$$
+\item Le problème est que ces tests \alert{ont une faible puissance} : ils ne sont pas consistants.
+\item Pas exemple, si $F\neq$ gaussienne mais $\int_{\R}xdF(x)=0$, $\int_{\R}x^2dF(x)=1$, alors
+$$\PP_{F}\big[\phi_1(X_1,\ldots,X_n) \leq x \big] \rightarrow \int_{-\infty}^x e^{-u^2/2}\frac{du}{\sqrt{2\pi}},\;\;x \in \R.$$
+(résultats analogues pour $\phi_2$ et $\phi_3$).
+\item La statistique de test $\phi_i$ \alert{ne caractérise pas} la loi $F_0$.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Tests de Kolmogorov-Smirnov}
+
+\begin{frame}
+\frametitle{Test de Kolmogorov-Smirnov}
+\begin{itemize}
+\item \underline{Rappel} Si la fonction de répartition $F$ est continue,
+$$\sqrt{n}\sup_{x\in \R}\big|\widehat F_n(x)-F(x)\big| \stackrel{d}{\longrightarrow} \mathbb{B}$$
+où la loi de $\mathbb{B}$ ne dépend pas de $F$.
+\end{itemize}
+\begin{prop}[Test de Kolmogorov-Smirnov]
+Soit $q_{1-\alpha}^{\mathbb{B}}$ tel que $\PP\big[\mathbb{B}>q_{1-\alpha}^{\mathbb{B}}\big]=\alpha$. Le test défini par la zone de rejet
+$${\mathcal R}_{n,\alpha} = \big\{\sqrt{n}\sup_{x\in \R}\big|\widehat F_n(x)-F_0(x)\big| \geq q_{1-\alpha}^{\mathbb{B}}\big|\big\}$$
+est \alert{asymptotiquement de niveau $\alpha$ :}
+$\PP_{F_0}\big[\widehat F_n \in {\mathcal R}_{n,\alpha}\big]\rightarrow \alpha$
+et \alert{consistant} :
+$$\forall F \neq F_0: \PP_{F}\big[\widehat F_n \notin {\mathcal R}_{n,\alpha}\big] \rightarrow 0.$$
+\end{prop}
+\end{frame}
+
+\subsection{Tests du $\chi^2$}
+
+\begin{frame}
+\frametitle{Test du Chi-deux}
+\begin{itemize}
+\item $X$ variables \alert{qualitative} : $X \in \{1,\ldots, d\}$.
+$$\PP\big[X=\ell\big]=p_\ell,\;\ell=1,\ldots d.$$
+\item La loi de $X$ est caratérisée par ${\boldsymbol p} = (p_1,\ldots, p_d)^T$.
+\item \underline{Notation}
+$${\mathcal M}_d  = \big\{{\boldsymbol p}=(p_1,\ldots, p_d)^T,\;\;0 \leq p_\ell,\sum_{\ell=1}^dp_\ell=1\big\}.$$
+\item \alert{Objectif} ${\boldsymbol q}\in {\mathcal M}_d$ donnée. A partir d'un $n$-échantillon
+$$X_1,\ldots, X_n \sim_{\text{i.i.d.}}{\boldsymbol p},$$
+tester
+$H_0:{\boldsymbol p}={\boldsymbol q}$ \alert{contre} $H_1:{\boldsymbol p}\neq{\boldsymbol q}.$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Construction  naturelle d'un test}
+\begin{itemize}
+\item \alert{Comparaison des fréquences empiriques}
+$$\widehat p_{n,\ell}=\frac{1}{n}\sum_{i=1}^n 1_{X_i=\ell}\;\;\;\text{\alert{proche de}}\;\;q_\ell,\;\;\ell=1,\ldots, d\; \alert{?}$$
+\item Loi des grands nombres :
+$$\big(\widehat p_{n,1},\ldots, \widehat p_{n,d}\big) \stackrel{\PP_{{\boldsymbol p}}}{\longrightarrow} (p_1,\ldots, p_d)={\boldsymbol p}.$$
+\item \alert{Théorème central-limite ?}
+$${\boldsymbol{U}_n}(\boldsymbol{p})=\sqrt{n}\Big(\frac{\widehat p_{n,1}-p_1}{\sqrt{p_1}},\ldots, \frac{\widehat p_{n,d}-p_d}{\sqrt{p_d}}\Big) \stackrel{d}{\longrightarrow} ?$$
+\item Composante par composante oui. \alert{Convergence globale plus délicate}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Statistique du Chi-deux}
+\begin{prop}
+Si les composantes de $\boldsymbol{p}$ sont toute non-nulles
+\begin{itemize}
+\item On a la \alert{convergence en loi} sous $\PP_{\boldsymbol{p}}$
+$${\boldsymbol{U}_n}(\boldsymbol{p})\stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$$
+avec $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ et $\sqrt{\boldsymbol{p}} = (\sqrt{p_1},\ldots, \sqrt{p_d})^T$.
+\item \alert{De plus}
+$$\|{\boldsymbol{U}_n}(\boldsymbol{p})\|^2 = n\sum_{\ell=1}^d \frac{(\widehat p_{n,\ell}-p_\ell)^2}{p_\ell} \stackrel{d}{\longrightarrow} \chi^2(\alert{d-1}).$$
+\end{itemize}
+\end{prop}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preuve de la normalité asymptotique}
+\begin{itemize}
+\item Pour $i=1,\ldots, n$ et $1 \leq \ell \leq d$, on pose
+$$Y_\ell^i=\frac{1}{\sqrt{p_\ell}}\big(1_{\{X_i=\ell\}}-p_\ell\big).$$
+\item Les vecteurs ${\boldsymbol Y}_i=(Y_1^i,\ldots, Y_d^i)$ sont \alert{indépendants et identiquement distribués} et
+$${\boldsymbol U}_n(\boldsymbol{p}) = \frac{1}{\sqrt{n}}\sum_{i = 1}^n {\boldsymbol Y}_i,$$
+$\E\big[Y_\ell^i\big]=0$, $\E\big[(Y_\ell^i)^2\big]=1-p_\ell$, $\E\big[Y_\ell^iY_{\ell'}^i \big]=-(p_\ell p_{\ell'})^{1/2}$.
+\item \alert{On applique le TCL vectoriel}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Convergence de la norme au carré}
+\begin{itemize}
+\item On a donc ${\boldsymbol U}_n(\boldsymbol{p}) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$.
+\item On a aussi
+\begin{align*}
+\|{\boldsymbol U}_n(\boldsymbol{p}) \|^2 & \stackrel{d}{\longrightarrow} \| {\mathcal N}\big(0,V(\boldsymbol{p})\big)\|^2 \\
+& \sim \chi^2\big(\mathrm{Rang}\big(V(\boldsymbol{p})\big)\big)
+\end{align*}
+par \alert{Cochran} :  $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ est la projection orthogonale sur $\mathrm{vect}\{\sqrt{\boldsymbol{p}}\}^\perp$ qui est de dimension $d-1$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test d'adéquation du $\chi^2$}
+\begin{itemize}
+\item  distance du $\chi^2$:
+$$\chi^2(\boldsymbol{p},\boldsymbol{q})=\sum_{\ell=1}^d \frac{(p_\ell-q_\ell)^2}{q_\ell}.$$
+\item Avec ces notations
+$\|{\boldsymbol U}_n(\boldsymbol{p})\|^2=n\chi^2(\widehat {\boldsymbol p}_n,\boldsymbol{p}).$
+\end{itemize}
+\begin{prop}
+Pour $\boldsymbol{q} \in {\mathcal M}_d$ le test simple défini par la zone de rejet
+$${\mathcal R}_{n,\alpha} = \big\{n\chi^2(\widehat {\boldsymbol p}_n,\boldsymbol{q}) \geq q_{1-\alpha,d-1}^{\chi^2} \big\}$$
+où
+%$q_{1-\alpha,d-1}^{chi^2}>0$ est défini par
+$\PP\big[U > q_{1-\alpha,d-1}^{\chi^2}\big]=\alpha$ si $U \sim \chi^2(d-1)$ est
+\alert{asymptotiquement de niveau $\alpha$ et consistant} pour tester
+$$H_0:\boldsymbol{p}=\boldsymbol{q}\;\;\;\text{contre}\;\;\;
+H_1:\boldsymbol{p}\neq\boldsymbol{q}.$$
+\end{prop}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemple de mise en oeuvre : expérience de Mendel}
+\begin{itemize}
+\item Soit $d=4$ et
+$$\boldsymbol{q}=\Big(\frac{9}{16},\frac{3}{16},\frac{3}{16},\frac{1}{16}\Big).$$
+\item \alert{Répartition observée} : $n=556$
+$$\widehat {\boldsymbol p}_{556} = \frac{1}{556}(315,101,108,32).$$
+\item \alert{Calcul de la statistique du $\chi^2$}
+$$556 \times \chi^2(\widehat {\boldsymbol p}_{556}, \boldsymbol{q})=0,47.$$
+\item On a $q_{95\%, 3}=0,7815$.
+\item \alert{Conclusion :} Puisque $0,47 < 0,7815$, on accepte l'hypothèse $\boldsymbol{p}=\boldsymbol{q}$ au niveau $\alpha = 5\%$.
+\end{itemize}
+\end{frame}
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
