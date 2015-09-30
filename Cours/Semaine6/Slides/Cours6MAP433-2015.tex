@@ -86,9 +86,9 @@ où $t_0$ est un seuil à choisir... \alert{Comment ?}
 \begin{itemize}
 \item Une \alert{règle de décision} (non-randomisée) assigne à chaque réalisation $z$ de l'observation $Z$ une \alert{décision}.
 \item Si $z \in \zaccept$, l'hypothèse nulle est \alert{acceptée}; autrement, l'hypothèse est rejetée.
-\item \alert{Terminologie}: 
+\item \alert{Terminologie}:
 \begin{itemize}
-\item $\zaccept$= \alert{zone d'acceptation}, 
+\item $\zaccept$= \alert{zone d'acceptation},
 \item $\zreject$= \alert{zone de rejet} ou \alert{région critique}.
 \end{itemize}
 \end{itemize}
@@ -152,7 +152,7 @@ de répartition de la loi binomiale,
 \item \alert{Erreur de seconde espèce}: pour une valeur critique fixée:
 \begin{multline*}
 \truetheta \mapsto \PP_{\truetheta}(|\hat{\theta}(Z) - 1/2| \leq t_0) \\=
-\binom_{n,1/2}(n(1+t_0)/2) - \binom_{n,1/2}(n(1-t_0)/2) 
+\binom_{n,1/2}(n(1+t_0)/2) - \binom_{n,1/2}(n(1-t_0)/2)
 \end{multline*}
 \end{itemize}
 \end{frame}
@@ -299,12 +299,12 @@ et
 \frametitle{Preuve Existence-1}
 \begin{itemize}
 \item Pour $\alpha=0$ et $\alpha=1$, le résultat est élémentaire en posant $c_0=\infty$ et $c_1=0$.
-\item On suppose $\alpha \in \ooint{0,1}$ et considère la fonction  
+\item On suppose $\alpha \in \ooint{0,1}$ et considère la fonction
 $$
-c \mapsto A(c)= \PP_0( p_1(Z) > c p_0(Z)) = \PP_0( p_1(Z)/p_0(Z) > c , p_0(Z) > 0) \eqsp, 
+c \mapsto A(c)= \PP_0( p_1(Z) > c p_0(Z)) = \PP_0( p_1(Z)/p_0(Z) > c , p_0(Z) > 0) \eqsp,
 $$
-\item La fonction $A$ est  décroissante, continue à droite et admet des limites à gauche ($c \mapsto 1 - A(c)$ est la fonction de répartition de 
-la variable aléatoire $p_1(Z)/p_0(Z)$ qui est définie $\PP_0$-p.s.):  
+\item La fonction $A$ est  décroissante, continue à droite et admet des limites à gauche ($c \mapsto 1 - A(c)$ est la fonction de répartition de
+la variable aléatoire $p_1(Z)/p_0(Z)$ qui est définie $\PP_0$-p.s.):
 $$
 A(c^-) - A(c) = \PP_0( p_1(Z)/p_0(Z) = c) \eqsp, A(-\infty)= 1, A(+\infty)=0
 $$
@@ -376,7 +376,7 @@ et
 \begin{itemize}
 \item On note:
 \begin{align*}
-S^+ &= \{z : \varphi(z) - \varphi^*(z) > 0\} \\ 
+S^+ &= \{z : \varphi(z) - \varphi^*(z) > 0\} \\
 S^- &=\{ z: \varphi(z) - \varphi^*(z) < 0\} .
 \end{align*}
 \item Pour $z \in S^+$, $\phi(z) > 0$ et donc \alert{$p_1(z) \geq c_\alpha p_0(z)$} (car $\varphi(z)=0$ si $p_1(z) < c_\alpha p_0(z)$).
@@ -389,14 +389,14 @@ S^- &=\{ z: \varphi(z) - \varphi^*(z) < 0\} .
 \end{itemize}
 }
 \only<3>
-{\alert{Conclusion} 
+{\alert{Conclusion}
 $$
 \int (\varphi - \varphi^*) (p_1 - c_\alpha p_0) \rmd \mu \geq 0
 $$
 ce qui  implique
 \alert{
 \begin{align*}
-\int (\varphi - \varphi^*) p_1  \rmd \mu 
+\int (\varphi - \varphi^*) p_1  \rmd \mu
 &\geq c_\alpha \int (\varphi - \varphi^*)  p_0 \rmd \mu \\
 &\geq c_\alpha \left\{ \PE_{0}[\varphi(Z)] - \PE_{0}[\varphi^*(Z)]  \right\}\\
 &= c_\alpha \{ \alpha - \PE_{0}[\varphi^*(Z)] \} \geq 0 \eqsp.
@@ -419,7 +419,7 @@ Comme le test $\varphi(z) \equiv \alpha$ a un niveau $\alpha$, nous avons $\alph
 \frametitle{Exemple de mise en oeuvre}
 \begin{itemize}
 \item On observe
-$$Z=(X_1,\ldots, X_n) \sim_{\text{i.i.d.}} {\mathcal N}(\truetheta, \sigma^2) \eqsp \quad \text{$\sigma^2$ connu}.$$, 
+$$Z=(X_1,\ldots, X_n) \sim_{\text{i.i.d.}} {\mathcal N}(\truetheta, \sigma^2) \eqsp \quad \text{$\sigma^2$ connu}.$$,
 \item \alert{Construction du test de N-P.} de $H_0:\truetheta = \truetheta_0= 0$ contre $H_1:\truetheta = \truetheta_1$, avec $0 < \truetheta_1$.
 \item \alert{Mesure dominante} $\mu^n=\;$mesure de Lebesgue sur $\R^n$ et
 $$f(\truetheta, Z)=\tfrac{1}{(2\pi)^{n/2}}\exp\big(-\frac{1}{2}\sum_{i = 1}^n X_i^2+n\truetheta\overline{X}_n-\frac{n\truetheta^2}{2}\big).$$
@@ -436,7 +436,7 @@ $$\frac{f(\truetheta_1,Z)}{f(\truetheta_0,Z)} = \exp\left(\frac{n \truetheta_1}{
 \big\{f(\truetheta_1,Z) >  cf(\truetheta_0,Z)\big\}&= \left\{ \frac{n \truetheta_1}{\sigma^2} \overline{X}_n-\frac{n \truetheta_1^2}{2 \sigma^2} > \log c\right\} \\
  &= \left\{\overline{X}_n > \frac{\truetheta_1}{2}+\frac{\sigma^2 \log c}{n \truetheta_1}\right\}.
 \end{align*}
-La région de rejet est donc de la forme 
+La région de rejet est donc de la forme
 $$
 \{ \overline{X}_n > t_{n,\alpha} \}
 $$
@@ -456,17 +456,38 @@ $$\PP_{\truetheta_0}\big[\overline{X}_n > t_{n,\alpha}\big]=\alpha.$$
 \end{align*}
 \item \alert{Conclusion}
 \[
-t_{n,\alpha}= \frac{\sigma z_{1-\alpha}}{\sqrt{n}} 
+t_{n,\alpha}= \frac{\sigma z_{1-\alpha}}{\sqrt{n}}
 \]
 On remarque d'ailleurs que le \alert{seuil critique} ne \alert{dépend pas de $\theta_1$} et que le \alert{même} test est U.P.P. contre toutes les contre-alternatives $\theta_1 > 0$.
 \end{itemize}
 \end{frame}
 
+
+
 \section{$p$-valeur}
+\begin{frame}
+\frametitle{Une application numérique}
+\begin{itemize}
+\item On prend $n=100$ et $\sigma=1$.  $\bar{X}_{100}= 0.1738$.
+\item Test de niveau $\alpha$ de l'hypothèse $H_0= \{ \truetheta= 0 \}$ contre $H_1: \{\truetheta= \theta_1 \}$ avec $\theta_1 > 0$:
+\[
+\left\{ \bar{X}_n > \sigma z_{1-\alpha}/ \sqrt{n} \right\}= \left\{ \bar{X}_n > z_{1-\alpha}/10 \right\} \eqsp.
+\]
+\item Pour $\alpha =0.05$, $z_{1-\alpha}= 1.6449$ et donc on \alert{rejette} l'hypothèse nulle. Pour $\alpha= 0.01$, $Z_{1-\alpha}= 2.3263$ et donc on \alert{accepte} l'hypothèse nulle.
+\item Que penser de cette petite expérience ?
+\begin{itemize}
+\item En pratique, on a une observation une bonne fois pour toute (ici $0.1738$) et on  choisit  $\alpha$... \alert{comment ?}
+\item On ne veut pas $\alpha$ trop grand (trop de risque), mais en prenant $\alpha$ de plus en plus petit... on va \alert{ fatalement} finir par accepter $H_0$ !
+\end{itemize}
+\item Défaut de méthodologie inhérent au principe de Neyman (contrôle de l'erreur de première espèce).
+\end{itemize}
+\end{frame}
+
+
 \begin{frame}
 \frametitle{p-valeur}
 \begin{itemize}
-\item Supposons que sous $\PP_0$, la distribution du rapport de vraisemblance $p_1(Z)/p_0(Z)$ est continue. 
+\item Supposons que sous $\PP_0$, la distribution du rapport de vraisemblance $p_1(Z)/p_0(Z)$ est continue.
 \item Le test U.P.P. de niveau $\alpha$ est non-randomisé et rejette l'hypothèse nulle si $p_1(Z)/p_0(Z) > c_\alpha$, où la constante $c_\alpha$ est choisie de façon à ce que
 \[
 \PP_0 ( p_1(Z)/ p_0(Z) \geq c_\alpha) = \alpha.
@@ -486,9 +507,9 @@ On remarque d'ailleurs que le \alert{seuil critique} ne \alert{dépend pas de $\
     $$
     \zreject_\alpha \subset \zreject_{\alpha'} \quad \text{si $\alpha < \alpha'$}.
     $$
-\item Lorsque cette condition est satisfaite, il est intéressant de déterminer 
+\item Lorsque cette condition est satisfaite, il est intéressant de déterminer
 \begin{itemize}
-\item non seulement si le test est \alert{accepté} ou \alert{rejeté} à un niveau de signification \alert{donné}... 
+\item non seulement si le test est \alert{accepté} ou \alert{rejeté} à un niveau de signification \alert{donné}...
 \item mais aussi de déterminer \alert{le plus petit niveau de signification} auquel l'hypothèse serait rejetée.
 \end{itemize}
 \end{itemize}
@@ -511,7 +532,7 @@ $$
 \begin{frame}
 \frametitle{Exemple}
 \begin{itemize}
-\item On reprend l'exemple du test $H_0= \{\truetheta= \truetheta_0= 0\}$ contre $H_1= \{ \truetheta= \truetheta_1 > 0\}$. 
+\item On reprend l'exemple du test $H_0= \{\truetheta= \truetheta_0= 0\}$ contre $H_1= \{ \truetheta= \truetheta_1 > 0\}$.
 \item Dans ce cas, pour un niveau $\alpha$, la région de réjection est
 \[
 \mathcal{R}_\alpha = \left\{ \bar{X}_n  > \frac{\sigma}{\sqrt{n}} z_{1-\alpha} \right\}
@@ -530,73 +551,36 @@ $$
 \item En notant $\Phi^{-1}$ la \alert{fonction des quantiles}, $z_{1-\alpha}= \Phi^{-1}(1-\alpha)$.
 \item Par conséquent, nous avons
 \begin{align*}
-\left\{ \bar{X}_n > \frac{\sigma}{\sqrt{n}} z_{1-\alpha} \right\} 
+\left\{ \bar{X}_n > \frac{\sigma}{\sqrt{n}} z_{1-\alpha} \right\}
 &= \left\{ \bar{X}_n > \frac{\sigma}{\sqrt{n}} \Phi^{-1}(1-\alpha) \right\} \\
 &= \left\{ \frac{\sqrt{n} \bar{X}_n}{\sigma} >  \Phi^{-1}(1-\alpha) \right\} = \left\{ \alpha > 1 - \Phi\left( \frac{\sqrt{n} \bar{X}_n}{\sigma} \right) \right\}
 \end{align*}
-\item Pour une valeur donnée de la moyenne empirique $\bar{X}_n$, l'infimum par rapport au niveau $\alpha$ est 
+\item Pour une valeur donnée de la moyenne empirique $\bar{X}_n$, l'infimum par rapport au niveau $\alpha$ est
 \[
 \hat{p}= 1 - \Phi\left( \frac{\sqrt{n} \bar{X}_n}{\sigma} \right) \eqsp.
 \]
+\item \alert{Application numérique:} Si $n=100$, $\sigma= 1$, $\bar{X}_n= 0.1738$, alors, $\hat{p}= 1 - \Phi(1.1738)= 0.041$. On accepterait l'hypothèse nulle dans un test de niveau $4\%$... on peut avoir quelques doutes !
 \end{itemize}
 \end{frame}
 
 
-
-\section{Tests gaussiens}
-
-\subsection{Tests sur la moyenne}
 
 \begin{frame}
-\frametitle{Tests gaussiens incontournables}
+\frametitle{Interprétation de la $p$-valeur}
 \begin{itemize}
-\item On observe
-$$\bY=(Y_1,\ldots, Y_n) \sim {\mathcal N}(\mu, \sigma^2 \text{Id}_n).$$
-\item \underline{\alert{Test sur la moyenne, variance connue}}
-$$H_0:\mu \leq \mu_0\;\;\;\text{contre}\;\;\;H_1:\mu > \mu_0$$
-\item \alert{ Principe} on estime $\mu$ et on rejette $H_0$ si l'estimateur est  plus grand  que $\mu_0$.
-$${\mathcal R}(c_\alpha) = \big\{\overline{Y}_n - \mu_0 \geq c_\alpha\big\},\;\;\;c_\alpha\;\;\text{à déterminer}.$$
-\item On choisit $c_\alpha$ de sorte que
-$$\sup_{\mu \leq \mu_0}\PP_\mu\big[{\mathcal R}(c_\alpha)\big] \leq \alpha.$$
-%\item Il y a \alert{plusieurs choix possibles}. On fait le choix rendant  ${\mathcal R}(c_\alpha)$ \alert{  maximale}.
-%\item On a \alert{seulement} optimalité parmi la classe de test de zone de rejet de la forme ${\mathcal R}(c), c >0$ sans outil supplémentaire.
+\item Une grande valeur de la $p$-valeur s'interprète en faveur de \alert{ne pas vouloir rejeter l'hypothèse}.
+\item  Ne pas vouloir rejeter l'hypothèse  peut signifier deux choses :
+\begin{itemize}
+\item L'hypothèse est vraie
+\item L'hypothèse est fausse \alert{ mais} le test n'est pas \alert{puissant} (erreur de seconde espèce \alert{grande}).
+\end{itemize}
+\item \alert{Souvent :} la $p$-valeur est la probabilité (sous $H_0$) que la statistique de test d'une expérience  copie  soit $\geq$ à la statistique de test observée.
+\item \alert{Exemple du test du $\chi^2$ et de l'expérience de Mendel} (à suivre) %
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Calcul de $c_\alpha$}
-\begin{itemize}
-\item \alert{Majoration de l'erreur de première espèce}. Si $\mu \leq \mu_0$, on a
-\begin{align*}
-\PP_{\mu}\big[\overline{Y}_n - \mu_0 \geq c_\alpha\big] & = \PP_\mu\big[(\mu+\tfrac{\sigma}{\sqrt{n}}\xi^{n,\mu})-\mu_0 \geq c_\alpha\big] \\
-& =   \PP_{\mu}\big[\tfrac{\sigma}{\sqrt{n}}\xi^{n,\mu} \geq c_\alpha + (\mu_0-\alert{\mu})\big] \\
-& \leq \PP_{\mu}\big[\tfrac{\sigma}{\sqrt{n}}\xi^{n,\mu} \geq c_\alpha\big].
-\end{align*}
-où $\xi^{n,\mu}$ est, en loi sous $\PP_\mu$, une gaussienne standard.
-\item \alert{ Petit miracle} : la loi de $\xi^{n,\mu}$ sous $\PP_\mu$ ne \alert{dépend pas de} $\mu$
-% (on parle de statistique libre).
-Donc
-\begin{align*}
-\PP_{\mu}\big[\tfrac{\sigma}{\sqrt{n}}\xi^{n,\mu} \geq c_\alpha\big] & =1-\Phi\big(\tfrac{\sqrt{n}}{\sigma}c_\alpha\big) \\
-& \stackrel{\text{on veut}}{\leq} \alpha.
-\end{align*}
-\item Le choix $c_{\alpha,n} = \tfrac{\sigma}{\sqrt{n}}\Phi^{-1}(1-\alpha)$ conduit à la zone de rejet ${\mathcal R}(c_\alpha)$ \alert{maximale}.
-\end{itemize}
-\end{frame}
 
-\begin{frame}
-\frametitle{Contrôle de l'erreur de seconde espèce}
-\begin{itemize}
-\item On a construit un test de niveau $\alpha$ parmi une classe \alert{donnée a priori} de tests basés sur un estimateur  raisonnable, de sorte que l'on ait une zone de rejet maximale. Désormais, $c_{\alpha, n}$ est \alert{fixé}.
-\item On \alert{évalue à la main} l'erreur de seconde espèce ou la \alert{fonction de puissance}
-\begin{align*}
-\mu \in (\mu_0,+\infty) & \leadsto \PP_\mu\big[\overline{Y}_n - \mu_0 < c_{\alpha,n}\big] \\
-&= 1 - {\text{puissance du test au point }}\mu
-\end{align*}
-\item \alert{Montrer que} pour tout $\mu > \mu_0$, on a $\PP_\mu\big[\overline{Y}_n - \mu_0 < c_{\alpha,n}\big] \rightarrow 0$ lorsque $n\rightarrow \infty$.
-\item Pour l'optimalité dans un sens plus fort, il faut \alert{ d'autres outils}.
-\end{itemize}
-\end{frame}
+\section{Tests Gaussiens}
 
 \begin{frame}
 \frametitle{Autres tests classiques gaussiens}
@@ -613,89 +597,37 @@ et ces variables sont \alert{pivotales} : leur loi ne dépend pas de $\mu,\sigma
 \end{itemize}
 \end{frame}
 
-%\begin{frame}
-%\frametitle{Tests sur la moyenne}
-%\begin{itemize}
-%\item On teste \alert{$H_0 : \mu \leq \mu_0$ contre $H_1: \mu > \mu_0$}. Un test de niveau $\alpha$ : donné par
-%$${\mathcal R}_\alpha = \big\{T(\bY)>q_{1-\alpha, n-1}^{\mathfrak T}\big\}$$
-%où
-%$$T(Y)  = \frac{\sqrt{n}(\overline{Y}_n-\mu_0)}{s_n}$$
-%%et $q_{1-\alpha, n-1}^{\mathfrak{T}}$ = quantile d'ordre $1-\alpha$ de la loi de Student à $n-1$ degrés de liberté :
-%où
-%$$\PP\big[\text{Student}_{n-1} > q_{1-\alpha, n-1}^{\mathfrak{T}}\big]=\alpha$$
-%\item On teste \alert{ $H_0 : \mu = \mu_0$ contre $H_1:\mu \neq \mu_0$}. Un test de niveau $\alpha$: donné par
-%${\mathcal R}_\alpha = \big\{\big|T(\bY)\big| > q_{1-\alert{\alpha/2}, n-1}^{\mathfrak{T}}\big\}$.
-%\end{itemize}
-%\end{frame}
-%\subsection{Tests sur la variance}
-%\begin{frame}
-%\frametitle{Test sur la variance}
-%\begin{itemize}
-%\item On teste \alert{ $H_0:\sigma^2 \leq \sigma_0^2$ contre $H_1:\sigma^2 > \sigma_0^2$}. Un test de niveau $\alpha$ : donné par
-%$${\mathcal R}_\alpha = \big\{V(\bY)>q_{1-\alpha,n-1}^{\chi^2}\big\},$$
-%où
-%$$V(\bY) = \frac{1}{\sigma_0^2}\sum_{i = 1}^n (Y_i - \overline{Y})^2$$
-%et
-%$$\PP\big[\text{Chi-deux}_{n-1} > q_{1-\alpha,n-1}^{\chi^2}\big] = \alpha.$$
-%\item \alert{Mêmes remarques méthodologiques} sur l'optimalité de ces tests que précédemment.
-%\end{itemize}
-%\end{frame}
-
-
-\section{Compléments : $p$-valeur et liens entre tests et régions de confiance}
-
 \begin{frame}
-\frametitle{$p$-valeurs}
+\frametitle{Tests sur la moyenne}
 \begin{itemize}
-\item \alert{Exemple} : on observe
-$$X_1,\ldots, X_n\sim_{\text{i.i.d.}}{\mathcal N}(\mu,\sigma^2),\;\;\;\sigma^2\;\;\text{connu}.$$
-\item \alert{Objectif}: tester $H_0:\mu=0$ contre $H_1:\mu\neq 0$.
-\item Au niveau $\alpha=5\%$, on rejette si
-$$\big| \overline{X}_n \big| > \frac{\phi^{-1}(1-\alpha/2)}{\sqrt{n}}$$
-\item \alert{Application numérique} : $n=100$, $\overline{X}_{100}=0.307$. On a $\frac{\phi^{-1}(1-0.05/2)}{\sqrt{100}} \approx 0.196$. \alert{on rejette l'hypothèse...}.
-%\item
+\item On teste \alert{$H_0 : \mu \leq \mu_0$ contre $H_1: \mu > \mu_0$}. Un test de niveau $\alpha$ : donné par
+$${\mathcal R}_\alpha = \big\{T(\bY)>q_{1-\alpha, n-1}^{\mathfrak T}\big\}$$
+où
+$$T(Y)  = \frac{\sqrt{n}(\overline{Y}_n-\mu_0)}{s_n}$$
+%et $q_{1-\alpha, n-1}^{\mathfrak{T}}$ = quantile d'ordre $1-\alpha$ de la loi de Student à $n-1$ degrés de liberté :
+où
+$$\PP\big[\text{Student}_{n-1} > q_{1-\alpha, n-1}^{\mathfrak{T}}\big]=\alpha$$
+\item On teste \alert{ $H_0 : \mu = \mu_0$ contre $H_1:\mu \neq \mu_0$}. Un test de niveau $\alpha$: donné par
+${\mathcal R}_\alpha = \big\{\big|T(\bY)\big| > q_{1-\alert{\alpha/2}, n-1}^{\mathfrak{T}}\big\}$.
 \end{itemize}
 \end{frame}
-
+\subsection{Tests sur la variance}
 \begin{frame}
-\frametitle{$p$-valeur (cont.)}
+\frametitle{Test sur la variance}
 \begin{itemize}
-\item \alert{Et pour un autre choix de $\alpha$ ?}. Pour $\alpha=0.01$, on a $\frac{\phi^{-1}(1-0.05/2)}{\sqrt{100}} \approx 0.256$. On rejette toujours... Pour $\alpha=0.001$, on a $\frac{\phi^{-1}(1-0.05/2)}{\sqrt{100}} \approx 0.329$. \alert{On accepte $H_0$ !}
-\item Que penser de cette petite expérience ?
-\begin{itemize}
-\item En pratique, on a une observation une bonne fois pour toute (ici $0.307$) et on  choisit  $\alpha$... \alert{comment ?}
-\item On ne veut pas $\alpha$ trop grand (trop de risque), mais en prenant $\alpha$ de plus en plus petit... on va \alert{ fatalement} finir par accepter $H_0$ !
-\end{itemize}
-\item Défaut de méthodologie inhérent au principe de Neyman (contrôle de l'erreur de première espèce).
+\item On teste \alert{ $H_0:\sigma^2 \leq \sigma_0^2$ contre $H_1:\sigma^2 > \sigma_0^2$}. Un test de niveau $\alpha$ : donné par
+$${\mathcal R}_\alpha = \big\{V(\bY)>q_{1-\alpha,n-1}^{\chi^2}\big\},$$
+où
+$$V(\bY) = \frac{1}{\sigma_0^2}\sum_{i = 1}^n (Y_i - \overline{Y})^2$$
+et
+$$\PP\big[\text{Chi-deux}_{n-1} > q_{1-\alpha,n-1}^{\chi^2}\big] = \alpha.$$
+\item \alert{Mêmes remarques méthodologiques} sur l'optimalité de ces tests que précédemment.
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}
-\frametitle{p-valeur}
-\begin{itemize}
-\item Quantité \alert{significative} : non par le niveau $\alpha$, mais le \alert{seuil de basculement de décision} : c'est la $p$-valeur ($p$-value) du test.
-\end{itemize}
-\begin{df}
-Soit ${\mathcal R}_\alpha$ une famille de zones de rejet d'un test de niveau $\alpha$ pour une hypothèse $H_0$ contre une alternative $H_1$. Soit $Z$ l'observation associée à l'expérience. On a $Z \in \mathfrak{Z}$ et ${\mathcal R}_0 = \mathfrak{Z}$.
-On appelle \alert{$p$-valeur du test} la quantité
-$$p-\text{valeur}(Z) = \inf\{\alpha, Z \in {\mathcal R}_\alpha\}.$$
-\end{df}
-\end{frame}
 
-\begin{frame}
-\frametitle{Interprétation de la $p$-valeur}
-\begin{itemize}
-\item Une grande valeur de la $p$-valeur s'interprète en faveur de \alert{ne pas vouloir rejeter l'hypothèse}.
-\item  Ne pas vouloir rejeter l'hypothèse  peut signifier deux choses :
-\begin{itemize}
-\item L'hypothèse est vraie
-\item L'hypothèse est fausse \alert{ mais} le test n'est pas \alert{puissant} (erreur de seconde espèce \alert{grande}).
-\end{itemize}
-\item \alert{Souvent :} la $p$-valeur est la probabilité (sous $H_0$) que la statistique de test d'une expérience  copie  soit $\geq$ à la statistique de test observée.
-\item \alert{Exemple du test du $\chi^2$ et de l'expérience de Mendel} (à suivre) %
-\end{itemize}
-\end{frame}
+
 
 
 
