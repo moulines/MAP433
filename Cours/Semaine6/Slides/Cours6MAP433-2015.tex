@@ -510,8 +510,35 @@ $$
 
 \begin{frame}
 \frametitle{Exemple}
+\begin{itemize}
+\item On reprend l'exemple du test $H_0= \{\truetheta= \truetheta_0= 0\}$ contre $H_1= \{ \truetheta= \truetheta_1 > 0\}$. 
+\item Dans ce cas, pour un niveau $\alpha$, la région de réjection est
+\[
+\mathcal{R}_\alpha = \left\{ \bar{X}_n  > \frac{\sigma}{\sqrt{n}} z_{1-\alpha} \right\}
+\]
+\item Si $0 < \alpha < \alpha' < 1$, on a $z_{1-\alpha} \geq z_{1 - \alpha'}$ et donc
+\[
+\zreject_\alpha = \left\{ \bar{X}_n \geq \frac{\sigma}{\sqrt{n}} z_{1-\alpha} \right\} \subset
+\zreject_{\alpha'} = \left\{ \bar{X}_n \geq \frac{\sigma}{\sqrt{n}} z_{1-\alpha'} \right\}
+\]
+\end{itemize}
+\end{frame}
 
-
+\begin{frame}
+\frametitle{Exemple: calcul explicite de la $p$-valeur}
+\begin{itemize}
+\item En notant $\Phi^{-1}$ la \alert{fonction des quantiles}, $z_{1-\alpha}= \Phi^{-1}(1-\alpha)$.
+\item Par conséquent, nous avons
+\begin{align*}
+\left\{ \bar{X}_n > \frac{\sigma}{\sqrt{n}} z_{1-\alpha} \right\} 
+&= \left\{ \bar{X}_n > \frac{\sigma}{\sqrt{n}} \Phi^{-1}(1-\alpha) \right\} \\
+&= \left\{ \frac{\sqrt{n} \bar{X}_n}{\sigma} >  \Phi^{-1}(1-\alpha) \right\} = \left\{ \alpha > 1 - \Phi\left( \frac{\sqrt{n} \bar{X}_n}{\sigma} \right) \right\}
+\end{align*}
+\item Pour une valeur donnée de la moyenne empirique $\bar{X}_n$, l'infimum par rapport au niveau $\alpha$ est 
+\[
+\hat{p}= 1 - \Phi\left( \frac{\sqrt{n} \bar{X}_n}{\sigma} \right) \eqsp.
+\]
+\end{itemize}
 \end{frame}
 
 
