@@ -1,0 +1,754 @@
+\input{../../def/defslide}
+\title{MAP 433 : Introduction aux méthodes statistiques. Cours 4}
+%\author{M. Hoffmann}
+%\institute{Université Paris-Est and ETG}
+\begin{document}
+\date{18 Septembre 2015}
+\maketitle
+
+
+
+\begin{frame}
+\frametitle{Aujourd'hui}
+\tableofcontents
+\end{frame}
+
+
+\section{$M$-estimation, rappel du Cours 3}
+
+\begin{frame}
+\frametitle{$M$-estimation}
+\begin{itemize}
+\item \underline{Situation} : on observe $X_1,\ldots, X_n$ de loi $\PP_{\truetheta}$ sur $\R$ et $\truetheta \in \Theta$.
+\item \underline{Principe} : Se donner une application $\psi : \Theta \times \R \rightarrow \R_+$ telle que, pour tout $\truetheta \in \Theta \subset \alert{\R^d}$,
+$$\curtheta \leadsto \E_\truetheta\big[\psi(\curtheta,X)\big] = \int \psi(\curtheta,x)\PP_\truetheta(dx)$$
+admet \alert{un extremum (\alert{maximum ou minimum}) en $\curtheta=\truetheta$}.
+\end{itemize}
+\begin{df}
+On appelle $M$-estimateur associé à $\psi$ tout estimateur $\alert{\est}$ satisfaisant
+$$\sum_{i = 1}^n \psi(\alert{\est}, X_i) = \max_{\curtheta \in \Theta}\sum_{i = 1}^n\psi(\curtheta, X_i).$$
+\end{df}
+Au lieu de maximiser, on peut aussi minimiser
+\end{frame}
+
+\begin{frame}
+\frametitle{Un exemple classique : paramètre de localisation}
+\begin{itemize}
+\item $\Theta = \R$, $\PP_{\tco{\truetheta}}(dx) = f(x-{\tco{\truetheta}})dx$, et $\int_{\R}xf(x)dx=0$, $\int_{\R}x^2\PP_\truetheta(dx)<+\infty$ pour tout $\truetheta \in \R$. On pose
+$$\boxed{\psi(\curtheta,x)=(\curtheta-x)^2}$$
+\item La fonction
+$$\vartheta \leadsto \E_\truetheta\big[\psi(\vartheta,X)\big] =
+\int_{\R}(\vartheta-x)^2f(x-\truetheta)dx$$
+admet un \alert{maximum} en $\truetheta=\E_\truetheta\big[X\big] = \int_{\R}xf(x-\truetheta)dx=\truetheta.$
+\item \alert{$M$-estimateur associé :}
+$$\sum_{i = 1}^n(X_i-\est)^2 = \min_{\vartheta \in \R}\sum_{i = 1}^n (X_i-\vartheta)^2.$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Paramètre de localisation}
+\begin{itemize}
+\item C'est \alert{aussi} un $Z$-estimateur associé à $\phi(\curtheta,x)=2(x-\curtheta)$: on résout
+$$\sum_{i = 1}^n (X_i - \curtheta)=0\;\;\text{d'où}\;\;\est = \overline{X}_n.$$
+\item Dans cet \alert{exemple très simple},
+tous les points de vue coïncident.
+%
+\item Si, dans le même contexte,
+$\int_{\R}x^2\PP_\truetheta(dx)=+\infty$ et $f(x)=f(-x)$, on peut
+utiliser $Z$-estimateur avec $\phi(\curtheta,x)={\rm Arctg}(x-\curtheta)$. Méthode
+robuste, mais est-elle optimale? Peut-on faire mieux \alert{si $f$ est connue? A suivre...}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Lien entre $Z$- et $M$- estimateurs}
+\begin{itemize}
+\item \alert{Pas d'inclusion} entre ces deux classes d'estimateurs \alert{en général} :
+\begin{itemize}
+\item Si $\psi$ non-régulière, $M$-estimateur $\nRightarrow$ $Z$-estimateur
+\item Si une équation d'estimation admet plusieurs solutions distinctes, $Z$-estimateur $\nRightarrow$ $M$-estimateur (cas d'un extremum local).
+\end{itemize}
+\item Toutefois, si $\psi$ \alert{est régulière}, les $M$-estimateurs \alert{sont} des $Z$-estimateurs : si $\Theta \subset \R$ ($d=1$), en posant
+$$\phi(\curtheta,x) = \partial_\theta\psi(\curtheta,x),$$
+on a
+$$\boxed{\sum_{i = 1}^n \partial_{\theta} \psi(\curtheta, X_i)\big|_{\curtheta = \est}
+= \sum_{i = 1}^n \phi(\est, X_i)=0}.$$
+%\item On travaillera (presque) toujours dans ce cadre.
+\end{itemize}
+\end{frame}
+
+\subsection{Principe de maximum de vraisemblance}
+
+\begin{frame}
+\frametitle{Maximum de vraisemblance}
+\begin{itemize}
+\item Principe \alert{ fondamental} et
+\alert{incontournable} en statistique. Cas particuliers connus
+depuis le XVIIIème siècle. D\'efinition g\'en\'erale:
+Fisher~(1922).
+\item Fournit une première \alert{méthode systématique} de construction d'un $M$-estimateur
+\item Procédure \alert{optimale} (dans quel sens ?)
+sous des hypothèses de \alert{régularité} de la famille
+$\{\PP_\truetheta, \truetheta \in \Theta\}$.
+\item Parfois difficile à mettre en oeuvre en pratique $\rightarrow$ \alert{méthodes numériques}, statistique
+computationnelle.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Fonction de vraisemblance}
+\begin{itemize}
+\item La famille $\{\PP_\truetheta,\truetheta \in \Theta\}$ est dominée par une mesure $\sigma$-finie $\mu$. On se donne, pour $\truetheta \in \Theta$
+$$f(\truetheta,x) = \frac{d\PP_\truetheta}{d\mu}(x),\;x \in \R.$$
+\end{itemize}
+\alert{Fonction de vraisemblance} du $n$-échantillon associée à la famille $\{f(\truetheta,\cdot),\truetheta \in \Theta\}$ :
+$$\boxed{\truetheta \leadsto {\mathcal L}_n(\truetheta, X_1,\ldots, X_n) = \prod_{i = 1}^n f(\truetheta, X_i)}$$
+\begin{itemize}
+\item C'est une fonction aléatoire (définie $\mu$-presque partout).
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemples}
+\begin{itemize}
+\item \underline{Exemple 1}: \alert{Modèle de Poisson}. On observe
+$$X_1,\ldots, X_n \sim_{\text{i.i.d.}}\text{Poisson}(\alert{\truetheta}),$$
+$\alert{\truetheta} \in \Theta = \R_+\setminus \{0\}$ et prenons
+$\mu(dx) = \sum_{k \in \N}\delta_k(dx)$.
+\item La densit\'e de $\PP_\truetheta$ par rapport \`a $\mu$ est
+$$f(\alert{\truetheta}, x) = e^{-\alert{\truetheta}}
+\frac{\alert{\truetheta}^x}{x!}, \quad x=0,1,2,\dots.$$
+\item La \alert{ fonction de vraisemblance} associée s'écrit
+\begin{align*}
+\truetheta \leadsto {\mathcal L}_n(\truetheta, X_1,\ldots, X_n)
+&= \prod_{i = 1}^n e^{-\truetheta}\frac{\truetheta^{X_i}}{X_i!} \\
+&= \frac{1}{\prod_{i = 1}^nX_i!} e^{-n\truetheta} \truetheta^{\sum_{i = 1}^n X_i}.
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemples}
+\begin{itemize}
+\item \underline{Exemple 2} \alert{Modèle de Cauchy}. On observe
+$$X_1,\ldots, X_n \sim_{\text{i.i.d.}}\text{Cauchy},$$
+$\alert{\truetheta} \in \Theta = \R$ et $\mu(dx)=dx$ (\alert{ par exemple}).
+\item On a alors
+$$\PP_{\alert{\truetheta}}(dx)=f(\alert{\truetheta},x)dx=\frac{1}{\pi\big(1+(x-\alert{\truetheta})^2\big)}dx.$$
+\item La \alert{ fonction de vraisemblance} associée s'écrit
+$$\truetheta \leadsto {\mathcal L}_n(\truetheta, X_1,\ldots, X_n) = \frac{1}{\pi^n}\prod_{i = 1}^n \big(1+(X_i-\truetheta)^2\big)^{-1}.$$
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Estimateur du maximum de vraisemblance}
+\begin{itemize}
+\item On généralise le principe précédent pour une famille de lois et un ensemble de paramètres \alert{quelconques}.
+\item \underline{Situation} : $X_1,\ldots, X_n\sim_{\text{i.i.d.}}\PP_\truetheta$, $\{\PP_\truetheta,\truetheta \in \Theta\}$ dominée, $\Theta \subset \R^d$, $\truetheta \leadsto {\mathcal L}_n(\truetheta, X_1,\ldots, X_n)$ vraisemblance associée.
+\end{itemize}
+\begin{df}
+On appelle \alert{ estimateur du maximum de vraisemblance} tout estimateur $\estMV$ satisfaisant
+$${\mathcal L}_n(\estMV,X_1,\ldots, X_n) = \max_{\truetheta \in \Theta} {\mathcal L}_n(\truetheta, X_1,\ldots, X_n).$$
+\end{df}
+\begin{itemize}
+\item \alert{Existence, unicité...}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Remarques}
+\begin{itemize}
+\item \underline{Log-vraisemblance}:
+\begin{align*}\truetheta \leadsto \ell_n(\truetheta, X_1,\ldots, X_n)& = n^{-1} \log {\mathcal L}_n(\truetheta, X_1,\ldots, X_n)\\
+& = n^{-1} \sum_{i = 1}^n \log f(\truetheta, X_i).
+\end{align*}
+\alert{Bien défini} si $f(\truetheta, \cdot) >0$ $\mu$-pp.
+$$\text{Max. vraisemblance = max. log-vraisemblance.}$$
+\item L'estimateur du maximum de vraisemblance \alert{ ne dépend pas} du choix de la mesure dominante $\mu$.
+\item \alert{Racine de l'équation de vraisemblance} : tout estimateur $\widehat \truetheta_n^{\,{\tt rv}}$ vérifiant
+$$\nabla_\truetheta \ell_n(\widehat \truetheta_n^{\,{\tt rv}}, X_1,\ldots, X_n) = 0.$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemple : modèle normal } L'expérience statistique est
+engendrée par un $n$-échantillon de loi ${\mathcal
+N}(\mu,\sigma^2)$, le paramètre est $\truetheta = (\mu,\sigma^2)\in
+\Theta = \R\times \R_+\setminus\{0\}$.
+\begin{itemize}
+\item
+\alert{Vraisemblance} $${\mathcal L}_n((\mu,\sigma^2),
+X_1,\ldots, X_n) =
+\frac1{(2\pi\sigma^2)^{n/2}}\exp\big(-\tfrac{1}{2\sigma^2}
+\sum_{i=1}^n(X_i-\mu)^2\big).$$
+\item \alert{Log-vraisemblance}
+$$\ell_n\big((\mu,\sigma^2),X_1,\ldots, X_n\big) = -\frac{n}{2}
+\log(2\pi \sigma^2)-\frac{1}{2\sigma^2}\sum_{i = 1}^n (X_i-\mu)^2.$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemple : modèle normal }
+%\begin{itemize}
+%\item
+\alert{Equation(s) de vraisemblance}
+$$
+\left\{
+\begin{array}{lll}
+\partial_\mu\ell_n \big((\mu,\sigma^2),X_1,\ldots, X_n\big) & = &\displaystyle\frac{1}{\sigma^2}\sum_{i = 1}^n (X_i-\mu) \\ \\
+\partial_{\sigma^2}\ell_n \big((\mu,\sigma^2),X_1,\ldots, X_n\big)&
+ = &\displaystyle -\frac{n}{2\sigma^2}+\frac{1}{2\sigma^4}
+ \sum_{i = 1}^n (X_i-\mu)^2.
+\end{array}
+\right.
+$$
+Solution de ces \'equations (pour $n \geq 2$):
+$$\boxed{\widehat
+\truetheta_n^{\,{\tt rv}} = \big(\overline{X}_n,\frac{1}{n} \sum_{i =
+1}^n(X_i-\overline{X}_n)^2\big)}$$ et on vérifie que $\widehat
+\truetheta_n^{\,{\tt rv}} =\estMV$.
+%\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Exemple : modèle de Poisson}
+\begin{itemize}
+\item
+\alert{Vraisemblance}
+$${\mathcal L}_n(\truetheta, X_1,\ldots, X_n) =
+\frac{1}{\prod_{i = 1}^n X_i!}e^{-n\truetheta}\truetheta^{\sum_{i = 1}^n X_i}.$$
+\item \alert{Log-vraisemblance}
+$$\ell_n(\truetheta, X_1,\ldots, X_n) = c(X_1,\ldots, X_n)-n\truetheta +\sum_{i =1}^n X_i \log \truetheta.$$
+\item \alert{Equation de vraisemblance}
+$$-n+\sum_{i = 1}^n X_i \frac{1}{\truetheta} = 0,\;\;
+\text{soit}\;\;
+\boxed{\widehat \truetheta_n^{\,{\tt rv}} = \frac{1}{n}\sum_{i = 1}^n X_i=\overline{X}_n}$$
+et on vérifie que $\widehat \truetheta_n^{\,{\tt rv}} =\estMV$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemple : modèle de Laplace} L'expérience statistique
+est engendrée par un $n$-échantillon de loi de Laplace de paramètre
+$\truetheta \in \Theta = \R$. La densité par rapport à la mesure de
+Lebesgue :
+$$f(\truetheta,x) = \frac{1}{2\sigma}\exp\big(-\frac{|x-\truetheta|}{\sigma}\big),$$
+où $\sigma >0$ est \alert{connu}.
+\begin{itemize}
+\item \alert{Vraisemblance}
+$${\mathcal L}_n(\truetheta, X_1,\ldots, X_n) = (2\sigma)^{-n}
+\exp\big(-\frac{1}{\sigma}\sum_{i = 1}^n \big|X_i-\truetheta\big|\big)$$
+\item \alert{Log-vraisemblance}
+$$\ell_n(\truetheta,X_1,\ldots, X_n) = - n \log(2\sigma)-
+\frac{1}{\sigma}\sum_{i = 1}^n \big|X_i-\truetheta\big|.$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemple : modèle de Laplace} Maximiser ${\mathcal
+L}_n(\truetheta, X_1,\ldots, X_n)$ revient à minimiser la fonction
+$\truetheta \leadsto \sum_{i = 1}^n \big|X_i-\truetheta\big|$,
+dérivable presque partout de dérivée constante par morceaux.
+\alert{Equation de vraisemblance:}
+$$\sum_{i = 1}^n \text{sign}(X_i-\truetheta)=0.$$
+Soit $X_{(1)}\leq \ldots \leq X_{(n)}$ la statistique d'ordre.
+\begin{itemize}
+\item
+$n$ pair: $\estMV$ \alert{n'est pas unique}; tout point de
+l'intervalle
+$\big[X_{\big(\tfrac{n}{2}\big)},X_{\big(\tfrac{n}{2}+1\big)} \big]$
+est un EMV.
+\item $n$ impair: $\estMV=X_{\big(\tfrac{n+1}{2}\big)}$,
+l'EMV est unique. Mais $\widehat \truetheta_n^{\,{\tt rv}}$ n'existe
+pas.
+\item \alert{pour tout} $n$, la
+médiane empirique est un EMV.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemple : modèle de Cauchy}
+\begin{itemize}
+\item \alert{Vraisemblance}
+$${\mathcal L}_n(\truetheta, X_1,\ldots, X_n) = \pi^{-n} \prod_{i =1}^n \frac{1}{1+(X_i-\truetheta)^2}.$$
+\item \alert{Log-vraisemblance}
+$$\ell_n(\truetheta,X_1,\ldots, X_n) = -n\log \pi -\sum_{i = 1}^n \log\big(1+(X_i-\truetheta)^2\big)$$
+\item \alert{Equation de vraisemblance}
+$$\boxed{\sum_{i = 1}^n \frac{X_i-\truetheta}{1+(X_i-\truetheta)^2}=0}$$
+pas de solution explicite et admet en général plusieurs solutions.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{l'EMV est  un M-estimateur}
+\begin{itemize}
+\item On pose
+$$\boxed{\psi(\curtheta,x):=\log f(\curtheta,x),\;\;\curtheta \in \Theta,\;x\in\R}$$
+(on suppose que $f(\curtheta,\cdot) >0$.)
+\item La fonction
+$$a \leadsto \E_\truetheta \big[\psi(\vartheta,X)\big]=\int_{\R}\log f(\vartheta,x) f(\truetheta,x) \mu(dx)$$
+a un maximum en $\vartheta=\truetheta$ d'après \alert{l'inégalité de convexité}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+%\frametitle{}
+\begin{itemize}
+\item Le $M$-estimateur associé à $\psi$ maximise la fonction
+$$\curtheta \leadsto \sum_{i = 1}^n \log f(\curtheta, X_i) = \ell_n(\curtheta, X_1,\ldots, X_n)$$
+c'est-à-dire la \alert{ log-vraisemblance}. C'est \alert{l'estimateur du maximum de vraisemblance}.
+
+\item C'est aussi un $Z$-estimateur si la fonction $\truetheta \leadsto \log f(\truetheta, \cdot)$ est régulière, associé à la fonction
+$$\phi(\truetheta, x) = \partial_\truetheta \log f(\truetheta, x) = \frac{\partial_\truetheta f(\truetheta, x)}{f(\truetheta, x)},\;\truetheta \in \Theta, x\in \R$$
+lorsque $\Theta \subset \R$, \`a condition que le maximum de
+log-vraisemblance n'est pas atteint sur la frontière de $\Theta$.
+(Se généralise en dimension $d$.)
+\end{itemize}
+\end{frame}
+
+
+\section{EMV, asymptotique des $Z$- et $M$- estimateurs}
+
+\begin{frame}
+\frametitle{Asymptotique des $Z$- et $M$-estimateurs}
+\begin{itemize}
+\item Problème général \alert{délicat}. Dans ce cours : conditions suffisantes.
+\item \alert{Convergence} : critère simple pour les $M$-estimateurs.
+\item \alert{Vitesse de convergence} : technique simple pour les $Z$-estimateurs, à condition de savoir que l'estimateur est convergent.
+\item Sous des hypothèses de régularité, un $M$-estimateur est un $Z$-estimateur.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Convergence des $M$-estimateurs}
+\begin{itemize}
+\item \underline{Situation}: on observe $X_1,\ldots, X_n$ i.i.d. de loi dans la famille $\{\PP_\truetheta, \truetheta \in \Theta\}$.
+\item $\psi:\Theta \times \R \rightarrow \R$ \alert{fonction de contraste}.
+\item \alert{Loi des grands nombres :}
+$$
+M_n(\curtheta)=\frac{1}{n}\sum_{i = 1}^n \psi(\curtheta,X_i)
+$$
+converge en $\PP_\truetheta$-probabilité vers
+$$M(\curtheta,\truetheta)\;=\E_\truetheta\big[\psi(\curtheta,X)\big]$$
+\alert{ qui atteint son maximum en $\curtheta=\truetheta$}
+\item  à montrer :
+$$\alert{\est}= \alert{
+\arg \max_{\curtheta \in \Theta}}\, M_n(\curtheta)
+\stackrel{\PP_\truetheta}{\longrightarrow} \alert{\arg \max_{\curtheta
+\in \Theta}}
+\E_\truetheta\big[\psi(\curtheta,X)\big]=\alert{\truetheta}.$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemple estimateur de translation}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Convergence des $M$-estimateurs}
+\begin{prop}
+Si le $M$-estimateur $\alert{\est}$ associé à la fonction de contraste est bien défini et si
+\begin{itemize}
+\item $\sup_{\curtheta \in \Theta}|M_n(\curtheta)-M(\curtheta,\truetheta)| \stackrel{\PP_\truetheta}{\longrightarrow} 0$,
+\item $\forall \varepsilon >0, \;\sup_{|\curtheta-\truetheta| \geq \varepsilon}M(\curtheta,\truetheta)<M(\truetheta,\truetheta)$ \alert{(condition de maximum)}
+%\item $M_n(\est) \geq M_n(\truetheta)-\varepsilon_n$, avec $\varepsilon_n \stackrel{\PP_\truetheta}{\longrightarrow} 0$,
+\end{itemize}
+alors
+$$
+\tco{\est} \stackrel{\PP_\truetheta}{\longrightarrow} \truetheta \eqsp.
+$$
+\end{prop}
+\begin{itemize}
+\item La condition 1 (convergence uniforme) peut être délicate à montrer...
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Loi limite des $Z$-estimateurs}
+\begin{itemize}
+\item \underline{Situation}: on observe $X_1,\ldots, X_n$ i.i.d. de loi dans la famille $\{\PP_\truetheta, \truetheta \in \Theta\}$, $\alert{\Theta \subset \R}$.
+\item \alert{ $\est$} : $Z$-estimateur \alert{associé à} $\phi:\Theta \times \R \rightarrow \R$ vérifie
+$$\boxed{\sum_{i = 1}^n \phi(\alert{\est},X_i)=0}$$
+\item Si $\est$ est un $M$-estimateur associé à la fonction de contraste $\psi$ \alert{régulière}, alors c'est un $Z$-estimateur associé à la fonction $\phi(\curtheta,x) = \partial_\truetheta\psi(\vartheta,x)$.
+\item On suppose $\est$ convergent. \alert{ Que dire de sa loi limite} ?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Loi limite des $Z$-estimateurs : principe}
+\begin{itemize}
+\item \alert{ Loi des grands nombres}$$Z_n(\curtheta)=\frac{1}{n}\sum_{i = 1}^n \phi(\curtheta,X_i) \stackrel{\PP_\truetheta}{\longrightarrow} Z(\curtheta,\truetheta) = \E_\truetheta\big[\phi(\curtheta,X)\big]$$
+\item \underline{Principe}. Développement de Taylor autour de $\truetheta$ :
+$$0 = Z_n(\est) = Z_n(\truetheta)+(\alert{\est}-\truetheta)Z_n'(\truetheta)+\alert{\tfrac{1}{2}(\est-\truetheta)^2Z''(\widetilde \truetheta_n)}.$$
+\item On \alert{ néglige} le reste :
+$$\sqrt{n}(\alert{\est}-\truetheta) \approx \frac{-\sqrt{n}Z_n(\truetheta)}{Z_n'(\truetheta)}$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Loi limite des $Z$-estimateurs : principe}
+\begin{itemize}
+\item Convergence du \alert{ numérateur}
+$$\sqrt{n}Z_n(\truetheta) = \frac{1}{\sqrt{n}}\sum_{i = 1}^n\phi(\truetheta,X_i) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,\E_ {\alert{\truetheta}}\big[\phi(\alert{\truetheta},X)^2\big]\big)$$
+si $\alert{\E_\truetheta\big[\phi(\truetheta,X)\big]=0}$ et $\alert{\E_\truetheta\big[\phi(\truetheta,X)^2\big]<+\infty}$.
+\item Convergence du \alert{ dénominateur} $$Z'_n(\truetheta) = \frac{1}{n}\sum_{i = 1}^n\partial_\truetheta \phi(\truetheta,X_i) \stackrel{\PP_\truetheta}{\longrightarrow}
+\E_{\alert{\truetheta}}\big[\partial_\truetheta \phi(\alert{\truetheta},X)\big]$$
+\alert{ $\neq 0$ (à supposer)}.
+\item + hypothèses techniques pour \alert{ contrôler le reste} (besoin de la convergence de $\est$).
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Loi limite des $Z$-estimateurs}
+\begin{prop}[Convergence des $Z$-estimateurs]
+\begin{itemize}
+%\item $\forall \truetheta \in \Theta, \PP_\truetheta \ll \mu$
+\item Soit $\Theta$ un ouvert de $\R$. Pour tout $\truetheta\in \Theta$, $\tco{\est \stackrel{\PP_\truetheta}{\rightarrow} \truetheta}$, $\E_\truetheta\big[\phi(\truetheta,X)^2\big]<+\infty$
+et
+$$\E_\truetheta\big[\phi(\truetheta,X)\big]=0,\;\E_\truetheta\big[\partial_\truetheta\phi(\truetheta, X)\big]\neq 0.$$
+\item \alert{(Contrôle reste)} pour tout $\truetheta\in\Theta$, pour tout $\curtheta$ \alert{dans un voisinage de $\truetheta$},
+$$|\partial^2_\theta\phi(\curtheta,x)|\leq g(x),\;\;\E_\truetheta\big[g(X)\big]<+\infty.$$
+\end{itemize}
+Alors
+$$\sqrt{n}(\alert{\est}-\truetheta) \stackrel{d}{\longrightarrow} {\mathcal N}\Big(0,\frac{\E_{\alert{\truetheta}}[\phi(\alert{\truetheta},X)^2]}{\big(\E_{\alert{\truetheta}}[\partial_{\truetheta}\phi(\alert{\truetheta}, X)]\big)^2}\Big).$$
+\end{prop}
+\end{frame}
+
+
+\subsection{Approche asymptotique}
+
+\begin{frame}
+\frametitle{Approche asymptotique}
+\begin{itemize}
+\item Hypothèse simplificatrice : $\truetheta \in \Theta\; \alert{\subset \R}$. On se restreint aux \alert{ estimateurs asymptotiquement normaux} c'est-à-dire vérifiant
+$$\sqrt{n}\big(\est - \truetheta\big) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,v(\truetheta)\big)$$
+cf. théorèmes limites obtenus pour les $Z$-,$M$-estimateurs.
+\item Si $\widehat \truetheta_{n,1}$ et $\widehat \truetheta_{n,2}$ as. normaux de variance asymptotique
+ $v_1(\truetheta) \leq v_2(\truetheta),$ alors la précision de $\widehat \truetheta_{n,1}$ est \alert{asymptotiquement meilleure} que celle de $\widehat \truetheta_{n,2}$ au point $\truetheta$ :
+\begin{align*}
+\widehat \truetheta_{n,1} & = \truetheta+\sqrt{\frac{\alert{v_1(\truetheta)}}{n}}\xi^{(n)}\\
+\widehat \truetheta_{n,2} & = \truetheta+\sqrt{\frac{\alert{v_2(\truetheta)}}{n}}\zeta^{(n)}
+\end{align*}
+où $\xi^{(n)}$ et $\zeta^{(n)} \stackrel{d}{\rightarrow} {\mathcal N}(0,1)$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparaison d'estimateurs : cas asymptotique}
+\begin{itemize}
+\item Si $v_1(\truetheta) < v_2(\truetheta)$, et si $\truetheta \leadsto v_i(\truetheta)$ est continue, on pose
+$${\mathcal C}_{n,\alpha}(\widehat \truetheta_{n,i}) = \left[\widehat \truetheta_{n,i}\pm\sqrt{\frac{v_i(\widehat \truetheta_{n,i})}{n}}\Phi^{-1}(1-\alpha/2)\right],\;\;i=1,2$$
+où $\alpha \in (0,1)$ et $\Phi(\cdot)$ est la fonction de répartition de la loi normale standard.
+\item ${\mathcal C}_{n,\alpha}(\widehat \truetheta_{n,i})$, $i=1,2$ sont deux \alert{intervalles de confiance asymptotiquement de niveau $1-\alpha$} et on a
+$$\frac{|{\mathcal C}_{n,\alpha}(\widehat \truetheta_{n,1})|}{|{\mathcal C}_{n,\alpha}(\widehat \truetheta_{n,2})|} \stackrel{\PP_\truetheta^n}{\longrightarrow} \sqrt{\frac{v_1(\truetheta)}{v_2(\truetheta)}}<1.$$
+\item La notion de \alert{ longueur minimale possible d'un intervalle de confiance} est en général difficile à manipuler.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Conclusion provisoire}
+\begin{itemize}
+\item Il est \alert{difficile en général} de comparer des estimateurs.
+\item Cadre asymptotique + normalité asymptotique $\rightarrow$ comparaison de la \alert{variance asymptotique} $\truetheta \leadsto v(\truetheta)$.
+\item Sous des hypothèses de
+régularité du modèle $\{\PP_\truetheta^n, \truetheta \in \Theta\}$
+% + restriction de la classe des estimateurs
+\end{itemize}
+alors
+%(cours 6)
+\begin{itemize}
+\item Il \alert{existe} une variance asymptotique $v^\star(\truetheta)$ \alert{minimale} parmi les variances de la classe des $M$-estimateurs as. normaux.
+\item Cette fonction est associée à une \alert{quantité d'information intrinsèque} au modèle.
+\item La variance asymptotique de l'\alert{EMV} est $v^\star(\truetheta)$.
+\item Ceci règle \alert{partiellement} le problème de l'optimalité.
+\end{itemize}
+\end{frame}
+
+
+\section{Modèles réguliers et information de Fisher}
+
+\begin{frame}
+\frametitle{Régularité d'un modèle statistique et information}
+\begin{itemize}
+\item \underline{Cadre simplificateur} : modèle de densité
+$$X_1,\ldots, X_n\;\;\text{i.i.d. de loi}\;\; \PP_\truetheta$$
+dans la famille $\big\{\PP_\truetheta, \truetheta \in \Theta\big\}$ avec $\Theta \alert{\; \subset \R}$ pour simplifier.
+\item \underline{Notation} :
+$$f(\truetheta, x) = \frac{d\PP_\truetheta}{d\mu}(x),\;\;x\in \R,\truetheta \in \Theta.$$
+\item \underline{\alert{Hypothèse}} : la quantité
+$$\alert{\boxed{{\mathbb I}(\truetheta) = \E_\truetheta\big[\big(\partial_\truetheta \log f(\truetheta, X)\big)^2\big]}}$$
+est bien définie.
+\end{itemize}
+\end{frame}
+
+\subsection{Construction de l'information de Fisher}
+
+\begin{frame}
+\frametitle{Information de Fisher}
+\begin{df}
+\begin{itemize}
+\item $\mathbb{I}(\truetheta) = \E_\truetheta\big[\big(\partial_\truetheta \log f(\truetheta, X)\big)^2\big]$ s'appelle \alert{l'information de Fisher} de la famille $\{\PP_\truetheta,\truetheta \in \Theta\}$ au point $\truetheta$. Elle ne dépend pas de la mesure dominante $\mu$.
+\item Le cadre d'intérêt est celui où
+$$\alert{0 < \mathbb{I}(\truetheta)< +\infty.}$$
+\item $\mathbb{I}(\truetheta)$ quantifie  l'information  qu'apporte chaque observation $X_i$ sur le paramètre $\truetheta$.
+\end{itemize}
+\end{df}
+\underline{Remarque} : on a $\PP_\truetheta\big[f(\truetheta, X)>0\big]=1$, donc la quantité $\log f(\truetheta, X)$ est bien définie.
+\end{frame}
+
+\begin{frame}
+\frametitle{Information dans quel sens ? Origine de la notion}
+\begin{itemize}
+\item Supposons l'EMV $\estMV$ bien défini et \alert{convergent}.
+\item Supposons l'application $(\truetheta,x) \leadsto f(\truetheta, x)$ possédant \alert{toutes les propriétés de régularité et d'intégrabilité} voulues.
+\item Alors
+$$\boxed{\sqrt{n}\big(\estMV-\truetheta\big) \stackrel{d}{\longrightarrow} {\mathcal N}\Big(0,\alert{\frac{1}{\mathbb{I}(\truetheta)}}\Big)}$$
+en loi sous $\PP_\truetheta$, où encore
+$$\estMV \stackrel{d}{\approx} \truetheta +\frac{1}{\tco{\sqrt{n\mathbb{I}(\truetheta)}}} \,{\mathcal N}(0,1)$$
+en loi sous $\PP_\truetheta$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Construction de l'information + jeu d'hypothèses attenant}
+\begin{itemize}
+\item Heuristique : on établira un jeu d'hypothèses justifiant \alert{a posteriori} le raisonnement.
+\item \underline{Etape 1} : l'EMV $\estMV$ \alert{converge} :
+$$\estMV \stackrel{\PP_\truetheta}{\longrightarrow} \truetheta$$
+via le théorème de convergence des $M$-estimateurs.
+\item \underline{Etape 2} : l'EMV $\estMV$ est un \alert{$Z$-estimateur} :
+$$0 = \partial_\curtheta \Big(\sum_{i = 1}^n \log f(\curtheta,X_i)\Big)_{\curtheta = \alert{\estMV}}.$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Construction de $\mathbb{I}(\truetheta)$ cont.}
+\begin{itemize}
+\item \underline{Etape 3} : développement asymptotique \alert{autour de $\truetheta$} :
+$$\alert{0}  \approx \sum_{i = 1}^n \partial_\truetheta \log f(\truetheta, X_i) + \alert{(\estMV-\truetheta)} \sum_{i = 1}^n \partial^2_\truetheta \log f(\truetheta, X_i),$$
+soit
+$$\alert{\estMV-\truetheta} \approx -\frac{\sum_{i = 1}^n \alert{\partial_\truetheta \log f}(\alert{\truetheta}, X_i)}{ \sum_{i = 1}^n \alert{\partial^2_\truetheta \log f}(\alert{\truetheta}, X_i)}$$
+%Puis : étude du numérateur et du dénominateur
+\item \underline{Etape 4} : le numérateur. Normalisation et convergence de
+$\sum_{i = 1}^n \alert{\partial_\truetheta \log f}(\alert{\truetheta}, X_i)\;\;?$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Numérateur}
+\begin{lem}
+On a $$\E_\truetheta\big[\alert{\partial_\truetheta \log f}(\alert{\truetheta}, X)\big]=0.$$
+\end{lem}
+\begin{proof}
+\begin{align*}
+\E_\truetheta\big[\alert{\partial_\truetheta \log f}(\alert{\truetheta}, X)\big] & = \int_{\R} \partial_\truetheta \log f(\truetheta, x) f(\truetheta, x)\mu(dx) \\
+& = \int_{\R} \frac{\partial_\truetheta f(\truetheta, x)}{f(\truetheta, x)} f(\truetheta, x) \mu(dx) \\
+& = \int_{\R} \partial_\truetheta f(\truetheta, x) \mu(dx) \\
+& = \partial_\truetheta \int_{\R} f(\truetheta, x) \mu(dx) = \partial_\truetheta 1 = 0.
+\end{align*}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\frametitle{Dénominateur}
+De même $\int_{\R} \partial_\truetheta^2 f(\truetheta, x) \mu(dx)= 0.$
+\alert{Conséquence} :
+ $$\boxed{\alert{\mathbb{I}(\truetheta)} = \E_\truetheta\big[\big(\partial_\truetheta \log f(\truetheta, X)\big)^2\big] = \alert{-\E_\truetheta\big[\partial_\truetheta^2 \log f(\truetheta, X)\big]}}$$
+En effet
+\begin{align*}
+&\alert{ \E_\truetheta\big[\partial_\truetheta^2 \log f(\truetheta, X)\big]} & =
+%& \int_{\R} \partial_\truetheta^2 \log f(\truetheta, x)f(\truetheta, x)\mu(dx)
+\\
+& = \int_{\R} \frac{\partial_\truetheta^2 f(\truetheta,x) f(\truetheta, x)-\big(\partial_\truetheta f(\truetheta, x)\big)^2}{f(\truetheta, x)^2}f(\truetheta, x)\mu(dx)\\
+&= \int_{\R}\partial_\truetheta^2 f(\truetheta, x)\mu(dx)-\int_{\R} \frac{\big(\partial_\truetheta f(\truetheta, x)\big)^2}{f(\truetheta, x)}\mu(dx) \\
+& = 0-\int_{\R} \Big(\frac{\partial_\truetheta f(\truetheta,x)}{f(\truetheta, x)}\Big)^2f(\truetheta, x) \mu(dx) =\alert{ -\E\big[\big(\partial_\truetheta\log f(\truetheta, X)\big)^2\big]}.
+\end{align*}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Conséquences}
+\begin{itemize}
+\item Les $\partial_\truetheta \log f(\truetheta, X_i)$ sont i.i.d. et $\E_\truetheta \big[\partial_\truetheta \log f(\truetheta, X)\big]=0$. TCL :
+\begin{align*}\frac{1}{\sqrt{n}} \sum_{i = 1}^n \alert{\partial_\truetheta \log f}(\alert{\truetheta}, X_i) & \stackrel{d}{\longrightarrow} \mathcal N\big(0, \alert{\E_\truetheta \big[\big(\partial_\truetheta \log f(\truetheta, X)\big)^2\big]}\big)\\
+& = {\mathcal N}\big(0,\alert{\mathbb{I}(\truetheta)}\big).
+\end{align*}
+\item Les $\partial_\truetheta^2 \log f(\truetheta, X_i)$ sont i.i.d. LGN :
+\begin{align*}
+\frac{1}{n}\sum_{i = 1}^n \alert{\partial_\truetheta^2 \log f}(\alert{\truetheta}, X_i) & \stackrel{\PP_\truetheta}{\longrightarrow}
+\E_\truetheta\big[\alert{\partial_\truetheta^2\log f}(\alert{\truetheta}, X)\big] \\
+&\stackrel{\text{conséquence}}{=}-\mathbb{I}(\truetheta).
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Conclusion}
+\begin{itemize}
+\item En combinant les deux estimations + lemme de Slutsky :
+\begin{align*}
+\alert{\sqrt{n}}(\estMV-\truetheta) & \approx -\frac{\alert{\frac{1}{\sqrt{n}}}\sum_{i = 1}^n \alert{\partial_\truetheta \log f}(\alert{\truetheta}, X_i)}{\alert{\frac{1}{n}} \sum_{i = 1}^n \alert{\partial^2_\truetheta \log f}(\alert{\truetheta}, X_i)}\\
+& \stackrel{d}{\longrightarrow} \frac{{\mathcal N}\big(0,\alert{\mathbb{I}(\truetheta)}\big)}{\alert{\mathbb{I}(\truetheta)}} \\
+& \stackrel{\text{loi}}{=} {\mathcal N}\Big(0,\alert{\frac{1}{\mathbb{I}(\truetheta)}}\Big).
+\end{align*}
+\item Le raisonnement est \alert{ rigoureux dès lors que} : (i) on a la convergence de $\estMV$, (ii) on peut justifier le lemme et sa conséquence, (iii) $\mathbb{I}(\truetheta)$ est bien définie et non dégénérée et (iv) on sait contrôler le terme de reste dans le développement asymptotique, \alert{partie la plus difficile}.
+\end{itemize}
+\end{frame}
+
+\subsection{Modèle régulier}
+
+\begin{frame}
+\frametitle{Modèle régulier}
+\begin{df} La famille de densités $\{f(\truetheta,\cdot),\truetheta \in \Theta\}$,  par rapport à la mesure dominante $\mu$, $\Theta \subset \R$, est \alert{régulière} si
+\begin{itemize}
+\item $\Theta$ ouvert et $\{f(\truetheta, \cdot)>0\}=\{f(\truetheta', \cdot)>0\}$, $\forall \truetheta, \truetheta' \in \Theta$.
+\item $\mu$-p.p. $\truetheta \leadsto f(\truetheta,\cdot)$, $\truetheta \leadsto \log f(\truetheta,\cdot)$ sont ${\mathcal C}^2$.
+ \item $\forall \truetheta \in \Theta, \exists {\mathcal V}_\truetheta \subset \Theta$ t.q. pour $a \in {\mathcal V}_\truetheta$
+$$|\partial_a^{2}\log f(a,x)|+|\partial_a \log f(a,x)|+\big(\partial_a\log f(a,x)\big)^2\leq g(x)$$
+où
+$$\int_{\mathbb{R}}g(x)\sup_{a \in {\mathcal V}(\truetheta)}f(a,x)\mu(dx)<+\infty.$$
+\item L'information de Fisher est non-dégénérée :
+$$\forall \truetheta \in \Theta,\;\;\mathbb{I}(\truetheta) >0.$$
+\end{itemize}
+\end{df}
+\end{frame}
+
+\begin{frame}
+\frametitle{Résultat principal}
+\begin{prop}
+\begin{itemize}
+\item Si l'expérience engendrée par l'observation $X_1,\ldots, X_n\sim_{\text{i.i.d.}}\PP_\truetheta$ est associée à une famille de probabilités $\{\PP_\truetheta, \truetheta \in \Theta\}$ sur $\R$ \alert{ régulière} au sens de la définition précédente, alors
+$$\sqrt{n}\big(\estMV-\truetheta\big) \stackrel{d}{\longrightarrow} {\mathcal N}\Big(0,\frac{1}{\mathbb{I}(\truetheta)}\Big).$$
+\item Si $\est$ est un $Z$-estimateur \alert{régulier} asymptotiquement normal de variance $v(\truetheta)$, alors
+$$\forall \truetheta \in \Theta,\;\;v(\truetheta) \geq \frac{1}{\mathbb{I}(\truetheta)}.$$
+\end{itemize}
+\end{prop}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preuve de la proposition}
+\begin{itemize}
+\item Le premier point consiste à \alert{rendre rigoureux} le raisonnement précédent. \alert{Point délicat : } le contrôle du terme de reste.
+\item \alert{Optimalité de la variance de l'EMV parmi celle des $Z$-estimateurs} : on a vu que si $\est$ est un $Z$-estimateur régulier associé à la fonction $\phi$, alors, sa variance asymptotique $v(\truetheta) = v_\phi(\truetheta)$ vaut
+$$v_\phi(\truetheta) = \frac{\E_\truetheta\big[\phi(\truetheta,X)^2\big]}{\big(\E_\truetheta\big[\partial_\truetheta \phi(\truetheta, X)\big]\big)^2}.$$
+\item \alert{A montrer} : pour toute fonction $\phi$ :
+$$\boxed{\frac{\E_\truetheta\big[\phi(\truetheta,X)^2\big]}{\big(\E_\truetheta\big[\partial_\truetheta \phi(\truetheta, X)\big]\big)^2} \geq \frac{1}{\mathbb{I}(\truetheta)}}.$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preuve de l'inégalité}
+\begin{itemize}
+\item Par construction
+$$\partial_a\E_\truetheta\big[\phi(a,X)\big]_{\big|a=\truetheta}=0.$$
+\item (avec $\dot\phi(\truetheta, x)=\partial_{\truetheta}\phi(\truetheta,x)$)
+\begin{align*}
+0&=\int_{\R}\big[\dot \phi(\truetheta,x)f(\truetheta,x)+\phi(\truetheta,x)\partial_\truetheta f(\truetheta,x)\big]\mu(dx)\\
+& = \int_{\R}\big[\dot \phi(\truetheta,x)f(\truetheta,x)+\phi(\truetheta, x)\alert{\partial_\truetheta \log f(\truetheta, x) f(\truetheta,x)}\big]\mu(dx).
+\end{align*}
+\item \underline{Conclusion}
+$$\boxed{\alert{\E_\truetheta\big[\dot \phi(\truetheta,X)\big] = -\E_\truetheta\big[\phi(\truetheta, X)\partial_\truetheta \log f(\truetheta,X)\big]}}$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preuve de l'inégalité (fin)}
+\begin{itemize}
+\item On a
+$$\E_\truetheta\big[\dot \phi(\truetheta,X)\big] = -\E_\truetheta\big[\phi(\truetheta, X)\partial_\truetheta \log f(\truetheta,X)\big]$$
+\item \underline{Cauchy-Schwarz} :
+$$\big(\E_\truetheta\big[\dot \phi(\truetheta,X)\big] \big)^2 \leq \E_\truetheta\big[\phi(\truetheta, X)^2\big] \E_\truetheta\big[\big(\partial_\truetheta \log f(\truetheta,X)\big)^2\big],$$
+c'est-à-dire
+$$\boxed{v_\phi(\truetheta)^{-1} = \frac{\big(\E_\truetheta\big[\dot \phi(\truetheta,X)\big] \big)^2}{\E_\truetheta\big[\phi(\truetheta, X)^2\big]} \leq \mathbb{I}(\truetheta).}$$
+\end{itemize}
+\end{frame}
+
+\subsection{Cadre général et interprétation géométrique}
+
+\begin{frame}
+\frametitle{Information de Fisher dans un modèle général}
+\begin{df}
+\begin{itemize}
+\item \alert{Situation} : suite d'expériences statistiques
+$${\mathcal E}^n=\big(\mathfrak{Z}^n, {\mathcal Z}^n, \{\PP_\truetheta^n,\truetheta \in \Theta\}\big)$$
+dominées par $\mu_n$, associées à l'observation $Z^{(n)}$,
+$$f_n(\truetheta,z)=\frac{d\PP_\truetheta^n}{d\mu^n}(z),\;\;z\in\mathfrak{Z}^n,\alert{\truetheta \in \Theta \subset \R}.$$
+\item \alert{ Information de Fisher} (si elle existe) de l'expérience au point $\truetheta$ :
+$$\mathbb{I}(\truetheta\,|\,{\mathcal E}_n)=\E_\truetheta^n\big[\big(\partial_\truetheta \log  f_n(\truetheta, Z^{(n)})\big)^2\big]$$
+\end{itemize}
+\end{df}
+\end{frame}
+
+\begin{frame}
+\frametitle{Le cas multidimensionnel}
+\begin{itemize}
+\item \alert{Même contexte} que précédemment, avec $\Theta \subset \R^d$, et $\alert{ d \geq 1}$.
+\item \alert{ Matrice d'information de Fisher}
+$$\mathbb{I}(\truetheta)= \E_\truetheta \big[\nabla_{\truetheta}\log f(\truetheta, Z^{n}) \nabla_{\truetheta}\log f(\truetheta, Z^{n})^T\big]$$
+\alert{matrice symétrique positive}.
+\item Si $\mathbb{I}(\truetheta)$ définie et si ${\mathcal E}^n$ \alert{modèle de densité}, en généralisant à la dimension $d$ les conditions de régularité, on a \alert{}
+$$\sqrt{n}\big(\estMV-\truetheta\big) \stackrel{d}{\longrightarrow} {\mathcal N}\Big(0, \alert{\mathbb{I}(\truetheta)^{-1}}\Big).$$
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Interprétation géométrique}
+\begin{itemize}
+\item On pose $\mathbb{D}(\curtheta,\truetheta)=\E_\truetheta\big[\log f(\curtheta,X)\big]$. On a vu (inégalité d'entropie) que
+\begin{align*}
+\mathbb{D}(\curtheta,\truetheta) & = \int_{\R}\log f(\curtheta,x) f(\truetheta,x)\mu(dx) \\
+&  \leq \int_{\R}\log f(\alert{\truetheta}, x) f(\truetheta,x)\mu(dx) = \mathbb{D}(\alert{\truetheta},\truetheta).
+\end{align*}
+\item On a
+$$\boxed{\mathbb{I}(\truetheta)=\partial_\curtheta^2 \mathbb{D}(\curtheta,\truetheta)_{\big|\curtheta=\truetheta}.
+}$$
+\begin{itemize}
+\item Si $\mathbb{I}(\truetheta)$ est  petite , le \alert{rayon de courbure de $\curtheta \leadsto \mathbb{D}(\curtheta,\truetheta)$ est grand} dans un voisinage de $\truetheta$ : la stabilisation d'un maximum empirique (l'EMV) est plus difficile, rendant moins précis l'estimation.
+\item Si $\mathbb{I}(\truetheta)$ est  grande , le \alert{ rayon de courbure est petit} et le maximum de l'EMV est mieux localisé.
+ \end{itemize}
+%\item \alert{Faiblesse de cette approche} : nécessite de la régularité en $\truetheta$.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Efficacité à un pas}
+\begin{itemize}
+%\item \alert{Situation : modèle de densité} $Z^n = (X_1,\ldots, X_n)$.
+\item Dans un modèle régulier, le \alert{calcul numérique} de l'EMV peut être difficile à réaliser.
+\item Si l'on dispose d'un estimateur $\est$ \alert{asymptotiquement normal} et si les évaluations
+$$\ell'_n(\truetheta) = \tfrac{1}{n}\sum_{i = 1}^n \partial_\truetheta \log f(\truetheta, X_i),\;\;\ell''_n(\truetheta)=\tfrac{1}{n}\sum_{i = 1}^n\partial_\truetheta^2 \log f(\truetheta, X_i)$$
+sont \alert{faciles}, alors on peut \alert{ corriger} $\est$ de sorte d'avoir le même comportement asymptotique que l'EMV :
+$$\widetilde \truetheta_n = \est - \frac{\ell'_n(\est)}{\ell''_n(\est)}\;\;\;\text{(algorithme de Newton)}$$
+satisfait
+$$\boxed{\sqrt{n}\big(\widetilde \truetheta_n-\truetheta\big) \stackrel{d}{\longrightarrow} {\mathcal N}\Big(0, \alert{\frac{1}{\mathbb{I}(\truetheta)}}\Big)}$$
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
