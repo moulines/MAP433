@@ -86,7 +86,11 @@ où $t_0$ est un seuil à choisir... \alert{Comment ?}
 \begin{itemize}
 \item Une \alert{règle de décision} (non-randomisée) assigne à chaque réalisation $z$ de l'observation $Z$ une \alert{décision}.
 \item Si $z \in \zaccept$, l'hypothèse nulle est \alert{acceptée}; autrement, l'hypothèse est rejetée.
-\item \alert{Terminologie}: $\zaccept$= \alert{zone d'acceptation} ; $\zreject$= \alert{zone de rejet} ou \alert{région critique}.
+\item \alert{Terminologie}: 
+\begin{itemize}
+\item $\zaccept$= \alert{zone d'acceptation}, 
+\item $\zreject$= \alert{zone de rejet} ou \alert{région critique}.
+\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -111,7 +115,7 @@ $$\big(\PP_\truetheta^{10}\big[\varphi(Z)=0\big],\;\;\truetheta \neq \frac{1}{2}
 \begin{itemize}
 \item Sous $\PP_\theta$, $n \hat{\theta}(Z)= \sum_{i=1}^n Z_i$ suit une loi binomiale de paramètre de succès $\truetheta$.
 En notant $\binom_{n,\truetheta}$ la fonction
-de répartition de la loi binomiale,
+de répartition de la loi binomiale de paramètre $\truetheta$,
 \begin{multline*}
 \PP_\truetheta( |\hat{\theta}(Z) - 1/2| > t_0 ) \\
 = 1 - \{\binom_{n,\truetheta}(n(1+t_0)/2) - \binom_{n,\truetheta}(n(1-t_0)/2)  \} \eqsp.
@@ -415,12 +419,12 @@ Comme le test $\varphi(z) \equiv \alpha$ a un niveau $\alpha$, nous avons $\alph
 \frametitle{Exemple de mise en oeuvre}
 \begin{itemize}
 \item On observe
-$$Z=(X_1,\ldots, X_n) \sim_{\text{i.i.d.}} {\mathcal N}(\truetheta, 1).$$
-\item \alert{Construction du test de N-P.} de $H_0:\truetheta = \truetheta_0$ contre $H_1:\truetheta = \truetheta_1$, avec $\truetheta_0 < \truetheta_1$.
+$$Z=(X_1,\ldots, X_n) \sim_{\text{i.i.d.}} {\mathcal N}(\truetheta, \sigma^2) \eqsp \quad \text{$\sigma^2$ connu}.$$, 
+\item \alert{Construction du test de N-P.} de $H_0:\truetheta = \truetheta_0= 0$ contre $H_1:\truetheta = \truetheta_1$, avec $0 < \truetheta_1$.
 \item \alert{Mesure dominante} $\mu^n=\;$mesure de Lebesgue sur $\R^n$ et
 $$f(\truetheta, Z)=\tfrac{1}{(2\pi)^{n/2}}\exp\big(-\frac{1}{2}\sum_{i = 1}^n X_i^2+n\truetheta\overline{X}_n-\frac{n\truetheta^2}{2}\big).$$
 \item \alert{Rapport de vraisemblance}
-$$\frac{f(\truetheta_1,Z)}{f(\truetheta_0,Z)} = \exp\big(n(\truetheta_1-\truetheta_0)\overline{X}_n-\frac{n}{2}(\truetheta_1^2-\truetheta_0^2)\big).$$
+$$\frac{f(\truetheta_1,Z)}{f(\truetheta_0,Z)} = \exp\left(\frac{n \truetheta_1}{\sigma^2} \overline{X}_n  -\frac{n \truetheta_1^2}{2 \sigma^2} \right).$$
 \end{itemize}
 \end{frame}
 
@@ -429,43 +433,45 @@ $$\frac{f(\truetheta_1,Z)}{f(\truetheta_0,Z)} = \exp\big(n(\truetheta_1-\truethe
 \begin{itemize}
 \item \alert{Zone de rejet} du test de N-P. :
 \begin{align*}
-& \big\{f(\truetheta_1,Z) >  cf(\truetheta_0,Z)\big\}\\
-  =& \big\{n(\truetheta_1-\truetheta_0)\overline{X}_n-\frac{n}{2}(\truetheta_1^2-\truetheta_0^2) > \log c\big\} \\
- =& \big\{\overline{X}_n > \frac{\truetheta_0+\truetheta_1}{2}+\tfrac{\log c}{n(\truetheta_1-\truetheta_0)}\big\}.
+\big\{f(\truetheta_1,Z) >  cf(\truetheta_0,Z)\big\}&= \left\{ \frac{n \truetheta_1}{\sigma^2} \overline{X}_n-\frac{n \truetheta_1^2}{2 \sigma^2} > \log c\right\} \\
+ &= \left\{\overline{X}_n > \frac{\truetheta_1}{2}+\frac{\sigma^2 \log c}{n \truetheta_1}\right\}.
 \end{align*}
-\item \alert{Choix de $c$}. On résout
-$$\PP_{\truetheta_0}\big[\overline{X}_n > \tfrac{1}{2}(\truetheta_0+\truetheta_1)+\tfrac{\log c}{n(\truetheta_1-\truetheta_0)}\big]=\alpha.$$
-\item \alert{Approche standard} : on raisonne sous $\PP_{\truetheta_0}$. On a
-$$\overline{X}_n = \truetheta_0 + \frac{1}{\sqrt{n}}\xi^{n,\truetheta_0}, \quad \xi^{n,\truetheta_0} \sim {\mathcal N}(0,1)$$
-sous $\PP_{\truetheta_0}$ \alert{mais pas sous une autre probabilité $\PP_\truetheta$ si $\truetheta \neq \truetheta_0$!}
+La région de rejet est donc de la forme 
+$$
+\{ \overline{X}_n > t_{n,\alpha} \}
+$$
+\item \alert{Choix de $t_{n,\alpha}$}. On choisit $t_{n,\alpha}$ pour ajuster le niveau du test
+$$\PP_{\truetheta_0}\big[\overline{X}_n > t_{n,\alpha}\big]=\alpha.$$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Exemple (fin)}
 \begin{itemize}
-\item \alert{Résolution de}
-$$\PP_{\truetheta_0}\big[\truetheta_0 + \frac{1}{\sqrt{n}}\xi^{n,\truetheta_0} > \frac{1}{2}(\truetheta_0+\truetheta_1)+\frac{\log c}{n(\truetheta_1-\truetheta_0)}\big]=\alpha.$$
-\item \alert{Equivalent à}
-$\PP_{\truetheta_0}\big[\xi^{n\truetheta_0} > \frac{\sqrt{n}}{2}(\truetheta_1-\truetheta_0)+\frac{1}{\sqrt{n}}\frac{\log c}{\truetheta_1-\truetheta_0}\big]=\alpha,$
-soit
-$$\frac{\sqrt{n}}{2}(\truetheta_1-\truetheta_0)+\frac{1}{\sqrt{n}}\frac{\log c}{\truetheta_1-\truetheta_0}=\Phi^{-1}(1-\alpha),$$
-où $\Phi(x) = \int_{-\infty}^x \rme^{-u^2/2}\tfrac{du}{\sqrt{2\pi}}$.
-%\item \alert{Conclusion}
-%$$\boxed{c_\alpha = \exp\big(n\frac{(\truetheta_1-\truetheta_0)^2}{2}+\sqrt{n}(\truetheta_1-\truetheta_0)\Phi^{-1}(1-\alpha)\big)}$$
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{p-valeur}
-\begin{itemize}
-\item Supposons que sous $\PP_0$, la distribution du rapport de vraisemblance $p_1(Z)/p_0(Z)$ est continue. Le test U.P.P.
-de niveau $\alpha$ est non-randomisé et rejette l'hypothèse nulle si $p_1(Z)/p_0(Z) > k$, où $k$ est choisi de façon à ce que
+\item On note $z_{1-\alpha}$ le quantile $1-\alpha$ d'une loi Gaussienne standardisée: $\Phi(z_{1-\alpha})= 1-\alpha$.
+\item Sous $\PP_{\truetheta_0}$, $\sqrt{n} \bar{X}_n/\sigma \sim \mathcal{N}(0,1)$, par conséquent
+\begin{align*}
+\PP_{\theta_0} \left( \bar{X}_n > t_{n,\alpha} \right) &= \PP_{\theta_0} \left( \frac{\sqrt{n} \bar{X}_n}{\sigma} > \frac{\sqrt{n}}{\sigma} t_{n,\alpha} \right) \\
+&= 1 - \Phi \left( \frac{\sqrt{n}}{\sigma} t_{n,\alpha} \right)
+\end{align*}
+\item \alert{Conclusion}
 \[
-\PP_0 ( p_1(Z)/ p_0(Z) \geq k) = \alpha.
+t_{n,\alpha}= \frac{\sigma z_{1-\alpha}}{\sqrt{n}} 
 \]
-\item Lorsque l'on fait fait varier le niveau $\alpha$, on obtient ainsi une famille de régions de réjections, $\{\zreject_\alpha\}_{\alpha \in \ccint{0,1}}$, qui sont dans de nombreux cas d'intérêt emboitées
+On remarque d'ailleurs que le \alert{seuil critique} ne \alert{dépend pas de $\theta_1$} et que le \alert{même} test est U.P.P. contre toutes les contre-alternatives $\theta_1 > 0$.
+\end{itemize}
+\end{frame}
+
+\section{$p$-valeur}
+\begin{frame}
+\frametitle{p-valeur}
+\begin{itemize}
+\item Supposons que sous $\PP_0$, la distribution du rapport de vraisemblance $p_1(Z)/p_0(Z)$ est continue. 
+\item Le test U.P.P. de niveau $\alpha$ est non-randomisé et rejette l'hypothèse nulle si $p_1(Z)/p_0(Z) > c_\alpha$, où la constante $c_\alpha$ est choisie de façon à ce que
+\[
+\PP_0 ( p_1(Z)/ p_0(Z) \geq c_\alpha) = \alpha.
+\]
+\item Lorsque l'on fait fait varier le niveau $\alpha$, on obtient ainsi une famille de régions de réjections, $\{\zreject_\alpha\}_{\alpha \in \ccint{0,1}}$ qui sont, dans de nombreux cas, d'intérêt emboitées
     $$
     \zreject_\alpha \subset \zreject_{\alpha'} \quad \text{si $\alpha < \alpha'$}.
     $$
@@ -480,38 +486,33 @@ de niveau $\alpha$ est non-randomisé et rejette l'hypothèse nulle si $p_1(Z)/p
     $$
     \zreject_\alpha \subset \zreject_{\alpha'} \quad \text{si $\alpha < \alpha'$}.
     $$
-\item Lorsque cette condition est satisfaite, il est intéressant de déterminer non seulement si le test est accepté ou rejeté à un niveau de signification donné, mais aussi de déterminer \alert{le plus petit niveau de signification} auquel l'hypothèse serait rejetée.
+\item Lorsque cette condition est satisfaite, il est intéressant de déterminer 
+\begin{itemize}
+\item non seulement si le test est \alert{accepté} ou \alert{rejeté} à un niveau de signification \alert{donné}... 
+\item mais aussi de déterminer \alert{le plus petit niveau de signification} auquel l'hypothèse serait rejetée.
+\end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{p-valeur}
 \begin{definition}[p-valeur]
-La $p$-valeur d'un test pour une observation $Z$ donnée est le plus petit niveau de signification auquel le test serait rejeté
+La $p$-valeur d'un test pour une observation $Z$ donnée est \alert{le plus petit niveau de signification} auquel le test serait rejeté
 $$
-\hat{p}(Z)= \inf\{ \alpha: Z \in S_\alpha\}.
+\hat{p}(Z)= \inf\{ \alpha: Z \in \zreject_\alpha\}.
 $$
 \end{definition}
 \begin{itemize}
-\item Une petite $p$-valeur suggère que l'observation contredit l'hypothèse.
-\item Une grande $p$-valeur s'interprète en faveur de ne pas vouloir rejeter l'hypothèse de base.
+\item Une \alert{petite} $p$-valeur suggère que l'observation \alert{contredit} l'hypothèse.
+\item Une \alert{grande} $p$-valeur s'interprète en faveur de \alert{ne pas vouloir rejeter} l'hypothèse de base.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Bilan provisoire}
-\begin{itemize}
-\item Si l'on accepte \alert{le principe de Neyman}, on sait résoudre le problème à deux points.
-\item Que faire si l'hypothèse nulle $H_0$ ou l'alternative $H_1$ sont \alert{composites} ?
-\begin{itemize}
-\item On peut proposer des extensions si l'on dispose de structures particulières sur la vraisemblance du modèle (Poly. Ch. 7.3, hors programme).
-\item On sait dire \alert{ beaucoup de choses} dans le cas gaussien.
-\end{itemize}
-\item \alert{ Critique méthodologique de l'approche de Neyman} $\leadsto$ notion de $p$-valeur.
-\end{itemize}
+\frametitle{Exemple}
+
+
 \end{frame}
-
-
 
 
 
@@ -530,7 +531,7 @@ $$H_0:\mu \leq \mu_0\;\;\;\text{contre}\;\;\;H_1:\mu > \mu_0$$
 $${\mathcal R}(c_\alpha) = \big\{\overline{Y}_n - \mu_0 \geq c_\alpha\big\},\;\;\;c_\alpha\;\;\text{à déterminer}.$$
 \item On choisit $c_\alpha$ de sorte que
 $$\sup_{\mu \leq \mu_0}\PP_\mu\big[{\mathcal R}(c_\alpha)\big] \leq \alpha.$$
-\item Il y a \alert{plusieurs choix possibles}. On fait le choix rendant  ${\mathcal R}(c_\alpha)$ \alert{  maximale}.
+%\item Il y a \alert{plusieurs choix possibles}. On fait le choix rendant  ${\mathcal R}(c_\alpha)$ \alert{  maximale}.
 %\item On a \alert{seulement} optimalité parmi la classe de test de zone de rejet de la forme ${\mathcal R}(c), c >0$ sans outil supplémentaire.
 \end{itemize}
 \end{frame}
