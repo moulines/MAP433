@@ -1,0 +1,228 @@
+\documentclass[a4paper,11pt,fleqn]{article}
+
+\usepackage[francais]{babel}
+%\usepackage[latin1]{inputenc}
+%\usepackage[applemac]{inputenc}
+\usepackage{a4wide,amsmath,amssymb,bbm,fancyhdr,graphicx,enumitem}
+
+\RequirePackage[OT1]{fontenc}
+
+\usepackage[latin1]{inputenc}
+% THE variable
+\newcommand{\thisyear}{2015--2016}
+
+% Definitions (pas trop!)
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\rset}{\ensuremath{\mathbb{R}}}
+\renewcommand{\P}{\ensuremath{\operatorname{P}}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\V}{\ensuremath{\mathbb{V}}}
+\newcommand{\gaus}{\ensuremath{\mathcal{N}}}
+\newcommand{\1}{\ensuremath{\mathbbm{1}}}
+\newcommand{\dlim}{\ensuremath{\stackrel{\mathcal{L}}{\longrightarrow}}}
+\newcommand{\plim}{\ensuremath{\stackrel{\mathrm{P}}{\longrightarrow}}}
+\newcommand{\PP}{\ensuremath{\mathbb{P}}}
+\newcommand{\p}{\ensuremath{\mathbb{P}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\pa}[1]{\left(#1\right)}
+\newcommand{\cro}[1]{\left[#1\right]}
+\newcommand{\ac}[1]{\left\{#1\right\}}
+\def\H{{\bf H}}
+
+
+% Style
+\pagestyle{fancyplain}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\renewcommand{\subsectionmark}[1]{}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\footnotesize {\sf
+MAP433 Statistique, \thisyear }}}
+\rhead[\fancyplain{}{\footnotesize {\sf MAP433 Statistique,
+\thisyear }}]{\fancyplain{}{\thepage}}
+\cfoot[\fancyplain{}{}]{\fancyplain{}{}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\parindent=0mm
+
+% Titre
+
+%\title{ {\bf MAP433 Statistique} }
+%\author{{\bf PC6 Introduction aux tests}}
+%\date{}
+
+\title{\includegraphics[width=3.5cm]{logoX.png}\hfill {\bf MAP433
+    Statistique}\hfill \quad\quad\quad\quad\quad\quad \ } \author{{\bf PC 6:
+    Introduction aux tests statistiques}} \date{2 octobre 2015}
+
+\begin{document}
+
+\maketitle
+
+\section{Tests d'égalité et d'inégalité}
+
+  Soient $(X_1,...,X_n)$ des variables gaussiennes ind{\'e}pendantes
+  respectivement de loi ${\mathcal N}(\mu,\sigma^2)$.   
+  
+ \begin{enumerate}
+ \item On suppose $\sigma^2$ connu.    
+  Soient $\mu_0\neq \mu_1\in\mathbb{R}$. On considère les hypoth\`eses
+  \begin{enumerate}[label=(H-\arabic*),start=0]
+  \item\label{item:3} $\mu=\mu_0$.
+  \item\label{item:4} $\mu=\mu_1$.
+  \end{enumerate}
+  \begin{enumerate}[label=\roman*]
+  \item Déterminer le test $\delta_\alpha$ de
+  Neyman-Pearson de niveau $\alpha\in(0,1)$.
+\item Dans le cas $\mu_0<\mu_1$, en donner une forme simplifiée consistant à comparer
+  la statistique
+$$
+\bar X_n=\frac 1n\sum_{k=1}^nX_k\;
+$$
+à un seuil $s$ (appelé aussi \emph{valeur critique}) à déterminer.
+\item Calculer sa puissance.  Quel est son comportement quand $\alpha$ et $n$
+  varient ?
+\end{enumerate}
+\item On conserve la même forme de test qu'à la question précédente mais pour les
+hypoth\`eses
+  \begin{enumerate}[label=(H'-\arabic*),start=0]
+  \item\label{item:1} $\mu\leq \mu_0$.
+  \item\label{item:2} $\mu> \mu_0$.
+  \end{enumerate}
+   \begin{enumerate}[label=\roman*]
+  \item Déterminer le niveau $\alpha'$ et la puissance du test  $\delta_\alpha$  pour ces nouvelles hypothèses.
+  \item Soit $\delta'_{\alpha'}$ un test de niveau $\alpha'$ pour~\ref{item:1}
+    contre~\ref{item:2}. En utilisant le fait que ce test peut servir aussi pour
+    tester~\ref{item:3} contre~\ref{item:4} avec $\mu_1>\mu_0$ arbitraire,
+    comparer la puissance de $\delta'_\alpha$ à celle de $\delta_\alpha$.
+  \item Conclure.
+    \end{enumerate}
+
+  \item On considère à présent les hypothèses
+    \begin{enumerate}[label=(H''-\arabic*),start=0]
+  \item\label{item:5} $\mu = \mu_0$.
+  \item\label{item:6} $\mu \neq \mu_0$.
+  \end{enumerate}
+   \begin{enumerate}[label=\roman*]
+  \item Construire un test $\delta_\alpha^{''}$ de niveau $\alpha$ pour tester ces hypothèses, basé sur la même statistique de test que précédemment.
+  \item Calculer la puissance du test $\delta_\alpha^{''}$ et le comparer au test $\delta_\alpha$. Ce test est-il UPP? 
+   \end{enumerate}
+   
+  \item Comment adapter ces différents tests au cas où $\sigma^2$ est inconnu ? 
+\end{enumerate}
+
+Application interactive : \texttt{http://webpopix.org:8080/X/TestMean}
+
+\section{Test pour une certification bio}
+Pour avoir la certification "bio", un fabriquant de produits "bios" doit
+garantir pour chaque lot un pourcentage d'OGM inf\'erieur \`a 1\%.
+Il pr\'el\`eve donc $n=25$ produits par lot et teste si le
+pourcentage d'OGM est inf\'erieur \`a 1\%. On note $X_{i}$ le
+logarithme du pourcentage d'OGM du paquet num\'ero $i$.
+
+\noindent {\bf Mod\`ele:} On suppose que les $X_{i}$ sont
+ind\'ependants et suivent une loi gaussienne
+$\mathcal{N}(\theta,1)$.
+
+\begin{enumerate}
+\item Pour le fabriquant, le pourcentage d'OGM est inf\'erieur \`a 1\% sauf preuve du contraire. Il veut tester l'hypoth\`ese $\H_{0}: \theta\leq 0$ contre  $\H_{1}: \theta> 0$ et il souhaite que pour $\theta \leq 0$ le test se trompe avec une probabilit\'e  inf\'erieure \`a 5\%. Calculez un seuil $t_{25,5}$ tel que
+$$\sup_{\theta\leq 0} \P_{\theta}(\bar X_{25}> t_{25,5})=5\%.$$
+On pourra utiliser que $\P(Z>1.645)\approx 5\%$, pour $Z\sim
+\mathcal{N}(0,1)$.
+\item Une association "anti-OGM" veut s'assurer qu'il n'y a effectivement pas plus de $1\%$ d'OGM dans les produits lab\'elis\'es "bio". En particulier, elle s'inqui\`ete de savoir si le test parvient \`a \'eliminer les produits pour lesquels le pourcentage d'OGM d\'epasse de 50\% le maximum autoris\'e. Quelle est la probabilit\'e que le test ne rejette pas $\H_{0}$ lorsque le pourcentage d'OGM est de 1.5\%?
+\item Scandalis\'ee par le r\'esultat pr\'ec\'edent, l'association milite pour que le test du fabriquant prouve effectivement que le pourcentage d'OGM est inf\'erieur \`a 1\%. Pour elle, le pourcentage d'OGM est sup\'erieur \`a 1\% sauf preuve du contraire, donc $\H_{0}$ est $\theta> 0$ et  $\H_{1}$ est $\theta\leq 0$. Proposez un test de $\H_{0}$ contre $\H_{1}$ tel que la probabilit\'e que le test rejette \`a tort $\H_{0}$ soit inf\'erieure \`a 5\%.
+    \item Les agences de régulation accepte le test statistique proposé par le fabricant ($\H_{0}: \theta\leq 0$ contre  $\H_{1}: \theta> 0$) mais exige qu'un dépassement de $10\%$ du maximum autorisé soit détecté dans $80\%$ des cas. Le niveau du test restant fixé à $5\%$ que doit faire le fabricant pour se soumettre à cette législation ?.
+\end{enumerate}
+
+\section{Des finanicers sans scrupules}
+
+Roger a lu dans le journal que  $20\%$ des professionnels de la finance pensent qu'il faut enfreindre la loi pour réussir:
+\begin{verbatim}
+http://www.slate.fr/story/101785/wall-street-enfeindre-loi-reussir
+\end{verbatim}
+Il pense que ce pourcentage est sous-estimé et se propose d'enquêter pour vérifier son hypothèse.
+Il a dans son carnet d'adresses seulement deux noms de financiers qu'il peut interroger et à qui il va poser la question suivante: \emph{``Pensez-vous qu'il faut enfreindre la loi pour réussir ?''}.
+\begin{enumerate}
+\item En supposant que la conclusion de Roger ne dépende que des réponses à cette question, quelles règles de décision peut-il mettre en place, et quelles sont alors les risques pour Roger de conclure à tort ?
+\item Roger souhaite que la probabilité de conclure à tort que ce pourcentage est supérieur à $20\%$ soit exactement de $5\%$. Il réalise alors qu'il n'a pas besoin d'interroger qui que ce soit pour que cette contrainte soit satisfaite : il lui suffit de mettre dans sa poche 19 jetons noir et un rouge. Pourquoi ? Quel est le défaut de cette méthode ?
+\item Roger choisit maintenant une carte dans un jeu de 32 cartes et note soigneusement le résultat avant de faire son enquête auprès de ses deux connaissances. Pourquoi a-t-il adopté cette nouvelle stratégie ? Quelles sont alors les risques pour Roger de conclure à tort ?
+\item Roger sent bien qu'une telle décision ne peut être prise sur la base d'un tirage aléatoire\ldots  \\
+Que devrait-il faire alors?
+\end{enumerate}
+
+
+
+
+\section{Piscine}
+
+Un constructeur de piscine veut comparer 2 produits \`a dissoudre dans l'eau qui permettent de tuer les bact\'eries pr\'esentes. Les deux produits garantissent que 95 $\%$ des bact\'eries seront \'elimin\'ees. Par contre il se peut que le pH soit plus basique et donc plus nocif pour les utilisateurs. Il m\`ene une exp\'erience dans son magasin o\`u 2 piscines remplies sont expos\'ees. Il met le produit A dans la piscine 1 et le produit B dans la piscine 2. Il a un pH-m\`etre vendu dans le commerce et il se doute que la mesure n'est pas fiable. Il prend donc 10 mesures dans chaque piscine.
+
+Dans la piscine 1, il trouve $x_1,...,x_{10}$ qui valent respectivement
+$$ 7.33~;~6.17~;~7.46~;~8.13~;~6.68~;~6.76~;~7.97~;~6.76~;~6.81~;~8.40$$
+La moyenne empirique vaut $\bar{x}=7.247$ et la variance empirique (celle divis\'ee par ``$n-1$'') v\'erifie $\sqrt{\widehat{\sigma_x^2}}=0.73.$
+
+Dans la piscine 2, il trouve $y_1,...,y_{10}$ qui valent respectivement
+$$ 10.40~;~7.27~;~8.99~;~7.28~;~9.18~;~9.10~;~7.96~;~7.71~;~9.59~;~9.61$$
+Le moyennes et variance empiriques valent $\bar{y}=8.709$ et  $\sqrt{\widehat{\sigma_y^2}}=1.08.$
+
+Le constructeur n'a aucun parti pris entre les 2 produits et veut juste conseiller au mieux ses clients. Il voudrait pouvoir leur dire clairement ``pr\'ef\'erez A'', ``pr\'ef\'erez B'' ou ``faites ce que vous voulez, les deux produits sont indiscernables vu mes mesures''.
+
+On sait que $pH=7$ est neutre pour la peau tandis que $pH=9$ est basique et donc nocif pour la peau.
+
+\begin{enumerate}
+\item Supposons que les observations sont les r\'ealisations de variables al\'eatoires ind\'ependantes gaussiennes de m\^eme variance $\sigma^2$  et de moyenne $m_1$ quand la mesure est prise dans la piscine 1, respectivement $m_2$ quand la moyenne est prise dans la piscine 2, $m_1$ et $m_2$. Pr\'eciser le mod\`ele statistique sous la forme d'un seul vecteur gaussien dont on donnera la moyenne et la matrice de covariance.
+\item Supposons  que $\sigma^2$ est connue, \'egale \`a 1.
+\begin{enumerate}[label=\roman*]
+\item Donner l'expression la plus simple possible du test du rapport de vraisemblance de $\H_0$: "$m_1=m_2=7$" contre $\H_1$: "$m_1=7,\quad m_2=9$" au niveau $\alpha$.
+\item Expliquer pourquoi ce test est uniform\'ement le plus puissant parmi tous les tests de niveau $\alpha$ de ces m\^emes hypth\`eses.
+\item Calculer la p-valeur du test et conclure.
+\end{enumerate}
+\item Toujours dans le cas où $\sigma^2$ est connu, construire un test de $\H_0$: "$m_1=m_2$" contre $\H_1$: "$m_1<m_2$" au niveau $\alpha$.
+\item Revenons au cas g\'en\'eral (plus r\'ealiste vu l'\'enonc\'e) o\`u $\sigma^2$ est inconnue.
+\begin{enumerate}[label=\roman*]
+\item Donner les lois de $Z=\bar{Y}-\bar{X}$ et de $W=9\,\widehat{\sigma_X^2}+9\,\widehat{\sigma_Y^2}$. Expliquer pourquoi $W$ est ind\'ependante de $Z$.
+\item Toujours dans le cas o\`u $\sigma^2$ est inconnue, construire un test de $\H_0$: "$m_1=m_2$" contre $\H_1$: "$m_1<m_2$" au niveau $\alpha$. Calculer la p-valeur du test et conclure par l'une des 3 phrases  ``pr\'ef\'erez A'', ``pr\'ef\'erez B'' ou ``faites ce que vous voulez, les deux produits sont indiscernables vu les mesures''.
+\end{enumerate}
+\end{enumerate}
+
+Pour vous aider voici un tableau de valeurs qui donne $t$ tel que  $P(U>t)=a$
+
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+&a=0.05& a=0.025& a=0.01 & a=0.005& a=0.0025 & a=$1.10^{-4}$ \\
+\hline
+U$\sim\mathcal{N}(0,1)$ & 1.645 & 1.960 & 2.326 & 2.576 &2.807& 3.719 \\
+\hline
+U$\sim$T(9) & 1.833 & 2.262 & 2.821 & 3.250 & 3.670& 6.010 \\
+\hline
+U$\sim$T(10) & 1.812 & 2.228 & 2,763 & 3.169 &3.581&  5.694 \\
+\hline
+U$\sim$T(18) & 1.734 & 2.100 & 2.552 & 2.878 & 3.196 & 4.648 \\
+\hline
+U$\sim$T(20) & 1.724 & 2.085 & 2.528 & 2.845 & 3.153 & 4.538 \\
+\hline
+\end{tabular}
+
+o\`u T(k) est la loi du Student  \`a $k$ degr\'es de libert\'e.
+
+\section{BONUS:  Test à rapport de vraisemblance monotone}
+Dans cet exercice, on se donne un modèle statistique dominé paramétré par un sous-ensemble $\Theta\subset\R$. On note $L_n(\theta)$ la vraisemblance de l'échantillon en $\theta$.
+On suppose qu'il existe une statistique $\widehat{S}=S(X_1,\ldots,X_n)$ et, pour tout $(\theta_0,\theta_1)\in\Theta^2$ tel que $\theta_0<\theta_1$, une fonction $g_{\theta_0,\theta_1}$ strictement croissante telles que $\frac{L_n(\theta_1)}{L_n(\theta_0)}=g_{\theta_0,\theta_1}(\widehat{S})$. On fixe $\theta_*\in\Theta$ et, pour tester $\H_0\;:\; \theta\le\theta_*$ contre $\H_1\;:\;\theta>\theta_*$,
+on propose de rejeter $\H_0$ lorsque $r_n(\theta_*)\ge t_\alpha$ où
+\[r_n(\theta_*)=\frac{\sup_{\theta_1>\theta_*}L_n(\theta_1)}{\sup_{\theta_0\le\theta_*}L_n(\theta_0)},\qquad t_\alpha=\inf\left\{t\in \R,\;\text{tels que}\;\sup_{\theta_0\le \theta_*}\P_\theta\left(r_n(\theta_*)\ge t\right)\le \alpha\right\}\enspace.\]
+\begin{enumerate}
+ \item Montrer qu'il existe $s_\alpha\in \R$ tel que le test rejette $\H_0$ si $\widehat{S}\ge s_\alpha$.
+\end{enumerate}
+On suppose maintenant qu'il existe $s_\alpha$ tel que $\P_{\theta_*}(\widehat{S}\ge s_\alpha)=\alpha$.
+\begin{itemize}
+ \item[2.] Soit $\theta_0\le \theta_*$. Montrer que $\P_{\theta_0}(\widehat{S}\ge s_\alpha)\le \alpha$ et donc que le test est de niveau $\alpha$.\\
+ \emph{Indications} : On pourra utiliser le test de Neyman-Pearson de $\H_0:\theta=\theta_0$ contre $\H_1:\theta=\theta_*$ de niveau $\alpha'=\P_{\theta_0}(\widehat{S}\ge s_\alpha)$ et comparer sa puissance au test trivial rejetant cette hypothèse lorsque $T=1$ où $T$ est une variable aléatoire de Bernoulli de paramètre $\alpha'$ indépendante des observations.
+ \item[3.] Soit maintenant un autre test de niveau $\alpha$ défini par sa région de rejet $R$ et notons $x_{1:n}=(x_1,\ldots,x_n)$, $T:(x_{1:n})\mapsto 1_{S(x_{1:n})\ge s_\alpha}$ et $\phi:(x_{1:n})\mapsto 1_{x_{1:n}\in R}$. Soit $\theta_1>\theta_*$. Montrer que
+\begin{align*}
+\P_{\theta_1}(\widehat{S}\ge s_{\alpha})-\P_{\theta_1}(R)&=g_{\theta_*,\theta_1}(s_\alpha)\left(\P_{\theta_*}(\widehat{S}\ge s_{\alpha})-\P_{\theta_*}(R)\right)\\
+&+\E_{\theta_*}\left[(T(X_{1:n})-\phi(X_{1:n}))\left(\frac{L_n(\theta_1)}{L_n(\theta_*)}-g_{\theta_*,\theta_1}(s_\alpha)\right)\right]\\
+&+\E_{\theta_1}\left[(T(X_{1:n})-\phi(X_{1:n}))1_{L_n(\theta_*)=0}\right]
+\end{align*}
+\item[4.] Montrer que chacun des trois termes du membre de gauche est positif ou nul et conclure.
+\end{itemize}
+
+
+\end{document}

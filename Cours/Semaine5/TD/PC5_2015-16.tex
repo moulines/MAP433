@@ -52,11 +52,17 @@ MAP433 Statistique, \thisyear / PC5}}}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \parindent=0mm
 
+
+%-- Si cette ligne est lue, le corrigé ne s'affiche pas :
+%%\newcommand{\Corrige}[1]{}
+%-- Si la ligne suivante est lue, le corrigé s'affiche :
+\newcommand{\Corrige}[1]{\noindent {\small {\bf Corrigé :}\\ #1} }
+
 % Titre
 %\title{{\bf MAP433 Statistique}}
-\title{\includegraphics[width=3.5cm]{logo_x.jpg}\hfill {\bf MAP433 Statistique}\hfill \quad\quad\quad\quad\quad\quad \ }
-\author{{\bf PC 5: R\'egression}}
-\date{25 septembre 2015}
+\title{\includegraphics[width=3.5cm]{logo_x.jpg}\hfill {\bf MAP433
+    Statistique}\hfill \quad\quad\quad\quad\quad\quad \ } \author{{\bf PC 5:
+    R\'egression}} \date{25 septembre 2015}
 
 \begin{document}
 
@@ -111,6 +117,37 @@ carr\'es de $\beta_{0}$ et $\beta$.
   dans ce mod\`ele?
 \end{enumerate}
 
+\Corrige{ Dans ce corrigé, on note $\bZ = [\be,\X]$.
+  \begin{enumerate}
+  \item D'une part, $\bar Y \be$ est le projeté orthogonal de $\bY$ sur $\be$.
+    D'autre part, $\hatbY$ est le projeté orthogonal de $\bY$ sur
+    $\mathrm{Im}(\bZ)$; puis $\overline{\hatbY}$ est le projeté
+    orthogonal de $\hatbY$ sur $\be$. Donc $\bar Y = \overline{ \hatbY}$. Comme
+\[
+\overline{\hatbY} = n^{-1} \be^T \left( \hatbY \right) = n^{-1} \be^T
+\left(\hat\beta_{0} \be + \X \hat \beta \right)
+\]
+on obtient le résultat demandé.
+\item On écrit $\bY- \overline Y \be = \bY - \hatbY +\hatbY - \overline Y \be$.
+  Puisque $\bY - \hatbY$ est dans l'orthogonal de $\mathrm{Im}(\bZ)$ et $\hatbY
+  - \overline Y \be$ est dans $ \mathrm{Im}(\bZ)$, on obtient la décomposition
+  de la variance. On en déduit que $R^2 \leq 1$ en observant que $R^2 =
+  \|\hatbY - \bar Y \be \|^2 / \|\bY - \bar Y \be \|^2$.
+\item $\bZ$ est une matrice $n \times (k+1)$; si elle est de rang $k+1$, alors
+  $Z^T Z$ est inversible. La covariance de $(\hat \beta_0, \hat \beta)$ est
+  $\sigma^2 (\bZ^T \bZ)^{-1}$. La diagonale de cette matrice collecte la
+  variance de chaque composante du vecteur $(\hat \beta_0, \hat \beta_1,
+  \cdots, \hat \beta_k)$.
+\item Estimateur sans biais
+\[
+\hat{\sigma}^2_n = \frac{1}{n-(k+1)} \|\bY - \hatbY \|^2 
+\]
+\item $\tilde \beta \neq \beta$.
+\item on n'a plus la relation ``$\overline{\hatbY} = \bar Y$''. On peut avoir
+  $R^2 \geq 1$.
+  \end{enumerate}
+}
+
 \section{Le mod\`ele ANOVA}
 On dispose d'observations de variables al\'eatoires
 $$
@@ -128,6 +165,59 @@ matrice $\G$ que l'on pr\'ecisera.
 \item Proposer un estimateur de $\G \m$. Quel est son biais? sa covariance?
 \item Proposer un estimateur $\hat \sigma^2$ de $\sigma^2$. Quelle est sa distribution?
 \end{enumerate}
+\Corrige{ On note $\be_{1:q}$ le vecteur (colonne) de $\rset^q$ dont toutes les
+  composantes valent $1$.
+  \begin{enumerate} 
+  \item On a
+\[
+\X = 
+\begin{bmatrix}
+  \be_{1:l} & \cdots & &  \\
+  \cdots & \be_{1:l} &\cdots & \cdots \\
+  \cdots & \cdots &\cdots & \cdots \\
+  \cdots & \cdots & \cdots  & \be_{1:l}
+\end{bmatrix} \in \rset^{n \times k} \qquad \m = 
+\begin{bmatrix}
+  m_1 \\
+\cdots \\
+m_k
+\end{bmatrix} \in \rset^k.
+\]
+Par suite,
+\[
+\X^T \X = l \ \mathrm{I}_{k \times k}
+\]
+\item On a 
+\[
+\G = 
+\begin{bmatrix}
+  1 & -1 & \cdots & \cdots & \cdots & \cdots \\
+0 & 1 & -1 & \cdots & \cdots & \cdots \\
+ \cdots & \cdots & \cdots & \cdots & \cdots & \cdots \\
+ \cdots & \cdots & \cdots & \cdots & 1 & -1\\
+\end{bmatrix} \in \rset^{(k-1) \times k}
+\]
+\item
+\[
+\widehat{\m} = \left(\X^T \, \X \right)^{-1} \ \X^T \bY = l^{-1} \X^T \bY = 
+\begin{bmatrix}
+  l^{-1} \sum_{j=1}^l Y_{1,j} \\
+  \cdots \\
+  l^{-1} \sum_{j=1}^l Y_{k,j}
+\end{bmatrix}
+\]
+La covariance de $\widehat{\m}$ est $\sigma^2 l^{-1} \ I$.
+\item Un estimateur de $\G \m$ est $ \G \widehat{\m}$; qui est sans biais et
+  dont la matrice de covariance est $\sigma^2 l^{-1} \, \G \G^T$.
+\item Un estimateur sans biais de $\hat \sigma^2$ est 
+\[
+\hat \sigma^2 = \frac{1}{n-k} \| \bY - \X \widehat{\m}\|^2 = \frac{1}{k(l-1)} \|
+\bY - \X \widehat{\m}\|^2 = \frac{1}{k(l-1)} \sum_{i=1}^k \sum_{j=1}^l \left(
+  Y_{i,j} - \bar \bY_{i\cdot} \right)^{2}.
+\]
+Et sa loi est $\frac{\sigma^2}{k(l-1)} \ \chi^2(k(l-1))$.
+  \end{enumerate}
+}
 
 
 
@@ -158,6 +248,26 @@ $$
   l'estimateur des MC est optimal dans la classe de tous les estimateurs
   lin\'eaires sans biais.
 \end{enumerate}
+\Corrige{
+  \begin{enumerate}
+  \item $\E\left[\hat \beta\right] = \beta$ et $\mathrm{Cov}(\hat \beta) =
+    \sigma^2 (\X^T \X)^{-1}$.
+  \item $\L \X = I$.
+  \item $\mathrm{Cov}(\tilde \beta) = \sigma^2 \L \L^T$. De plus, 
+\[
+\Delta \Delta^T = \L \L^T + (\X^T \X)^{-1} - \L \X (\X^T \X)^{-1} - (\X^T
+\X)^{-1} \X^T \L^T
+\]
+et les deux derniers termes valent $-2 (\X^T \X)^{-1}$ puisque $\L \X = I$.  On
+en déduit la relation sur les matrices de covariance; puis la relation de
+domination en observant que $\lambda^T \Delta \Delta^T \lambda = \|\Delta^T
+\lambda\|^2 \geq 0$ pour tout $\lambda \in \rset^k$.
+\item La relation entre les matrices entraine en particulier que tout $i$,
+  $\mathrm{Var}(\tilde \beta_i) \geq \mathrm{Var}(\beta_i)$.  Le risque
+  quadratique est la trace de la matrice de covariance, et c'est aussi la somme
+  des variances de chaque composante.
+  \end{enumerate}
+}
 
 
 \section{R\'egression Ridge}
@@ -183,7 +293,24 @@ l'estimateur Ridge. Est-il sans biais?
   \beta)^2\big]$ de l'estimateur Ridge de param\`etre $\lambda$ est inf\'erieur
   au risque $\E\big[(\hat\beta_0 - \beta)^2\big]$ de l'estimateur des MC.
 \end{enumerate}
-
+\Corrige{
+  \begin{enumerate}
+  \item Il n'y a pas unicité de l'estimateur MC.
+  \item On a $\hat \beta_\lambda = \left(\X^T \X + \lambda I \right)^{-1} \X^T
+    \bY$ qui est défini pour $k>n$.
+\item Son espérance et sa matrice de covariance sont respectivement
+ \[
+ \left(\X^T \X + \lambda I \right)^{-1} \X^T \X \beta,  \qquad \qquad \sigma^2 \ 
+ \left(\X^T \X + \lambda I \right)^{-1} \X^T \X \left(\X^T \X + \lambda I
+ \right)^{-1}.
+\]
+\item Notons $R_\lambda(\beta)$ le risque de l'estimateur Ridge; et
+  $R_0(\beta)$ celui de l'estimateur MC. Si $\beta^2 \|\X\|^2/\sigma^2 <1$
+  alors pour tout $\lambda>0$, $R_\lambda(\beta) < R_0(\beta)$. Si $\beta^2
+  \|\X\|^2/\sigma^2 >1$ alors pour tout $\lambda$ {\bf assez petit},
+  $R_\lambda(\beta) < R_0(\beta)$.
+  \end{enumerate}
+}
 
 
 \end{document}
