@@ -143,12 +143,12 @@ En notant $\binom_{n,\truetheta}$ la fonction
 de répartition de la loi binomiale,
 \begin{multline*}
 \PP_\truetheta( |\hat{\theta}(Z) - 1/2| \leq t_0 ) \\
-= \{\binom_{n,\truetheta}(n(1+t_0)/2) - \binom_{n,\truetheta}(n(1-t_0)/2)  \eqsp.
+= \{\binom_{n,\truetheta}(n(1+t_0)/2) - \binom_{n,\truetheta}(n(1-t_0)/2) \}  \eqsp.
 \end{multline*}
 \item \alert{Erreur de seconde espèce}: pour une valeur critique fixée:
 \begin{multline*}
 \truetheta \mapsto \PP_{\truetheta}(|\hat{\theta}(Z) - 1/2| \leq t_0) \\=
-\binom_{n,1/2}(n(1+t_0)/2) - \binom_{n,1/2}(n(1-t_0)/2)  \}
+\binom_{n,1/2}(n(1+t_0)/2) - \binom_{n,1/2}(n(1-t_0)/2) 
 \end{multline*}
 \end{itemize}
 \end{frame}
@@ -275,8 +275,8 @@ sous la contrainte que le niveau du test soit inférieure à $\alpha$
 \item Supposons que $\Theta_0 = \{\theta_0\}$ et $\Theta_1=\{ \theta_1 \}$.
 \item On note $p_0(z)= f(\theta_0,z)$ et $p_1(z)= f(\theta_1,z)$ les densités des lois $\PP_{\theta_0}$ et $\PP_{\theta_1}$ par rapport à une mesure de domination $\mu$ (existe toujours)
 \end{itemize}
-\begin{theorem}[Existence d'un test de niveau $\alpha$]
- Pour tester $H_0: \{\theta = \theta_0\}$ contre l'alternative $H_1 : \{\theta = \theta_1\}$, il existe un test $\varphi$ et une constante $c_\alpha$ telle que
+\begin{theo}[Existence d'un test de niveau $\alpha$]
+ Soit $\alpha \in \ccint{0,1}$. Pour tester $H_0: \{\theta = \theta_0\}$ contre l'alternative $H_1 : \{\theta = \theta_1\}$, il existe un test $\varphi$ et une constante $c_\alpha$ telle que
 $$
 \PE_{\theta_0}[\phi(Z)]= \alpha
 $$
@@ -288,38 +288,43 @@ et
 0 & \text{quand $p_1(z) < c_\alpha p_0(z)$}
 \end{cases}
 \]
-\end{theorem}
+\end{theo}
 \end{frame}
 
 \begin{frame}
-\frametitle{Preuve}
+\frametitle{Preuve Existence-1}
 \begin{itemize}
-\item Soit $\alpha(c)= \PP_0( p_1(Z) > c p_0(Z))$, qui est la probabilité que la variable aléatoire $p_1(Z)/p_0(Z)$ soit strictement plus grande que $c$ (il suffit de se placer sur l'événement $\{p_0(Z) > 0 \}$).
-\item $c \mapsto \alpha(c)$ est donc décroissante, continue à droite et admet des limites à gauches ($c \mapsto 1 - \alpha(c)$ est une fonction de répartition !)
+\item Pour $\alpha=0$ et $\alpha=1$, le résultat est élémentaire en posant $c_0=\infty$ et $c_1=0$.
+\item On suppose $\alpha \in \ooint{0,1}$ et considère la fonction  
 $$
-\alpha(c^-) - \alpha(c) = \PP_0( p_1(Z)/p_0(Z) = c) \eqsp, \alpha(-\infty)= 1, \alpha(+\infty)=0
+c \mapsto A(c)= \PP_0( p_1(Z) > c p_0(Z)) = \PP_0( p_1(Z)/p_0(Z) > c , p_0(Z) > 0) \eqsp, 
+$$
+\item La fonction $A$ est  décroissante, continue à droite et admet des limites à gauche ($c \mapsto 1 - A(c)$ est la fonction de répartition de 
+la variable aléatoire $p_1(Z)/p_0(Z)$ qui est définie $\PP_0$-p.s.):  
+$$
+A(c^-) - A(c) = \PP_0( p_1(Z)/p_0(Z) = c) \eqsp, A(-\infty)= 1, A(+\infty)=0
 $$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Preuve}
+\frametitle{Preuve Existence-2}
 \begin{itemize}
-\item Pour tout $\alpha \in \ooint{0,1}$, il existe $c_\alpha$ tel que $\alpha(c_\alpha) \leq \alpha \leq \alpha(c_\alpha^-)$.
+\item Pour tout $\alpha \in \ooint{0,1}$, il existe $c_\alpha$ tel que $A(c_\alpha) \leq \alpha \leq A(c_\alpha^-)$.
 \item On considère le test $\varphi_\alpha$ définit par
 $$
 \varphi_\alpha(z)
 =
 \begin{cases}
 1 & \quad \text{quand $p_1(z) > c_\alpha p_0(z)$} \\
-\frac{\alpha - \alpha(c_\alpha)}{\alpha(c_\alpha^-)-\alpha(c_\alpha)} & \text{quand $p_1(z) = c_\alpha p_0(z)$} \\
+\frac{\alpha - A(c_\alpha)}{A(c_\alpha^-)-A(c_\alpha)} & \text{quand $p_1(z) = c_\alpha p_0(z)$} \\
 0  & \quad \text{quand $p_1(z) < c_\alpha p_0(z)$}
 \end{cases}
 $$
-La seconde ligne a un sens seulement si $\alpha(c_\alpha^-)  > \alpha(c_\alpha)$.
+Si $A(c_\alpha^-)  = A(c_\alpha)$, alors $\PP_0( p_1(Z)= c_\alpha p_0(Z))=0$ et il n'y pas lieu de spécifier la valeur du test sur cet événement.
 \item Le niveau de $\phi$ est donné par
 \begin{align*}
-\PE_0[\varphi(Z)] &= \PP_0 \left( \frac{p_1(Z)}{p_0(Z)} > c_\alpha \right) + \frac{\alpha-\alpha(c_\alpha)}{\alpha(c_\alpha^-)-\alpha(c_\alpha)}
+\PE_0[\varphi_\alpha(Z)] &= \PP_0 \left( \frac{p_1(Z)}{p_0(Z)} > c_\alpha \right) + \frac{\alpha-A(c_\alpha)}{A(c_\alpha^-)-A(c_\alpha)}
 \PP_0\left( \frac{p_1(Z)}{p_0(Z)} = c_\alpha \right) \\
 &= \alpha
 \end{align*}
@@ -328,8 +333,8 @@ La seconde ligne a un sens seulement si $\alpha(c_\alpha^-)  > \alpha(c_\alpha)$
 
 
 \begin{frame}
-\frametitle{Test le plus puissant}
-\begin{theorem}
+\frametitle{Test Uniformément Plus Puissant}
+\begin{theo}
 Un test $\varphi$ vérifiant
 $$
 \PE_{\theta_0}[\phi(Z)]= \alpha
@@ -343,12 +348,13 @@ et
 \end{cases}
 \]
 est \alert{uniformément le plus puissant} pour tester l'hypothèse nulle $H_0: \{\theta = \theta_0\}$ contre l'alternative $H_1: \{\theta = \theta_1\}$.
-\end{theorem}
+\end{theo}
 \end{frame}
 
 \begin{frame}
-\frametitle{Preuve}
-\only<1>{Soit $\varphi$ un test satisfaisant les conditions
+\frametitle{Preuve test U.P.P.-1}
+\only<1>{\begin{itemize}
+\item Soit $\varphi$ un test satisfaisant les conditions
 $$
 \PE_{\theta_0}[\phi(Z)]= \alpha
 $$
@@ -360,35 +366,46 @@ et
 0 & \text{quand $p_1(z) < c_\alpha p_0(z)$}
 \end{cases}
 \]
-et $\varphi^*$ un test de niveau $\PE_0[\varphi^*(Z)] \leq \alpha$}
+\item Soit  $\varphi^*$ un test de niveau $\PE_0[\varphi^*(Z)] \leq \alpha$
+\end{itemize}}
 \only<2>{
 \begin{itemize}
-\item On note $S^+= \{z : \varphi(z) - \varphi^*(z) > 0\}$ et $S^-=\{ z: \varphi(z) - \varphi^*(z) < 0\}$.
-\item Pour $z \in S^+$, $\phi(z) > 0$ et donc $p_1(z) \geq c_\alpha p_0(z)$.
-\item Pour $z \in S^-$, $\phi(z) < 1$ et donc $p_1(z) \leq c_\alpha p_0(z)$.
+\item On note:
+\begin{align*}
+S^+ &= \{z : \varphi(z) - \varphi^*(z) > 0\} \\ 
+S^- &=\{ z: \varphi(z) - \varphi^*(z) < 0\} .
+\end{align*}
+\item Pour $z \in S^+$, $\phi(z) > 0$ et donc \alert{$p_1(z) \geq c_\alpha p_0(z)$} (car $\varphi(z)=0$ si $p_1(z) < c_\alpha p_0(z)$).
+\item Pour $z \in S^-$, $\phi(z) < 1$ et donc \alert{$p_1(z) \leq c_\alpha p_0(z)$} (car $\varphi(z)=1$ si $p_1(z) > c_\alpha p_0(z)$).
 \item Par conséquent:
-$$
-\int (\varphi - \varphi^*) (p_1 - c_\alpha p_0) \rmd \mu \geq 0
-$$
+\begin{multline*}
+\int (\varphi - \varphi^*) (p_1 - c_\alpha p_0) \rmd \mu  \\
+= \int_{S^+ \cup S^-}  (\varphi - \varphi^*) (p_1 - c_\alpha p_0) \rmd \mu \geq 0
+\end{multline*}
 \end{itemize}
 }
 \only<3>
-{Comme
+{\alert{Conclusion} 
 $$
 \int (\varphi - \varphi^*) (p_1 - c_\alpha p_0) \rmd \mu \geq 0
 $$
-Nous avons
-$$
-\int (\varphi - \varphi^*) (p_1 - c_\alpha p_0) \rmd \mu \geq c_\alpha \int (\varphi - \varphi^*) (p_1 - c_\alpha p_0) \rmd \mu \geq 0 \eqsp.
-$$
+ce qui  implique
+\alert{
+\begin{align*}
+\int (\varphi - \varphi^*) p_1  \rmd \mu 
+&\geq c_\alpha \int (\varphi - \varphi^*)  p_0 \rmd \mu \\
+&\geq c_\alpha \left\{ \PE_{0}[\varphi(Z)] - \PE_{0}[\varphi^*(Z)]  \right\}\\
+&= c_\alpha \{ \alpha - \PE_{0}[\varphi^*(Z)] \} \geq 0 \eqsp.
+\end{align*}
+}
 }
 \end{frame}
 
 \begin{frame}
 \frametitle{Puissance d'un test U.P.P}
-\begin{lemma}
+\begin{lem}
 Notons $\puissance$ la puissance du test U.P.P de niveau $\alpha$ du test $H_0= \{\theta = \theta_0\}$ contre l'alternative $H_1= \{\theta=\theta_1\}$. Alors $\alpha \leq \puissance$ avec égalité si $\PP_{\theta_0}= \PP_{\theta_1}$.
-\end{lemma}
+\end{lem}
 \begin{proof}
 Comme le test $\varphi(z) \equiv \alpha$ a un niveau $\alpha$, nous avons $\alpha \leq \puissance$.
 \end{proof}
