@@ -12,7 +12,7 @@
 
 
 \begin{frame}
-\frametitle{Aujourd'hui (et la semaine prochaine...)}
+\frametitle{Aujourd'hui}
 \tableofcontents
 \end{frame}
 
@@ -29,7 +29,7 @@
 \begin{frame}
 \frametitle{Situation}
 \begin{itemize}
-\item \underline{Situation} : on part d'une expérience statistique $\big(\mathfrak{Z}, {\mathcal Z},\{\PP_\truetheta, \truetheta \in \Theta\}\big)$ engendrée par l'observation $Z$.
+\item \underline{Situation} : on part d'une expérience statistique $\big(\Xset, \Xsigma,\{\PP_\truetheta, \truetheta \in \Theta\}\big)$ engendrée par l'observation $Z$.
 \item On souhaite tester :
 $$H_0:\;\truetheta \in \Theta_0 \subset \Theta\;\;\;\text{\alert{contre}}\;\;\;H_1:\truetheta \in \Theta_1$$
 avec $\alert{\Theta_0 \cap \Theta_1 = \emptyset}$.
@@ -115,11 +115,171 @@ $$H_0: \alert{ \sigma^2 \leq \sigma_0^2}\;\;\;\text{ contre}\;\;\; H_1:\sigma^2 
 \end{frame}
 
 \section{Tests asymptotiques}
-\subsection{tests de Wald}
+\subsection{Elements de la théorie asymptotique des tests}
+\begin{frame}
+\frametitle{Quelques définitions}
+\begin{itemize}
+\item Soit $(\PP_\truetheta, \truetheta \in \Theta)$ une famille de probabilités sur $(\Xset,\Xsigma)$ admettant des densités $\{ f(\truetheta,x), \truetheta \in \Theta \}$ par rapport à une mesure de domination $\mu$.
+\item Supposons que nous disposions d'un $n$-échantillon $(X_1,X_2,\dots, X_n)$ de ce modèle statistique.
+\item Considérons le problème de tester l'hypothèse de base $H_0: \theta \in \Theta_0$ contre l'alternative $H_1: \theta \in \Theta_1$, où $\Theta_0 \cap \Theta_1= \emptyset$ et $\Theta_0 \cup \Theta_1= \Theta$.
+\item Un \alert{test} pour un échantillon de taille $n$ est une  fonction mesurable
+\[
+\varphi_n : \Xset^n \to \ccint{0,1} \eqsp.
+\]
+\item Si le test est \alert{non randomisé} $\varphi_n \in \{0,1\}$, l'ensemble
+\[
+\{ (x_1,\dots, x_n) \in \Xset^n, \varphi_n(x_1,\dots,x_n)= 1\}
+\]
+est appelée la \alert{région critique du test}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests asymptotiques}
+\begin{itemize}
+\item  On dit qu'une suite de  tests $\{\varphi_n, n \in \nset\}$ est \alert{asymptotiquement de niveau $\alpha$} pour $\alpha \in \ccint{0,1}$ si
+\alert{
+\[
+\lim_{n \to \infty} \PE^n_\truetheta[ \varphi_n(X_1,\dots,X_n)] \leq \alpha \eqsp, \text{pour tout $\truetheta \in \Theta_0$}
+\]
+}
+\item La puissance de ce test est la fonction
+\[
+\truetheta \mapsto \puissance_n(\truetheta)= \PE^n_{\truetheta}[ \varphi_n(X_1,\dots,X_n)]
+\]
+\item Un test q'une suite de tests $\{\varphi_n, n \in \nset\}$ est asymptotiquement \alert{consistante} si, pour tout $\theta \in \Theta_1$,
+\alert{
+\[
+\lim_{n \to \infty} \puissance_n(\truetheta) = 1 \eqsp.
+\]
+}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modèle régulier}
+\begin{df} La famille de densités $\{f(\truetheta,\cdot),\truetheta \in \Theta\}$,  par rapport à la mesure dominante $\mu$, $\Theta \subset \R$, est \alert{régulière} si
+\begin{itemize}
+\item $\Theta$ ouvert et $\{f(\truetheta, \cdot)>0\}=\{f(\truetheta', \cdot)>0\}$, $\forall \truetheta, \truetheta' \in \Theta$.
+\item $\mu$-p.p. $\truetheta \leadsto f(\truetheta,\cdot)$, $\truetheta \leadsto \log f(\truetheta,\cdot)$ sont ${\mathcal C}^2$.
+ \item $\forall \truetheta \in \Theta, \exists {\mathcal V}_\truetheta \subset \Theta$ t.q. pour $\tilde{\truetheta} \in {\mathcal V}_\truetheta$
+$$|\nabla_\truetheta^{2}\log f(\tilde{\truetheta},x)|+|\nabla_\truetheta \log f(\tilde{\truetheta},x)|+\big(\nabla_\truetheta\log f(\tilde{\truetheta},x)\big)^2\leq g(x)$$
+où
+$$\int_{\mathbb{R}}g(x)\sup_{a \in {\mathcal V}(\truetheta)}f(\tilde{\truetheta},x)\mu(dx)<+\infty.$$
+\item L'information de Fisher est non-dégénérée :
+$$\forall \truetheta \in \Theta,\;\;\mathbb{I}(\truetheta) >0.$$
+\end{itemize}
+\end{df}
+\end{frame}
+
+\begin{frame}
+\frametitle{Consistance du test de Neyman-Pearson}
+\begin{itemize}
+\item Supposons que $\Theta= \{\theta_0,\theta_1\}$ avec $\theta_0 \ne \theta_1$ et que l'on cherche à tester $H_0: \theta = \theta_0$ contre $H_1: \theta= \theta_1$.
+\item Le lemme de Neyman-Pearson montre que le test qui rejette $H_0$ si 
+\[
+\frac{\prod_{i=1}^n f(\truetheta_1,X_i)}{\prod_{i=1}^{n} f(\truetheta_0,X_i)} \geq c_{n,\alpha}
+\]
+est U.P.P. 
+\item De façon équivalente, en prenant le logarithme de chaque membre de l'identité, le test de N.P. rejette $H_0$ si 
+\[
+\Lambda_n(\truetheta_0,\truetheta_1) = \sum_{i=1}^n \{ \ell(X_i,\truetheta_1) - \ell(X_i,\truetheta_0) \} > k_{n,\alpha}
+\]
+où $\ell(x;\truetheta)= \log f(\truetheta,x)$ et $k_{n,\alpha}$ est choisi de telle sorte que 
+\[
+\PP_{\truetheta_0}^n [ \Lambda_n(\truetheta_0,\truetheta_1)  > k_{n,\alpha}] = \alpha 
+\]
+(on suppose qu'une telle valeur existe, autrement il faudrait randomiser)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Calcul asymptotique du seuil critique}
+\begin{itemize}
+\item En pratique, il est souvent difficile de déterminer exactement le seuil critique $k_{n,\alpha}$... mais il est souvent facile de déterminer 
+une suite $\{k_{n,\alpha}, n \in \nset\}$ telle que 
+\[
+\lim_{n \to \infty} \PP^n_{\theta_0} ( \Lambda_n(\truetheta_0,\truetheta_1) > k_{n,\alpha}) = \alpha.
+\]
+\item En effet, le théorème central limite montre que, sous $H_0$, 
+\[
+n^{-1/2} \sum_{k=1}^n \{ \ell(X_i,\truetheta_1) - \ell(X_i,\truetheta_0) + \KL{\truetheta_0}{\truetheta_1} \} \dlim_{\PP^n_{\truetheta_0}} \gauss(0,J(\truetheta_0,\truetheta_1))
+\]
+où $\KL{\truetheta_0}{\truetheta_1}$ est la \alert{divergence de Kullback-Leibler} définie par
+\[
+\KL{\truetheta_0}{\truetheta_1} = \PE_{\truetheta_0}\left[ \ell(X_1;\truetheta_0) - \ell(X_1;\truetheta_1) \right] > 0
+\]
+et 
+\[
+J(\truetheta_0,\truetheta_1)= \PVar_{\truetheta_0}[ \ell(X_1;\truetheta_1) - \ell(X_1;\truetheta_0) ] \eqsp.
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Calcul asymptotique du seuil critique}
+\begin{itemize}
+\item Pour $\alpha \in \ooint{0,1}$, on note $z_{1-\alpha}$ le quantile $1-\alpha$ de la loi gaussienne standardisée.
+\item  Nous avons donc:
+\[
+\lim_{n \to \infty} \PP_{\truetheta_0}^n \left( n^{-1/2} J^{-1}(\truetheta_0,\truetheta_1) \{ \Lambda_n + n \KL{\truetheta_0}{\truetheta_1} \} \geq z_{1-\alpha} \right) = \alpha \eqsp.
+\]
+ce qui implique, en posant
+\[
+k_{n,\alpha}= -n \KL{\truetheta_0}{\truetheta_1} + n^{1/2} z_{1-\alpha} J(\truetheta_0,\truetheta_1)
+\]
+que le test de région critique $\{ \Lambda_n > k_{n,\alpha} \}$ est asymptotiquement de niveau $\alpha$,
+\[
+\lim_{n \to \infty} \PP^n_{\truetheta_0} [ \Lambda_n \geq k_{n,\alpha} ]  = 1 - \alpha \eqsp.
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Distribution du test sous l'hypothèse alternative}
+\begin{itemize}
+\item Sous $\PP^n_{\theta_1}$, nous avons
+\[
+\Delta_n= \frac{1}{\sqrt{n}} \sum_{i=1}^n \{ \ell(X_i;\truetheta_1) - \ell(X_i;\truetheta_0) - \KL{\truetheta_1}{\truetheta_0} \}
+\dlim{\PP^n_{\truetheta_1}} \gauss( 0, J(\theta_1,\theta_0) )
+\]
+où 
+\begin{align*}
+&\KL{\truetheta_1}{\truetheta_0}= \PE_{\truetheta_1}[ \ell(X_1;\truetheta_1) - \ell(X1_;\truetheta_0)]  \\
+&J(\theta_1,\theta_0) = \PVar_{\truetheta_1} ( \ell(X_1;\truetheta_1) - \ell(X1_;\truetheta_0) )
+\end{align*}
+\pause \item Par conséquent
+\begin{multline*}
+\{ \Lambda_n > k_{n,\alpha} \} \\ 
+= \left\{ \Delta_n > J^{-1/2}(\truetheta_1,\truetheta_0) \{z_{1-\alpha}J(\truetheta_0,\truetheta_1) - n^{1/2} I(\truetheta_0,\truetheta_1) \right\}
+\end{multline*}
+où 
+$$
+I(\truetheta_0,\truetheta_1)= \KL{\truetheta_0}{\truetheta_1} + \KL{\truetheta_1}{\truetheta_0} \eqsp.
+$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Puissance du test de NP}
+\begin{itemize}
+\item La puissance du test est donc
+\[
+\puissance_n(\truetheta_1)= \Phi\left( J^{-1/2}(\truetheta_1,\truetheta_0) \left\{ n^{1/2} I(\truetheta_0,\truetheta_1) - z_{1-\alpha}J(\truetheta_0,\truetheta_1) \right\} \right)
+\]
+ce qui implique que, dès que $\KL{\truetheta_0}{\truetheta_1} \ne 0$ 
+\[
+\lim_{n \to \infty} \puissance_n(\truetheta_1)= 1 \eqsp.
+\]
+\item Si le modèle est identifiable, alors il existe un test de niveau asymptotique $\alpha$ et donc la puissance tend vers 1.
+\end{itemize}
+\end{frame}
+
+\subsection{Tests de Wald}
 \begin{frame}
 \frametitle{Le test de Wald : hypothèse nulle simple}
 \begin{itemize}
-\item \underline{Situation} la suite d'expériences $\big(\mathfrak{Z}^n, {\mathcal Z}^n,\{\PP_\truetheta^n,\truetheta \in \Theta\}\big)$ est engendrée par l'observation $Z^n$, $\truetheta \in \Theta \subset \R$
+\item \underline{Situation} la suite d'expériences $\big(\Xset^n, \Xsigma^{\otimes n},\{\PP_\truetheta^n,\truetheta \in \Theta\}\big)$ est engendrée par l'observation $Z^n= (X_1,\dots,X_n)$, $\truetheta \in \Theta \subset \R$
 \item \alert{Objectif} : Tester
 $$H_0:\truetheta = \truetheta_0\;\;\;\text{contre}\;\;H_1 \;\truetheta\neq \truetheta_0.$$
 \item \alert{Hypothèse} : on dispose d'un estimateur $\est$ \alert{asymptotiquement normal}
@@ -180,10 +340,10 @@ Donc $T_{n}\stackrel{\PP_{\truetheta}^n}{\longrightarrow}+\infty$, d'où le rés
 \item \alert{ Même contexte:} $\Theta \subset \R^d$ et \alert{on dispose} d'un estimateur $\est$ asymptotiquement normal :
 $$\sqrt{n}\big(\est-\truetheta\big)\stackrel{d}{\longrightarrow} {\mathcal N}\big(0, V(\truetheta)\big)$$
 où la matrice $V(\truetheta)$ est \alert{définie positive} et continue en $\truetheta$.
-\item On cheche à tester $H_0: \truetheta= \truetheta_0$ contre $H_1: \truetheta \ne \truetheta_1$. 
+\item On cheche à tester $H_0: \truetheta= \truetheta_0$ contre $H_1: \truetheta \ne \truetheta_1$.
 \item Sous $\PP_\truetheta$, la convergence $n^{1/2} (\est - \truetheta) \dlim \gauss(0,V(\truetheta))$ implique que
 $$
-V^{-1/2}(\truetheta) n^{1/2} (\est - \theta) \dlim \gauss(0,\Id{d}) 
+V^{-1/2}(\truetheta) n^{1/2} (\est - \theta) \dlim \gauss(0,\Id{d})
 $$
 et donc que
 $$
@@ -200,7 +360,7 @@ $$
 \[
 \ell_n(\truetheta)= n^{-1} \sum_{i=1}^n \log f(\truetheta,X_i)= \log(\truetheta) - \theta \bar{X}_n
 \]
-où $\bar{X}_n= n^{-1} \sum_{i=1}^n X_i$ est la moyenne empirique. 
+où $\bar{X}_n= n^{-1} \sum_{i=1}^n X_i$ est la moyenne empirique.
 \item Estimateur du MV: $\hat{\theta}_n = \bar{X}_n^{-1}$.
 \item \alert{Modèle régulier}
 \[
@@ -217,7 +377,7 @@ où $I(\truetheta)= \theta^{-2}$ est l'\alert{information de Fisher}
 \begin{align*}
 n (\est - \truetheta_0)^2/I(\est)= n (1 - \truetheta_0 \est)^2 \dlim_{\PP_{\truetheta_0}} \geq q^{\chi2}_{1,1-\alpha}
 \end{align*}
-\item \alert{Application numérique} $n=100$, $\truetheta_0=0.5$,  
+\item \alert{Application numérique} $n=100$, $\truetheta_0=0.5$,
 \end{itemize}
 \end{frame}
 
@@ -225,8 +385,8 @@ n (\est - \truetheta_0)^2/I(\est)= n (1 - \truetheta_0 \est)^2 \dlim_{\PP_{\true
 \begin{frame}
 \frametitle{Test de Wald: cas vectoriel}
 \begin{itemize}
-\item Le test de Wald de l'hypothèse $H_0= \truetheta= \truetheta_0$ contre $H_1= \truetheta \ne \truetheta_0$ 
-rejette $H_0$ si 
+\item Le test de Wald de l'hypothèse $H_0= \truetheta= \truetheta_0$ contre $H_1= \truetheta \ne \truetheta_0$
+rejette $H_0$ si
 \[
 n (\est - \truetheta_0)^T V^{-1}(\est) (\est - \truetheta_0) > q^{\chi^2}_{d,1-\alpha} \eqsp
 \]
@@ -289,23 +449,10 @@ $$\PP_\truetheta^n\big[T_n \notin {\mathcal R}_{n,\alpha}\big]\rightarrow 0.$$
 \end{frame}
 
 
-\begin{frame}
-\frametitle{Modèle régulier}
-\begin{df} La famille de densités $\{f(\truetheta,\cdot),\truetheta \in \Theta\}$,  par rapport à la mesure dominante $\mu$, $\Theta \subset \R$, est \alert{régulière} si
-\begin{itemize}
-\item $\Theta$ ouvert et $\{f(\truetheta, \cdot)>0\}=\{f(\truetheta', \cdot)>0\}$, $\forall \truetheta, \truetheta' \in \Theta$.
-\item $\mu$-p.p. $\truetheta \leadsto f(\truetheta,\cdot)$, $\truetheta \leadsto \log f(\truetheta,\cdot)$ sont ${\mathcal C}^2$.
- \item $\forall \truetheta \in \Theta, \exists {\mathcal V}_\truetheta \subset \Theta$ t.q. pour $\tilde{\truetheta} \in {\mathcal V}_\truetheta$
-$$|\nabla_\truetheta^{2}\log f(\tilde{\truetheta},x)|+|\nabla_\truetheta \log f(\tilde{\truetheta},x)|+\big(\nabla_\truetheta\log f(\tilde{\truetheta},x)\big)^2\leq g(x)$$
-où
-$$\int_{\mathbb{R}}g(x)\sup_{a \in {\mathcal V}(\truetheta)}f(\tilde{\truetheta},x)\mu(dx)<+\infty.$$
-\item L'information de Fisher est non-dégénérée :
-$$\forall \truetheta \in \Theta,\;\;\mathbb{I}(\truetheta) >0.$$
-\end{itemize}
-\end{df}
-\end{frame}
 
 \subsection{Test de Rao}
+
+
 \begin{frame}
 \frametitle{Test du score (Rao)}
 \begin{itemize}
@@ -327,7 +474,7 @@ $$
 \end{itemize}
 \item \alert{Conclusion} Pour tout $\truetheta \in \Theta$,
 $$
-Z_n(\truetheta) = n^{-1/2} \sum_{i=1}^n \eta_\truetheta(X_i) \dlim_{\PP_{\truetheta_0}} \gauss(0, I(\truetheta)) \eqsp. 
+Z_n(\truetheta) = n^{-1/2} \sum_{i=1}^n \eta_\truetheta(X_i) \dlim_{\PP_{\truetheta_0}} \gauss(0, I(\truetheta)) \eqsp.
 $$
 \end{itemize}
 \end{frame}
@@ -343,7 +490,7 @@ Z_n(\truetheta_0)^T I^{-1} (\truetheta_0) Z_n(\truetheta_0)
 $$
 Z_n(\truetheta_0)^T I^{-1} (\truetheta_0) Z_n(\truetheta_0) \dlim_{\PP_{\truetheta_0}} \chi^2_d
 $$
-et donc le test de Rao de rejet 
+et donc le test de Rao de rejet
 $$
 Z_n(\truetheta_0)^T I^{-1} (\truetheta_0) Z_n(\truetheta_0) \geq q_{d,1-\alpha}^{\chi^2}
 $$
