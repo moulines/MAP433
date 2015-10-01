@@ -109,7 +109,7 @@ $$H_0: \alert{ \sigma^2 \leq \sigma_0^2}\;\;\;\text{ contre}\;\;\; H_1:\sigma^2 
 \item Pour contruire un test de l'hypothèse $H_0:\truetheta \in \Theta_0$ contre $H_1:\truetheta \in \Theta_1$, on cherche \alert{une statistique libre} sous l'hypothèse et on rejette pour un seuil qui dépend de la loi de la statistique sous $H_0$, de sorte de fournir une zone de rejet \alert{ maximale}.
 %étudie séparément l'erreur de seconde espèce
  \item Le plus souvent, la statistique est obtenue via un estimateur. Sauf exception (comme la cas gaussien) une telle statistique est difficile à trouver en général.
- \item \alert{Simplification} cadre asymptotique (où la gaussianité réappara”t le plus souvent...).
+ \item \alert{Simplification} cadre asymptotique (où la gaussianité réapparaît le plus souvent...).
 \end{itemize}
 
 \end{frame}
@@ -251,7 +251,7 @@ où
 \pause \item Par conséquent
 \begin{multline*}
 \{ \Lambda_n > k_{n,\alpha} \} \\ 
-= \left\{ \Delta_n > J^{-1/2}(\truetheta_1,\truetheta_0) \{z_{1-\alpha}J(\truetheta_0,\truetheta_1) - n^{1/2} I(\truetheta_0,\truetheta_1) \right\}
+= \left\{ \Delta_n > J^{-1/2}(\truetheta_1,\truetheta_0) \{z_{1-\alpha}J(\truetheta_0,\truetheta_1) - n^{1/2} I(\truetheta_0,\truetheta_1) \} \right\}
 \end{multline*}
 où 
 $$
@@ -274,6 +274,73 @@ ce qui implique que, dès que $\KL{\truetheta_0}{\truetheta_1} \ne 0$
 \item Si le modèle est identifiable, alors il existe un test de niveau asymptotique $\alpha$ et donc la puissance tend vers 1.
 \end{itemize}
 \end{frame}
+
+\subsection{Efficacité asymptotique relative}
+\begin{frame}
+\frametitle{Un exemple}
+\begin{itemize}
+\item Supposons que $(X_1,\dots,X_n)$ est un $n$-échantillon indépendant de densité $f(\theta,x)= h(x-\truetheta)$ par rapport à la mesure de Lebesgue sur $\rset$.
+\item \alert{Hypothèses}
+\begin{itemize}
+\item Variance finie  $\int |x|^2 h(x) \rmd x < \infty$ 
+\item Parité  $h$ est une fonction paire (donc $\theta$ est la moyenne et la médiane de la loi)
+\item $h$ est continue et $h(0) > 0$ : unicité de la médiane
+\end{itemize}
+\item On cherche à tester $\theta= 0$ contre $H_1: \theta > 0$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Un exemple}
+\begin{itemize}
+\item On considère deux statistiques de tests:
+\begin{align*}
+S_n&= \frac{1}{n} \sum_{i=1}^n \indi{X_i > 0} \quad \text{test du signe} \\
+T_n&= \frac{1}{n} \sum_{i=1}^n \frac{X_i}{S_n} \quad \text{t-test}
+\end{align*}
+où $S_n= n^{-1} \sum_{i=1}^n (X_i - \bar{X}_n)^2$ est la \alert{variance empirique}
+\item \alert{Question:} quel test est le meilleur ?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Asymptotique du test du signe}
+$$
+S_n= n^{-1} \sum_{i=1}^n \indi{X_i > 0} 
+$$
+\begin{itemize}
+\item Par le théorème de la limite centrale
+$$
+n^{1/2} \sigma^{-1}(\theta) (S_n - \mu(\theta)) \dlim_{\PP^n_\theta} \gauss(0,1)
+$$
+où
+\[
+\mu(\theta) = 1 - F(-\theta) \quad \sigma^2(\theta) = (1-F(-\theta)) F(-\theta) \eqsp.
+\]
+\item Par conséquent, sous $H_0= \theta = 0$
+\[
+2 \sqrt{n} (S_n - 1/2) \dlim_{\PP^n_0} \gauss(0,1) \eqsp.
+\]
+\item Le test de région critique  $\{ 2 \sqrt{n} (S_n -1/2) > z_{ 1-\alpha} \}$ est un test de niveau asymptotique $\alpha$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Puissance du test de signe}
+\begin{align*}
+\puissance_n(\theta) 
+&= \PP_\theta( \sqrt{n}(S_n - \mu(0)) > \sigma(0) z_{1-\alpha}) \\
+&= \PP_\theta( \sqrt{n} \sigma^{-1}(\theta) (S_n - \mu(\theta)) > \sigma^{-1}(\theta) \{ \sigma(0) z_{1-\alpha} + n^{1/2} \{\mu(0)-\mu(\theta)\}\}) \\
+&= 1 - \Phi\left( \frac{\sigma(0) z_{1-\alpha} + n^{1/2} \{ \mu(0) - \mu(\theta)\}}{\sigma(\theta)} \right) + o(1)
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Asymptotique du $t$-test}
+
+\end{frame}
+
 
 \subsection{Tests de Wald}
 \begin{frame}
