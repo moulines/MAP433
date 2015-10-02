@@ -21,98 +21,98 @@
 
 
 
-\section{Construction d'un test : hypothèses générales}
-
-
-%\frametitle
-
-\begin{frame}
-\frametitle{Situation}
-\begin{itemize}
-\item \underline{Situation} : on part d'une expérience statistique $\big(\Xset, \Xsigma,\{\PP_\truetheta, \truetheta \in \Theta\}\big)$ engendrée par l'observation $Z$.
-\item On souhaite tester :
-$$H_0:\;\truetheta \in \Theta_0 \subset \Theta\;\;\;\text{\alert{contre}}\;\;\;H_1:\truetheta \in \Theta_1$$
-avec $\alert{\Theta_0 \cap \Theta_1 = \emptyset}$.
-\item Si $\Theta_0 = \{\truetheta_0\}$ et $\Theta_1 = \{\truetheta_1\}$, on a Neyman-Pearson. \alert{ Et sinon ?}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Principe de construction}
-\begin{itemize}
-\item  Trouver  une \alert{statistique libre sous l'hypothèse} : toute quantité $\phi(Z)$ \alert{observable} dont on connait la loi sous l'hypothèse, c'est-à-dire la loi de $\phi(Z)$ sous $\PP_\truetheta$ avec $\truetheta \in \Theta_0$.
-\item On  regarde  si le comportement de $\phi(Z)$ est \alert{typique} d'un comportement sous l'hypothèse.
-\item Si oui, on \alert{accepte} $H_0$, si non on \alert{rejette} $H_0$.
-\item On quantifie  oui/non  par le niveau $\alpha$ du test.
-\end{itemize}
-\end{frame}
-
-\subsection{Retour sur un exemple}
-\begin{frame}
-\frametitle{Exemple : test sur la variance}
-\begin{itemize}
-\item On observe $Z=(Y_1,\ldots, Y_n)$,
-$$Y_1,\ldots, Y_n \sim_{\text{i.i.d.}}{\mathcal N}(\mu,\sigma^2)$$
-avec $\truetheta =(\mu,\sigma^2) \in \Theta = \R \times (0,+\infty)$.
-\item \alert{Premier cas} : on teste
-$$ \alert{ H_0:\sigma^2 = \sigma_0^2\;\;\;\text{ contre}\;\;\; H_1:\sigma^2 > \sigma_0^2.}$$
-\item Sous l'hypothèse (c'est-à-dire sous $\PP_\truetheta$ avec $\truetheta = (\mu,\sigma_0)$ et $\mu \in \R$ quelconque), on a
-$$\boxed{(n-1)\frac{s_n^2}{\sigma_0^2} \sim \chi^2(n-1)}$$
-avec $s_n^2:=\frac{1}{n-1}\sum_{i = 1}^n (Y_i-\overline{Y}_n)^2$.
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Test sur la variance (cont.)}
-\begin{itemize}
-\item Donc, \alert{sous l'hypothèse}, le comportement  typique de
-$$\phi(Z) = (n-1)\frac{s_n^2}{\sigma_0^2} $$
-est celui d'une variable aléatoire de loi du $\chi^2$ à $n-1$ degrés de liberté.
-\item Soit $q_{1-\alpha,n-1}^{\chi^2}>0$ tel que si $U \sim {\chi^2}(n-1)$, alors
-$$\PP\big[U > q_{1-\alpha,n-1}^{\chi^2}\big] = \alpha.$$
-\item \alert{Sous l'hypothèse} $\phi(Z)\stackrel{d}{=} U$ et donc la probabilité pour que $\phi(Z)$ dépasse $q_{1-\alpha,n-1}^{\chi^2}$ est inférieure (égale) à $\alpha$ (comportement atypique si $\alpha$ petit).
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Test sur la variance (cont.)}
-\begin{itemize}
-\item \alert{Règle de décision :} On accepte l'hypothèse si
-$$\phi(Z) \leq  q_{1-\alpha,n-1}^{\chi^2}.$$
-On la rejette sinon.
-\item Par construction, on a un \alert{test de niveau $\alpha$}.
-\item On ne \alert{sait rien dire sur l'erreur de seconde espèce}, mis à part qu'elle est minimale parmi les tests de zone de rejet de la forme de $\{\phi(Z) > c\}$, $c>0$...
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Test sur la variance (fin)}
-\begin{itemize}
-\item \alert{Deuxième cas :} On teste
-$$H_0: \alert{ \sigma^2 \leq \sigma_0^2}\;\;\;\text{ contre}\;\;\; H_1:\sigma^2 > \sigma_0^2.$$
-\item \alert{Pas de statistique libre évidente...} Mais, pour $\sigma^2 \leq \sigma_0^2$, on a
-\begin{align*}
-\PP_{\sigma}\big[(n-1)\tfrac{s_n^2}{\sigma_0^2} > q_{1-\alpha,n-1}^{\chi^2}\big]
-= & \PP_{\sigma}\big[(n-1)\tfrac{s_n^2}{\sigma^2} > \alert{\tfrac{\sigma_0^2}{\sigma^2} } q_{1-\alpha,n-1}^{\chi^2}\big] \\
-\leq &  \PP_{\sigma}\big[(n-1)\tfrac{s_n^2}{\sigma^2} > q_{1-\alpha,n-1}^{\chi^2}\big] \\
-= & \alpha.
-\end{align*}
-\item La même statistique de test convient pour contrôler l'erreur de première espèce que pour l'hypohèse nulle simple. On choisit \alert{ ici} la \alert{même} règle de décision.
-\end{itemize}
-\end{frame}
-
-\subsection{Principe de construction}
-
-\begin{frame}
-\frametitle{Conclusion provisoire}
-\begin{itemize}
-\item Pour contruire un test de l'hypothèse $H_0:\truetheta \in \Theta_0$ contre $H_1:\truetheta \in \Theta_1$, on cherche \alert{une statistique libre} sous l'hypothèse et on rejette pour un seuil qui dépend de la loi de la statistique sous $H_0$, de sorte de fournir une zone de rejet \alert{ maximale}.
-%étudie séparément l'erreur de seconde espèce
- \item Le plus souvent, la statistique est obtenue via un estimateur. Sauf exception (comme la cas gaussien) une telle statistique est difficile à trouver en général.
- \item \alert{Simplification} cadre asymptotique (où la gaussianité réapparaît le plus souvent...).
-\end{itemize}
-
-\end{frame}
+%\section{Construction d'un test : hypothèses générales}
+%
+%
+%%\frametitle
+%
+%\begin{frame}
+%\frametitle{Situation}
+%\begin{itemize}
+%\item \underline{Situation} : on part d'une expérience statistique $\big(\Xset, \Xsigma,\{\PP_\truetheta, \truetheta \in \Theta\}\big)$ engendrée par l'observation $Z$.
+%\item On souhaite tester :
+%$$H_0:\;\truetheta \in \Theta_0 \subset \Theta\;\;\;\text{\alert{contre}}\;\;\;H_1:\truetheta \in \Theta_1$$
+%avec $\alert{\Theta_0 \cap \Theta_1 = \emptyset}$.
+%\item Si $\Theta_0 = \{\truetheta_0\}$ et $\Theta_1 = \{\truetheta_1\}$, on a Neyman-Pearson. \alert{ Et sinon ?}
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Principe de construction}
+%\begin{itemize}
+%\item  Trouver  une \alert{statistique libre sous l'hypothèse} : toute quantité $\phi(Z)$ \alert{observable} dont on connait la loi sous l'hypothèse, c'est-à-dire la loi de $\phi(Z)$ sous $\PP_\truetheta$ avec $\truetheta \in \Theta_0$.
+%\item On  regarde  si le comportement de $\phi(Z)$ est \alert{typique} d'un comportement sous l'hypothèse.
+%\item Si oui, on \alert{accepte} $H_0$, si non on \alert{rejette} $H_0$.
+%\item On quantifie  oui/non  par le niveau $\alpha$ du test.
+%\end{itemize}
+%\end{frame}
+%
+%\subsection{Retour sur un exemple}
+%\begin{frame}
+%\frametitle{Exemple : test sur la variance}
+%\begin{itemize}
+%\item On observe $Z=(Y_1,\ldots, Y_n)$,
+%$$Y_1,\ldots, Y_n \sim_{\text{i.i.d.}}{\mathcal N}(\mu,\sigma^2)$$
+%avec $\truetheta =(\mu,\sigma^2) \in \Theta = \R \times (0,+\infty)$.
+%\item \alert{Premier cas} : on teste
+%$$ \alert{ H_0:\sigma^2 = \sigma_0^2\;\;\;\text{ contre}\;\;\; H_1:\sigma^2 > \sigma_0^2.}$$
+%\item Sous l'hypothèse (c'est-à-dire sous $\PP_\truetheta$ avec $\truetheta = (\mu,\sigma_0)$ et $\mu \in \R$ quelconque), on a
+%$$\boxed{(n-1)\frac{s_n^2}{\sigma_0^2} \sim \chi^2(n-1)}$$
+%avec $s_n^2:=\frac{1}{n-1}\sum_{i = 1}^n (Y_i-\overline{Y}_n)^2$.
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Test sur la variance (cont.)}
+%\begin{itemize}
+%\item Donc, \alert{sous l'hypothèse}, le comportement  typique de
+%$$\phi(Z) = (n-1)\frac{s_n^2}{\sigma_0^2} $$
+%est celui d'une variable aléatoire de loi du $\chi^2$ à $n-1$ degrés de liberté.
+%\item Soit $q_{1-\alpha,n-1}^{\chi^2}>0$ tel que si $U \sim {\chi^2}(n-1)$, alors
+%$$\PP\big[U > q_{1-\alpha,n-1}^{\chi^2}\big] = \alpha.$$
+%\item \alert{Sous l'hypothèse} $\phi(Z)\stackrel{d}{=} U$ et donc la probabilité pour que $\phi(Z)$ dépasse $q_{1-\alpha,n-1}^{\chi^2}$ est inférieure (égale) à $\alpha$ (comportement atypique si $\alpha$ petit).
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Test sur la variance (cont.)}
+%\begin{itemize}
+%\item \alert{Règle de décision :} On accepte l'hypothèse si
+%$$\phi(Z) \leq  q_{1-\alpha,n-1}^{\chi^2}.$$
+%On la rejette sinon.
+%\item Par construction, on a un \alert{test de niveau $\alpha$}.
+%\item On ne \alert{sait rien dire sur l'erreur de seconde espèce}, mis à part qu'elle est minimale parmi les tests de zone de rejet de la forme de $\{\phi(Z) > c\}$, $c>0$...
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Test sur la variance (fin)}
+%\begin{itemize}
+%\item \alert{Deuxième cas :} On teste
+%$$H_0: \alert{ \sigma^2 \leq \sigma_0^2}\;\;\;\text{ contre}\;\;\; H_1:\sigma^2 > \sigma_0^2.$$
+%\item \alert{Pas de statistique libre évidente...} Mais, pour $\sigma^2 \leq \sigma_0^2$, on a
+%\begin{align*}
+%\PP_{\sigma}\big[(n-1)\tfrac{s_n^2}{\sigma_0^2} > q_{1-\alpha,n-1}^{\chi^2}\big]
+%= & \PP_{\sigma}\big[(n-1)\tfrac{s_n^2}{\sigma^2} > \alert{\tfrac{\sigma_0^2}{\sigma^2} } q_{1-\alpha,n-1}^{\chi^2}\big] \\
+%\leq &  \PP_{\sigma}\big[(n-1)\tfrac{s_n^2}{\sigma^2} > q_{1-\alpha,n-1}^{\chi^2}\big] \\
+%= & \alpha.
+%\end{align*}
+%\item La même statistique de test convient pour contrôler l'erreur de première espèce que pour l'hypohèse nulle simple. On choisit \alert{ ici} la \alert{même} règle de décision.
+%\end{itemize}
+%\end{frame}
+%
+%\subsection{Principe de construction}
+%
+%\begin{frame}
+%\frametitle{Conclusion provisoire}
+%\begin{itemize}
+%\item Pour contruire un test de l'hypothèse $H_0:\truetheta \in \Theta_0$ contre $H_1:\truetheta \in \Theta_1$, on cherche \alert{une statistique libre} sous l'hypothèse et on rejette pour un seuil qui dépend de la loi de la statistique sous $H_0$, de sorte de fournir une zone de rejet \alert{ maximale}.
+%%étudie séparément l'erreur de seconde espèce
+% \item Le plus souvent, la statistique est obtenue via un estimateur. Sauf exception (comme la cas gaussien) une telle statistique est difficile à trouver en général.
+% \item \alert{Simplification} cadre asymptotique (où la gaussianité réapparaît le plus souvent...).
+%\end{itemize}
+%
+%\end{frame}
 
 \section{Tests asymptotiques}
 \subsection{Elements de la théorie asymptotique des tests}
@@ -176,18 +176,18 @@ $$\forall \truetheta \in \Theta,\;\;\mathbb{I}(\truetheta) >0.$$
 \frametitle{Consistance du test de Neyman-Pearson}
 \begin{itemize}
 \item Supposons que $\Theta= \{\theta_0,\theta_1\}$ avec $\theta_0 \ne \theta_1$ et que l'on cherche à tester $H_0: \theta = \theta_0$ contre $H_1: \theta= \theta_1$.
-\item Le lemme de Neyman-Pearson montre que le test qui rejette $H_0$ si 
+\item Le lemme de Neyman-Pearson montre que le test qui rejette $H_0$ si
 \[
 \frac{\prod_{i=1}^n f(\truetheta_1,X_i)}{\prod_{i=1}^{n} f(\truetheta_0,X_i)} \geq c_{n,\alpha}
 \]
-est U.P.P. 
-\item De façon équivalente, en prenant le logarithme de chaque membre de l'identité, le test de N.P. rejette $H_0$ si 
+est U.P.P.
+\item De façon équivalente, en prenant le logarithme de chaque membre de l'identité, le test de N.P. rejette $H_0$ si
 \[
 \Lambda_n(\truetheta_0,\truetheta_1) = \sum_{i=1}^n \{ \ell(X_i,\truetheta_1) - \ell(X_i,\truetheta_0) \} > k_{n,\alpha}
 \]
-où $\ell(x;\truetheta)= \log f(\truetheta,x)$ et $k_{n,\alpha}$ est choisi de telle sorte que 
+où $\ell(x;\truetheta)= \log f(\truetheta,x)$ et $k_{n,\alpha}$ est choisi de telle sorte que
 \[
-\PP_{\truetheta_0}^n [ \Lambda_n(\truetheta_0,\truetheta_1)  > k_{n,\alpha}] = \alpha 
+\PP_{\truetheta_0}^n [ \Lambda_n(\truetheta_0,\truetheta_1)  > k_{n,\alpha}] = \alpha
 \]
 (on suppose qu'une telle valeur existe, autrement il faudrait randomiser)
 \end{itemize}
@@ -196,12 +196,12 @@ où $\ell(x;\truetheta)= \log f(\truetheta,x)$ et $k_{n,\alpha}$ est choisi de t
 \begin{frame}
 \frametitle{Calcul asymptotique du seuil critique}
 \begin{itemize}
-\item En pratique, il est souvent difficile de déterminer exactement le seuil critique $k_{n,\alpha}$... mais il est souvent facile de déterminer 
-une suite $\{k_{n,\alpha}, n \in \nset\}$ telle que 
+\item En pratique, il est souvent difficile de déterminer exactement le seuil critique $k_{n,\alpha}$... mais il est souvent facile de déterminer
+une suite $\{k_{n,\alpha}, n \in \nset\}$ telle que
 \[
 \lim_{n \to \infty} \PP^n_{\theta_0} ( \Lambda_n(\truetheta_0,\truetheta_1) > k_{n,\alpha}) = \alpha.
 \]
-\item En effet, le théorème central limite montre que, sous $H_0$, 
+\item En effet, le théorème central limite montre que, sous $H_0$,
 \[
 n^{-1/2} \sum_{k=1}^n \{ \ell(X_i,\truetheta_1) - \ell(X_i,\truetheta_0) + \KL{\truetheta_0}{\truetheta_1} \} \dlim_{\PP^n_{\truetheta_0}} \gauss(0,J(\truetheta_0,\truetheta_1))
 \]
@@ -209,7 +209,7 @@ où $\KL{\truetheta_0}{\truetheta_1}$ est la \alert{divergence de Kullback-Leibl
 \[
 \KL{\truetheta_0}{\truetheta_1} = \PE_{\truetheta_0}\left[ \ell(X_1;\truetheta_0) - \ell(X_1;\truetheta_1) \right] > 0
 \]
-et 
+et
 \[
 J(\truetheta_0,\truetheta_1)= \PVar_{\truetheta_0}[ \ell(X_1;\truetheta_1) - \ell(X_1;\truetheta_0) ] \eqsp.
 \]
@@ -243,17 +243,17 @@ que le test de région critique $\{ \Lambda_n > k_{n,\alpha} \}$ est asymptotiqu
 \Delta_n= \frac{1}{\sqrt{n}} \sum_{i=1}^n \{ \ell(X_i;\truetheta_1) - \ell(X_i;\truetheta_0) - \KL{\truetheta_1}{\truetheta_0} \}
 \dlim{\PP^n_{\truetheta_1}} \gauss( 0, J(\theta_1,\theta_0) )
 \]
-où 
+où
 \begin{align*}
 &\KL{\truetheta_1}{\truetheta_0}= \PE_{\truetheta_1}[ \ell(X_1;\truetheta_1) - \ell(X1_;\truetheta_0)]  \\
 &J(\theta_1,\theta_0) = \PVar_{\truetheta_1} ( \ell(X_1;\truetheta_1) - \ell(X1_;\truetheta_0) )
 \end{align*}
 \pause \item Par conséquent
 \begin{multline*}
-\{ \Lambda_n > k_{n,\alpha} \} \\ 
+\{ \Lambda_n > k_{n,\alpha} \} \\
 = \left\{ \Delta_n > J^{-1/2}(\truetheta_1,\truetheta_0) \{z_{1-\alpha}J(\truetheta_0,\truetheta_1) - n^{1/2} I(\truetheta_0,\truetheta_1) \} \right\}
 \end{multline*}
-où 
+où
 $$
 I(\truetheta_0,\truetheta_1)= \KL{\truetheta_0}{\truetheta_1} + \KL{\truetheta_1}{\truetheta_0} \eqsp.
 $$
@@ -267,7 +267,7 @@ $$
 \[
 \puissance_n(\truetheta_1)= \Phi\left( J^{-1/2}(\truetheta_1,\truetheta_0) \left\{ n^{1/2} I(\truetheta_0,\truetheta_1) - z_{1-\alpha}J(\truetheta_0,\truetheta_1) \right\} \right)
 \]
-ce qui implique que, dès que $\KL{\truetheta_0}{\truetheta_1} \ne 0$ 
+ce qui implique que, dès que $\KL{\truetheta_0}{\truetheta_1} \ne 0$
 \[
 \lim_{n \to \infty} \puissance_n(\truetheta_1)= 1 \eqsp.
 \]
@@ -277,14 +277,14 @@ ce qui implique que, dès que $\KL{\truetheta_0}{\truetheta_1} \ne 0$
 
 \subsection{Efficacité asymptotique relative}
 \begin{frame}
-\frametitle{Un exemple}
+\frametitle{Efficacité asymptotique... à travers un exemple}
 \begin{itemize}
-\item Supposons que $(X_1,\dots,X_n)$ est un $n$-échantillon indépendant de densité $f(\theta,x)= h(x-\truetheta)$ par rapport à la mesure de Lebesgue sur $\rset$.
+\item Supposons que $(X_1,\dots,X_n)$ est un $n$-échantillon indépendant de densité $f(\theta,x)= f(x-\truetheta)$ par rapport à la mesure de Lebesgue sur $\rset$.
 \item \alert{Hypothèses}
 \begin{itemize}
-\item Variance finie  $\int |x|^2 h(x) \rmd x < \infty$ 
-\item Parité  $h$ est une fonction paire (donc $\theta$ est la moyenne et la médiane de la loi)
-\item $h$ est continue et $h(0) > 0$ : unicité de la médiane
+\item Variance finie  $\int |x|^2 f(x) \rmd x < \infty$
+\item Parité  $f$ est une fonction paire (donc $\theta$ est la moyenne et la médiane de la loi)
+\item $f$ est continue et $f(0) > 0$ : unicité de la médiane
 \end{itemize}
 \item On cherche à tester $\theta= 0$ contre $H_1: \theta > 0$.
 \end{itemize}
@@ -296,10 +296,13 @@ ce qui implique que, dès que $\KL{\truetheta_0}{\truetheta_1} \ne 0$
 \begin{itemize}
 \item On considère deux statistiques de tests:
 \begin{align*}
-S_n&= \frac{1}{n} \sum_{i=1}^n \indi{X_i > 0} \quad \text{test du signe} \\
-T_n&= \frac{1}{n} \sum_{i=1}^n \frac{X_i}{S_n} \quad \text{t-test}
+U_n&= \frac{1}{n} \sum_{i=1}^n \indi{X_i > 0} &&\text{test du signe} \\
+S_n&= \bar{X}_n/S_n     &&\text{t-test}
 \end{align*}
-où $S_n= n^{-1} \sum_{i=1}^n (X_i - \bar{X}_n)^2$ est la \alert{variance empirique}
+où \begin{itemize}
+\item $\bar{X}_n= n^{-1} \sum_{i=1}^n X_i$ est la \alert{moyenne empirique}
+\item $S_n^2= n^{-1} \sum_{i=1}^n (X_i - \bar{X}_n)^2$ est la \alert{variance empirique}.
+\end{itemize}
 \item \alert{Question:} quel test est le meilleur ?
 \end{itemize}
 \end{frame}
@@ -307,12 +310,12 @@ où $S_n= n^{-1} \sum_{i=1}^n (X_i - \bar{X}_n)^2$ est la \alert{variance empiri
 \begin{frame}
 \frametitle{Asymptotique du test du signe}
 $$
-S_n= n^{-1} \sum_{i=1}^n \indi{X_i > 0} 
+U_n= n^{-1} \sum_{i=1}^n \indi{X_i > 0}
 $$
 \begin{itemize}
 \item Par le théorème de la limite centrale
 $$
-n^{1/2} \sigma^{-1}(\theta) (S_n - \mu(\theta)) \dlim_{\PP^n_\theta} \gauss(0,1)
+n^{1/2} \sigma^{-1}(\theta) (U_n - \mu(\theta)) \dlim_{\PP^n_\theta} \gauss(0,1)
 $$
 où
 \[
@@ -320,27 +323,358 @@ où
 \]
 \item Par conséquent, sous $H_0= \theta = 0$
 \[
-2 \sqrt{n} (S_n - 1/2) \dlim_{\PP^n_0} \gauss(0,1) \eqsp.
+2 \sqrt{n} (U_n - 1/2) \dlim_{\PP^n_0} \gauss(0,1) \eqsp.
 \]
-\item Le test de région critique  $\{ 2 \sqrt{n} (S_n -1/2) > z_{ 1-\alpha} \}$ est un test de niveau asymptotique $\alpha$.
+\item Le test de région critique  $\{ 2 \sqrt{n} (U_n -1/2) > z_{ 1-\alpha} \}$ est un test de niveau asymptotique $\alpha$.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Puissance du test de signe}
+La puissance du test de signe de niveau asymptotique $\alpha$ est donnée par
 \begin{align*}
-\puissance_n(\theta) 
-&= \PP_\theta( \sqrt{n}(S_n - \mu(0)) > \sigma(0) z_{1-\alpha}) \\
-&= \PP_\theta( \sqrt{n} \sigma^{-1}(\theta) (S_n - \mu(\theta)) > \sigma^{-1}(\theta) \{ \sigma(0) z_{1-\alpha} + n^{1/2} \{\mu(0)-\mu(\theta)\}\}) \\
+\puissance^{\mathrm{sign}}_{n,\alpha}(\theta)
+&= \PP_\theta( \sqrt{n}(U_n - \mu(0)) > \sigma(0) z_{1-\alpha}) \\
+&= \PP_\theta( \sqrt{n} \sigma^{-1}(\theta) (U_n - \mu(\theta)) > \sigma^{-1}(\theta) \{ \sigma(0) z_{1-\alpha} + n^{1/2} \{\mu(0)-\mu(\theta)\}\}) \\
 &= 1 - \Phi\left( \frac{\sigma(0) z_{1-\alpha} + n^{1/2} \{ \mu(0) - \mu(\theta)\}}{\sigma(\theta)} \right) + o(1)
 \end{align*}
+où $U_n= n^{-1} \sum_{i=1}^n \indi{X_i > 0}$.
+
+Le test est \alert{consistant}: pour tout $\theta > 0$,
+\alert{
+\[
+\lim_{n \to \infty}  \puissance^{\mathrm{sign}}_{n,\alpha}(\theta) = 1 \eqsp.
+\]
+}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Asymptotique du $z$-test}
+On considère la moyenne empirique \alert{studentisée}
+\begin{equation*}
+T_n= \frac{1}{n} \sum_{i=1}^n \frac{X_i}{S_n} \quad \text{t-test}
+\end{equation*}
+où $S^2_n= n^{-1} \sum_{i=1}^n (X_i - \bar{X}_n)^2$ est la \alert{variance empirique}
+\begin{itemize}
+\item Loi des grands nombres : $S^2_n \plim_{\PP_{\theta}} \sigma^2 = \int x^2 f(x) \rmd x$.
+\item Théorème Central limite: $n^{-1/2} \sum_{i=1}^n (X_i - \theta) \dlim_{\PP_\theta} \gauss(0,\sigma^2)$.
+\item Slutsky: $n^{-1/2} S_n^{-1} \left\{ \sum_{i=1}^n (X_i-\theta)  \right\} \dlim_{\PP_\theta} \gauss(0,1)$.
+\item Le test de région critique $\{ T_n > n^{-1/2} z_{1-\alpha} \}$ est un test de niveau asymptotique $\alpha$:
+\begin{align*}
+\lim_{n \to \infty} \PP_0 \left( T_n > n^{-1/2} z_{1-\alpha} \right) 
+&= \lim_{n \to \infty} \PP_0 \left( n^{1/2} T_n > z_{1-\alpha} \right) \\
+&= 1 - \Phi(z_{1-\alpha})= \alpha \eqsp.
+\end{align*}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Puissance du $z$-test}
+La puissance du test de niveau $\alpha$ est donnée par
+\begin{align*}
+\puissance^{\mathrm{t-test}}_{n,\alpha}(\theta)
+&= \PP_{\truetheta}(\sqrt{n} T_n > z_{1-\alpha})\\
+&=  \PP_{\truetheta}(n^{-1/2} S_n^{-1} \sum_{i=1}^n (X_i - \theta) > z_{1-\alpha} - \sqrt{n} S_n^{-1} \truetheta).
+\end{align*}
+Comme $\lim_{n \to \infty} \{ z_{1-\alpha} - \sqrt{n} S_n^{-1} \} = - \infty$, $\PP_\theta$-p.s.,
+le $t$-test de niveau asymptotique $\alpha$ est \alert{consistant}: pour tout $\theta > 0$,
+\alert{
+\[
+\lim_{n \to \infty} \puissance^{\mathrm{t-test}}_{n,\alpha}(\theta) = 1 \eqsp.
+\]
+}
+
 \end{frame}
 
 \begin{frame}
-\frametitle{Asymptotique du $t$-test}
-
+\frametitle{Comparaison asymptotique des puissances}
+\begin{itemize}
+\item Nous devons rendre la discrimination entre l'hypothèse nulle $H_0$ et l'hypothèse alternative plus \alert{difficile} quad $n \to \infty$.
+\item \alert{Idée: }  considérer un test $H_0: \theta = 0$ contre \alert{une suite d'hypothèses alternatives} $H^n_1: \theta = \theta_n$ avec $\theta_n > 0$ et $\lim_{n \to \infty} \theta_n = 0$.
+\end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Test du signe}
+$$
+\puissance^{\mathrm{sign}}_{n,\alpha}(\theta)=
+1 - \Phi\left( \frac{\sigma(0) z_{1-\alpha} + n^{1/2} \{ \mu(0) - \mu(\theta)\}}{\sigma(\theta)} \right) + o(1)
+$$
+\begin{itemize}
+\item  la puissance du test contre la suite de contre-alternatives $H_1^n: \theta_n > 0$, dépend de $\sqrt{n} (\mu(0) - \mu(\theta_n))$ où
+\[
+\mu(\theta) = 1 - F(-\theta) \quad \sigma^2(\theta) = (1-F(-\theta)) F(-\theta) \eqsp.
+\]
+\item Comme $F$ est différentiable en $\theta = 0$, nous avons
+\[
+\sqrt{n}(\mu(\theta_n) - \mu(0))= \sqrt{n} ( F(-\theta_n) - F(0)) = - \sqrt{n} \theta_n f(0) + o(\sqrt{n} \theta_n) \eqsp.
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test du signe}
+\begin{itemize}
+\item Si $\sqrt{n} \theta_n \to 0$, alors $\sqrt{n}(\mu(0)- \mu(\theta_n)) \to 0$; alors, $\pi_{n,\alpha}^{\mathrm{sign}}(\theta_n) \to \alpha$, 
+on ne distingue pas l'hypothèse de base et l'alternative.
+\item Si $\sqrt{n} \theta_n \to \infty$, alors $\sqrt{n}(\mu(0)- \mu(\theta_n)) \to -\infty$: $\pi_{n,\alpha}^{\mathrm{sign}}(\theta_n) \to 1$, problème \alert{trop facile}, la puissance tend vers $1$.
+\item Cas intéressant ! 
+\alert{
+\[
+\lim_{n \to \infty} \sqrt{n} \theta_n= h > 0 
+\]
+}
+\item Dans ce cas, $\sqrt{n}(\mu(0)- \mu(\theta_n)) \to -h f(0)$ et 
+\alert{
+\[
+\lim_{n \to \infty} \pi_{n,\alpha}^{\mathrm{sign}}(\theta_n) = \Phi(2 h f(0) - z_{1-\alpha}) 
+\]
+} 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Efficacité asymptotique des tests}
+\begin{itemize}
+\item Ceci conduit à une approche naturelle de comparaison des tests, qui consistent à comparer la \alert{puissance locale des tests}
+\alert{
+\[
+\puissance(h)= \lim_{n \to \infty} \pi_n( h / \sqrt{n}) \eqsp.
+\]
+}
+\item Pour les modèles réguliers, cette fonction de \alert{puissance locale asymptotique} est bien définie (preuve délicate en toute généralité)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Efficacité asymptotique locale des tests}
+\begin{theo}
+Soit $\sequence{\theta}[n][\nset] \subset \rset^+_*$ telle que $\lim_{n \to \infty}\sqrt{n} \theta_n h$. 
+Soit $\sequence{T}[n][\nset]$ une suite de statistiques vérifiant:  
+\begin{enumerate}
+\item $\sqrt{n} \sigma(\theta_n)^{-1} (T_n - \mu(\theta_n)) \dlim_{\PP_{\theta_n}} \gauss(0,1)$
+\item $\mu$ est différentiable en $0$
+\item $\sigma$ continue en $0$.
+\end{enumerate}
+Soit  $\varphi_n$ une suite de tests simples de région critique $\{ T_n > t_{n,\alpha}\}$  de niveau asymptotique $\alpha$, $\lim_{n \o \infty} \PP_{0}( T_n > t_{n,\alpha})= \alpha$. 
+
+\bigskip 
+
+La \alert{puissance locale asymptotique} de cette suite de tests est donnée par
+\[
+\puissance(h)= \lim_{n \to \infty} \pi_n( \sqrt{n} \theta_n)= 1 - \Phi(z_{1-\alpha} - h \mu'(0)/\sigma(0)) \eqsp.
+\]
+\end{theo}
+\end{frame}
+
+\begin{frame}
+\frametitle{Conclusion}
+\begin{itemize}
+\item Nous disposons maintenant d'une méthode simple de comparer les tests, en nous basant sur la puissance asympotique locale...
+\item Pour les tests asymptotiquement normaux, il suffit de comparer la \alert{pente} des tests, à savoir \alert{$\mu'(0)/\sigma(0)$}.
+\item La plus grande est la pente, le plus rapidement $\pi(h)$ augmente avec $h$ !
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Application: test du signe}
+\begin{itemize}
+\item $U_n= \sum_{i=1}^n \indi{X_i > 0}$. 
+\item $\mu(\theta)= 1 - F(-\theta)$, $\mu'(\theta)= - f(\theta)$.
+\item $\sigma^2(\theta)= (1 - F(-\theta)) F(-\theta)$
+\item \alert{Pente:} $\mu'(0)/\sigma(0)= 2 f(0)$. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Application: t-test}
+\begin{itemize}
+\item $T_n = \bar{X}_n/S_n$.
+\item $\mu(\theta)= \theta/\sigma$ and $\sigma(\theta)= 1$. En effet
+\begin{align*}
+\sqrt{n} ( T_n - \theta_n/\sigma) 
+&= \sqrt{n} ( \bar{X}_n / S_n - \theta_n / S_n) + \sqrt{n} \theta_n (S_n^{-1} - \sigma^{-1}) \\
+&= n^{-1/2} \sum_{i=1}n (X_i - \theta_n)/S_n + + \sqrt{n} \theta_n (S_n^{-1} - \sigma^{-1}) \dlim_{\PP_{\theta_n}} \gauss(0,1) \eqsp.
+\end{align*}
+\item \alert{Pente:} $\mu(0)/\sigma(0)= 1/\sigma$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Efficacité relative}
+\begin{enumerate}
+\item test du signe: $\mu'(0)/\sigma(0)=2 f(0)$,
+\item $t$-test: $\mu'(0)/\sigma(0)=1/\sigma$.
+\end{enumerate}
+
+\begin{itemize}
+\item Laplace: $2 f(0) \sigma = 2$.
+\item Logistique: $2 f(0) \sigma = \pi^2/12=0.822$.
+\item Gauss: $2 f(0) \sigma = 2/\pi=0.6366$.
+\item Uniforme: $2 f(0) \sigma = 1/3$.
+\end{itemize}
+\end{frame}
+
+\section{Quelques tests asymptotiques}
+
+\subsection{Test du rapport de vraisemblance}
+\begin{frame}
+\frametitle{Test du rapport de vraisemblance}
+ \begin{itemize}
+ \item Soit  $X^{(n)}= (X_{1},\ ,\ X_{n})$ un $n$-échantillon du modèle statistique $\PP_{\theta}^{n}\ll\mu_{n},\ \theta\in\Theta$, de densité  $f_{\theta}(x^{(n)})= \rmd \PP_{\theta}^{n}/ \rmd \mu_{n}$.
+ \item Pour tester $H_{0}$ : $\theta\in\Theta_{0}$  contre $H_{1}$ : $\theta\in\Theta-\Theta_{0}$, le test du \alert{rapport de vraisemblance} rejette $H_{0}$ lorsque la valeur du \alert{rapport de vraisemblance généralisé}
+$$
+\Lambda_{n}=\frac{\sup_{\theta\in\Theta_{0}}f_{\theta}(X^{(n)})}{\sup_{\theta\in\Theta}f_{\theta}(X^{(n)})}
+$$
+est inférieure à un seuil.
+\item   Lorsque les hypothèses $H_{0},\ H_{1}$ sont simples, ce test est U.P.P. .
+\item Pour des hypothèses composites, il n'y a en général aucun résultat d'optimalité, sauf dans des cas simples... 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{t-test}
+\begin{itemize}
+\item  Soient $X^{(n)}= (X_{1}, \dots, X_{n})$ un $n$-échantillon de $\gauss(\mu,\ \sigma^{2})$.
+\item On teste l'hypothèse $H_0: \mu =0$ contre $H_1: \mu \ne 0$.
+\item En posant $\theta=(\mu,\ \sigma^{2})$,
+\begin{align*}
+\Lambda_{n}&=\frac{\sup_{\theta\in\Theta_{0}}(1/\sigma^{n})\exp(-\frac{1}{2\sigma^{2}}\sum_{i}(X_{i}-\mu)^{2})}{\sup_{\theta\in\Theta}(1/\sigma^{n})\exp(-\frac{1}{2\sigma^{2}}\sum_{i}(X_{i}-\mu)^{2})}\\
+&=(\frac{\sum_{i}(X_{i}-\overline{X}_{n})^{2}}{\sum_{i}X_{i}^{2}})^{n/2}
+\end{align*}
+\item Un calcul élémentaire montre que $\Lambda_{n}<c$ est équivalent à $t_{n}^{2}>k$ où
+$$
+t_{n}=\frac{\sqrt{n}\overline{X}_{n}}{\sqrt{\frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2}}}
+$$
+est la $\mathrm{t}$-statistique. En d'autres termes, le $\mathrm{t}$-test est un test de rapport de vraisemblance généralisé. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Justification}
+\begin{align*}
+t_{n}^{2} &=\frac{n\overline{X}_{n}^{2}}{\frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2}} \\
+&=\frac{\sum_{i}X_{i}^{2}-\sum_{i}(X_{i}-\overline{X}_{n})^{2}}{\frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2}} \\
+&=\frac{(n-1)\sum_{i}X_{i}^{2}}{\sum_{i}(X_{i}-\overline{X}_{n})^{2}}-(n\ -1) \\
+&=(n-1)\Lambda_{n}^{-2/n}-(n-1)
+\end{align*}
+ce qui montre que
+$$
+\Lambda_{n}=(\frac{n-1}{t_{n}^{2}+n-1})^{n/2}
+$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Distribution asymptotique}
+Comme
+$$
+\Lambda_{n}=(\frac{n-1}{t_{n}^{2}+n-1})^{n/2}
+$$
+nous avons
+\begin{align*}
+&\log\Lambda_{n}=\frac{n}{2}\log\frac{n-1}{t_{n}^{2}+n-1} \\
+&\Rightarrow \ -2\log\Lambda_{n}=n\log(1+\frac{t_{n}^{2}}{n-1}) \\
+&=n \left(\frac{t_{n}^{2}}{n-1}+o_{p}(\frac{t_{n}^{2}}{n-1}) \right) \dlim_{\PP_0} \chi_{1}^{2}
+\end{align*}
+car sous $H_{0}$,  $t_{n} \dlim_{\PP_0} \gauss(0,1)$.
+
+\bigskip
+
+\alert{résultat vrai en toute généralité !}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Test d'égalité des proportions pour une variable multinomiale}
+\begin{itemize}
+\item Soit $(X_1,\dots,X_n)$ un $n$-échantillon d'une loi multinomiale à $d$-instances
+\item \alert{Paramètre} $\mathbf{p}= (p_1,\dots,p_d) \in \mathcal{M}_d= \{ (p_1, \dots, p_d), p_i \geq 0, \sum_{i=1}^d p_i =1 \}$.
+\item \alert{Rapport de vraisemblance généralisé}
+\alert{
+\begin{align*}
+\Lambda_n 
+&= \frac{(1/d)^n}{\max_{(p_1,\dots,p_k) \in \mathcal{M}_d} \prod_{i=1}^d p_j^{N_i} } \\
+&= \prod_{i=1}^d \left( \frac{n}{d N_i} \right)^{N_i} = \prod_{i=1}^d (d \hat{p}_{n,i})^{-N_i}
+\end{align*}
+}
+où $N_i= \sum_{j=1}^n \indi{X_j=i}$  et $\hat{p}_{n,i}= N_i/n$ les fréquences empiriques. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Loi limite des fréquences empiriques}
+\begin{itemize}
+\item On suppose $(X_1,\dots,X_n)$ $n$-échantillon multinomial de proportion $(q_1,\dots,q_d)$.
+\item \alert{Comparaison des fréquences empiriques}
+$$\widehat p_{n,\ell}=\frac{1}{n}\sum_{i=1}^n \indi{X_i=\ell}\;\;\;\text{\alert{proche de}}\;\;q_\ell,\;\;\ell=1,\ldots, d\; \alert{?}$$
+\item Loi des grands nombres :
+$$\big(\widehat p_{n,1},\ldots, \widehat p_{n,d}\big) \stackrel{\PP_{{\boldsymbol p}}}{\longrightarrow} (p_1,\ldots, p_d)={\boldsymbol p}.$$
+\item \alert{Théorème central-limite ?}
+$${\boldsymbol{U}_n}(\boldsymbol{p})=\sqrt{n}\Big(\frac{\widehat p_{n,1}-p_1}{\sqrt{p_1}},\ldots, \frac{\widehat p_{n,d}-p_d}{\sqrt{p_d}}\Big) \stackrel{d}{\longrightarrow} ?$$
+\item Composante par composante oui. \alert{Convergence globale plus délicate}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Statistique du Chi-deux}
+\begin{prop}
+Si les composantes de $\boldsymbol{p}$ sont toute non-nulles
+\begin{itemize}
+\item On a la \alert{convergence en loi} sous $\PP_{\boldsymbol{p}}$
+$${\boldsymbol{U}_n}(\boldsymbol{p})\stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$$
+avec $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ et $\sqrt{\boldsymbol{p}} = (\sqrt{p_1},\ldots, \sqrt{p_d})^T$.
+\item \alert{De plus}
+$$\|{\boldsymbol{U}_n}(\boldsymbol{p})\|^2 = n\sum_{\ell=1}^d \frac{(\widehat p_{n,\ell}-p_\ell)^2}{p_\ell} \stackrel{d}{\longrightarrow} \chi^2(\alert{d-1}).$$
+\end{itemize}
+\end{prop}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preuve de la normalité asymptotique}
+\begin{itemize}
+\item Pour $i=1,\ldots, n$ et $1 \leq \ell \leq d$, on pose
+$$Y_\ell^i=\frac{1}{\sqrt{p_\ell}}\big(\indi{X_i=\ell}-p_\ell\big).$$
+\item Les vecteurs ${\boldsymbol Y}_i=(Y_1^i,\ldots, Y_d^i)$ sont \alert{indépendants et identiquement distribués} et
+$${\boldsymbol U}_n(\boldsymbol{p}) = \frac{1}{\sqrt{n}}\sum_{i = 1}^n {\boldsymbol Y}_i,$$
+$\E\big[Y_\ell^i\big]=0$, $\E\big[(Y_\ell^i)^2\big]=1-p_\ell$, $\E\big[Y_\ell^iY_{\ell'}^i \big]=-(p_\ell p_{\ell'})^{1/2}$.
+\item \alert{On applique le TCL vectoriel}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Convergence de la norme au carré}
+\begin{itemize}
+\item On a donc ${\boldsymbol U}_n(\boldsymbol{p}) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$.
+\item On a aussi
+\begin{align*}
+\|{\boldsymbol U}_n(\boldsymbol{p}) \|^2 & \stackrel{d}{\longrightarrow} \| {\mathcal N}\big(0,V(\boldsymbol{p})\big)\|^2 \\
+& \sim \chi^2\big(\mathrm{Rang}\big(V(\boldsymbol{p})\big)\big)
+\end{align*}
+par \alert{Cochran} :  $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ est la projection orthogonale sur $\mathrm{vect}\{\sqrt{\boldsymbol{p}}\}^\perp$ qui est de dimension $d-1$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Distribution limite de $-2 \log \Lambda_n$}
+Nous avons
+\begin{align*}
+-2 \log \Lambda_n &= 2\sum_{i=1}^d N_i \log( \hat{p}_{N,i}/p_i) \\
+                  &= 2 n \sum_{i=1}^d  (\hat{p}_{N,i} - p_i + p_i) \log\left( 1 + \frac{\hat{p}_{n,i}-p_i}{p_i} \right) \\
+                  &= 2 n \sum_{i=1}^d \frac{(\hat{p}_{n,i}-p_i)^2}{p_i} + 2 n \sum_{i=1}^d p_i \left\{ \frac{(\hat{p}_{n,i}-p_i)}{p_i} - \frac{1}{2} \left(\frac{\hat{p}_{n,i}-p_i}{p_i} \right)^2 \right\} + o_{\PP}(1) \eqsp.
+\end{align*}
+car $\sum_{i=1}^d p_i (\hat{p}_{n,i} - p_i)/p_i= 0$... Par conséquent 
+\alert{
+\[
+-2 \log \Lambda_n \dlim_{\PP_{\mathbb{p}}} \chi^2(d-1) 
+\]
+}
+Trop beau pour qu'il n'y ait pas quelque chose de plus profond.. en PC
+\end{frame}
 
 \subsection{Tests de Wald}
 \begin{frame}
@@ -524,7 +858,7 @@ $$\PP_\truetheta^n\big[T_n \notin {\mathcal R}_{n,\alpha}\big]\rightarrow 0.$$
 \frametitle{Test du score (Rao)}
 \begin{itemize}
 \item Soit $\{X_i\}_{i=1}^n$ un $n$-échantillon \iid\ associé à un modèle statistique $(\PP_\truetheta, \truetheta \in \Theta)$  \alert{régulier}
-\item Pour $\truetheta \in \Theta^$, le \alert{score de Fisher} est donné par
+\item Pour $\truetheta \in \Theta$, le \alert{score de Fisher} est donné par
 \[
 \eta_{\truetheta}(x)= \nabla_{\truetheta} \log f(\truetheta,x)
 \]
@@ -577,7 +911,7 @@ $$H_0:F=F_0\;\;\text{contre}\;\;F\neq F_0$$
 où
 $F_0$ distribution donnée. Par exemple : $F_0$ \alert{gaussienne centrée réduite}.
 \item Il est \alert{très facile de construire un test asymptotiquement de niveau $\alpha$.}
-Il suffit de trouver une statistique $\phi(X_1,\ldots, X_n)$ de loi connue sous l'hypothèse.
+Il suffit de trouver une statistique $\phi(X_1,\ldots, X_n)$ de loi connue sous l'hypothèse de base.
 \end{itemize}
 \end{frame}
 
@@ -633,57 +967,8 @@ $H_0:{\boldsymbol p}={\boldsymbol q}$ \alert{contre} $H_1:{\boldsymbol p}\neq{\b
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Construction  naturelle d'un test}
-\begin{itemize}
-\item \alert{Comparaison des fréquences empiriques}
-$$\widehat p_{n,\ell}=\frac{1}{n}\sum_{i=1}^n 1_{X_i=\ell}\;\;\;\text{\alert{proche de}}\;\;q_\ell,\;\;\ell=1,\ldots, d\; \alert{?}$$
-\item Loi des grands nombres :
-$$\big(\widehat p_{n,1},\ldots, \widehat p_{n,d}\big) \stackrel{\PP_{{\boldsymbol p}}}{\longrightarrow} (p_1,\ldots, p_d)={\boldsymbol p}.$$
-\item \alert{Théorème central-limite ?}
-$${\boldsymbol{U}_n}(\boldsymbol{p})=\sqrt{n}\Big(\frac{\widehat p_{n,1}-p_1}{\sqrt{p_1}},\ldots, \frac{\widehat p_{n,d}-p_d}{\sqrt{p_d}}\Big) \stackrel{d}{\longrightarrow} ?$$
-\item Composante par composante oui. \alert{Convergence globale plus délicate}.
-\end{itemize}
-\end{frame}
 
-\begin{frame}
-\frametitle{Statistique du Chi-deux}
-\begin{prop}
-Si les composantes de $\boldsymbol{p}$ sont toute non-nulles
-\begin{itemize}
-\item On a la \alert{convergence en loi} sous $\PP_{\boldsymbol{p}}$
-$${\boldsymbol{U}_n}(\boldsymbol{p})\stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$$
-avec $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ et $\sqrt{\boldsymbol{p}} = (\sqrt{p_1},\ldots, \sqrt{p_d})^T$.
-\item \alert{De plus}
-$$\|{\boldsymbol{U}_n}(\boldsymbol{p})\|^2 = n\sum_{\ell=1}^d \frac{(\widehat p_{n,\ell}-p_\ell)^2}{p_\ell} \stackrel{d}{\longrightarrow} \chi^2(\alert{d-1}).$$
-\end{itemize}
-\end{prop}
-\end{frame}
 
-\begin{frame}
-\frametitle{Preuve de la normalité asymptotique}
-\begin{itemize}
-\item Pour $i=1,\ldots, n$ et $1 \leq \ell \leq d$, on pose
-$$Y_\ell^i=\frac{1}{\sqrt{p_\ell}}\big(1_{\{X_i=\ell\}}-p_\ell\big).$$
-\item Les vecteurs ${\boldsymbol Y}_i=(Y_1^i,\ldots, Y_d^i)$ sont \alert{indépendants et identiquement distribués} et
-$${\boldsymbol U}_n(\boldsymbol{p}) = \frac{1}{\sqrt{n}}\sum_{i = 1}^n {\boldsymbol Y}_i,$$
-$\E\big[Y_\ell^i\big]=0$, $\E\big[(Y_\ell^i)^2\big]=1-p_\ell$, $\E\big[Y_\ell^iY_{\ell'}^i \big]=-(p_\ell p_{\ell'})^{1/2}$.
-\item \alert{On applique le TCL vectoriel}.
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Convergence de la norme au carré}
-\begin{itemize}
-\item On a donc ${\boldsymbol U}_n(\boldsymbol{p}) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$.
-\item On a aussi
-\begin{align*}
-\|{\boldsymbol U}_n(\boldsymbol{p}) \|^2 & \stackrel{d}{\longrightarrow} \| {\mathcal N}\big(0,V(\boldsymbol{p})\big)\|^2 \\
-& \sim \chi^2\big(\mathrm{Rang}\big(V(\boldsymbol{p})\big)\big)
-\end{align*}
-par \alert{Cochran} :  $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ est la projection orthogonale sur $\mathrm{vect}\{\sqrt{\boldsymbol{p}}\}^\perp$ qui est de dimension $d-1$.
-\end{itemize}
-\end{frame}
 
 \begin{frame}
 \frametitle{Test d'adéquation du $\chi^2$}
