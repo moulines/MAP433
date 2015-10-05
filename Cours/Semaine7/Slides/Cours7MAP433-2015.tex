@@ -403,7 +403,7 @@ asymptotique $\alpha$ est \alert{consistant}: pour tout $\theta > 0$, \alert{
 \frametitle{Test du signe}
 $$
 \puissance^{\mathrm{sign}}_{n,\alpha}(\theta)=
-1 - \Phi\left( \frac{\sigma(0) z_{1-\alpha} + n^{1/2} \{ \mu(0) - \mu(\theta)\}}{\sigma(\theta)} \right) + o(1)
+\PP_\theta( \sqrt{n} \sigma^{-1}(\theta) (U_n - \mu(\theta)) > \sigma^{-1}(\theta) \{ \sigma(0) z_{1-\alpha} + n^{1/2} \{\mu(0)-\mu(\theta)\}\})
 $$
 \begin{itemize}
 \item  la puissance du test contre la suite de contre-alternatives $H_1^n: \theta_n > 0$, dépend de $\sqrt{n} (\mu(0) - \mu(\theta_n))$ où
