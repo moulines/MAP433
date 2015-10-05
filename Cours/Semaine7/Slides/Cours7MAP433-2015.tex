@@ -363,7 +363,7 @@ où $S^2_n= n^{-1} \sum_{i=1}^n (X_i - \bar{X}_n)^2$ est la \alert{variance empi
 \item Slutsky: $n^{-1/2} S_n^{-1} \left\{ \sum_{i=1}^n (X_i-\theta)  \right\} \dlim_{\PP_\theta} \gauss(0,1)$.
 \item Le test de région critique $\{ T_n > n^{-1/2} z_{1-\alpha} \}$ est un test de niveau asymptotique $\alpha$:
 \begin{align*}
-\lim_{n \to \infty} \PP_0 \left( T_n > n^{-1/2} z_{1-\alpha} \right) 
+\lim_{n \to \infty} \PP_0 \left( T_n > n^{-1/2} z_{1-\alpha} \right)
 &= \lim_{n \to \infty} \PP_0 \left( n^{1/2} T_n > z_{1-\alpha} \right) \\
 &= 1 - \Phi(z_{1-\alpha})= \alpha \eqsp.
 \end{align*}
@@ -418,21 +418,21 @@ $$
 \begin{frame}
 \frametitle{Test du signe}
 \begin{itemize}
-\item Si $\sqrt{n} \theta_n \to 0$, alors $\sqrt{n}(\mu(0)- \mu(\theta_n)) \to 0$; alors, $\pi_{n,\alpha}^{\mathrm{sign}}(\theta_n) \to \alpha$, 
+\item Si $\sqrt{n} \theta_n \to 0$, alors $\sqrt{n}(\mu(0)- \mu(\theta_n)) \to 0$; alors, $\pi_{n,\alpha}^{\mathrm{sign}}(\theta_n) \to \alpha$,
 on ne distingue pas l'hypothèse de base et l'alternative.
 \item Si $\sqrt{n} \theta_n \to \infty$, alors $\sqrt{n}(\mu(0)- \mu(\theta_n)) \to -\infty$: $\pi_{n,\alpha}^{\mathrm{sign}}(\theta_n) \to 1$, problème \alert{trop facile}, la puissance tend vers $1$.
-\item Cas intéressant ! 
+\item Cas intéressant !
 \alert{
 \[
-\lim_{n \to \infty} \sqrt{n} \theta_n= h > 0 
+\lim_{n \to \infty} \sqrt{n} \theta_n= h > 0
 \]
 }
-\item Dans ce cas, $\sqrt{n}(\mu(0)- \mu(\theta_n)) \to -h f(0)$ et 
+\item Dans ce cas, $\sqrt{n}(\mu(0)- \mu(\theta_n)) \to -h f(0)$ et
 \alert{
 \[
-\lim_{n \to \infty} \pi_{n,\alpha}^{\mathrm{sign}}(\theta_n) = \Phi(2 h f(0) - z_{1-\alpha}) 
+\lim_{n \to \infty} \pi_{n,\alpha}^{\mathrm{sign}}(\theta_n) = \Phi(2 h f(0) - z_{1-\alpha})
 \]
-} 
+}
 \end{itemize}
 \end{frame}
 
@@ -452,16 +452,16 @@ on ne distingue pas l'hypothèse de base et l'alternative.
 \begin{frame}
 \frametitle{Efficacité asymptotique locale des tests}
 \begin{theo}
-Soit $\sequence{\theta}[n][\nset] \subset \rset^+_*$ telle que $\lim_{n \to \infty}\sqrt{n} \theta_n h$. 
-Soit $\sequence{T}[n][\nset]$ une suite de statistiques vérifiant:  
+Soit $\sequence{\theta}[n][\nset] \subset \rset^+_*$ telle que $\lim_{n \to \infty}\sqrt{n} \theta_n h$.
+Soit $\sequence{T}[n][\nset]$ une suite de statistiques vérifiant:
 \begin{enumerate}
 \item $\sqrt{n} \sigma(\theta_n)^{-1} (T_n - \mu(\theta_n)) \dlim_{\PP_{\theta_n}} \gauss(0,1)$
 \item $\mu$ est différentiable en $0$
 \item $\sigma$ continue en $0$.
 \end{enumerate}
-Soit  $\varphi_n$ une suite de tests simples de région critique $\{ T_n > t_{n,\alpha}\}$  de niveau asymptotique $\alpha$, $\lim_{n \o \infty} \PP_{0}( T_n > t_{n,\alpha})= \alpha$. 
+Soit  $\varphi_n$ une suite de tests simples de région critique $\{ T_n > t_{n,\alpha}\}$  de niveau asymptotique $\alpha$, $\lim_{n \o \infty} \PP_{0}( T_n > t_{n,\alpha})= \alpha$.
 
-\bigskip 
+\bigskip
 
 La \alert{puissance locale asymptotique} de cette suite de tests est donnée par
 \[
@@ -483,10 +483,10 @@ La \alert{puissance locale asymptotique} de cette suite de tests est donnée par
 \begin{frame}
 \frametitle{Application: test du signe}
 \begin{itemize}
-\item $U_n= \sum_{i=1}^n \indi{X_i > 0}$. 
+\item $U_n= \sum_{i=1}^n \indi{X_i > 0}$.
 \item $\mu(\theta)= 1 - F(-\theta)$, $\mu'(\theta)= - f(\theta)$.
 \item $\sigma^2(\theta)= (1 - F(-\theta)) F(-\theta)$
-\item \alert{Pente:} $\mu'(0)/\sigma(0)= 2 f(0)$. 
+\item \alert{Pente:} $\mu'(0)/\sigma(0)= 2 f(0)$.
 \end{itemize}
 \end{frame}
 
@@ -496,7 +496,7 @@ La \alert{puissance locale asymptotique} de cette suite de tests est donnée par
 \item $T_n = \bar{X}_n/S_n$.
 \item $\mu(\theta)= \theta/\sigma$ and $\sigma(\theta)= 1$. En effet
 \begin{align*}
-\sqrt{n} ( T_n - \theta_n/\sigma) 
+\sqrt{n} ( T_n - \theta_n/\sigma)
 &= \sqrt{n} ( \bar{X}_n / S_n - \theta_n / S_n) + \sqrt{n} \theta_n (S_n^{-1} - \sigma^{-1}) \\
 &= n^{-1/2} \sum_{i=1}n (X_i - \theta_n)/S_n + + \sqrt{n} \theta_n (S_n^{-1} - \sigma^{-1}) \dlim_{\PP_{\theta_n}} \gauss(0,1) \eqsp.
 \end{align*}
@@ -532,7 +532,7 @@ $$
 $$
 est inférieure à un seuil.
 \item   Lorsque les hypothèses $H_{0},\ H_{1}$ sont simples, ce test est U.P.P. .
-\item Pour des hypothèses composites, il n'y a en général aucun résultat d'optimalité, sauf dans des cas simples... 
+\item Pour des hypothèses composites, il n'y a en général aucun résultat d'optimalité, sauf dans des cas simples...
 \end{itemize}
 \end{frame}
 
@@ -550,7 +550,7 @@ est inférieure à un seuil.
 $$
 t_{n}=\frac{\sqrt{n}\overline{X}_{n}}{\sqrt{\frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2}}}
 $$
-est la $\mathrm{t}$-statistique. En d'autres termes, le $\mathrm{t}$-test est un test de rapport de vraisemblance généralisé. 
+est la $\mathrm{t}$-statistique. En d'autres termes, le $\mathrm{t}$-test est un test de rapport de vraisemblance généralisé.
 \end{itemize}
 \end{frame}
 
@@ -596,12 +596,12 @@ car sous $H_{0}$,  $t_{n} \dlim_{\PP_0} \gauss(0,1)$.
 \item \alert{Rapport de vraisemblance généralisé}
 \alert{
 \begin{align*}
-\Lambda_n 
+\Lambda_n
 &= \frac{(1/d)^n}{\max_{(p_1,\dots,p_k) \in \mathcal{M}_d} \prod_{i=1}^d p_j^{N_i} } \\
 &= \prod_{i=1}^d \left( \frac{n}{d N_i} \right)^{N_i} = \prod_{i=1}^d (d \hat{p}_{n,i})^{-N_i}
 \end{align*}
 }
-où $N_i= \sum_{j=1}^n \indi{X_j=i}$  et $\hat{p}_{n,i}= N_i/n$ les fréquences empiriques. 
+où $N_i= \sum_{j=1}^n \indi{X_j=i}$  et $\hat{p}_{n,i}= N_i/n$ les fréquences empiriques.
 \end{itemize}
 \end{frame}
 
@@ -667,10 +667,10 @@ Nous avons
                   &= 2 n \sum_{i=1}^d  (\hat{p}_{N,i} - p_i + p_i) \log\left( 1 + \frac{\hat{p}_{n,i}-p_i}{p_i} \right) \\
                   &= 2 n \sum_{i=1}^d \frac{(\hat{p}_{n,i}-p_i)^2}{p_i} + 2 n \sum_{i=1}^d p_i \left\{ \frac{(\hat{p}_{n,i}-p_i)}{p_i} - \frac{1}{2} \left(\frac{\hat{p}_{n,i}-p_i}{p_i} \right)^2 \right\} + o_{\PP}(1) \eqsp.
 \end{align*}
-car $\sum_{i=1}^d p_i (\hat{p}_{n,i} - p_i)/p_i= 0$... Par conséquent 
+car $\sum_{i=1}^d p_i (\hat{p}_{n,i} - p_i)/p_i= 0$... Par conséquent
 \alert{
 \[
--2 \log \Lambda_n \dlim_{\PP_{\mathbb{p}}} \chi^2(d-1) 
+-2 \log \Lambda_n \dlim_{\PP_{\mathbb{p}}} \chi^2(d-1)
 \]
 }
 Trop beau pour qu'il n'y ait pas quelque chose de plus profond.. en PC
@@ -875,7 +875,7 @@ $$
 \end{itemize}
 \item \alert{Conclusion} Pour tout $\truetheta \in \Theta$,
 $$
-Z_n(\truetheta) = n^{-1/2} \sum_{i=1}^n \eta_\truetheta(X_i) \dlim_{\PP_{\truetheta_0}} \gauss(0, I(\truetheta)) \eqsp.
+Z_n(\truetheta) = n^{-1/2} \sum_{i=1}^n \eta_\truetheta(X_i) \dlim_{\PP_{\truetheta}} \gauss(0, I(\truetheta)) \eqsp.
 $$
 \end{itemize}
 \end{frame}
