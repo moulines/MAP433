@@ -30,6 +30,9 @@
 \newcommand{\ac}[1]{\left\{#1\right\}}
 \def\H{{\bf H}}
 
+\newcommand{\bX}{\mathbf{X}} 
+\newcommand{\K}{\mathcal{K}}
+
 
 % Style
 \pagestyle{fancyplain}
@@ -43,11 +46,14 @@ MAP433 Statistique, \thisyear }}}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \parindent=0mm
 
-% Titre
 
-%\title{ {\bf MAP433 Statistique} }
-%\author{{\bf PC6 Introduction aux tests}}
-%\date{}
+
+
+%-- Si cette ligne est lue, le corrigé ne s'affiche pas :
+%%\newcommand{\Corrige}[1]{}
+%-- Si la ligne suivante est lue, le corrigé s'affiche :
+\newcommand{\Corrige}[1]{\noindent {\small {\bf Corrigé :}\\ #1} }
+
 
 \title{\includegraphics[width=3.5cm]{logoX.png}\hfill {\bf MAP433
     Statistique}\hfill \quad\quad\quad\quad\quad\quad \ } \author{{\bf PC 6:
@@ -57,8 +63,7 @@ MAP433 Statistique, \thisyear }}}
 
 \maketitle
 
-\section{Tests d'égalité et d'inégalité}
-
+\section{Tests d'égalité et d'inégalité}~\label{PC6:exo1}
   Soient $(X_1,...,X_n)$ des variables gaussiennes ind{\'e}pendantes
   respectivement de loi ${\mathcal N}(\mu,\sigma^2)$.   
   
@@ -111,6 +116,86 @@ hypoth\`eses
 
 Application interactive : \texttt{http://webpopix.org:8080/X/TestMean}
 
+\bigskip
+
+\Corrige{Modèle statistique: $\bX = (X_1, \cdots, X_n) \in \rset^n$; muni de sa
+  tribu borélienne. Famille de lois $\{\PP_\mu, \mu \in \rset \}$; modèle
+  dominé par la mesure de Lebesgue sur $\rset^n$, et la densité de $\PP_\mu$
+  est
+\[ 
+p_\mu(x_{1:n}) = \left( \frac{1}{\sqrt{2 \pi} \sigma} \right)^n \ \exp \left\{ 
+  \frac{-1}{2\sigma^2} \sum_{k=1}^n (x_k-\mu)^2 \right\} 
+\] 
+  \begin{enumerate}
+  \item On a l'égalité (en supposant $\mu_2 > \mu_1$; adapter le raisonnement
+    dans le cas contraire)
+\[
+\left\{ x_{1:n}: \ln \frac{p_{\mu_1}(x_{1:n})}{p_{\mu_0}(x_{1:n})} > c_\alpha
+\right\} = \left\{ x_{1:n} : \bar x_n > \frac{1}{n} \frac{\sigma^2 \ln
+    c_\alpha}{\mu_1 - \mu_0} + \frac{\mu_0 + \mu_1}{2}\right\}
+\]
+dont on déduit que NP est un test non randomisé de zone de rejet de la forme
+$\left\{ \bar X_n > s_\alpha\right\}$.  Le test NP de niveau $\alpha$ est
+obtenu en prenant
+\[
+s_\alpha = \mu_0 + \frac{\sigma}{\sqrt{n}} z_{1-\alpha},
+\]
+où $z_q$ est le quantile d'ordre $q$ d'une loi $\mathcal{N}(0,1)$.  La
+puissance du test est donnée par
+\[
+\pi(\mu_1) = \PP\left( \xi > z_{1-\alpha} - \frac{\sqrt{n}}{\sigma} (\mu_1 -
+  \mu_0) \right)
+\]
+où sous $\PP$, $\xi \sim \mathcal{N}(0,1)$.
+\item $\bullet$ Pour la règle de décision $\delta_\alpha$ définie à la question
+  précédente, le niveau du test de $H'_0$ contre $H'_1$ est
+\[
+\sup_{\mu \leq \mu_0} \PP_\mu(\bar X_n > s_\alpha) = \PP\left(\xi >
+  z_{1-\alpha} \right) = \alpha.
+\]
+La fonction puissance est  pour tout $\mu > \mu_0$, 
+     \begin{align*} 
+       \mu \mapsto \PP_\mu \left( \bar X_n > s_\alpha \right) = 1- \Phi \left(
+         z_{1-\alpha} - \frac{\sqrt{n}}{\sigma}(\mu - \mu_0)\right)
+     \end{align*} 
+     où $\Phi$ est la cdf d'une loi $\mathcal{N}(0,1)$. \\
+     $\bullet$ Pour une autre règle de décision $\delta_\alpha'$ de fonction
+     puissance $\pi'$: (i) comme $H_0 = H'_0$, le niveau de la règle
+     $\delta_\alpha'$ pour tester $H_0$ contre $H_1$ est $\alpha$; (ii) mais
+     $\delta_\alpha$ est UPP$_\alpha$ pour $H_0$ contre $H_1$ donc les
+     fonctions puissance vérifient $\pi(\mu_1) \geq \pi'(\mu_1)$; (iii) cette
+     relation est vraie pour tout $\mu_1 > mu_0$. \\
+     $\bullet$ Si on cherche de $H'_0$ contre $H'_1$ dont la zone de rejet est
+     de la forme $\{\bar X_n > s'_\alpha \}$ au niveau $\alpha \%$, on trouve
+     $s'_\alpha = s_\alpha$. Donc les deux règles de décision coïncident. La
+     question précédente entraine que cette règle est UPP$_\alpha$ pour tester
+     $H'_0$ contre $H'_1$.
+\item  On propose un test non randomisé de zone de rejet de la forme
+\[
+ \{x_{1:n}: \left|\bar x_n - \mu_0 \right| > s'' \} 
+\]
+Pour qu'il soit de niveau $\alpha$, on prend $s'' = \frac{\sigma}{\sqrt{n}}
+z_{1-\alpha/2}$. La puissance de ce test est donnée, pour tout $\mu \neq \mu_0$,
+\[
+\mu \mapsto 1 - \Phi\left( z_{1-\alpha/2}+ \frac{\sqrt{n}}{\sigma} \left(\mu_0
+    - \mu \right) \right) + \Phi\left( -z_{1-\alpha/2}+ \frac{\sqrt{n}}{\sigma}
+  \left(\mu_0 - \mu \right) \right)
+\]
+Ce test n'est pas UPP$_\alpha$ pour tester $H''_0$ contre $H''_1$. 
+\item La construction des tests (via la définition de leur zone de rehetà va
+  utiliser
+  \[
+  \frac{ \sqrt{n} \left( \bar X_n - \mu \right)}{\sqrt{S_n}} \sim t_{n-1}
+  \qquad \qquad \text{avec} \ \ S_n = \frac{1}{n-1} \sum_{k=1}^n (X_k - \bar
+  X_n)^2.
+   \]
+   où $t_q$ désigne une loi de Student à $q$ degrés de liberté. Ce sont donc
+   les quantiles de cette loi et non pas ceux de la loi $\mathcal{N}(0,1)$ qui
+   vont intervenir dans la définition des seuils critiques.
+  \end{enumerate}
+}
+
+
 \section{Test pour une certification bio}
 Pour avoir la certification "bio", un fabriquant de produits "bios" doit
 garantir pour chaque lot un pourcentage d'OGM inf\'erieur \`a 1\%.
@@ -132,6 +217,26 @@ On pourra utiliser que $\P(Z>1.645)\approx 5\%$, pour $Z\sim
     \item Les agences de régulation accepte le test statistique proposé par le fabricant ($\H_{0}: \theta\leq 0$ contre  $\H_{1}: \theta> 0$) mais exige qu'un dépassement de $10\%$ du maximum autorisé soit détecté dans $80\%$ des cas. Le niveau du test restant fixé à $5\%$ que doit faire le fabricant pour se soumettre à cette législation ?.
 \end{enumerate}
 
+\Corrige{
+  \begin{enumerate}
+  \item On trouve $t_{25,5} =  1.645/\sqrt{n} \approx 0.33$.
+\item  
+\[
+\PP_{\ln(3/2)}\left( \bar{X}_n \leq t_{25,5} \right)  = \PP\left( \mathcal{N}(0,1) \leq 1.645 - 5 \ln(3/2) \right) \approx 0.35
+\]
+\item On propose le test de zone de rejet
+\[ 
+\{x_{1:n}: \bar x_n \leq - t_{25,5} \}.
+\] 
+\item on cherche un seuil $s$ et une taille d'échantillon $n$ tels que
+\begin{align*}
+  &\sup_{\theta \leq 0} \PP_\theta \left( \bar X_n > s \right) = 0.05 \\
+  & \inf_{\theta \geq \ln (11/10)} \PP_{\theta} \left( \bar X_n > s \right)
+  \geq 0.8.
+\end{align*}
+  \end{enumerate}
+}
+
 \section{Des finanicers sans scrupules}
 
 Roger a lu dans le journal que  $20\%$ des professionnels de la finance pensent qu'il faut enfreindre la loi pour réussir:
@@ -148,12 +253,60 @@ Il a dans son carnet d'adresses seulement deux noms de financiers qu'il peut int
 Que devrait-il faire alors?
 \end{enumerate}
 
-
+\Corrige{Soit $p$ la proportion de professionnels de la finance pensant qu'il
+  faut enfreindre la loi pour réussir.  On cherche à tester $H_0$: $p=0.2$
+  contre $H_1$: $p>0.2$.
+  \begin{enumerate}
+  \item Soit $X$ le nombre de ``oui'' reçu en interrogeant ses deux amis: $X
+    \sim \mathcal{B}(2,p)$. Deux règles de décision possibles
+ \[
+  \left\{
+   \begin{array}{ll}
+  \text{rejette $H_0$} & \text{si $X \geq 1$} \\
+  \text{accepte $H_0$} & \ \text{si $X=0$}
+   \end{array}
+ \right. 
+\qquad \qquad 
+\left\{
+   \begin{array}{ll}
+ \text{rejette  $H_0$} & \text{si $X =2$} \\
+ \text{accepte $H_0$} & \ \text{si $X\leq 1$}
+  \end{array}
+\right.
+ \]
+ Pour la première règle de décision, le niveau est $0.36$ et la fonction
+ puissance $p \mapsto p^2 + 2p(1-p)$.  Pour la seconde règle de décision, le
+ niveau est $0.04$ et la fonction puissance $p \mapsto p^2$.
+\item $1/20 =0.05$. On peut construire un test de niveau $5 \%$ sans utiliser
+  les données, mais en tirant un jeton et en rejettant $H_0$ si l'on tire le jeton rouge.
+\item  Soit le test randomisé
+\[
+\left\{
+   \begin{array}{ll}
+ \text{rejette  $H_0$} & \text{si $X =2$} \\
+\text{on rejette $H_0$ avec probabilité $q$ et on rejette sinon} & \text{si $X=1$} \\
+ \text{accepte $H_0$} & \ \text{si $X =0$}
+  \end{array}
+\right.
+ \]
+ En prenant $q= 1/32$, on obtient un niveau de test égal à $5 \%$ et une
+ fonction puissance $p \mapsto p^2 + p(1-p)/16$.
+\item Accepter le fait que son plan d'expérience le contraint à ne mettre en
+  place que des tests (raisonnables) de niveaux donnés. Augmenter la taille de
+  l'échantillon permet de mieux contrôler ce niveau.
+  \end{enumerate}}
 
 
 \section{Piscine}
 
-Un constructeur de piscine veut comparer 2 produits \`a dissoudre dans l'eau qui permettent de tuer les bact\'eries pr\'esentes. Les deux produits garantissent que 95 $\%$ des bact\'eries seront \'elimin\'ees. Par contre il se peut que le pH soit plus basique et donc plus nocif pour les utilisateurs. Il m\`ene une exp\'erience dans son magasin o\`u 2 piscines remplies sont expos\'ees. Il met le produit A dans la piscine 1 et le produit B dans la piscine 2. Il a un pH-m\`etre vendu dans le commerce et il se doute que la mesure n'est pas fiable. Il prend donc 10 mesures dans chaque piscine.
+Un constructeur de piscine veut comparer 2 produits \`a dissoudre dans l'eau
+qui permettent de tuer les bact\'eries pr\'esentes. Les deux produits
+garantissent que 95 $\%$ des bact\'eries seront \'elimin\'ees. Par contre il se
+peut que le pH soit plus basique et donc plus nocif pour les utilisateurs. Il
+m\`ene une exp\'erience dans son magasin o\`u 2 piscines remplies sont
+expos\'ees. Il met le produit A dans la piscine 1 et le produit B dans la
+piscine 2. Il a un pH-m\`etre vendu dans le commerce et il se doute que la
+mesure n'est pas fiable. Il prend donc 10 mesures dans chaque piscine.
 
 Dans la piscine 1, il trouve $x_1,...,x_{10}$ qui valent respectivement
 $$ 7.33~;~6.17~;~7.46~;~8.13~;~6.68~;~6.76~;~7.97~;~6.76~;~6.81~;~8.40$$
@@ -202,6 +355,115 @@ U$\sim$T(20) & 1.724 & 2.085 & 2.528 & 2.845 & 3.153 & 4.538 \\
 \end{tabular}
 
 o\`u T(k) est la loi du Student  \`a $k$ degr\'es de libert\'e.
+
+
+\bigskip 
+
+
+\Corrige{
+  \begin{enumerate}
+  \item On dispose de $2n$ observations $(n=10)$; $D_{2n}=(X_1, \cdots, X_n, Y_1, \cdots
+Y_n)$ à valeur dans $\rset^{2n}$. On munit cet espace de la famille de lois
+$\{\PP_m, m=(m_1, m_2) \in \rset^2 \}$ possédant une densité $p_m$ par rapport
+à Lebesgue donnée par
+\[
+\ln p_m(x_{1:n}, y_{1:n}) = C - \frac{1}{2\sigma^2} \left(
+  \sum_{k=1}^n(x_k-m_1)^2 + \sum_{k=1}^n (y_k - m_2)^2\right)
+\]
+ce qui est la densité d'un vecteur gaussien de moyenne et de matrice de covariance
+\[
+\E[D_{2n}] = \begin{bmatrix}
+  m_1 \\
+  \cdots \\
+  m_1 \\
+  m_2 \\
+  \cdots \\
+  m_2
+\end{bmatrix} \qquad \qquad \mathrm{Var}(D_{2n}) = \sigma^2 I_{2n}.
+\]
+\item 
+  \begin{enumerate}
+  \item  Notons $m=(7,7)$ et $m'=(7,9)$. Le ratio des lois s'exprime
+  \[
+  \ln \frac{p_{m'}(x_{1:n},y_{1:n})}{p_m(x_{1:n},y_{1:n})} = -
+  \frac{1}{2\sigma^2} \left( \sum_{k=1}^n(y_k-m_2')^2 - \sum_{k=1}^n (y_k -
+    m_2)^2\right)
+  \]
+  Par des calculs analogues à ce que l'on a fait dans
+  l'exercice~\ref{PC6:exo1}, on vérifie que le test du rapport de vraisemblance
+  est un test non randomisé de zone de rejet de la forme $\{ \bar Y_n > s \}$
+  où l'on choisit le seuil $s$ en utilisant le fait que sous $\PP_{(7,7)}$,
+  $\bar Y_n \sim \mathcal{N}(7, \sigma^2/n)$.  On trouve $s = 7 +
+  \frac{1}{\sqrt{10}} z_{1-\alpha}$ où $z_{q}$ est le quantile d'ordre $q$
+  d'une loi $\mathcal{N}(0,1)$.
+\item  Voir le cours sur NP.
+\item Sur ce jeu de données, $\bar Y_n = 8.709$.  On cherche $\PP(T > 8.709)$
+  lorsque $T \sim \mathcal{N}(m_2, \sigma^2/n)$.  Puisque $\sigma^2 =1$,
+  $n=10$, $m_2 =7$, on obtient $\PP(\mathcal{N}(0,1) > 1.709*\sqrt{10}) \approx
+  0.$ On rejette donc l'hypothèse nulle.
+  \end{enumerate}
+\item On peut proposer un test non randomisé de zone de rejet $\{ \bar X_n -
+  \bar Y_n < s \}$ Puisque sous $\PP_m$, $\bar X_n - \bar Y_n \sim
+  \mathcal{N}(m_1-m_2, \frac{2 \sigma^2}{n})$, on choisit $s$ pour que le
+  niveau du test soit $\alpha$. On trouve $s = z_\alpha \frac{\sqrt{2}
+    \sigma}{\sqrt{n}}$.
+\item 
+  \begin{enumerate}
+  \item Sous $\PP_{m}$ avec $m=(m_1,m_2)$,
+  \begin{itemize}
+  \item $\bar Y_n - \bar X_n \sim \mathcal{N}(m_2-m_1, 2 \sigma^2/n)$ puisque
+    les v.a. $\bar X_n$ et $\bar Y_n$ sont des gaussiennes indépendantes.
+  \item $9 \, \widehat{\sigma^2_x}/\sigma^2 \sim \chi^2(9)$ et cette v.a. est
+    une fonction de $\{X_1, \cdots, X_n \}$; et de même $9 \,
+    \widehat{\sigma^2_y}/\sigma^2 \sim \chi^2(9)$ et cette v.a. est une
+    fonction de $\{Y_1, \cdots, Y_n \}$. Puisque $\{X_1, \cdots, X_n\}$ et
+    $\{Y_1, \cdots, Y_n \}$ sont indépendantes, alors $\widehat{\sigma^2_x}$ et
+    $\widehat{\sigma^2_y}$ sont des v.a. sont indépendantes.  Donc
+    $W_n/\sigma^2$ suit une loi $\chi^2(18)$.
+  \item D'après Cochran et l'indep des v.a. $\{X_i, Y_j, 1 \leq i,j \leq n \}$:
+    $\bar X_n$ est indépendant de $\widehat{\sigma^2_x}$ et de
+    $\widehat{\sigma^2_y}$; de même, $\bar Y_n$ est indépendant de
+    $\widehat{\sigma^2_y}$ et de $\widehat{\sigma^2_x}$. Dont on déduit
+    (puisque $\bar X_n$ et $\bar Y_n$ sont indépendants) que $W_n$ et $Z_n$
+    sont indépendants.
+    \end{itemize} 
+\item  Sous $\PP_{(m_1,m_2)}$,
+  \[
+  \sqrt{n} (\bar X_n -m_1) /\sigma \sim \mathcal{N}(0,1) \qquad \qquad \sqrt{n}
+  (\bar Y_n -m_2) /\sigma \sim \mathcal{N}(0,1)
+  \]
+  et ces deux quantités sont indépendantes, donc
+  \[
+  \frac{\sqrt{n}}{\sqrt{2}\sigma} (\bar X_n -\bar Y_n -m_1 + m_2) \sim
+  \mathcal{N}(0,1).
+  \]
+  D'autre part, $(9 \widehat{\sigma^2_x} + 9 \widehat{\sigma_y^2} ) /\sigma^2
+  \sim \chi^2(18)$.  \\
+  Enfin, ces deux lois sont indépendantes d'après la question précédente. Donc
+  sous $\PP_{(m_1,m_1)}$ le ratio suivant suit une loi de Student à $18$ degrés
+  de liberté:
+  \[
+  \frac{\sigma \sqrt{18}}{\sqrt{9 \widehat{\sigma^2_x} + 9 \widehat{\sigma_y^2}
+    }} \frac{\sqrt{n}}{\sqrt{2}\sigma} (\bar X_n -\bar Y_n) =
+  \frac{\sqrt{n}}{\sqrt{\widehat{\sigma^2_x} + \widehat{\sigma_y^2} }} (\bar
+  X_n -\bar Y_n).
+  \]
+  $\bullet$ On propose donc un test non randomisé de zone de rejet
+  \[
+  \left\{ \frac{\sqrt{n}}{\sqrt{\widehat{\sigma^2_x} + \widehat{\sigma_y^2} }}
+    (\bar X_n -\bar Y_n) < t \right\}
+  \]
+  où le seuil $t$ est choisi comme le quantile d'ordre $\alpha$ d'une loi de
+  Student à $18$ degrés de liberté. On trouve $t = - 1.734$ (en utilisant le tableau, puisque la loi de Student est une loi symétrique). \\
+  $\bullet$ Avec les données de l'exercice, la statistique de test vaut
+  \[
+  \frac{\sqrt{10}}{\sqrt{1.08^2 + 0.73^2}}(7.247 - 8.709) = - 3.55
+  \]
+  donc on rejette l'hypothèse nulle. La valeur moyenne du pH dans la piscine A
+  est inférieure à celle dans la piscine B.
+  \end{enumerate}
+  \end{enumerate}
+}
 
 \section{BONUS:  Test à rapport de vraisemblance monotone}
 Dans cet exercice, on se donne un modèle statistique dominé paramétré par un sous-ensemble $\Theta\subset\R$. On note $L_n(\theta)$ la vraisemblance de l'échantillon en $\theta$.
