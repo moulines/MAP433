@@ -1,0 +1,310 @@
+\documentclass[a4paper,11pt,fleqn]{article}
+
+\usepackage[francais]{babel}
+%\usepackage[latin1]{inputenc}                                                                                                                                                                                                                                                                                                 
+%\usepackage[applemac]{inputenc}                                                                                                                                                                                                                                                                                               
+\usepackage{a4wide,amsmath,amssymb,bbm,fancyhdr,graphicx,enumitem,color}
+
+\RequirePackage[OT1]{fontenc}
+
+\usepackage[utf8]{inputenc}
+% THE variable                                                                                                                                                                                                                                                                                                                 
+\newcommand{\thisyear}{}
+
+% Definitions (pas trop!)                                                                                                                                                                                                                                                                                                      
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\rset}{\ensuremath{\mathbb{R}}}
+\renewcommand{\P}{\ensuremath{\operatorname{P}}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\V}{\ensuremath{\mathbb{V}}}
+\newcommand{\gaus}{\ensuremath{\mathcal{N}}}
+\newcommand{\1}{\ensuremath{\mathbbm{1}}}
+\newcommand{\dlim}{\ensuremath{\stackrel{\mathcal{L}}{\longrightarrow}}}
+\newcommand{\plim}{\ensuremath{\stackrel{\mathrm{P}}{\longrightarrow}}}
+\newcommand{\PP}{\ensuremath{\mathbb{P}}}
+\newcommand{\p}{\ensuremath{\mathbb{P}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\pa}[1]{\left(#1\right)}
+\newcommand{\cro}[1]{\left[#1\right]}
+\newcommand{\ac}[1]{\left\{#1\right\}}
+\def\H{{\bf H}}
+
+% Style                                                                                                                                                                                                                                                                                                                        
+\pagestyle{fancyplain}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\renewcommand{\subsectionmark}[1]{}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\footnotesize {\sf
+MAP433 Statistique, \thisyear }}}
+\rhead[\fancyplain{}{\footnotesize {\sf MAP433 Statistique,
+\thisyear }}]{\fancyplain{}{\thepage}}
+\cfoot[\fancyplain{}{}]{\fancyplain{}{}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\parindent=0mm
+
+% Titre                                                                                                                                                                                                                                                                                                                        
+
+% \title{\includegraphics[width=3.5cm]{images/logo_x.jpg}\hfill {\bf MAP433 Statistique}\hfill \quad\quad \ }
+% \author{{\bf PC7 Tests~:~approche asymptotique, approche bay\'esienne}}
+% \date{}
+\title{ {\bf MAP433 Statistique} }
+\author{{\bf PC7 - Tests asymptotiques}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Rapport de vraisemblance g\'en\'eralis\'e}
+
+On consid\`ere le mod\`ele suivant. Soit $\beta\in\rset$ et $t\in(0,1)$. On a $n$
+observations $X_1,\dots,X_n$ mod\'elis\'ees par des variables ind\'ependantes et
+telles que $X_i\sim\mathcal{N}(0,1)$ si $i/n\leq t$ et
+$X_i\sim\mathcal{N}(\beta,1)$ si $i/n> t$, o\`u $\mathcal{N}(\mu,1)$ est la loi
+gaussienne scalaire de moyenne $\mu$ et de variance 1. Dans un premier temps, on suppose les param\`etres $\beta$ et $t$ inconnus.
+\begin{enumerate}
+\item Montrer que la log-vraisemblance s'\'ecrit  comme une fonction croissante de $L_n(\beta,t)$, o\`u
+$$                                                                                                                                                                                                                                                                                                                             
+L_{n}(\beta,t)=-\left(\sum_{i=1}^{[tn]}X_i^2+\sum_{[tn]+1}^n(X_i-\beta)^2\right),                                                                                                                                                                                                                                
+$$
+avec $[u]$ la partie enti\`ere de $u$.
+\item On note $\beta_0$ et $t_0$ les vrais param\`etres du mod\`ele. Montrer
+  que, pour tout $\beta\in\rset$,
+  $$
+  -\frac1n L_{n}(\beta,t)\overset{\mathbb{P}_{\beta_0,t_0}}{\longrightarrow}
+  \left\{
+  \begin{array}{ll}
+1+ \beta_0^2\,|t-t_0|+ (1-t)\,(\beta_0-\beta)^2 & \ \text{si $t_0\leq t$} \\
+1+ \beta^2\,|t-t_0|+ (1-t_0)\,(\beta_0-\beta)^2 & \ \text{si $t_0 \geq t$} 
+  \end{array}
+\right.
+$$ 
+\item En quelles valeurs de $t\in(0,1)$ et $\beta\in\rset$ la limite ci-dessus est-elle minimale ?
+\end{enumerate}
+ On suppose d\'esormais le param\`etre $t$ connu et  fix\'e dans $(0,1)$, $t=t_0$. 
+\begin{enumerate}[resume]
+\item Calculer l'estimateur $\hat{\beta}_n$ de
+$\beta_0$ par maximum  de vraisemblance.
+\item Montrer que le test du rapport de vraisemblance g\'en\'eralis\'e de
+$$
+H_0=\{\text{la moyenne des $X_i$ est nulle pour i=1,\dots,n}\}
+$$
+contre
+$$
+H_1= \{\text{la moyenne des $X_i$ devient non-nulle \`a partir de $i>[t_0 n]$}\}.
+$$
+s'exprime en fonction de $L_{n}(\hat\beta_n,t_0)-L_{n}(0,t_0)$.  Donner le
+test de niveau asymptotique $\alpha$ et exprimer la $p$-valeur à l'aide de la
+fonction de répartition d'une loi classique.
+\end{enumerate}
+
+\section{Test asymptotique pour la r\'egression logistique}
+
+  Soit $\theta\in \mathbb R^p$ un param{\`e}tre vectoriel {\`a} estimer.
+On consid{\`e}re une suite $Y_1,\dots,Y_n$ de variables de Bernoulli ind{\'e}pendantes de param{\`e}tres
+respectifs $p_1(\theta),\dots,p_n(\theta)$ donn{\'e}s par
+$$
+p_i(\theta) = \varphi(\theta^T x_i)
+$$
+o{\`u} $\varphi(t) = (1+e^{-t})^{-1}$ et o{\`u} $x_1,\dots,x_n$ est une
+suite de vecteurs d{\'e}terministes de taille $p$.  On suppose que la matrice
+$[x_1,\dots,x_n]$ est de rang $p$.  On note la fonction de log-vraisemblance
+$L_n(\theta)$ des observations $(Y_1, \cdots, Y_n)$.  On supposera toujours que
+le supremum de $L_n$ est atteint.  On note respectivement $\nabla L_n(\theta)$
+et $\nabla\nabla^T L_n(\theta)$ le gradient et la matrice hessienne de $L_n$ au
+point $\theta$.
+\begin{enumerate}
+\item Donner l'allure de la fonction $\varphi$.
+\item \'Ecrire $L_n(\theta)$ en fonction de $\theta$ et des observations $(x_i,Y_i)_{i=1\dots n}$.
+\item Montrer que 
+  \begin{align*}
+    &  \nabla L_n(\theta) = \sum_{i=1}^n (Y_i-p_i(\theta))x_i \\
+    & -\nabla\nabla^T L_n(\theta) = \sum_{i=1}^nh(\theta^Tx_i) x_ix_i^T \qquad
+    \text{où \ } h=\varphi (1-\varphi)
+  \end{align*}
+  En d\'eduire que $-\nabla\nabla^T L_n(\theta)$ est d{\'e}finie positive.
+\item Montrer que l'estimateur du maximum de vraisemblance $\hat \theta_n$ est
+  d{\'e}fini comme la solution d'un syst{\`e}me d'{\'e}quations que l'on
+  pr{\'e}cisera.
+\end{enumerate}
+On souhaite {\'e}tablir la normalit{\'e} asymptotique de $\sqrt
+n(\hat\theta_n-\theta)$ sous $\mathbb P_\theta$.  On fait les hypoth{\`e}ses
+suivantes :
+\begin{itemize}[label=$\bullet$ ]
+\item $\hat\theta_n$ converge probabilit\'e vers $\theta$, ce qu'on \'ecrit
+  $\hat\theta_n=\theta+o_P(1)$.
+\item Pour tout $\theta$, $Q_\theta:=\lim_{n\to\infty} \frac 1n\sum_{i=1}^n
+  h(\theta^Tx_i) x_ix_i^T$ existe et est inversible.
+\item  $\sup_n\frac 1n \sum_{i=1}^n \|x_i\|^{3}<\infty$.
+\end{itemize}
+\begin{enumerate}[resume]
+%\item V{\'e}rifier que 
+\item En utilisant le d\'eveloppement de Taylor
+$$
+\nabla L_n(\hat \theta_n)=\nabla L_n(\theta)+ \nabla\nabla^T L_n(\tilde\theta_{n}) (\hat\theta_n-\theta)\,,
+$$
+pour $\|\tilde\theta_{n}-\theta\|\leq \|\hat\theta_n-\theta\|$, montrer que
+$$
+ \left(\frac {\nabla\nabla^TL_n(\theta)}{n}+ o_P(1)\right)\, \sqrt n(\hat\theta_n-\theta) = -\frac {\nabla L_n(\theta)}{\sqrt n}
+$$
+\emph{Indication :} On pourra utiliser que $h$ est $1$-lipschitzienne. 
+
+\item Montrer que $-\frac {\nabla L_n(\theta)}{\sqrt n}$ est asymptotiquement normal.
+
+\item Conclure que $\sqrt n(\hat\theta_n-\theta)\xrightarrow[]{\mathcal L}{\mathcal N}(0,Q_\theta^{-1})$\,.
+
+\item On note $\beta_{n,k}$ le $k${\`e}me coefficient de la diagonale
+de $(-\frac {\nabla\nabla^TL_n(\hat\theta_n)}{n})^{-1}$. Montrer que
+$$
+\sqrt{\frac{n}{\beta_{n,k}}}\,(\hat\theta_{n,k}-\theta_k)\xrightarrow[]{\mathcal L}{\mathcal N}(0,1)\,.
+$$
+\item En d{\'e}duire un test de niveau asymptotique $\alpha$ pour 
+$H_0~:~\theta_k=0$ contre $H_0~:~\theta_k\neq0$.
+% intervalle de confiance asymptotique {\`a} $100(1-\alpha)\%$ pour $\theta_k$.
+\end{enumerate}
+
+\section{Test d'ad\'equation du $\chi^2$}
+Une \'etude sur l'utilisation d'une station Velib a \'etabli
+que le nombre de clients souhaitant emprunter un v\'elo entre 8h et 8h10 un jour
+de semaine suit une loi de Poisson de param\`etre~4.  
+
+L'analyse des donn\'ees de la m\^eme station r\'ecolt\'ees sur $n=200$ jours \`a la m\^eme tranche
+horaire indique les nombres de retours de v\'elo suivant (on a gard\'e uniquement des jours de semaine pendant lesquels des emplacements
+libres \'etaient disponibles pour le retour de v\'elos durant les 10 minutes consid\'er\'ees).
+\begin{center}\begin{small}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Nombre de retours&0&1&2&3&4&5&6&7&8&9&10&11\\
+\hline
+Effectifs observ\'es&6&15&40&42&37&30&10&9&5&3&2&1\\
+\hline
+\end{tabular}\end{small}
+\end{center}
+
+On note $N_{i}$ le nombre de retours observ\'es au jour $i$ et on suppose les $N_{i}$ ind\'ependants. Enfin, on note $N'_{i}=\min(N_{i},8)$ et $Q$ la loi de $\min(N,8)$ lorsque $N\sim\mathcal{P}(4)$.
+\begin{enumerate}
+\item Calculer la $p$-valeur du test du $\chi^2$ d'ad\'equation des $N'_{i}$ \`a la loi
+$Q$. 
+%associ\'ee aux observations
+%  correspondant au  bas\'e sur la statistique
+%$$
+%T=n\sum_{i}\left(\frac{\hat p_n(i)-p(i)}{\sqrt{p(i)}}\right)^2\;,
+%$$
+%o\`u $\hat{p}_n$ est l'estimateur empirique de $p=(p(0),\dots,p(8))$ avec $p(i)=Q(\{i\})$. 
+\item On suppose que 
+%les temps entre deux retours cons\'ecutifs suivent une loi
+%  exponentielle de param\`etre $\lambda$. Dans ce cas, les 
+$N_{i}$ sont ind\'ependants et suivent une loi de Poisson de param\`etre $\lambda$. Proposer un test de niveau asymptotique  $\alpha=5\%$ de $\lambda=4$ contre $\lambda\neq 4$. Calculer la $p$-valeur associ\'ee.
+\end{enumerate}
+\bigskip
+
+\noindent{\bf Table de la loi de Poisson:}
+
+\bigskip
+
+\hspace{-1.5cm}\begin{small}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+$k$&0&1&2&3&4&5&6&7&8&9&10&11&12&13\\ \hline
+$\p_{3.7}[X=k]$&.025&.091&.169&.209&.193&.143&.088&.047&.021&
+.009&.003&.001&$3.10^{-4}$&$10^{-4}$\\ \hline
+$\p_{4}[X=k]$&.018&.073&.146&.195&.195&.156&.104&.059&.03&.013&.005&.002&$6.10^{-4}$&$2.10^{-4}$\\
+\hline
+\end{tabular}\end{small}
+
+\section{BONUS 1 Test de Wilcoxon}
+Une firme pharmaceutique a mis au point une nouvelle mol\'ecule pour faire chuter le taux de sucre dans le sang. Pour tester l'efficacit\'e de cette mol\'ecule, elle le compare \`a un placebo. Elle  r\'eunit $n+m$ patients. A un premier groupe de $m$ individus, elle administre un placebo (sans leur dire!). Au second \
+groupe elle donne sa nouvelle mol\'ecule.  Apr\`es un d\'elai appropri\'e, on mesure les taux de glyc\'emie $\ac{X_{i}:i=1,\ldots,n}$ et  $\ac{Y_{i}:i=1,\ldots,m}$ chez les deux groupes.
+\begin{scriptsize}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+placebo : X & m\'edicament : Y\\
+\hline
+1.0 & 1.4\\
+1.41&  0.94\\
+ 0.61& 3.1\\
+  0.22& 0.54\\
+   5.9& 1.2\\
+    0.84 & 0.043\\
+    0.49& 3.0\\
+    & 0.40\\
+    & 0.075\\
+    & 1.1\\
+    \hline
+\end{tabular}
+\end{center}\end{scriptsize}
+On suppose que les $X_{1},\ldots,X_{n}$ (resp. $Y_{1},\ldots,Y_{m}$) sont i.i.d. de loi de fonction de r\'epartition  $F_{X}$ (resp. $F_{Y}$). On supposera que les lois sont diffuses, en particulier $F_{X}$ et $F_{Y}$ sont continues. On veut tester si les lois des $X$ et des $Y$ sont les m\^emes ou si les $Y_{i}$ son\
+t stochastiquement plus petits que les $X_{i}$, c'est \`a dire $F_{X}<F_{Y}$.
+On va donc tester   $H_{0}:F_{X}=F_{Y}$ contre $H_{1}:F_{X}<F_{Y}$.
+
+On pose $Z_{i}=X_{i}$ pour $i=1,\ldots,n$ et $Z_{n+i}=Y_{i}$ pour $i=1,\ldots,m$. On note $R(i)$ le rang de $Z_{i}$ dans la suite $(Z_{1},\ldots,Z_{n+m})$, \`a savoir, $R(i)=1$ si $Z_{i}$ est la plus petite valeur, $R(i)=2$ si $Z_{i}$ est la seconde plus petite valeur, etc. La statistique de Wilcoxon est d\'efinie pa\
+r
+$$W_{n,m}=\sum_{i=1}^nR(i).$$
+L'id\'ee est que sous $H_{1}$ la statistique $W_{n,m}$  sera plus grande que sous $H_{0}$.
+\begin{enumerate}
+\item Montrez que la permutation $R:\ac{1,\ldots,n+m}\to \ac{1,\ldots,n+m}$ suit sous $H_{0}$ une loi uniforme sur l'ensemble $\mathcal{S}_{n+m}$ des permutations de  $\ac{1,\ldots,n+m}$. En d\'eduire que sous $H_{0}$ la loi de $W_{n,m}$  ne d\'epend pas de la loi $F_{X}$. Quelle est la loi de $R(i)$ sous $H_{0}$?
+\item Montrez que sous $H_{0}$ on a $\E(W_{n,m})=n(n+m+1)/2$.
+\item Montrez que  sous $H_{0}$ on a  $\textrm{Var}(W_{n,m})=n\textrm{Var}(R(1))+n(n-1)\textrm{Cov}(R(1),R(2))$ et
+$$0=\textrm{Var}\pa{\sum_{i=1}^{n+m}R(i)}=(n+m)\textrm{Var}(R(1))+(n+m)(n+m-1)\textrm{Cov}(R(1),R(2)).$$
+En d\'eduire que $\textrm{Var}(W_{n,m})=nm(n+m+1)/12$  sous $H_{0}$.
+\item En admettant que $T_{n,m}=(W_{n,m}-\E(W_{n,m}))/\sqrt{\textrm{Var}(W_{n,m})}$ converge en loi  sous $H_{0}$ vers une loi normale  $\mathcal{N}(0,1)$   lorsque $n\to\infty$, testez au niveau asymptotique 5\% si la nouvelle mol\'ecule est plus efficace que le placebo.
+\end{enumerate}
+
+\section{BONUS 2 Test de naissance : l'approche bay\'esienne}
+\label{exo:NaissancesLoiBeta}
+Soient $X_1, \ldots, X_n$ $n$ v.a. i.i.d de Bernoulli~: $\mathbb{P}_\theta( X_i ) = \theta^{X_i} (1 - \theta)^{1 - X_i}$,
+$\theta \in \Theta= [0,1]$.
+\begin{enumerate}
+\item D\'efinir un test UPP de risque de premi\`ere esp\`ece $\alpha$ pour $H_0=\{\theta=\theta_0\}$ contre
+ $H_1=\{\theta=\theta_1\}$.
+\item Proposer un test asymptotique pour l'hypoth\`ese $H_0=\{\theta\geq\theta_0\}$ contre $H_1=\{\theta<\theta_0\}$ bas\'e sur
+la statistique $S_n=\sum_{i=1}^nX_i$.
+\item Notons $\pi$ la densit\'e de la loi a priori pour $\theta$ par rapport \`a la mesure
+de Lebesgue sur $[0,1]$. Ecrire la densit\'e a posteriori $\pi( \theta \vert S_n=y)$.
+\item Pour loi a priori pour $\theta$, nous avons besoin d'une loi dont le support soit inclus dans l'intervalle $[0,1]$.
+Parmi les choix possibles de telles lois, il est int\'eressant de consid\'erer la famille des lois Beta. Rappelons
+que les lois $Beta$ d\'ependent de deux param\`etres $\alpha,\beta>0$ et que la densit\'e de la loi Beta($\alpha,\beta$)
+est donn\'ee par~:
+\[                                                                                                                                                                                                                                                                                                                             
+b_{\alpha,\beta}(x)= \frac{x^{\alpha-1} (1- x)^{\beta-1}}{B(\alpha,\beta)}, \quad 0 < x < 1,                                                                                                                                                                                                                                   
+\]
+o\`u $B(\alpha,\beta) = \Gamma(\alpha) \Gamma(\beta) / \Gamma(\alpha+\beta)$ est la fonction Beta. Quel est la loi posteriori
+correspondante ?
+\item En d\'eduire le test Bayesien de l'hypoth\`ese $H_0=\{\theta\geq\theta_0\}$ contre $H_1=\{\theta<\theta_0\}$ pour cette loi
+  a priori.
+\item  Montrer que la moyenne de la loi a posteriori (i.e. l'esp\'erance conditionnelle de $\theta$ sachant $S_n = y$) est donn\'ee par
+\[                                                                                                                                                                                                                                                                                                                             
+\mathbb{E} \left[ \theta \vert S_n = y \right] = \frac{\alpha + y}{\alpha + \beta + n}.                                                                                                                                                                                                                                              
+\]
+On utilisera que $\Gamma(x+1)=x\Gamma(x)$ pour tout $x>0$.
+\item Montrer que la variance a posteriori vaut
+%$\var[ \btheta \vert S_n = y ]={\mathbb{E} [ \btheta \vert S_n = y] (1 - \mathbb{E} [ \btheta \vert S_n = y])}/{\alpha+\beta+n+1}$.                                                                                                                                                                                                       
+%est donn\'ee par                                                                                                                                                                                                                                                                                                                
+\[                                                                                                                                                                                                                                                                                                                             
+\mathrm{Var}[ \theta \vert S_n = y ] = \frac{\mathbb{E} [ \theta \vert S_n = y] (1 - \mathbb{E} [ \theta \vert S_n = y])}{\alpha+\beta+n+1}.                                                                                                                                                                                                       
+\]
+\item Que remarque-t-on quand $n$ et $y$ sont grands ?
+\item La loi $\beta(1,1)$ est la loi uniforme sur $[0,1]$. C'est la loi a priori utilis\'ee par Bayes (1763) et red\'ecouverte
+ind\'ependamment par Laplace (1800), fondateurs de l'estimation bay\'esienne, pour l'analyse bay\'esienne du mod\`ele
+de Bernoulli. La motivation premi\`ere de Laplace \'etait de d\'eterminer si le nombre de gar\c cons et de filles \`a la naissance
+suivait une loi de Bernoulli de param\`etre 0.5. Un total de 241945 filles et de 251527 gar\c cons sont n\'es \`a Paris de  1745 \`a 1770.
+En appelant "succ\`es" la naissance d'un enfant de sexe f\'eminin, calculer une borne de
+$$                                                                                                                                                                                                                                                                                                                             
+\,\pi(\theta \geq 0.5 | S_n = 241945 ) \mbox{pour }n = 241945+251527,                                                                                                                                                                                                                                                          
+$$
+obtenue avec l'in\'egalit\'e de Tchebyschev-Cantelli ($\mathbb{P}(Z-\mathbb{E}[Z]\geq\delta)\leq \mathrm{Var}(Z)/(\delta^2+\mathrm{Var}(Z))$).
+
+Laplace a en fait montr\'e que
+\[                                                                                                                                                                                                                                                                                                                             
+\mbox{pour }n = 241945+251527,\,\pi(\theta \geq 0.5 | S_n = 241945 ) = 1.15 \times 10^{-42},                                                                                                                                                                                                                                   
+\]
+montrant qu'avec une probabilit\'e tr\`es proche de 1, $\theta < 0.5$. Comme nous l'avons not\'e ci-dessus,
+pour des valeurs aussi grandes, l'influence de la loi a priori est tout \`a fait n\'egligeable, la loi a posteriori
+\'etant extr\^emement concentr\'ee autour de la valeur $\hat{\theta}_n = 241 945/ (241 945 + 251 527) = 0.49$.
+\end{enumerate}
+
+
+\end{document}
+
