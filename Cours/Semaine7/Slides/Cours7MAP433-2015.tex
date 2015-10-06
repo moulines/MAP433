@@ -165,9 +165,9 @@ est appelée la \alert{région critique du test}.
  \item Pour tout $\truetheta \in \Theta$, il existe un voisinage ${\mathcal V}_\truetheta \subset \Theta$ t.q. pour $\tilde{\truetheta} \in {\mathcal V}_\truetheta$
 $$|\nabla_\truetheta^{2}\log f(\tilde{\truetheta},x)|+|\nabla_\truetheta \log f(\tilde{\truetheta},x)|+\big(\nabla_\truetheta\log f(\tilde{\truetheta},x)\big)^2\leq g(x)$$
 où
-$$\int_{\mathbb{R}}g(x)\sup_{\tilde{\truetheta} \in {\mathcal V}(\truetheta)}f(\tilde{\truetheta},x)\mu(dx)<+\infty.$$
+$$\int_{\Xset}g(x)\sup_{\tilde{\truetheta} \in {\mathcal V}(\truetheta)}f(\tilde{\truetheta},x)\mu(dx)<+\infty.$$
 \item L'information de Fisher est non-dégénérée : pour tout $\truetheta \in \Theta$,
-$$,\;\;\mathbb{I}(\truetheta) >0.$$
+$$\;\;\mathbb{I}(\truetheta) >0.$$
 \end{itemize}
 \end{df}
 \end{frame}
@@ -187,7 +187,7 @@ est U.P.P.
 \]
 où $\ell(x;\truetheta)= \log f(\truetheta,x)$ et $k_{n,\alpha}$ est choisi de telle sorte que
 \[
-\PP_{\truetheta_0}^n [ \Lambda_n(\truetheta_0,\truetheta_1)  > k_{n,\alpha}] = \alpha
+\PP_{\truetheta_0}^n [ \Lambda_n(\truetheta_0,\truetheta_1)  \geq  k_{n,\alpha}] = \alpha
 \]
 (on suppose qu'une telle valeur existe, autrement il faudrait randomiser)
 \end{itemize}
@@ -256,7 +256,7 @@ où
 \pause \item Par conséquent
 \[
 \{ \Lambda_n(\truetheta_0,\truetheta_1) \geq k_{n,\alpha} \} = \left\{ \Delta_n
-  > z_{1-\alpha} \sqrt{J(\truetheta_0,\truetheta_1)} - n^{1/2}
+  \geq z_{1-\alpha} \sqrt{J(\truetheta_0,\truetheta_1)} - n^{1/2}
   I(\truetheta_0,\truetheta_1) \right\}
 \]
 où
@@ -339,12 +339,10 @@ La puissance du test de signe de niveau asymptotique $\alpha$ est donnée pour t
 \begin{align*}
 \puissance^{\mathrm{sign}}_{n,\alpha}(\theta)
 &= \PP_\theta( \sqrt{n}(U_n - \mu(0)) > \sigma(0) z_{1-\alpha}) \\
-&= \PP_\theta( \sqrt{n} \sigma^{-1}(\theta) (U_n - \mu(\theta)) > \sigma^{-1}(\theta) \{ \sigma(0) z_{1-\alpha} + n^{1/2} \{\mu(0)-\mu(\theta)\}\}), \end{align*}
-car $\mu(0) < \mu(\truetheta)$ pour $\truetheta > 0$.
+&= \PP_\theta( \sqrt{n} \sigma^{-1}(\theta) (U_n - \mu(\theta)) > \sigma^{-1}(\theta) \{ \sigma(0) z_{1-\alpha} + n^{1/2} \{\mu(0)-\mu(\theta)\}\}). \end{align*}
 
-
-Le test est \alert{consistant}: pour tout $\theta > 0$,
-\alert{
+Puisque $\mu(0) < \mu(\truetheta)$ pour $\truetheta > 0$, le test est
+\alert{consistant}: pour tout $\theta > 0$, \alert{
 \[
 \lim_{n \to \infty}  \puissance^{\mathrm{sign}}_{n,\alpha}(\theta) = 1 \eqsp.
 \]
@@ -403,7 +401,7 @@ asymptotique $\alpha$ est \alert{consistant}: pour tout $\theta > 0$, \alert{
 \frametitle{Test du signe}
 $$
 \puissance^{\mathrm{sign}}_{n,\alpha}(\theta)=
-\PP_\theta( \sqrt{n} \sigma^{-1}(\theta) (U_n - \mu(\theta)) > \sigma^{-1}(\theta) \{ \sigma(0) z_{1-\alpha} + n^{1/2} \{\mu(0)-\mu(\theta)\}\})
+\PP_\theta( \sqrt{n} \sigma^{-1}(\theta) (U_n - \mu(\theta)) > \sigma^{-1}(\theta) \{ \sigma(0) z_{1-\alpha} + \sqrt{n} \{\mu(0)-\mu(\theta)\}\})
 $$
 \begin{itemize}
 \item  la puissance du test contre la suite de contre-alternatives $H_1^n: \theta_n > 0$, dépend de $\sqrt{n} (\mu(0) - \mu(\theta_n))$ où
@@ -442,8 +440,8 @@ $$
 \begin{frame}
 \frametitle{Efficacité asymptotique des tests}
 \begin{itemize}
-\item Ceci conduit à une approche naturelle de comparaison des tests, qui consistent à comparer la \alert{puissance locale des tests}
-\alert{
+\item Ceci conduit à une approche naturelle de comparaison des tests, qui
+  consiste à comparer la \alert{puissance locale des tests} \alert{
 \[
 \puissance(h)= \lim_{n \to \infty} \puissance_n( h / \sqrt{n}) \eqsp.
 \]
@@ -479,7 +477,7 @@ La \alert{puissance locale asymptotique} de cette suite de tests est donnée par
 \begin{itemize}
 \item Nous disposons maintenant d'une méthode simple de comparer les tests, en nous basant sur la puissance asympotique locale...
 \item Pour les tests asymptotiquement normaux, il suffit de comparer la \alert{pente} des tests, à savoir \alert{$\mu'(0)/\sigma(0)$}.
-\item Plus la pente est grande,  plus rapidement $\pi(h)$ augmente avec $h$ !
+\item Plus la pente est grande, plus $\pi(h)$ augmente rapidement avec $h$ !
 \end{itemize}
 \end{frame}
 
@@ -529,10 +527,10 @@ La \alert{puissance locale asymptotique} de cette suite de tests est donnée par
 \begin{frame}
 \frametitle{Test du rapport de vraisemblance}
  \begin{itemize}
- \item Soit  $X^{(n)}= (X_{1},\ ,\ X_{n})$ un $n$-échantillon du modèle statistique $\PP_{\theta}^{n}\ll\mu_{n},\ \theta\in\Theta$, de densité  $f_{\theta}(x^{(n)})= \rmd \PP_{\theta}^{n}/ \rmd \mu_{n}$.
+ \item Soit  $X^{(n)}= (X_{1},\ ,\ X_{n})$ un $n$-échantillon du modèle statistique $\PP_{\theta}^{n}\ll\mu_{n},\ \theta\in\Theta$, de densité  $f(\theta,x^{(n)})= \rmd \PP_{\theta}^{n}/ \rmd \mu_{n}$.
  \item Pour tester $H_{0}$ : $\theta\in\Theta_{0}$  contre $H_{1}$ : $\theta\in\Theta-\Theta_{0}$, le test du \alert{rapport de vraisemblance} rejette $H_{0}$ lorsque la valeur du \alert{rapport de vraisemblance généralisé}
 $$
-\Lambda_{n}=\frac{\sup_{\theta\in\Theta_{0}}f_{\theta}(X^{(n)})}{\sup_{\theta\in\Theta}f_{\theta}(X^{(n)})}
+\Lambda_{n}=\frac{\sup_{\theta\in\Theta_{0}}f(\theta,X^{(n)})}{\sup_{\theta\in\Theta}f(\theta,X^{(n)})}
 $$
 est inférieure à un seuil.
 \item   Lorsque les hypothèses $H_{0},\ H_{1}$ sont simples, ce test est U.P.P. .
@@ -548,7 +546,7 @@ est inférieure à un seuil.
 \item En posant $\theta=(\mu,\ \sigma^{2})$,
 \begin{align*}
 \Lambda_{n}&=\frac{\sup_{\theta\in\Theta_{0}}(1/\sigma^{n})\exp(-\frac{1}{2\sigma^{2}}\sum_{i}(X_{i}-\mu)^{2})}{\sup_{\theta\in\Theta}(1/\sigma^{n})\exp(-\frac{1}{2\sigma^{2}}\sum_{i}(X_{i}-\mu)^{2})}\\
-&=(\frac{\sum_{i}(X_{i}-\overline{X}_{n})^{2}}{\sum_{i}X_{i}^{2}})^{n/2}
+&=\left( \frac{\sum_{i}(X_{i}-\overline{X}_{n})^{2}}{\sum_{i}X_{i}^{2}} \right)^{n/2}
 \end{align*}
 \item Un calcul élémentaire montre que $\Lambda_{n}<c$ est équivalent à $t_{n}^{2}>k$ où
 $$
@@ -582,9 +580,9 @@ nous avons
 \begin{align*}
 &\log\Lambda_{n}=\frac{n}{2}\log\frac{n-1}{t_{n}^{2}+n-1} \\
 &\Rightarrow \ -2\log\Lambda_{n}=n\log(1+\frac{t_{n}^{2}}{n-1}) \\
-&=n \left(\frac{t_{n}^{2}}{n-1}+o_{p}(\frac{t_{n}^{2}}{n-1}) \right) \dlim_{\PP_0} \chi_{1}^{2}
+&=n \left(\frac{t_{n}^{2}}{n-1}+o_{p}(\frac{t_{n}^{2}}{n-1}) \right) \dlim_{\PP_0^n} \chi_{1}^{2}
 \end{align*}
-car sous $H_{0}$,  $t_{n} \dlim_{\PP_0} \gauss(0,1)$.
+car sous $H_{0}$,  $t_{n} \dlim_{\PP_0^n} \gauss(0,1)$.
 
 \bigskip
 
@@ -598,13 +596,11 @@ car sous $H_{0}$,  $t_{n} \dlim_{\PP_0} \gauss(0,1)$.
 \item Soit $(X_1,\dots,X_n)$ un $n$-échantillon d'une loi multinomiale à $d$-instances
 \item \alert{Paramètre} $\mathbf{p}= (p_1,\dots,p_d) \in \mathcal{M}_d= \{ (p_1, \dots, p_d), p_i \geq 0, \sum_{i=1}^d p_i =1 \}$.
 \item \alert{Rapport de vraisemblance généralisé}
-\alert{
 \begin{align*}
 \Lambda_n
-&= \frac{(1/d)^n}{\max_{(p_1,\dots,p_k) \in \mathcal{M}_d} \prod_{i=1}^d p_j^{N_i} } \\
+&= \frac{(1/d)^n}{\max_{(p_1,\dots,p_d) \in \mathcal{M}_d} \prod_{i=1}^d p_i^{N_i} } \\
 &= \prod_{i=1}^d \left( \frac{n}{d N_i} \right)^{N_i} = \prod_{i=1}^d (d \hat{p}_{n,i})^{-N_i}
 \end{align*}
-}
 où $N_i= \sum_{j=1}^n \indi{X_j=i}$  et $\hat{p}_{n,i}= N_i/n$ les fréquences empiriques.
 \end{itemize}
 \end{frame}
@@ -626,7 +622,7 @@ $${\boldsymbol{U}_n}(\boldsymbol{p})=\sqrt{n}\Big(\frac{\widehat p_{n,1}-p_1}{\s
 \begin{frame}
 \frametitle{Statistique du Chi-deux}
 \begin{prop}
-Si les composantes de $\boldsymbol{p}$ sont toute non-nulles
+Si les composantes de $\boldsymbol{p}$ sont toutes non-nulles
 \begin{itemize}
 \item On a la \alert{convergence en loi} sous $\PP_{\boldsymbol{p}}$
 $${\boldsymbol{U}_n}(\boldsymbol{p})\stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$$
@@ -690,9 +686,8 @@ $$H_0:\truetheta = \truetheta_0\;\;\;\text{contre}\;\;H_1 \;\truetheta\neq \true
 \item \alert{Hypothèse} : on dispose d'un estimateur $\est$ \alert{asymptotiquement normal}
 $$\boxed{\sqrt{n}(\est-\truetheta)\stackrel{d}{\rightarrow}{\mathcal N}\big(0,v(\truetheta)\big)}$$
 en loi sous $\PP_{\truetheta}^n$, $\forall \truetheta \in \Theta$, où $\truetheta \leadsto v(\truetheta) >0$ est continue.
-\item Sous l'hypothèse (ici sous $\PP_{\truetheta_0}^n$) on a \alert{la convergence}
-$$\sqrt{n}\frac{\est-\truetheta_0}{\sqrt{v(\est)}}\stackrel{d}{\longrightarrow} {\mathcal N}(0,1)$$
-\alert{en loi sous $\PP_{\truetheta_0}^n$}.
+\item On a \alert{la convergence}
+$$\sqrt{n}\frac{\est-\truetheta_0}{\sqrt{v(\est)}}\stackrel{d}{\longrightarrow}_{\PP_{\truetheta_0}^n} {\mathcal N}(0,1).$$
 \end{itemize}
 \end{frame}
 
@@ -701,8 +696,7 @@ $$\sqrt{n}\frac{\est-\truetheta_0}{\sqrt{v(\est)}}\stackrel{d}{\longrightarrow} 
 \begin{itemize}
 \item \underline{Remarque} $\sqrt{v(\est)} \leftrightarrow \sqrt{v(\truetheta_0)}$ ou d'autres choix encore...
 \item On a aussi
-$$T_n = n\frac{(\est-\truetheta_0)^2}{v(\est)} \stackrel{d}{\longrightarrow} \chi^2(1)$$
-sous $\PP_{\truetheta_0}^n$.
+$$T_n = n\frac{(\est-\truetheta_0)^2}{v(\est)} \stackrel{d}{\longrightarrow}_{\PP_{\truetheta_0}^n} \chi^2(1).$$
 \item Soit $q_{1-\alpha,1}^{\chi^2} >0$ tel que si $U \sim \chi^2(1)$, on a $\PP\big[U > q_{1-\alpha,1}^{\chi^2}\big]=\alpha$. On \alert{choisit la zone de rejet}
 $${\mathcal R}_{n,\alpha} = \big\{T_n\geq q_{1-\alpha,1}^{\chi^2}\big\}.$$
 \item Le test de zone de rejet ${\mathcal R}_{n,\alpha}$ s'appelle \alert{Test de Wald de l'hypothèse simple $\truetheta=\truetheta_0$ contre l'alternative $\truetheta \neq \truetheta_0$ basé sur $\est$.}
@@ -712,12 +706,12 @@ $${\mathcal R}_{n,\alpha} = \big\{T_n\geq q_{1-\alpha,1}^{\chi^2}\big\}.$$
 \begin{frame}
 \frametitle{Propriétés du test de Wald}
 \begin{prop}
-Le test Wald de l'hypothèse simple $\truetheta=\truetheta_0$ contre l'alternative $\truetheta \neq \truetheta_0$ basé sur $\est$ est
+Le test de Wald de l'hypothèse simple $\truetheta=\truetheta_0$ contre l'alternative $\truetheta \neq \truetheta_0$ basé sur $\est$ est
 \begin{itemize}
 \item \alert{asymptotiquement} de niveau $\alpha$ :
-$$\PP_{\truetheta_0}^n\big[T_n \in {\mathcal R}_{n,\alpha}\big]\rightarrow \alpha.$$
+$$\PP_{\truetheta_0}^n\big[ {\mathcal R}_{n,\alpha}\big]\rightarrow \alpha.$$
 \item \alert{convergent ou (consistant)}. Pour tout point $\truetheta \neq \truetheta_0$
-$$\PP_\truetheta^n\big[T_n \notin {\mathcal R}_{n,\alpha}\big] \rightarrow 0.$$
+$$\PP_\truetheta^n\big[ {\mathcal R}_{n,\alpha}^c\big] \rightarrow 0.$$
 \end{itemize}
 \end{prop}
 \end{frame}
@@ -745,14 +739,14 @@ Donc $T_{n}\stackrel{\PP_{\truetheta}^n}{\longrightarrow}+\infty$, d'où le rés
 \item \alert{ Même contexte:} $\Theta \subset \R^d$ et \alert{on dispose} d'un estimateur $\est$ asymptotiquement normal :
 $$\sqrt{n}\big(\est-\truetheta\big)\stackrel{d}{\longrightarrow} {\mathcal N}\big(0, V(\truetheta)\big)$$
 où la matrice $V(\truetheta)$ est \alert{définie positive} et continue en $\truetheta$.
-\item On cheche à tester $H_0: \truetheta= \truetheta_0$ contre $H_1: \truetheta \ne \truetheta_1$.
+\item On cherche à tester $H_0: \truetheta= \truetheta_0$ contre $H_1: \truetheta \ne \truetheta_1$.
 \item Sous $\PP_\truetheta$, la convergence $n^{1/2} (\est - \truetheta) \dlim \gauss(0,V(\truetheta))$ implique que
 $$
 V^{-1/2}(\truetheta) n^{1/2} (\est - \theta) \dlim \gauss(0,\Id{d})
 $$
 et donc que
 $$
-n (\est - \truetheta)^{T} V^{-1}(\truetheta) (\est - \truetheta) \dlim \chi^2_d  \eqsp.
+n (\est - \truetheta)^{T} V^{-1}(\truetheta) (\est - \truetheta) \dlim \chi^2(d)  \eqsp.
 $$
 \end{itemize}
 \end{frame}
@@ -780,7 +774,7 @@ où $I(\truetheta)= \theta^{-2}$ est l'\alert{information de Fisher}
 \begin{itemize}
 \item \alert{Test de Wald} de l'hypothèse $H_0: \truetheta = \truetheta_0$ contre l'hypothèse $H_1: \truetheta \ne \truetheta_0$.
 \begin{align*}
-n (\est - \truetheta_0)^2/I(\est)= n (1 - \truetheta_0 \est)^2 \dlim_{\PP_{\truetheta_0}} \geq q^{\chi2}_{1,1-\alpha}
+n (\est - \truetheta_0)^2 I(\est)= n (1 - \truetheta_0 / \est)^2 \dlim_{\PP_{\truetheta_0}} \geq q^{\chi2}_{1-\alpha,1}
 \end{align*}
 \item \alert{Application numérique} $n=100$, $\truetheta_0=0.5$,
 \end{itemize}
@@ -790,10 +784,10 @@ n (\est - \truetheta_0)^2/I(\est)= n (1 - \truetheta_0 \est)^2 \dlim_{\PP_{\true
 \begin{frame}
 \frametitle{Test de Wald: cas vectoriel}
 \begin{itemize}
-\item Le test de Wald de l'hypothèse $H_0= \truetheta= \truetheta_0$ contre $H_1= \truetheta \ne \truetheta_0$
+\item Le test de Wald de l'hypothèse $H_0: \truetheta= \truetheta_0$ contre $H_1: \truetheta \ne \truetheta_0$
 rejette $H_0$ si
 \[
-n (\est - \truetheta_0)^T V^{-1}(\est) (\est - \truetheta_0) > q^{\chi^2}_{d,1-\alpha} \eqsp
+n (\est - \truetheta_0)^T V^{-1}(\est) (\est - \truetheta_0) > q^{\chi^2}_{1-\alpha,d} \eqsp
 \]
 \item On peut remplacer la matrice de covariance $V(\est)$ par $V(\truetheta_0)$ ou tout estimateur consistant de $V(\truetheta_0)$.
 \end{itemize}
@@ -802,10 +796,11 @@ n (\est - \truetheta_0)^T V^{-1}(\est) (\est - \truetheta_0) > q^{\chi^2}_{d,1-\
 \begin{frame}
 \frametitle{Test de Wald : hypothèse nulle composite}
 \begin{itemize}
-\item \alert{ Même contexte:} $\Theta \subset \R^d$ et \alert{on dispose} d'un estimateur $\est$ asymptotiquement normal :
-$$\sqrt{n}\big(\est-\truetheta\big)\stackrel{d}{\longrightarrow} {\mathcal N}\big(0, V(\truetheta)\big)$$
+\item \alert{ Même contexte:} $\Theta \subset \R^d$ et \alert{on dispose} d'un
+  estimateur $\est$ asymptotiquement normal : pour tout $\truetheta \in \Theta$,
+$$\sqrt{n}\big(\est-\truetheta\big)\stackrel{d}{\longrightarrow}_{\PP_{\truetheta}^n} {\mathcal N}\big(0, V(\truetheta)\big)$$
 où la matrice $V(\truetheta)$ est \alert{définie positive} et continue en $\truetheta$.
-\item \alert{But} Tester $H_0: \truetheta \in \Theta_0$ contre $H_1:\truetheta \notin \Theta_0$, où
+\item \alert{But:} Tester $H_0: \truetheta \in \Theta_0$ contre $H_1:\truetheta \notin \Theta_0$, où
 $$\boxed{\Theta_0 = \big\{\truetheta \in \Theta,\;\;g(\truetheta) = 0\big\}}$$
 et
 $$g:\R^d \rightarrow \R^m$$
@@ -822,7 +817,8 @@ $$g:\R^d \rightarrow \R^m$$
 \item \alert{Hypothèse : } la différentielle (de matrice $J_g(\truetheta)$) de $g$ est de rang maximal $m$ en tout point de (l'intérieur) de $\Theta_0$.
 \end{itemize}
 \begin{prop}
-En tout point $\truetheta$ de l'intérieur de $\Theta_0$ (i.e. \alert{sous l'hypothèse}), on a, en loi sous $\PP_\truetheta^n$ :
+  En tout point $\truetheta$ de l'intérieur de $\Theta_0$ on a, en loi sous
+  $\PP_\truetheta^n$ (i.e. \alert{sous l'hypothèse}) :
 \begin{itemize}
 \item $$\sqrt{n}g(\est) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0, J_g(\truetheta)V(\truetheta)J_g(\truetheta)^T\big),$$
 \item $$\alert{T_n=ng(\est)^T\Sigma_g(\est)^{-1}g(\est)} \stackrel{d}{\longrightarrow} \chi^2(m)$$
@@ -839,13 +835,13 @@ où $\Sigma_g(\truetheta) =J_g(\truetheta) V(\truetheta) J_g(\truetheta)^T$.
 \frametitle{Test de Wald (fin)}
 \begin{prop}
 Sous les hypothèses précédentes, le test de zone de rejet
-$${\mathcal R}_\alpha  = \big\{T_n \geq q_{1-\alpha, m}^{\chi^2}\big\}$$
+$${\mathcal R}_{n,\alpha}  = \big\{T_n \geq q_{1-\alpha, m}^{\chi^2}\big\}$$
 avec $\PP\big[U > q_{1-\alpha, m}^{\chi^2}\big]=\alpha$ si $U \sim \chi^2(m)$ est
 \begin{itemize}
 \item \alert{Asymptotiquement de niveau $\alpha$} en tout point $\truetheta$ de (l'intérieur) de $\Theta_0$ :
-$$\PP_\truetheta^n\big[T_n \in {\mathcal R}_{n,\alpha}\big]\rightarrow \alpha.$$
+$$\PP_\truetheta^n\big[ {\mathcal R}_{n,\alpha}\big]\rightarrow \alpha.$$
 \item \alert{Convergent} : pour tout $\truetheta \notin \Theta_0$ on a
-$$\PP_\truetheta^n\big[T_n \notin {\mathcal R}_{n,\alpha}\big]\rightarrow 0.$$
+$$\PP_\truetheta^n\big[{\mathcal R}_{n,\alpha}^c\big]\rightarrow 0.$$
 \end{itemize}
 \end{prop}
 \begin{itemize}
@@ -861,7 +857,7 @@ $$\PP_\truetheta^n\big[T_n \notin {\mathcal R}_{n,\alpha}\big]\rightarrow 0.$$
 \begin{frame}
 \frametitle{Test du score (Rao)}
 \begin{itemize}
-\item Soit $\{X_i\}_{i=1}^n$ un $n$-échantillon \iid\ associé à un modèle statistique $(\PP_\truetheta, \truetheta \in \Theta)$  \alert{régulier}
+\item Soit $(X_1, \cdots, X_n)$ un $n$-échantillon \iid\ associé à un modèle statistique $(\PP_\truetheta, \truetheta \in \Theta \subseteq \rset^d)$  \alert{régulier}
 \item Pour $\truetheta \in \Theta$, le \alert{score de Fisher} est donné par
 \[
 \eta_{\truetheta}(x)= \nabla_{\truetheta} \log f(\truetheta,x)
@@ -872,14 +868,14 @@ $$\PP_\truetheta^n\big[T_n \notin {\mathcal R}_{n,\alpha}\big]\rightarrow 0.$$
 $$
 \PE_{\truetheta}[\eta_{\truetheta}(X)]= 0 \eqsp, \quad \truetheta \in \Theta \eqsp.
 $$
-\item La covariance du score de Fisher est égale à la \alert{matrice d'Information de Fisher}
+\item La matrice de covariance du score de Fisher est égale à la \alert{matrice d'Information de Fisher}
 $$
 I(\truetheta)= \PE_{\truetheta} \left[ \eta_{\truetheta}(X) \eta_{\truetheta}(X)^T \right]
 $$
 \end{itemize}
 \item \alert{Conclusion} Pour tout $\truetheta \in \Theta$,
 $$
-Z_n(\truetheta) = n^{-1/2} \sum_{i=1}^n \eta_\truetheta(X_i) \dlim_{\PP_{\truetheta}} \gauss(0, I(\truetheta)) \eqsp.
+Z_n(\truetheta) = n^{-1/2} \sum_{i=1}^n \eta_\truetheta(X_i) \dlim_{\PP_{\truetheta}^n} \gauss(0, I(\truetheta)) \eqsp.
 $$
 \end{itemize}
 \end{frame}
@@ -893,11 +889,11 @@ Z_n(\truetheta_0)^T I^{-1} (\truetheta_0) Z_n(\truetheta_0)
 \]
 \item Sous l'hypothèse nulle,
 $$
-Z_n(\truetheta_0)^T I^{-1} (\truetheta_0) Z_n(\truetheta_0) \dlim_{\PP_{\truetheta_0}} \chi^2_d
+Z_n(\truetheta_0)^T I^{-1} (\truetheta_0) Z_n(\truetheta_0) \dlim_{\PP_{\truetheta_0}^n} \chi^2(d)
 $$
 et donc le test de Rao de rejet
 $$
-Z_n(\truetheta_0)^T I^{-1} (\truetheta_0) Z_n(\truetheta_0) \geq q_{d,1-\alpha}^{\chi^2}
+Z_n(\truetheta_0)^T I^{-1} (\truetheta_0) Z_n(\truetheta_0) \geq q_{1-\alpha,d}^{\chi^2}
 $$
 est asymptotiquement de niveau $\alpha$.
 \end{itemize}
@@ -908,10 +904,10 @@ est asymptotiquement de niveau $\alpha$.
 \begin{frame}
 \frametitle{Tests d'adéquation}
 \begin{itemize}
-\item \underline{Situation} On observe (pour simplifier) un $n$-échantillon de loi $F$ inconnu
+\item \underline{Situation} On observe (pour simplifier) un $n$-échantillon de loi $F$ inconnue
 $$X_1,\ldots, X_n\sim_{\text{i.i.d.}}F$$
 \item \alert{Objectif} Tester
-$$H_0:F=F_0\;\;\text{contre}\;\;F\neq F_0$$
+$$H_0:F=F_0\;\;\text{contre $H_1$:}\;\;F\neq F_0$$
 où
 $F_0$ distribution donnée. Par exemple : $F_0$ \alert{gaussienne centrée réduite}.
 \item Il est \alert{très facile de construire un test asymptotiquement de niveau $\alpha$.}
@@ -923,9 +919,14 @@ Il suffit de trouver une statistique $\phi(X_1,\ldots, X_n)$ de loi connue sous 
 \frametitle{Test d'adéquation : situation}
 \begin{itemize}
 \item \alert{Exemples : sous l'hypothèse}
-$$\phi_1(X_1\ldots, X_n) = \sqrt{n}\overline{X}_n \sim {\mathcal N}(0,1)$$
-$$\phi_2(X_1,\ldots, X_n) = \sqrt{n}\frac{\overline{X}_n}{s_n} \sim \text{Student}(n-1)$$
-$$\phi_3(X_1,\ldots, X_n) = (n-1)s_n^2 \sim \chi^2(n-1).$$
+  \begin{align*}
+    &  \phi_1(X_1\ldots, X_n) = \sqrt{n}\overline{X}_n \sim {\mathcal N}(0,1) \\
+    & \phi_2(X_1,\ldots, X_n) = \sqrt{n}\frac{\overline{X}_n}{S_n} \sim \text{Student}(n-1) \qquad \text{avec} \ S_n = (n-1)^{-1} \sum_{k=1}^n (X_k - \bar X_n)^2 \\
+    & \phi_3(X_1,\ldots, X_n) = (n-1)s_n^2 \sim \chi^2(n-1).
+  \end{align*}
+%% $$\phi_1(X_1\ldots, X_n) = \sqrt{n}\overline{X}_n \sim {\mathcal N}(0,1)$$
+%% $$\phi_2(X_1,\ldots, X_n) = \sqrt{n}\frac{\overline{X}_n}{S_n} \sim \text{Student}(n-1) \qquad \text{avec} \ S_n = (n-1)^{-1} \sum_{k=1}^n (X_k \bar X_n)^2$$
+%% $$\phi_3(X_1,\ldots, X_n) = (n-1)s_n^2 \sim \chi^2(n-1).$$
 \item Le problème est que ces tests \alert{ont une faible puissance} : ils ne sont pas consistants.
 \item Pas exemple, si $F\neq$ gaussienne mais $\int_{\R}xdF(x)=0$, $\int_{\R}x^2dF(x)=1$, alors
 $$\PP_{F}\big[\phi_1(X_1,\ldots,X_n) \leq x \big] \rightarrow \int_{-\infty}^x e^{-u^2/2}\frac{du}{\sqrt{2\pi}},\;\;x \in \R.$$
@@ -946,11 +947,12 @@ où la loi de $\mathbb{B}$ ne dépend pas de $F$.
 \end{itemize}
 \begin{prop}[Test de Kolmogorov-Smirnov]
 Soit $q_{1-\alpha}^{\mathbb{B}}$ tel que $\PP\big[\mathbb{B}>q_{1-\alpha}^{\mathbb{B}}\big]=\alpha$. Le test défini par la zone de rejet
-$${\mathcal R}_{n,\alpha} = \big\{\sqrt{n}\sup_{x\in \R}\big|\widehat F_n(x)-F_0(x)\big| \geq q_{1-\alpha}^{\mathbb{B}}\big|\big\}$$
-est \alert{asymptotiquement de niveau $\alpha$ :}
-$\PP_{F_0}\big[\widehat F_n \in {\mathcal R}_{n,\alpha}\big]\rightarrow \alpha$
-et \alert{consistant} :
-$$\forall F \neq F_0: \PP_{F}\big[\widehat F_n \notin {\mathcal R}_{n,\alpha}\big] \rightarrow 0.$$
+$${\mathcal R}_{n,\alpha} = \big\{\sqrt{n}\sup_{x\in \R}\big|\widehat
+F_n(x)-F_0(x)\big| \geq q_{1-\alpha}^{\mathbb{B}} \big\}$$
+est
+\alert{asymptotiquement de niveau $\alpha$ :} $\PP_{F_0}\big[ {\mathcal
+  R}_{n,\alpha}\big]\rightarrow \alpha$ et \alert{consistant} :
+$$\forall F \neq F_0: \PP_{F}\big[{\mathcal R}_{n,\alpha}^c\big] \rightarrow 0.$$
 \end{prop}
 \end{frame}
 
@@ -959,7 +961,7 @@ $$\forall F \neq F_0: \PP_{F}\big[\widehat F_n \notin {\mathcal R}_{n,\alpha}\bi
 \begin{frame}
 \frametitle{Test du Chi-deux}
 \begin{itemize}
-\item $X$ variables \alert{qualitative} : $X \in \{1,\ldots, d\}$.
+\item $X$ variable \alert{qualitative} : $X \in \{1,\ldots, d\}$.
 $$\PP\big[X=\ell\big]=p_\ell,\;\ell=1,\ldots d.$$
 \item La loi de $X$ est caratérisée par ${\boldsymbol p} = (p_1,\ldots, p_d)^T$.
 \item \underline{Notation}
