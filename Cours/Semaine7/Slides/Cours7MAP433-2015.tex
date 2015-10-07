@@ -166,7 +166,7 @@ est appelée la \alert{région critique du test}.
 $$|\nabla_\truetheta^{2}\log f(\tilde{\truetheta},x)|+|\nabla_\truetheta \log f(\tilde{\truetheta},x)|+\big(\nabla_\truetheta\log f(\tilde{\truetheta},x)\big)^2\leq g(x)$$
 où
 $$\int_{\Xset}g(x)\sup_{\tilde{\truetheta} \in {\mathcal V}(\truetheta)}f(\tilde{\truetheta},x)\mu(dx)<+\infty.$$
-\item L'information de Fisher est non-dégénérée : pour tout $\truetheta \in \Theta$, la matrice d'information de Fisher 
+\item L'information de Fisher est non-dégénérée : pour tout $\truetheta \in \Theta$, la matrice d'information de Fisher
 $\mathbb{I}(\truetheta)$ est définie positive.
 \end{itemize}
 \end{df}
@@ -287,11 +287,11 @@ Si le modèle est identifiable, alors il existe un test de niveau asymptotique $
 U_n&= \frac{1}{n} \sum_{i=1}^n \indi{X_i > 0} &&\text{test du signe} \\
 \bar{X}_n&= n^{-1} \sum_{i=1}^n X_i     &&\text{z-test}
 \end{align*}
-\item  Sous $H_0$, $\PP_0( X_1 > 0)=1/2$, et donc $U_n \plim[\PP_{0}^n] 1/2$. Si $\theta > 0$, $\PP_\theta(X_1 > 0) >  1 - F(-\theta)$ et 
-ce qui suggère de considérer un test $\{ U_n -1/2 > c_{n,\alpha} \}$ 
+\item  Sous $H_0$, $\PP_0( X_1 > 0)=1/2$, et donc $U_n \plim[\PP_{0}^n] 1/2$. Si $\theta > 0$, $\PP_\theta(X_1 > 0) >  1 - F(-\theta)$ et
+ce qui suggère de considérer un test $\{ U_n -1/2 > c_{n,\alpha} \}$
 \item Sous $H_0$,  $\PE_0[X_1]= 0$ et donc $\bar{X}_n \plim[\PP_{0}^n] 1/2$. Si $\theta > 0$, $\PE_\theta[X_1]= \theta$ ce qui suggère de
 considérer un test $\{ \bar{X}_n > d_{n,\alpha} \}$
-\item \alert{Questions:} 
+\item \alert{Questions:}
 \begin{enumerate}
 \item Comment calibrer  les constantes $c_{n,\alpha}$  et $d_{n,\alpha}$ ? facile !
 \item quel test dois je choisir ? En quoi mon choix est-il dépendant de la distribution des observations ?
@@ -327,10 +327,10 @@ La puissance du test de signe de niveau asymptotique $\alpha$ est donnée pour t
 \begin{align*}
 \puissance^{\mathrm{sign}}_{n,\alpha}(\theta)
 &= \PP_\theta( \sqrt{n}(U_n - 1/2) > 1/2 z_{1-\alpha}) \\
-&= \PP_\theta\left( U_n - \mu(\theta) > \{1/2-\mu(\theta)\} + \frac{1}{2 \sqrt{n}} z_{1-\alpha}  \right) \eqsp. 
+&= \PP_\theta\left( U_n - \mu(\theta) > \{1/2-\mu(\theta)\} + \frac{1}{2 \sqrt{n}} z_{1-\alpha}  \right) \eqsp.
 \end{align*}
 
-Puisque $1/2 < \mu(\truetheta)= 1- F(-\theta)$ pour $\truetheta > 0$, la loi des grands nombres montre que 
+Puisque $1/2 < \mu(\truetheta)= 1- F(-\theta)$ pour $\truetheta > 0$, la loi des grands nombres montre que
 le test est \alert{consistant}: pour tout $\theta > 0$, \alert{
 \[
 \lim_{n \to \infty}  \puissance^{\mathrm{sign}}_{n,\alpha}(\theta) = 1 \eqsp.
@@ -376,10 +376,10 @@ le $z$-test de niveau asymptotique $\alpha$ est \alert{consistant}: pour tout $\
 \frametitle{Comparaison asymptotique des puissances}
 \begin{itemize}
 \item A l'instar de l'estimation ponctuelle, la simple notion de \alert{consistance} ne nous donne pas une méthode permettant de \alert{comparer} des tests: tous les tests \alert{raisonnables} sont consistants, comme tous les estimateurs \alert{raisonnables}  des paramètres.
-\item Pour pouvoir comparer asymptotiquement les tests, il faut introduire une élementaire que la consistance.. 
+\item Pour pouvoir comparer asymptotiquement les tests, il faut introduire une élementaire que la consistance..
 \item Deux approches possibles:
 \item \alert{Bahadur}: mesurer la vitesse à laquelle la vitesse du test tend vers $1$ (théorie des \alert{grandes déviations})
-\item \alert{Pitman}:   
+\item \alert{Pitman}:
 \begin{itemize}
 \item rendre la discrimination entre l'hypothèse nulle $H_0$ et l'hypothèse alternative $H_1$ plus \alert{difficile} quand $n \to \infty$.
 \item \alert{considérer un test $H_0: \theta = 0$ contre \alert{une suite d'hypothèses alternatives} $H^n_1: \theta = \theta_n$ avec $\theta_n > 0$ et $\lim_{n \to \infty} \theta_n = 0$.}
@@ -443,13 +443,13 @@ F(-\theta) = F(0) - \theta f(0) + o(\theta)
 \frametitle{Efficacité asymptotique locale des tests}
 \begin{theo}
 Soit $g$ une fonction telle $\PE_\theta[g^2(X_1)] < \infty$ pour tout $\theta \in \Theta$. On note $\PE_\theta[g(X_1)]= \mu(\theta)$
-et $\PVar_\theta[g(X_1)]= \sigma^2(\theta)$. 
+et $\PVar_\theta[g(X_1)]= \sigma^2(\theta)$.
 \begin{enumerate}
 \item $\mu$ est différentiable en $0$
 \item $\sigma$ continue en $0$.
 \end{enumerate}
-On pose $G_n= n^{-1/2} \sum_{k=1}^n \{ g(X_k) - \mu(0) \}$. 
-\begin{enumerate} 
+On pose $G_n= n^{-1/2} \sum_{k=1}^n \{ g(X_k) - \mu(0) \}$.
+\begin{enumerate}
 \item La suite de test $\{ G_n > \sigma(0) z_{1-\alpha}\}$  est de niveau asymptotique $\alpha$: $\lim_{n \to \infty} \PP_{0}( G_n > \sigma(0) z_{1-\alpha})= \alpha$.
 \item La \alert{puissance locale asymptotique} de cette suite de tests est donnée par
 \[
@@ -462,7 +462,7 @@ On pose $G_n= n^{-1/2} \sum_{k=1}^n \{ g(X_k) - \mu(0) \}$.
 \begin{frame}
 \frametitle{Elements de preuve}
 \begin{itemize}
-\item On pose 
+\item On pose
 \begin{align*}
 G_n       &= n^{-1/2} \sum_{k=1}^n \{g(X_k) - \mu(0) \} \\
 \Lambda_n &= \Lambda_n(X_1,\dots,X_n) = \prod_{k=1}^n \frac{f(hn^{-1/2},X_k)}{f(0,X_k)}
@@ -471,7 +471,7 @@ G_n       &= n^{-1/2} \sum_{k=1}^n \{g(X_k) - \mu(0) \} \\
 \tco{$\lim_{n \to \infty} \PE_{\theta_n}\left[ \rme^{\rmi u G_n} \right]$}
 \item \alert{Remarque fondamentale:} \tco{$\PE_{\theta_n}[ \rme^{\rmi u G_n}] = \PE_{0}[\Lambda_n \rme^{\rmi u G_n}]$}
 \begin{align*}
-&\PE_{\theta_n}[ \rme^{\rmi u G_n}] 
+&\PE_{\theta_n}[ \rme^{\rmi u G_n}]
 = \idotsint \rme^{\rmi u n^{-1/2} \sum_{k=1}^n \{g(x_k) - \mu(0)\}} \prod_{k=1}^n f(\theta_n,x_k) \rmd x_1 \dots \rmd x_n \\
 &= \idotsint \rme^{\rmi u n^{-1/2} \sum_{k=1}^n \{g(x_k) - \mu(0)\}} \Lambda_n(x_1,\dots,x_n) \prod_{k=1}^n f(0,x_k) \rmd x_1 \dots \rmd x_n
 \end{align*}
@@ -485,24 +485,24 @@ G_n       &= n^{-1/2} \sum_{k=1}^n \{g(X_k) - \mu(0) \} \\
 \[
 \left[\begin{array}{c}
   \log \Lambda_n \\
-  G_n 
+  G_n
 \end{array}
 \right]
 =
 \left[\begin{array}{c}
    \sum_{k=1}^n \log f(hn^{-1/2},X_k) - \log f(0,X_k)  \\
-   n^{-1/2} \sum_{k=1}^n \{ g(X_k) - \mu(0)\} 
+   n^{-1/2} \sum_{k=1}^n \{ g(X_k) - \mu(0)\}
  \end{array}
 \right]
 \]
 \item Pour un modèle régulier, en posant $\ell(\theta,x)= \log f(\theta,x)$ (avec la convention $\ell(x)= \ell(0,x)$),
-nous avons 
+nous avons
 \[
 \ell(hn^{-1/2},x)= \ell(x) + h n^{-1/2} \dot\ell(x) + (h^2 n^{-1})/2 \ddot \ell(x) + o(n^{-1})
 \]
 ce qui implique
 \begin{align*}
- \sum_{k=1}^n \ell (hn^{-1/2},X_k) - \ell(X_k) 
+ \sum_{k=1}^n \ell (hn^{-1/2},X_k) - \ell(X_k)
  &= \frac{h}{\sqrt{n}} \sum_{k=1}^n \dot\ell(X_k) + \frac{h^2}{2n} \sum_{k=1}^n \ddot \ell(X_k) + o_{\PP_0^n}(1) \\
  &= \frac{h}{\sqrt{n}} \sum_{k=1}^n \dot\ell(X_k) - \frac{h^2}{2} I(0)  + o_{\PP_0^n}(1)
 \end{align*}
@@ -522,7 +522,7 @@ où $I(0)$ est l'information de Fisher.
 \right]
 =
 n^{-1/2}  \sum_{k=1}^n \left[ \begin{array}{c} \dot \ell(X_k) \\ g(X_k) - \mu(0) \end{array} \right]
-- 
+-
 \left[
 \begin{array}{c}
 (h^2/2) I(0) \\
@@ -539,7 +539,7 @@ o_{\PP_{0}^n}(1) \eqsp.
   G_n
 \end{array}
 \right]
-\dlim{\PP_{0}^n} 
+\dlim{\PP_{0}^n}
 \left[\begin{array}{c}
   L \\
   G
@@ -547,10 +547,10 @@ o_{\PP_{0}^n}(1) \eqsp.
 \right]
 \\
 &\sim
-\gauss\left( \left[ \begin{array}{c} - (h^2/2) I(0) \\ 0 \end{array}\right], \left[ 
+\gauss\left( \left[ \begin{array}{c} - (h^2/2) I(0) \\ 0 \end{array}\right], \left[
 \begin{array}{cc}
 \PE_0[ (\dot \ell(X_1))^2] & \PE_0[ g(X_1)  \dot \ell(X_1)] \\
-\PE_0[ g(X_1)  \dot \ell(X_1)] & \Var_0(g(X_1)) 
+\PE_0[ g(X_1)  \dot \ell(X_1)] & \Var_0(g(X_1))
 \end{array}
 \right] \right)
 \end{align*}
@@ -566,11 +566,11 @@ o_{\PP_{0}^n}(1) \eqsp.
 \begin{frame}
 \frametitle{Preuve: on rassemble les bouts}
 \begin{itemize}
-\item En utilisant $\PE_{\theta_n}[ \rme^{\rmi u G_n}] = \PE_0[ \rme^{\log(\Lambda_n)} \rme^{\rmi u G_n}]$ et 
+\item En utilisant $\PE_{\theta_n}[ \rme^{\rmi u G_n}] = \PE_0[ \rme^{\log(\Lambda_n)} \rme^{\rmi u G_n}]$ et
 la convergence en loi de $[\log(\Lambda_n), G_n]$ implique (il y a encore des petits détails à régler)
 \[
 \lim_{n \to \infty} \PE_{\theta_n}[ \rme^{\rmi u G_n}]= \PE[ \rme^{L} \rme^{\rmi u G}]
-\] 
+\]
 où $[L,G]^T$ est un vecteur gaussien de moyenne $[-h^2 I(0)/2,0]^T$ et de covariance
 \[
 \left[
@@ -578,8 +578,8 @@ où $[L,G]^T$ est un vecteur gaussien de moyenne $[-h^2 I(0)/2,0]^T$ et de covar
 I(0) & -\dot \mu(0) \\
 -\dot \mu(0) & \sigma^2(0)
 \end{array}
-\right] 
-\] 
+\right]
+\]
 \item Conclusion par un calcul élémentaire...
 \end{itemize}
 \end{frame}
@@ -656,47 +656,103 @@ est inférieure à un seuil.
 \Lambda_{n}&=\frac{\sup_{\theta\in\Theta_{0}}(1/\sigma^{n})\exp(-\frac{1}{2\sigma^{2}}\sum_{i}(X_{i}-\mu)^{2})}{\sup_{\theta\in\Theta}(1/\sigma^{n})\exp(-\frac{1}{2\sigma^{2}}\sum_{i}(X_{i}-\mu)^{2})}\\
 &=\left( \frac{\sum_{i}(X_{i}-\overline{X}_{n})^{2}}{\sum_{i}X_{i}^{2}} \right)^{n/2}
 \end{align*}
-\item Un calcul élémentaire montre que $\Lambda_{n}<c$ est équivalent à $t_{n}^{2}>k$ où
+\item Un calcul élémentaire montre que $\Lambda_{n}<c$ est équivalent à $T_{n}^{2}>k$ où
 $$
-t_{n}=\frac{\sqrt{n}\overline{X}_{n}}{\sqrt{\frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2}}}
+T_{n}=\frac{\sqrt{n}\overline{X}_{n}}{S_n}  \quad \text{où} \quad \quad S_n^2= \frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2} \eqsp.
 $$
-est la $\mathrm{t}$-statistique. En d'autres termes, le $\mathrm{t}$-test est un test de rapport de vraisemblance généralisé.
+est la $t$-statistique. En d'autres termes, le $\mathrm{t}$-test est un test de rapport de vraisemblance généralisé.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Justification}
 \begin{align*}
-t_{n}^{2} &=\frac{n\overline{X}_{n}^{2}}{\frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2}} \\
+T_{n}^{2} &=\frac{n\overline{X}_{n}^{2}}{\frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2}} \\
 &=\frac{\sum_{i}X_{i}^{2}-\sum_{i}(X_{i}-\overline{X}_{n})^{2}}{\frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2}} \\
 &=\frac{(n-1)\sum_{i}X_{i}^{2}}{\sum_{i}(X_{i}-\overline{X}_{n})^{2}}-(n\ -1) \\
 &=(n-1)\Lambda_{n}^{-2/n}-(n-1)
 \end{align*}
 ce qui montre que
 $$
-\Lambda_{n}=(\frac{n-1}{t_{n}^{2}+n-1})^{n/2}
+\Lambda_{n}=\left(\frac{n-1}{T_{n}^{2}+n-1}\right)^{n/2}
 $$
 \end{frame}
 
 \begin{frame}
 \frametitle{Distribution asymptotique}
-Comme
+\begin{itemize}
+\item Comme
 $$
-\Lambda_{n}=(\frac{n-1}{t_{n}^{2}+n-1})^{n/2}
+\Lambda_{n}=(\frac{n-1}{T_{n}^{2}+n-1})^{n/2}
 $$
 nous avons
 \begin{align*}
-&\log\Lambda_{n}=\frac{n}{2}\log\frac{n-1}{t_{n}^{2}+n-1} \\
-&\Rightarrow \ -2\log\Lambda_{n}=n\log(1+\frac{t_{n}^{2}}{n-1}) \\
-&=n \left(\frac{t_{n}^{2}}{n-1}+o_{p}(\frac{t_{n}^{2}}{n-1}) \right) \dlim_{\PP_0^n} \chi_{1}^{2}
+&-2\log\Lambda_{n}=n\log\left(1+\frac{T_n^{2}}{n-1}\right) \\
+&\phantom{-2\log\Lambda_{n}}=n \left(\frac{T_n^{2}}{n-1}+o_{p}(\frac{T_n^{2}}{n-1}) \right) 
 \end{align*}
-car sous $H_{0}$,  $t_{n} \dlim_{\PP_0^n} \gauss(0,1)$.
-
-\bigskip
-
-\alert{résultat vrai en toute généralité !}
+\item Sous $H_{0}: \theta= 0$,  nous avons en utilisant le TCL $\sqrt{n} \bar{X}_n \dlim{\PP_0^n} \gauss(0,\sigma^2)$ et Slutsky
+$$
+T_{n} = \frac{\bar{X}_n}{S_n} \dlim_{\PP_0^n} \gauss(0,1).
+$$
+\item Par conséquent $-2 \log \Lambda_n \dlim_{\PP_0^n} \chi_{1}^{2}$.
+\item \alert{résultat vrai en toute généralité !}
+\end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Distribution asymptotique du test du rapport de vraisemblance}
+\begin{theo}
+On considère un $n$-échantillon $(X_1,\dots,X_n)$ d'un modèle paramétrique régulier $(\PP_\theta, \theta \in \Theta \subset \rset^d)$ et le test bilat\'{e}ral de $H_{0} :  \theta=\theta_{0}$  contre $H_{1} :  \theta\neq\theta_{0}$.  On a:
+$$
+v(X_1,\dots,X_n)=\frac{\prod{k=1}^n f(\theta_{0};X_k)}{\sup_{\theta\in\Theta} \prod_{k=1}^n f(\theta,X_k)}=\frac{\prod_{k=1}^n f(\theta_0,X_k)}{\prod_{k=1}^n f(\hat{\theta}_{n},X_k)}
+$$
+ Alors, sous $H_{0}$, on a:
+$$
+-2\ln v(X_1,\dots,X_n)\dlim{\PP_{\theta_0}^n} \chi_{d}^{2}.
+$$
+ Donc le test d\'{e}terministe dont la r\'{e}gion critique est
+$$
+W_\alpha=\{-2\ln v(X_1,\dots,X_n)>z_{d,1-\alpha}\}
+$$
+est asymptotiquement de seuil $\alpha$ pour tester $H_{0}$  contre $H_{1}$.
+\end{theo}
+\end{frame}
+
+\begin{frame}
+\frametitle{Elements de preuve}
+\begin{itemize}
+\item On suppose que $d=1$. On note $L_n(\theta)$ la log-vraisemblance
+\[
+L_n(\theta)= \sum_{k=1}^n \log f(\theta,X_k).
+\]
+\item On effectue un développement à l'ordre 2 de la log-vraisemblance
+\[
+L_n(\theta_0)=L_n(\hat{\theta}_{n})+(\theta_{0}-\hat{\theta}_{n})\frac{\partial}{\partial\theta}L_n(\hat{\theta}_n)+
+\frac{1}{2}(\theta_{0}-\hat{\theta}_{n})^{2}\frac{\partial^{2}}{\partial\theta^{2}}L_n(\hat{\theta}'_n)
+\]
+où $\theta'_n \in [\theta_0,\hat{\theta}_n]$
+\item Comme $\frac{\partial}{\partial\theta}L_n(\hat{\theta}_n)$, ceci implique
+\begin{align*}
+-2 \{ L_n(\theta_{0})-L_n(\hat{\theta}_{n}) \} 
+&=\ -(\theta_{0}-\hat{\theta}_{n})^{2}\frac{\partial^{2}}{\partial\theta^{2}}L_n(\theta_{n}') \\
+&=\ - \{\sqrt{n} (\theta_{0}-\hat{\theta}_{n})\}^{2} \frac{1}{n} \frac{\partial^{2}}{\partial\theta^{2}}L_n(\theta_{n}')
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Elements de preuve}
+\begin{itemize}
+\item L'estimateur du maximum de vraisemblance est asymptotiquement normal: $\sqrt{n} (\theta_{0}-\hat{\theta}_{n}) \dlim{\PP_{\theta_0}^n} \gauss(0,I^{-1}(\theta_0))$, où $I(\theta)$ est l'information de Fisher
+\item Par la loi des grands nombres 
+\begin{align*}
+n^{-1} \frac{\partial^{2}}{\partial\theta^{2}}L_n(\theta_{n}') 
+&= n^-1 \sum_{k=1}^n \frac{\partial^{2}}{\partial\theta^{2}} f(\theta'_n,X_k)\\
+&\plim{\PP_{\theta_0}^n} -I(\theta_0) 
+\end{align*}
+\item Par conséquent, $-2 \{ L_n(\theta_{0})-L_n(\hat{\theta}_{n}) \} \dlim{\PP_{\theta_0}^n} \dlim{\PP_{\theta_0}^n} chi^2_1$
+\end{itemize}
+\end{frame}
 
 \begin{frame}
 \frametitle{Test d'égalité des proportions pour une variable multinomiale}
