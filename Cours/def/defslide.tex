@@ -36,7 +36,7 @@
 \def\rset{\mathbb{R}}
 \def\nset{\mathbb{N}}
 \def\dlim{\stackrel{d}{\rightarrow}}
-\newcommandx{\plim}[1][1=]{\stackrel{\PP_{#1}}{\longrightarrow}}
+\newcommandx{\plim}[1][1=]{\stackrel{#1}{\longrightarrow}}
 \def\iid{i.i.d.}
 \def\1{\mathbbm{1}}
 \newenvironment{dem}{\textbf{Proof}}{\flushright$\blacksquare$\\}
@@ -130,7 +130,7 @@
 \def\binom{\mathrm{Bin}}
 \newcommand{\KL}[2]{\mathrm{KL}(#1,#2)}
 \def\Xset{\mathsf{X}}
-\def\Xsigma{\mathcal{X}} 
+\def\Xsigma{\mathcal{X}}
 \newcommandx\sequence[3][2=,3=]
 {\ifthenelse{\equal{#3}{}}{\ensuremath{\{ #1_{#2}\}}}{\ensuremath{\{ #1_{#2}, \eqsp #2 \in #3 \}}}}
 \newcommandx\sequencePar[3][2=,3=]

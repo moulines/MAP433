@@ -126,7 +126,7 @@
 \[
 \varphi_n : \Xset^n \to \ccint{0,1} \eqsp.
 \]
-\item Si le test est \alert{non randomisé} $\varphi_n \in \{0,1\}$, l'ensemble
+\item Si le test est \alert{non randomisé} $\varphi_n \in \{0,1\}$ et l'ensemble
 \[
 \{ (x_1,\dots, x_n) \in \Xset^n, \varphi_n(x_1,\dots,x_n)= 1\}
 \]
@@ -158,16 +158,16 @@ est appelée la \alert{région critique du test}.
 
 \begin{frame}
 \frametitle{Modèle régulier}
-\begin{df} La famille de densités $\{f(\truetheta,\cdot),\truetheta \in \Theta\}$,  par rapport à la mesure dominante $\mu$, $\Theta \subset \R$, est \alert{régulière} si
+\begin{df} La famille de densités $\{f(\truetheta,\cdot),\truetheta \in \Theta\}$,  par rapport à la mesure dominante $\mu$, $\Theta \subset \rset^d$, est \alert{régulière} si
 \begin{itemize}
 \item $\Theta$ ouvert et $\{f(\truetheta, \cdot)>0\}=\{f(\truetheta', \cdot)>0\}$, $\forall \truetheta, \truetheta' \in \Theta$.
-\item $\mu$-p.p. $\truetheta \leadsto f(\truetheta,\cdot)$, $\truetheta \leadsto \log f(\truetheta,\cdot)$ sont ${\mathcal C}^2$.
+\item $\mu$-p.p. $\truetheta \leadsto f(\truetheta,\cdot)$ est ${\mathcal C}^2$.
  \item Pour tout $\truetheta \in \Theta$, il existe un voisinage ${\mathcal V}_\truetheta \subset \Theta$ t.q. pour $\tilde{\truetheta} \in {\mathcal V}_\truetheta$
 $$|\nabla_\truetheta^{2}\log f(\tilde{\truetheta},x)|+|\nabla_\truetheta \log f(\tilde{\truetheta},x)|+\big(\nabla_\truetheta\log f(\tilde{\truetheta},x)\big)^2\leq g(x)$$
 où
 $$\int_{\Xset}g(x)\sup_{\tilde{\truetheta} \in {\mathcal V}(\truetheta)}f(\tilde{\truetheta},x)\mu(dx)<+\infty.$$
-\item L'information de Fisher est non-dégénérée : pour tout $\truetheta \in \Theta$,
-$$\;\;\mathbb{I}(\truetheta) >0.$$
+\item L'information de Fisher est non-dégénérée : pour tout $\truetheta \in \Theta$, la matrice d'information de Fisher 
+$\mathbb{I}(\truetheta)$ est définie positive.
 \end{itemize}
 \end{df}
 \end{frame}
@@ -178,18 +178,18 @@ $$\;\;\mathbb{I}(\truetheta) >0.$$
 \item Supposons que $\Theta= \{\theta_0,\theta_1\}$ avec $\theta_0 \ne \theta_1$ et que l'on cherche à tester $H_0: \theta = \theta_0$ contre $H_1: \theta= \theta_1$.
 \item Le lemme de Neyman-Pearson montre que le test qui rejette $H_0$ si
 \[
-\frac{\prod_{i=1}^n f(\truetheta_1,X_i)}{\prod_{i=1}^{n} f(\truetheta_0,X_i)} \geq c_{n,\alpha}
+\Lambda_n(\truetheta_0,\truetheta_1) = \frac{\prod_{i=1}^n f(\truetheta_1,X_i)}{\prod_{i=1}^{n} f(\truetheta_0,X_i)} > c_{n,\alpha}
 \]
 est U.P.P.
 \item De façon équivalente, en prenant le logarithme de chaque membre de l'identité, le test de N.P. rejette $H_0$ si
 \[
-\Lambda_n(\truetheta_0,\truetheta_1) = \sum_{i=1}^n \{ \ell(X_i; \truetheta_1) - \ell(X_i; \truetheta_0) \} \geq k_{n,\alpha}
+\log \Lambda_n(\truetheta_0,\truetheta_1)  = \sum_{i=1}^n \left\{ \log \frac{f(\truetheta_1;X_i)}{f(\truetheta_0;X_i)} \right\} \geq k_{n,\alpha}
 \]
 où $\ell(x;\truetheta)= \log f(\truetheta,x)$ et $k_{n,\alpha}$ est choisi de telle sorte que
 \[
-\PP_{\truetheta_0}^n [ \Lambda_n(\truetheta_0,\truetheta_1)  \geq  k_{n,\alpha}] = \alpha
+\PP_{\truetheta_0}^n [ \log \Lambda_n(\truetheta_0,\truetheta_1)  \geq  k_{n,\alpha}] = \alpha
 \]
-(on suppose qu'une telle valeur existe, autrement il faudrait randomiser)
+(on suppose qu'une telle valeur existe, autrement il faudrait utiliser un test randomisé)
 \end{itemize}
 \end{frame}
 
@@ -199,19 +199,19 @@ où $\ell(x;\truetheta)= \log f(\truetheta,x)$ et $k_{n,\alpha}$ est choisi de t
 \item En pratique, il est souvent difficile de déterminer exactement le seuil critique $k_{n,\alpha}$... mais il est souvent facile de déterminer
 une suite $\{k_{n,\alpha}, n \in \nset\}$ telle que
 \[
-\lim_{n \to \infty} \PP^n_{\theta_0} ( \Lambda_n(\truetheta_0,\truetheta_1) \geq  k_{n,\alpha}) = \alpha.
+\lim_{n \to \infty} \PP^n_{\theta_0} ( \log \Lambda_n(\truetheta_0,\truetheta_1) \geq  k_{n,\alpha}) = \alpha.
 \]
 \item En effet, le théorème central limite montre que, sous $H_0$,
 \[
-n^{-1/2} \sum_{k=1}^n \{ \ell(X_k; \truetheta_1) - \ell(X_k; \truetheta_0) + \KL{\truetheta_0}{\truetheta_1} \} \dlim_{\PP^n_{\truetheta_0}} \gauss(0,J(\truetheta_0,\truetheta_1))
+n^{-1/2} \sum_{k=1}^n \left\{ \log \frac{f(\theta_1,X_k)}{f(\theta_0,X_k)}  + \KL{\truetheta_0}{\truetheta_1} \right\} \dlim_{\PP^n_{\truetheta_0}} \gauss(0,J(\truetheta_0,\truetheta_1))
 \]
 où $\KL{\truetheta_0}{\truetheta_1}$ est la \alert{divergence de Kullback-Leibler} définie par
 \[
-\KL{\truetheta_0}{\truetheta_1} = \PE_{\truetheta_0}\left[ \ell(X_1;\truetheta_0) - \ell(X_1;\truetheta_1) \right] > 0
+\KL{\truetheta_0}{\truetheta_1} = \PE_{\truetheta_0}\left[ \log \frac{ f(\theta_0,X_1)}{f(\theta_1,X_1)} \right] > 0
 \]
 et
 \[
-J(\truetheta_0,\truetheta_1)= \PVar_{\truetheta_0}[ \ell(X_1;\truetheta_1) - \ell(X_1;\truetheta_0) ] \eqsp.
+J(\truetheta_0,\truetheta_1)= \PVar_{\truetheta_0}\left( \log \frac{ f(\theta_0,X_1)}{f(\theta_1,X_1)} \right) \eqsp.
 \]
 \end{itemize}
 \end{frame}
@@ -222,18 +222,17 @@ J(\truetheta_0,\truetheta_1)= \PVar_{\truetheta_0}[ \ell(X_1;\truetheta_1) - \el
 \item Pour $\alpha \in \ooint{0,1}$, on note $z_{1-\alpha}$ le quantile $1-\alpha$ de la loi gaussienne standardisée.
 \item  Nous avons donc:
 \[
-\lim_{n \to \infty} \PP_{\truetheta_0}^n \left( n^{-1/2}
-  J^{-1/2}(\truetheta_0,\truetheta_1) \{ \Lambda_n(\truetheta_0,\truetheta_1) +
+\lim_{n \to \infty} \PP_{\truetheta_0}^n \left( \frac{1}{\sqrt{n J(\truetheta_0,\truetheta_1)}} \{ \log \Lambda_n(\truetheta_0,\truetheta_1) +
   n \KL{\truetheta_0}{\truetheta_1} \} \geq z_{1-\alpha} \right) = \alpha
 \]
 ce qui implique, en posant
 \[
 k_{n,\alpha}= -n \KL{\truetheta_0}{\truetheta_1} + n^{1/2} z_{1-\alpha} \sqrt{J(\truetheta_0,\truetheta_1)}
 \]
-que le test de région critique $\{ \Lambda_n(\truetheta_0,\truetheta_1) \geq
+que le test de région critique $\{ \log \Lambda_n(\truetheta_0,\truetheta_1) \geq
 k_{n,\alpha} \}$ est asymptotiquement de niveau $\alpha$,
 \[
-\lim_{n \to \infty} \PP^n_{\truetheta_0} [ \Lambda_n(\truetheta_0,\truetheta_1)
+\lim_{n \to \infty} \PP^n_{\truetheta_0} [ \log \Lambda_n(\truetheta_0,\truetheta_1)
 \geq k_{n,\alpha} ] = \alpha \eqsp.
 \]
 \end{itemize}
@@ -243,39 +242,24 @@ k_{n,\alpha} \}$ est asymptotiquement de niveau $\alpha$,
 \frametitle{Distribution du test sous l'hypothèse alternative}
 \begin{itemize}
 \item Sous $\PP^n_{\theta_1}$, nous avons
-\[
-\Delta_n= \frac{1}{\sqrt{n}} \sum_{i=1}^n \{ \ell(X_i;\truetheta_1) -
-\ell(X_i;\truetheta_0) - \KL{\truetheta_1}{\truetheta_0} \}
-\dlim_{\PP^n_{\truetheta_1}} \gauss( 0, J(\theta_1,\theta_0) )
-\]
+\begin{multline*}
+\PP_{\theta_1}^n \left( \sum_{k=1}^n \left\{ \log \frac{f(\theta_1,X_k)}{f(\theta_0,X_k)}  \right\} \geq -n \KL{\theta_0}{\theta_1} + \sqrt{n} J^{1/2}(\theta_0,\theta_1) z_{1-\alpha} \right) \\
+=
+\PP_{\theta_1}^n \left( \frac{1}{n} \sum_{k=1}^n \left\{ \log \frac{f(\theta_1,X_k)}{f(\theta_0,X_k)} - \KL{\theta_1}{\theta_0} \right\} \geq - I(\theta_0,\theta_1) + \frac{\sqrt{J(\theta_0,\theta_1)}}{\sqrt{n}} z_{1-\alpha} \right) \eqsp,
+\end{multline*}
 où
-\begin{align*}
-&\KL{\truetheta_1}{\truetheta_0}= \PE_{\truetheta_1}[ \ell(X_1;\truetheta_1) - \ell(X_1;\truetheta_0)]  \\
-&J(\theta_1,\theta_0) = \PVar_{\truetheta_1} ( \ell(X_1;\truetheta_1) - \ell(X_1;\truetheta_0) )
-\end{align*}
-\pause \item Par conséquent
 \[
-\{ \Lambda_n(\truetheta_0,\truetheta_1) \geq k_{n,\alpha} \} = \left\{ \Delta_n
-  \geq z_{1-\alpha} \sqrt{J(\truetheta_0,\truetheta_1)} - n^{1/2}
-  I(\truetheta_0,\truetheta_1) \right\}
+I(\truetheta_0,\truetheta_1)= \KL{\truetheta_0}{\truetheta_1} + \KL{\truetheta_1}{\truetheta_0}  \eqsp.
 \]
-où
-$$
-I(\truetheta_0,\truetheta_1)= \KL{\truetheta_0}{\truetheta_1} + \KL{\truetheta_1}{\truetheta_0} \eqsp.
-$$
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Puissance du test de NP}
-\begin{itemize}
-\item \alert{Conclusion} Si $\KL{\truetheta_0}{\truetheta_1} \ne 0$ alors
+\pause \item Par conséquent, \item \alert{Conclusion} Si $\KL{\truetheta_0}{\truetheta_1} \ne 0$ alors
 \[
 \lim_{n \to \infty} \puissance_n(\truetheta_1)= 1 \eqsp.
 \]
-\item Si le modèle est identifiable, alors il existe un test de niveau asymptotique $\alpha$ et donc la puissance tend vers 1.
+Si le modèle est identifiable, alors il existe un test de niveau asymptotique $\alpha$ consistant (la puissance du test tend  vers 1).
 \end{itemize}
 \end{frame}
+
+
 
 \subsection{Efficacité asymptotique relative}
 \begin{frame}
@@ -284,7 +268,7 @@ $$
 \item Supposons que $(X_1,\dots,X_n)$ est un $n$-échantillon indépendant de densité $f(\theta,x)= f(x-\truetheta)$ par rapport à la mesure de Lebesgue sur $\rset$.
 \item \alert{Hypothèses}
 \begin{itemize}
-\item Variance finie: $\int |x|^2 f(x) \rmd x < \infty$
+\item Variance finie: $\sigma^2_f \int |x|^2 f(x) \rmd x < \infty$
 \item Parité: $f$ est une fonction paire (donc $\theta$ est la moyenne et la
   médiane de la loi)
 \item $f$ est continue et $f(0) > 0$ : unicité de la médiane
@@ -298,16 +282,20 @@ $$
 \begin{frame}
 \frametitle{Un exemple}
 \begin{itemize}
-\item On considère deux statistiques de tests:
+\item On considère deux statistiques:
 \begin{align*}
 U_n&= \frac{1}{n} \sum_{i=1}^n \indi{X_i > 0} &&\text{test du signe} \\
-T_n&= \frac{\bar{X}_n}{S_n}     &&\text{t-test}
+\bar{X}_n&= n^{-1} \sum_{i=1}^n X_i     &&\text{z-test}
 \end{align*}
-où \begin{itemize}
-\item $\bar{X}_n= n^{-1} \sum_{i=1}^n X_i$ est la \alert{moyenne empirique}
-\item $S_n^2= n^{-1} \sum_{i=1}^n (X_i - \bar{X}_n)^2$ est la \alert{variance empirique}.
-\end{itemize}
-\item \alert{Question:} quel test est le meilleur ?
+\item  Sous $H_0$, $\PP_0( X_1 > 0)=1/2$, et donc $U_n \plim[\PP_{0}^n] 1/2$. Si $\theta > 0$, $\PP_\theta(X_1 > 0) >  1 - F(-\theta)$ et 
+ce qui suggère de considérer un test $\{ U_n -1/2 > c_{n,\alpha} \}$ 
+\item Sous $H_0$,  $\PE_0[X_1]= 0$ et donc $\bar{X}_n \plim[\PP_{0}^n] 1/2$. Si $\theta > 0$, $\PE_\theta[X_1]= \theta$ ce qui suggère de
+considérer un test $\{ \bar{X}_n > d_{n,\alpha} \}$
+\item \alert{Questions:} 
+\begin{enumerate}
+\item Comment calibrer  les constantes $c_{n,\alpha}$  et $d_{n,\alpha}$ ? facile !
+\item quel test dois je choisir ? En quoi mon choix est-il dépendant de la distribution des observations ?
+\end{enumerate}
 \end{itemize}
 \end{frame}
 
@@ -325,7 +313,7 @@ où
 \[
 \mu(\theta) = 1 - F(-\theta) \quad \qquad \sigma^2(\theta) = (1-F(-\theta)) F(-\theta) \eqsp.
 \]
-\item Par conséquent, sous $H_0: \theta = 0$
+\item Par conséquent, sous $H_0: \theta = 0$, $\mu(0)=1/2$ et $\sigma^2(0)= 1/4$ ce qui implique:
 \[
 2 \sqrt{n} (U_n - 1/2) \dlim_{\PP^n_0} \gauss(0,1) \eqsp.
 \]
@@ -338,11 +326,12 @@ où
 La puissance du test de signe de niveau asymptotique $\alpha$ est donnée pour tout $\theta > 0$, par
 \begin{align*}
 \puissance^{\mathrm{sign}}_{n,\alpha}(\theta)
-&= \PP_\theta( \sqrt{n}(U_n - \mu(0)) > \sigma(0) z_{1-\alpha}) \\
-&= \PP_\theta( \sqrt{n} \sigma^{-1}(\theta) (U_n - \mu(\theta)) > \sigma^{-1}(\theta) \{ \sigma(0) z_{1-\alpha} + n^{1/2} \{\mu(0)-\mu(\theta)\}\}). \end{align*}
+&= \PP_\theta( \sqrt{n}(U_n - 1/2) > 1/2 z_{1-\alpha}) \\
+&= \PP_\theta\left( U_n - \mu(\theta) > \{1/2-\mu(\theta)\} + \frac{1}{2 \sqrt{n}} z_{1-\alpha}  \right) \eqsp. 
+\end{align*}
 
-Puisque $\mu(0) < \mu(\truetheta)$ pour $\truetheta > 0$, le test est
-\alert{consistant}: pour tout $\theta > 0$, \alert{
+Puisque $1/2 < \mu(\truetheta)= 1- F(-\theta)$ pour $\truetheta > 0$, la loi des grands nombres montre que 
+le test est \alert{consistant}: pour tout $\theta > 0$, \alert{
 \[
 \lim_{n \to \infty}  \puissance^{\mathrm{sign}}_{n,\alpha}(\theta) = 1 \eqsp.
 \]
@@ -352,20 +341,13 @@ Puisque $\mu(0) < \mu(\truetheta)$ pour $\truetheta > 0$, le test est
 
 
 \begin{frame}
-\frametitle{Asymptotique du $t$-test}
-On considère la moyenne empirique \alert{studentisée}
-\begin{equation*}
-T_n= \frac{1}{n} \sum_{i=1}^n \frac{X_i}{S_n} \quad \text{t-test}
-\end{equation*}
-où $S^2_n= n^{-1} \sum_{i=1}^n (X_i - \bar{X}_n)^2$ est la \alert{variance empirique}
+\frametitle{Asymptotique du $z$-test}
 \begin{itemize}
-\item Loi des grands nombres : $S^2_n \plim_{\PP_{\theta}} s^2 = \int x^2 f(x) \rmd x$.
-\item Théorème Central limite: $n^{-1/2} \sum_{i=1}^n (X_i - \theta) \dlim_{\PP_\theta} \gauss(0,s^2)$.
-\item Slutsky: $n^{-1/2} S_n^{-1} \left\{ \sum_{i=1}^n (X_i-\theta)  \right\} \dlim_{\PP_\theta} \gauss(0,1)$.
-\item Le test de région critique $\{ T_n > n^{-1/2} z_{1-\alpha} \}$ est un test de niveau asymptotique $\alpha$:
+\item Théorème Central limite: $n^{-1/2} \sum_{i=1}^n (X_i - \theta) \dlim_{\PP_\theta} \gauss(0,\sigma^2_f)$.
+\item Le test de région critique $\{ \bar{X}_n > n^{-1/2} \sigma_f z_{1-\alpha} \}$ est un test de niveau asymptotique $\alpha$:
 \begin{align*}
-\lim_{n \to \infty} \PP_0 \left( T_n > n^{-1/2} z_{1-\alpha} \right)
-&= \lim_{n \to \infty} \PP_0 \left( n^{1/2} T_n > z_{1-\alpha} \right) \\
+\lim_{n \to \infty} \PP_0 \left( \bar{X}_n > n^{-1/2} \sigma_f z_{1-\alpha} \right)
+&= \lim_{n \to \infty} \PP_0 \left( n^{1/2} \bar{X}_n / \sigma_f >  z_{1-\alpha} \right) \\
 &= 1 - \Phi(z_{1-\alpha})= \alpha \eqsp.
 \end{align*}
 \end{itemize}
@@ -373,18 +355,19 @@ où $S^2_n= n^{-1} \sum_{i=1}^n (X_i - \bar{X}_n)^2$ est la \alert{variance empi
 
 
 \begin{frame}
-\frametitle{Puissance du $t$-test}
+\frametitle{Puissance du $z$-test}
 La puissance du test de niveau $\alpha$ est donnée par
-\begin{align*}
-\puissance^{\mathrm{t-test}}_{n,\alpha}(\theta)
-&= \PP_{\truetheta}(\sqrt{n} T_n > z_{1-\alpha})\\
-&=  \PP_{\truetheta}(n^{-1/2} S_n^{-1} \sum_{i=1}^n (X_i - \theta) > z_{1-\alpha} - \sqrt{n} S_n^{-1} \truetheta).
-\end{align*}
-Comme $\lim_{n \to \infty} \{ z_{1-\alpha} - \sqrt{n} S_n^{-1} \theta\} = -
-\infty$, $\PP_\theta$-p.s. pour tout $\theta >0$, le $t$-test de niveau
-asymptotique $\alpha$ est \alert{consistant}: pour tout $\theta > 0$, \alert{
 \[
-\lim_{n \to \infty} \puissance^{\mathrm{t-test}}_{n,\alpha}(\theta) = 1 \eqsp.
+\puissance^{\mathrm{t-test}}_{n,\alpha}(\theta)= \PP^n_{\truetheta}(\sqrt{n} \bar{X}_n > \sigma_f z_{1-\alpha})
+\]
+Comme, par la loi des grands nombres
+\begin{align*}
+\frac{1}{n} \sum_{i=1}^n (X_i - \theta) &\plim[\PP^n_{\theta}] 0 \\
+n^{-1/2} \sigma_f z_{1-\alpha} -   \truetheta &\plim[\PP^n_{\theta}] -\truetheta
+\end{align*}
+le $z$-test de niveau asymptotique $\alpha$ est \alert{consistant}: pour tout $\theta > 0$, \alert{
+\[
+\lim_{n \to \infty} \puissance^{\mathrm{z-test}}_{n,\alpha}(\theta) = 1 \eqsp.
 \]
 }
 \end{frame}
@@ -392,8 +375,15 @@ asymptotique $\alpha$ est \alert{consistant}: pour tout $\theta > 0$, \alert{
 \begin{frame}
 \frametitle{Comparaison asymptotique des puissances}
 \begin{itemize}
-\item Nous devons rendre la discrimination entre l'hypothèse nulle $H_0$ et l'hypothèse alternative $H_1$ plus \alert{difficile} quand $n \to \infty$.
-\item \alert{Idée: }  considérer un test $H_0: \theta = 0$ contre \alert{une suite d'hypothèses alternatives} $H^n_1: \theta = \theta_n$ avec $\theta_n > 0$ et $\lim_{n \to \infty} \theta_n = 0$.
+\item A l'instar de l'estimation ponctuelle, la simple notion de \alert{consistance} ne nous donne pas une méthode permettant de \alert{comparer} des tests: tous les tests \alert{raisonnables} sont consistants, comme tous les estimateurs \alert{raisonnables}  des paramètres.
+\item Pour pouvoir comparer asymptotiquement les tests, il faut introduire une élementaire que la consistance.. 
+\item Deux approches possibles:
+\item \alert{Bahadur}: mesurer la vitesse à laquelle la vitesse du test tend vers $1$ (théorie des \alert{grandes déviations})
+\item \alert{Pitman}:   
+\begin{itemize}
+\item rendre la discrimination entre l'hypothèse nulle $H_0$ et l'hypothèse alternative $H_1$ plus \alert{difficile} quand $n \to \infty$.
+\item \alert{considérer un test $H_0: \theta = 0$ contre \alert{une suite d'hypothèses alternatives} $H^n_1: \theta = \theta_n$ avec $\theta_n > 0$ et $\lim_{n \to \infty} \theta_n = 0$.}
+\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -404,13 +394,18 @@ $$
 \PP_\theta( \sqrt{n} \sigma^{-1}(\theta) (U_n - \mu(\theta)) > \sigma^{-1}(\theta) \{ \sigma(0) z_{1-\alpha} + \sqrt{n} \{\mu(0)-\mu(\theta)\}\})
 $$
 \begin{itemize}
-\item  la puissance du test contre la suite de contre-alternatives $H_1^n: \theta_n > 0$, dépend de $\sqrt{n} (\mu(0) - \mu(\theta_n))$ où
+\item  Nous cherchons à déterminer la puissance du test contre la suite de contre-alternatives $H_1^n: \theta_n > 0$, où $\theta_n \to 0$.
+\item La puissance dépend de $\sqrt{n} (\mu(0) - \mu(\theta_n))$ où
 \[
 \mu(\theta) = 1 - F(-\theta) \eqsp.
 \]
 \item Comme $F$ est différentiable en $\theta = 0$, nous avons
 \[
-\sqrt{n}(\mu(\theta_n) - \mu(0))= - \sqrt{n} ( F(-\theta_n) - F(0)) =  \sqrt{n} \theta_n f(0) + o(\sqrt{n} \theta_n) \eqsp.
+\sqrt{n}(\mu(\theta_n) - \mu(0))= - \sqrt{n} ( F(-\theta_n) - F(0)) =  \sqrt{n} \theta_n f(0) + o(\sqrt{n} \theta_n) \eqsp,
+\]
+car
+\[
+F(-\theta) = F(0) - \theta f(0) + o(\theta)
 \]
 \end{itemize}
 \end{frame}
@@ -428,12 +423,6 @@ $$
 \lim_{n \to \infty} \sqrt{n} \theta_n= h > 0
 \]
 }
-\item Dans ce cas, $\sqrt{n}(\mu(0)- \mu(\theta_n)) \to -h f(0)$ et $\lim_n \sigma(\theta_n) = \sigma(0)=1/2$, donc
-\alert{
-\[
-\lim_{n \to \infty} \puissance_{n,\alpha}^{\mathrm{sign}}(\theta_n) = \Phi(2 h f(0) - z_{1-\alpha})
-\]
-}
 \end{itemize}
 \end{frame}
 
@@ -446,71 +435,190 @@ $$
 \puissance(h)= \lim_{n \to \infty} \puissance_n( h / \sqrt{n}) \eqsp.
 \]
 }
-\item Pour les modèles réguliers, cette fonction de \alert{puissance locale asymptotique} est bien définie (preuve délicate en toute généralité)
+\item Pour les modèles réguliers, cette fonction de \alert{puissance locale asymptotique} est bien définie (preuve délicate, basée sur la notion de \alert{contiguité})
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Efficacité asymptotique locale des tests}
 \begin{theo}
-Soit $\sequence{\theta}[n][\nset] \subset \rset^+_*$ telle que $\lim_{n \to \infty}\sqrt{n} \theta_n = h$.
-Soit $\sequence{T}[n][\nset]$ une suite de statistiques vérifiant:
+Soit $g$ une fonction telle $\PE_\theta[g^2(X_1)] < \infty$ pour tout $\theta \in \Theta$. On note $\PE_\theta[g(X_1)]= \mu(\theta)$
+et $\PVar_\theta[g(X_1)]= \sigma^2(\theta)$. 
 \begin{enumerate}
-\item $\sqrt{n} \sigma(\theta_n)^{-1} (T_n - \mu(\theta_n)) \dlim_{\PP_{\theta_n}} \gauss(0,1)$
 \item $\mu$ est différentiable en $0$
 \item $\sigma$ continue en $0$.
 \end{enumerate}
-Soit  $\varphi_n$ une suite de tests simples de région critique $\{ T_n > t_{n,\alpha}\}$  de niveau asymptotique $\alpha$: $\lim_{n \to \infty} \PP_{0}( T_n > t_{n,\alpha})= \alpha$.
-
-\bigskip
-
-La \alert{puissance locale asymptotique} de cette suite de tests est donnée par
+On pose $G_n= n^{-1/2} \sum_{k=1}^n \{ g(X_k) - \mu(0) \}$. 
+\begin{enumerate} 
+\item La suite de test $\{ G_n > \sigma(0) z_{1-\alpha}\}$  est de niveau asymptotique $\alpha$: $\lim_{n \to \infty} \PP_{0}( G_n > \sigma(0) z_{1-\alpha})= \alpha$.
+\item La \alert{puissance locale asymptotique} de cette suite de tests est donnée par
 \[
-\puissance(h)= \lim_{n \to \infty} \puissance_n( \sqrt{n} \theta_n)= \Phi(h
-\mu'(0)/\sigma(0) - z_{1-\alpha}) \eqsp.
+\puissance(h)= \lim_{n \to \infty} \puissance_n( h/\sqrt{n})= \Phi(h \mu'(0)/\sigma(0) - z_{1-\alpha}) \eqsp.
 \]
+\end{enumerate}
 \end{theo}
+\end{frame}
+
+\begin{frame}
+\frametitle{Elements de preuve}
+\begin{itemize}
+\item On pose 
+\begin{align*}
+G_n       &= n^{-1/2} \sum_{k=1}^n \{g(X_k) - \mu(0) \} \\
+\Lambda_n &= \Lambda_n(X_1,\dots,X_n) = \prod_{k=1}^n \frac{f(hn^{-1/2},X_k)}{f(0,X_k)}
+\end{align*}
+\item On cherche à déterminer la loi de $G_n$ sous la suite de lois $\PP_{\theta_n}^n$.  On va chercher à calculer
+\tco{$\lim_{n \to \infty} \PE_{\theta_n}\left[ \rme^{\rmi u G_n} \right]$}
+\item \alert{Remarque fondamentale:} \tco{$\PE_{\theta_n}[ \rme^{\rmi u G_n}] = \PE_{0}[\Lambda_n \rme^{\rmi u G_n}]$}
+\begin{align*}
+&\PE_{\theta_n}[ \rme^{\rmi u G_n}] 
+= \idotsint \rme^{\rmi u n^{-1/2} \sum_{k=1}^n \{g(x_k) - \mu(0)\}} \prod_{k=1}^n f(\theta_n,x_k) \rmd x_1 \dots \rmd x_n \\
+&= \idotsint \rme^{\rmi u n^{-1/2} \sum_{k=1}^n \{g(x_k) - \mu(0)\}} \Lambda_n(x_1,\dots,x_n) \prod_{k=1}^n f(0,x_k) \rmd x_1 \dots \rmd x_n
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Elements de preuve 2}
+\begin{itemize}
+\item On est ramené à étudier, sous $\PP_{\theta_0}^n$ la limite du vecteur aléatoire
+\[
+\left[\begin{array}{c}
+  \log \Lambda_n \\
+  G_n 
+\end{array}
+\right]
+=
+\left[\begin{array}{c}
+   \sum_{k=1}^n \log f(hn^{-1/2},X_k) - \log f(0,X_k)  \\
+   n^{-1/2} \sum_{k=1}^n \{ g(X_k) - \mu(0)\} 
+ \end{array}
+\right]
+\]
+\item Pour un modèle régulier, en posant $\ell(\theta,x)= \log f(\theta,x)$ (avec la convention $\ell(x)= \ell(0,x)$),
+nous avons 
+\[
+\ell(hn^{-1/2},x)= \ell(x) + h n^{-1/2} \dot\ell(x) + (h^2 n^{-1})/2 \ddot \ell(x) + o(n^{-1})
+\]
+ce qui implique
+\begin{align*}
+ \sum_{k=1}^n \ell (hn^{-1/2},X_k) - \ell(X_k) 
+ &= \frac{h}{\sqrt{n}} \sum_{k=1}^n \dot\ell(X_k) + \frac{h^2}{2n} \sum_{k=1}^n \ddot \ell(X_k) + o_{\PP_0^n}(1) \\
+ &= \frac{h}{\sqrt{n}} \sum_{k=1}^n \dot\ell(X_k) - \frac{h^2}{2} I(0)  + o_{\PP_0^n}(1)
+\end{align*}
+où $I(0)$ est l'information de Fisher.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Elements de preuve 3}
+\begin{itemize}
+\item Par conséquent, nous avons
+\[
+\left[\begin{array}{c}
+  \log \Lambda_n \\
+  G_n
+\end{array}
+\right]
+=
+n^{-1/2}  \sum_{k=1}^n \left[ \begin{array}{c} \dot \ell(X_k) \\ g(X_k) - \mu(0) \end{array} \right]
+- 
+\left[
+\begin{array}{c}
+(h^2/2) I(0) \\
+0
+\end{array}
+\right]
++
+o_{\PP_{0}^n}(1) \eqsp.
+\]
+\item En utilisant un TCL, nous avons donc
+\begin{align*}
+&\left[\begin{array}{c}
+  \log \Lambda_n \\
+  G_n
+\end{array}
+\right]
+\dlim{\PP_{0}^n} 
+\left[\begin{array}{c}
+  L \\
+  G
+\end{array}
+\right]
+\\
+&\sim
+\gauss\left( \left[ \begin{array}{c} - (h^2/2) I(0) \\ 0 \end{array}\right], \left[ 
+\begin{array}{cc}
+\PE_0[ (\dot \ell(X_1))^2] & \PE_0[ g(X_1)  \dot \ell(X_1)] \\
+\PE_0[ g(X_1)  \dot \ell(X_1)] & \Var_0(g(X_1)) 
+\end{array}
+\right] \right)
+\end{align*}
+\item  Nous avons:
+\begin{enumerate}
+\item $\PE_0[ (\dot \ell(X_1))^2]= I(0)$
+\item $\PE_0[ (g(X_1)- \mu(0))^2]= \sigma(0)^2$.
+\item $\PE_0[ (g(X_1) - \mu) \dot \ell(X_1)]= \PE_0[ g(X_1) \dot\ell(X_1)]= \int g(x) \dot f(x-\theta) \rmd x \vert_{\theta=0}= -\dot\mu(0)$
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preuve: on rassemble les bouts}
+\begin{itemize}
+\item En utilisant $\PE_{\theta_n}[ \rme^{\rmi u G_n}] = \PE_0[ \rme^{\log(\Lambda_n)} \rme^{\rmi u G_n}]$ et 
+la convergence en loi de $[\log(\Lambda_n), G_n]$ implique (il y a encore des petits détails à régler)
+\[
+\lim_{n \to \infty} \PE_{\theta_n}[ \rme^{\rmi u G_n}]= \PE[ \rme^{L} \rme^{\rmi u G}]
+\] 
+où $[L,G]^T$ est un vecteur gaussien de moyenne $[-h^2 I(0)/2,0]^T$ et de covariance
+\[
+\left[
+\begin{array}{cc}
+I(0) & -\dot \mu(0) \\
+-\dot \mu(0) & \sigma^2(0)
+\end{array}
+\right] 
+\] 
+\item Conclusion par un calcul élémentaire...
+\end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Conclusion}
 \begin{itemize}
-\item Nous disposons maintenant d'une méthode simple de comparer les tests, en nous basant sur la puissance asympotique locale...
+\item Nous disposons maintenant d'une méthode simple pour comparer les tests de l'hypothèse $H_0 \theta = 0$;, contre $H_1: \theta > 0$, en nous basant sur la puissance asympotique locale...
 \item Pour les tests asymptotiquement normaux, il suffit de comparer la \alert{pente} des tests, à savoir \alert{$\mu'(0)/\sigma(0)$}.
-\item Plus la pente est grande, plus $\pi(h)$ augmente rapidement avec $h$ !
+\item Plus la pente est grande, plus la puissance asymptotique locale $\pi(h)$ augmente rapidement avec $h$ !
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Application: test du signe}
+\frametitle{Application}
 \begin{itemize}
-\item $U_n= n^{-1} \sum_{i=1}^n \indi{X_i > 0}$.
-\item $\mu(\theta)= 1 - F(-\theta)$, $\mu'(\theta)=  f(\theta)$.
+\item Test du signe
+\begin{itemize}
+\item Statistique $U_n= n^{-1} \sum_{i=1}^n \indi{X_i > 0}$.
+\item $\mu(\theta)= 1 - F(-\theta)$, $\dot \mu(\theta)=  f(\theta)$.
 \item $\sigma^2(\theta)= (1 - F(-\theta)) F(-\theta)$
-\item \alert{Pente:} $\mu'(0)/\sigma(0)= 2 f(0)$.
+\item \alert{Pente:} $\dot\mu(0)/\sigma(0)= 2 f(0)$.
+\end{itemize}
+\item $z$-test
+\begin{itemize}
+\item Statistique $\bar{X}_n$.
+\item $\mu(\theta)= \theta$ and $\sigma(\theta)= \sigma_f$ avec $\sigma^2_f = \int x^2 f(x) \rmd x$.
+\item \alert{Pente:} $\dot\mu(0)/\sigma(0)= 1/\sigma_f$.
+\end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Application: t-test}
-\begin{itemize}
-\item $T_n = \bar{X}_n/S_n$.
-\item $\mu(\theta)= \theta/s$ and $\sigma(\theta)= 1$. En effet
-\begin{align*}
-\sqrt{n} ( T_n - \theta_n/s)
-&= \sqrt{n} ( \bar{X}_n / S_n - \theta_n / S_n) + \sqrt{n} \theta_n (S_n^{-1} - s^{-1}) \\
-&= n^{-1/2} \sum_{i=1}^n (X_i - \theta_n)/S_n + + \sqrt{n} \theta_n (S_n^{-1} - s^{-1}) \dlim_{\PP_{\theta_n}} \gauss(0,1) \eqsp.
-\end{align*}
-\item \alert{Pente:} $\mu'(0)/\sigma(0)= 1/s$.
-\end{itemize}
-\end{frame}
 
 \begin{frame}
 \frametitle{Efficacité relative}
 \begin{enumerate}
 \item test du signe: $\mu'(0)/\sigma(0)=2 f(0)$,
-\item $t$-test: $\mu'(0)/\sigma(0)=1/s$.
+\item $t$-test: $\mu'(0)/\sigma(0)=1/\sigma_f$.
 \end{enumerate}
 
 \begin{itemize}
@@ -539,7 +647,7 @@ est inférieure à un seuil.
 \end{frame}
 
 \begin{frame}
-\frametitle{t-test}
+\frametitle{Exemple 1: t-test}
 \begin{itemize}
 \item  Soient $X^{(n)}= (X_{1}, \dots, X_{n})$ un $n$-échantillon de $\gauss(\mu,\ \sigma^{2})$.
 \item On teste l'hypothèse $H_0: \mu =0$ contre $H_1: \mu \ne 0$.
