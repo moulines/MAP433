@@ -268,7 +268,7 @@ Si le modèle est identifiable, alors il existe un test de niveau asymptotique $
 \item Supposons que $(X_1,\dots,X_n)$ est un $n$-échantillon indépendant de densité $f(\theta,x)= f(x-\truetheta)$ par rapport à la mesure de Lebesgue sur $\rset$.
 \item \alert{Hypothèses}
 \begin{itemize}
-\item Variance finie: $\sigma^2_f \int |x|^2 f(x) \rmd x < \infty$
+\item Variance finie: $\sigma^2_f =  \int |x|^2 f(x) \rmd x < \infty$
 \item Parité: $f$ est une fonction paire (donc $\theta$ est la moyenne et la
   médiane de la loi)
 \item $f$ est continue et $f(0) > 0$ : unicité de la médiane
@@ -287,9 +287,9 @@ Si le modèle est identifiable, alors il existe un test de niveau asymptotique $
 U_n&= \frac{1}{n} \sum_{i=1}^n \indi{X_i > 0} &&\text{test du signe} \\
 \bar{X}_n&= n^{-1} \sum_{i=1}^n X_i     &&\text{z-test}
 \end{align*}
-\item  Sous $H_0$, $\PP_0( X_1 > 0)=1/2$, et donc $U_n \plim[\PP_{0}^n] 1/2$. Si $\theta > 0$, $\PP_\theta(X_1 > 0) >  1 - F(-\theta)$ et
+\item  Sous $H_0$, $\PP_0( X_1 > 0)=1/2$, et donc $U_n \plim[\PP_{0}^n] 1/2$. Si $\theta > 0$, $\PP_\theta(X_1 > 0) =  1 - F(-\theta) > 1/2$ et
 ce qui suggère de considérer un test $\{ U_n -1/2 > c_{n,\alpha} \}$
-\item Sous $H_0$,  $\PE_0[X_1]= 0$ et donc $\bar{X}_n \plim[\PP_{0}^n] 1/2$. Si $\theta > 0$, $\PE_\theta[X_1]= \theta$ ce qui suggère de
+\item Sous $H_0$,  $\PE_0[X_1]= 0$ et donc $\bar{X}_n \plim[\PP_{0}^n] 0$. Si $\theta > 0$, $\PE_\theta[X_1]= \theta$ ce qui suggère de
 considérer un test $\{ \bar{X}_n > d_{n,\alpha} \}$
 \item \alert{Questions:}
 \begin{enumerate}
@@ -376,7 +376,7 @@ le $z$-test de niveau asymptotique $\alpha$ est \alert{consistant}: pour tout $\
 \frametitle{Comparaison asymptotique des puissances}
 \begin{itemize}
 \item A l'instar de l'estimation ponctuelle, la simple notion de \alert{consistance} ne nous donne pas une méthode permettant de \alert{comparer} des tests: tous les tests \alert{raisonnables} sont consistants, comme tous les estimateurs \alert{raisonnables}  des paramètres.
-\item Pour pouvoir comparer asymptotiquement les tests, il faut introduire une élementaire que la consistance..
+\item Pour pouvoir comparer asymptotiquement les tests, il faut introduire une notion moins élementaire que la consistance.
 \item Deux approches possibles:
 \item \alert{Bahadur}: mesurer la vitesse à laquelle la vitesse du test tend vers $1$ (théorie des \alert{grandes déviations})
 \item \alert{Pitman}:
@@ -539,7 +539,7 @@ o_{\PP_{0}^n}(1) \eqsp.
   G_n
 \end{array}
 \right]
-\dlim{\PP_{0}^n}
+\dlim_{\PP_{0}^n}
 \left[\begin{array}{c}
   L \\
   G
@@ -558,7 +558,7 @@ o_{\PP_{0}^n}(1) \eqsp.
 \begin{enumerate}
 \item $\PE_0[ (\dot \ell(X_1))^2]= I(0)$
 \item $\PE_0[ (g(X_1)- \mu(0))^2]= \sigma(0)^2$.
-\item $\PE_0[ (g(X_1) - \mu) \dot \ell(X_1)]= \PE_0[ g(X_1) \dot\ell(X_1)]= \int g(x) \dot f(x-\theta) \rmd x \vert_{\theta=0}= -\dot\mu(0)$
+\item $\PE_0[ g(X_1) \dot\ell(X_1)]= \int g(x) \dot f(x-\theta) \rmd x \vert_{\theta=0}= -\dot\mu(0)$
 \end{enumerate}
 \end{itemize}
 \end{frame}
@@ -567,9 +567,9 @@ o_{\PP_{0}^n}(1) \eqsp.
 \frametitle{Preuve: on rassemble les bouts}
 \begin{itemize}
 \item En utilisant $\PE_{\theta_n}[ \rme^{\rmi u G_n}] = \PE_0[ \rme^{\log(\Lambda_n)} \rme^{\rmi u G_n}]$ et
-la convergence en loi de $[\log(\Lambda_n), G_n]$ implique (il y a encore des petits détails à régler)
+la convergence en loi de $[\log(\Lambda_n), G_n]$, on obtient (il y a encore des petits détails à régler)
 \[
-\lim_{n \to \infty} \PE_{\theta_n}[ \rme^{\rmi u G_n}]= \PE[ \rme^{L} \rme^{\rmi u G}]
+\lim_{n \to \infty} \PE_{\theta_n}[ \rme^{\rmi u G_n}]= \PE_0[ \rme^{L} \rme^{\rmi u G}]
 \]
 où $[L,G]^T$ est un vecteur gaussien de moyenne $[-h^2 I(0)/2,0]^T$ et de covariance
 \[
@@ -587,7 +587,7 @@ I(0) & -\dot \mu(0) \\
 \begin{frame}
 \frametitle{Conclusion}
 \begin{itemize}
-\item Nous disposons maintenant d'une méthode simple pour comparer les tests de l'hypothèse $H_0 \theta = 0$;, contre $H_1: \theta > 0$, en nous basant sur la puissance asympotique locale...
+\item Nous disposons maintenant d'une méthode simple pour comparer les tests de l'hypothèse $H_0: \theta = 0$;, contre $H_1: \theta > 0$, en nous basant sur la puissance asympotique locale...
 \item Pour les tests asymptotiquement normaux, il suffit de comparer la \alert{pente} des tests, à savoir \alert{$\mu'(0)/\sigma(0)$}.
 \item Plus la pente est grande, plus la puissance asymptotique locale $\pi(h)$ augmente rapidement avec $h$ !
 \end{itemize}
@@ -622,10 +622,10 @@ I(0) & -\dot \mu(0) \\
 \end{enumerate}
 
 \begin{itemize}
-\item Laplace: $2 f(0) s = \sqrt{2}=1.414$.
-\item Logistique: $2 f(0) s = \pi/(2\sqrt{3})=0.907$.
-\item Gauss: $2 f(0) s = \sqrt{2/\pi}=0.798$.
-\item Uniforme: $2 f(0) s = 1/\sqrt{3}=0.577$.
+\item Laplace: $2 f(0) \sigma_f  = \sqrt{2}=1.414$.
+\item Logistique: $2 f(0) \sigma_f  = \pi/(2\sqrt{3})=0.907$.
+\item Gauss: $2 f(0) \sigma_f = \sqrt{2/\pi}=0.798$.
+\item Uniforme: $2 f(0) \sigma_f = 1/\sqrt{3}=0.577$.
 \end{itemize}
 \end{frame}
 
