@@ -656,16 +656,16 @@ est inférieure à un seuil.
 \Lambda_{n}&=\frac{\sup_{\theta\in\Theta_{0}}(1/\sigma^{n})\exp(-\frac{1}{2\sigma^{2}}\sum_{i}(X_{i}-\mu)^{2})}{\sup_{\theta\in\Theta}(1/\sigma^{n})\exp(-\frac{1}{2\sigma^{2}}\sum_{i}(X_{i}-\mu)^{2})}\\
 &=\left( \frac{\sum_{i}(X_{i}-\overline{X}_{n})^{2}}{\sum_{i}X_{i}^{2}} \right)^{n/2}
 \end{align*}
-\item Un calcul élémentaire montre que $\Lambda_{n}<c$ est équivalent à $T_{n}^{2}>k$ où
+\item \alert{Résultat important:} Le $t$-test est un test de rapport de vraisemblance généralisé: $\Lambda_{n}<c$ est équivalent à $T_{n}^{2}>k$ où
 $$
 T_{n}=\frac{\sqrt{n}\overline{X}_{n}}{S_n}  \quad \text{où} \quad \quad S_n^2= \frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2} \eqsp.
 $$
-est la $t$-statistique. En d'autres termes, le $\mathrm{t}$-test est un test de rapport de vraisemblance généralisé.
+est la $t$-statistique.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Justification}
+\frametitle{Preuve}
 \begin{align*}
 T_{n}^{2} &=\frac{n\overline{X}_{n}^{2}}{\frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2}} \\
 &=\frac{\sum_{i}X_{i}^{2}-\sum_{i}(X_{i}-\overline{X}_{n})^{2}}{\frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2}} \\
@@ -695,9 +695,101 @@ $$
 T_{n} = \frac{\bar{X}_n}{S_n} \dlim_{\PP_0^n} \gauss(0,1).
 $$
 \item Par conséquent $-2 \log \Lambda_n \dlim_{\PP_0^n} \chi_{1}^{2}$.
-\item \alert{résultat vrai en toute généralité !}
+\item \alert{résultat vrai en toute généralité...}
 \end{itemize}
 \end{frame}
+
+\begin{frame}
+\frametitle{Test du $chi^2$}
+\begin{itemize}
+\item On suppose $(X_1,\dots,X_n)$ $n$-échantillon multinomial d'un modèle multinomial.
+\item \alert{Paramètre} $\mathbf{p}= (p_1,\dots,p_d) \in \mathcal{M}_d= \{ (p_1, \dots, p_d), p_i \geq 0, \sum_{i=1}^d p_i =1 \}$.
+\item On considère le test bilatère de l'hypothèse nulle  $H_0: (p_1,\dots,p_d)= (q_1,\dots,q_d)$ contre l'alternative $H_1: (p_1,\dots,p_d) \ne (q_1,\dots,q_d)$.
+\item \alert{Idée:} Comparaison des fréquences empiriques
+$$\widehat p_{n,\ell}=\frac{1}{n}\sum_{i=1}^n \indi{X_i=\ell}\;\;\;\text{\alert{proche de}}\;\;q_\ell,\;\;\ell=1,\ldots, d\; \alert{?}$$
+\item Loi des grands nombres :
+$$\big(\widehat p_{n,1},\ldots, \widehat p_{n,d}\big) \plim[\PP_{{\boldsymbol p}}] (p_1,\ldots, p_d)={\boldsymbol p}.$$
+\item \alert{Théorème central-limite ?}
+$${\boldsymbol{U}_n}(\boldsymbol{p})=\sqrt{n}\Big(\frac{\widehat p_{n,1}-p_1}{\sqrt{p_1}},\ldots, \frac{\widehat p_{n,d}-p_d}{\sqrt{p_d}}\Big) \dlim_{\PP_{\boldsymbol{p}}} ?$$
+\item Composante par composante oui. \alert{Convergence globale plus délicate}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Statistique du Chi-deux}
+\begin{prop}
+Si les composantes de $\boldsymbol{p}$ sont toutes non-nulles
+\begin{itemize}
+\item On a la \alert{convergence en loi} sous $\PP_{\boldsymbol{p}}$
+$${\boldsymbol{U}_n}(\boldsymbol{p})\stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$$
+avec $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ et $\sqrt{\boldsymbol{p}} = (\sqrt{p_1},\ldots, \sqrt{p_d})^T$.
+\item \alert{De plus}
+$$\|{\boldsymbol{U}_n}(\boldsymbol{p})\|^2 = n\sum_{\ell=1}^d \frac{(\widehat p_{n,\ell}-p_\ell)^2}{p_\ell} \stackrel{d}{\longrightarrow} \chi^2(\alert{d-1}).$$
+\end{itemize}
+\end{prop}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preuve de la normalité asymptotique}
+\begin{itemize}
+\item Pour $i=1,\ldots, n$ et $1 \leq \ell \leq d$, on pose
+$$Y_\ell^i=\frac{1}{\sqrt{p_\ell}}\big(\indi{X_i=\ell}-p_\ell\big).$$
+\item Les vecteurs ${\boldsymbol Y}_i=(Y_1^i,\ldots, Y_d^i)$ sont \alert{indépendants et identiquement distribués} et
+$${\boldsymbol U}_n(\boldsymbol{p}) = \frac{1}{\sqrt{n}}\sum_{i = 1}^n {\boldsymbol Y}_i,$$
+$\E_{\boldsymbol{p}}\big[Y_\ell^i\big]=0$, $\E_{\boldsymbol{p}}\big[(Y_\ell^i)^2\big]=1-p_\ell$, $\E_{\boldsymbol{p}}\big[Y_\ell^iY_{\ell'}^i \big]=-(p_\ell p_{\ell'})^{1/2}$.
+\item \alert{On applique le TCL vectoriel}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Convergence de la norme au carré}
+\begin{itemize}
+\item On a donc ${\boldsymbol U}_n(\boldsymbol{p}) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$.
+\item On a aussi
+\begin{align*}
+\|{\boldsymbol U}_n(\boldsymbol{p}) \|^2 & \stackrel{d}{\longrightarrow} \| {\mathcal N}\big(0,V(\boldsymbol{p})\big)\|^2 \\
+& \sim \chi^2\big(\mathrm{Rang}\big(V(\boldsymbol{p})\big)\big)
+\end{align*}
+par \alert{Cochran} :  $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ est la projection orthogonale sur $\mathrm{vect}\{\sqrt{\boldsymbol{p}}\}^\perp$ qui est de dimension $d-1$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Test des proportions pour une variable multinomiale}
+\begin{itemize}
+\item Soit $(X_1,\dots,X_n)$ un $n$-échantillon d'une loi multinomiale à $d$-instances
+\item On considère le test bilatère  $H_0: (p_1,\dots,p_d)= (q_1,\dots,q_d)$ conte $H_1= (p_0,\dots,p_d) \ne (q_1,\dots,q_d)$
+\item \alert{Rapport de vraisemblance généralisé}
+\begin{align*}
+\Lambda_n
+&= \frac{ \prod_{i=1}^d q_i^{N_i}}{\max_{(p_1,\dots,p_d) \in \mathcal{M}_d} \prod_{i=1}^d p_i^{N_i} } \\
+&= \prod_{i=1}^d \left( \frac{q_i n}{ N_i} \right)^{N_i} = \prod_{i=1}^d (q_i/ \hat{p}_{n,i})^{N_i}
+\end{align*}
+où $N_i= \sum_{j=1}^n \indi{X_j=i}$  et $\hat{p}_{n,i}= N_i/n$ les fréquences empiriques.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Distribution limite de $-2 \log \Lambda_n$}
+Nous avons
+\begin{align*}
+-2 \log \Lambda_n &= 2\sum_{i=1}^d N_i \log( \hat{p}_{N,i}/q_i) \\
+                  &= 2 n \sum_{i=1}^d  (\hat{p}_{N,i} - q_i + q_i) \log\left( 1 + \frac{\hat{p}_{n,i}-q_i}{q_i} \right) \\
+                  &= 2 n \sum_{i=1}^d \frac{(\hat{p}_{n,i}-q_i)^2}{q_i} + 2 n \sum_{i=1}^d q_i \left\{ \frac{(\hat{p}_{n,i}-q_i)}{q_i} - \frac{1}{2} \left(\frac{\hat{p}_{n,i}-q_i}{q_i} \right)^2 \right\} + o_{\PP}(1) \eqsp \\
+                  &= n \sum_{i=1}^d \frac{(\hat{p}_{n,i}-q_i)^2}{q_i}
+\end{align*}
+car $\sum_{i=1}^d q_i (\hat{p}_{n,i} - q_i)/q_i= 0$...
+
+\alert{
+\[
+-2 \log \Lambda_n \dlim_{\PP_{\mathbb{p}}} \chi^2(d-1)
+\]
+}
+
+\end{frame}
+
+
 
 \begin{frame}
 \frametitle{Distribution asymptotique du test du rapport de vraisemblance}
@@ -754,98 +846,9 @@ n^{-1} \frac{\partial^{2}}{\partial\theta^{2}}L_n(\theta_{n}')
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Test des proportions pour une variable multinomiale}
-\begin{itemize}
-\item Soit $(X_1,\dots,X_n)$ un $n$-échantillon d'une loi multinomiale à $d$-instances
-\item \alert{Paramètre} $\mathbf{p}= (p_1,\dots,p_d) \in \mathcal{M}_d= \{ (p_1, \dots, p_d), p_i \geq 0, \sum_{i=1}^d p_i =1 \}$.
-\item On considère le test bilatère  $H_0: (p_1,\dots,p_d)= (q_1,\dots,q_d)$ conte $H_1= (p_0,\dots,p_d) \ne (q_1,\dots,q_d)$ 
-\item \alert{Rapport de vraisemblance généralisé}
-\begin{align*}
-\Lambda_n
-&= \frac{ \prod_{i=1}^d q_i^{N_i}}{\max_{(p_1,\dots,p_d) \in \mathcal{M}_d} \prod_{i=1}^d p_i^{N_i} } \\
-&= \prod_{i=1}^d \left( \frac{q_i n}{ N_i} \right)^{N_i} = \prod_{i=1}^d (q_i/ \hat{p}_{n,i})^{N_i}
-\end{align*}
-où $N_i= \sum_{j=1}^n \indi{X_j=i}$  et $\hat{p}_{n,i}= N_i/n$ les fréquences empiriques.
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Distribution limite de $-2 \log \Lambda_n$}
-\alert{
-\[
--2 \log \Lambda_n \dlim_{\PP_{\mathbb{p}}} \chi^2(d-1)
-\]
-}
-
-
-Nous avons
-\begin{align*}
--2 \log \Lambda_n &= 2\sum_{i=1}^d N_i \log( \hat{p}_{N,i}/q_i) \\
-                  &= 2 n \sum_{i=1}^d  (\hat{p}_{N,i} - q_i + q_i) \log\left( 1 + \frac{\hat{p}_{n,i}-q_i}{q_i} \right) \\
-                  &= 2 n \sum_{i=1}^d \frac{(\hat{p}_{n,i}-q_i)^2}{q_i} + 2 n \sum_{i=1}^d q_i \left\{ \frac{(\hat{p}_{n,i}-q_i)}{q_i} - \frac{1}{2} \left(\frac{\hat{p}_{n,i}-q_i}{q_i} \right)^2 \right\} + o_{\PP}(1) \eqsp \\
-                  &= n \sum_{i=1}^d \frac{(\hat{p}_{n,i}-q_i)^2}{q_i}
-\end{align*}
-car $\sum_{i=1}^d q_i (\hat{p}_{n,i} - q_i)/q_i= 0$... 
-
-
-\end{frame}
 
 
 
-%\begin{frame}
-%\frametitle{Loi limite des fréquences empiriques}
-%\begin{itemize}
-%\item On suppose $(X_1,\dots,X_n)$ $n$-échantillon multinomial de proportion $(q_1,\dots,q_d)$.
-%\item \alert{Comparaison des fréquences empiriques}
-%$$\widehat p_{n,\ell}=\frac{1}{n}\sum_{i=1}^n \indi{X_i=\ell}\;\;\;\text{\alert{proche de}}\;\;q_\ell,\;\;\ell=1,\ldots, d\; \alert{?}$$
-%\item Loi des grands nombres :
-%$$\big(\widehat p_{n,1},\ldots, \widehat p_{n,d}\big) \stackrel{\PP_{{\boldsymbol p}}}{\longrightarrow} (p_1,\ldots, p_d)={\boldsymbol p}.$$
-%\item \alert{Théorème central-limite ?}
-%$${\boldsymbol{U}_n}(\boldsymbol{p})=\sqrt{n}\Big(\frac{\widehat p_{n,1}-p_1}{\sqrt{p_1}},\ldots, \frac{\widehat p_{n,d}-p_d}{\sqrt{p_d}}\Big) \stackrel{d}{\longrightarrow} ?$$
-%\item Composante par composante oui. \alert{Convergence globale plus délicate}.
-%\end{itemize}
-%\end{frame}
-
-\begin{frame}
-\frametitle{Statistique du Chi-deux}
-\begin{prop}
-Si les composantes de $\boldsymbol{p}$ sont toutes non-nulles
-\begin{itemize}
-\item On a la \alert{convergence en loi} sous $\PP_{\boldsymbol{p}}$
-$${\boldsymbol{U}_n}(\boldsymbol{p})\stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$$
-avec $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ et $\sqrt{\boldsymbol{p}} = (\sqrt{p_1},\ldots, \sqrt{p_d})^T$.
-\item \alert{De plus}
-$$\|{\boldsymbol{U}_n}(\boldsymbol{p})\|^2 = n\sum_{\ell=1}^d \frac{(\widehat p_{n,\ell}-p_\ell)^2}{p_\ell} \stackrel{d}{\longrightarrow} \chi^2(\alert{d-1}).$$
-\end{itemize}
-\end{prop}
-\end{frame}
-
-%\begin{frame}
-%\frametitle{Preuve de la normalité asymptotique}
-%\begin{itemize}
-%\item Pour $i=1,\ldots, n$ et $1 \leq \ell \leq d$, on pose
-%$$Y_\ell^i=\frac{1}{\sqrt{p_\ell}}\big(\indi{X_i=\ell}-p_\ell\big).$$
-%\item Les vecteurs ${\boldsymbol Y}_i=(Y_1^i,\ldots, Y_d^i)$ sont \alert{indépendants et identiquement distribués} et
-%$${\boldsymbol U}_n(\boldsymbol{p}) = \frac{1}{\sqrt{n}}\sum_{i = 1}^n {\boldsymbol Y}_i,$$
-%$\E\big[Y_\ell^i\big]=0$, $\E\big[(Y_\ell^i)^2\big]=1-p_\ell$, $\E\big[Y_\ell^iY_{\ell'}^i \big]=-(p_\ell p_{\ell'})^{1/2}$.
-%\item \alert{On applique le TCL vectoriel}.
-%\end{itemize}
-%\end{frame}
-%
-%\begin{frame}
-%\frametitle{Convergence de la norme au carré}
-%\begin{itemize}
-%\item On a donc ${\boldsymbol U}_n(\boldsymbol{p}) \stackrel{d}{\longrightarrow} {\mathcal N}\big(0,V(\boldsymbol{p})\big)$.
-%\item On a aussi
-%\begin{align*}
-%\|{\boldsymbol U}_n(\boldsymbol{p}) \|^2 & \stackrel{d}{\longrightarrow} \| {\mathcal N}\big(0,V(\boldsymbol{p})\big)\|^2 \\
-%& \sim \chi^2\big(\mathrm{Rang}\big(V(\boldsymbol{p})\big)\big)
-%\end{align*}
-%par \alert{Cochran} :  $V(\boldsymbol{p}) = \mathrm{Id}_d-\sqrt{\boldsymbol{p}}\big(\sqrt{\boldsymbol{p}}\big)^T$ est la projection orthogonale sur $\mathrm{vect}\{\sqrt{\boldsymbol{p}}\}^\perp$ qui est de dimension $d-1$.
-%\end{itemize}
-%\end{frame}
-%
 
 \subsection{Tests de Wald}
 \begin{frame}
