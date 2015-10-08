@@ -640,32 +640,113 @@ I(0) & -\dot \mu(0) \\
 $$
 \Lambda_{n}=\frac{\sup_{\theta\in\Theta_{0}}f(\theta,X^{(n)})}{\sup_{\theta\in\Theta}f(\theta,X^{(n)})}
 $$
-est inférieure à un seuil.
-\item   Lorsque les hypothèses $H_{0},\ H_{1}$ sont simples, ce test est U.P.P. .
-\item Pour des hypothèses composites, il n'y a en général aucun résultat d'optimalité, sauf dans des cas simples...
+est \alert{inférieure} à un seuil.
+\item Beaucoup de tests d'hypothèses classiques sont des tests du rapport de vraisemblance généralisé...
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemple 0: z-test}
+\begin{itemize}
+\item  Soient $X^{(n)}= (X_{1}, \dots, X_{n})$ un $n$-échantillon de $\gauss(\mu,\ \sigma^{2})$ où \alert{$\mu$ est inconnu et $\sigma^2$ est connu}.
+\item On teste l'hypothèse $H_0: \mu =0$ contre $H_1: \mu \ne 0$.
+\item \alert{Idée naturelle}: Calculer la moyenne empirique $\bar{X}_n= n^{-1} \sum_{i=1}^n X_i$ et refuser $H_0$ si $\{|\bar{X}_n| \geq \sigma z_{1-{\alpha/2}} / \sqrt{n}\}$.
+    \begin{itemize}
+    \item Le $z$-test est un test de niveau $\alpha$. En effet $\sqrt{n} \bar{X}_n / \sigma$ est une variable Gaussienne centrée réduite
+    \[
+    \PE_0[(\sqrt{n} \bar{X}_n / \sigma)^2]= \frac{1}{n \sigma^2} \PE_0\left[ \left( \sum_{k=1}^n X_k \right)^2\right] = 1
+    \]
+    \item Par conséquent,
+    \begin{align*}
+    \PP_0( \sqrt{n} |\bar{X}_n| / \sigma| > z_{1-\alpha/2})
+    &= \PP_0( \sqrt{n} \bar{X}_n / \sigma| > z_{1-\alpha/2}) + \PP_0( \sqrt{n} \bar{X}_n / \sigma| < -z_{1-\alpha/2}) \\
+    &= 1 - \Phi(z_{1-\alpha/2}) + \Phi(-z_{1-\alpha/2})= \alpha   \eqsp.
+    \end{align*}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{le $z$-test comme un test de rapport de vraisemblance généralisé}
+\begin{itemize}
+\item Rapport de vraisemblance généralisé:
+\begin{align*}
+\lambda_n  
+&= \frac{\exp(-(1/2\sigma^2) \sum_{k=1}n X_k^2)}{\sup_{\theta \in \rset} \exp(-1/(2\sigma^2) \sum_{k=1}^n (X_k - \mu)^2)} \\ 
+&= \exp\left( -(1/2\sigma^2) \left\{ \sum_{k=1}^n X_k^2 - \sum_{k=1}^n (X_k - \bar{X}_n)^2 \right\} \right) \\
+&= \exp \left( - \frac{n}{2 \sigma^2} \bar{X}_n^2 \right)
+\end{align*}
+\item Le test du RVG est équivalent au $z$-test. En effet
+\begin{align*}
+\{ \Lambda_n  < c_{n,\alpha} \} 
+&= \{ - 2 \log \Lambda_n  >  - 2 \log c_{n,\alpha} \} \\
+&= \{ \sqrt{n} |\bar{X}_n| > \sqrt{- 2 \log c_{n,\alpha}} \} \eqsp.  
+\end{align*}
+\item \alert{Remarque:} sous $H_0$, $-2 \log \Lambda_n$ est distribué suivant une loi du $\chi^2_1$ à un degré de liberté.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Exemple 1: t-test}
 \begin{itemize}
-\item  Soient $X^{(n)}= (X_{1}, \dots, X_{n})$ un $n$-échantillon de $\gauss(\mu,\ \sigma^{2})$.
-\item On teste l'hypothèse $H_0: \mu =0$ contre $H_1: \mu \ne 0$.
-\item En posant $\theta=(\mu,\ \sigma^{2})$,
-\begin{align*}
-\Lambda_{n}&=\frac{\sup_{\theta\in\Theta_{0}}(1/\sigma^{n})\exp(-\frac{1}{2\sigma^{2}}\sum_{i}(X_{i}-\mu)^{2})}{\sup_{\theta\in\Theta}(1/\sigma^{n})\exp(-\frac{1}{2\sigma^{2}}\sum_{i}(X_{i}-\mu)^{2})}\\
-&=\left( \frac{\sum_{i}(X_{i}-\overline{X}_{n})^{2}}{\sum_{i}X_{i}^{2}} \right)^{n/2}
-\end{align*}
-\item \alert{Résultat important:} Le $t$-test est un test de rapport de vraisemblance généralisé: $\Lambda_{n}<c$ est équivalent à $T_{n}^{2}>k$ où
-$$
-T_{n}=\frac{\sqrt{n}\overline{X}_{n}}{S_n}  \quad \text{où} \quad \quad S_n^2= \frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2} \eqsp.
-$$
-est la $t$-statistique.
+\item  Soient $X^{(n)}= (X_{1}, \dots, X_{n})$ un $n$-échantillon de $\gauss(\mu,\ \sigma^{2})$ où \alert{$\mu$ et $\sigma^2$ sont inconnus}.
+\item On teste l'hypothèse $H_0: \mu =0$ contre $H_1: \mu \ne 0$, la variance étant inconnue
+\item \alert{Idée}: Estimer la moyenne $\bar{X}_n$ et la variance empirique $S_n^{2} = (n-1)^{-1} \sum_{i=1}^n (X_i- \bar{X}_n)^2$. On rejette l'hypothèse nulle si 
+    \[
+    \left\{ \frac{\sqrt{n}|\bar{X}_n|}{S_n} \geq t_{n-1,1-\alpha/2} \right\}
+    \]
+    où $t_{n-1,1-\alpha/2}$ est le quantile $1-\alpha/2$ de la loi de Student à $(n-1)$ degrés de liberté. 
+\item Le $t$-test est de niveau $\alpha$ car $\sqrt{n}\bar{X}_n/S_n$ suit une loi de Student à $n-1$-d.l.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Exemple 1: t-test}
+\begin{itemize}
+\item  Soient $X^{(n)}= (X_{1}, \dots, X_{n})$ un $n$-échantillon de $\gauss(\mu,\ \sigma^{2})$ où \alert{$\mu$ et $\sigma^2$ sont inconnus}.
+\item On teste l'hypothèse $H_0: \mu =0$ contre $H_1: \mu \ne 0$, la variance étant inconnue
+\item En posant $\theta=(\mu,\ \sigma^{2})$, le rapport de vraisemblance généralisé est donné par
+\begin{equation*}
+\Lambda_{n}=\frac{\sup_{\theta\in\Theta_{0}}(1/\sigma^{n})\exp(-\frac{1}{2\sigma^{2}}\sum_{i}(X_{i}-\mu)^{2})}{\sup_{\theta\in\Theta}(1/\sigma^{n})\exp(-\frac{1}{2\sigma^{2}}\sum_{i}(X_{i}-\mu)^{2})}
+\end{equation*}
+\only<1>{
+\item Maximisation de la vraisemblance pour $\mu=0$ (on maximise par rapport à $\sigma^2$) 
+\[
+\sigma^2 \mapsto -(n/2) \log \sigma^2 -(1/2\sigma^2) \sum_{i=1}^n X_i^2
+\]
+Le maximum de vraisemblance est $\hat{\sigma}_{n,0}^2 = n^{-1} \sum_{i=1}^n X_i^2$ et la vraisemblance au maximum est 
+\[
+(\hat{\sigma}_{n,0})^{-n} \exp(- (1/2 \hat{\sigma}^2_{n,0}) \sum_{i=1}^n X_i^2)=  \left( \sum_{i=1}^n X_i^2 \right)^{-n} \exp(-n/2)
+\]
+}
+\only<2>
+{
+\item Maximisation de la vraisemblance pour $(\mu,\sigma^2)$ (on maximise par rapport à $\sigma^2$)
+\[
+(\mu,\sigma^2) \mapsto -(n/2) \log \sigma^2 -(1/2\sigma^2) \sum_{i=1}^n (X_i-\mu)^2
+\]
+Le maximum de vraisemblance est $\bar{X}_n= n^{-1} \sum_{i=1}^n X_i$ et $S_n^2 = n^{-1} \sum_{i=1}^n (X_i-\bar{X}_n)^2$ et la vraisemblance au maximum est
+\[
+S_n^{-n} \exp(- (1/2 S_n) \sum_{i=1}^n (X_i - \bar{X}_n)^2) =   S_n^{-n}  \exp(-n/2)
+\]
+}
+\only<3>
+{ \item Le rapport de vraisemblance généralisé est donné par
+\begin{equation*}
+\Lambda_{n}=\left( \frac{\sum_{i}(X_{i}-\overline{X}_{n})^{2}}{\sum_{i}X_{i}^{2}} \right)^{n/2}
+\end{equation*}
+} 
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Preuve}
+Le $t$-test est un test de rapport de vraisemblance généralisé: $\Lambda_{n}<c$ est équivalent à $T_{n}^{2}>k$ où
+$$
+T_{n}=\frac{\sqrt{n}\overline{X}_{n}}{S_n}  \quad \text{où} \quad \quad S_n^2= \frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2} \eqsp.
+$$
+est la $t$-statistique.
 \begin{align*}
 T_{n}^{2} &=\frac{n\overline{X}_{n}^{2}}{\frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2}} \\
 &=\frac{\sum_{i}X_{i}^{2}-\sum_{i}(X_{i}-\overline{X}_{n})^{2}}{\frac{1}{n-1}\sum_{i}(X_{i}-\overline{X}_{n})^{2}} \\
@@ -688,7 +769,7 @@ $$
 nous avons
 \begin{align*}
 &-2\log\Lambda_{n}=n\log\left(1+\frac{T_n^{2}}{n-1}\right) \\
-&\phantom{-2\log\Lambda_{n}}=n \left(\frac{T_n^{2}}{n-1}+o_{p}(\frac{T_n^{2}}{n-1}) \right) 
+&\phantom{-2\log\Lambda_{n}}=n \left(\frac{T_n^{2}}{n-1}+o_{p}(\frac{T_n^{2}}{n-1}) \right)
 \end{align*}
 \item Sous $H_{0}: \theta= 0$,  nous avons en utilisant le TCL $\sqrt{n} \bar{X}_n \dlim_{\PP_0^n} \gauss(0,\sigma^2)$ et Slutsky
 $$
@@ -796,7 +877,7 @@ car $\sum_{i=1}^d q_i (\hat{p}_{n,i} - q_i)/q_i= 0$...
 \begin{theo}
 On considère un $n$-échantillon $(X_1,\dots,X_n)$ d'un modèle paramétrique régulier $(\PP_\theta, \theta \in \Theta \subset \rset^d)$ et le test bilat\'{e}ral de $H_{0} :  \theta=\theta_{0}$  contre $H_{1} :  \theta\neq\theta_{0}$.  On a:
 $$
-v(X_1,\dots,X_n)=\frac{\prod{k=1}^n f(\theta_{0};X_k)}{\sup_{\theta\in\Theta} \prod_{k=1}^n f(\theta,X_k)}=\frac{\prod_{k=1}^n f(\theta_0,X_k)}{\prod_{k=1}^n f(\hat{\theta}_{n},X_k)}
+v(X_1,\dots,X_n)=\frac{\prod_{k=1}^n f(\theta_{0};X_k)}{\sup_{\theta\in\Theta} \prod_{k=1}^n f(\theta,X_k)}=\frac{\prod_{k=1}^n f(\theta_0,X_k)}{\prod_{k=1}^n f(\hat{\theta}_{n},X_k)}
 $$
  Alors, sous $H_{0}$, on a:
 $$
@@ -825,7 +906,7 @@ L_n(\theta_0)=L_n(\hat{\theta}_{n})+(\theta_{0}-\hat{\theta}_{n})\frac{\partial}
 où $\theta'_n \in [\theta_0,\hat{\theta}_n]$
 \item Comme $\frac{\partial}{\partial\theta}L_n(\hat{\theta}_n)$, ceci implique
 \begin{align*}
--2 \{ L_n(\theta_{0})-L_n(\hat{\theta}_{n}) \} 
+-2 \{ L_n(\theta_{0})-L_n(\hat{\theta}_{n}) \}
 &=\ -(\theta_{0}-\hat{\theta}_{n})^{2}\frac{\partial^{2}}{\partial\theta^{2}}L_n(\theta_{n}') \\
 &=\ - \{\sqrt{n} (\theta_{0}-\hat{\theta}_{n})\}^{2} \frac{1}{n} \frac{\partial^{2}}{\partial\theta^{2}}L_n(\theta_{n}')
 \end{align*}
@@ -836,11 +917,11 @@ où $\theta'_n \in [\theta_0,\hat{\theta}_n]$
 \frametitle{Elements de preuve}
 \begin{itemize}
 \item L'estimateur du maximum de vraisemblance est asymptotiquement normal: $\sqrt{n} (\theta_{0}-\hat{\theta}_{n}) \dlim_{\PP_{\theta_0}^n} \gauss(0,I^{-1}(\theta_0))$, où $I(\theta)$ est l'information de Fisher
-\item Par la loi des grands nombres 
+\item Par la loi des grands nombres
 \begin{align*}
-n^{-1} \frac{\partial^{2}}{\partial\theta^{2}}L_n(\theta_{n}') 
+n^{-1} \frac{\partial^{2}}{\partial\theta^{2}}L_n(\theta_{n}')
 &= n^{-1} \sum_{k=1}^n \frac{\partial^{2}}{\partial\theta^{2}} f(\theta'_n,X_k)\\
-&\plim[\PP_{\theta_0}^n] -I(\theta_0) 
+&\plim[\PP_{\theta_0}^n] -I(\theta_0)
 \end{align*}
 \item Par conséquent, $-2 \{ L_n(\theta_{0})-L_n(\hat{\theta}_{n}) \} \dlim_{\PP_{\theta_0}^n}  \chi^2_1$
 \end{itemize}
@@ -940,17 +1021,10 @@ où $\bar{X}_n= n^{-1} \sum_{i=1}^n X_i$ est la moyenne empirique.
 \sqrt{n} (\est - \truetheta) \dlim_{\PP_{\truetheta}} \gauss(0,I^{-1}(\truetheta))
 \]
 où $I(\truetheta)= \theta^{-2}$ est l'\alert{information de Fisher}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Exemple: test loi exponentielle}
-\begin{itemize}
 \item \alert{Test de Wald} de l'hypothèse $H_0: \truetheta = \truetheta_0$ contre l'hypothèse $H_1: \truetheta \ne \truetheta_0$.
 \begin{align*}
-n (\est - \truetheta_0)^2 I(\est)= n (1 - \truetheta_0 / \est)^2 \dlim_{\PP_{\truetheta_0}} \geq q^{\chi2}_{1-\alpha,1}
+n (\est - \truetheta_0)^2 I(\est)= n (1 - \truetheta_0 / \est)^2  \geq q^{\chi2}_{1-\alpha,1}
 \end{align*}
-\item \alert{Application numérique} $n=100$, $\truetheta_0=0.5$,
 \end{itemize}
 \end{frame}
 
