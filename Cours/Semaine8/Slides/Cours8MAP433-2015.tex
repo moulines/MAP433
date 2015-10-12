@@ -201,16 +201,16 @@ $V$: \alert{$\projX=P_V$} et \alert{${\rm rang}(\projX)=k$}.
 \begin{frame}
 \frametitle{Propriétés de l'estimateur}
 \begin{theo}
-Pour tout $(\truebeta,\sigma^2) \in \rset^d \times \rset_+$, sous $\PP_{\truebeta,\sigma^2}$, l'estimateur 
+Pour tout $(\truebeta,\sigma^2) \in \rset^d \times \rset_+$, sous $\PP_{\truebeta,\sigma^2}$, l'estimateur
 $\estregress$ est un vecteur Gaussien de moyenne $\truebeta$ et de variance $\sigma^2(\regressmat^T \regressmat)^{-1}$
 \end{theo}
 \begin{proof}
 \begin{align*}
-\estregress 
+\estregress
 &= \regressmat^{\#} \bY = \regressmat^{\#} (\regressmat \truebeta + \sigma \bnoise) \\
-&= \truebeta + \sigma \regressmat^{\#} \bnoise 
-\end{align*} 
-Le vecteur $\regressmat^{\#} \bnoise$ est Gaussien centré de matrice de covariance 
+&= \truebeta + \sigma \regressmat^{\#} \bnoise
+\end{align*}
+Le vecteur $\regressmat^{\#} \bnoise$ est Gaussien centré de matrice de covariance
 \[
 \regressmat^{\#} \left( \regressmat^{\#} \right)^T = (\regressmat^T \regressmat)^{-1} \eqsp.
 \]
@@ -270,8 +270,8 @@ Pour tout $(\truebeta,\sigma^2) \in \rset^k \times \rset_+$,
 \end{theorem}
 \begin{proof}
 \only<1>{
-$(\Id{n}- \projX) \bnoise \sim \gauss(0,(\Id{n}-\projX))$ et donc $\|(\Id{n}- \projX) \bnoise\|^2$ suit une loi du $\chi^2$ à 
-$(n-k)= \mathrm{Tr}(\Id{n} - \projX)$ d.l. 
+$(\Id{n}- \projX) \bnoise \sim \gauss(0,(\Id{n}-\projX))$ et donc $\|(\Id{n}- \projX) \bnoise\|^2$ suit une loi du $\chi^2$ à
+$(n-k)= \mathrm{Tr}(\Id{n} - \projX)$ d.l.
 }
 \only<2>{
 $$
@@ -285,8 +285,8 @@ et $ \projX \bnoise$ et $(\Id{n}- \projX) \bnoise$ sont indépendants.
 \begin{frame}
 \frametitle{Loi de Student}
 \begin{definition}
-Soit $Z$ une variable aléatoire de loi normale centrée et réduite et soit $U$ une variable indépendante de $Z$ et distribuée suivant la loi du 
-$\chi^2$ à $p$ degrés de liberté. 
+Soit $Z$ une variable aléatoire de loi normale centrée et réduite et soit $U$ une variable indépendante de $Z$ et distribuée suivant la loi du
+$\chi^2$ à $p$ degrés de liberté.
 Par définition la variable
 \[
 T = \frac{Z}{\sqrt{U/p}}
@@ -318,7 +318,7 @@ T_j= \frac{\hat{\beta}_j- \beta_j}{\hat{\sigma}\sqrt{[(\regressmat^T \regressmat
 \]
 \item Soit $R$ une matrice ($q \times k$) de rang $q$ ($q \leq k$) alors
 \[
-\frac{1}{q \hat{\sigma}^2} (R\{\estregress-\truebeta\})^T \left[ R (\regressmat^T \regressmat)^{-1} R^T \right]^{-1} R\{\estregress-\truebeta\} 
+\frac{1}{q \hat{\sigma}^2} (R\{\estregress-\truebeta\})^T \left[ R (\regressmat^T \regressmat)^{-1} R^T \right]^{-1} R\{\estregress-\truebeta\}
 \sim \mathcal{F}_{q,n-p}
 \]
 \end{enumerate}
@@ -361,7 +361,7 @@ $$
 \begin{frame}
 \frametitle{Régions de confiance}
 \begin{theo}
- Une région de confiance  pour $q$ ($q\leq k$)  param\`{e}tres $\beta_{j}$ notés $(\beta_{j_{1}},\ \cdots,\ \beta_{j_{q}})$ de niveau 
+ Une région de confiance  pour $q$ ($q\leq k$)  param\`{e}tres $\beta_{j}$ notés $(\beta_{j_{1}},\ \cdots,\ \beta_{j_{q}})$ de niveau
  $ 1-\alpha$ est donn\'{e}e  par
 $$
 \left\{R\beta \in \rset^q, \frac{1}{q\hat{\sigma}^{2}}[R(\hat{\beta}-\beta)]'[R(X'X)^{-1}R']^{-1}[R(\hat{\beta}-\beta)]\leq f_{q,n-p}(1-\alpha)\right\},
@@ -384,7 +384,7 @@ o\`{u} $R$ est la matrice de taille $q\times p$ dont tous les éléments sont nu
 \frametitle{Régression multiple}
 \alert{Modèle de régression}
 \[
-\mathrm{maxO3}= \beta_1 + \beta_2 \mathrm{T12} + \beta_3 \mathrm{Vx12} + \beta_4 \mathrm{Ne12} + \sigma \bnoise 
+\mathrm{maxO3}= \beta_1 + \beta_2 \mathrm{T12} + \beta_3 \mathrm{Vx12} + \beta_4 \mathrm{Ne12} + \sigma \bnoise
 \]
 \alert{Intervalles de confiance}
 \begin{table}
@@ -393,7 +393,7 @@ o\`{u} $R$ est la matrice de taille $q\times p$ dont tous les éléments sont nu
 (Intercept) &-25.4886483  & 33.280203 \\
 T12         &  3.4819098  & 5.544563  \\
 Vx12        &  0.3264694  & 2.931560  \\
-Ne12        & -3.6368523  & 0.399082 
+Ne12        & -3.6368523  & 0.399082
 \end{tabular}
 \end{table}
 \end{frame}
@@ -412,7 +412,7 @@ Ne12        & -3.6368523  & 0.399082
 
 \begin{frame}
 \frametitle{Problème}
-Nous avons modélisé les pics d'ozone par $\mathrm{T12}$, $\mathrm{Vx12}$ et $\mathrm{Ne12}$. 
+Nous avons modélisé les pics d'ozone par $\mathrm{T12}$, $\mathrm{Vx12}$ et $\mathrm{Ne12}$.
 Il para\^{i}t raisonnable de se poser les questions suivantes :
 \begin{enumerate}
 \item Est-ce que la valeur de $\mathrm{O3}$ est influenc\'{e}e par $\mathrm{Vx}$?
@@ -434,7 +434,7 @@ Nous pouvons expliciter les trois questions pr\'{e}c\'{e}dentes en terme de test
 \begin{frame}
 \frametitle{Test entre mod\`{e}les embo\^{i}t\'{e}s}
 \begin{itemize}
-\item \alert{Modèle}: 
+\item \alert{Modèle}:
 $\bY=\regressmat\truebeta+ \sigma \bnoise$ o\`{u} $\bnoise \sim \gauss(0,\ \sigma^{2}\Id{n})$,
 \item Pour faciliter les notations, supposons que nous souhaitons tester la nullit\'{e} simultan\'{e}e des $q$ derniers coefficients du mod\`{e}le avec $q\leq p$:
 \[
@@ -444,8 +444,8 @@ $\mathrm{H}_{0}$: $\beta_{p-q+1}=\cdots=\beta_{p}=0$ contre $\mathrm{H}_{1}:\exi
 \]
 \item Que signifie $\mathrm{H}_{0}$ : $\beta_{p-q+1}=\cdots=\beta_{p}=0$ en terme de mod\`{e}le? Si les $q$ derniers coefficients sont nuls, le mod\`{e}le devient
 $\bY=\regressmat_{0}\truebeta_{0}+\sigma \bnoise$ o\`{u} $\bnoise \sim \gauss(0,\ \sigma^{2}\Id{n})$,
-o\`{u} la matrice $\regressmat_{0}$ est compos\'{e}e des $p-q$ premi\`{e}res colonnes de $\regressmat$. 
-\item Les colonnes de $\regressmat_{0}$ engendrent un espace not\'{e} $\vect(\regressmat_0)$ de dimension $p_{0}=p-q$. 
+o\`{u} la matrice $\regressmat_{0}$ est compos\'{e}e des $p-q$ premi\`{e}res colonnes de $\regressmat$.
+\item Les colonnes de $\regressmat_{0}$ engendrent un espace not\'{e} $\vect(\regressmat_0)$ de dimension $p_{0}=p-q$.
 \end{itemize}
 \end{frame}
 
@@ -479,17 +479,17 @@ o\`{u} la matrice $\regressmat_{0}$ est compos\'{e}e des $p-q$ premi\`{e}res col
 \end{itemize}
 }
 \only<4>
-{ 
+{
 \begin{itemize}
 \item En posant $\predY= \regressmat \estregress$ et $\predY_0= \regressmat_0 \estregress_0$, le test du RVG est donné par
 \begin{align*}
 \Lambda_n &= \frac{\| \bY - \predY \|^n}{\| \bY - \predY_0 \|^n}
 \end{align*}
-\item Comme $\predY - \predY_0 \in \vect(\regressmat)$ et $\bY - \predY \perp \vect(\regressmat)$, on a 
+\item Comme $\predY - \predY_0 \in \vect(\regressmat)$ et $\bY - \predY \perp \vect(\regressmat)$, on a
 \[
-\| \bY - \predY_0 \|^2 = \|\bY - \predY \|^2 + \| \predY - \predY_0 \|^2  
+\| \bY - \predY_0 \|^2 = \|\bY - \predY \|^2 + \| \predY - \predY_0 \|^2
 \]
-et 
+et
 \[
 \Lambda_n = \left( 1 + \frac{\|\predY - \predY_0\|^2}{\| \bY - \predY\|^2} \right)^{-n/2}
 \]
@@ -499,14 +499,14 @@ et
 \begin{itemize}
 \item On considère la statistique de test
 \[
-F_n = \frac{\|\predY - \predY_0\|^2}{\| \bY - \predY\|^2 
+F_n = \frac{\|\predY - \predY_0\|^2}{\| \bY - \predY\|^2}
 \]
 \item Le test du RVG s'écrit donc
 \[
-\Lambda_n = (1 + F_n)^{-n/2} 
+\Lambda_n = (1 + F_n)^{-n/2}
 \]
 \item On rejette H0 si $\Lambda_n$ est inférieur à un seuil ce qui revient à tester que $F_n > d$.
-\end{itemize}  
+\end{itemize}
 }
 \end{frame}
 
@@ -773,3 +773,4 @@ $$
 
 
 \end{document}
+==
