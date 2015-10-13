@@ -436,15 +436,19 @@ Nous pouvons expliciter les trois questions pr\'{e}c\'{e}dentes en terme de test
 \begin{itemize}
 \item \alert{Modèle}:
 $$
-\bY=\regressmat\truebeta+ \sigma \bnoise$ o\`{u} $\bnoise \sim \gauss(0,\ \sigma^{2}\Id{n}) \eqsp,
+\text{
+$\bY=\regressmat\truebeta+ \sigma \bnoise$ o\`{u} $\bnoise \sim \gauss(0,\ \sigma^{2}\Id{n})$ \eqsp,
+}
 $$
 ce qui implique
 $$ \PE_{\truebeta,\sigma^2}[\bY]= \regressmat \truebeta \in \vect(\regressmat) \eqsp.
+$$
+\item On cherche à tester si 
+$$\PE_{\truebeta,\sigma^2}[\bY] \in \vect(\regressmat_0)
 $$ 
-\item On cherche à tester si $\PE_{\truebeta,\sigma^2}[\bY] \in \vect(\regressmat_0)$ où $\vect(\regressmat_0) \subset \vect(\regressmat)$ 
-est un sous espace linéaire (strict) de $\vect(\regressmat)$
-\item \alert{Exemple typique:} $\mathrm{H}_0$: $\beta_{j_1} = \dots = \beta_{j_q}= 0$. Dans ce cas, $\regressmat_0$ sont les colonnes 
-de la matrice $\regressmat$ qui correspondent aux indices $\{1,\dots,k\} \setminus \{j_1,\dots,j_q\}$   
+où $\vect(\regressmat_0) \subset \vect(\regressmat)$ est un sous espace linéaire (strict) de $\vect(\regressmat)$
+\item \alert{Exemple typique:} $\mathrm{H}_0$: $\beta_{j_1} = \dots = \beta_{j_q}= 0$. Dans ce cas, $\regressmat_0$ sont les colonnes
+de la matrice $\regressmat$ qui correspondent aux indices $\{1,\dots,k\} \setminus \{j_1,\dots,j_q\}$
 \end{itemize}
 \end{frame}
 
@@ -515,7 +519,7 @@ F_n = \frac{\|\predY - \predY_0\|^2/q}{\| \bY - \predY\|^2/(n-k)}
 \frametitle{Distribution du test}
 \alert{Modèle général (sans contrainte)}:
 \[
-\bY= \regressmat \truebeta + \sigma \bnoise 
+\bY= \regressmat \truebeta + \sigma \bnoise
 \]
 \begin{itemize}
 \item Comme $\predY = \projX \bY$ et $\predY_0= \projX_0 \bY$ et $\projX \projX_0= \projX_0 \projX= \projX_0$,
@@ -538,12 +542,12 @@ F_n = \frac{\|\predY - \predY_0\|^2/q}{\| \bY - \predY\|^2/(n-k)}
 \begin{frame}
 \frametitle{Distribution du test sous l'hypothèse nulle}
 \begin{itemize}
-\item \alert{Hypothèse nulle}: $\regressmat \truebeta = \projX_0 \regressmat \truebeta$ car $\regressmat \truebeta \in \vect(\regressmat_0)$. 
-\item \alert{Conséquence}: sous $\mathrm{H}_0$,  
-\[ 
+\item \alert{Hypothèse nulle}: $\regressmat \truebeta = \projX_0 \regressmat \truebeta$ car $\regressmat \truebeta \in \vect(\regressmat_0)$.
+\item \alert{Conséquence}: sous $\mathrm{H}_0$,
+\[
 \predY - \predY_0 =  \sigma \projX (\Id{n} - \projX_0) \bnoise
 \]
-\item \alert{Conclusion}: par le Théorème de Cochran,  sous $\mathrm{H}_0$, 
+\item \alert{Conclusion}: par le Théorème de Cochran,  sous $\mathrm{H}_0$,
 $$
 \| \predY - \predY_0 \|^2/ \sigma^2
 $$
@@ -564,11 +568,11 @@ est distribué suivant une variable de $\chi^2$  à $q$ d.d.l., qui est le nombr
 \frametitle{Synthèse Test entre mod\`{e}les emboît\'{e}s}
 \begin{itemize}
 \item Considérons l'hypothèse  nulle : $\mathrm{H}_0$: $\regressmat \truebeta \in \vect(\regressmat_0)$ (où $\vect(\regressmat_0)$ est un sous-espace vectoriel de $\vect(\regressmat)$).
-\item \alert{Test:} Si 
+\item \alert{Test:} Si
 \[
-\frac{\|\predY - \predY_0\|^2/q}{\|\bY - \predY\|^2/(n-k)} \geq f_{1-\alpha}(q,n-k) 
+\frac{\|\predY - \predY_0\|^2/q}{\|\bY - \predY\|^2/(n-k)} \geq f_{1-\alpha}(q,n-k)
 \]
-où 
+où
 \end{itemize}
 \end{frame}
 
@@ -835,4 +839,4 @@ $$
 
 
 \end{document}
-==
+== 
