@@ -193,7 +193,7 @@ $V$: \alert{$\projX=P_V$} et \alert{${\rm rang}(\projX)=k$}.
 \]
 \begin{enumerate}
 \item \alert<1>{$\regressmat$ est de rang complet.}
-\item \alert<2>{$\bnoise \sigma \gauss(0,\Id{n})$}
+\item \alert<2>{$\bnoise \sim \gauss(0,\Id{n})$}
 \end{enumerate}
 \end{frame}
 
@@ -499,17 +499,29 @@ et
 \begin{itemize}
 \item On considère la statistique de test
 \[
-F_n = \frac{\|\predY - \predY_0\|^2}{\| \bY - \predY\|^2}
+F_n = \frac{\|\predY - \predY_0\|^2/q}{\| \bY - \predY\|^2/(n-k)}
 \]
 \item Le test du RVG s'écrit donc
 \[
-\Lambda_n = (1 + F_n)^{-n/2}
+\Lambda_n = \left(1 + \{q/(n-k)\}F_n\right)^{-n/2}
 \]
 \item On rejette H0 si $\Lambda_n$ est inférieur à un seuil ce qui revient à tester que $F_n > d$.
 \end{itemize}
 }
 \end{frame}
 
+\begin{frame}
+\frametitle{Distribution du test}
+\begin{itemize}
+  \item $\predY = \projX \bY$ et $\predY_0= \projX_0 \bY$, donc, sous $\mathrm{H}_0$, comme $\projX_0 \truebeta_0= \projX \truebeta_0= \truebeta_0$
+\begin{align*}
+\predY - \predY_0&= \projX \truebeta_0 + \sigma \projX \bnoise - \projX_0 \truebeta_0 + \sigma \projX_0 \bnoise \\
+&=\sigma \projX (\Id{n} - \projX_0) \bnoise \eqsp,
+\end{align*}
+ce qui montre (Cochran) que, sous H0, $\| \predY - \predY_0 \|^2/ \sigma^2$ est distribuée suivant un $\chi^2$ à $q$ d.l. 
+  \item $Y - \predY= \sigma (\Id{n} - \projX) \bnoise$ et comme $(\Id{n} - \projX) \projX =0$, $\predY- \predY_0$ and $\bY - \predY$ sont indépendants.
+\end{itemize}
+\end{frame}
 
 \begin{frame}
 \frametitle{Coefficient de détermination}
