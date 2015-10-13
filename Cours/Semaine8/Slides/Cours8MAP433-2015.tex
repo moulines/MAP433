@@ -351,7 +351,7 @@ T_j= \frac{\hat{\beta}_j- \beta_j}{\hat{\sigma}\sqrt{[(\regressmat^T \regressmat
     $$
 \item Un intervalle de confiance bilatéral de niveau $ 1-\alpha$, pour $\sigma^{2}$  est donné par
 $$
-[\frac{(n-p)\hat{\sigma}^{2}}{c_{2}},\ \frac{(n-p)\hat{\sigma}^{2}}{c_{1}}]\ \quad \text{où} \quad  \PP(c_{1}\leq\chi_{n-p}^{2}\leq c_{2})=1-\alpha.
+\ccint{\frac{(n-p)\hat{\sigma}^{2}}{c_{2}},\ \frac{(n-p)\hat{\sigma}^{2}}{c_{1}}}\ \quad \text{où} \quad  \PP(c_{1}\leq\chi_{n-p}^{2}\leq c_{2})=1-\alpha.
 $$
 \end{enumerate}
 \end{theo}
@@ -522,16 +522,16 @@ F_n = \frac{\|\predY - \predY_0\|^2/q}{\| \bY - \predY\|^2/(n-k)}
 \bY= \regressmat \truebeta + \sigma \bnoise
 \]
 \begin{itemize}
-\item Comme $\predY = \projX \bY$ et $\predY_0= \projX_0 \bY$ et $\projX \projX_0= \projX_0 \projX= \projX_0$,
+\item Comme $\predY = \projX \bY$ et $\predY_0= \projX[\regressmat_0] \bY$ et $\projX \projX[\regressmat_0]= \projX[\regressmat_0] \projX= \projX[\regressmat_0]$,
 \begin{align*}
-\predY - \predY_0&= \regressmat \truebeta + \sigma \projX \bnoise - \projX_0 \regressmat \truebeta + \sigma \projX_0 \bnoise \\
-&= (\regressmat \truebeta - \projX_0 \regressmat \truebeta) + \sigma \projX (\Id{n} - \projX_0) \bnoise \eqsp,
+\predY - \predY_0&= \regressmat \truebeta + \sigma \projX \bnoise - \projX[\regressmat_0] \regressmat \truebeta + \sigma \projX[\regressmat_0] \bnoise \\
+&= (\regressmat \truebeta - \projX[\regressmat_0] \regressmat \truebeta) + \sigma \projX (\Id{n} - \projX[\regressmat_0]) \bnoise \eqsp,
 \end{align*}
 \item D'autre part, comme $\bY - \predY$
 \[
 \bY - \predY= \sigma (\Id{n} - \projX) \bnoise \eqsp.
 \]
-\item Par le théorème de Cochran, $\projX(\Id{n} - \projX_0) \bnoise$ et $(\Id{n} - \projX) \bnoise$ sont \alert{indépendants}
+\item Par le théorème de Cochran, $\projX(\Id{n} - \projX[\regressmat_0]) \bnoise$ et $(\Id{n} - \projX) \bnoise$ sont \alert{indépendants}
 \item \alert{Conclusion:} Le numérateur et le dénominateur de la statistique de test sont \alert{indépendants}
 \[
 F_n = \frac{\|\predY - \predY_0\|^2/q}{\| \bY - \predY\|^2/(n-k)}
@@ -542,10 +542,10 @@ F_n = \frac{\|\predY - \predY_0\|^2/q}{\| \bY - \predY\|^2/(n-k)}
 \begin{frame}
 \frametitle{Distribution du test sous l'hypothèse nulle}
 \begin{itemize}
-\item \alert{Hypothèse nulle}: $\regressmat \truebeta = \projX_0 \regressmat \truebeta$ car $\regressmat \truebeta \in \vect(\regressmat_0)$.
+\item \alert{Hypothèse nulle}: $\regressmat \truebeta = \projX[\regressmat_0] \regressmat \truebeta$ car $\regressmat \truebeta \in \vect(\regressmat_0)$.
 \item \alert{Conséquence}: sous $\mathrm{H}_0$,
 \[
-\predY - \predY_0 =  \sigma \projX (\Id{n} - \projX_0) \bnoise
+\predY - \predY_0 =  \sigma \projX (\Id{n} - \projX[\regressmat_0]) \bnoise
 \]
 \item \alert{Conclusion}: par le Théorème de Cochran,  sous $\mathrm{H}_0$,
 $$
@@ -568,11 +568,31 @@ est distribué suivant une variable de $\chi^2$  à $q$ d.d.l., qui est le nombr
 \frametitle{Synthèse Test entre mod\`{e}les emboît\'{e}s}
 \begin{itemize}
 \item Considérons l'hypothèse  nulle : $\mathrm{H}_0$: $\regressmat \truebeta \in \vect(\regressmat_0)$ (où $\vect(\regressmat_0)$ est un sous-espace vectoriel de $\vect(\regressmat)$).
-\item \alert{Test:} Si
+\item \alert{Test:} On rejette $\mathrm{H}_0$ si 
+\alert{
 \[
 \frac{\|\predY - \predY_0\|^2/q}{\|\bY - \predY\|^2/(n-k)} \geq f_{1-\alpha}(q,n-k)
 \]
-où
+}
+où $f_{1-\alpha}(q,n-k)$ est le quantile $1-\alpha$ d'une loi de Fisher à $(q,n-k)$-d.d.l. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test de Student}
+\begin{itemize}
+  \item Dans le cas où $\mathrm{H}_0$: $\beta_j=0$, pour $j \in \{1,\dots,k\}$, le test est équivalent au test de Student
+  \alert{
+  \[
+  T_j = \frac{\hat{\beta}_j}{\hat{\sigma}\sqrt{[(\regressmat^T\regressmat)^{-1}]_{i,i}}}
+  \]
+  }
+  \item Sous $\mathrm{H}_0$, $T_j$ est distribué suivant une loi de Student à $(n-p)$-d.d.l
+  \item Le test rejette $\mathrm{H}_0$ si 
+  \[
+  |T_j| \geq t_{n-k}(1-\alpha/2) 
+  \]
+  où $t_{n-k}(1-\alpha/2)$ est le quantile d'ordre $1-\alpha/2$ de la loi de Student à $(n-p)$-d.d.l. 
 \end{itemize}
 \end{frame}
 
