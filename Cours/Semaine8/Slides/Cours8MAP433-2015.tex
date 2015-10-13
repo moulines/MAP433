@@ -435,19 +435,19 @@ Nous pouvons expliciter les trois questions pr\'{e}c\'{e}dentes en terme de test
 \frametitle{Test entre mod\`{e}les embo\^{i}t\'{e}s}
 \begin{itemize}
 \item \alert{Modèle}:
-$\bY=\regressmat\truebeta+ \sigma \bnoise$ o\`{u} $\bnoise \sim \gauss(0,\ \sigma^{2}\Id{n})$,
-\item Pour faciliter les notations, supposons que nous souhaitons tester la nullit\'{e} simultan\'{e}e des $q$ derniers coefficients du mod\`{e}le avec $q\leq p$:
-\[
-\text{
-$\mathrm{H}_{0}$: $\beta_{p-q+1}=\cdots=\beta_{p}=0$ contre $\mathrm{H}_{1}:\exists j\in\{p-q+1,\ \cdots,p\}:\beta_{j}\neq 0$.
-}
-\]
-\item Que signifie $\mathrm{H}_{0}$ : $\beta_{p-q+1}=\cdots=\beta_{p}=0$ en terme de mod\`{e}le? Si les $q$ derniers coefficients sont nuls, le mod\`{e}le devient
-$\bY=\regressmat_{0}\truebeta_{0}+\sigma \bnoise$ o\`{u} $\bnoise \sim \gauss(0,\ \sigma^{2}\Id{n})$,
-o\`{u} la matrice $\regressmat_{0}$ est compos\'{e}e des $p-q$ premi\`{e}res colonnes de $\regressmat$.
-\item Les colonnes de $\regressmat_{0}$ engendrent un espace not\'{e} $\vect(\regressmat_0)$ de dimension $p_{0}=p-q$.
+$$
+\bY=\regressmat\truebeta+ \sigma \bnoise$ o\`{u} $\bnoise \sim \gauss(0,\ \sigma^{2}\Id{n}) \eqsp,
+$$
+ce qui implique
+$$ \PE_{\truebeta,\sigma^2}[\bY]= \regressmat \truebeta \in \vect(\regressmat) \eqsp.
+$$ 
+\item On cherche à tester si $\PE_{\truebeta,\sigma^2}[\bY] \in \vect(\regressmat_0)$ où $\vect(\regressmat_0) \subset \vect(\regressmat)$ 
+est un sous espace linéaire (strict) de $\vect(\regressmat)$
+\item \alert{Exemple typique:} $\mathrm{H}_0$: $\beta_{j_1} = \dots = \beta_{j_q}= 0$. Dans ce cas, $\regressmat_0$ sont les colonnes 
+de la matrice $\regressmat$ qui correspondent aux indices $\{1,\dots,k\} \setminus \{j_1,\dots,j_q\}$   
 \end{itemize}
 \end{frame}
+
 
 \begin{frame}
 \frametitle{Test du rapport de vraisemblance généralisé}
@@ -458,6 +458,9 @@ o\`{u} la matrice $\regressmat_{0}$ est compos\'{e}e des $p-q$ premi\`{e}res col
 {
 \begin{itemize}
 \item On calcule d'abord l'EMV sous le modèle contraint
+\[
+\bY = \regressmat_0 \truebeta_0 + \sigma \bnoise \eqsp.
+\]
 \item \alert{régresseur} $\estregress_0= \regressmat_0^{\#} \bY$, \alert{variance} $\hat{\sigma}^2= n^{-1} \| \bY - \regressmat_0 \estregress_0\|^2$
 \item \alert{vraisemblance}
 \[
@@ -481,17 +484,15 @@ o\`{u} la matrice $\regressmat_{0}$ est compos\'{e}e des $p-q$ premi\`{e}res col
 \only<4>
 {
 \begin{itemize}
-\item En posant $\predY= \regressmat \estregress$ et $\predY_0= \regressmat_0 \estregress_0$, le test du RVG est donné par
+\item En posant $\predY= \regressmat \estregress$ et $\predY_0= \regressmat_0 \estregress_0$, le RVG est donné par
 \begin{align*}
 \Lambda_n &= \frac{\| \bY - \predY \|^n}{\| \bY - \predY_0 \|^n}
 \end{align*}
-\item Comme $\predY - \predY_0 \in \vect(\regressmat)$ et $\bY - \predY \perp \vect(\regressmat)$, on a
+\item $\predY - \predY_0 \in \vect(\regressmat)$ car $\predY \in \vect(\regressmat)$ et $\predY_0 \in \vect(\regressmat_0) \subset \vect(\regressmat)$
+\item $\bY - \predY \perp \vect(\regressmat)$ car $\predY= \projX \bY$ est la projection orthogonale de $\bY$ sur $\vect(\regressmat)$,
+\item \alert{Conclusion}
 \[
 \| \bY - \predY_0 \|^2 = \|\bY - \predY \|^2 + \| \predY - \predY_0 \|^2
-\]
-et
-\[
-\Lambda_n = \left( 1 + \frac{\|\predY - \predY_0\|^2}{\| \bY - \predY\|^2} \right)^{-n/2}
 \]
 \end{itemize}
 }
@@ -512,16 +513,65 @@ F_n = \frac{\|\predY - \predY_0\|^2/q}{\| \bY - \predY\|^2/(n-k)}
 
 \begin{frame}
 \frametitle{Distribution du test}
+\alert{Modèle général (sans contrainte)}:
+\[
+\bY= \regressmat \truebeta + \sigma \bnoise 
+\]
 \begin{itemize}
-  \item $\predY = \projX \bY$ et $\predY_0= \projX_0 \bY$, donc, sous $\mathrm{H}_0$, comme $\projX_0 \truebeta_0= \projX \truebeta_0= \truebeta_0$
+\item Comme $\predY = \projX \bY$ et $\predY_0= \projX_0 \bY$ et $\projX \projX_0= \projX_0 \projX= \projX_0$,
 \begin{align*}
-\predY - \predY_0&= \projX \truebeta_0 + \sigma \projX \bnoise - \projX_0 \truebeta_0 + \sigma \projX_0 \bnoise \\
-&=\sigma \projX (\Id{n} - \projX_0) \bnoise \eqsp,
+\predY - \predY_0&= \regressmat \truebeta + \sigma \projX \bnoise - \projX_0 \regressmat \truebeta + \sigma \projX_0 \bnoise \\
+&= (\regressmat \truebeta - \projX_0 \regressmat \truebeta) + \sigma \projX (\Id{n} - \projX_0) \bnoise \eqsp,
 \end{align*}
-ce qui montre (Cochran) que, sous H0, $\| \predY - \predY_0 \|^2/ \sigma^2$ est distribuée suivant un $\chi^2$ à $q$ d.l. 
-  \item $Y - \predY= \sigma (\Id{n} - \projX) \bnoise$ et comme $(\Id{n} - \projX) \projX =0$, $\predY- \predY_0$ and $\bY - \predY$ sont indépendants.
+\item D'autre part, comme $\bY - \predY$
+\[
+\bY - \predY= \sigma (\Id{n} - \projX) \bnoise \eqsp.
+\]
+\item Par le théorème de Cochran, $\projX(\Id{n} - \projX_0) \bnoise$ et $(\Id{n} - \projX) \bnoise$ sont \alert{indépendants}
+\item \alert{Conclusion:} Le numérateur et le dénominateur de la statistique de test sont \alert{indépendants}
+\[
+F_n = \frac{\|\predY - \predY_0\|^2/q}{\| \bY - \predY\|^2/(n-k)}
+\]
 \end{itemize}
 \end{frame}
+
+\begin{frame}
+\frametitle{Distribution du test sous l'hypothèse nulle}
+\begin{itemize}
+\item \alert{Hypothèse nulle}: $\regressmat \truebeta = \projX_0 \regressmat \truebeta$ car $\regressmat \truebeta \in \vect(\regressmat_0)$. 
+\item \alert{Conséquence}: sous $\mathrm{H}_0$,  
+\[ 
+\predY - \predY_0 =  \sigma \projX (\Id{n} - \projX_0) \bnoise
+\]
+\item \alert{Conclusion}: par le Théorème de Cochran,  sous $\mathrm{H}_0$, 
+$$
+\| \predY - \predY_0 \|^2/ \sigma^2
+$$
+est distribué suivant une variable de $\chi^2$  à $q$ d.d.l., qui est le nombre de coefficients nuls.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Distribution du test sous l'hypothèse nulle}
+\begin{itemize}
+\item $(\bY - \predY)$ est indépendant de $\predY - \predY_0$ et $\| \bY - \predY \|^2/ \sigma^2$ est distribué suivant une loi du $\chi^2$ à $(n-k)$ d.d.l.
+\item Sous l'hypothèse $\mathrm{H}_0$, $\| \predY - \predY_0 \|^2/\sigma^2$ et $\| \bY - \predY \|^2$ sont \alert{indépendants} et distribués suivant des lois du $\chi^2$ à \alert{$q$} et \alert{$n-k$} d.d.l.
+\item \alert{Conclusion}  Sous l'hypothèse $\mathrm{H}_0$, la statistique de test est donc distribuée suivant \alert{un loi de Fisher} à $(q,n-k)$ d.d.l
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Synthèse Test entre mod\`{e}les emboît\'{e}s}
+\begin{itemize}
+\item Considérons l'hypothèse  nulle : $\mathrm{H}_0$: $\regressmat \truebeta \in \vect(\regressmat_0)$ (où $\vect(\regressmat_0)$ est un sous-espace vectoriel de $\vect(\regressmat)$).
+\item \alert{Test:} Si 
+\[
+\frac{\|\predY - \predY_0\|^2/q}{\|\bY - \predY\|^2/(n-k)} \geq f_{1-\alpha}(q,n-k) 
+\]
+où 
+\end{itemize}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Coefficient de détermination}
