@@ -1,0 +1,190 @@
+\documentclass[a4paper,11pt,fleqn]{article}
+
+%%\usepackage[francais]{babel}
+\usepackage{a4wide,amsmath,amssymb,bbm,fancyhdr,graphicx,enumitem,color}
+
+\RequirePackage[OT1]{fontenc}
+
+\usepackage[latin1]{inputenc}
+
+% THE variable
+\newcommand{\thisyear}{Ann\'ee 2015-2016}
+
+% Definitions (pas trop!)
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\rset}{\ensuremath{\mathbb{R}}}
+\renewcommand{\P}{\ensuremath{\operatorname{P}}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\V}{\ensuremath{\mathbb{V}}}
+\newcommand{\gaus}{\ensuremath{\mathcal{N}}}
+\newcommand{\1}{\ensuremath{\mathbbm{1}}}
+\newcommand{\dlim}{\ensuremath{\stackrel{\mathcal{L}}{\longrightarrow}}}
+\newcommand{\plim}{\ensuremath{\stackrel{\mathrm{P}}{\longrightarrow}}}
+\newcommand{\PP}{\ensuremath{\mathbb{P}}}
+\newcommand{\p}{\ensuremath{\mathbb{P}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\pa}[1]{\left(#1\right)}
+\newcommand{\ac}[1]{\left\{#1\right\}}
+\newcommand{\HH}{\mathcal{H}}
+
+
+% Style
+\pagestyle{fancyplain}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\renewcommand{\subsectionmark}[1]{}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\footnotesize {\sf
+MAP433 Statistique, \thisyear / PC8}}}
+\rhead[\fancyplain{}{\footnotesize {\sf MAP433 Statistique,
+\thisyear / \rightmark}}]{\fancyplain{}{\thepage}}
+\cfoot[\fancyplain{}{}]{\fancyplain{}{}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\parindent=0mm
+
+% Titre
+%\title{{\bf MAP433 Statistique}}
+%\title{\includegraphics[width=3.5cm]{../images/logo_x.jpg}\hfill {\bf MAP433 Statistique}\hfill \quad\quad\quad\quad\quad\quad \ }
+%\title{\includegraphics[width=3.5cm]{logoX.png}\hfill {\bf MAP433 Statistique}\hfill \quad\quad\quad\quad\quad\quad\ }
+
+\title{{\bf MAP433 Statistique}\hfill
+    \quad\quad\quad\quad\quad\quad } \author{{\bf PC8 - Tests et regression}}
+  \date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Test dans un mod\`ele ANOVA}
+
+\subsection{Formalisation et construction du test}
+
+Soit $K$ un entier supérieur ou égal à 2.
+
+Pour tout $k=1, 2, \ldots K$, on dispose de $n_k$ observations, que l'on suppose être des réalisations de $n_k$ variables aléatoires $X_{k,1}$, $X_{k,2}$, \ldots , $X_{k, n_k}$  indépendantes et de loi ${\cal N}(m_k , \sigma^2)$.
+
+La variance $\sigma^2$ est commune à tous les groupes et est supposée inconnue.
+
+On chercher à tester l'hypothèse nulle $H_0$: $m_1=\cdots =m_K$.
+
+On posera dans la suite ${\bf X} = (X_{ki} , 1\leq k \leq K, 1 \leq i \leq n_k)$.
+
+\begin{enumerate}
+\item Ecrire la vraisemblance des observations ${\bf X}$.
+\item Calculer l'estimateur de maximum de vraisemblance des paramètres du
+  modèle sous $H_0$.
+\item Calculer l'estimateur de maximum de vraisemblance des paramètres du
+  modèle.
+\item Montrer que le test de rapport de vraisemblance généralisé conduit à
+  utiliser une statistique de test dont la loi suit une loi de Fisher dont on
+  précisera les degrés de liberté.
+\item Quelle est la forme de la région de rejet de $H_0$ pour ce test?
+\end{enumerate}
+
+\subsection{Un exemple}
+On s'intéresse à l'impact de différents régimes alimentaires sur le poids de
+chiens de même race. On dispose d'un groupe témoin (ou contrôle) de 10 animaux
+qui reçoivent une alimentation classique et de deux groupes tests à qui l'on
+fait suivre deux régimes différents. Les résultats (en kg) par groupe sont
+résumés dans le tableau suivant:
+
+\vspace*{0.5cm}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+Groupe & effectif & $\sum_i x_{ki}$ & $\bar{x}_k$ & $\sum_i x_{ki}^2$  &   $\sum_i (x_{ki} -\bar{x}_k)^2$ \\
+\hline
+Contrôle & 10 & 50.32 & 5.032 & 256.2702 & 3.05996  \\
+\hline
+Régime 1 & 10 & 46.61 &  4.661 & 222.9185 &  5.66929 \\
+\hline
+Régime 2 & 10 & 55.26 & 5.526 & 307.1296  & 1.76284 \\
+\hline
+\end{tabular}
+\vspace*{0.5cm}
+On vérifie alors que $\bar{x}=5.073$ et que $\sum_k \sum_i (x_{ki}
+-\bar{x}_k)^2=14.2584$. Peut-on conclure que ces différents régimes
+alimentaires n'ont pas tous le même effet sur le poids des animaux?
+
+
+
+
+
+
+\section{Analyse de donn\'ees atmosph\'eriques}
+Nous allons analyser des relev\'es atmosph\'eriques effectu\'es par l'association``Air Breizh".
+Ces relev\'es se pr\'esentent sous la forme d'un tableau dont chaque ligne donne les mesures de l'ozone du jour (O3), de la temp\'erature \`a 12h (T12) et 15h (T15), d'un indice de n\'ebulosit\'e \`a 12h (Ne12), des relev\'es de vents \`a 12h (N12, S12, E12, W12),
+d'un indice du vent moyen (Vx) et de la concentration en ozone de la veille (03v).
+Notre objectif sera de trouver parmi  les facteurs pr\'ec\'edents ceux qui sont influents sur la quantit\'e d'ozone (O3) pr\'esente dans la basse atmosph\`ere.  \medskip
+
+Les analyses seront r\'ealis\'ees avec {\tt R} : c'est un logiciel gratuit et
+tr\`es largement utilis\'e par les statisticiens car la plupart des m\'ethodes
+statistiques (anciennes et nouvelles) ont \'et\'e impl\'ement\'ees dans ce
+langage. Il est t\'el\'echargeable sur: {\em http://cran.r-project.org/}.  Pour
+apprendre \`a s'en servir: {\em
+  http://cran.r-project.org/doc/manuals/R-intro.pdf}. Vous pouvez aussi
+consulter l'ouvrage \emph{R\'egression avec R} de Cornillon \& Matzner-Lober.
+La syntaxe est proche de scilab et matlab. \medskip
+
+Pour commencer, t\'el\'echargez les donn\'ees sur la page {\em
+  http://www.cmap.polytechnique.fr/~giraud/MAP433/ozone.Rdata}. Lancez {\tt R},
+puis chargez les donn\'ees dans {\tt R} avec la commande {\tt
+  load("ozone.Rdata")}. Nous effectuerons une r\'egression lin\'eaire \`a
+l'aide de la fonction {\tt lm}. Par exemple
+ \begin{verbatim}
+ reg = lm(O3~T12+Vx, data=ozone)
+ \end{verbatim}
+ r\'ealise la r\'egression de O3 par rapport aux variables T12 et Vx.
+ Tapez {\tt ?lm} pour avoir une description de cette fonction.
+ Si {\tt reg} est le r\'esultat d'une r\'egression de $Y\in\R^n$ contre $X\in\R^{n\times k}$, l'instruction {\tt summary(reg)} retourne un tableau de valeurs dont la premi\`ere  colonne donne l'estimateur
+ $$\widehat \theta\in\mathop{\textrm{argmin}}_{\theta\in\R^k}\|Y-X \theta\|^2$$
+ et l'avant derni\`ere colonne donne les $t$-values
+$$\hat t_{j}={\widehat\theta_{j}\over \sqrt{\hat \sigma^2[(X^TX)^{-1}]_{jj}}}\quad\textrm{o\`u}\quad \widehat \sigma^2={1\over n-k}\|Y-X\widehat\theta\|^2.$$
+ La derni\`ere colonne donne les $p$-values $\hat p_{j}= \mathcal{T}_{n-k}(\hat t_{j})$ o\`u $\mathcal{T}_{n-k}(t)=\p(|T_{n-k}|>|t|)$  avec $T_{n-k}$ une variable de Student \`a $n-k$ degr\'es de libert\'e.
+
+
+
+\subsection*{A) Inspection des r\'esidus}
+\begin{enumerate}
+\item Calculer avec la fonction {\tt lm} la r\'egression de O3 par rapport aux autres variables. Identifier $Y$ et $X$ dans ce cas.  Que vaut $n$? Que vaut $k$?
+\item On note $\hat\xi=Y-\hat Y$ o\`u $\hat Y=X\widehat \theta$. Tracer l'histogramme des $\{\hat \xi_{i}:i=1,\ldots,n\}$ \`a l'aide de la fonction ${\tt hist}$.
+\item L'histogramme sugg\`ere que les r\'esidus pourraient suivre une loi Gaussienne. On va inspecter cette hypoth\`ese en regardant les quantiles de la loi empirique. On note $x_{q}(Q)=\min\{x : {Q}(]-\infty,x])\geq q\}$ le quantile d'ordre $q$ d'une loi $Q$. Tracer le QQplot
+\begin{verbatim}
+qqnorm(lm(O3~.,data=ozone)$residuals)
+\end{verbatim}
+ Que repr\'esente ce graphique?
+ \item Pour savoir si la variance d\'epend du signal tracer les points $\big\{(\hat Y_{i},|\hat\xi_{i}|):i=1,\ldots,n\big\}$ \`a l'aide de la fonction {\tt plot}. Effectuer la r\'egression des $|\hat\xi_{i}|$ en fonction des $\hat Y_{i}$.
+\end{enumerate}
+
+
+\subsection*{B) Choix des variables}
+\begin{enumerate}
+\item Quelles variables $j$ ont une $p$-value $\hat p_{j}$ inf\'erieure \`a 5\%?
+\item Calculer la r\'egression de O3 par rapport \`a Ne12+O3v et inspecter les r\'esidus comme pr\'ec\'edemment.
+\item Calculer la r\'egression de O3 par rapport \`a Ne12+O3v+T15+Vx. Que constatez-vous au niveau des  $p$-values $\hat p_{j}$?
+\end{enumerate}
+
+
+
+\subsection*{C) R\'egressions partielles}
+Dor\'enavant on ne travaille qu'avec les variables Ne12, O3v, T15 et Vx. On veut inspecter les questions suivantes:
+\begin{itemize}
+\item le mod\`ele lin\'eaire par rapport \`a la variable $j$ est-il raisonnable?
+\item quelle est l'influence de la variable $j$?
+\end{itemize}
+\begin{enumerate}
+\item Montrer que si le mod\`ele $Y=\sum_{k}\theta_{k}X_{k}+\xi$ est vrai, alors:
+
+lm($Y\sim -X_{j}$)\$residuals = $\theta_{j}\times$ lm($X_{j} \sim -X_{j}$)\$residuals + lm($\xi \sim -X_{j}$)\$residuals
+
+o\`u lm($Z\sim -X_{j}$) repr\'esente la r\'egression de $Z$ par rapport \`a toutes les variables $X_{1},\ldots,X_{k}$ sauf $X_{j}$.
+\item Si les $\xi_{1},\ldots,\xi_{n}$ sont i.i.d.\ de loi $\mathcal{N}(0,\sigma^2)$,
+quelle est la loi du vecteur lm($\xi \sim -X_{j}$)\$residuals?
+\item Calculer la r\'egression de lm($Y\sim -X_{j}$)\$residuals par lm($X_{j} \sim -X_{j}$)\$residuals pour $j=$Ne12. Le mod\`ele lin\'eaire semble-t-il raisonnable pour cette variable?
+\item M\^eme question avec la variable $j=$T15.
+ \end{enumerate}
+
+
+
+
+
+\end{document}
+
