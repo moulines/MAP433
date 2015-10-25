@@ -15,7 +15,7 @@
 \tableofcontents
 \end{frame}
 
-\section{Le modèle de régression: rappels}
+\section{Le modèle de régression}
 \begin{frame}
 \frametitle{Modèle de régression}
 \begin{df}
@@ -41,51 +41,28 @@ décorrélées, $\PE_{\truetheta}[\xi_i \xi_j]= 0$ si $i \ne j$ et de variance u
 
 
 \begin{itemize}
-\item  \alert{Modèle de régression}:
-$$Y_i =
+\item  \alert{Modèle de régression Gaussien}:
+\tco{$$Y_i =
 r({\truebeta},\bx_i)+\ \sigma \xi_i,\;\;\truetheta \in \Theta\subset  \R^d \times \rset_+.$$
-\item  \alert{Bruit Gaussien:} $\xi_i \sim \gauss(0,1)$, i.i.d.
-\item On a alors le modèle de \alert{régression gaussienne}.
-\item \alert{On sait expliciter la loi de l'observation} $Z=(Y_1,\dots,Y_n)$ $\Longrightarrow$ appliquer le
+}
+où \tco{$\xi_i \sim \gauss(0,1)$}, i.i.d.
+\item \alert{On sait expliciter la vraisemblance  de l'observation} $Z=(Y_1,\dots,Y_n)$ $\Longrightarrow$ appliquer le
 principe du maximum de vraisemblance.
-\item La loi de $Y_i$:
-\begin{align*}
-\PP^{Y_i}(dy) & = \frac{1}{\sqrt{2\pi \sigma^2}}\exp\big
-(-\frac{1}{2\sigma^2}(y-r({\truebeta},\bx_i))^2\big)dy \\
-& \ll dy.
-\end{align*}
+$$\boxed{{\mathcal L}_n(\truetheta, Y_1,\ldots, Y_n)
+= \tfrac{1}{(\sqrt{2\pi \sigma^2})^{n}} \exp\Big(-\frac{1}{2\sigma^2}\sum_{i = 1}^n\big(Y_i-
+r({\truebeta},\bx_i)\big)^2\Big)}$$
 
 %d'où
 %$$\PP^{(Y_1,\ldots, Y_n)}(dy_1\ldots dy_n) = \Big(\prod_{i=1}^n \frac{1}{\sqrt{2\pi \sigma^2}}\exp\big(-\frac{1}{2\sigma^2}(y-\truetheta^T\bx_i)\big)\Big) dy_1\ldots dy_n$$
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{EMV pour régression gaussienne}
-\begin{itemize}
-\item  Le modèle $\{\PP_\truetheta^n \alert{ = \text{loi de }\;(Y_1,\ldots, Y_n)},\truetheta = (\truebeta,\sigma^2) \in \R^k \times \rset_+^* \}$ est \alert{dominé} par
-$\mu^n(dy_1\ldots dy_n) = dy_1\ldots dy_n.$
-\item D'où
-\[
- \frac{d\PP_\truetheta^n}{d\mu^n}(y_1,\ldots, y_n)
-  =\; \prod_{i=1}^n \tfrac{1}{\sqrt{2\pi \sigma^2}}\exp
-  \big(-\tfrac{1}{2\sigma^2}(y_i-r({\truebeta},\bx_i))^2\big)
-%\;= & \tfrac{1}{(\sqrt{2\pi \sigma^2})^{n}}
-%\exp\big(-\tfrac{1}{2\sigma^2}\sum_{i =
-%1}^n\big(y_i-r({\truebeta},\bx_i)\big)^2\big).
-\]
-\item La fonction de vraisemblance
-$$\boxed{{\mathcal L}_n(\truetheta, Y_1,\ldots, Y_n)
-= \tfrac{1}{(\sqrt{2\pi \sigma^2})^{n}} \exp\Big(-\frac{1}{2\sigma^2}\sum_{i = 1}^n\big(Y_i-
-r({\truebeta},\bx_i)\big)^2\Big)}$$
-\end{itemize}
-\end{frame}
 
 \begin{frame}
 \frametitle{Estimateur des moindres carrés}
 Maximiser la \alert{ vraisemblance} en régression gaussienne
 \begin{align*}
-\estregress &\in \argmin_{\curbeta \in \rset^k} \sum_{i = 1}^n \big(Y_i-r(\curbeta,\bx_i)\big)^2 \\
+\estregress &\in \argmin_{\bcurbeta \in \rset^k} \sum_{i = 1}^n \big(Y_i-r(\bcurbeta,\bx_i)\big)^2 \\
 \hat{\sigma}_n^2 &= n^{-1} \sum_{i=1}^n (Y_i - r(\estregress,\bx_i))^2
 \end{align*}
 %\begin{df}
@@ -100,7 +77,7 @@ Maximiser la \alert{ vraisemblance} en régression gaussienne
 \end{frame}
 
 
-\subsection{Régression linéaire multiple}
+\section{Régression linéaire multiple}
 
 \begin{frame}
 \frametitle{Régression linéaire multiple (=Modèle linéaire)}
@@ -112,14 +89,16 @@ avec
 $$\boxed{Y_i = \bx_i^T \truebeta+ \sigma \xi_i,\;\;i=1,\ldots, n}$$
 où $\truetheta \in \Theta = \R^k,\;\;\bx_i \in \R^k$.
 \item \alert{Matriciellement}
-$$\boxed{\bY = \regressmat\truebeta + \sigma \bnoise}$$
-avec
-\begin{itemize}
-\item \alert<1>{$\bY = (Y_1 \cdots Y_n)^T$},
-\item \alert<2>{$\bnoise = (\xi_1 \cdots \xi_n)^T$}
-\item \alert<3>{$\regressmat$ la matrice $(n\times k)$ de régression
-\[
-\regressmat= 
+$$\boxed{\bY = 
+\left[
+\begin{matrix}
+  Y_1 \\
+  Y_2 \\
+  \vdots \\
+  Y_n
+\end{matrix}
+\right]
+= 
 \left[
 \begin{matrix}
  \bx_1^T \\
@@ -128,8 +107,18 @@ avec
  \bx_n^T
 \end{matrix}
 \right]
-\].}
-\end{itemize}
+\truebeta +
+\sigma 
+\left[
+\begin{matrix}
+ \xi_1 \\
+ \xi_2 \\
+ \vdots  \\
+ \xi_n
+\end{matrix}
+\right]
+=\regressmat \truebeta + \sigma \bnoise.}
+$$
 \end{itemize}
 \end{frame}
 
@@ -145,10 +134,10 @@ $$\sum_{i = 1}^n
 \[
 \|\boldsymbol{Y}-\regressmat\estregress\|^2 =   \min_{\bcurbeta \in \R^k}\|\bY -\regressmat\bcurbeta\|^2
 \]
-\alert{Projection orthogonale} sur 
+\alert{Projection orthogonale} sur
 $$
 \vect(\regressmat) = \{v\in \R^n: v=\regressmat \bcurbeta, \bcurbeta \in \R^k\} \eqsp.
-$$ 
+$$
 \end{itemize}
 \end{frame}
 
@@ -180,7 +169,7 @@ $$\boxed{\estregress = \big(\regressmat^T\regressmat\big)^{-1}\regressmat^T \bol
 \end{prop}
 \begin{enumerate}
 \item $\regressmat^{\#}$ \alert{pseudo-inverse} de $\regressmat$.
-\item $\projX = \regressmat\big(\regressmat^T\regressmat\big)^{-1}\regressmat^T = \regressmat \regressmat^{\#}$ 
+\item $\projX = \regressmat\big(\regressmat^T\regressmat\big)^{-1}\regressmat^T = \regressmat \regressmat^{\#}$
 projecteur orthogonal sur $\vect(\regressmat)$.
 \end{enumerate}
 \end{frame}
@@ -220,7 +209,7 @@ projection des observations sur l'espace de régression.
 \[
 \bY - \predY = (\Id{n} - \projX) \bY \eqsp.
 \]
-\item Si  $\bY= \regressmat \truebeta +  \sigma \bnoise$, alors 
+\item Si  $\bY= \regressmat \truebeta +  \sigma \bnoise$, alors
 \tco{
 \begin{align*}
 \predY    &= \regressmat \truebeta + \sigma \projX \bnoise \\
@@ -237,11 +226,11 @@ car $\projX \regressmat= \regressmat$ ($\projX$ est le projecteur orthogonal sur
 \begin{theo}
 \alert{Hypothèses}
 \begin{itemize}
-\item $\bY \sim \gauss(\mu,\sigma^2 \Id{n})$, 
-\item $\mathcal{M}$ un sous espace de $\R^n$ de dimension $k$, 
+\item $\bY \sim \gauss(\mu,\sigma^2 \Id{n})$,
+\item $\mathcal{M}$ un sous espace de $\R^n$ de dimension $k$,
 \item $\Pi$ la matrice de projection orthogonale
 sur $\mathcal{M}$ et $\Pi_{\perp}= \Id{n} - \Pi$ la matrice de projection orthogonale sur $\mathcal{M}^\perp$.
-\end{itemize} 
+\end{itemize}
 Alors
 \begin{enumerate}
 \item \alert<1>{$\Pi \bY \sim \gauss(\Pi \mu, \sigma^2 \Pi)$, $\Pi_\perp \bY \sim \gauss(\Pi_{\perp} \mu, \sigma^2 \Pi_{\perp})$}
@@ -370,9 +359,9 @@ $$
 \begin{multline*}
 \Big\{(\beta_{j_1},\dots,\beta_{j_q}) \rset^q, \\ \frac{1}{q\hat{\sigma}_n^{2}}[E(\estregress-\truebeta)]^T[E(X^TX)^{-1}E^T]^{-1}[E(\estregress-\truebeta)]\leq f_{q,n-p}(1-\alpha)\Big\},
 \end{multline*}
-o\`{u} 
+o\`{u}
 \begin{itemize}
-\item $E$ est la matrice de taille $q\times k$ telle que 
+\item $E$ est la matrice de taille $q\times k$ telle que
 $$
 \left[
 \begin{matrix}
@@ -381,9 +370,9 @@ $$
   \beta_{j_q}
 \end{matrix}
 \right]
-= E \truebeta 
+= E \truebeta
 $$
-(tous les éléments sont nuls sauf les $[E]_{ij_{i}}$, $i=1,\dots,q$ qui valent 1) 
+(tous les éléments sont nuls sauf les $[E]_{ij_{i}}$, $i=1,\dots,q$ qui valent 1)
 \item $f_{q,n-k}(1-\alpha)$ est le quantile de niveau $(1-\alpha)$ d'une loi de Fisher admettant $(q,\ n-k)$ d.d.l.
 \end{itemize}
 \end{theo}
@@ -427,7 +416,7 @@ Ne12        & -3.6368523  & 0.399082
 \end{figure}
 \end{frame}
 
-\section{Tests d'hypothèses}
+\section{Choix de modèles}
 
 \begin{frame}
 \frametitle{Problème}
@@ -495,9 +484,9 @@ de la matrice $\regressmat$ qui correspondent aux indices $\{1,\dots,k\} \setmin
 \only<3>
 {
 \begin{itemize}
-\item On calcule ensuite l'EMV sous le modèle non contrait
-\item \alert{régresseur} $\estregress= \regressmat^{\#} \bY$, \alert{variance} $\hat{\sigma}_n^2= n^{-1} \| \bY - \regressmat \estregress\|^2$
-\item \alert{vraisemblance}
+\item On calcule ensuite l'EMV sous le modèle non contraint
+\pause \item \alert{régresseur} $\estregress= \regressmat^{\#} \bY$, \alert{variance} $\hat{\sigma}_n^2= n^{-1} \| \bY - \regressmat \estregress\|^2$
+\pause \item \alert{vraisemblance}
 \[
 \sup_{(\truebeta,\sigma^2)} (2 \pi \sigma^2)^{-n/2} \exp(-1/(2\sigma^2) \| \bY - \regressmat \truebeta\|^2)
 = \frac{exp(-n)}{(2 \pi n^{-1} \| \bY - \regressmat \estregress \|^2)^{n/2}}
@@ -511,9 +500,9 @@ de la matrice $\regressmat$ qui correspondent aux indices $\{1,\dots,k\} \setmin
 \begin{align*}
 \Lambda_n &= \frac{\| \bY - \predY \|^n}{\| \bY - \predY_0 \|^n}
 \end{align*}
-\item $\predY - \predY_0 \in \vect(\regressmat)$ car $\predY \in \vect(\regressmat)$ et $\predY_0 \in \vect(\regressmat_0) \subset \vect(\regressmat)$
-\item $\bY - \predY \perp \vect(\regressmat)$ car $\predY= \projX \bY$ est la projection orthogonale de $\bY$ sur $\vect(\regressmat)$,
-\item \alert{Conclusion}
+\pause \item $\predY - \predY_0 \in \vect(\regressmat)$ car $\predY \in \vect(\regressmat)$ et $\predY_0 \in \vect(\regressmat_0) \subset \vect(\regressmat)$
+\pause \item $\bY - \predY \perp \vect(\regressmat)$ car $\predY= \projX \bY$ est la projection orthogonale de $\bY$ sur $\vect(\regressmat)$,
+\pause \item \alert{Conclusion}
 \[
 \| \bY - \predY_0 \|^2 = \|\bY - \predY \|^2 + \| \predY - \predY_0 \|^2
 \]

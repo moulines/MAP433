@@ -3,8 +3,8 @@ res1= lm(Arctic_Sea_Ice_Extent~Year,data=sea_ice)
 plot(sea_ice)
 abline(res1)
 plot(sea_ice[1:34,1],studres(res1),ylab='Studentized Residuals',xlab="Year")
-resNL= lm(Arctic_Sea_Ice_Extent~Year+I(Year^2),data=sea_ice)
+resNL= lm(Arctic_Sea_Ice_Extent~(Year-1979)+I((Year-1979)^2),data=sea_ice)
 vec= seq(sea_ice[1,1],sea_ice[34,1],by=0.1)
 lines(vec,resNL$coefficients[1]+resNL$coefficients[2]*vec+resNL$coefficients[3]*vec^2)
 anova(res1,resNL)
-resNNL = nls(Arctic_Sea_Ice_Extent~a+b*Year+c*exp(d*log(Year)),data=sea_ice,start(a=resNL$coefficients[1],b=resNL$coefficients[2],c=resNL$coefficients[3],d=2));
+resNNL = nls(Arctic_Sea_Ice_Extent~a+b*(Year-1979)+c*exp(d*log((Year-1979))),data=sea_ice,start=list(a=resNL$coefficients[1],b=resNL$coefficients[2],c=resNL$coefficients[3],d=2));
